@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: calc(1.5 * var(--unit));
+  border-radius: var(--roundedSmall);
+  margin: 0;
+  background: var(--surface);
+  color: var(--textSecondary);
+  font-family: var(--fontMono);
+  font-size: var(--fontSizeXs);
+  font-weight: 500;
+  gap: calc(0.5 * var(--unit));
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--unit);
+}
+
+.name {
+  text-transform: capitalize;
+}
+
+.separator {
+  flex: 1;
+  border-bottom: 1px dashed var(--surfaceLighter);
+}

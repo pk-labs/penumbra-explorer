@@ -1,0 +1,66 @@
+.root {
+  /* FIXME: !important workaround for CSS import order issue */
+  --panelGradientStartColor: rgba(83, 174, 168, 0.25) !important;
+  --panelGradientStopColor: rgba(83, 174, 168, 0.025) !important;
+}
+
+.chart {
+  display: flex;
+  height: 48px;
+  margin-bottom: calc(2 * var(--unit));
+  gap: calc(0.5 * var(--unit));
+}
+
+.bar {
+  width: 6px;
+  height: 100%;
+  border-radius: var(--roundedFull);
+  background: var(--surfaceLight);
+
+  &.full {
+    --duration: calc(1s / 6);
+    animation: barAnimation linear forwards;
+    animation-duration: var(--duration);
+
+    &:nth-child(2) {
+      animation-delay: var(--duration);
+    }
+
+    &:nth-child(3) {
+      animation-delay: calc(2 * var(--duration));
+    }
+
+    &:nth-child(4) {
+      animation-delay: calc(3 * var(--duration));
+    }
+
+    &:nth-child(5) {
+      animation-delay: calc(4 * var(--duration));
+    }
+
+    &:nth-child(6) {
+      animation-delay: calc(5 * var(--duration));
+    }
+  }
+}
+
+@keyframes barAnimation {
+  0% {
+    background: linear-gradient(to right, var(--secondaryLight) 0%, var(--surfaceLight) 0%);
+  }
+
+  50% {
+    background: linear-gradient(to right, var(--secondaryLight) 50%, var(--surfaceLight) 50%);
+  }
+
+  100% {
+    background: linear-gradient(to right, var(--secondaryLight) 100%, var(--surfaceLight) 100%);
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: calc(0.5 * var(--unit));
+}

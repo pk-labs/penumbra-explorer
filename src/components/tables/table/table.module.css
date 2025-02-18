@@ -1,0 +1,80 @@
+.root {
+  display: flex;
+  min-height: 600px;
+  flex-direction: column;
+  padding: calc(3 * var(--unit));
+  border-radius: var(--rounded);
+  backdrop-filter: blur(var(--blurXl));
+  background: var(--surface);
+  gap: calc(2 * var(--unit));
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fontSize2Xl);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.actions {
+  color: var(--textSecondary);
+}
+
+.table {
+  flex: 1;
+  border-collapse: collapse;
+
+  thead tr,
+  tr:not(:last-child) {
+    th,
+    td {
+      border-bottom: 1px solid var(--surfaceLighter);
+    }
+  }
+
+  th,
+  td {
+    height: calc(6 * var(--unit));
+    padding: 0 calc(1.5 * var(--unit));
+    font-size: var(--fontSizeSm);
+    font-weight: 500;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    > * {
+      vertical-align: middle;
+
+      &:not(:last-child) {
+        margin-right: var(--unit);
+      }
+    }
+  }
+
+  th {
+    color: var(--textSecondary);
+    text-transform: capitalize;
+  }
+
+  td {
+    font-family: var(--fontMono);
+  }
+
+  &.alignLastRight {
+    th:last-child,
+    td:last-child {
+      text-align: right;
+    }
+  }
+}
+
+.footer {
+  color: var(--textSecondary);
+  font-size: var(--fontSizeXs);
+}

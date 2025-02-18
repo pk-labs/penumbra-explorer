@@ -1,0 +1,58 @@
+.root {
+  /* FIXME: !important workaround for CSS import order issue */
+  --panelGradientStartColor: rgba(244, 156, 67, 0.25) !important;
+  --panelGradientStopColor: rgba(244, 156, 67, 0.025) !important;
+}
+
+.chart {
+  display: flex;
+  margin-bottom: calc(0.5 * var(--unit));
+  gap: var(--unit);
+}
+
+.horizontalBarGroup {
+  display: flex;
+  gap: 2px;
+}
+
+.verticalBarGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.bar {
+  width: 6px;
+  border-radius: var(--roundedFull);
+  transform: scaleX(0);
+  transform-origin: bottom;
+
+  &.top {
+    animation: barAnimation 500ms linear 500ms forwards;
+    background: var(--surfaceLight);
+  }
+
+  &.bottom {
+    animation: barAnimation 500ms linear forwards;
+    background: var(--primary);
+  }
+}
+
+@keyframes barAnimation {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(0.25 * var(--unit));
+  margin-bottom: calc(1.5 * var(--unit));
+}

@@ -1,0 +1,16 @@
+# Dependencies
+/node_modules
+
+# Build and test artifacts
+.next
+.swc
+/build
+/coverage
+/out
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+*.log

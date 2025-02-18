@@ -1,0 +1,5 @@
+.dataRow:hover {
+  /* FIXME: !important workaround for CSS import order issue */
+  background: rgba(83, 174, 168, 0.15) !important;
+  cursor: pointer;
+}

@@ -1,0 +1,23 @@
+@import "variables.css";
+@import "normalize.css";
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--fontPrimary);
+  font-size: var(--fontSizeBase);
+  line-height: 1.5;
+}

@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(2 * var(--unit));
+  gap: var(--unit);
+}
+
+.breadcrumb {
+  font-family: var(--fontSecondary);
+  font-size: var(--fontSize3Xl);
+  font-weight: 500;
+}
+
+.separator,
+.breadcrumb[href] {
+  color: var(--textSecondary);
+}
+
+.breadcrumb[href] {
+  text-decoration: none;
+  transition: color 200ms var(--fastOutSlowIn);
+
+  &:hover {
+    color: var(--text);
+  }
+}

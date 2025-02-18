@@ -1,0 +1,62 @@
+.root {
+  --panelGradientStartColor: rgba(174, 174, 174, 0.25);
+  --panelGradientStopColor: rgba(174, 174, 174, 0.025);
+  display: grid;
+  height: 196px;
+  padding: calc(3 * var(--unit));
+  border-radius: var(--rounded);
+  backdrop-filter: blur(var(--blurXl));
+  background-color: var(--surface);
+  background-image: radial-gradient(
+    100% 100% at 0% 0%,
+    var(--panelGradientStartColor) 0%,
+    var(--panelGradientStopColor) 100%
+  );
+  grid-template: 1fr 1fr / 1fr 1fr;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: var(--textSecondary);
+  font-size: var(--fontSizeBase);
+  font-weight: 500;
+  gap: var(--unit);
+  text-transform: capitalize;
+
+  & > * {
+    white-space: nowrap;
+  }
+}
+
+.number {
+  font-family: var(--fontMono);
+  font-size: var(--fontSize3Xl);
+  font-weight: 500;
+}
+
+.footer,
+.chart {
+  color: var(--textSecondary);
+  font-family: var(--fontMono);
+  font-size: var(--fontSizeXs);
+  font-weight: 500;
+}
+
+.footer {
+  align-self: flex-end;
+  grid-area: 2 / 1;
+}
+
+.chart {
+  overflow: hidden;
+  align-self: flex-end;
+  grid-area: span 2 / 2;
+  justify-self: flex-end;
+}
