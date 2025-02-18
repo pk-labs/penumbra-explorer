@@ -1,0 +1,26 @@
+overwrite: true
+schema: https://penumbra-explorer.buber.eepy.sh/
+config:
+  # https://www.graphql-code-generator.com/docs/config-reference/naming-convention#remove-underscores
+  namingConvention:
+    typeNames: change-case-all#pascalCase
+    transformUnderscore: true
+documents:
+  - src/lib/graphql/queries/**/*.graphql
+  - src/lib/graphql/mutations/**/*.graphql
+  - src/lib/graphql/fragments/**/*.graphql
+generates:
+  src/lib/graphql/generated/types.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql
+    config:
+      withHooks: false
+  src/lib/graphql/generated/hooks.ts:
+    preset: import-types
+    presetConfig:
+      typesPath: ./types
+    plugins:
+      - typescript-urql
+
