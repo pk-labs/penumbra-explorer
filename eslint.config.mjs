@@ -34,6 +34,7 @@ const eslintConfig = [
       ],
     },
   }),
+  { ignores: ['src/lib/graphql/generated/'] },
 ];
 
 export default eslintConfig;
