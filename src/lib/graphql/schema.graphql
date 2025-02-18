@@ -1,0 +1,149 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: QueryRoot
+}
+
+"""
+
+Indicates that an Input Object is a OneOf Input Object (and thus requires
+exactly one of its field be provided)
+"""
+directive @oneOf on INPUT_OBJECT
+
+union Action = IbcRelay | NotYetSupportedAction | Output | Spend
+
+union SearchResult = Block | Transaction
+
+type AssetId {
+    altBaseDenom: String!
+    altBech32M: String!
+    inner: String!
+}
+
+type Block {
+    createdAt: DateTime!
+    height: Int!
+    rawEvents: [Event!]!
+    transactions: [Transaction!]!
+    "TODO: replace stub with actual data"
+    transactionsCount: Int!
+}
+
+type Event {
+    type: String!
+    value: String!
+}
+
+type Fee {
+    amount: U128!
+    assetId: AssetId
+}
+
+type IbcRelay {
+    rawAction: String!
+}
+
+type NotYetSupportedAction {
+    debug: String!
+}
+
+type NotePayload {
+    encryptedNote: String!
+    ephemeralKey: String!
+    noteCommitment: String!
+}
+
+type Output {
+    body: OutputBody!
+    proof: String!
+}
+
+type OutputBody {
+    balanceCommitment: String!
+    notePayload: NotePayload!
+    ovkWrappedKey: String!
+    wrappedMemoKey: String!
+}
+
+type QueryRoot {
+    block(height: Int!): Block
+    blocks(selector: BlocksSelector!): [Block!]!
+    latestTransactions(limit: Int!): [Transaction!]!
+    search(slug: String!): SearchResult
+    transaction(hash: String!): Transaction
+}
+
+type Spend {
+    authSig: String!
+    body: SpendBody!
+    proof: String!
+}
+
+type SpendBody {
+    balanceCommitment: String!
+    nullifier: String!
+    rk: String!
+}
+
+type Transaction {
+    anchor: String!
+    bindingSig: String!
+    block: Block!
+    body: TransactionBody!
+    hash: String!
+    index: Int!
+    raw: String!
+    rawEvents: [Event!]!
+    result: TransactionResult!
+}
+
+type TransactionBody {
+    actions: [Action!]!
+    actionsCount: Int!
+    detectionData: [String!]!
+    memo: String
+    parameters: TransactionParameters!
+    rawActions: [String!]!
+}
+
+type TransactionParameters {
+    chainId: String!
+    expiryHeight: Int!
+    fee: Fee!
+}
+
+type TransactionResult {
+    code: Int!
+    codespace: String!
+    data: String!
+    events: [String!]!
+    gasUsed: Int!
+    gasWanted: Int!
+    info: String!
+    log: String!
+}
+
+"""
+
+Implement the DateTime<Utc> scalar
+
+The input/output is a string in RFC3339 format.
+"""
+scalar DateTime
+
+scalar U128
+
+input BlockHeightRange {
+    from: Int!
+    to: Int!
+}
+
+input BlocksSelector {
+    latest: LatestBlock
+    range: BlockHeightRange
+}
+
+input LatestBlock {
+    limit: Int!
+}

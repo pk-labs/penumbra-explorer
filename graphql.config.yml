@@ -1,0 +1,8 @@
+schema: src/lib/graphql/schema.graphql
+extensions:
+  endpoints:
+    dev:
+      headers:
+        user-agent: JS GraphQL
+      introspect: false
+      url: https://penumbra-explorer.buber.eepy.sh/
