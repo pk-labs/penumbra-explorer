@@ -1,24 +1,13 @@
 /* istanbul ignore file */
-/**
- * https://github.com/vercel/next.js/tree/canary/examples/with-urql
- */
 import { cacheExchange, Client, fetchExchange } from 'urql';
 
 const createGraphqlClient = () => {
-  // let origin = process.env.NEXT_PUBLIC_GRAPHQL_ORIGIN ?? '';
-  //
-  // if (!origin) {
-  //   const host = headers().get('host');
-  //
-  //   if (host?.startsWith('localhost')) {
-  //     origin = `http://${host}`;
-  //   } else if (host) {
-  //     origin = `https://${host}`;
-  //   }
-  // }
+  if (!process.env.NEXT_PUBLIC_GRAPHQL_URL) {
+    throw Error('Missing NEXT_PUBLIC_GRAPHQL_URL');
+  }
 
   return new Client({
-    url: 'https://penumbra-explorer.buber.eepy.sh/',
+    url: process.env.NEXT_PUBLIC_GRAPHQL_URL,
     fetchOptions: {
       credentials: 'omit',
     },

@@ -12,5 +12,9 @@
 *.tsbuildinfo
 next-env.d.ts
 
+# Environment
+.env
+!.env.example
+
 # Logs
 *.log
