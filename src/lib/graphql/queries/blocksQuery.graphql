@@ -1,0 +1,9 @@
+query Blocks(
+  $limit: Int!
+) {
+  blocks(selector: {latest: {limit: $limit}}) {
+    height
+    createdAt
+    transactionsCount
+  }
+}

@@ -30,7 +30,8 @@
     "useUnknownInCatchVariables": false
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/lib/graphql/generated"
   ],
   "include": [
     "next-env.d.ts",
