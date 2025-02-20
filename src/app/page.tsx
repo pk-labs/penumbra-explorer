@@ -47,5 +47,4 @@ const HomePage: FC = async () => {
     )
 }
 
-export const revalidate = 1
 export default HomePage

@@ -44,5 +44,4 @@ const TransactionViewPage: FC<Props> = async props => {
     )
 }
 
-export const revalidate = 1
 export default TransactionViewPage

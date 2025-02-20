@@ -64,4 +64,7 @@ const RootLayout: FC<Props> = async props => (
     </html>
 )
 
+// Disable all caching for now
+export const dynamic = 'force-dynamic'
+
 export default RootLayout
