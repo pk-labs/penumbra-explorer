@@ -37,7 +37,6 @@ const _fontMono = localFont({
 
 export const metadata: Metadata = {
     title: rootTitle,
-    description: 'PK Labs frontend developer onboarding task.',
     icons: [
         {
             url: '/favicon.ico',
