@@ -2,7 +2,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { transactions } from '../../../__tests__/__fixtures__'
 import {
     BlockView,
     Breadcrumb,
@@ -11,8 +10,6 @@ import {
 } from '../../../components'
 import { rootTitle } from '../../../lib/constants'
 import { loadBlock } from '../../../lib/loaders'
-
-const latestTransactions = transactions.slice(0, 10)
 
 interface Props {
     params: Promise<{
@@ -38,12 +35,7 @@ const BlockViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/blocks">Blocks</Breadcrumb>
             </Breadcrumbs>
-            <BlockView
-                block={block}
-                subtitle="1,057,456"
-                title="Block view"
-                transactions={latestTransactions}
-            />
+            <BlockView block={block} subtitle="1,057,456" title="Block view" />
         </Container>
     )
 }

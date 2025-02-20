@@ -2,7 +2,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { transactions } from '../../../__tests__/__fixtures__'
 import {
     Breadcrumb,
     Breadcrumbs,
@@ -10,6 +9,7 @@ import {
     TransactionView,
 } from '../../../components'
 import { rootTitle } from '../../../lib/constants'
+import { loadTransaction } from '../../../lib/loaders'
 
 interface Props {
     params: Promise<{
@@ -23,7 +23,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => ({
 
 const TransactionViewPage: FC<Props> = async props => {
     const params = await props.params
-    const transaction = transactions.find(t => t.id === params.transactionId)
+    const transaction = await loadTransaction(params.transactionId)
 
     if (!transaction) {
         notFound()

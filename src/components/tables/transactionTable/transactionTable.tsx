@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
 import { timezone } from '../../../lib/constants'
 import dayjs from '../../../lib/dayjs'
-import { Transaction } from '../../../lib/types'
+import { TransactionFragment } from '../../../lib/graphql/generated/types'
 import { formatNumber, shortenHash } from '../../../lib/utils'
 import Pill from '../../pill'
 import Table from '../table'
@@ -16,7 +16,7 @@ interface Props {
     className?: string
     time?: boolean
     title?: string
-    transactions: Transaction[]
+    transactions?: TransactionFragment[]
 }
 
 const TransactionTable: FC<Props> = props => {
@@ -48,11 +48,11 @@ const TransactionTable: FC<Props> = props => {
                 </tr>
             </thead>
             <tbody>
-                {props.transactions.map(transaction => (
+                {props.transactions?.map(transaction => (
                     <tr
-                        key={transaction.id}
+                        key={transaction.hash}
                         className={styles.dataRow}
-                        data-transaction-id={transaction.id}
+                        data-transaction-id={transaction.hash}
                         onClick={onRowClick}
                     >
                         <td>
@@ -65,18 +65,24 @@ const TransactionTable: FC<Props> = props => {
                         </td>
                         <td>
                             <Box color="var(--textSecondary)" size={16} />
-                            <span>{formatNumber(transaction.blockHeight)}</span>
+                            <span>
+                                {formatNumber(transaction.block.height)}
+                            </span>
                         </td>
                         <td>
-                            <Pill>{transaction.latestAction}</Pill>
-                            {transaction.totalActions > 1 && (
+                            {transaction.body.rawActions.length > 0 && (
+                                <Pill>{transaction.body.rawActions}</Pill>
+                            )}
+                            {transaction.body.actionsCount > 1 && (
                                 <span className={styles.moreActions}>
-                                    +{transaction.totalActions - 1}
+                                    +{transaction.body.actionsCount - 1}
                                 </span>
                             )}
                         </td>
                         {props.time && (
-                            <td>{now.to(dayjs(transaction.date))}</td>
+                            <td>
+                                {now.to(dayjs(transaction.block.createdAt))}
+                            </td>
                         )}
                     </tr>
                 ))}

@@ -1,5 +1,10 @@
+#import "./transactionFragment.graphql"
+
 fragment Block on Block {
     height
     createdAt
+    transactions {
+        ...Transaction
+    }
     transactionsCount
 }

@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import { Copy } from 'lucide-react'
 import { FC } from 'react'
 import { BlockFragment } from '../../../lib/graphql/generated/types'
-import { Transaction } from '../../../lib/types'
 import { formatNumber } from '../../../lib/utils'
 import { DataList, DataListItem } from '../../dataList'
 import { TransactionTable } from '../../tables'
@@ -11,7 +10,6 @@ import styles from './blockView.module.css'
 
 interface Props extends Omit<ViewProps, 'children'> {
     block: BlockFragment
-    transactions: Transaction[]
 }
 
 const BlockView: FC<Props> = props => (
@@ -33,7 +31,7 @@ const BlockView: FC<Props> = props => (
                 {props.block.transactionsCount}
             </DataListItem>
         </DataList>
-        <TransactionTable transactions={props.transactions} />
+        <TransactionTable transactions={props.block.transactions} />
     </View>
 )
 

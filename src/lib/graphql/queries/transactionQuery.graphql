@@ -1,0 +1,9 @@
+#import "../fragments/transactionFragment.graphql"
+
+query Transaction(
+  $id: String!
+) {
+    transaction(hash: $id) {
+        ...Transaction
+    }
+}

@@ -186,29 +186,61 @@ export type TransactionResult = {
   log: Scalars['String']['output'];
 };
 
-export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
+export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', rawActions: Array<string>, actionsCount: number } }> };
+
+export type TransactionFragment = { __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', rawActions: Array<string>, actionsCount: number } };
 
 export type BlockQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
 
 
-export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number } | null };
+export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', rawActions: Array<string>, actionsCount: number } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
   limit: Scalars['Int']['input'];
 }>;
 
 
-export type BlocksQuery = { __typename?: 'QueryRoot', blocks: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> };
+export type BlocksQuery = { __typename?: 'QueryRoot', blocks: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', rawActions: Array<string>, actionsCount: number } }> }> };
 
+export type TransactionQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', rawActions: Array<string>, actionsCount: number } } | null };
+
+export type TransactionsQueryVariables = Exact<{
+  limit: Scalars['Int']['input'];
+}>;
+
+
+export type TransactionsQuery = { __typename?: 'QueryRoot', latestTransactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', rawActions: Array<string>, actionsCount: number } }> };
+
+export const TransactionFragmentDoc = gql`
+    fragment Transaction on Transaction {
+  hash
+  block {
+    height
+    createdAt
+  }
+  body {
+    rawActions
+    actionsCount
+  }
+}
+    `;
 export const BlockFragmentDoc = gql`
     fragment Block on Block {
   height
   createdAt
+  transactions {
+    ...Transaction
+  }
   transactionsCount
 }
-    `;
+    ${TransactionFragmentDoc}`;
 export const BlockDocument = gql`
     query Block($id: Int!) {
   block(height: $id) {
@@ -223,3 +255,17 @@ export const BlocksDocument = gql`
   }
 }
     ${BlockFragmentDoc}`;
+export const TransactionDocument = gql`
+    query Transaction($id: String!) {
+  transaction(hash: $id) {
+    ...Transaction
+  }
+}
+    ${TransactionFragmentDoc}`;
+export const TransactionsDocument = gql`
+    query Transactions($limit: Int!) {
+  latestTransactions(limit: $limit) {
+    ...Transaction
+  }
+}
+    ${TransactionFragmentDoc}`;

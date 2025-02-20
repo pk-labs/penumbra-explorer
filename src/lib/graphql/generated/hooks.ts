@@ -3,13 +3,29 @@ import * as Types from './types';
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export const TransactionFragmentDoc = gql`
+    fragment Transaction on Transaction {
+  hash
+  block {
+    height
+    createdAt
+  }
+  body {
+    rawActions
+    actionsCount
+  }
+}
+    `;
 export const BlockFragmentDoc = gql`
     fragment Block on Block {
   height
   createdAt
+  transactions {
+    ...Transaction
+  }
   transactionsCount
 }
-    `;
+    ${TransactionFragmentDoc}`;
 export const BlockDocument = gql`
     query Block($id: Int!) {
   block(height: $id) {
@@ -31,4 +47,26 @@ export const BlocksDocument = gql`
 
 export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });
+};
+export const TransactionDocument = gql`
+    query Transaction($id: String!) {
+  transaction(hash: $id) {
+    ...Transaction
+  }
+}
+    ${TransactionFragmentDoc}`;
+
+export function useTransactionQuery(options: Omit<Urql.UseQueryArgs<Types.TransactionQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.TransactionQuery, Types.TransactionQueryVariables>({ query: Types.TransactionDocument, ...options });
+};
+export const TransactionsDocument = gql`
+    query Transactions($limit: Int!) {
+  latestTransactions(limit: $limit) {
+    ...Transaction
+  }
+}
+    ${TransactionFragmentDoc}`;
+
+export function useTransactionsQuery(options: Omit<Urql.UseQueryArgs<Types.TransactionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.TransactionsQuery, Types.TransactionsQueryVariables>({ query: Types.TransactionsDocument, ...options });
 };

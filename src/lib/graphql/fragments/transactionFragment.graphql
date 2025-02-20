@@ -1,0 +1,11 @@
+fragment Transaction on Transaction {
+    hash
+    block {
+        height
+        createdAt
+    }
+    body {
+        rawActions
+        actionsCount
+    }
+}

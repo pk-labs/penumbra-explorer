@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 import { Search } from 'lucide-react'
 import { FC } from 'react'
-import { transactions } from '../__tests__/__fixtures__'
 import {
     BlockPanel,
     BlockTable,
@@ -11,13 +10,12 @@ import {
     TransactionPanel,
     TransactionTable,
 } from '../components'
-import { loadBlocks } from '../lib/loaders'
+import { loadBlocks, loadTransactions } from '../lib/loaders'
 import styles from './page.module.css'
-
-const latestTransactions = transactions.slice(0, 10)
 
 const HomePage: FC = async () => {
     const latestBlocks = await loadBlocks(10)
+    const latestTransactions = await loadTransactions(10)
 
     return (
         <>
