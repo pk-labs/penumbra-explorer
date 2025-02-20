@@ -15,7 +15,7 @@ const NavigationBar: FC<Props> = props => (
         <div className={styles.group}>
             <Image alt="Noctis" height={33} src={logo.src} width={120} />
             <div className={styles.dropdown}>
-                <span>Marinnet</span>
+                <span>Mainnet</span>
                 <ChevronsUpDown size={16} />
             </div>
         </div>
