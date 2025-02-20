@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default } from './button';
+export { default } from './button'

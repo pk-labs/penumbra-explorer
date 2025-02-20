@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default } from './formatNumber';
+export { default } from './formatNumber'

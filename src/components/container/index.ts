@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default } from './container';
+export { default } from './container'

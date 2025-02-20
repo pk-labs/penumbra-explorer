@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default } from './pill';
+export { default } from './pill'

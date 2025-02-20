@@ -1,10 +1,10 @@
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
 
 beforeEach(() => {
-  jest.useFakeTimers();
-});
+    jest.useFakeTimers()
+})
 
 afterEach(() => {
-  jest.clearAllTimers();
-  jest.useRealTimers();
-});
+    jest.clearAllTimers()
+    jest.useRealTimers()
+})

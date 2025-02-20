@@ -1,10 +1,8 @@
 export default {
   arrowParens: 'avoid',
   endOfLine: 'lf',
-  jsxSingleQuote: true,
-  printWidth: 100,
-  semi: true,
+  semi: false,
   singleQuote: true,
-  tabWidth: 2,
-  trailingComma: 'all',
+  tabWidth: 4,
+  trailingComma: 'es5',
 };

@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default } from './shortenHash';
+export { default } from './shortenHash'

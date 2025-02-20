@@ -1,1 +1,1 @@
-export { default as blocksQuery } from './blocksQuery.graphql';
+export { default as blocksQuery } from './blocksQuery.graphql'

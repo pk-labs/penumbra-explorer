@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default } from './table';
+export { default } from './table'

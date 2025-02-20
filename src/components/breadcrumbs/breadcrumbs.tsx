@@ -1,35 +1,37 @@
-import clsx from 'clsx';
-import { ChevronRight } from 'lucide-react';
-import { Children, FC, ReactElement } from 'react';
-import { Props as BreadcrumbProps } from './breadcrumb';
-import styles from './breadcrumbs.module.css';
+import clsx from 'clsx'
+import { ChevronRight } from 'lucide-react'
+import { Children, FC, ReactElement } from 'react'
+import { Props as BreadcrumbProps } from './breadcrumb'
+import styles from './breadcrumbs.module.css'
 
 interface Props {
-  children:
-    | ReactElement<BreadcrumbProps>
-    | Array<
+    children:
         | ReactElement<BreadcrumbProps>
-        | Array<ReactElement<BreadcrumbProps>>
-        | false
-        | null
-        | undefined
-      >;
-  className?: string;
+        | Array<
+              | ReactElement<BreadcrumbProps>
+              | Array<ReactElement<BreadcrumbProps>>
+              | false
+              | null
+              | undefined
+          >
+    className?: string
 }
 
 const Breadcrumbs: FC<Props> = props => {
-  const lastIndex = Children.count(props.children) - 1;
+    const lastIndex = Children.count(props.children) - 1
 
-  return (
-    <nav className={clsx(styles.root, props.className)}>
-      {Children.map(props.children, (child, index) => (
-        <>
-          {child}
-          {index < lastIndex && <ChevronRight size={24} className={styles.separator} />}
-        </>
-      ))}
-    </nav>
-  );
-};
+    return (
+        <nav className={clsx(styles.root, props.className)}>
+            {Children.map(props.children, (child, index) => (
+                <>
+                    {child}
+                    {index < lastIndex && (
+                        <ChevronRight className={styles.separator} size={24} />
+                    )}
+                </>
+            ))}
+        </nav>
+    )
+}
 
-export default Breadcrumbs;
+export default Breadcrumbs

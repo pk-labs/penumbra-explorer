@@ -1,6 +1,6 @@
 export default {
-  plugins: {
-    'postcss-normalize': {},
-    'postcss-nesting': {},
-  },
-};
+    plugins: {
+        'postcss-normalize': {},
+        'postcss-nesting': {},
+    },
+}

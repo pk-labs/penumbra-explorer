@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { default } from './burnPanel';
+export { default } from './burnPanel'
