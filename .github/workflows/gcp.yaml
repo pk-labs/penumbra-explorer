@@ -21,6 +21,7 @@ jobs:
         id: deployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          environment: development
           environment-url: https://pe-frontend-564694434950.europe-west6.run.app/
           initial-status: in_progress
 
