@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
 import { timezone } from '../../../lib/constants'
 import dayjs from '../../../lib/dayjs'
-import { Block } from '../../../lib/types'
+import { BlockFragment } from '../../../lib/graphql/generated/types'
 import { formatNumber } from '../../../lib/utils'
 import Table from '../table'
 import styles from './blockTable.module.css'
 
 interface Props {
     actions?: ReactNode
-    blocks: Block[]
+    blocks?: BlockFragment[]
     className?: string
     proposer?: boolean
     title?: string
@@ -46,25 +46,25 @@ const BlockTable: FC<Props> = props => {
                 </tr>
             </thead>
             <tbody>
-                {props.blocks.map(block => (
+                {props.blocks?.map(block => (
                     <tr
-                        key={block.id}
+                        key={block.height}
                         className={styles.dataRow}
-                        data-block-id={block.id}
+                        data-block-id={block.height}
                         onClick={onRowClick}
                     >
                         <td>
                             <Box color="var(--textSecondary)" size={16} />
                             <span>{formatNumber(block.height)}</span>
                         </td>
-                        <td>{now.to(dayjs(block.date))}</td>
+                        <td>{now.to(dayjs(block.createdAt))}</td>
                         {props.proposer && (
                             <td>
-                                <span>{block.proposer}</span>
+                                <span>TODO: Proposer</span>
                                 <Copy color="var(--textSecondary)" size={14} />
                             </td>
                         )}
-                        <td>{block.transactions}</td>
+                        <td>{block.transactionsCount}</td>
                     </tr>
                 ))}
             </tbody>

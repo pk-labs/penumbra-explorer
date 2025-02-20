@@ -1,19 +1,19 @@
 /* istanbul ignore file */
 import { faker } from '@faker-js/faker'
-import { Block, Transaction } from '../lib/types'
+import { Transaction } from '../lib/types'
 
-export const generateBlock = (): Block => ({
-    id: faker.string.uuid(),
-    height: faker.number.int({ min: 1000000, max: 9999999 }),
-    date: faker.date.recent().toISOString(),
-    transactions: faker.number.int({ min: 0, max: 30 }),
-    proposer:
-        'penumbravalid' +
-        faker.finance
-            .bitcoinAddress({ type: 'bech32', network: 'testnet' })
-            .slice(0, 7) +
-        '...',
-})
+// export const generateBlock = (): Block => ({
+//     id: faker.string.uuid(),
+//     height: faker.number.int({ min: 1000000, max: 9999999 }),
+//     date: faker.date.recent().toISOString(),
+//     transactions: faker.number.int({ min: 0, max: 30 }),
+//     proposer:
+//         'penumbravalid' +
+//         faker.finance
+//             .bitcoinAddress({ type: 'bech32', network: 'testnet' })
+//             .slice(0, 7) +
+//         '...',
+// })
 
 export const generateTransaction = (): Transaction => ({
     id: faker.string.uuid(),

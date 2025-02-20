@@ -1,0 +1,5 @@
+fragment Block on Block {
+    height
+    createdAt
+    transactionsCount
+}

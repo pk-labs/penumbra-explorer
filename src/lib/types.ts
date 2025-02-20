@@ -1,10 +1,6 @@
-export interface Block {
-    date: string
-    height: number
-    id: string
-    proposer: string
-    transactions: number
-}
+import { BlocksQuery } from './graphql/generated/types'
+
+export type Block = BlocksQuery['blocks'][number]
 
 export interface Transaction {
     blockHeight: number

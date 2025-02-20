@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 import type { Metadata } from 'next'
 import { FC } from 'react'
-import { blocks } from '../../__tests__/__fixtures__'
 import {
     BlockTable,
     Breadcrumb,
@@ -9,22 +8,25 @@ import {
     Container,
 } from '../../components'
 import { rootTitle } from '../../lib/constants'
-
-const paginatedBlocks = blocks.slice(0, 20)
+import { loadBlocks } from '../../lib/loaders'
 
 export const metadata: Metadata = {
     title: `Blocks - ${rootTitle}`,
 }
 
-const BlocksPage: FC = async () => (
-    <Container>
-        <Breadcrumbs>
-            <Breadcrumb href="/">Explorer</Breadcrumb>
-            <Breadcrumb>Blocks</Breadcrumb>
-        </Breadcrumbs>
-        <BlockTable blocks={paginatedBlocks} proposer />
-    </Container>
-)
+const BlocksPage: FC = async () => {
+    const blocks = await loadBlocks(20)
+
+    return (
+        <Container>
+            <Breadcrumbs>
+                <Breadcrumb href="/">Explorer</Breadcrumb>
+                <Breadcrumb>Blocks</Breadcrumb>
+            </Breadcrumbs>
+            <BlockTable blocks={blocks} proposer />
+        </Container>
+    )
+}
 
 export const revalidate = 1
 export default BlocksPage

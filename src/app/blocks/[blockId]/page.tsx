@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { blocks, transactions } from '../../../__tests__/__fixtures__'
+import { transactions } from '../../../__tests__/__fixtures__'
 import {
     BlockView,
     Breadcrumb,
@@ -10,6 +10,7 @@ import {
     Container,
 } from '../../../components'
 import { rootTitle } from '../../../lib/constants'
+import { loadBlock } from '../../../lib/loaders'
 
 const latestTransactions = transactions.slice(0, 10)
 
@@ -25,7 +26,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => ({
 
 const BlockViewPage: FC<Props> = async props => {
     const params = await props.params
-    const block = blocks.find(b => b.id === params.blockId)
+    const block = await loadBlock(Number(params.blockId))
 
     if (!block) {
         notFound()

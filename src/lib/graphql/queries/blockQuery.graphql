@@ -1,0 +1,9 @@
+#import "../fragments/blockFragment.graphql"
+
+query Block(
+  $id: Int!
+) {
+    block(height: $id) {
+        ...Block
+    }
+}

@@ -1,9 +1,9 @@
+#import "../fragments/blockFragment.graphql"
+
 query Blocks(
   $limit: Int!
 ) {
   blocks(selector: {latest: {limit: $limit}}) {
-    height
-    createdAt
-    transactionsCount
+    ...Block
   }
 }
