@@ -5,6 +5,7 @@
     "scripts": {
         "build": "env-cmd --silent next build",
         "clean": "npx rimraf .next coverage out",
+        "deploy": "gcloud run deploy --source .",
         "dev": "env-cmd next dev",
         "graphql:codegen": "env-cmd graphql-codegen",
         "lint": "next lint",

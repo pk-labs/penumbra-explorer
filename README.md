@@ -9,7 +9,7 @@ Penumbra Blockchain Explorer
 3. Start the app with `npm run dev`.
 
 Or check out the deployed version at
-<https://penumbra-blockchain-explorer-426149560589.europe-west6.run.app/>.
+<https://pe-frontend-564694434950.europe-west6.run.app/>.
 
 ### npm scripts
 
@@ -42,51 +42,42 @@ Or check out the deployed version at
 ## Components, CSS, icons and fonts
 
 The UI and theme replicate the provided [Figma mocks](https://bit.ly/3WRV2bK) as
-close as possible.
-All components are built from scratch as <https://github.com/penumbra-zone/web>
-and
-<https://ui.penumbra.zone/> don't seem to provide fitting ones for this task.
+close as possible. All components are built from scratch as
+<https://github.com/penumbra-zone/web> and <https://ui.penumbra.zone/> don't
+seem to provide fitting ones for this task.
 
 The project uses CSS modules with the global CSS and theme at `src/lib/css`. It
-uses modern CSS with
-variables, flex, grid, animations, etc. Most components can be overridden with
-`className`. PostCSS
-plugins add additional features such as normalizing and nesting. Tailwind was
-considered but
-ultimately I went for this approach as I haven't used Tailwind in a while.
+uses modern CSS with variables, flex, grid, animations, etc. Most components can
+be overridden with `className`. PostCSS plugins add additional features such as
+normalizing and nesting. Tailwind was considered but ultimately I went for this
+approach as I haven't used Tailwind in a while.
 
 <https://lucide.dev/> is used for most icons. Some are custom and extracted from
 Figma.
 
 The `Poppins` and `Work Sans` fonts are loaded with `next/font/google` whereas
-`Iosevka` is built
-from source and loaded with `next/font/local` from `src/lib/fonts`.
+`Iosevka` is built from source and loaded with `next/font/local` from
+`src/lib/fonts`.
 
 ## Linting
 
 TypeScript is linted and autoformatted with ESLint and Prettier mimicking the
-configuration at
-<https://github.com/penumbra-zone/web>. CSS is linted and autoformatted with
-Stylelint.
+configuration at <https://github.com/penumbra-zone/web>. CSS is linted and
+autoformatted with Stylelint.
 
 ## Testing
 
 Jest tests are collocated with the components. Global test configuration and
-mocks reside in
-`src/__tests__`. Test coverage can be reported to console and written to file
-with
-`npm run test:coverage`.
+mocks reside in `src/__tests__`. Test coverage can be reported to console and
+written to file with `npm run test:coverage`.
 
 ## CI/CD
 
 On push, the GitHub Actions workflow `.github/workflows/gcp.yaml` is triggered.
-First it runs all
-checks (linting, typechecking, testing) and uploads a test coverage report to
-Codecov with a badge
-displayed at the top of this file. Then it triggers Google Cloud Build which
-deploys the app to
-Google Cloud Run
-at <https://penumbra-blockchain-explorer-426149560589.europe-west6.run.app/>.
+First it runs all  checks (linting, typechecking, testing) and uploads a test
+coverage report to Codecov with a badge displayed at the top of this file. Then
+it triggers Google Cloud Build which  deploys the app to Google Cloud Run at
+<https://pe-frontend-564694434950.europe-west6.run.app/>.
 
 ## Misc
 
