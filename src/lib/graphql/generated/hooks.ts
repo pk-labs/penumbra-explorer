@@ -16,6 +16,12 @@ export const TransactionFragmentDoc = gql`
     }
     actionsCount
     memo
+    parameters {
+      chainId
+      fee {
+        amount
+      }
+    }
   }
 }
     `;

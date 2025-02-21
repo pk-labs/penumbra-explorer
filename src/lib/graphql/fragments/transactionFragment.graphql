@@ -10,5 +10,11 @@ fragment Transaction on Transaction {
         }
         actionsCount
         memo
+        parameters {
+            chainId
+            fee {
+                amount
+            }
+        }
     }
 }
