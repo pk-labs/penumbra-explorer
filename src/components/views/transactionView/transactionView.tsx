@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { Copy } from 'lucide-react'
 import { FC } from 'react'
 import { TransactionFragment } from '../../../lib/graphql/generated/types'
 import { shortenHash } from '../../../lib/utils'
+import CopyToClipboard from '../../copyToClipboard'
 import { DataList, DataListItem } from '../../dataList'
 import { View, ViewProps } from '../view'
 import styles from './transactionView.module.css'
@@ -20,7 +20,7 @@ const TransactionView: FC<Props> = props => (
         <DataList>
             <DataListItem name="Transaction hash">
                 {shortenHash(props.transaction.hash)}
-                <Copy color="var(--textSecondary)" size={14} />
+                <CopyToClipboard data={props.transaction.hash} iconSize={14} />
             </DataListItem>
             <DataListItem name="Block height">
                 {props.transaction.block.height}

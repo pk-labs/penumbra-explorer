@@ -1,0 +1,8 @@
+.root {
+    stroke: var(--textSecondary);
+    transition: stroke 200ms var(--fastOutSlowIn);
+
+    &:hover {
+        stroke: var(--text);
+    }
+}

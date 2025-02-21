@@ -1,12 +1,13 @@
 'use client'
 
-import { Box, CheckCheck, Copy } from 'lucide-react'
+import { Box, CheckCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
 import { dateFormatFull } from '../../../lib/constants'
 import dayjs from '../../../lib/dayjs'
 import { TransactionFragment } from '../../../lib/graphql/generated/types'
 import { formatAction, formatNumber, shortenHash } from '../../../lib/utils'
+import CopyToClipboard from '../../copyToClipboard'
 import Pill from '../../pill'
 import Table from '../table'
 import styles from './transactionTable.module.css'
@@ -62,7 +63,10 @@ const TransactionTable: FC<Props> = props => {
                                     size={14}
                                 />
                                 <span>{shortenHash(transaction.hash)}</span>
-                                <Copy color="var(--textSecondary)" size={14} />
+                                <CopyToClipboard
+                                    data={transaction.hash}
+                                    iconSize={14}
+                                />
                             </td>
                             <td>
                                 <Box color="var(--textSecondary)" size={16} />
