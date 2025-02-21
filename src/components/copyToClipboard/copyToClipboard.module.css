@@ -3,6 +3,7 @@
     transition: stroke 200ms var(--fastOutSlowIn);
 
     &:hover {
+        cursor: pointer;
         stroke: var(--text);
     }
 }
