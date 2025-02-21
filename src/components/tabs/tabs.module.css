@@ -1,60 +1,60 @@
 .root {
-  --height: calc(7 * var(--unit));
-  position: relative;
-  display: flex;
-  height: var(--height);
-  align-items: center;
-  padding: 0 calc(2 * var(--unit));
-  border-radius: calc(var(--height) / 2);
-  background: var(--surface);
+    --height: calc(7 * var(--unit));
+    position: relative;
+    display: flex;
+    height: var(--height);
+    align-items: center;
+    padding: 0 calc(2 * var(--unit));
+    border-radius: calc(var(--height) / 2);
+    background: var(--surface);
 }
 
 .tab {
-  position: relative;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  padding: 0 calc(2 * var(--unit));
-  background-image: radial-gradient(
-    50% 100% at 50% 100%,
-    rgba(186, 77, 20, 0.35) 0%,
-    rgba(186, 77, 20, 0) 95%
-  );
-  background-position-y: var(--height);
-  background-repeat: no-repeat;
-  color: var(--textSecondary);
-  font-size: var(--fontSizeSm);
-  font-weight: 500;
-  text-decoration: none;
-  transition:
-    color 200ms var(--fastOutSlowIn),
-    background-position 200ms var(--fastOutSlowIn);
-
-  &::before {
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    content: "";
-    transform: translateX(0);
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 calc(2 * var(--unit));
+    background-image: radial-gradient(
+        50% 100% at 50% 100%,
+        rgba(186, 77, 20, 0.35) 0%,
+        rgba(186, 77, 20, 0) 95%
+    );
+    background-position-y: var(--height);
+    background-repeat: no-repeat;
+    color: var(--textSecondary);
+    font-size: var(--fontSizeSm);
+    font-weight: 500;
+    text-decoration: none;
     transition:
-      width 200ms var(--fastOutSlowIn),
-      transform 200ms var(--fastOutSlowIn);
-  }
-
-  &:hover,
-  &.active {
-    color: var(--text);
-  }
-
-  &.active {
-    background-position-y: 0;
+        color 200ms var(--fastOutSlowIn),
+        background-position 200ms var(--fastOutSlowIn);
 
     &::before {
-      width: calc(100% - 2 * var(--unit));
-      transform: translateX(-50%);
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        content: "";
+        transform: translateX(0);
+        transition:
+            width 200ms var(--fastOutSlowIn),
+            transform 200ms var(--fastOutSlowIn);
     }
-  }
+
+    &:hover,
+    &.active {
+        color: var(--text);
+    }
+
+    &.active {
+        background-position-y: 0;
+
+        &::before {
+            width: calc(100% - 2 * var(--unit));
+            transform: translateX(-50%);
+        }
+    }
 }

@@ -1,40 +1,40 @@
 :root {
-  /* Typography */
-  --fontPrimary: Poppins, sans-serif;
-  --fontSecondary: "Work Sans", sans-serif;
-  --fontMono: _fontMono, monospace;
-  --fontSizeBase: 1rem;
-  --fontSizeXs: calc(1rem / 16 * 12);
-  --fontSizeSm: calc(1rem / 16 * 14);
-  --fontSize2Xl: calc(1rem / 16 * 24);
-  --fontSize3Xl: calc(1rem / 16 * 30);
-  --fontSize4Xl: calc(1rem / 16 * 36);
+    /* Typography */
+    --fontPrimary: Poppins, sans-serif;
+    --fontSecondary: "Work Sans", sans-serif;
+    --fontMono: _fontMono, monospace;
+    --fontSizeBase: 1rem;
+    --fontSizeXs: calc(1rem / 16 * 12);
+    --fontSizeSm: calc(1rem / 16 * 14);
+    --fontSize2Xl: calc(1rem / 16 * 24);
+    --fontSize3Xl: calc(1rem / 16 * 30);
+    --fontSize4Xl: calc(1rem / 16 * 36);
 
-  /* Colors */
-  --text: #fafafa;
-  --textSecondary: #a3a3a3;
-  --background: #0d0d0d;
-  --surface: rgba(250, 250, 250, 0.05);
-  --surfaceLight: rgba(250, 250, 250, 0.1);
-  --surfaceLighter: rgba(250, 250, 250, 0.15);
-  --primary: #ba4d14;
-  --primaryLight: #f49c43;
-  --secondaryLight: #53aea8;
-  --successLight: #55d383;
+    /* Colors */
+    --text: #fafafa;
+    --textSecondary: #a3a3a3;
+    --background: #0d0d0d;
+    --surface: rgba(250, 250, 250, 0.05);
+    --surfaceLight: rgba(250, 250, 250, 0.1);
+    --surfaceLighter: rgba(250, 250, 250, 0.15);
+    --primary: #ba4d14;
+    --primaryLight: #f49c43;
+    --secondaryLight: #53aea8;
+    --successLight: #55d383;
 
-  /* Layout */
-  --unit: 8px;
-  --pageMinWidth: 1200px;
-  --pageMaxWidth: 1600px;
-  --pageNarrowWidth: 752px;
-  --rounded: 16px;
-  --roundedSmall: 8px;
-  --roundedFull: 9999px;
+    /* Layout */
+    --unit: 8px;
+    --pageMinWidth: 1200px;
+    --pageMaxWidth: 1600px;
+    --pageNarrowWidth: 752px;
+    --rounded: 16px;
+    --roundedSmall: 8px;
+    --roundedFull: 9999px;
 
-  /* Effects */
-  --blurXl: 64px;
+    /* Effects */
+    --blurXl: 64px;
 
-  /* Animation */
-  --fastOutSlowIn: cubic-bezier(0.4, 0, 0.2, 1);
-  --easeInOut: cubic-bezier(0.4, 0, 0.6, 1);
+    /* Animation */
+    --fastOutSlowIn: cubic-bezier(0.4, 0, 0.2, 1);
+    --easeInOut: cubic-bezier(0.4, 0, 0.6, 1);
 }

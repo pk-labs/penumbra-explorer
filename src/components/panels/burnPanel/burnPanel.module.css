@@ -1,71 +1,71 @@
 .root {
-  /* FIXME: !important workaround for CSS import order issue */
-  --panelGradientStartColor: rgba(193, 166, 204, 0.25) !important;
-  --panelGradientStopColor: rgba(193, 166, 204, 0.025) !important;
+    /* FIXME: !important workaround for CSS import order issue */
+    --panelGradientStartColor: rgba(193, 166, 204, 0.25) !important;
+    --panelGradientStopColor: rgba(193, 166, 204, 0.025) !important;
 }
 
 .chart {
-  display: flex;
-  height: 62px;
-  margin-bottom: calc(0.5 * var(--unit));
-  gap: calc(0.5 * var(--unit));
+    display: flex;
+    height: 62px;
+    margin-bottom: calc(0.5 * var(--unit));
+    gap: calc(0.5 * var(--unit));
 }
 
 .bar {
-  position: relative;
-  width: 8px;
-  border-radius: var(--roundedFull);
-  animation: barAnimation 500ms linear forwards;
-  background: var(--surfaceLight);
-  transform: scaleX(0);
-  transform-origin: center;
-
-  &::before,
-  &::after {
-    position: absolute;
+    position: relative;
     width: 8px;
-    height: 8px;
     border-radius: var(--roundedFull);
-    animation: dotAnimation 500ms ease-out 500ms forwards;
-    content: "";
-    transform: scale(0);
+    animation: barAnimation 500ms linear forwards;
+    background: var(--surfaceLight);
+    transform: scaleX(0);
     transform-origin: center;
-  }
 
-  &::before {
-    background: var(--primaryLight);
-  }
+    &::before,
+    &::after {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: var(--roundedFull);
+        animation: dotAnimation 500ms ease-out 500ms forwards;
+        content: "";
+        transform: scale(0);
+        transform-origin: center;
+    }
 
-  &::after {
-    bottom: 0;
-    background: var(--secondaryLight);
-  }
+    &::before {
+        background: var(--primaryLight);
+    }
+
+    &::after {
+        bottom: 0;
+        background: var(--secondaryLight);
+    }
 }
 
 @keyframes barAnimation {
-  from {
-    transform: scaleY(0);
-  }
+    from {
+        transform: scaleY(0);
+    }
 
-  to {
-    transform: scaleY(1);
-  }
+    to {
+        transform: scaleY(1);
+    }
 }
 
 @keyframes dotAnimation {
-  from {
-    transform: scale(0);
-  }
+    from {
+        transform: scale(0);
+    }
 
-  to {
-    transform: scale(1);
-  }
+    to {
+        transform: scale(1);
+    }
 }
 
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 calc(0.25 * var(--unit));
-  margin-bottom: calc(1.5 * var(--unit));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 calc(0.25 * var(--unit));
+    margin-bottom: calc(1.5 * var(--unit));
 }
