@@ -39,7 +39,6 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/transactions">Transactions</Breadcrumb>
             </Breadcrumbs>
             <TransactionView
-                subtitle={transaction.hash}
                 title="Transaction view"
                 transaction={transaction}
             />

@@ -5,7 +5,7 @@ import styles from './view.module.css'
 export interface Props {
     children?: ReactNode
     className?: string
-    subtitle: string
+    subtitle?: string
     title: string
 }
 
@@ -13,7 +13,9 @@ const View: FC<Props> = props => (
     <article className={clsx(styles.root, props.className)}>
         <header className={styles.header}>
             <h2 className={styles.title}>{props.title}</h2>
-            <div className={styles.subtitle}>{props.subtitle}</div>
+            {props.subtitle && (
+                <div className={styles.subtitle}>{props.subtitle}</div>
+            )}
         </header>
         {props.children}
     </article>
