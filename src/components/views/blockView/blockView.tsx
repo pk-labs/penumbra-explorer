@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { Copy } from 'lucide-react'
 import { FC } from 'react'
 import { BlockFragment } from '../../../lib/graphql/generated/types'
 import { formatNumber } from '../../../lib/utils'
@@ -23,10 +22,11 @@ const BlockView: FC<Props> = props => (
                 {props.block.height}
             </DataListItem>
             <DataListItem name="Time">{props.block.createdAt}</DataListItem>
-            <DataListItem name="Proposer">
-                TODO: Proposer
-                <Copy color="var(--textSecondary)" size={14} />
-            </DataListItem>
+            {/*<DataListItem name="Proposer">*/}
+            {/*    TODO: Proposer*/}
+            {/*    <Copy color="var(--textSecondary)" size={14} />*/}
+            {/*</DataListItem>*/}
+            <DataListItem name="Proposer">-</DataListItem>
             {/*<DataListItem name="Txs">*/}
             {/*    {props.block.transactionsCount}*/}
             {/*</DataListItem>*/}

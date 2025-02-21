@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Copy } from 'lucide-react'
+import { Box } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
 import { dateFormatFull } from '../../../lib/constants'
@@ -61,8 +61,8 @@ const BlockTable: FC<Props> = props => {
                         <td>{dayjs(block.createdAt).format(dateFormatFull)}</td>
                         {props.proposer && (
                             <td>
-                                <span>TODO: Proposer</span>
-                                <Copy color="var(--textSecondary)" size={14} />
+                                -{/*<span>TODO: Proposer</span>*/}
+                                {/*<Copy color="var(--textSecondary)" size={14} />*/}
                             </td>
                         )}
                         {/*<td>{block.transactionsCount}</td>*/}
