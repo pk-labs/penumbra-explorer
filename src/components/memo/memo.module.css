@@ -1,0 +1,30 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--unit);
+}
+
+.title {
+    margin: 0;
+    font-size: var(--fontSizeXs);
+    font-weight: 400;
+}
+
+.content {
+    display: flex;
+    padding: var(--unit) calc(1.5 * var(--unit));
+    border-radius: var(--roundedSmall);
+    background: var(--surface);
+    color: var(--textSecondary);
+    font-size: var(--fontSizeSm);
+    font-weight: 400;
+    gap: var(--unit);
+}
+
+.icon {
+    margin-top: calc(0.25 * var(--unit));
+}
+
+.memo {
+    overflow-wrap: anywhere;
+}

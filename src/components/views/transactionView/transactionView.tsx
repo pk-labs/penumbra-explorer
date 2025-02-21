@@ -6,6 +6,7 @@ import ActionList from '../../actionList'
 import CopyToClipboard from '../../copyToClipboard'
 import { DataList, DataListItem } from '../../dataList'
 import JsonTree from '../../jsonTree'
+import Memo from '../../memo'
 import { View, ViewProps } from '../view'
 import styles from './transactionView.module.css'
 
@@ -31,6 +32,7 @@ const TransactionView: FC<Props> = props => (
                 {props.transaction.block.createdAt}
             </DataListItem>
         </DataList>
+        <Memo>{props.transaction.body.memo}</Memo>
         <ActionList actions={props.transaction.body.actions} />
         <JsonTree data={props.transaction} />
     </View>

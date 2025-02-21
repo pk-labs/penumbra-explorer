@@ -15,6 +15,7 @@ export const TransactionFragmentDoc = gql`
       __typename
     }
     actionsCount
+    memo
   }
 }
     `;

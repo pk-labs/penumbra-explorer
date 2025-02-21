@@ -9,5 +9,6 @@ fragment Transaction on Transaction {
             __typename
         }
         actionsCount
+        memo
     }
 }
