@@ -5,7 +5,9 @@ fragment Transaction on Transaction {
         createdAt
     }
     body {
-        rawActions
+        actions {
+            __typename
+        }
         actionsCount
     }
 }

@@ -6,7 +6,7 @@ import { FC, MouseEvent, ReactNode, useCallback } from 'react'
 import { dateFormatFull } from '../../../lib/constants'
 import dayjs from '../../../lib/dayjs'
 import { TransactionFragment } from '../../../lib/graphql/generated/types'
-import { formatNumber, shortenHash } from '../../../lib/utils'
+import { formatAction, formatNumber, shortenHash } from '../../../lib/utils'
 import Pill from '../../pill'
 import Table from '../table'
 import styles from './transactionTable.module.css'
@@ -70,8 +70,12 @@ const TransactionTable: FC<Props> = props => {
                             </span>
                         </td>
                         <td>
-                            {transaction.body.rawActions.length > 0 && (
-                                <Pill>{transaction.body.rawActions}</Pill>
+                            {transaction.body.actions.length > 0 && (
+                                <Pill>
+                                    {formatAction(
+                                        transaction.body.actions[0].__typename
+                                    )}
+                                </Pill>
                             )}
                             {transaction.body.actionsCount > 1 && (
                                 <span className={styles.moreActions}>
