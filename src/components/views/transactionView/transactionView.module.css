@@ -1,5 +1,5 @@
 .root {
     /* FIXME: !important workaround for CSS import order issue */
-    --viewGradientStartColor: rgba(244, 156, 67, 0.25) !important;
-    --viewGradientStopColor: rgba(244, 156, 67, 0.025) !important;
+    --viewGradientStartColor: rgba(193, 166, 204, 0.25) !important;
+    --viewGradientStopColor: rgba(193, 166, 204, 0.025) !important;
 }
