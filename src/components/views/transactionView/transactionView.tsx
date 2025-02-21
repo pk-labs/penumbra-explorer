@@ -4,6 +4,7 @@ import { TransactionFragment } from '../../../lib/graphql/generated/types'
 import { shortenHash } from '../../../lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import { DataList, DataListItem } from '../../dataList'
+import JsonTree from '../../jsonTree'
 import { View, ViewProps } from '../view'
 import styles from './transactionView.module.css'
 
@@ -29,6 +30,7 @@ const TransactionView: FC<Props> = props => (
                 {props.transaction.block.createdAt}
             </DataListItem>
         </DataList>
+        <JsonTree data={props.transaction} />
     </View>
 )
 
