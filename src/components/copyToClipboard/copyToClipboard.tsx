@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 import { Copy, LucideProps } from 'lucide-react'
 import { FC, MouseEvent, useCallback } from 'react'
