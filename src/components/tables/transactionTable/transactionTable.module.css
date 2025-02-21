@@ -4,6 +4,11 @@
     cursor: pointer;
 }
 
+td.noData {
+    color: var(--textSecondary);
+    text-align: center;
+}
+
 .moreActions {
     color: var(--textSecondary);
 }
