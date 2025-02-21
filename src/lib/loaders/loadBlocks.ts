@@ -22,7 +22,10 @@ const loadBlocks = async (limit: number) => {
         console.error(result.error)
     }
 
-    return result.data?.blocks
+    return result.data?.blocks?.map(block => ({
+        ...block,
+        transactionsCount: '-',
+    }))
 }
 
 export default loadBlocks

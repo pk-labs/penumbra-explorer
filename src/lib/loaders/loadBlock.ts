@@ -22,7 +22,12 @@ const loadBlock = async (id: number) => {
         console.error(result.error)
     }
 
-    return result.data?.block
+    return (
+        result.data?.block && {
+            ...result.data.block,
+            transactionsCount: '-',
+        }
+    )
 }
 
 export default loadBlock
