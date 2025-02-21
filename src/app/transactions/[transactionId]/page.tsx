@@ -23,7 +23,10 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => ({
 
 const TransactionViewPage: FC<Props> = async props => {
     const params = await props.params
-    const transaction = await loadTransaction(params.transactionId)
+
+    const transaction = await loadTransaction(
+        params.transactionId.toUpperCase()
+    )
 
     if (!transaction) {
         notFound()

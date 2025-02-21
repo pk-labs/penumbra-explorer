@@ -25,7 +25,10 @@ const loadTransactions = async (limit: number) => {
         console.error(result.error)
     }
 
-    return result.data?.latestTransactions
+    return result.data?.latestTransactions?.map(transaction => ({
+        ...transaction,
+        hash: transaction.hash.toLowerCase(),
+    }))
 }
 
 export default loadTransactions
