@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { FC } from 'react'
 import { TransactionFragment } from '../../../lib/graphql/generated/types'
 import { shortenHash } from '../../../lib/utils'
+import ActionList from '../../actionList'
 import CopyToClipboard from '../../copyToClipboard'
 import { DataList, DataListItem } from '../../dataList'
 import JsonTree from '../../jsonTree'
@@ -30,6 +31,7 @@ const TransactionView: FC<Props> = props => (
                 {props.transaction.block.createdAt}
             </DataListItem>
         </DataList>
+        <ActionList actions={props.transaction.body.actions} />
         <JsonTree data={props.transaction} />
     </View>
 )
