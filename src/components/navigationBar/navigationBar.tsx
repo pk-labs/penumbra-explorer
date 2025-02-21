@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { ChevronsUpDown, Search } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
 import logo from '../../lib/images/logo.png'
 import { Tab, Tabs } from '../tabs'
@@ -13,7 +14,9 @@ interface Props {
 const NavigationBar: FC<Props> = props => (
     <header className={clsx(styles.root, props.className)}>
         <div className={styles.group}>
-            <Image alt="Noctis" height={33} src={logo.src} width={120} />
+            <Link href="/">
+                <Image alt="Noctis" height={33} src={logo.src} width={120} />
+            </Link>
             <div className={styles.dropdown}>
                 <span>Mainnet</span>
                 <ChevronsUpDown size={16} />
