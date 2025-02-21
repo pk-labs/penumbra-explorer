@@ -12,7 +12,7 @@ const Parameters: FC<Props> = props => (
         <h3 className={styles.title}>Parameters</h3>
         <DataList>
             <DataListItem name="Transaction fee">
-                {props.parameters.fee.amount} UM
+                {Number(props.parameters.fee.amount) / 1000} UM
             </DataListItem>
             <DataListItem name="Chain ID">
                 {props.parameters.chainId}
