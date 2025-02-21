@@ -17,4 +17,5 @@
     font-family: var(--fontMono);
     font-size: var(--fontSizeXs);
     font-weight: 500;
+    overflow-wrap: anywhere;
 }
