@@ -3,7 +3,7 @@
 import { Box, CheckCheck, Copy } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
-import { timezone } from '../../../lib/constants'
+import { dateFormatFull } from '../../../lib/constants'
 import dayjs from '../../../lib/dayjs'
 import { TransactionFragment } from '../../../lib/graphql/generated/types'
 import { formatNumber, shortenHash } from '../../../lib/utils'
@@ -31,7 +31,7 @@ const TransactionTable: FC<Props> = props => {
         [router]
     )
 
-    const now = dayjs().tz(timezone)
+    // const now = dayjs().tz(timezone)
 
     return (
         <Table
@@ -80,8 +80,13 @@ const TransactionTable: FC<Props> = props => {
                             )}
                         </td>
                         {props.time && (
+                            // <td>
+                            //     {now.to(dayjs(transaction.block.createdAt))}
+                            // </td>
                             <td>
-                                {now.to(dayjs(transaction.block.createdAt))}
+                                {dayjs(transaction.block.createdAt).format(
+                                    dateFormatFull
+                                )}
                             </td>
                         )}
                     </tr>
