@@ -33,7 +33,7 @@ const TransactionView: FC<Props> = props => (
                 {props.transaction.block.createdAt}
             </DataListItem>
         </DataList>
-        <Memo>{props.transaction.body.memo}</Memo>
+        {props.transaction.body.memo && <Memo />}
         <ActionList actions={props.transaction.body.actions} />
         <Parameters parameters={props.transaction.body.parameters} />
         <JsonTree data={props.transaction} />
