@@ -23,6 +23,7 @@ const JsonTree: FC<Props> = props => (
                     background: 'transparent',
                 }}
                 theme="twilight"
+                collapsed
             />
         </div>
     </div>
