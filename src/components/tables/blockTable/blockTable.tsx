@@ -65,7 +65,8 @@ const BlockTable: FC<Props> = props => {
                                 <Copy color="var(--textSecondary)" size={14} />
                             </td>
                         )}
-                        <td>{block.transactionsCount}</td>
+                        {/*<td>{block.transactionsCount}</td>*/}
+                        <td>-</td>
                     </tr>
                 ))}
             </tbody>

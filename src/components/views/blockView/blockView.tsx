@@ -27,9 +27,10 @@ const BlockView: FC<Props> = props => (
                 TODO: Proposer
                 <Copy color="var(--textSecondary)" size={14} />
             </DataListItem>
-            <DataListItem name="Txs">
-                {props.block.transactionsCount}
-            </DataListItem>
+            {/*<DataListItem name="Txs">*/}
+            {/*    {props.block.transactionsCount}*/}
+            {/*</DataListItem>*/}
+            <DataListItem name="Txs">-</DataListItem>
         </DataList>
         <TransactionTable transactions={props.block.transactions} />
     </View>
