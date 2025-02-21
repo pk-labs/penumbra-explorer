@@ -4,7 +4,6 @@ import { BlockFragment } from '../../../lib/graphql/generated/types'
 import { formatNumber } from '../../../lib/utils'
 import { DataList, DataListItem } from '../../dataList'
 import JsonTree from '../../jsonTree'
-import { TransactionTable } from '../../tables'
 import { View, ViewProps } from '../view'
 import styles from './blockView.module.css'
 
@@ -34,7 +33,6 @@ const BlockView: FC<Props> = props => {
                 {/*</DataListItem>*/}
                 <DataListItem name="Txs">-</DataListItem>
             </DataList>
-            <TransactionTable transactions={props.block.transactions} />
             <JsonTree data={props.block} />
         </View>
     )

@@ -1,8 +1,12 @@
 'use client'
 
-import ReactJsonView from '@microlink/react-json-view'
+import dynamic from 'next/dynamic'
 import { FC } from 'react'
 import styles from './jsonTree.module.css'
+
+const ReactJsonView = dynamic(() => import('@microlink/react-json-view'), {
+    ssr: false,
+})
 
 interface Props {
     data: object
