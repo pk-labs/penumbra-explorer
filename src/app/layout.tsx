@@ -9,14 +9,14 @@ import { background } from '@/lib/images'
 import styles from './layout.module.css'
 
 export const metadata: Metadata = {
-    title: rootTitle,
     icons: [
         {
-            url: '/favicon.ico',
             rel: 'icon',
             sizes: '32x32',
+            url: '/favicon.ico',
         },
     ],
+    title: rootTitle,
 }
 
 interface Props {

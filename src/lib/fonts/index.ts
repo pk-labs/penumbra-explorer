@@ -4,26 +4,26 @@ import localFont from 'next/font/local'
 
 // @ts-expect-error: Font loaders must be called and assigned to a const in the module scope
 const _fontPrimary = Poppins({
+    display: 'swap',
+    style: 'normal',
     subsets: ['latin'],
     weight: ['400', '500'],
-    style: 'normal',
-    display: 'swap',
 })
 
 // @ts-expect-error: Font loaders must be called and assigned to a const in the module scope
 const _fontSecondary = Work_Sans({
+    display: 'swap',
+    style: 'normal',
     subsets: ['latin'],
     weight: ['400', '500'],
-    style: 'normal',
-    display: 'swap',
 })
 
 // @ts-expect-error: Font loaders must be called and assigned to a const in the module scope
 const _fontMono = localFont({
+    display: 'swap',
     src: [
         { path: './iosevka-regular.woff2', weight: '400' },
         { path: './iosevka-medium.woff2', weight: '500' },
     ],
     style: 'normal',
-    display: 'swap',
 })

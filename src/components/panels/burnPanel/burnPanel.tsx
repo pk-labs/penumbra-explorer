@@ -23,27 +23,27 @@ const BurnPanel: FC<Props> = props => (
         }
     >
         <div className={styles.chart}>
-            <div className={styles.bar} style={{ marginTop: 22, height: 32 }} />
-            <div className={styles.bar} style={{ marginTop: 18, height: 28 }} />
-            <div className={styles.bar} style={{ marginTop: 29, height: 20 }} />
-            <div className={styles.bar} style={{ marginTop: 29, height: 19 }} />
-            <div className={styles.bar} style={{ marginTop: 22, height: 32 }} />
-            <div className={styles.bar} style={{ marginTop: 12, height: 29 }} />
-            <div className={styles.bar} style={{ marginTop: 28, height: 26 }} />
-            <div className={styles.bar} style={{ marginTop: 12, height: 50 }} />
-            <div className={styles.bar} style={{ marginTop: 4, height: 58 }} />
-            <div className={styles.bar} style={{ marginTop: 18, height: 36 }} />
-            <div className={styles.bar} style={{ marginTop: 24, height: 21 }} />
-            <div className={styles.bar} style={{ marginTop: 12, height: 33 }} />
-            <div className={styles.bar} style={{ marginTop: 24, height: 30 }} />
-            <div className={styles.bar} style={{ marginTop: 12, height: 33 }} />
-            <div className={styles.bar} style={{ marginTop: 12, height: 42 }} />
-            <div className={styles.bar} style={{ marginTop: 19, height: 19 }} />
-            <div className={styles.bar} style={{ marginTop: 19, height: 19 }} />
-            <div className={styles.bar} style={{ marginTop: 19, height: 29 }} />
-            <div className={styles.bar} style={{ marginTop: 12, height: 36 }} />
+            <div className={styles.bar} style={{ height: 32, marginTop: 22 }} />
+            <div className={styles.bar} style={{ height: 28, marginTop: 18 }} />
+            <div className={styles.bar} style={{ height: 20, marginTop: 29 }} />
+            <div className={styles.bar} style={{ height: 19, marginTop: 29 }} />
+            <div className={styles.bar} style={{ height: 32, marginTop: 22 }} />
+            <div className={styles.bar} style={{ height: 29, marginTop: 12 }} />
+            <div className={styles.bar} style={{ height: 26, marginTop: 28 }} />
+            <div className={styles.bar} style={{ height: 50, marginTop: 12 }} />
+            <div className={styles.bar} style={{ height: 58, marginTop: 4 }} />
+            <div className={styles.bar} style={{ height: 36, marginTop: 18 }} />
+            <div className={styles.bar} style={{ height: 21, marginTop: 24 }} />
+            <div className={styles.bar} style={{ height: 33, marginTop: 12 }} />
+            <div className={styles.bar} style={{ height: 30, marginTop: 24 }} />
+            <div className={styles.bar} style={{ height: 33, marginTop: 12 }} />
+            <div className={styles.bar} style={{ height: 42, marginTop: 12 }} />
+            <div className={styles.bar} style={{ height: 19, marginTop: 19 }} />
+            <div className={styles.bar} style={{ height: 19, marginTop: 19 }} />
+            <div className={styles.bar} style={{ height: 29, marginTop: 19 }} />
+            <div className={styles.bar} style={{ height: 36, marginTop: 12 }} />
             <div className={styles.bar} style={{ height: 62 }} />
-            <div className={styles.bar} style={{ marginTop: 20, height: 27 }} />
+            <div className={styles.bar} style={{ height: 27, marginTop: 20 }} />
         </div>
         <div className={styles.footer}>
             <span>Jan 13</span>

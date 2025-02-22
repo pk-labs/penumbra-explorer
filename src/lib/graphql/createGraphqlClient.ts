@@ -7,12 +7,12 @@ const createGraphqlClient = () => {
     }
 
     return new Client({
-        url: process.env.GRAPHQL_URL,
+        exchanges: [cacheExchange, fetchExchange],
         fetchOptions: {
             credentials: 'omit',
         },
-        exchanges: [cacheExchange, fetchExchange],
         requestPolicy: 'network-only',
+        url: process.env.GRAPHQL_URL,
     })
 }
 

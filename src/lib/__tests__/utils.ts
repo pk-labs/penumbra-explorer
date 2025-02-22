@@ -2,23 +2,23 @@
 import { faker } from '@faker-js/faker'
 
 export const generateBlock = () => ({
-    id: faker.string.uuid(),
-    height: faker.number.int({ min: 1000000, max: 9999999 }),
     date: faker.date.recent().toISOString(),
-    transactions: faker.number.int({ min: 0, max: 30 }),
+    height: faker.number.int({ max: 9999999, min: 1000000 }),
+    id: faker.string.uuid(),
     proposer:
         'penumbravalid' +
         faker.finance
-            .bitcoinAddress({ type: 'bech32', network: 'testnet' })
+            .bitcoinAddress({ network: 'testnet', type: 'bech32' })
             .slice(0, 7) +
         '...',
+    transactions: faker.number.int({ max: 30, min: 0 }),
 })
 
 export const generateTransaction = () => ({
-    id: faker.string.uuid(),
-    hash: faker.finance.bitcoinAddress({ type: 'bech32', network: 'testnet' }),
-    blockHeight: faker.number.int({ min: 1000000, max: 9999999 }),
+    blockHeight: faker.number.int({ max: 9999999, min: 1000000 }),
     date: faker.date.recent().toISOString(),
+    hash: faker.finance.bitcoinAddress({ network: 'testnet', type: 'bech32' }),
+    id: faker.string.uuid(),
     latestAction: faker.helpers.arrayElement([
         'delegate',
         'undelegate',
@@ -29,5 +29,5 @@ export const generateTransaction = () => ({
         'withdraw from a dutch auction',
         'ics20 withdrawal',
     ]),
-    totalActions: faker.number.int({ min: 1, max: 15 }),
+    totalActions: faker.number.int({ max: 15, min: 1 }),
 })

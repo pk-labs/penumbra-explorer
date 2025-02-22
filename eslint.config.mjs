@@ -22,24 +22,12 @@ const eslintConfig = [
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {
-                    varsIgnorePattern: '^_',
                     argsIgnorePattern: '^_',
                     ignoreRestSiblings: true,
+                    varsIgnorePattern: '^_',
                 },
             ],
             'import/no-anonymous-default-export': 'off',
-            'perfectionist/sort-interfaces': [
-                'error',
-                {
-                    type: 'natural',
-                },
-            ],
-            'perfectionist/sort-intersection-types': [
-                'error',
-                {
-                    type: 'natural',
-                },
-            ],
             'perfectionist/sort-enums': [
                 'error',
                 {
@@ -52,7 +40,25 @@ const eslintConfig = [
                     type: 'natural',
                 },
             ],
+            'perfectionist/sort-interfaces': [
+                'error',
+                {
+                    type: 'natural',
+                },
+            ],
+            'perfectionist/sort-intersection-types': [
+                'error',
+                {
+                    type: 'natural',
+                },
+            ],
             'perfectionist/sort-object-types': [
+                'error',
+                {
+                    type: 'natural',
+                },
+            ],
+            'perfectionist/sort-objects': [
                 'error',
                 {
                     type: 'natural',
