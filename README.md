@@ -44,12 +44,12 @@ Or check out the deployed version at
 
 ## CSS, icons and fonts
 
-The project uses CSS modules with the global CSS and theme at `src/lib/css`. It
-uses modern CSS with variables, flex, grid, animations, etc. Most components can
-be overridden with `className`. PostCSS plugins add additional features such as
-normalizing and nesting.
+The project uses CSS modules with the global CSS and theme at `src/lib/css`.
+Theming is done with CSS variables and most components can be overridden with
+`className`. PostCSS plugins add additional features such as normalizing and
+nesting.
 
-<https://lucide.dev/> is used for most icons. Some are custom and extracted from
+<https://lucide.dev/> is used for most icons. Some are custom and exported from
 Figma.
 
 The `Poppins` and `Work Sans` fonts are loaded with `next/font/google` whereas
