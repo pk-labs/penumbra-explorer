@@ -13,7 +13,7 @@
         "stylelint": "stylelint src/**/*.css",
         "stylelint:fix": "stylelint --fix src/**/*.css",
         "test": "jest",
-        "test:codegen": "npx tsx src/__tests__/__fixtures__/generate.ts",
+        "test:codegen": "npx tsx src/lib/__tests__/__fixtures__/generate.ts",
         "test:coverage": "npm test -- --coverage",
         "test:watch": "npm test -- --watch",
         "typecheck": "tsc"
