@@ -33,27 +33,21 @@ Or check out the deployed version at
 
 ### Project structure
 
-| Directory                    | Description                                                           |
-|------------------------------|-----------------------------------------------------------------------|
-| `src/app`                    | Next.js app router with layouts and pages.                            |
-| `src/components`             | Components used by layouts and pages.                                 |
-| `src/lib`                    | Logic, helpers, types, assets, etc. used across the app.              |
-| `src/__tests__`              | Global test configuration.                                            |
-| `src/__tests__/__fixtures__` | Block and transaction fixtures generated with `npm run test:codegen`. |
-| `public`                     | Static public assets accessible through the browser.                  |
+| Directory                        | Description                                                           |
+|----------------------------------|-----------------------------------------------------------------------|
+| `src/app`                        | Next.js app router with layouts and pages.                            |
+| `src/components`                 | Components used by layouts and pages.                                 |
+| `src/lib`                        | Configuration, logic, types, assets, etc. used across the app.        |
+| `src/lib/__tests__`              | Global test configuration.                                            |
+| `src/lib/__tests__/__fixtures__` | Block and transaction fixtures generated with `npm run test:codegen`. |
+| `public`                         | Static public assets accessible through the browser.                  |
 
-## Components, CSS, icons and fonts
-
-The UI and theme replicate the provided [Figma mocks](https://bit.ly/3WRV2bK) as
-close as possible. All components are built from scratch as
-<https://github.com/penumbra-zone/web> and <https://ui.penumbra.zone/> don't
-seem to provide fitting ones for this task.
+## CSS, icons and fonts
 
 The project uses CSS modules with the global CSS and theme at `src/lib/css`. It
 uses modern CSS with variables, flex, grid, animations, etc. Most components can
 be overridden with `className`. PostCSS plugins add additional features such as
-normalizing and nesting. Tailwind was considered but ultimately I went for this
-approach as I haven't used Tailwind in a while.
+normalizing and nesting.
 
 <https://lucide.dev/> is used for most icons. Some are custom and extracted from
 Figma.
@@ -64,22 +58,21 @@ The `Poppins` and `Work Sans` fonts are loaded with `next/font/google` whereas
 
 ## Linting
 
-TypeScript is linted and autoformatted with ESLint and Prettier mimicking the
-configuration at <https://github.com/penumbra-zone/web>. CSS is linted and
-autoformatted with Stylelint.
+TypeScript is linted and autoformatted with ESLint and Prettier. CSS is linted
+and autoformatted with Stylelint.
 
 ## Testing
 
 Jest tests are collocated with the components. Global test configuration and
-mocks reside in `src/__tests__`. Test coverage can be reported to console and
-written to file with `npm run test:coverage`.
+mocks reside in `src/lib/__tests__`. Test coverage can be reported to console
+and written to file with `npm run test:coverage`.
 
 ## CI/CD
 
 On push, the GitHub Actions workflow `.github/workflows/gcp.yaml` is triggered.
-First it runs all  checks (linting, typechecking, testing) and uploads a test
-coverage report to Codecov with a badge displayed at the top of this file. Then
-it triggers Google Cloud Build which  deploys the app to Google Cloud Run at
+First it runs all  checks (linting, typechecking, testing) and creates a
+coverage report with a badge displayed at the top of this file. Then  it
+triggers Google Cloud Build which deploys the app to Google Cloud Run at
 <https://pe-frontend-564694434950.europe-west6.run.app/>.
 
 ## Misc
