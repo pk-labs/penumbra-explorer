@@ -16,7 +16,7 @@ const eslintConfig = [
             'next/typescript',
             'plugin:prettier/recommended',
         ],
-        plugins: ['simple-import-sort'],
+        plugins: ['simple-import-sort', 'perfectionist'],
         rules: {
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-unused-vars': [
@@ -28,6 +28,12 @@ const eslintConfig = [
                 },
             ],
             'import/no-anonymous-default-export': 'off',
+            'perfectionist/sort-interfaces': [
+                'error',
+                {
+                    type: 'natural',
+                },
+            ],
             'react/display-name': 'off',
             'react/jsx-boolean-value': ['error', 'never'],
             'react/jsx-no-bind': 'warn',
