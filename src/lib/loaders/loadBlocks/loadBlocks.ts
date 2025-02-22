@@ -9,15 +9,7 @@ const loadBlocks = async (limit: number) => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
-        .query<BlocksQuery, BlocksQueryVariables>(
-            blocksQuery,
-            { limit },
-            {
-                fetchOptions: {
-                    cache: 'no-store',
-                },
-            }
-        )
+        .query<BlocksQuery, BlocksQueryVariables>(blocksQuery, { limit })
         .toPromise()
 
     if (result.error) {
