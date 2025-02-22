@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import incognitoFull from '../actionList/incognitoFull.svg'
+import { encrypted } from '@/lib/images'
 import styles from './memo.module.css'
 
 const Memo: FC = () => (
@@ -9,9 +9,9 @@ const Memo: FC = () => (
         <div className={styles.content}>
             <Image
                 alt="Memo"
-                height={incognitoFull.height}
-                src={incognitoFull.src}
-                width={incognitoFull.width}
+                height={encrypted.height}
+                src={encrypted.src}
+                width={encrypted.width}
             />
             <span>Memo</span>
         </div>

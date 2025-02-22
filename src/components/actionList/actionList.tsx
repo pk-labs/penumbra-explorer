@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import { TransactionFragment } from '../../lib/graphql/generated/types'
+import { TransactionFragment } from '@/lib/graphql/generated/types'
+import { encrypted } from '@/lib/images'
 import styles from './actionList.module.css'
-import incognitoFull from './incognitoFull.svg'
 
 interface Props {
     actions: TransactionFragment['body']['actions']
@@ -17,9 +17,9 @@ const ActionList: FC<Props> = props => {
                     <li key={i} className={styles.item}>
                         <Image
                             alt={action.__typename}
-                            height={incognitoFull.height}
-                            src={incognitoFull.src}
-                            width={incognitoFull.width}
+                            height={encrypted.height}
+                            src={encrypted.src}
+                            width={encrypted.width}
                         />
                         {action.__typename}
                     </li>
