@@ -7,12 +7,9 @@ Penumbra Blockchain Explorer
 
 ## Getting started
 
-1. Make sure Node.js v22 development is set up.
-2. Install dependencies with  `npm install`.
-3. Start the app with `npm run dev`.
-
-Or check out the deployed version at
-<https://pe-frontend-564694434950.europe-west6.run.app/>.
+1. Set up Node.js v22
+2. Install dependencies with  `npm install`
+3. Start the app with `npm run dev`
 
 ### npm scripts
 
@@ -69,10 +66,8 @@ and written to file with `npm run test:coverage`.
 
 ## CI/CD
 
-On push, the GitHub Actions workflow `.github/workflows/gcp.yaml` is triggered.
-First it runs all  checks (linting, typechecking, testing) and creates a
-coverage report with a badge displayed at the top of this file. Then  it
-triggers Google Cloud Build which deploys the app to Google Cloud Run at
+On push, the GitHub Actions workflow `.github/workflows/gcp.yaml` is triggered,
+running checks and tests and deploying the application to Google Cloud at
 <https://pe-frontend-564694434950.europe-west6.run.app/>.
 
 ## Misc
