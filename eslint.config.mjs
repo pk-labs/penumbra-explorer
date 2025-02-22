@@ -52,6 +52,12 @@ const eslintConfig = [
                     type: 'natural',
                 },
             ],
+            'perfectionist/sort-object-types': [
+                'error',
+                {
+                    type: 'natural',
+                },
+            ],
             'react/display-name': 'off',
             'react/jsx-boolean-value': ['error', 'never'],
             'react/jsx-no-bind': 'warn',
