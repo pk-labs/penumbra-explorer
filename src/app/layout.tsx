@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import '../lib/css/main.css'
+import '../lib/css'
 import '../lib/fonts'
 import type { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
