@@ -1,7 +1,7 @@
 # pe-frontend
 
 ![Status](https://github.com/pk-labs/pe-frontend/actions/workflows/gcp.yaml/badge.svg)
-![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fstpch%2F9208254a7b67b695d104a875931624d8%2Fraw%2Fccdb1323935e2a3914d9505ceb8210013690215e%2Fpe-frontend-lcov-coverage.json&label=Coverage)
+![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fstpch%2F9208254a7b67b695d104a875931624d8%2Fraw%2Fa9108e6ed61d37ded8136e21f1fe85e247cd33a0%2Fpe-frontend-lcov-coverage.json&label=Coverage)
 
 Penumbra Blockchain Explorer
 
