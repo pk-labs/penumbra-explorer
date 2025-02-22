@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TransactionFragment } from '../../lib/graphql/generated/types'
+import { TransactionFragment } from '@/lib/graphql/generated/types'
 import { DataList, DataListItem } from '../dataList'
 import styles from './parameters.module.css'
 

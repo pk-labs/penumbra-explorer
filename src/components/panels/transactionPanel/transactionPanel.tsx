@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import Image from 'next/image'
 import { FC, ReactNode } from 'react'
-import { formatNumber } from '../../../lib/utils'
+import { formatNumber } from '@/lib/utils'
 import Panel from '../panel'
 import styles from './transactionPanel.module.css'
 import icon from './transactionPanelIcon.svg'
