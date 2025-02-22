@@ -9,6 +9,7 @@ describe('Container', () => {
 
     test('supports narrow layout', async () => {
         const { container } = render(<Container narrow>Foo</Container>)
+
         expect(getByText(container, 'Foo').classList.contains('narrow')).toBe(
             true
         )
@@ -20,6 +21,7 @@ describe('Container', () => {
         expect(container.firstElementChild?.classList.contains('foo')).toBe(
             true
         )
+
         expect(container.firstElementChild?.classList.contains('bar')).toBe(
             true
         )

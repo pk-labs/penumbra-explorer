@@ -9,6 +9,7 @@ describe('Button', () => {
 
     test('renders light button', async () => {
         const { container } = render(<Button light>Foo</Button>)
+
         expect(getByText(container, 'Foo').classList.contains('light')).toBe(
             true
         )

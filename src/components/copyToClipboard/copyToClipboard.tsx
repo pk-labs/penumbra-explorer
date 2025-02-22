@@ -19,7 +19,7 @@ const CopyToClipboard: FC<Props> = props => {
             navigator.clipboard
                 .writeText(props.data)
                 .then(() => alert('Copied to clipboard'))
-                .catch(e => {
+                .catch(e => /* istanbul ignore next */ {
                     console.error(e)
                     alert('Error copying to clipboard')
                 })
