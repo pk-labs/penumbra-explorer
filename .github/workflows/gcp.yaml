@@ -49,16 +49,11 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-      - name: Create coverage badge JSON Gist
+      - name: Create coverage badge JSON gist
         uses: gaelgirodon/ci-badges-action@v1
         with:
           gist-id: 9208254a7b67b695d104a875931624d8
           token: ${{ secrets.GIST_TOKEN }}
-
-      - name: Enforce minimum coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v2
-        with:
-          min_coverage: 20
 
       - name: Cache .next directory
         uses: actions/cache@v4
@@ -67,6 +62,11 @@ jobs:
           key: ${{ runner.os }}-next-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
               ${{ runner.os }}-next-
+
+      - name: Enforce minimum coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v2
+        with:
+          min_coverage: 20
 
       - if: failure()
         uses: chrnorm/deployment-status@v2

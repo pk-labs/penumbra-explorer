@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export { default as blockQuery } from './blockQuery.graphql'
 export { default as blocksQuery } from './blocksQuery.graphql'
 export { default as transactionQuery } from './transactionQuery.graphql'
