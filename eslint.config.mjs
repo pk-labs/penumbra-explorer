@@ -28,53 +28,22 @@ const eslintConfig = [
                 },
             ],
             'import/no-anonymous-default-export': 'off',
-            'perfectionist/sort-enums': [
-                'error',
-                {
-                    type: 'natural',
-                },
-            ],
+            'perfectionist/sort-enums': ['error', { type: 'natural' }],
             'perfectionist/sort-heritage-clauses': [
                 'error',
-                {
-                    type: 'natural',
-                },
+                { type: 'natural' },
             ],
-            'perfectionist/sort-interfaces': [
-                'error',
-                {
-                    type: 'natural',
-                },
-            ],
+            'perfectionist/sort-interfaces': ['error', { type: 'natural' }],
             'perfectionist/sort-intersection-types': [
                 'error',
-                {
-                    type: 'natural',
-                },
+                { type: 'natural' },
             ],
-            'perfectionist/sort-object-types': [
-                'error',
-                {
-                    type: 'natural',
-                },
-            ],
-            'perfectionist/sort-objects': [
-                'error',
-                {
-                    type: 'natural',
-                },
-            ],
-            'perfectionist/sort-union-types': [
-                'error',
-                {
-                    type: 'natural',
-                },
-            ],
+            'perfectionist/sort-object-types': ['error', { type: 'natural' }],
+            'perfectionist/sort-objects': ['error', { type: 'natural' }],
+            'perfectionist/sort-union-types': ['error', { type: 'natural' }],
             'perfectionist/sort-variable-declarations': [
                 'error',
-                {
-                    type: 'natural',
-                },
+                { type: 'natural' },
             ],
             'react/display-name': 'off',
             'react/jsx-boolean-value': ['error', 'never'],
