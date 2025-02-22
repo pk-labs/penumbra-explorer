@@ -5,14 +5,14 @@ import styles from './tabs.module.css'
 
 interface Props {
     children?:
-        | ReactElement<TabProps>
         | Array<
-              | ReactElement<TabProps>
               | Array<ReactElement<TabProps>>
               | false
               | null
+              | ReactElement<TabProps>
               | undefined
           >
+        | ReactElement<TabProps>
     className?: string
 }
 

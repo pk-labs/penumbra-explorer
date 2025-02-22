@@ -5,14 +5,14 @@ import { Props as DataListItemProps } from './dataListItem'
 
 interface Props {
     children:
-        | ReactElement<DataListItemProps>
         | Array<
-              | ReactElement<DataListItemProps>
               | Array<ReactElement<DataListItemProps>>
               | false
               | null
+              | ReactElement<DataListItemProps>
               | undefined
           >
+        | ReactElement<DataListItemProps>
     className?: string
     href?: string
     light?: boolean

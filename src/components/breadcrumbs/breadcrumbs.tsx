@@ -6,14 +6,14 @@ import styles from './breadcrumbs.module.css'
 
 interface Props {
     children:
-        | ReactElement<BreadcrumbProps>
         | Array<
-              | ReactElement<BreadcrumbProps>
               | Array<ReactElement<BreadcrumbProps>>
               | false
               | null
+              | ReactElement<BreadcrumbProps>
               | undefined
           >
+        | ReactElement<BreadcrumbProps>
     className?: string
 }
 
