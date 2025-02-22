@@ -1,14 +1,9 @@
 /* istanbul ignore file */
 import type { Metadata } from 'next'
 import { FC } from 'react'
-import {
-    BlockTable,
-    Breadcrumb,
-    Breadcrumbs,
-    Container,
-} from '../../components'
-import { rootTitle } from '../../lib/constants'
-import { loadBlocks } from '../../lib/loaders'
+import { BlockTable, Breadcrumb, Breadcrumbs, Container } from '@/components'
+import { rootTitle } from '@/lib/constants'
+import { loadBlocks } from '@/lib/loaders'
 
 export const metadata: Metadata = {
     title: `Blocks - ${rootTitle}`,

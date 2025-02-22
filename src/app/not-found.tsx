@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 import { Search } from 'lucide-react'
 import { FC } from 'react'
-import { Container } from '../components'
+import { Container } from '@/components'
 import styles from './page.module.css'
 
 const NotFoundPage: FC = async () => (

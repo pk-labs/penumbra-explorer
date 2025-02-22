@@ -1,11 +1,11 @@
 /* istanbul ignore file */
-import '../lib/css'
-import '../lib/fonts'
+import '@/lib/css'
+import '@/lib/fonts'
 import type { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
-import { NavigationBar } from '../components'
-import { rootTitle } from '../lib/constants'
-import background from '../lib/images/background.svg'
+import { NavigationBar } from '@/components'
+import { rootTitle } from '@/lib/constants'
+import background from '@/lib/images/background.svg'
 import styles from './layout.module.css'
 
 export const metadata: Metadata = {

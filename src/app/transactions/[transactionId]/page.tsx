@@ -7,9 +7,9 @@ import {
     Breadcrumbs,
     Container,
     TransactionView,
-} from '../../../components'
-import { rootTitle } from '../../../lib/constants'
-import { loadTransaction } from '../../../lib/loaders'
+} from '@/components'
+import { rootTitle } from '@/lib/constants'
+import { loadTransaction } from '@/lib/loaders'
 
 interface Props {
     params: Promise<{

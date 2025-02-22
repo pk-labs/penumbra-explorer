@@ -9,8 +9,8 @@ import {
     Container,
     TransactionPanel,
     TransactionTable,
-} from '../components'
-import { loadBlocks, loadTransactions } from '../lib/loaders'
+} from '@/components'
+import { loadBlocks, loadTransactions } from '@/lib/loaders'
 import styles from './page.module.css'
 
 const HomePage: FC = async () => {

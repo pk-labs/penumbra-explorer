@@ -6,9 +6,9 @@ import {
     Breadcrumbs,
     Container,
     TransactionTable,
-} from '../../components'
-import { rootTitle } from '../../lib/constants'
-import { loadTransactions } from '../../lib/loaders'
+} from '@/components'
+import { rootTitle } from '@/lib/constants'
+import { loadTransactions } from '@/lib/loaders'
 
 export const metadata: Metadata = {
     title: `Transactions - ${rootTitle}`,

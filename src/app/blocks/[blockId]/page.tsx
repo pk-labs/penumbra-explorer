@@ -2,14 +2,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import {
-    BlockView,
-    Breadcrumb,
-    Breadcrumbs,
-    Container,
-} from '../../../components'
-import { rootTitle } from '../../../lib/constants'
-import { loadBlock } from '../../../lib/loaders'
+import { BlockView, Breadcrumb, Breadcrumbs, Container } from '@/components'
+import { rootTitle } from '@/lib/constants'
+import { loadBlock } from '@/lib/loaders'
 
 interface Props {
     params: Promise<{
