@@ -6,7 +6,7 @@ const createJestConfig = nextJest({ dir: './' })
 const config: Config = {
     clearMocks: true,
     collectCoverageFrom: ['src/**/*.{ts,tsx}'],
-    coverageReporters: ['text', 'text-summary', 'json-summary', 'lcov'],
+    coverageReporters: ['text', 'text-summary', 'lcov'],
     roots: ['<rootDir>/src/'],
     setupFilesAfterEnv: ['<rootDir>/src/lib/__tests__/setup.ts'],
     testEnvironment: 'jsdom',
