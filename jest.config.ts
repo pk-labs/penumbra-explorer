@@ -11,6 +11,9 @@ const config: Config = {
     setupFilesAfterEnv: ['<rootDir>/src/lib/__tests__/setup.ts'],
     testEnvironment: 'jsdom',
     testRegex: '.+\\.test\\.tsx?$',
+    transform: {
+        '^.+\\.graphql$': '@graphql-tools/jest-transform',
+    },
 }
 
 export default createJestConfig(config)
