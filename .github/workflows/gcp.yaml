@@ -49,11 +49,14 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-#      - name: Upload coverage report
-#        uses: codecov/codecov-action@v5
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
-#          fail_ci_if_error: true
+      - name: Create coverage badge JSON Gist
+        uses: gaelgirodon/ci-badges-action@v1
+        with:
+          gist-id: 9208254a7b67b695d104a875931624d8
+          token: ${{ secrets.GIST_TOKEN }}
+
+      # TODO: Enforce minimum code coverage
+      # https://github.com/marketplace/actions/very-good-coverage
 
       - name: Cache .next directory
         uses: actions/cache@v4
