@@ -1,17 +1,17 @@
 import createGraphqlClient from '../../graphql/createGraphqlClient'
-import loadBlock from './loadBlock'
+import loadBlocks from './loadBlocks'
 
 jest.mock('../../graphql/createGraphqlClient')
 
-describe('loadBlock', () => {
+describe('loadBlocks', () => {
     test('returns data', async () => {
         ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
             query: () => ({
-                toPromise: () => Promise.resolve({ data: { block: true } }),
+                toPromise: () => Promise.resolve({ data: { blocks: true } }),
             }),
         })
 
-        await expect(loadBlock(1)).resolves.toBe(true)
+        await expect(loadBlocks(1)).resolves.toBe(true)
     })
 
     test('logs error', async () => {
@@ -23,7 +23,7 @@ describe('loadBlock', () => {
 
         const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
-        await loadBlock(1)
+        await loadBlocks(1)
         expect(consoleError).toHaveBeenCalledWith('foo')
     })
 })

@@ -1,7 +1,9 @@
-/* istanbul ignore file */
-import createGraphqlClient from '../graphql/createGraphqlClient'
-import { BlocksQuery, BlocksQueryVariables } from '../graphql/generated/types'
-import { blocksQuery } from '../graphql/queries'
+import createGraphqlClient from '../../graphql/createGraphqlClient'
+import {
+    BlocksQuery,
+    BlocksQueryVariables,
+} from '../../graphql/generated/types'
+import { blocksQuery } from '../../graphql/queries'
 
 const loadBlocks = async (limit: number) => {
     const graphqlClient = createGraphqlClient()
