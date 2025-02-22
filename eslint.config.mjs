@@ -70,6 +70,12 @@ const eslintConfig = [
                     type: 'natural',
                 },
             ],
+            'perfectionist/sort-variable-declarations': [
+                'error',
+                {
+                    type: 'natural',
+                },
+            ],
             'react/display-name': 'off',
             'react/jsx-boolean-value': ['error', 'never'],
             'react/jsx-no-bind': 'warn',
