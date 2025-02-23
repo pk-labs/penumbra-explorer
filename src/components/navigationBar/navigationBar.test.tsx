@@ -10,9 +10,13 @@ jest.mock('../tabs/tabs', () => () => <div>Tabs</div>)
 
 describe('NavigationBar', () => {
     test('applies custom classes', async () => {
-        const { container } = render(<NavigationBar className="foo" />)
+        const { container } = render(<NavigationBar className="foo bar" />)
 
         expect(container.firstElementChild?.classList.contains('foo')).toBe(
+            true
+        )
+
+        expect(container.firstElementChild?.classList.contains('bar')).toBe(
             true
         )
     })

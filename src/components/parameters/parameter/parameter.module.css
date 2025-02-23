@@ -1,0 +1,15 @@
+.root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--unit);
+}
+
+.name {
+    text-transform: capitalize;
+}
+
+.separator {
+    flex: 1;
+    border-bottom: 1px dashed var(--surfaceLighter);
+}

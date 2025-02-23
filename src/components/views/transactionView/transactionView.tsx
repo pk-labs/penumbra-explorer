@@ -4,10 +4,10 @@ import { TransactionFragment } from '@/lib/graphql/generated/types'
 import { shortenHash } from '@/lib/utils'
 import Actions from '../../actions'
 import CopyToClipboard from '../../copyToClipboard'
-import { DataList, DataListItem } from '../../dataList'
 import JsonTree from '../../jsonTree'
 import Memo from '../../memo'
-import Parameters from '../../parameters'
+import { Parameter, Parameters } from '../../parameters'
+import Subsection from '../../subsection'
 import { View, ViewProps } from '../view'
 import styles from './transactionView.module.css'
 
@@ -21,21 +21,32 @@ const TransactionView: FC<Props> = props => (
         subtitle={props.subtitle}
         title={props.title}
     >
-        <DataList>
-            <DataListItem name="Transaction hash">
+        <Parameters>
+            <Parameter name="Transaction hash">
                 {shortenHash(props.transaction.hash)}
                 <CopyToClipboard data={props.transaction.hash} iconSize={14} />
-            </DataListItem>
-            <DataListItem name="Block height">
+            </Parameter>
+            <Parameter name="Block height">
                 {props.transaction.block.height}
-            </DataListItem>
-            <DataListItem name="Time">
+            </Parameter>
+            <Parameter name="Time">
                 {props.transaction.block.createdAt}
-            </DataListItem>
-        </DataList>
+            </Parameter>
+        </Parameters>
         {props.transaction.body.memo && <Memo />}
         <Actions actions={props.transaction.body.actions} />
-        <Parameters parameters={props.transaction.body.parameters} />
+        <Subsection title="Parameters">
+            <Parameters>
+                <Parameter name="Transaction fee">
+                    {Number(props.transaction.body.parameters.fee.amount) /
+                        1000}{' '}
+                    UM
+                </Parameter>
+                <Parameter name="Chain ID">
+                    {props.transaction.body.parameters.chainId}
+                </Parameter>
+            </Parameters>
+        </Subsection>
         <JsonTree data={props.transaction} />
     </View>
 )

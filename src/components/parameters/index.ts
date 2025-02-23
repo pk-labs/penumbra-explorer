@@ -1,2 +1,3 @@
 /* istanbul ignore file */
-export { default } from './parameters'
+export { Parameter } from './parameter'
+export { default as Parameters } from './parameters'

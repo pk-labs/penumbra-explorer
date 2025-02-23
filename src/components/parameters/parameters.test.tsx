@@ -1,13 +1,13 @@
 import { getByText, render } from '@testing-library/react'
-import DataList from './dataList'
-import DataListItem from './dataListItem'
+import { Parameter } from './parameter'
+import Parameters from './parameters'
 
-describe('DataList', () => {
+describe('Parameters', () => {
     test('renders children', async () => {
         const { container } = render(
-            <DataList>
-                <DataListItem name="Foo">Bar</DataListItem>
-            </DataList>
+            <Parameters>
+                <Parameter name="Foo">Bar</Parameter>
+            </Parameters>
         )
 
         getByText(container, 'Foo')
@@ -15,13 +15,13 @@ describe('DataList', () => {
     })
 
     test('applies custom classes', async () => {
-        const { container } = render(
-            <DataList className="foo">
-                <DataListItem name="Foo">Bar</DataListItem>
-            </DataList>
-        )
+        const { container } = render(<Parameters className="foo bar" />)
 
         expect(container.firstElementChild?.classList.contains('foo')).toBe(
+            true
+        )
+
+        expect(container.firstElementChild?.classList.contains('bar')).toBe(
             true
         )
     })
