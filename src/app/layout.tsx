@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 import '@/lib/css'
 import '@/lib/fonts'
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
 import { NavigationBar } from '@/components'
 import { rootTitle } from '@/lib/constants'

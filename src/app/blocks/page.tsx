@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
 import { FC } from 'react'
 import { BlockTable, Breadcrumb, Breadcrumbs, Container } from '@/components'
 import { rootTitle } from '@/lib/constants'
