@@ -1,11 +1,8 @@
-.dataRow:hover {
-    /* FIXME: !important workaround for CSS import order issue */
-    background: rgba(193, 166, 204, 0.15) !important;
-    cursor: pointer;
-}
-
-td.noData {
-    text-align: center;
+.root {
+    tbody tr:hover {
+        background: rgba(193, 166, 204, 0.15);
+        cursor: pointer;
+    }
 }
 
 .moreActions {

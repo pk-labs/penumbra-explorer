@@ -34,7 +34,7 @@ const TransactionTable: FC<Props> = props => {
     return (
         <Table
             actions={props.actions}
-            className={props.className}
+            className={styles.root}
             title={props.title}
             section
         >
@@ -46,12 +46,11 @@ const TransactionTable: FC<Props> = props => {
                     {props.time && <th>Time</th>}
                 </tr>
             </thead>
-            <tbody>
-                {props.transactions?.length ? (
-                    props.transactions.map(transaction => (
+            {Boolean(props.transactions?.length) && (
+                <tbody>
+                    {props.transactions?.map(transaction => (
                         <tr
                             key={transaction.hash}
-                            className={styles.dataRow}
                             data-transaction-id={transaction.hash}
                             onClick={onRowClick}
                         >
@@ -98,18 +97,9 @@ const TransactionTable: FC<Props> = props => {
                                 </td>
                             )}
                         </tr>
-                    ))
-                ) : (
-                    <tr>
-                        <td
-                            className={styles.noData}
-                            colSpan={props.time ? 4 : 3}
-                        >
-                            No transactions
-                        </td>
-                    </tr>
-                )}
-            </tbody>
+                    ))}
+                </tbody>
+            )}
         </Table>
     )
 }

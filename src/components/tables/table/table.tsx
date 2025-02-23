@@ -6,7 +6,8 @@ export interface Props {
     actions?: ReactNode
     alignLastRight?: boolean
     children?:
-        | Array<ReactElement<HTMLTableSectionElement>>
+        | Array<false | ReactElement<HTMLTableSectionElement>>
+        | false
         | ReactElement<HTMLTableSectionElement>
     className?: string
     footer?: ReactNode

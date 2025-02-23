@@ -10,7 +10,7 @@ import { formatNumber } from '@/lib/utils'
 import { Table, TableProps } from '../table'
 import styles from './blockTable.module.css'
 
-interface Props extends Pick<TableProps, 'actions' | 'className' | 'title'> {
+interface Props extends Pick<TableProps, 'actions' | 'title'> {
     blocks?: BlockFragment[]
     proposer?: boolean
 }
@@ -30,7 +30,7 @@ const BlockTable: FC<Props> = props => {
     return (
         <Table
             actions={props.actions}
-            className={props.className}
+            className={styles.root}
             title={props.title}
             alignLastRight
             section
@@ -43,25 +43,28 @@ const BlockTable: FC<Props> = props => {
                     <th>Txs</th>
                 </tr>
             </thead>
-            <tbody>
-                {props.blocks?.map(block => (
-                    <tr
-                        key={block.height}
-                        className={styles.dataRow}
-                        data-block-id={block.height}
-                        onClick={onRowClick}
-                    >
-                        <td>
-                            <Box color="var(--textSecondary)" size={16} />
-                            <span>{formatNumber(block.height)}</span>
-                        </td>
-                        {/*<td>{now.to(dayjs(block.createdAt))}</td>*/}
-                        <td>{dayjs(block.createdAt).format(dateFormatFull)}</td>
-                        {props.proposer && <td>-</td>}
-                        <td>-</td>
-                    </tr>
-                ))}
-            </tbody>
+            {Boolean(props.blocks?.length) && (
+                <tbody>
+                    {props.blocks?.map(block => (
+                        <tr
+                            key={block.height}
+                            data-block-id={block.height}
+                            onClick={onRowClick}
+                        >
+                            <td>
+                                <Box color="var(--textSecondary)" size={16} />
+                                <span>{formatNumber(block.height)}</span>
+                            </td>
+                            {/*<td>{now.to(dayjs(block.createdAt))}</td>*/}
+                            <td>
+                                {dayjs(block.createdAt).format(dateFormatFull)}
+                            </td>
+                            {props.proposer && <td>-</td>}
+                            <td>-</td>
+                        </tr>
+                    ))}
+                </tbody>
+            )}
         </Table>
     )
 }
