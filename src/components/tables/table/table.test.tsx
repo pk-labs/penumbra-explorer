@@ -47,11 +47,6 @@ describe('Table', () => {
         expect(container.firstChild?.lastChild).toHaveClass('foo')
     })
 
-    test('aligns last cell right', async () => {
-        const { container } = render(<Table alignLastRight />)
-        expect(container.firstChild?.firstChild).toHaveClass('alignLastRight')
-    })
-
     test('applies custom classes', async () => {
         const { container } = render(<Table className="foo bar" />)
 

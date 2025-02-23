@@ -65,13 +65,6 @@
     td {
         font-family: var(--fontMono);
     }
-
-    &.alignLastRight {
-        th:last-child,
-        td:last-child {
-            text-align: right;
-        }
-    }
 }
 
 .footer {

@@ -4,7 +4,6 @@ import styles from './table.module.css'
 
 export interface Props {
     actions?: ReactNode
-    alignLastRight?: boolean
     children?:
         | Array<false | ReactElement<HTMLTableSectionElement>>
         | false
@@ -29,14 +28,7 @@ const Table: FC<Props> = props => {
                     <div className={styles.actions}>{props.actions}</div>
                 </Header>
             )}
-            <table
-                className={clsx(
-                    styles.table,
-                    props.alignLastRight && styles.alignLastRight
-                )}
-            >
-                {props.children}
-            </table>
+            <table className={styles.table}>{props.children}</table>
             {props.footer && (
                 <Footer className={clsx(styles.footer, props.footerClassName)}>
                     {props.footer}
