@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import { ChevronRight } from 'lucide-react'
 import { Children, FC, ReactElement } from 'react'
-import { Props as BreadcrumbProps } from './breadcrumb'
+import { BreadcrumbProps } from './breadcrumb'
 import styles from './breadcrumbs.module.css'
 
 interface Props {
-    children:
+    children?:
         | Array<
               | Array<ReactElement<BreadcrumbProps>>
               | false

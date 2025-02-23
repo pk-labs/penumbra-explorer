@@ -1,0 +1,15 @@
+.root {
+    font-family: var(--fontSecondary);
+    font-size: var(--fontSize3Xl);
+    font-weight: 500;
+
+    &[href] {
+        color: var(--textSecondary);
+        text-decoration: none;
+        transition: color 200ms var(--fastOutSlowIn);
+
+        &:hover {
+            color: var(--text);
+        }
+    }
+}
