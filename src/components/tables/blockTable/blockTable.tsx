@@ -2,20 +2,17 @@
 
 import { Box } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { FC, MouseEvent, ReactNode, useCallback } from 'react'
+import { FC, MouseEvent, useCallback } from 'react'
 import { dateFormatFull } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
 import { BlockFragment } from '@/lib/graphql/generated/types'
 import { formatNumber } from '@/lib/utils'
-import Table from '../table'
+import { Table, TableProps } from '../table'
 import styles from './blockTable.module.css'
 
-interface Props {
-    actions?: ReactNode
+interface Props extends Pick<TableProps, 'actions' | 'className' | 'title'> {
     blocks?: BlockFragment[]
-    className?: string
     proposer?: boolean
-    title?: string
 }
 
 const BlockTable: FC<Props> = props => {
@@ -60,13 +57,7 @@ const BlockTable: FC<Props> = props => {
                         </td>
                         {/*<td>{now.to(dayjs(block.createdAt))}</td>*/}
                         <td>{dayjs(block.createdAt).format(dateFormatFull)}</td>
-                        {props.proposer && (
-                            <td>
-                                -{/*<span>TODO: Proposer</span>*/}
-                                {/*<Copy color="var(--textSecondary)" size={14} />*/}
-                            </td>
-                        )}
-                        {/*<td>{block.transactionsCount}</td>*/}
+                        {props.proposer && <td>-</td>}
                         <td>-</td>
                     </tr>
                 ))}

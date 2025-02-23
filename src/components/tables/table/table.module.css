@@ -1,5 +1,6 @@
 .root {
     display: flex;
+    min-height: calc(12 * var(--unit));
     flex-direction: column;
     padding: calc(3 * var(--unit));
     border-radius: var(--rounded);

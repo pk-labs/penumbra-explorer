@@ -2,21 +2,18 @@
 
 import { Box, CheckCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { FC, MouseEvent, ReactNode, useCallback } from 'react'
+import { FC, MouseEvent, useCallback } from 'react'
 import { dateFormatFull } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
 import { TransactionFragment } from '@/lib/graphql/generated/types'
 import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import Pill from '../../pill'
-import Table from '../table'
+import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
-interface Props {
-    actions?: ReactNode
-    className?: string
+interface Props extends Pick<TableProps, 'actions' | 'className' | 'title'> {
     time?: boolean
-    title?: string
     transactions?: TransactionFragment[]
 }
 

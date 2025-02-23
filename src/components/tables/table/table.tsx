@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { FC, ReactElement, ReactNode } from 'react'
 import styles from './table.module.css'
 
-interface Props {
+export interface Props {
     actions?: ReactNode
     alignLastRight?: boolean
     children?:
