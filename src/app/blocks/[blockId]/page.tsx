@@ -2,9 +2,20 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { BlockView, Breadcrumb, Breadcrumbs, Container } from '@/components'
+import {
+    Breadcrumb,
+    Breadcrumbs,
+    Container,
+    JsonTree,
+    Parameter,
+    Parameters,
+    TransactionTable,
+    View,
+} from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { loadBlock } from '@/lib/loaders'
+import { formatNumber } from '@/lib/utils'
+import styles from './page.module.css'
 
 interface Props {
     params: Promise<{
@@ -30,7 +41,23 @@ const BlockViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/blocks">Blocks</Breadcrumb>
             </Breadcrumbs>
-            <BlockView block={block} subtitle="1,057,456" title="Block view" />
+            <View
+                className={styles.view}
+                subtitle={formatNumber(block.height)}
+                title="Block view"
+            >
+                <Parameters>
+                    <Parameter name="Block height">{block.height}</Parameter>
+                    <Parameter name="Time">{block.createdAt}</Parameter>
+                    <Parameter name="Proposer">-</Parameter>
+                    <Parameter name="Txs">-</Parameter>
+                </Parameters>
+                <TransactionTable
+                    className={styles.table}
+                    transactions={block.transactions}
+                />
+                <JsonTree data={block} />
+            </View>
         </Container>
     )
 }

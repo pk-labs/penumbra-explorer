@@ -3,13 +3,22 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import {
+    Actions,
     Breadcrumb,
     Breadcrumbs,
     Container,
-    TransactionView,
+    CopyToClipboard,
+    JsonTree,
+    Memo,
+    Parameter,
+    Parameters,
+    Subsection,
+    View,
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { loadTransaction } from '@/lib/loaders'
+import { shortenHash } from '@/lib/utils'
+import styles from './page.module.css'
 
 interface Props {
     params: Promise<{
@@ -38,10 +47,38 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/transactions">Transactions</Breadcrumb>
             </Breadcrumbs>
-            <TransactionView
-                title="Transaction view"
-                transaction={transaction}
-            />
+            <View className={styles.view} title="Transaction view">
+                <Parameters>
+                    <Parameter name="Transaction hash">
+                        {shortenHash(transaction.hash)}
+                        <CopyToClipboard
+                            data={transaction.hash}
+                            iconSize={14}
+                        />
+                    </Parameter>
+                    <Parameter name="Block height">
+                        {transaction.block.height}
+                    </Parameter>
+                    <Parameter name="Time">
+                        {transaction.block.createdAt}
+                    </Parameter>
+                </Parameters>
+                {transaction.body.memo && <Memo />}
+                <Actions actions={transaction.body.actions} />
+                <Subsection title="Parameters">
+                    <Parameters>
+                        <Parameter name="Transaction fee">
+                            {Number(transaction.body.parameters.fee.amount) /
+                                1000}{' '}
+                            UM
+                        </Parameter>
+                        <Parameter name="Chain ID">
+                            {transaction.body.parameters.chainId}
+                        </Parameter>
+                    </Parameters>
+                </Subsection>
+                <JsonTree data={transaction} />
+            </View>
         </Container>
     )
 }
