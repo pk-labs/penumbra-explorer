@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { FC, ReactElement } from 'react'
-import { Props as TabProps } from './tab'
+import { TabProps } from './tab'
 import styles from './tabs.module.css'
 
 interface Props {

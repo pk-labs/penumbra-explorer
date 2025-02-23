@@ -3,13 +3,12 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FC, ReactNode } from 'react'
-import styles from './tabs.module.css'
+import { FC } from 'react'
+import styles from './tab.module.css'
 
 export interface Props {
-    children?: ReactNode
+    children: string
     href: string
-    label: string
 }
 
 const Tab: FC<Props> = props => {
@@ -19,10 +18,10 @@ const Tab: FC<Props> = props => {
 
     return (
         <Link
-            className={clsx(styles.tab, active && styles.active)}
+            className={clsx(styles.root, active && styles.active)}
             href={props.href}
         >
-            {props.label}
+            {props.children}
         </Link>
     )
 }

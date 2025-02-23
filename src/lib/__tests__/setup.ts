@@ -8,4 +8,6 @@ beforeEach(() => {
 afterEach(() => {
     jest.clearAllTimers()
     jest.useRealTimers()
+
+    document.title = ''
 })
