@@ -2,11 +2,11 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { encrypted } from '@/lib/images'
+import Subsection from '../subsection'
 import styles from './memo.module.css'
 
 const Memo: FC = () => (
-    <div className={styles.root}>
-        <h3 className={styles.title}>Memo</h3>
+    <Subsection title="Memo">
         <div className={styles.content}>
             <Image
                 alt="Memo"
@@ -16,7 +16,7 @@ const Memo: FC = () => (
             />
             <span>Memo</span>
         </div>
-    </div>
+    </Subsection>
 )
 
 export default Memo
