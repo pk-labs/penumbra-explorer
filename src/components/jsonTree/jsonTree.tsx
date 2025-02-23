@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { FC } from 'react'
+import Subsection from '../subsection'
 import styles from './jsonTree.module.css'
 
 const ReactJsonView = dynamic(() => import('@microlink/react-json-view'), {
@@ -13,8 +14,7 @@ interface Props {
 }
 
 const JsonTree: FC<Props> = props => (
-    <div className={styles.root}>
-        <h3 className={styles.title}>Raw JSON</h3>
+    <Subsection title="Raw JSON">
         <div className={styles.container}>
             <ReactJsonView
                 enableClipboard={false}
@@ -26,7 +26,7 @@ const JsonTree: FC<Props> = props => (
                 collapsed
             />
         </div>
-    </div>
+    </Subsection>
 )
 
 export default JsonTree
