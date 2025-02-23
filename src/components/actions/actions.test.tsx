@@ -1,8 +1,8 @@
 import { getByText, render } from '@testing-library/react'
-import { ActionItemProps } from './actionItem'
+import { ActionProps } from './action'
 import Actions from './actions'
 
-jest.mock('./actionItem/actionItem', () => (props: ActionItemProps) => (
+jest.mock('./action/action', () => (props: ActionProps) => (
     <div>{props.action.__typename}</div>
 ))
 
