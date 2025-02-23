@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { Box } from 'lucide-react'
 import Image from 'next/image'
 import { FC, ReactNode } from 'react'
-import Panel from '../panel'
+import { Panel } from '../panel'
 import styles from './blockPanel.module.css'
 import icon from './blockPanelIcon.svg'
 

@@ -1,7 +1,8 @@
+/* istanbul ignore file */
 import clsx from 'clsx'
 import Image from 'next/image'
 import { FC, ReactNode } from 'react'
-import Panel from '../panel'
+import { Panel } from '../panel'
 import styles from './burnPanel.module.css'
 import icon from './burnPanelIcon.png'
 

@@ -1,2 +1,3 @@
 /* istanbul ignore file */
-export { default } from './panel'
+export type { Props as PanelProps } from './panel'
+export { default as Panel } from './panel'
