@@ -13,7 +13,7 @@ import Pill from '../../pill'
 import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
-interface Props extends Pick<TableProps, 'actions' | 'className' | 'title'> {
+interface Props extends Pick<TableProps, 'actions' | 'title'> {
     embedded?: boolean
     time?: boolean
     transactions?: TransactionFragment[]
@@ -102,7 +102,7 @@ const TransactionTable: FC<Props> = props => {
                     ))
                 ) : (
                     <tr>
-                        <td colSpan={props.time ? 4 : 3}></td>
+                        <td colSpan={props.time ? 4 : 3} />
                     </tr>
                 )}
             </tbody>

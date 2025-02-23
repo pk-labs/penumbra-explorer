@@ -11,13 +11,13 @@ export const useParams = jest.fn(() => ({}))
 
 export const usePathname = jest.fn(() => '/')
 
-const router = {
-    back: () => jest.fn(),
-    forward: () => jest.fn(),
-    prefetch: () => jest.fn(),
-    push: () => jest.fn(),
-    refresh: () => jest.fn(),
-    replace: () => jest.fn(),
+export const router = {
+    back: jest.fn(),
+    forward: jest.fn(),
+    prefetch: jest.fn(),
+    push: jest.fn(),
+    refresh: jest.fn(),
+    replace: jest.fn(),
 }
 
 export const useRouter = () => router

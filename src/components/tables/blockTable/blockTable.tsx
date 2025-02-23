@@ -12,7 +12,6 @@ import styles from './blockTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'title'> {
     blocks?: BlockFragment[]
-
     proposer?: boolean
 }
 
@@ -43,9 +42,9 @@ const BlockTable: FC<Props> = props => {
                     <th>Txs</th>
                 </tr>
             </thead>
-            {Boolean(props.blocks?.length) && (
-                <tbody>
-                    {props.blocks?.map(block => (
+            <tbody>
+                {props.blocks?.length ? (
+                    props.blocks.map(block => (
                         <tr
                             key={block.height}
                             data-block-id={block.height}
@@ -62,9 +61,13 @@ const BlockTable: FC<Props> = props => {
                             {props.proposer && <td>-</td>}
                             <td>-</td>
                         </tr>
-                    ))}
-                </tbody>
-            )}
+                    ))
+                ) : (
+                    <tr>
+                        <td colSpan={props.proposer ? 4 : 3} />
+                    </tr>
+                )}
+            </tbody>
         </Table>
     )
 }
