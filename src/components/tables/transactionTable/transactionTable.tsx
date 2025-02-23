@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import { Box, CheckCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
@@ -13,6 +14,7 @@ import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'className' | 'title'> {
+    embedded?: boolean
     time?: boolean
     transactions?: TransactionFragment[]
 }
@@ -34,7 +36,7 @@ const TransactionTable: FC<Props> = props => {
     return (
         <Table
             actions={props.actions}
-            className={styles.root}
+            className={clsx(styles.root, props.embedded && styles.embedded)}
             title={props.title}
             section
         >
@@ -46,9 +48,9 @@ const TransactionTable: FC<Props> = props => {
                     {props.time && <th>Time</th>}
                 </tr>
             </thead>
-            {Boolean(props.transactions?.length) && (
-                <tbody>
-                    {props.transactions?.map(transaction => (
+            <tbody>
+                {props.transactions?.length ? (
+                    props.transactions.map(transaction => (
                         <tr
                             key={transaction.hash}
                             data-transaction-id={transaction.hash}
@@ -97,9 +99,13 @@ const TransactionTable: FC<Props> = props => {
                                 </td>
                             )}
                         </tr>
-                    ))}
-                </tbody>
-            )}
+                    ))
+                ) : (
+                    <tr>
+                        <td colSpan={props.time ? 4 : 3}></td>
+                    </tr>
+                )}
+            </tbody>
         </Table>
     )
 }

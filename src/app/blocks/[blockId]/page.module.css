@@ -1,10 +1,6 @@
-.view {
-    /* FIXME: !important workaround for CSS import order issue */
-    --viewGradientStartColor: rgba(83, 174, 168, 0.25) !important;
-    --viewGradientStopColor: rgba(83, 174, 168, 0.025) !important;
-
-    .table {
-        padding: 0;
-        border-radius: var(--roundedSmall);
+.root {
+    .view {
+        --viewGradientStartColor: rgba(83, 174, 168, 0.25);
+        --viewGradientStopColor: rgba(83, 174, 168, 0.025);
     }
 }

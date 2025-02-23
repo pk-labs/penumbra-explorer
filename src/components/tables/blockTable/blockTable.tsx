@@ -12,6 +12,7 @@ import styles from './blockTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'title'> {
     blocks?: BlockFragment[]
+
     proposer?: boolean
 }
 

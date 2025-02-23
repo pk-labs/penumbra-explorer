@@ -36,7 +36,7 @@ const BlockViewPage: FC<Props> = async props => {
     }
 
     return (
-        <Container narrow>
+        <Container className={styles.root} narrow>
             <Breadcrumbs>
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/blocks">Blocks</Breadcrumb>
@@ -52,10 +52,7 @@ const BlockViewPage: FC<Props> = async props => {
                     <Parameter name="Proposer">-</Parameter>
                     <Parameter name="Txs">-</Parameter>
                 </Parameters>
-                <TransactionTable
-                    className={styles.table}
-                    transactions={block.transactions}
-                />
+                <TransactionTable transactions={block.transactions} embedded />
                 <JsonTree data={block} />
             </View>
         </Container>

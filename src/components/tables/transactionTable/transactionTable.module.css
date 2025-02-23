@@ -1,4 +1,9 @@
 .root {
+    &.embedded {
+        padding: 0;
+        border-radius: var(--roundedSmall);
+    }
+
     tbody tr:hover {
         background: rgba(193, 166, 204, 0.15);
         cursor: pointer;
