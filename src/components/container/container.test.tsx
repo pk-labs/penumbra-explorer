@@ -9,21 +9,11 @@ describe('Container', () => {
 
     test('supports narrow layout', async () => {
         const { container } = render(<Container narrow>Foo</Container>)
-
-        expect(getByText(container, 'Foo').classList.contains('narrow')).toBe(
-            true
-        )
+        expect(container.firstChild).toHaveClass('narrow')
     })
 
     test('applies custom classes', async () => {
         const { container } = render(<Container className="foo bar" />)
-
-        expect(container.firstElementChild?.classList.contains('foo')).toBe(
-            true
-        )
-
-        expect(container.firstElementChild?.classList.contains('bar')).toBe(
-            true
-        )
+        expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

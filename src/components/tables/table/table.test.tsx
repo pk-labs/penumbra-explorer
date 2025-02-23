@@ -49,13 +49,6 @@ describe('Table', () => {
 
     test('applies custom classes', async () => {
         const { container } = render(<Table className="foo bar" />)
-
-        expect(container.firstElementChild?.classList.contains('foo')).toBe(
-            true
-        )
-
-        expect(container.firstElementChild?.classList.contains('bar')).toBe(
-            true
-        )
+        expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

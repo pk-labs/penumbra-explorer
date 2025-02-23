@@ -9,10 +9,7 @@ describe('Button', () => {
 
     test('renders light button', async () => {
         const { container } = render(<Button light>Foo</Button>)
-
-        expect(getByText(container, 'Foo').classList.contains('light')).toBe(
-            true
-        )
+        expect(getByText(container, 'Foo')).toHaveClass('light')
     })
 
     test('renders link button', async () => {
@@ -21,7 +18,7 @@ describe('Button', () => {
     })
 
     test('applies custom classes', async () => {
-        const { container } = render(<Button className="foo">Foo</Button>)
-        expect(getByText(container, 'Foo').classList.contains('foo')).toBe(true)
+        const { container } = render(<Button className="foo bar">Foo</Button>)
+        expect(getByText(container, 'Foo')).toHaveClass('foo', 'bar')
     })
 })

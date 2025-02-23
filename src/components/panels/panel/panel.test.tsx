@@ -23,12 +23,6 @@ describe('Panel', () => {
             <Panel className="foo bar" number={99} title="Foo" />
         )
 
-        expect(container.firstElementChild?.classList.contains('foo')).toBe(
-            true
-        )
-
-        expect(container.firstElementChild?.classList.contains('bar')).toBe(
-            true
-        )
+        expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

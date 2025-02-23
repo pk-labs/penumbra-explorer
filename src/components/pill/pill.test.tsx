@@ -9,9 +9,6 @@ describe('Pill', () => {
 
     test('applies custom classes', async () => {
         const { container } = render(<Pill className="foo bar">Foo</Pill>)
-
-        const root = getByText(container, 'Foo')
-        expect(root.classList.contains('foo')).toBe(true)
-        expect(root.classList.contains('bar')).toBe(true)
+        expect(getByText(container, 'Foo')).toHaveClass('foo', 'bar')
     })
 })
