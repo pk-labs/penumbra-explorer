@@ -1,32 +1,21 @@
-import Image from 'next/image'
 import { FC } from 'react'
 import { TransactionFragment } from '@/lib/graphql/generated/types'
-import { encrypted } from '@/lib/images'
+import { ActionItem } from './actionItem'
 import styles from './actions.module.css'
 
 interface Props {
     actions: TransactionFragment['body']['actions']
 }
 
-const Actions: FC<Props> = props => {
-    return (
-        <div className={styles.root}>
-            <h3 className={styles.title}>Actions</h3>
-            <ul className={styles.list}>
-                {props.actions.map((action, i) => (
-                    <li key={i} className={styles.item}>
-                        <Image
-                            alt={action.__typename}
-                            height={encrypted.height}
-                            src={encrypted.src}
-                            width={encrypted.width}
-                        />
-                        {action.__typename}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
+const Actions: FC<Props> = props => (
+    <div className={styles.root}>
+        <h3 className={styles.title}>Actions</h3>
+        <ul className={styles.list}>
+            {props.actions.map((action, i) => (
+                <ActionItem key={i} action={action} />
+            ))}
+        </ul>
+    </div>
+)
 
 export default Actions

@@ -1,0 +1,12 @@
+.root {
+    display: flex;
+    align-items: center;
+    padding: var(--unit) calc(1.5 * var(--unit));
+    border-radius: var(--roundedSmall);
+    background: var(--surface);
+    color: var(--textSecondary);
+    font-family: var(--fontMono);
+    font-size: var(--fontSizeSm);
+    font-weight: 500;
+    gap: var(--unit);
+}
