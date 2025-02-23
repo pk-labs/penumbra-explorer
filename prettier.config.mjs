@@ -1,8 +1,8 @@
 export default {
-  arrowParens: 'avoid',
-  endOfLine: 'lf',
-  semi: false,
-  singleQuote: true,
-  tabWidth: 4,
-  trailingComma: 'es5',
-};
+    arrowParens: 'avoid',
+    endOfLine: 'lf',
+    semi: false,
+    singleQuote: true,
+    tabWidth: 4,
+    trailingComma: 'es5',
+}

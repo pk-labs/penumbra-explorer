@@ -4,9 +4,9 @@ const nextConfig: NextConfig = {
     poweredByHeader: false,
     webpack: config => {
         config.module.rules.push({
-            test: /\.graphql$/,
-            loader: 'graphql-tag/loader',
             exclude: /node_modules/,
+            loader: 'graphql-tag/loader',
+            test: /\.graphql$/,
         })
 
         return config
