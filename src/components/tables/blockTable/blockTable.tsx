@@ -36,6 +36,7 @@ const BlockTable: FC<Props> = props => {
             className={props.className}
             title={props.title}
             alignLastRight
+            section
         >
             <thead>
                 <tr>

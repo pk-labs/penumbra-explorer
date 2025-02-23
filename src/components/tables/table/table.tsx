@@ -1,39 +1,48 @@
 import clsx from 'clsx'
-import { FC, ReactNode } from 'react'
+import { FC, ReactElement, ReactNode } from 'react'
 import styles from './table.module.css'
 
 interface Props {
     actions?: ReactNode
     alignLastRight?: boolean
-    children: ReactNode
+    children?:
+        | Array<ReactElement<HTMLTableSectionElement>>
+        | ReactElement<HTMLTableSectionElement>
     className?: string
     footer?: ReactNode
     footerClassName?: string
+    section?: boolean
     title?: string
 }
 
-const Table: FC<Props> = props => (
-    <section className={clsx(styles.root, props.className)}>
-        {Boolean(props.title || props.actions) && (
-            <header className={styles.header}>
-                <h2 className={styles.title}>{props.title}</h2>
-                <div className={styles.actions}>{props.actions}</div>
-            </header>
-        )}
-        <table
-            className={clsx(
-                styles.table,
-                props.alignLastRight && styles.alignLastRight
+const Table: FC<Props> = props => {
+    const Container = props.section ? 'section' : 'div'
+    const Header = props.section ? 'header' : 'div'
+    const Footer = props.section ? 'footer' : 'div'
+
+    return (
+        <Container className={clsx(styles.root, props.className)}>
+            {Boolean(props.title || props.actions) && (
+                <Header className={styles.header}>
+                    <h2 className={styles.title}>{props.title}</h2>
+                    <div className={styles.actions}>{props.actions}</div>
+                </Header>
             )}
-        >
-            {props.children}
-        </table>
-        {props.footer && (
-            <footer className={clsx(styles.footer, props.footerClassName)}>
-                {props.footer}
-            </footer>
-        )}
-    </section>
-)
+            <table
+                className={clsx(
+                    styles.table,
+                    props.alignLastRight && styles.alignLastRight
+                )}
+            >
+                {props.children}
+            </table>
+            {props.footer && (
+                <Footer className={clsx(styles.footer, props.footerClassName)}>
+                    {props.footer}
+                </Footer>
+            )}
+        </Container>
+    )
+}
 
 export default Table

@@ -39,6 +39,7 @@ const TransactionTable: FC<Props> = props => {
             actions={props.actions}
             className={props.className}
             title={props.title}
+            section
         >
             <thead>
                 <tr>
