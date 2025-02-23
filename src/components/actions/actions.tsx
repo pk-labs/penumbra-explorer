@@ -2,13 +2,13 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { TransactionFragment } from '@/lib/graphql/generated/types'
 import { encrypted } from '@/lib/images'
-import styles from './actionList.module.css'
+import styles from './actions.module.css'
 
 interface Props {
     actions: TransactionFragment['body']['actions']
 }
 
-const ActionList: FC<Props> = props => {
+const Actions: FC<Props> = props => {
     return (
         <div className={styles.root}>
             <h3 className={styles.title}>Actions</h3>
@@ -29,4 +29,4 @@ const ActionList: FC<Props> = props => {
     )
 }
 
-export default ActionList
+export default Actions
