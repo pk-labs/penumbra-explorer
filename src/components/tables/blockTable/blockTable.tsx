@@ -10,7 +10,7 @@ import { formatNumber } from '@/lib/utils'
 import { Table, TableProps } from '../table'
 import styles from './blockTable.module.css'
 
-interface Props extends Pick<TableProps, 'actions' | 'title'> {
+interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     blocks?: PartialBlockFragment[]
     proposer?: boolean
 }
@@ -31,6 +31,7 @@ const BlockTable: FC<Props> = props => {
         <Table
             actions={props.actions}
             className={styles.root}
+            footer={props.footer}
             title={props.title}
             section
         >

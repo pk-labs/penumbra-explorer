@@ -13,7 +13,7 @@ import Pill from '../../pill'
 import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
-interface Props extends Pick<TableProps, 'actions' | 'title'> {
+interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     embedded?: boolean
     time?: boolean
     transactions?: PartialTransactionFragment[]
@@ -35,6 +35,7 @@ const TransactionTable: FC<Props> = props => {
         <Table
             actions={props.actions}
             className={clsx(styles.root, props.embedded && styles.embedded)}
+            footer={props.footer}
             title={props.title}
             section
         >

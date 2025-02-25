@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import Link from 'next/link'
-import { FC, ReactNode } from 'react'
+import { FC, MouseEvent, ReactNode } from 'react'
 import styles from './button.module.css'
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
     className?: string
     href?: string
     light?: boolean
+    onClick?: (e: MouseEvent) => void
 }
 
 const Button: FC<Props> = props =>
@@ -21,6 +22,7 @@ const Button: FC<Props> = props =>
                 props.className
             )}
             href={props.href}
+            onClick={props.onClick}
         >
             {props.children}
         </Link>
@@ -31,6 +33,7 @@ const Button: FC<Props> = props =>
                 props.light && styles.light,
                 props.className
             )}
+            onClick={props.onClick}
             type="button"
         >
             {props.children}

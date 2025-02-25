@@ -1,7 +1,13 @@
 /* istanbul ignore file */
 import { Metadata } from 'next'
 import { FC } from 'react'
-import { BlockTable, Breadcrumb, Breadcrumbs, Container } from '@/components'
+import {
+    BlockTable,
+    Breadcrumb,
+    Breadcrumbs,
+    Container,
+    Pagination,
+} from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { loadBlocks } from '@/lib/loaders'
 
@@ -18,7 +24,7 @@ const BlocksPage: FC = async () => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb>Blocks</Breadcrumb>
             </Breadcrumbs>
-            <BlockTable blocks={blocks} />
+            <BlockTable blocks={blocks} footer={<Pagination />} />
         </Container>
     )
 }
