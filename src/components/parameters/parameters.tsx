@@ -17,17 +17,7 @@ interface Props {
 }
 
 const Parameters: FC<Props> = props => (
-    <>
-        <ul className={clsx(styles.root, props.className)}>{props.children}</ul>
-        {/*<DataList>*/}
-        {/*    <DataListItem name="Transaction fee">*/}
-        {/*        {Number(props.parameters.fee.amount) / 1000} UM*/}
-        {/*    </DataListItem>*/}
-        {/*    <DataListItem name="Chain ID">*/}
-        {/*        {props.parameters.chainId}*/}
-        {/*    </DataListItem>*/}
-        {/*</DataList>*/}
-    </>
+    <ul className={clsx(styles.root, props.className)}>{props.children}</ul>
 )
 
 export default Parameters
