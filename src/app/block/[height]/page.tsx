@@ -18,18 +18,16 @@ import { formatNumber } from '@/lib/utils'
 import styles from './page.module.css'
 
 interface Props {
-    params: Promise<{
-        blockId: string
-    }>
+    params: Promise<{ height: string }>
 }
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => ({
-    title: `Block ${(await props.params).blockId} - ${rootTitle}`,
+    title: `Block ${(await props.params).height} - ${rootTitle}`,
 })
 
 const BlockViewPage: FC<Props> = async props => {
     const params = await props.params
-    const block = await loadBlock(Number(params.blockId))
+    const block = await loadBlock(Number(params.height))
 
     if (!block) {
         notFound()

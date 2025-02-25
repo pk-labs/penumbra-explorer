@@ -115,6 +115,6 @@ describe('BlockTable', () => {
         }
 
         fireEvent.click(row)
-        expect(router.push).toHaveBeenCalledWith('/blocks/123')
+        expect(router.push).toHaveBeenCalledWith('/block/123')
     })
 })

@@ -150,7 +150,7 @@ describe('BlockTable', () => {
         }
 
         fireEvent.click(row)
-        expect(router.push).toHaveBeenCalledWith('/transactions/tx1')
+        expect(router.push).toHaveBeenCalledWith('/tx/tx1')
     })
 
     test('renders embedded', async () => {

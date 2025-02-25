@@ -20,7 +20,7 @@ const BlockTable: FC<Props> = props => {
 
     const onRowClick = useCallback(
         (e: MouseEvent<HTMLTableRowElement>) => {
-            router.push(`/blocks/${e.currentTarget.dataset.blockHeight}`)
+            router.push(`/block/${e.currentTarget.dataset.blockHeight}`)
         },
         [router]
     )

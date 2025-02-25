@@ -21,21 +21,16 @@ import { shortenHash } from '@/lib/utils'
 import styles from './page.module.css'
 
 interface Props {
-    params: Promise<{
-        transactionId: string
-    }>
+    params: Promise<{ hash: string }>
 }
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => ({
-    title: `Transaction ${(await props.params).transactionId} - ${rootTitle}`,
+    title: `Transaction ${(await props.params).hash} - ${rootTitle}`,
 })
 
 const TransactionViewPage: FC<Props> = async props => {
     const params = await props.params
-
-    const transaction = await loadTransaction(
-        params.transactionId.toUpperCase()
-    )
+    const transaction = await loadTransaction(params.hash.toUpperCase())
 
     if (!transaction) {
         notFound()
@@ -45,7 +40,7 @@ const TransactionViewPage: FC<Props> = async props => {
         <Container className={styles.root} narrow>
             <Breadcrumbs>
                 <Breadcrumb href="/">Explorer</Breadcrumb>
-                <Breadcrumb href="/transactions">Transactions</Breadcrumb>
+                <Breadcrumb href="/txs">Transactions</Breadcrumb>
             </Breadcrumbs>
             <View className={styles.view} title="Transaction view">
                 <Parameters>

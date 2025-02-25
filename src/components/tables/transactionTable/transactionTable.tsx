@@ -24,9 +24,7 @@ const TransactionTable: FC<Props> = props => {
 
     const onRowClick = useCallback(
         (e: MouseEvent<HTMLTableRowElement>) => {
-            router.push(
-                `/transactions/${e.currentTarget.dataset.transactionHash}`
-            )
+            router.push(`/tx/${e.currentTarget.dataset.transactionHash}`)
         },
         [router]
     )

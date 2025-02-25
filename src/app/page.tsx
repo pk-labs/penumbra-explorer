@@ -37,7 +37,7 @@ const HomePage: FC = async () => {
                         title="Latest blocks"
                     />
                     <TransactionTable
-                        actions={<Button href="/transactions">View all</Button>}
+                        actions={<Button href="/txs">View all</Button>}
                         title="Latest transactions"
                         transactions={latestTransactions}
                     />
