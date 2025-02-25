@@ -9,14 +9,14 @@ describe('loadTransactions', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { latestTransactions: [{ hash: 'FoO' }] },
+                        data: { transactions: [{ hash: 'FoO' }] },
                     }),
             }),
         })
 
-        await expect(loadTransactions(1)).resolves.toMatchObject([
-            { hash: 'foo' },
-        ])
+        await expect(
+            loadTransactions({ latest: { limit: 1 } })
+        ).resolves.toMatchObject([{ hash: 'foo' }])
     })
 
     test('logs error', async () => {
@@ -28,7 +28,7 @@ describe('loadTransactions', () => {
 
         const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
-        await loadTransactions(1)
+        await loadTransactions({ latest: { limit: 1 } })
         expect(consoleError).toHaveBeenCalledWith('foo')
     })
 })

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 const TransactionsPage: FC = async () => {
-    const transactions = await loadTransactions(20)
+    const transactions = await loadTransactions({ latest: { limit: 20 } })
 
     return (
         <Container>

@@ -1,7 +1,7 @@
 #import "../fragments/transactionFragment.graphql"
 
 query Transaction(
-  $hash: String!
+    $hash: String!
 ) {
     transaction(hash: $hash) {
         ...Transaction

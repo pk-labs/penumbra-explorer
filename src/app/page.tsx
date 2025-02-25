@@ -15,7 +15,7 @@ import styles from './page.module.css'
 
 const HomePage: FC = async () => {
     const latestBlocks = await loadBlocks({ latest: { limit: 10 } })
-    const latestTransactions = await loadTransactions(10)
+    const latestTransactions = await loadTransactions({ latest: { limit: 10 } })
 
     return (
         <>

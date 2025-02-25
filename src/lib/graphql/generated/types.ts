@@ -68,6 +68,10 @@ export type LatestBlock = {
   limit: Scalars['Int']['input'];
 };
 
+export type LatestTransactions = {
+  limit: Scalars['Int']['input'];
+};
+
 export type NotYetSupportedAction = {
   __typename?: 'NotYetSupportedAction';
   debug: Scalars['String']['output'];
@@ -98,9 +102,9 @@ export type QueryRoot = {
   __typename?: 'QueryRoot';
   block?: Maybe<Block>;
   blocks: Array<Block>;
-  latestTransactions: Array<Transaction>;
   search?: Maybe<SearchResult>;
   transaction?: Maybe<Transaction>;
+  transactions: Array<Transaction>;
 };
 
 
@@ -114,11 +118,6 @@ export type QueryRootBlocksArgs = {
 };
 
 
-export type QueryRootLatestTransactionsArgs = {
-  limit: Scalars['Int']['input'];
-};
-
-
 export type QueryRootSearchArgs = {
   slug: Scalars['String']['input'];
 };
@@ -126,6 +125,11 @@ export type QueryRootSearchArgs = {
 
 export type QueryRootTransactionArgs = {
   hash: Scalars['String']['input'];
+};
+
+
+export type QueryRootTransactionsArgs = {
+  selector: TransactionsSelector;
 };
 
 export type SearchResult = Block | Transaction;
@@ -174,6 +178,11 @@ export type TransactionParameters = {
   fee: Fee;
 };
 
+export type TransactionRange = {
+  fromTxHash: Scalars['String']['input'];
+  limit: Scalars['Int']['input'];
+};
+
 export type TransactionResult = {
   __typename?: 'TransactionResult';
   code: Scalars['Int']['output'];
@@ -184,6 +193,11 @@ export type TransactionResult = {
   gasWanted: Scalars['Int']['output'];
   info: Scalars['String']['output'];
   log: Scalars['String']['output'];
+};
+
+export type TransactionsSelector = {
+  latest?: InputMaybe<LatestTransactions>;
+  range?: InputMaybe<TransactionRange>;
 };
 
 export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> };
@@ -216,11 +230,11 @@ export type TransactionQueryVariables = Exact<{
 export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } } | null };
 
 export type TransactionsQueryVariables = Exact<{
-  limit: Scalars['Int']['input'];
+  selector: TransactionsSelector;
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'QueryRoot', latestTransactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }> } }> };
+export type TransactionsQuery = { __typename?: 'QueryRoot', transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }> } }> };
 
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
@@ -299,8 +313,8 @@ export const TransactionDocument = gql`
 }
     ${TransactionFragmentDoc}`;
 export const TransactionsDocument = gql`
-    query Transactions($limit: Int!) {
-  latestTransactions(limit: $limit) {
+    query Transactions($selector: TransactionsSelector!) {
+  transactions(selector: $selector) {
     ...PartialTransaction
   }
 }

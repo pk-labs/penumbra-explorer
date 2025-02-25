@@ -92,8 +92,8 @@ export function useTransactionQuery(options: Omit<Urql.UseQueryArgs<Types.Transa
   return Urql.useQuery<Types.TransactionQuery, Types.TransactionQueryVariables>({ query: Types.TransactionDocument, ...options });
 };
 export const TransactionsDocument = gql`
-    query Transactions($limit: Int!) {
-  latestTransactions(limit: $limit) {
+    query Transactions($selector: TransactionsSelector!) {
+  transactions(selector: $selector) {
     ...PartialTransaction
   }
 }
