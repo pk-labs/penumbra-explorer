@@ -38,7 +38,24 @@ describe('BlockTable', () => {
                     {
                         createdAt,
                         height: 123,
-                        transactions: [{ hash: 'tx1' }, { hash: 'tx2' }],
+                        transactions: [
+                            {
+                                block: { createdAt, height: 123 },
+                                body: {
+                                    actions: [],
+                                    actionsCount: 0,
+                                },
+                                hash: 'tx1',
+                            },
+                            {
+                                block: { createdAt, height: 456 },
+                                body: {
+                                    actions: [],
+                                    actionsCount: 0,
+                                },
+                                hash: 'tx2',
+                            },
+                        ],
                     },
                     {
                         createdAt,

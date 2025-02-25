@@ -1,11 +1,9 @@
+#import "../fragments/partialBlockFragment.graphql"
+
 query Blocks(
   $selector: BlocksSelector!
 ) {
   blocks(selector: $selector) {
-      height
-      createdAt
-      transactions {
-          hash
-      }
+     ...PartialBlock
   }
 }

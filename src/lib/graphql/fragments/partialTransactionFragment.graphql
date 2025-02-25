@@ -1,0 +1,13 @@
+fragment PartialTransaction on Transaction {
+    hash
+    block {
+        height
+        createdAt
+    }
+    body {
+        actions {
+            __typename
+        }
+        actionsCount
+    }
+}

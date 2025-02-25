@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
 import { dateFormatFull } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
-import { TransactionFragment } from '@/lib/graphql/generated/types'
+import { PartialTransactionFragment } from '@/lib/graphql/generated/types'
 import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import Pill from '../../pill'
@@ -16,7 +16,7 @@ import styles from './transactionTable.module.css'
 interface Props extends Pick<TableProps, 'actions' | 'title'> {
     embedded?: boolean
     time?: boolean
-    transactions?: TransactionFragment[]
+    transactions?: PartialTransactionFragment[]
 }
 
 const TransactionTable: FC<Props> = props => {

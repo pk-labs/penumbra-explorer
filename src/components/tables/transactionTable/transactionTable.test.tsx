@@ -46,12 +46,6 @@ describe('BlockTable', () => {
                         body: {
                             actions: [],
                             actionsCount: 0,
-                            parameters: {
-                                chainId: 'chain1',
-                                fee: {
-                                    amount: 9999,
-                                },
-                            },
                         },
                         hash: 'tx1',
                     },
@@ -63,12 +57,6 @@ describe('BlockTable', () => {
                         body: {
                             actions: [],
                             actionsCount: 0,
-                            parameters: {
-                                chainId: 'chain2',
-                                fee: {
-                                    amount: 9999,
-                                },
-                            },
                         },
                         hash: 'tx2',
                     },
@@ -94,12 +82,6 @@ describe('BlockTable', () => {
                         body: {
                             actions: [],
                             actionsCount: 0,
-                            parameters: {
-                                chainId: 'chain1',
-                                fee: {
-                                    amount: 9999,
-                                },
-                            },
                         },
                         hash: 'tx1',
                     },
@@ -128,12 +110,6 @@ describe('BlockTable', () => {
                                 { __typename: 'Spend' },
                             ],
                             actionsCount: 2,
-                            parameters: {
-                                chainId: 'chain1',
-                                fee: {
-                                    amount: 9999,
-                                },
-                            },
                         },
                         hash: 'tx1',
                     },
@@ -160,12 +136,6 @@ describe('BlockTable', () => {
                         body: {
                             actions: [],
                             actionsCount: 0,
-                            parameters: {
-                                chainId: 'chain1',
-                                fee: {
-                                    amount: 9999,
-                                },
-                            },
                         },
                         hash: 'tx1',
                     },
