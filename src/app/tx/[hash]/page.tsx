@@ -42,7 +42,11 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/txs">Transactions</Breadcrumb>
             </Breadcrumbs>
-            <View className={styles.view} title="Transaction view">
+            <View
+                className={styles.view}
+                subtitle={transaction.hash}
+                title="Transaction view"
+            >
                 <Parameters>
                     <Parameter name="Transaction hash">
                         {shortenHash(transaction.hash)}
