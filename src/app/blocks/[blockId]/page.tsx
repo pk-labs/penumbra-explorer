@@ -50,7 +50,9 @@ const BlockViewPage: FC<Props> = async props => {
                     <Parameter name="Block height">{block.height}</Parameter>
                     <Parameter name="Time">{block.createdAt}</Parameter>
                     {/*<Parameter name="Proposer">-</Parameter>*/}
-                    <Parameter name="Txs">-</Parameter>
+                    <Parameter name="Txs">
+                        {block.transactions.length}
+                    </Parameter>
                 </Parameters>
                 <TransactionTable transactions={block.transactions} embedded />
                 <JsonTree data={block} />
