@@ -11,7 +11,9 @@ interface Props {
 
 const Pagination: FC<Props> = props => (
     <div className={clsx(styles.root, props.className)}>
-        <Button onClick={() => console.log('Prev')}>Prev</Button>
+        <Button onClick={() => console.log('Prev')} disabled>
+            Prev
+        </Button>
         <Button onClick={() => console.log('Next')}>Next</Button>
     </div>
 )

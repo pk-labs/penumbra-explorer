@@ -13,11 +13,12 @@
     /* Colors */
     --text: #fafafa;
     --textSecondary: #a3a3a3;
+    --textDisabled: #6a6a6a;
     --background: #0d0d0d;
     --surface: rgba(250, 250, 250, 0.05);
     --surfaceLight: rgba(250, 250, 250, 0.1);
     --surfaceLighter: rgba(250, 250, 250, 0.15);
-    --surfaceDisable: rgba(10, 10, 10, 0.6);
+    --surfaceDisabled: rgba(19, 19, 19, 0.64);
     --primary: #ba4d14;
     --primaryLight: #f49c43;
     --secondaryLight: #53aea8;

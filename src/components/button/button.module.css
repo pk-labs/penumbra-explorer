@@ -19,19 +19,25 @@
     user-select: none;
     white-space: nowrap;
 
-    &:hover {
+    &:hover:not(.disabled) {
         background: var(--surfaceLight);
     }
 
-    &:active {
+    &:active:not(.disabled) {
         transform: scale(0.98);
     }
 
-    &.light {
+    &.light:not(.disabled) {
         background: var(--surfaceLight);
 
         &:hover {
             background: var(--surfaceLighter);
         }
+    }
+
+    &.disabled {
+        background: var(--surfaceDisabled);
+        color: var(--textDisabled);
+        cursor: not-allowed;
     }
 }

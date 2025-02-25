@@ -17,6 +17,22 @@ describe('Button', () => {
         expect(getByText(container, 'Foo')).toHaveAttribute('href', '/foo')
     })
 
+    test('renders disabled button', async () => {
+        const { container, rerender } = render(<Button disabled>Foo</Button>)
+
+        const button = getByText(container, 'Foo')
+        expect(button).toBeDisabled()
+        expect(button).toHaveClass('disabled')
+
+        rerender(
+            <Button href="/" disabled>
+                Foo
+            </Button>
+        )
+
+        expect(button).toHaveClass('disabled')
+    })
+
     test('applies custom classes', async () => {
         const { container } = render(<Button className="foo bar">Foo</Button>)
         expect(getByText(container, 'Foo')).toHaveClass('foo', 'bar')
