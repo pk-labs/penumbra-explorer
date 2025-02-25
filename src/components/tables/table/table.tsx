@@ -5,9 +5,11 @@ import styles from './table.module.css'
 export interface Props {
     actions?: ReactNode
     children?:
-        | Array<false | ReactElement<HTMLTableSectionElement>>
+        | Array<ReactElement<HTMLTableSectionElement>>
         | false
+        | null
         | ReactElement<HTMLTableSectionElement>
+        | undefined
     className?: string
     footer?: ReactNode
     footerClassName?: string
