@@ -67,6 +67,9 @@
 }
 
 .footer {
+    padding-top: calc(2 * var(--unit));
+    border-top: 1px solid var(--surfaceLighter);
+    margin-top: calc(-2 * var(--unit));
     color: var(--textSecondary);
     font-size: var(--fontSizeXs);
 }

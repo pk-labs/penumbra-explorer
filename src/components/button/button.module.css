@@ -9,8 +9,7 @@
     background: var(--surface);
     color: var(--text);
     cursor: pointer;
-    font: var(--fontSizeSm) var(--fontPrimary);
-    font-weight: 500;
+    font: 500 var(--fontSizeSm) var(--fontPrimary);
     gap: var(--unit);
     text-decoration: none;
     text-transform: capitalize;

@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 const BlocksPage: FC = async () => {
     const blocks = await loadBlocks({ latest: { limit: 20 } })
+    const totalItems = blocks?.length ? blocks[0].height : undefined
 
     return (
         <Container>
@@ -24,7 +25,16 @@ const BlocksPage: FC = async () => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb>Blocks</Breadcrumb>
             </Breadcrumbs>
-            <BlockTable blocks={blocks} footer={<Pagination />} />
+            <BlockTable
+                blocks={blocks}
+                footer={
+                    <Pagination
+                        itemsPerPage={20}
+                        page={1}
+                        totalItems={totalItems}
+                    />
+                }
+            />
         </Container>
     )
 }

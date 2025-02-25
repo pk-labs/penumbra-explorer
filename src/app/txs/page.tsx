@@ -5,6 +5,7 @@ import {
     Breadcrumb,
     Breadcrumbs,
     Container,
+    Pagination,
     TransactionTable,
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
@@ -23,7 +24,11 @@ const TransactionsPage: FC = async () => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
-            <TransactionTable transactions={transactions} time />
+            <TransactionTable
+                footer={<Pagination itemsPerPage={20} page={1} />}
+                transactions={transactions}
+                time
+            />
         </Container>
     )
 }
