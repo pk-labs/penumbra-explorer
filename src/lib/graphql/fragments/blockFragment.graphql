@@ -6,5 +6,4 @@ fragment Block on Block {
     transactions {
         ...Transaction
     }
-    transactionsCount
 }

@@ -32,7 +32,6 @@ export const BlockFragmentDoc = gql`
   transactions {
     ...Transaction
   }
-  transactionsCount
 }
     ${TransactionFragmentDoc}`;
 export const PartialTransactionFragmentDoc = gql`
