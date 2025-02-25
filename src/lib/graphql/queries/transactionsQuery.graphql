@@ -1,10 +1,10 @@
-#import "../fragments/transactionFragment.graphql"
+#import "../fragments/partialTransactionFragment.graphql"
 
 query Transactions(
   $limit: Int!
 ) {
 
   latestTransactions(limit: $limit) {
-    ...Transaction
+    ...PartialTransaction
   }
 }

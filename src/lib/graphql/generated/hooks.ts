@@ -59,8 +59,8 @@ export const PartialBlockFragmentDoc = gql`
 }
     ${PartialTransactionFragmentDoc}`;
 export const BlockDocument = gql`
-    query Block($id: Int!) {
-  block(height: $id) {
+    query Block($height: Int!) {
+  block(height: $height) {
     ...Block
   }
 }
@@ -81,8 +81,8 @@ export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQuery
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });
 };
 export const TransactionDocument = gql`
-    query Transaction($id: String!) {
-  transaction(hash: $id) {
+    query Transaction($hash: String!) {
+  transaction(hash: $hash) {
     ...Transaction
   }
 }
@@ -94,10 +94,10 @@ export function useTransactionQuery(options: Omit<Urql.UseQueryArgs<Types.Transa
 export const TransactionsDocument = gql`
     query Transactions($limit: Int!) {
   latestTransactions(limit: $limit) {
-    ...Transaction
+    ...PartialTransaction
   }
 }
-    ${TransactionFragmentDoc}`;
+    ${PartialTransactionFragmentDoc}`;
 
 export function useTransactionsQuery(options: Omit<Urql.UseQueryArgs<Types.TransactionsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.TransactionsQuery, Types.TransactionsQueryVariables>({ query: Types.TransactionsDocument, ...options });

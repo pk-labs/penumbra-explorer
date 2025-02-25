@@ -195,7 +195,7 @@ export type PartialTransactionFragment = { __typename?: 'Transaction', hash: str
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } };
 
 export type BlockQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
+  height: Scalars['Int']['input'];
 }>;
 
 
@@ -209,7 +209,7 @@ export type BlocksQueryVariables = Exact<{
 export type BlocksQuery = { __typename?: 'QueryRoot', blocks: Array<{ __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }> } }> }> };
 
 export type TransactionQueryVariables = Exact<{
-  id: Scalars['String']['input'];
+  hash: Scalars['String']['input'];
 }>;
 
 
@@ -220,7 +220,7 @@ export type TransactionsQueryVariables = Exact<{
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'QueryRoot', latestTransactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> };
+export type TransactionsQuery = { __typename?: 'QueryRoot', latestTransactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }> } }> };
 
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
@@ -278,8 +278,8 @@ export const PartialBlockFragmentDoc = gql`
 }
     ${PartialTransactionFragmentDoc}`;
 export const BlockDocument = gql`
-    query Block($id: Int!) {
-  block(height: $id) {
+    query Block($height: Int!) {
+  block(height: $height) {
     ...Block
   }
 }
@@ -292,8 +292,8 @@ export const BlocksDocument = gql`
 }
     ${PartialBlockFragmentDoc}`;
 export const TransactionDocument = gql`
-    query Transaction($id: String!) {
-  transaction(hash: $id) {
+    query Transaction($hash: String!) {
+  transaction(hash: $hash) {
     ...Transaction
   }
 }
@@ -301,7 +301,7 @@ export const TransactionDocument = gql`
 export const TransactionsDocument = gql`
     query Transactions($limit: Int!) {
   latestTransactions(limit: $limit) {
-    ...Transaction
+    ...PartialTransaction
   }
 }
-    ${TransactionFragmentDoc}`;
+    ${PartialTransactionFragmentDoc}`;
