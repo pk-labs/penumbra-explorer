@@ -11,7 +11,7 @@ describe('loadBlocks', () => {
             }),
         })
 
-        await expect(loadBlocks(1)).resolves.toBe(true)
+        await expect(loadBlocks({ latest: { limit: 1 } })).resolves.toBe(true)
     })
 
     test('logs error', async () => {
@@ -23,7 +23,7 @@ describe('loadBlocks', () => {
 
         const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
-        await loadBlocks(1)
+        await loadBlocks({ latest: { limit: 1 } })
         expect(consoleError).toHaveBeenCalledWith('foo')
     })
 })

@@ -47,12 +47,16 @@ export function useBlockQuery(options: Omit<Urql.UseQueryArgs<Types.BlockQueryVa
   return Urql.useQuery<Types.BlockQuery, Types.BlockQueryVariables>({ query: Types.BlockDocument, ...options });
 };
 export const BlocksDocument = gql`
-    query Blocks($limit: Int!) {
-  blocks(selector: {latest: {limit: $limit}}) {
-    ...Block
+    query Blocks($selector: BlocksSelector!) {
+  blocks(selector: $selector) {
+    height
+    createdAt
+    transactions {
+      hash
+    }
   }
 }
-    ${BlockFragmentDoc}`;
+    `;
 
 export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });

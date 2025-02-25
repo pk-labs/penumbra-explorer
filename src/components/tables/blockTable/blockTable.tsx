@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
 import { dateFormatFull } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
-import { BlockFragment } from '@/lib/graphql/generated/types'
+import { BlocksQuery } from '@/lib/graphql/generated/types'
 import { formatNumber } from '@/lib/utils'
 import { Table, TableProps } from '../table'
 import styles from './blockTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'title'> {
-    blocks?: BlockFragment[]
+    blocks?: BlocksQuery['blocks']
     proposer?: boolean
 }
 
@@ -59,7 +59,7 @@ const BlockTable: FC<Props> = props => {
                                 {dayjs(block.createdAt).format(dateFormatFull)}
                             </td>
                             {props.proposer && <td>-</td>}
-                            <td>-</td>
+                            <td>{block.transactions.length}</td>
                         </tr>
                     ))
                 ) : (

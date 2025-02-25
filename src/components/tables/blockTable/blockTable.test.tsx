@@ -38,20 +38,21 @@ describe('BlockTable', () => {
                     {
                         createdAt,
                         height: 123,
-                        transactions: [],
-                        transactionsCount: 0,
+                        transactions: [{ hash: 'tx1' }, { hash: 'tx2' }],
                     },
                     {
                         createdAt,
                         height: 456,
                         transactions: [],
-                        transactionsCount: 0,
                     },
                 ]}
             />
         )
 
-        getByText(container, 123)
+        expect(
+            getByText(container, 123).parentNode?.lastChild
+        ).toHaveTextContent('2')
+
         getByText(container, 456)
     })
 
@@ -65,7 +66,6 @@ describe('BlockTable', () => {
                         createdAt,
                         height: 123,
                         transactions: [],
-                        transactionsCount: 0,
                     },
                 ]}
                 proposer
@@ -85,7 +85,6 @@ describe('BlockTable', () => {
                         createdAt,
                         height: 123,
                         transactions: [],
-                        transactionsCount: 0,
                     },
                 ]}
                 proposer

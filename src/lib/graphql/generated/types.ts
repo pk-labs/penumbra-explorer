@@ -198,11 +198,11 @@ export type BlockQueryVariables = Exact<{
 export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
-  limit: Scalars['Int']['input'];
+  selector: BlocksSelector;
 }>;
 
 
-export type BlocksQuery = { __typename?: 'QueryRoot', blocks: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> }> };
+export type BlocksQuery = { __typename?: 'QueryRoot', blocks: Array<{ __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string }> }> };
 
 export type TransactionQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -258,12 +258,16 @@ export const BlockDocument = gql`
 }
     ${BlockFragmentDoc}`;
 export const BlocksDocument = gql`
-    query Blocks($limit: Int!) {
-  blocks(selector: {latest: {limit: $limit}}) {
-    ...Block
+    query Blocks($selector: BlocksSelector!) {
+  blocks(selector: $selector) {
+    height
+    createdAt
+    transactions {
+      hash
+    }
   }
 }
-    ${BlockFragmentDoc}`;
+    `;
 export const TransactionDocument = gql`
     query Transaction($id: String!) {
   transaction(hash: $id) {

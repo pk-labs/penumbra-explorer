@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 const BlocksPage: FC = async () => {
-    const blocks = await loadBlocks(20)
+    const blocks = await loadBlocks({ latest: { limit: 20 } })
 
     return (
         <Container>
