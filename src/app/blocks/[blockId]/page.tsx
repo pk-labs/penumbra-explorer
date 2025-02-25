@@ -49,7 +49,7 @@ const BlockViewPage: FC<Props> = async props => {
                 <Parameters>
                     <Parameter name="Block height">{block.height}</Parameter>
                     <Parameter name="Time">{block.createdAt}</Parameter>
-                    <Parameter name="Proposer">-</Parameter>
+                    {/*<Parameter name="Proposer">-</Parameter>*/}
                     <Parameter name="Txs">-</Parameter>
                 </Parameters>
                 <TransactionTable transactions={block.transactions} embedded />

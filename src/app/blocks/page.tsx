@@ -18,7 +18,7 @@ const BlocksPage: FC = async () => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb>Blocks</Breadcrumb>
             </Breadcrumbs>
-            <BlockTable blocks={blocks} proposer />
+            <BlockTable blocks={blocks} />
         </Container>
     )
 }

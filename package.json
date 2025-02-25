@@ -25,7 +25,7 @@
         "env-cmd": "^10.1.0",
         "graphql": "^16.10.0",
         "graphql-tag": "^2.12.6",
-        "lucide-react": "^0.475.0",
+        "lucide-react": "^0.476.0",
         "next": "^15.1.6",
         "react": "^19.0.0",
         "react-countup": "^6.5.3",
