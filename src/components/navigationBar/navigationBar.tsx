@@ -24,8 +24,12 @@ const NavigationBar: FC<Props> = props => (
         </div>
         <Tabs className={styles.tabs}>
             <Tab href="/">Home</Tab>
-            <Tab href="/blocks">Blocks</Tab>
-            <Tab href="/txs">Transactions</Tab>
+            <Tab href="/blocks" paths={['/block']}>
+                Blocks
+            </Tab>
+            <Tab href="/txs" paths={['/tx']}>
+                Transactions
+            </Tab>
         </Tabs>
         <div className={styles.group}>
             <div className={styles.search}>

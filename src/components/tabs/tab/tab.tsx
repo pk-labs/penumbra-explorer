@@ -9,12 +9,17 @@ import styles from './tab.module.css'
 export interface Props {
     children: string
     href: string
+    paths?: string[]
 }
 
 const Tab: FC<Props> = props => {
     const pathname = usePathname()
+    const paths = props.paths ? [props.href, ...props.paths] : [props.href]
+
     const active =
-        props.href === '/' ? pathname === '/' : pathname.startsWith(props.href)
+        props.href === '/'
+            ? pathname === '/'
+            : paths.some(path => pathname.startsWith(path))
 
     return (
         <Link
