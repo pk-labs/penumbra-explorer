@@ -25,6 +25,7 @@
     background: var(--surface);
     color: var(--textSecondary);
     font: var(--fontPrimary) var(--fontSizeBase);
+    transition: outline 200ms var(--fastOutSlowIn);
 
     &:focus {
         outline: solid 2px var(--textSecondary);

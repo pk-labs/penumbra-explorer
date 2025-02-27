@@ -1,9 +1,14 @@
 'use client'
 
 import clsx from 'clsx'
+import { Field, Form, Formik } from 'formik'
 import { Search as SearchIcon } from 'lucide-react'
 import { FC, ReactNode, useCallback, useRef } from 'react'
 import styles from './search.module.css'
+
+interface FormValues {
+    query: string
+}
 
 interface Props {
     children?: ReactNode
@@ -16,6 +21,10 @@ const Search: FC<Props> = props => {
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
+    const onSubmit = useCallback(async (values: FormValues) => {
+        console.log('onSubmit:', values)
+    }, [])
+
     return (
         <div className={clsx(styles.root, props.className)}>
             <SearchIcon
@@ -23,11 +32,19 @@ const Search: FC<Props> = props => {
                 onClick={focusInput}
                 size={16}
             />
-            <input
-                ref={input}
-                className={styles.input}
-                placeholder="Search by address, hash number, blocks, etc."
-            />
+            <Formik<FormValues>
+                initialValues={{ query: '' }}
+                onSubmit={onSubmit}
+            >
+                <Form>
+                    <Field
+                        ref={input}
+                        className={styles.input}
+                        name="query"
+                        placeholder="Search by address, hash number, blocks, etc."
+                    />
+                </Form>
+            </Formik>
         </div>
     )
 }
