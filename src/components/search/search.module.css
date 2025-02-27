@@ -1,5 +1,6 @@
 .root {
     position: relative;
+    width: 631px;
 }
 
 .icon {
@@ -17,7 +18,7 @@
 }
 
 .input {
-    width: 631px;
+    width: 100%;
     padding: calc(2 * var(--unit));
     padding-left: calc(5.5 * var(--unit));
     border: none;
@@ -30,4 +31,18 @@
     &:focus {
         outline: solid 2px var(--textSecondary);
     }
+}
+
+.results {
+    position: absolute;
+    z-index: 1;
+    top: calc(8 * var(--unit));
+    display: none;
+    width: 100%;
+    height: 276px;
+    padding: calc(3 * var(--unit));
+    border: 1px solid var(--surfaceLighter);
+    border-radius: var(--roundedSmall);
+    backdrop-filter: blur(var(--blurXl));
+    background: rgba(34, 99, 98, 0.1);
 }

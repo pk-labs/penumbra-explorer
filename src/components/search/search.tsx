@@ -18,8 +18,21 @@ interface Props {
 
 const Search: FC<Props> = props => {
     const input = useRef<HTMLInputElement>(null)
+    const results = useRef<HTMLDivElement>(null)
 
     const focusInput = useCallback(() => input.current?.focus(), [])
+
+    const onFocus = useCallback(() => {
+        if (results.current) {
+            results.current.style.display = 'block'
+        }
+    }, [])
+
+    const onBlur = useCallback(() => {
+        if (results.current) {
+            results.current.style.display = 'none'
+        }
+    }, [])
 
     const onSubmit = useCallback(async (values: FormValues) => {
         console.log('onSubmit:', values)
@@ -41,10 +54,13 @@ const Search: FC<Props> = props => {
                         ref={input}
                         className={styles.input}
                         name="query"
+                        onBlur={onBlur}
+                        onFocus={onFocus}
                         placeholder="Search by address, hash number, blocks, etc."
                     />
                 </Form>
             </Formik>
+            <div ref={results} className={styles.results} />
         </div>
     )
 }
