@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 import { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import { FC } from 'react'
 import {
     BlockTable,
@@ -38,13 +39,20 @@ const BlocksPage: FC<Props> = async props => {
         if (blocks?.length) {
             blocks.sort((a, b) => b.height - a.height)
             fromPrev = fromParam + limit + 1
-            fromNext = fromParam - limit - 1
+
+            fromNext =
+                blocks[blocks.length - 1].height > 1
+                    ? Math.max(fromParam - limit - 1, 1)
+                    : undefined
+        } else {
+            redirect('/blocks')
         }
     } else {
         blocks = await loadBlocks({ latest: { limit } })
 
         if (blocks?.length) {
-            fromNext = blocks[blocks.length - 1].height - limit - 1
+            const { height } = blocks[blocks.length - 1]
+            fromNext = height > 1 ? Math.max(height - limit - 1, 1) : undefined
         }
     }
 
