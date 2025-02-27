@@ -1,8 +1,8 @@
 'use client'
 
 import clsx from 'clsx'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { FC, useCallback } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { FC } from 'react'
 import Button from '../button'
 import styles from './pagination.module.css'
 
@@ -15,43 +15,34 @@ interface Props {
 const Pagination: FC<Props> = props => {
     const pathname = usePathname()
     const searchParams = useSearchParams()
-    const router = useRouter()
+    let prevHref: string | undefined
+    let nextHref: string | undefined
 
-    const onPrev = useCallback(() => {
-        if (!props.fromPrev) {
-            return
-        }
-
+    if (props.fromPrev) {
         const params = new URLSearchParams(searchParams)
         params.set('from', props.fromPrev)
+        prevHref = `${pathname}?${params}`
+    }
 
-        router.push(`${pathname}?${params}`)
-    }, [pathname, props.fromPrev, router, searchParams])
-
-    const onNext = useCallback(() => {
-        if (!props.fromNext) {
-            return
-        }
-
+    if (props.fromNext) {
         const params = new URLSearchParams(searchParams)
         params.set('from', props.fromNext)
-
-        router.push(`${pathname}?${params}`)
-    }, [pathname, props.fromNext, router, searchParams])
+        nextHref = `${pathname}?${params}`
+    }
 
     return (
         <div className={clsx(styles.root, props.className)}>
             <Button
                 className={styles.button}
                 disabled={!props.fromPrev}
-                onClick={onPrev}
+                href={prevHref}
             >
                 Prev
             </Button>
             <Button
                 className={styles.button}
                 disabled={!props.fromNext}
-                onClick={onNext}
+                href={nextHref}
             >
                 Next
             </Button>

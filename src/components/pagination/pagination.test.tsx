@@ -1,5 +1,4 @@
-import { fireEvent, getByText, render } from '@testing-library/react'
-import { router } from '@/lib/__tests__/__mocks__'
+import { getByText, render } from '@testing-library/react'
 import Pagination from './pagination'
 
 describe('Pagination', () => {
@@ -10,18 +9,20 @@ describe('Pagination', () => {
         expect(getByText(container, 'Next')).toBeDisabled()
     })
 
-    test('prev button updates from param', async () => {
+    test('prev button links to previous page', async () => {
         const { container } = render(<Pagination fromPrev="foo" />)
 
-        fireEvent.click(getByText(container, 'Prev'))
-        expect(router.push).toHaveBeenCalledWith('/?from=foo')
+        const button = getByText(container, 'Prev')
+        expect(button).toBeEnabled()
+        expect(button).toHaveAttribute('href', '/?from=foo')
     })
 
-    test('next button updates from param', async () => {
+    test('net button links to next page', async () => {
         const { container } = render(<Pagination fromNext="foo" />)
 
-        fireEvent.click(getByText(container, 'Next'))
-        expect(router.push).toHaveBeenCalledWith('/?from=foo')
+        const button = getByText(container, 'Next')
+        expect(button).toBeEnabled()
+        expect(button).toHaveAttribute('href', '/?from=foo')
     })
 
     test('applies custom classes', async () => {
