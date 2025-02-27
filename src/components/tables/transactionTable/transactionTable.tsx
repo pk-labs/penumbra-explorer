@@ -29,6 +29,7 @@ const TransactionTable: FC<Props> = props => {
         [router]
     )
 
+    // TODO: Extract time ago to client-only component to fix hydration mismatch
     const now = dayjs().tz(timezone)
 
     return (
