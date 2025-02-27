@@ -26,14 +26,17 @@
     background: var(--surface);
     color: var(--textSecondary);
     font: var(--fontPrimary) var(--fontSizeBase);
+    outline: solid 2px transparent;
     transition: outline 200ms var(--fastOutSlowIn);
 
     &:focus {
-        outline: solid 2px var(--textSecondary);
+        outline-color: var(--textSecondary);
+        transition: none;
 
         & + .results {
             opacity: 1;
             pointer-events: auto;
+            transition: none;
         }
     }
 }
