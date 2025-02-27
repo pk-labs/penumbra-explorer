@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 }
 
 const TransactionsPage: FC = async () => {
-    const transactions = await loadTransactions({ latest: { limit: 20 } })
+    const limit = 20
+    const transactions = await loadTransactions({ latest: { limit } })
 
     return (
         <Container>
@@ -25,7 +26,7 @@ const TransactionsPage: FC = async () => {
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
             <TransactionTable
-                footer={<Pagination itemsPerPage={20} page={1} />}
+                footer={<Pagination />}
                 transactions={transactions}
                 time
             />
