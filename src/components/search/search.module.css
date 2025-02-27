@@ -1,11 +1,32 @@
 .root {
-    display: flex;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: calc(2 * var(--unit));
+    stroke: var(--textSecondary);
+    transform: translateY(-50%);
+    transition: stroke 200ms var(--fastOutSlowIn);
+
+    &:hover {
+        cursor: pointer;
+        stroke: var(--text);
+    }
+}
+
+.input {
     width: 631px;
-    height: calc(7 * var(--unit));
-    align-items: center;
-    padding: 0 calc(2 * var(--unit));
-    border-radius: var(--roundedSmall);
+    padding: calc(2 * var(--unit));
+    padding-left: calc(5.5 * var(--unit));
+    border: none;
+    border-radius: var(--roundedFull);
     background: var(--surface);
     color: var(--textSecondary);
-    gap: calc(1.5 * var(--unit));
+    font: var(--fontPrimary) var(--fontSizeBase);
+
+    &:focus {
+        outline: solid 2px var(--textSecondary);
+    }
 }
