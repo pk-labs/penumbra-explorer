@@ -33,7 +33,7 @@ describe('BlockTable', () => {
     })
 
     test('renders transactions', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const createdAt = dayjs().toISOString()
 
         const { container } = render(
             <TransactionTable
@@ -69,7 +69,7 @@ describe('BlockTable', () => {
     })
 
     test('renders time', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const createdAt = dayjs().subtract(1, 's').toISOString()
 
         const { container } = render(
             <TransactionTable
@@ -90,11 +90,11 @@ describe('BlockTable', () => {
             />
         )
 
-        getByText(container, '01-01-2025 00:00:00.000')
+        getByText(container, '1s ago')
     })
 
     test('renders actions', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const createdAt = dayjs().toISOString()
 
         const { container } = render(
             <TransactionTable
@@ -123,7 +123,7 @@ describe('BlockTable', () => {
     })
 
     test('navigates to transaction on row click', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const createdAt = dayjs().toISOString()
 
         const { container } = render(
             <TransactionTable

@@ -3,7 +3,7 @@
 import { Box } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
-import { dateFormatFull } from '@/lib/constants'
+import { timezone } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
 import { formatNumber } from '@/lib/utils'
@@ -25,7 +25,7 @@ const BlockTable: FC<Props> = props => {
         [router]
     )
 
-    // const now = dayjs().tz(timezone)
+    const now = dayjs().tz(timezone)
 
     return (
         <Table
@@ -55,10 +55,7 @@ const BlockTable: FC<Props> = props => {
                                 <Box color="var(--textSecondary)" size={16} />
                                 <span>{formatNumber(block.height)}</span>
                             </td>
-                            {/*<td>{now.to(dayjs(block.createdAt))}</td>*/}
-                            <td>
-                                {dayjs(block.createdAt).format(dateFormatFull)}
-                            </td>
+                            <td>{now.to(dayjs(block.createdAt))}</td>
                             {props.proposer && <td>-</td>}
                             <td>{block.transactionsCount}</td>
                         </tr>

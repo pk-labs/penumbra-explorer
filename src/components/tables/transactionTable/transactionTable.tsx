@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { Box, CheckCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
-import { dateFormatFull } from '@/lib/constants'
+import { timezone } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
 import { PartialTransactionFragment } from '@/lib/graphql/generated/types'
 import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
@@ -29,7 +29,7 @@ const TransactionTable: FC<Props> = props => {
         [router]
     )
 
-    // const now = dayjs().tz(timezone)
+    const now = dayjs().tz(timezone)
 
     return (
         <Table
@@ -88,13 +88,8 @@ const TransactionTable: FC<Props> = props => {
                                 )}
                             </td>
                             {props.time && (
-                                // <td>
-                                //     {now.to(dayjs(transaction.block.createdAt))}
-                                // </td>
                                 <td>
-                                    {dayjs(transaction.block.createdAt).format(
-                                        dateFormatFull
-                                    )}
+                                    {now.to(dayjs(transaction.block.createdAt))}
                                 </td>
                             )}
                         </tr>
