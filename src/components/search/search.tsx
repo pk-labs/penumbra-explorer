@@ -3,7 +3,7 @@
 import clsx from 'clsx'
 import { Field, Form, Formik } from 'formik'
 import { Search as SearchIcon } from 'lucide-react'
-import { FC, ReactNode, useCallback, useRef } from 'react'
+import { FC, ReactNode, useCallback, useRef, useState } from 'react'
 import styles from './search.module.css'
 
 interface FormValues {
@@ -18,21 +18,13 @@ interface Props {
 
 const Search: FC<Props> = props => {
     const input = useRef<HTMLInputElement>(null)
-    const results = useRef<HTMLDivElement>(null)
+    const [focused, setFocused] = useState(false)
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
-    const onFocus = useCallback(() => {
-        if (results.current) {
-            results.current.style.display = 'block'
-        }
-    }, [])
+    const onFocus = useCallback(() => setFocused(true), [])
 
-    const onBlur = useCallback(() => {
-        if (results.current) {
-            results.current.style.display = 'none'
-        }
-    }, [])
+    const onBlur = useCallback(() => setFocused(false), [])
 
     const onSubmit = useCallback(async (values: FormValues) => {
         console.log('onSubmit:', values)
@@ -60,7 +52,7 @@ const Search: FC<Props> = props => {
                     />
                 </Form>
             </Formik>
-            <div ref={results} className={styles.results} />
+            <div className={clsx(styles.results, focused && styles.visible)} />
         </div>
     )
 }
