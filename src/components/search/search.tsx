@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import { Field, Form, Formik } from 'formik'
-import { Search as SearchIcon } from 'lucide-react'
+import { Box, Search as SearchIcon } from 'lucide-react'
 import { FC, ReactNode, useCallback, useRef } from 'react'
 import styles from './search.module.css'
 
@@ -56,6 +56,29 @@ const Search: FC<Props> = props => {
                                     <div className={styles.title}>
                                         Recent search results
                                     </div>
+                                    <ul className={styles.list}>
+                                        <li>
+                                            <Box
+                                                color="var(--textSecondary)"
+                                                size={16}
+                                            />
+                                            1,057,456
+                                        </li>
+                                        <li>
+                                            <Box
+                                                color="var(--textSecondary)"
+                                                size={16}
+                                            />
+                                            1,057,456
+                                        </li>
+                                        <li>
+                                            <Box
+                                                color="var(--textSecondary)"
+                                                size={16}
+                                            />
+                                            1,057,456
+                                        </li>
+                                    </ul>
                                 </>
                             )}
                         </div>

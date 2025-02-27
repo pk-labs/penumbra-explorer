@@ -60,4 +60,25 @@
         color: var(--textSecondary);
         font-size: var(--fontSizeXs);
     }
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        font: 500 var(--fontSizeSm) var(--fontMono);
+        list-style: none;
+
+        li {
+            display: flex;
+            height: calc(4 * var(--unit));
+            align-items: center;
+            padding: 0 var(--unit);
+            gap: calc(0.5 * var(--unit));
+
+            &:not(:last-child) {
+                border-bottom: 1px solid var(--surfaceLighter);
+            }
+        }
+    }
 }
