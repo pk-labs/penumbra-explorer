@@ -8,13 +8,14 @@ import icon from './blockPanelIcon.svg'
 
 export interface Props {
     className?: ReactNode
+    number?: number
 }
 
 const BlockPanel: FC<Props> = props => (
     <Panel
         className={clsx(styles.root, props.className)}
         footer="Block time ~12s"
-        number={3538663}
+        number={props.number}
         title={
             <>
                 <Image

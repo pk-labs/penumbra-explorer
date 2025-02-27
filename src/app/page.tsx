@@ -16,6 +16,11 @@ import styles from './page.module.css'
 const HomePage: FC = async () => {
     const latestBlocks = await loadBlocks({ latest: { limit: 10 } })
     const latestTransactions = await loadTransactions({ latest: { limit: 10 } })
+    let latestBlockHeight
+
+    if (latestBlocks?.length) {
+        latestBlockHeight = latestBlocks[0].height
+    }
 
     return (
         <>
@@ -25,7 +30,7 @@ const HomePage: FC = async () => {
             </Container>
             <Container>
                 <div className={styles.dashboard}>
-                    <BlockPanel />
+                    <BlockPanel number={latestBlockHeight} />
                     <TransactionPanel />
                     <BurnPanel />
                     <BlockTable

@@ -18,6 +18,11 @@ describe('Panel', () => {
         getByText(container, 'Bar')
     })
 
+    test('renders dash when number undefined', async () => {
+        const { container } = render(<Panel title="Foo" />)
+        getByText(container, '-')
+    })
+
     test('applies custom classes', async () => {
         const { container } = render(
             <Panel className="foo bar" number={99} title="Foo" />
