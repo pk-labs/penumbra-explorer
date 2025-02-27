@@ -30,6 +30,11 @@
 
     &:focus {
         outline: solid 2px var(--textSecondary);
+
+        & + .results {
+            opacity: 1;
+            pointer-events: auto;
+        }
     }
 }
 
@@ -37,19 +42,22 @@
     position: absolute;
     z-index: 1;
     top: calc(8 * var(--unit));
+    display: flex;
     width: 100%;
-    height: 276px;
+    max-height: 276px;
+    flex-direction: column;
     padding: calc(3 * var(--unit));
     border: 1px solid var(--surfaceLighter);
     border-radius: var(--roundedSmall);
     backdrop-filter: blur(var(--blurXl));
     background: rgba(34, 99, 98, 0.1);
+    gap: calc(2 * var(--unit));
     opacity: 0;
     pointer-events: none;
     transition: opacity 200ms var(--fastOutSlowIn);
 
-    &.visible {
-        opacity: 1;
-        pointer-events: auto;
+    .title {
+        color: var(--textSecondary);
+        font-size: var(--fontSizeXs);
     }
 }
