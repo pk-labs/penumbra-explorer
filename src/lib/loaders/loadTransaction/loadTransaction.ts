@@ -19,12 +19,7 @@ const loadTransaction = async (hash: string) => {
         console.error(result.error)
     }
 
-    return (
-        result.data?.transaction && {
-            ...result.data.transaction,
-            hash: result.data.transaction.hash.toLowerCase(),
-        }
-    )
+    return result.data?.transaction
 }
 
 export default loadTransaction

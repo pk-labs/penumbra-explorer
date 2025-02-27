@@ -4,17 +4,15 @@ import loadTransaction from './loadTransaction'
 jest.mock('../../graphql/createGraphqlClient')
 
 describe('loadTransaction', () => {
-    test('returns data with lowercase hash', async () => {
+    test('returns data', async () => {
         ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
             query: () => ({
                 toPromise: () =>
-                    Promise.resolve({ data: { transaction: { hash: 'FoO' } } }),
+                    Promise.resolve({ data: { transaction: true } }),
             }),
         })
 
-        await expect(loadTransaction('1')).resolves.toMatchObject({
-            hash: 'foo',
-        })
+        await expect(loadTransaction('1')).resolves.toBe(true)
     })
 
     test('logs error', async () => {

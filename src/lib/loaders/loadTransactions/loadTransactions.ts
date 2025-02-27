@@ -20,10 +20,7 @@ const loadTransactions = async (selector: TransactionsSelector) => {
         console.error(result.error)
     }
 
-    return result.data?.transactions?.map(transaction => ({
-        ...transaction,
-        hash: transaction.hash.toLowerCase(),
-    }))
+    return result.data?.transactions
 }
 
 export default loadTransactions
