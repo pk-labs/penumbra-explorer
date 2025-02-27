@@ -1,0 +1,11 @@
+.root {
+    display: flex;
+    width: 631px;
+    height: calc(7 * var(--unit));
+    align-items: center;
+    padding: 0 calc(2 * var(--unit));
+    border-radius: var(--roundedSmall);
+    background: var(--surface);
+    color: var(--textSecondary);
+    gap: calc(1.5 * var(--unit));
+}

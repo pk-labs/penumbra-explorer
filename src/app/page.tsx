@@ -1,5 +1,4 @@
 /* istanbul ignore file */
-import { Search } from 'lucide-react'
 import { FC } from 'react'
 import {
     BlockPanel,
@@ -7,6 +6,7 @@ import {
     BurnPanel,
     Button,
     Container,
+    Search,
     TransactionPanel,
     TransactionTable,
 } from '@/components'
@@ -21,10 +21,7 @@ const HomePage: FC = async () => {
         <>
             <Container>
                 <h1 className={styles.title}>Penumbra Blockchain Explorer</h1>
-                <div className={styles.search}>
-                    <Search size={16} />
-                    <span>Search by address, hash number, blocks, etc.</span>
-                </div>
+                <Search />
             </Container>
             <Container>
                 <div className={styles.dashboard}>
