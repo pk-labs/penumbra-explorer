@@ -26,7 +26,6 @@ type Block {
     height: Int!
     rawEvents: [Event!]!
     transactions: [Transaction!]!
-    "TODO: replace stub with actual data"
     transactionsCount: Int!
 }
 

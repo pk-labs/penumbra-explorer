@@ -1,9 +1,5 @@
-#import "./partialTransactionFragment.graphql"
-
 fragment PartialBlock on Block {
     height
     createdAt
-    transactions {
-        ...PartialTransaction
-    }
+    transactionsCount
 }

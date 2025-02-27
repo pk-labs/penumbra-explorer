@@ -34,6 +34,13 @@ export const BlockFragmentDoc = gql`
   }
 }
     ${TransactionFragmentDoc}`;
+export const PartialBlockFragmentDoc = gql`
+    fragment PartialBlock on Block {
+  height
+  createdAt
+  transactionsCount
+}
+    `;
 export const PartialTransactionFragmentDoc = gql`
     fragment PartialTransaction on Transaction {
   hash
@@ -49,15 +56,6 @@ export const PartialTransactionFragmentDoc = gql`
   }
 }
     `;
-export const PartialBlockFragmentDoc = gql`
-    fragment PartialBlock on Block {
-  height
-  createdAt
-  transactions {
-    ...PartialTransaction
-  }
-}
-    ${PartialTransactionFragmentDoc}`;
 export const BlockDocument = gql`
     query Block($height: Int!) {
   block(height: $height) {

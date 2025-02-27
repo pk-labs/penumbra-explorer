@@ -38,39 +38,19 @@ describe('BlockTable', () => {
                     {
                         createdAt,
                         height: 123,
-                        transactions: [
-                            {
-                                block: { createdAt, height: 123 },
-                                body: {
-                                    actions: [],
-                                    actionsCount: 0,
-                                },
-                                hash: 'tx1',
-                            },
-                            {
-                                block: { createdAt, height: 456 },
-                                body: {
-                                    actions: [],
-                                    actionsCount: 0,
-                                },
-                                hash: 'tx2',
-                            },
-                        ],
+                        transactionsCount: 98,
                     },
                     {
                         createdAt,
                         height: 456,
-                        transactions: [],
+                        transactionsCount: 99,
                     },
                 ]}
             />
         )
 
-        expect(
-            getByText(container, 123).parentNode?.lastChild
-        ).toHaveTextContent('2')
-
-        getByText(container, 456)
+        expect(getByText(container, 123).closest('tr')).toHaveTextContent('98')
+        expect(getByText(container, 456).closest('tr')).toHaveTextContent('99')
     })
 
     test('renders proposer', async () => {
@@ -82,7 +62,7 @@ describe('BlockTable', () => {
                     {
                         createdAt,
                         height: 123,
-                        transactions: [],
+                        transactionsCount: 0,
                     },
                 ]}
                 proposer
@@ -101,7 +81,7 @@ describe('BlockTable', () => {
                     {
                         createdAt,
                         height: 123,
-                        transactions: [],
+                        transactionsCount: 0,
                     },
                 ]}
                 proposer

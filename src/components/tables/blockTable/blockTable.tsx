@@ -60,7 +60,7 @@ const BlockTable: FC<Props> = props => {
                                 {dayjs(block.createdAt).format(dateFormatFull)}
                             </td>
                             {props.proposer && <td>-</td>}
-                            <td>{block.transactions.length}</td>
+                            <td>{block.transactionsCount}</td>
                         </tr>
                     ))
                 ) : (
