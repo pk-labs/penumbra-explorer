@@ -1,0 +1,13 @@
+query Search(
+    $slug: String!
+) {
+    search(slug: $slug) {
+        __typename
+        ... on Block {
+            height
+        }
+        ... on Transaction {
+            hash
+        }
+    }
+}

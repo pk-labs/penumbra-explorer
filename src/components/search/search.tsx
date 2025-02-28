@@ -1,15 +1,22 @@
 'use client'
 
+import { useDebounce } from '@uidotdev/usehooks'
 import clsx from 'clsx'
-import { Field, Form, Formik } from 'formik'
-import { Box, Search as SearchIcon } from 'lucide-react'
-import { FC, ReactNode, useCallback, useRef } from 'react'
+import { Box, CheckCheck, Search as SearchIcon } from 'lucide-react'
+import Link from 'next/link'
+import {
+    ChangeEvent,
+    FC,
+    ReactNode,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react'
+import { useSearchQuery } from '@/lib/graphql/generated/hooks'
+import { formatNumber } from '@/lib/utils'
 import styles from './search.module.css'
 import SearchResults from './searchResults'
-
-interface FormValues {
-    query: string
-}
 
 interface Props {
     children?: ReactNode
@@ -19,12 +26,86 @@ interface Props {
 
 const Search: FC<Props> = props => {
     const input = useRef<HTMLInputElement>(null)
+    const [query, setQuery] = useState('')
+    const debouncedQuery = useDebounce(query, 300)
+
+    const [searchQuery, executeSearchQuery] = useSearchQuery({
+        pause: true,
+        variables: { slug: query },
+    })
+
+    useEffect(() => {
+        if (debouncedQuery) {
+            executeSearchQuery()
+        }
+    }, [debouncedQuery, executeSearchQuery])
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
-    const onSubmit = useCallback(async (values: FormValues) => {
-        console.log('onSubmit:', values)
-    }, [])
+    const onInputChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value),
+        []
+    )
+
+    let searchResults
+    const search = searchQuery.data?.search
+
+    if (query) {
+        if (search) {
+            searchResults = (
+                <SearchResults
+                    className={styles.results}
+                    title={search.__typename}
+                >
+                    {search.__typename === 'Block' ? (
+                        <li>
+                            <Box color="var(--textSecondary)" size={16} />
+                            <Link href={`/block/${search.height}`}>
+                                {formatNumber(search.height)}
+                            </Link>
+                        </li>
+                    ) : (
+                        <li>
+                            <CheckCheck
+                                color="var(--secondaryLight)"
+                                size={16}
+                            />
+                            <Link href={`/tx/${search.hash}`}>
+                                {search.hash.toLowerCase()}
+                            </Link>
+                        </li>
+                    )}
+                </SearchResults>
+            )
+        } else {
+            searchResults = (
+                <SearchResults
+                    className={styles.results}
+                    title="Nothing found"
+                />
+            )
+        }
+    } else {
+        searchResults = (
+            <SearchResults
+                className={styles.results}
+                title="Recent search results"
+            >
+                <li>
+                    <Box color="var(--textSecondary)" size={16} />
+                    <Link href="/block/1057456">1,057,456</Link>
+                </li>
+                <li>
+                    <Box color="var(--textSecondary)" size={16} />
+                    <Link href="/block/1057456">1,057,456</Link>
+                </li>
+                <li>
+                    <Box color="var(--textSecondary)" size={16} />
+                    <Link href="/block/1057456">1,057,456</Link>
+                </li>
+            </SearchResults>
+        )
+    }
 
     return (
         <div className={clsx(styles.root, props.className)}>
@@ -33,54 +114,14 @@ const Search: FC<Props> = props => {
                 onClick={focusInput}
                 size={16}
             />
-            <Formik<FormValues>
-                initialValues={{ query: '' }}
-                onSubmit={onSubmit}
-            >
-                {formik => (
-                    <Form>
-                        <Field
-                            ref={input}
-                            className={styles.input}
-                            name="query"
-                            placeholder="Search by address, hash number, blocks, etc."
-                        />
-                        {formik.values.query ? (
-                            <SearchResults
-                                className={styles.results}
-                                title="Nothing found"
-                            />
-                        ) : (
-                            <SearchResults
-                                className={styles.results}
-                                title="Recent search results"
-                            >
-                                <li>
-                                    <Box
-                                        color="var(--textSecondary)"
-                                        size={16}
-                                    />
-                                    1,057,456
-                                </li>
-                                <li>
-                                    <Box
-                                        color="var(--textSecondary)"
-                                        size={16}
-                                    />
-                                    1,057,456
-                                </li>
-                                <li>
-                                    <Box
-                                        color="var(--textSecondary)"
-                                        size={16}
-                                    />
-                                    1,057,456
-                                </li>
-                            </SearchResults>
-                        )}
-                    </Form>
-                )}
-            </Formik>
+            <input
+                ref={input}
+                className={styles.input}
+                name="query"
+                onChange={onInputChange}
+                placeholder="Search by address, hash number, blocks, etc."
+            />
+            {searchResults}
         </div>
     )
 }

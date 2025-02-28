@@ -20,10 +20,10 @@
     },
     "dependencies": {
         "@microlink/react-json-view": "^1.26.1",
+        "@uidotdev/usehooks": "^2.4.1",
         "clsx": "^2.1.1",
         "dayjs": "^1.11.13",
         "env-cmd": "^10.1.0",
-        "formik": "^2.4.6",
         "graphql": "^16.10.0",
         "graphql-tag": "^2.12.6",
         "lucide-react": "^0.476.0",

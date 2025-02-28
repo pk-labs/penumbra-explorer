@@ -10,6 +10,7 @@ import {
     TransactionPanel,
     TransactionTable,
 } from '@/components'
+import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { loadBlocks, loadTransactions } from '@/lib/loaders'
 import styles from './page.module.css'
 
@@ -26,7 +27,9 @@ const HomePage: FC = async () => {
         <>
             <Container>
                 <h1 className={styles.title}>Penumbra Blockchain Explorer</h1>
-                <Search />
+                <GraphqlClientProvider>
+                    <Search />
+                </GraphqlClientProvider>
             </Container>
             <Container>
                 <div className={styles.dashboard}>

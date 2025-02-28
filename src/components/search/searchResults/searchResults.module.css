@@ -42,5 +42,11 @@
         &:not(:last-child) {
             border-bottom: 1px solid var(--surfaceLighter);
         }
+
+        a {
+            color: inherit;
+            pointer-events: auto;
+            text-decoration: none;
+        }
     }
 }

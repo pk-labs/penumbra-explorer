@@ -221,6 +221,13 @@ export type BlocksQueryVariables = Exact<{
 
 export type BlocksQuery = { __typename?: 'QueryRoot', blocks: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> };
 
+export type SearchQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type SearchQuery = { __typename?: 'QueryRoot', search?: { __typename: 'Block', height: number } | { __typename: 'Transaction', hash: string } | null };
+
 export type TransactionQueryVariables = Exact<{
   hash: Scalars['String']['input'];
 }>;
@@ -302,6 +309,19 @@ export const BlocksDocument = gql`
   }
 }
     ${PartialBlockFragmentDoc}`;
+export const SearchDocument = gql`
+    query Search($slug: String!) {
+  search(slug: $slug) {
+    __typename
+    ... on Block {
+      height
+    }
+    ... on Transaction {
+      hash
+    }
+  }
+}
+    `;
 export const TransactionDocument = gql`
     query Transaction($hash: String!) {
   transaction(hash: $hash) {

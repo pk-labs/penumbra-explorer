@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
 import { formatNumber } from '@/lib/utils'
-import { TimeAgo } from '../../index'
+import TimeAgo from '../../timeAgo'
 import { Table, TableProps } from '../table'
 import styles from './blockTable.module.css'
 

@@ -78,6 +78,23 @@ export const BlocksDocument = gql`
 export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });
 };
+export const SearchDocument = gql`
+    query Search($slug: String!) {
+  search(slug: $slug) {
+    __typename
+    ... on Block {
+      height
+    }
+    ... on Transaction {
+      hash
+    }
+  }
+}
+    `;
+
+export function useSearchQuery(options: Omit<Urql.UseQueryArgs<Types.SearchQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.SearchQuery, Types.SearchQueryVariables>({ query: Types.SearchDocument, ...options });
+};
 export const TransactionDocument = gql`
     query Transaction($hash: String!) {
   transaction(hash: $hash) {
