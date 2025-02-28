@@ -33,16 +33,16 @@ const BlocksPage: FC<Props> = async props => {
 
     if (Number.isInteger(fromParam)) {
         blocks = await loadBlocks({
-            range: { from: fromParam, to: fromParam + limit },
+            range: { from: fromParam, to: fromParam + limit - 1 },
         })
 
         if (blocks?.length) {
             blocks.sort((a, b) => b.height - a.height)
-            fromPrev = fromParam + limit + 1
+            fromPrev = fromParam + limit
 
             fromNext =
                 blocks[blocks.length - 1].height > 1
-                    ? Math.max(fromParam - limit - 1, 1)
+                    ? Math.max(fromParam - limit, 1)
                     : undefined
         } else {
             redirect('/blocks')
@@ -52,7 +52,7 @@ const BlocksPage: FC<Props> = async props => {
 
         if (blocks?.length) {
             const { height } = blocks[blocks.length - 1]
-            fromNext = height > 1 ? Math.max(height - limit - 1, 1) : undefined
+            fromNext = height > 1 ? Math.max(height - limit, 1) : undefined
         }
     }
 
