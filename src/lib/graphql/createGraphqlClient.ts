@@ -2,8 +2,8 @@
 import { cacheExchange, Client, fetchExchange } from 'urql'
 
 const createGraphqlClient = () => {
-    if (!process.env.GRAPHQL_URL) {
-        throw Error('Missing GRAPHQL_URL')
+    if (!process.env.NEXT_PUBLIC_GRAPHQL_URL) {
+        throw Error('Missing NEXT_PUBLIC_GRAPHQL_URL')
     }
 
     return new Client({
@@ -12,7 +12,7 @@ const createGraphqlClient = () => {
             credentials: 'omit',
         },
         requestPolicy: 'network-only',
-        url: process.env.GRAPHQL_URL,
+        url: process.env.NEXT_PUBLIC_GRAPHQL_URL,
     })
 }
 
