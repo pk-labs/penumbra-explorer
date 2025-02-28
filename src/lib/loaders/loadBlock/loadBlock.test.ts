@@ -4,14 +4,19 @@ import loadBlock from './loadBlock'
 jest.mock('../../graphql/createGraphqlClient')
 
 describe('loadBlock', () => {
-    test('returns data', async () => {
+    test('returns data with lowercase hash', async () => {
         ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
             query: () => ({
-                toPromise: () => Promise.resolve({ data: { block: true } }),
+                toPromise: () =>
+                    Promise.resolve({
+                        data: { block: { transactions: [{ hash: 'FoO' }] } },
+                    }),
             }),
         })
 
-        await expect(loadBlock(1)).resolves.toBe(true)
+        await expect(loadBlock(1)).resolves.toMatchObject({
+            transactions: [{ hash: 'foo' }],
+        })
     })
 
     test('logs error', async () => {

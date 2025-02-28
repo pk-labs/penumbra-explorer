@@ -12,14 +12,19 @@ const loadTransaction = async (hash: string) => {
         .query<
             TransactionQuery,
             TransactionQueryVariables
-        >(transactionQuery, { hash })
+        >(transactionQuery, { hash: hash.toUpperCase() })
         .toPromise()
 
     if (result.error) {
         console.error(result.error)
     }
 
-    return result.data?.transaction
+    return (
+        result.data?.transaction && {
+            ...result.data.transaction,
+            hash: result.data.transaction.hash.toLowerCase(),
+        }
+    )
 }
 
 export default loadTransaction

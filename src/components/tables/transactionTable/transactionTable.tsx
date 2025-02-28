@@ -46,62 +46,53 @@ const TransactionTable: FC<Props> = props => {
             </thead>
             <tbody>
                 {props.transactions?.length ? (
-                    props.transactions.map(transaction => {
-                        const hash = transaction.hash.toLowerCase()
-
-                        return (
-                            <tr
-                                key={hash}
-                                data-transaction-hash={hash}
-                                onClick={onRowClick}
-                            >
-                                <td>
-                                    <CheckCheck
-                                        color="var(--secondaryLight)"
-                                        size={14}
-                                    />
-                                    <span>{shortenHash(hash)}</span>
-                                    <CopyToClipboard
-                                        data={hash}
-                                        iconSize={14}
-                                    />
-                                </td>
-                                <td>
-                                    <Box
-                                        color="var(--textSecondary)"
-                                        size={16}
-                                    />
-                                    <span>
-                                        {formatNumber(transaction.block.height)}
-                                    </span>
-                                </td>
-                                <td>
-                                    {transaction.body.actions.length > 0 && (
-                                        <Pill>
-                                            {formatAction(
-                                                transaction.body.actions[0]
-                                                    .__typename
-                                            )}
-                                        </Pill>
-                                    )}
-                                    {transaction.body.actionsCount > 1 && (
-                                        <span className={styles.moreActions}>
-                                            +{transaction.body.actionsCount - 1}
-                                        </span>
-                                    )}
-                                </td>
-                                {props.time && (
-                                    <td>
-                                        <TimeAgo
-                                            isoDate={
-                                                transaction.block.createdAt
-                                            }
-                                        />
-                                    </td>
+                    props.transactions.map(transaction => (
+                        <tr
+                            key={transaction.hash}
+                            data-transaction-hash={transaction.hash}
+                            onClick={onRowClick}
+                        >
+                            <td>
+                                <CheckCheck
+                                    color="var(--secondaryLight)"
+                                    size={14}
+                                />
+                                <span>{shortenHash(transaction.hash)}</span>
+                                <CopyToClipboard
+                                    data={transaction.hash}
+                                    iconSize={14}
+                                />
+                            </td>
+                            <td>
+                                <Box color="var(--textSecondary)" size={16} />
+                                <span>
+                                    {formatNumber(transaction.block.height)}
+                                </span>
+                            </td>
+                            <td>
+                                {transaction.body.actions.length > 0 && (
+                                    <Pill>
+                                        {formatAction(
+                                            transaction.body.actions[0]
+                                                .__typename
+                                        )}
+                                    </Pill>
                                 )}
-                            </tr>
-                        )
-                    })
+                                {transaction.body.actionsCount > 1 && (
+                                    <span className={styles.moreActions}>
+                                        +{transaction.body.actionsCount - 1}
+                                    </span>
+                                )}
+                            </td>
+                            {props.time && (
+                                <td>
+                                    <TimeAgo
+                                        isoDate={transaction.block.createdAt}
+                                    />
+                                </td>
+                            )}
+                        </tr>
+                    ))
                 ) : (
                     <tr>
                         <td colSpan={props.time ? 4 : 3} />

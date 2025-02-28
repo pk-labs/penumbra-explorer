@@ -13,7 +13,15 @@ const loadBlock = async (height: number) => {
         console.error(result.error)
     }
 
-    return result.data?.block
+    return (
+        result.data?.block && {
+            ...result.data.block,
+            transactions: result.data.block.transactions.map(transaction => ({
+                ...transaction,
+                hash: transaction.hash.toLowerCase(),
+            })),
+        }
+    )
 }
 
 export default loadBlock

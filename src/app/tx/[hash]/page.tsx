@@ -36,8 +36,6 @@ const TransactionViewPage: FC<Props> = async props => {
         notFound()
     }
 
-    const hash = transaction.hash.toLowerCase()
-
     return (
         <Container className={styles.root} narrow>
             <Breadcrumbs>
@@ -46,13 +44,16 @@ const TransactionViewPage: FC<Props> = async props => {
             </Breadcrumbs>
             <View
                 className={styles.view}
-                subtitle={hash}
+                subtitle={transaction.hash}
                 title="Transaction view"
             >
                 <Parameters>
                     <Parameter name="Transaction hash">
-                        {shortenHash(hash)}
-                        <CopyToClipboard data={hash} iconSize={14} />
+                        {shortenHash(transaction.hash)}
+                        <CopyToClipboard
+                            data={transaction.hash}
+                            iconSize={14}
+                        />
                     </Parameter>
                     <Parameter name="Block height">
                         {transaction.block.height}
