@@ -5,6 +5,7 @@ import { Field, Form, Formik } from 'formik'
 import { Box, Search as SearchIcon } from 'lucide-react'
 import { FC, ReactNode, useCallback, useRef } from 'react'
 import styles from './search.module.css'
+import SearchResults from './searchResults'
 
 interface FormValues {
     query: string
@@ -44,44 +45,39 @@ const Search: FC<Props> = props => {
                             name="query"
                             placeholder="Search by address, hash number, blocks, etc."
                         />
-                        <div className={styles.results}>
-                            {formik.values.query ? (
-                                <>
-                                    <div className={styles.title}>
-                                        Nothing found
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <div className={styles.title}>
-                                        Recent search results
-                                    </div>
-                                    <ul className={styles.list}>
-                                        <li>
-                                            <Box
-                                                color="var(--textSecondary)"
-                                                size={16}
-                                            />
-                                            1,057,456
-                                        </li>
-                                        <li>
-                                            <Box
-                                                color="var(--textSecondary)"
-                                                size={16}
-                                            />
-                                            1,057,456
-                                        </li>
-                                        <li>
-                                            <Box
-                                                color="var(--textSecondary)"
-                                                size={16}
-                                            />
-                                            1,057,456
-                                        </li>
-                                    </ul>
-                                </>
-                            )}
-                        </div>
+                        {formik.values.query ? (
+                            <SearchResults
+                                className={styles.results}
+                                title="Nothing found"
+                            />
+                        ) : (
+                            <SearchResults
+                                className={styles.results}
+                                title="Recent search results"
+                            >
+                                <li>
+                                    <Box
+                                        color="var(--textSecondary)"
+                                        size={16}
+                                    />
+                                    1,057,456
+                                </li>
+                                <li>
+                                    <Box
+                                        color="var(--textSecondary)"
+                                        size={16}
+                                    />
+                                    1,057,456
+                                </li>
+                                <li>
+                                    <Box
+                                        color="var(--textSecondary)"
+                                        size={16}
+                                    />
+                                    1,057,456
+                                </li>
+                            </SearchResults>
+                        )}
                     </Form>
                 )}
             </Formik>
