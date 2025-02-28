@@ -3,10 +3,9 @@
 import { Box } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
-import { timezone } from '@/lib/constants'
-import dayjs from '@/lib/dayjs'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
 import { formatNumber } from '@/lib/utils'
+import { TimeAgo } from '../../index'
 import { Table, TableProps } from '../table'
 import styles from './blockTable.module.css'
 
@@ -24,9 +23,6 @@ const BlockTable: FC<Props> = props => {
         },
         [router]
     )
-
-    // TODO: Extract time ago to client-only component to fix hydration mismatch
-    const now = dayjs().tz(timezone)
 
     return (
         <Table
@@ -56,7 +52,9 @@ const BlockTable: FC<Props> = props => {
                                 <Box color="var(--textSecondary)" size={16} />
                                 <span>{formatNumber(block.height)}</span>
                             </td>
-                            <td>{now.to(dayjs(block.createdAt))}</td>
+                            <td>
+                                <TimeAgo isoDate={block.createdAt} />
+                            </td>
                             {props.proposer && <td>-</td>}
                             <td>{block.transactionsCount}</td>
                         </tr>

@@ -4,12 +4,11 @@ import clsx from 'clsx'
 import { Box, CheckCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
-import { timezone } from '@/lib/constants'
-import dayjs from '@/lib/dayjs'
 import { PartialTransactionFragment } from '@/lib/graphql/generated/types'
 import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import Pill from '../../pill'
+import TimeAgo from '../../timeAgo'
 import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
@@ -28,9 +27,6 @@ const TransactionTable: FC<Props> = props => {
         },
         [router]
     )
-
-    // TODO: Extract time ago to client-only component to fix hydration mismatch
-    const now = dayjs().tz(timezone)
 
     return (
         <Table
@@ -96,9 +92,11 @@ const TransactionTable: FC<Props> = props => {
                                 </td>
                                 {props.time && (
                                     <td>
-                                        {now.to(
-                                            dayjs(transaction.block.createdAt)
-                                        )}
+                                        <TimeAgo
+                                            isoDate={
+                                                transaction.block.createdAt
+                                            }
+                                        />
                                     </td>
                                 )}
                             </tr>
