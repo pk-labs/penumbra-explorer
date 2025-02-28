@@ -86,7 +86,7 @@ const Search: FC<Props> = props => {
                 />
             )
         }
-    } else {
+    } /*else {
         searchResults = (
             <SearchResults
                 className={styles.results}
@@ -106,7 +106,7 @@ const Search: FC<Props> = props => {
                 </li>
             </SearchResults>
         )
-    }
+    }*/
 
     return (
         <div className={clsx(styles.root, props.className)}>
