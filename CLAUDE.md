@@ -10,6 +10,8 @@
   - Single test: `npm test -- -t "test name"` or path: `npm test -- path/to/test.tsx`
   - Watch mode: `npm run test:watch`
   - Coverage: `npm run test:coverage`
+  
+**Important:** Always run both `npm run lint:fix` and `npm run stylelint:fix` after making changes to files
 
 ## Code Style
 - **Imports:** Group by external/internal, sort alphabetically
@@ -19,7 +21,10 @@
   - React components: PascalCase
   - Functions/variables: camelCase
   - Files: camelCase.tsx for components
-- **Error handling:** Use try/catch in async operations, check for undefined/null values
+- **Error handling:** 
+  - Use try/catch in async operations, check for undefined/null values
+  - Use `e` as the catch parameter (not `error`)
+  - Log errors simply without custom messages: `console.error(e)`
 - **Components:** React functional components with `FC<Props>` typing
 - **CSS:** Use CSS modules with componentName.module.css naming
 
