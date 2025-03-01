@@ -9,7 +9,7 @@ describe('loadTransactions', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { transactions: [{ hash: 'FoO' }] },
+                        data: { transactions: [{ block: {}, hash: 'FoO' }] },
                     }),
             }),
         })

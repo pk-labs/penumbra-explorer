@@ -1,8 +1,14 @@
-import createGraphqlClient from '../../graphql/createGraphqlClient'
-import { BlockQuery, BlockQueryVariables } from '../../graphql/generated/types'
-import { blockQuery } from '../../graphql/queries'
+import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
+import {
+    BlockFragment,
+    BlockQuery,
+    BlockQueryVariables,
+} from '@/lib/graphql/generated/types'
+import { blockQuery } from '@/lib/graphql/queries'
 
-const loadBlock = async (height: number) => {
+const loadBlock = async (
+    height: number
+): Promise<BlockFragment | null | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient

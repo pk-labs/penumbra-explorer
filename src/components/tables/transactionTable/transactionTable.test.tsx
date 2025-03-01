@@ -84,6 +84,7 @@ describe('BlockTable', () => {
                             actionsCount: 0,
                         },
                         hash: 'tx1',
+                        timeAgo: '1s ago',
                     },
                 ]}
                 time

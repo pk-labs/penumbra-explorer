@@ -4,18 +4,17 @@ import clsx from 'clsx'
 import { Box, CheckCheck } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
-import { PartialTransactionFragment } from '@/lib/graphql/generated/types'
+import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import Pill from '../../pill'
-import TimeAgo from '../../timeAgo'
 import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     embedded?: boolean
     time?: boolean
-    transactions?: PartialTransactionFragment[]
+    transactions?: TransformedPartialTransactionFragment[]
 }
 
 const TransactionTable: FC<Props> = props => {
@@ -84,13 +83,7 @@ const TransactionTable: FC<Props> = props => {
                                     </span>
                                 )}
                             </td>
-                            {props.time && (
-                                <td>
-                                    <TimeAgo
-                                        isoDate={transaction.block.createdAt}
-                                    />
-                                </td>
-                            )}
+                            {props.time && <td>{transaction.timeAgo}</td>}
                         </tr>
                     ))
                 ) : (

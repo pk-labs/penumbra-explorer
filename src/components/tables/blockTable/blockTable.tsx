@@ -3,14 +3,13 @@
 import { Box } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
-import { PartialBlockFragment } from '@/lib/graphql/generated/types'
+import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
-import TimeAgo from '../../timeAgo'
 import { Table, TableProps } from '../table'
 import styles from './blockTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
-    blocks?: PartialBlockFragment[]
+    blocks?: TransformedPartialBlockFragment[]
     proposer?: boolean
 }
 
@@ -52,9 +51,7 @@ const BlockTable: FC<Props> = props => {
                                 <Box color="var(--textSecondary)" size={16} />
                                 <span>{formatNumber(block.height)}</span>
                             </td>
-                            <td>
-                                <TimeAgo isoDate={block.createdAt} />
-                            </td>
+                            <td>{block.timeAgo}</td>
                             {props.proposer && <td>-</td>}
                             <td>{block.transactionsCount}</td>
                         </tr>

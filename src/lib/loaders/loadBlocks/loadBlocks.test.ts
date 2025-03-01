@@ -7,11 +7,13 @@ describe('loadBlocks', () => {
     test('returns data', async () => {
         ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
             query: () => ({
-                toPromise: () => Promise.resolve({ data: { blocks: true } }),
+                toPromise: () => Promise.resolve({ data: { blocks: [] } }),
             }),
         })
 
-        await expect(loadBlocks({ latest: { limit: 1 } })).resolves.toBe(true)
+        await expect(
+            loadBlocks({ latest: { limit: 1 } })
+        ).resolves.toMatchObject([])
     })
 
     test('logs error', async () => {
