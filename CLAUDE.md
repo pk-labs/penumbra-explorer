@@ -27,6 +27,10 @@
   - Log errors simply without custom messages: `console.error(e)`
 - **Components:** React functional components with `FC<Props>` typing
 - **CSS:** Use CSS modules with componentName.module.css naming
+- **Tests:** 
+  - Always use `test()` instead of `it()`
+  - All test functions should be async
+  - Test descriptions should be clear and descriptive
 
 ## Git Commit Guidelines
 - **Format:** Use imperative mood (e.g., "Add feature" not "Added feature")
