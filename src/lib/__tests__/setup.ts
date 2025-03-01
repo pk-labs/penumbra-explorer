@@ -9,5 +9,6 @@ afterEach(() => {
     jest.clearAllTimers()
     jest.useRealTimers()
 
+    window.localStorage.clear()
     document.title = ''
 })

@@ -2,12 +2,12 @@ import { act, renderHook } from '@testing-library/react'
 import useDebounce from './useDebounce'
 
 describe('useDebounce', () => {
-    it('returns initial value immediately', () => {
+    test('returns initial value immediately', async () => {
         const { result } = renderHook(() => useDebounce('foo', 500))
         expect(result.current).toBe('foo')
     })
 
-    it('debounces value updates', () => {
+    test('debounces value updates', async () => {
         const { rerender, result } = renderHook(
             ({ delay, value }) => useDebounce(value, delay),
             { initialProps: { delay: 500, value: 'foo' } }
@@ -23,7 +23,7 @@ describe('useDebounce', () => {
         expect(result.current).toBe('bar')
     })
 
-    it('resets debounce timer when value changes before delay completes', () => {
+    test('resets debounce timer when value changes before delay completes', async () => {
         const { rerender, result } = renderHook(
             ({ delay, value }) => useDebounce(value, delay),
             { initialProps: { delay: 500, value: 'foo' } }
