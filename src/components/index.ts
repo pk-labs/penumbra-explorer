@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 export { default as Actions } from './actions'
 export * from './breadcrumbs'
 export { default as Button } from './button'

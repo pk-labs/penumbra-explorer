@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 'use client'
 
-import { useDebounce } from '@uidotdev/usehooks'
 import clsx from 'clsx'
 import { Box, CheckCheck, Search as SearchIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -15,6 +14,7 @@ import {
     useState,
 } from 'react'
 import { useSearchQuery } from '@/lib/graphql/generated/hooks'
+import { useDebounce } from '@/lib/hooks'
 import { formatNumber } from '@/lib/utils'
 import styles from './search.module.css'
 import SearchResults from './searchResults'
