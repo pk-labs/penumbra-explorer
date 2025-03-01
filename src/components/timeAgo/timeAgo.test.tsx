@@ -37,4 +37,9 @@ describe('TimeAgo', () => {
 
         getByText(container, '3y ago')
     })
+
+    test('renders placeholder when isoDate is undefined', () => {
+        const { container } = render(<TimeAgo />)
+        expect(container.textContent).toBe('        ')
+    })
 })
