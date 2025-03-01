@@ -28,11 +28,11 @@ interface Props {
 const Search: FC<Props> = props => {
     const input = useRef<HTMLInputElement>(null)
     const [query, setQuery] = useState('')
-    const debouncedQuery = useDebounce(query, 300)
+    const debouncedQuery = useDebounce(query)
 
     const [searchQuery, executeSearchQuery] = useSearchQuery({
         pause: true,
-        variables: { slug: query },
+        variables: { slug: debouncedQuery },
     })
 
     useEffect(() => {
