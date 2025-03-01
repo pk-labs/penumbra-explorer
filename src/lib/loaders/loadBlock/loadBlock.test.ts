@@ -1,4 +1,4 @@
-import createGraphqlClient from '../../graphql/createGraphqlClient'
+import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import loadBlock from './loadBlock'
 
 jest.mock('../../graphql/createGraphqlClient')
