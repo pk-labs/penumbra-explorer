@@ -1,4 +1,4 @@
-import { getByText, render } from '@testing-library/react'
+import { fireEvent, getByText, render } from '@testing-library/react'
 import Modal from './modal'
 
 describe('Modal', () => {
@@ -10,6 +10,20 @@ describe('Modal', () => {
     test('renders children when open', async () => {
         const { container } = render(<Modal open>Foo</Modal>)
         getByText(container, 'Foo')
+    })
+
+    test('renders close button and invokes callback', async () => {
+        const onClose = jest.fn()
+        const { container } = render(<Modal onClose={onClose} open />)
+
+        const closeButton = container.querySelector('button')
+
+        if (!closeButton) {
+            throw Error('Missing element')
+        }
+
+        fireEvent.click(closeButton)
+        expect(onClose).toHaveBeenCalled()
     })
 
     test('applies custom classes', async () => {
