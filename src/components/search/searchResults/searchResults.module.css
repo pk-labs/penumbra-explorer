@@ -1,6 +1,6 @@
 .root {
     position: absolute;
-    z-index: 1;
+    z-index: var(--zIndexOverlay);
     top: calc(8 * var(--unit));
     display: flex;
     width: 100%;
@@ -9,7 +9,7 @@
     padding: calc(3 * var(--unit));
     border: 1px solid var(--surfaceLighter);
     border-radius: var(--roundedSmall);
-    backdrop-filter: blur(var(--blurXl));
+    backdrop-filter: blur(var(--blurFull));
     background: rgba(34, 99, 98, 0.1);
     gap: calc(2 * var(--unit));
 }

@@ -1,12 +1,15 @@
 'use client'
 
 import clsx from 'clsx'
-import { Search } from 'lucide-react'
+import { Search as SearchIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FC } from 'react'
+import { FC, useCallback, useState } from 'react'
+import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
+import Modal from '../modal'
+import Search from '../search'
 import { Tab, Tabs } from '../tabs'
 import styles from './navigationBar.module.css'
 
@@ -16,6 +19,11 @@ interface Props {
 
 const NavigationBar: FC<Props> = props => {
     const pathname = usePathname()
+    const [searchModalOpen, setSearchModalOpen] = useState(false)
+
+    const openSearchModal = useCallback(() => setSearchModalOpen(true), [])
+
+    const closeSearchModal = useCallback(() => setSearchModalOpen(false), [])
 
     return (
         <header className={clsx(styles.root, props.className)}>
@@ -40,10 +48,24 @@ const NavigationBar: FC<Props> = props => {
             </Tabs>
             <div className={styles.group}>
                 {pathname !== '/' && (
-                    <div className={styles.search}>
-                        <Search size={16} />
-                        <span>Search</span>
-                    </div>
+                    <>
+                        <div
+                            className={styles.search}
+                            onClick={openSearchModal}
+                        >
+                            <SearchIcon size={16} />
+                            <span>Search</span>
+                        </div>
+                        <Modal
+                            className={styles.searchModal}
+                            onClose={closeSearchModal}
+                            open={searchModalOpen}
+                        >
+                            <GraphqlClientProvider>
+                                <Search />
+                            </GraphqlClientProvider>
+                        </Modal>
+                    </>
                 )}
                 <div className={styles.price}>
                     <span className={styles.label}>UM Price:</span>

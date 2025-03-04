@@ -1,0 +1,33 @@
+.root {
+    position: fixed;
+    z-index: var(--zIndexModal);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(var(--blur)) brightness(50%);
+    background: var(--surface);
+}
+
+.closeButton {
+    position: absolute;
+    top: calc(2 * var(--unit));
+    right: calc(2 * var(--unit));
+    display: flex;
+    width: calc(4 * var(--unit));
+    height: calc(4 * var(--unit));
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: var(--roundedFull);
+    background: var(--surfaceLight);
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--surfaceLighter);
+    }
+}

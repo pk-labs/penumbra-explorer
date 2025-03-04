@@ -34,7 +34,13 @@
     width: 190px;
     background: var(--surface);
     color: var(--textSecondary);
+    cursor: pointer;
     gap: calc(1.5 * var(--unit));
+}
+
+.searchModal {
+    align-items: flex-start;
+    padding-top: calc(14 * var(--unit));
 }
 
 .price {
