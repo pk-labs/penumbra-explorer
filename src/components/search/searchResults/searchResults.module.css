@@ -12,9 +12,6 @@
     backdrop-filter: blur(var(--blurXl));
     background: rgba(34, 99, 98, 0.1);
     gap: calc(2 * var(--unit));
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 200ms var(--fastOutSlowIn);
 }
 
 .title {
@@ -33,19 +30,21 @@
     list-style: none;
 
     li {
-        display: flex;
-        height: calc(4 * var(--unit));
-        align-items: center;
-        padding: 0 var(--unit);
-        gap: calc(0.5 * var(--unit));
-
         &:not(:last-child) {
             border-bottom: 1px solid var(--surfaceLighter);
         }
 
+        &:hover {
+            background: rgba(83, 174, 168, 0.15);
+        }
+
         a {
+            display: flex;
+            height: calc(4 * var(--unit));
+            align-items: center;
+            padding: 0 var(--unit);
             color: inherit;
-            pointer-events: auto;
+            gap: calc(0.5 * var(--unit));
             text-decoration: none;
         }
     }

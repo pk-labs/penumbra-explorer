@@ -33,9 +33,7 @@
     --roundedSmall: 8px;
     --roundedFull: 9999px;
 
-    /* Effects */
+    /* Animation and effects */
     --blurXl: 64px;
-
-    /* Animation */
     --fastOutSlowIn: cubic-bezier(0.4, 0, 0.2, 1);
 }

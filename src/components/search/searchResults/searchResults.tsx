@@ -1,20 +1,28 @@
 'use client'
 
-import clsx from 'clsx'
+import { motion } from 'motion/react'
 import { FC, ReactNode } from 'react'
+import { fastOutSlowIn } from '@/lib/constants'
 import styles from './searchResults.module.css'
 
 interface Props {
     children?: ReactNode
-    className?: string
     title: string
 }
 
 const SearchResults: FC<Props> = props => (
-    <div className={clsx(styles.root, props.className)}>
+    <motion.div
+        animate={{ opacity: 1, transition: { duration: 0 } }}
+        className={styles.root}
+        exit={{
+            opacity: 0,
+            transition: { duration: 0.2, ease: fastOutSlowIn },
+        }}
+        initial={{ opacity: 0 }}
+    >
         <h3 className={styles.title}>{props.title}</h3>
         {props.children && <ul className={styles.list}>{props.children}</ul>}
-    </div>
+    </motion.div>
 )
 
 export default SearchResults

@@ -27,15 +27,10 @@
     color: var(--textSecondary);
     font: var(--fontPrimary) var(--fontSizeBase);
     outline: solid 2px transparent;
-    transition: outline 200ms var(--fastOutSlowIn);
+    transition: outline 200ms ease-in;
 
     &:focus {
         outline-color: var(--textSecondary);
         transition: none;
-
-        & + .results {
-            opacity: 1;
-            transition: none;
-        }
     }
 }
