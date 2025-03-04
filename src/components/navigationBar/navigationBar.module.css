@@ -10,7 +10,7 @@
 .group {
     display: flex;
     align-items: center;
-    gap: calc(2 * var(--unit));
+    gap: var(--unit);
 
     &:last-child {
         justify-self: flex-end;
@@ -24,18 +24,22 @@
 .search,
 .price {
     display: flex;
-    height: calc(6 * var(--unit));
+    height: calc(4 * var(--unit));
     align-items: center;
     padding: 0 calc(2 * var(--unit));
     border-radius: var(--roundedFull);
+    font-size: var(--fontSizeSm);
+    font-weight: 500;
 }
 
 .search {
-    width: 190px;
     background: var(--surface);
-    color: var(--textSecondary);
     cursor: pointer;
-    gap: calc(1.5 * var(--unit));
+    gap: calc(0.5 * var(--unit));
+
+    &:hover {
+        background: var(--surfaceLight);
+    }
 }
 
 .searchModal {
@@ -45,9 +49,7 @@
 
 .price {
     justify-content: center;
-    background: var(--surfaceLight);
-    font-size: var(--fontSizeSm);
-    font-weight: 500;
+    border: 1px solid var(--surfaceLighter);
     gap: calc(0.5 * var(--unit));
 
     .label {

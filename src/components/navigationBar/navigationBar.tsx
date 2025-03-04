@@ -54,7 +54,7 @@ const NavigationBar: FC<Props> = props => {
                             onClick={openSearchModal}
                         >
                             <SearchIcon size={16} />
-                            <span>Search</span>
+                            Search
                         </div>
                         <Modal
                             className={styles.searchModal}
