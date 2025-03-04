@@ -1,4 +1,5 @@
 import { fireEvent, getByText, render } from '@testing-library/react'
+import { usePathname } from '@/lib/__tests__/__mocks__'
 import Modal from './modal'
 
 describe('Modal', () => {
@@ -23,6 +24,34 @@ describe('Modal', () => {
         }
 
         fireEvent.click(closeButton)
+        expect(onClose).toHaveBeenCalled()
+    })
+
+    test('closes when pressing escape', async () => {
+        const onClose = jest.fn()
+        const { container } = render(<Modal onClose={onClose} open />)
+
+        fireEvent.keyDown(container, { key: 'Enter' })
+        expect(onClose).not.toHaveBeenCalled()
+
+        fireEvent.keyDown(container, { key: 'Escape' })
+        expect(onClose).toHaveBeenCalled()
+    })
+
+    test('closes when pathname changes and no keepOpen flag', async () => {
+        const onClose = jest.fn()
+        const { rerender } = render(<Modal onClose={onClose} open />)
+
+        expect(onClose).not.toHaveBeenCalled()
+
+        usePathname.mockReturnValueOnce('/foo')
+        rerender(<Modal onClose={onClose} keepOpen open />)
+
+        expect(onClose).not.toHaveBeenCalled()
+
+        usePathname.mockReturnValueOnce('/bar')
+        rerender(<Modal onClose={onClose} open />)
+
         expect(onClose).toHaveBeenCalled()
     })
 
