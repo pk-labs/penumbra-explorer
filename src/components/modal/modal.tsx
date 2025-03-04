@@ -26,8 +26,6 @@ const Modal: FC<Props> = props => {
         }
 
         const onKeyDown = (e: KeyboardEvent) => {
-            console.log('Key pressed:', e.key)
-
             if (e.key === 'Escape') {
                 props.onClose?.call(undefined)
             }
