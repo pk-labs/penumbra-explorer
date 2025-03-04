@@ -13,6 +13,7 @@ import {
     useRef,
     useState,
 } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import { useSearchQuery } from '@/lib/graphql/generated/hooks'
 import { useDebounce } from '@/lib/hooks'
 import { formatNumber } from '@/lib/utils'
@@ -35,11 +36,40 @@ const Search: FC<Props> = props => {
         variables: { slug: debouncedQuery },
     })
 
+    const searchResult = searchQuery.data?.search
+
+    const [recentSearchResults, setRecentSearchResults] = useLocalStorage<
+        Array<number | string>
+    >('search', [], { initializeWithValue: false })
+
     useEffect(() => {
         if (debouncedQuery) {
             executeSearchQuery()
         }
     }, [debouncedQuery, executeSearchQuery])
+
+    useEffect(() => {
+        if (!searchResult) {
+            return
+        }
+
+        const recentSearchResult =
+            searchResult.__typename === 'Block'
+                ? searchResult.height
+                : searchResult.hash
+
+        if (recentSearchResults?.includes(recentSearchResult)) {
+            return
+        }
+
+        if (Array.isArray(recentSearchResults)) {
+            setRecentSearchResults(
+                [recentSearchResult, ...recentSearchResults].slice(0, 5)
+            )
+        } else {
+            setRecentSearchResults([recentSearchResult])
+        }
+    }, [recentSearchResults, searchResult, setRecentSearchResults])
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
@@ -51,20 +81,19 @@ const Search: FC<Props> = props => {
     }, [])
 
     let searchResults
-    const search = searchQuery.data?.search
 
     if (query) {
-        if (search) {
+        if (searchResult) {
             searchResults = (
                 <SearchResults
                     className={styles.results}
-                    title={search.__typename}
+                    title={searchResult.__typename}
                 >
-                    {search.__typename === 'Block' ? (
+                    {searchResult.__typename === 'Block' ? (
                         <li>
                             <Box color="var(--textSecondary)" size={16} />
-                            <Link href={`/block/${search.height}`}>
-                                {formatNumber(search.height)}
+                            <Link href={`/block/${searchResult.height}`}>
+                                {formatNumber(searchResult.height)}
                             </Link>
                         </li>
                     ) : (
@@ -73,8 +102,8 @@ const Search: FC<Props> = props => {
                                 color="var(--secondaryLight)"
                                 size={16}
                             />
-                            <Link href={`/tx/${search.hash}`}>
-                                {search.hash.toLowerCase()}
+                            <Link href={`/tx/${searchResult.hash}`}>
+                                {searchResult.hash.toLowerCase()}
                             </Link>
                         </li>
                     )}
@@ -88,27 +117,35 @@ const Search: FC<Props> = props => {
                 />
             )
         }
-    } /*else {
+    } else if (recentSearchResults?.length) {
         searchResults = (
             <SearchResults
                 className={styles.results}
                 title="Recent search results"
             >
-                <li>
-                    <Box color="var(--textSecondary)" size={16} />
-                    <Link href="/block/1057456">1,057,456</Link>
-                </li>
-                <li>
-                    <Box color="var(--textSecondary)" size={16} />
-                    <Link href="/block/1057456">1,057,456</Link>
-                </li>
-                <li>
-                    <Box color="var(--textSecondary)" size={16} />
-                    <Link href="/block/1057456">1,057,456</Link>
-                </li>
+                {recentSearchResults.map((searchResult, i) =>
+                    typeof searchResult === 'number' ? (
+                        <li key={i}>
+                            <Box color="var(--textSecondary)" size={16} />
+                            <Link href={`/block/${searchResult}`}>
+                                {formatNumber(searchResult)}
+                            </Link>
+                        </li>
+                    ) : (
+                        <li key={i}>
+                            <CheckCheck
+                                color="var(--secondaryLight)"
+                                size={16}
+                            />
+                            <Link href={`/tx/${searchResult}`}>
+                                {searchResult.toLowerCase()}
+                            </Link>
+                        </li>
+                    )
+                )}
             </SearchResults>
         )
-    }*/
+    }
 
     return (
         <div className={clsx(styles.root, props.className)}>
