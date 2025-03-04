@@ -43,10 +43,12 @@ const Search: FC<Props> = props => {
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
-    const onInputChange = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value),
-        []
-    )
+    const onInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.currentTarget.value
+        const cleanedValue = value.trim().replaceAll(',', '')
+
+        setQuery(cleanedValue)
+    }, [])
 
     let searchResults
     const search = searchQuery.data?.search
