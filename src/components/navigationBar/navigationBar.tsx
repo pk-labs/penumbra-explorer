@@ -17,10 +17,6 @@ const NavigationBar: FC<Props> = props => (
             <Link href="/">
                 <Image alt="Noctis" height={33} src={logo.src} width={120} />
             </Link>
-            <div className={styles.dropdown}>
-                <span>Mainnet</span>
-                <ChevronsUpDown size={16} />
-            </div>
         </div>
         <Tabs className={styles.tabs}>
             <Tab href="/">Home</Tab>
