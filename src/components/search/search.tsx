@@ -11,11 +11,9 @@ import {
     useCallback,
     useEffect,
     useRef,
-    useState,
 } from 'react'
-import { useLocalStorage } from 'usehooks-ts'
+import { useDebounceValue, useLocalStorage } from 'usehooks-ts'
 import { useSearchQuery } from '@/lib/graphql/generated/hooks'
-import { useDebounce } from '@/lib/hooks'
 import { formatNumber } from '@/lib/utils'
 import styles from './search.module.css'
 import SearchResults from './searchResults'
@@ -28,12 +26,11 @@ interface Props {
 
 const Search: FC<Props> = props => {
     const input = useRef<HTMLInputElement>(null)
-    const [query, setQuery] = useState('')
-    const debouncedQuery = useDebounce(query)
+    const [query, setQuery] = useDebounceValue('', 300)
 
     const [searchQuery, executeSearchQuery] = useSearchQuery({
         pause: true,
-        variables: { slug: debouncedQuery },
+        variables: { slug: query },
     })
 
     const searchResult = searchQuery.data?.search
@@ -43,10 +40,10 @@ const Search: FC<Props> = props => {
     >('search', [], { initializeWithValue: false })
 
     useEffect(() => {
-        if (debouncedQuery) {
+        if (query) {
             executeSearchQuery()
         }
-    }, [debouncedQuery, executeSearchQuery])
+    }, [executeSearchQuery, query])
 
     useEffect(() => {
         if (!searchResult) {
@@ -73,12 +70,15 @@ const Search: FC<Props> = props => {
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
-    const onInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value
-        const cleanedValue = value.trim().replaceAll(',', '')
+    const onInputChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            const value = e.currentTarget.value
+            const cleanedValue = value.trim().replaceAll(',', '')
 
-        setQuery(cleanedValue)
-    }, [])
+            setQuery(cleanedValue)
+        },
+        [setQuery]
+    )
 
     let searchResults
 
