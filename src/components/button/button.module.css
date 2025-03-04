@@ -14,7 +14,7 @@
     text-decoration: none;
     text-transform: capitalize;
     transform: none;
-    transition: background 200ms var(--easeInOut);
+    transition: background 200ms var(--fastOutSlowIn);
     user-select: none;
     white-space: nowrap;
 
