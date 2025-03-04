@@ -1,5 +1,5 @@
 .root {
-    --height: calc(7 * var(--unit));
+    --height: calc(4.5 * var(--unit));
     position: relative;
     display: flex;
     height: var(--height);
