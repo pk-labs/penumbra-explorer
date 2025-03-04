@@ -56,7 +56,7 @@ const Search: FC<Props> = props => {
         const recentSearchResult =
             searchResult.__typename === 'Block'
                 ? searchResult.height
-                : searchResult.hash
+                : searchResult.hash.toLowerCase()
 
         if (recentSearchResults?.includes(recentSearchResult)) {
             return
@@ -102,12 +102,14 @@ const Search: FC<Props> = props => {
                         </li>
                     ) : (
                         <li>
-                            <Link href={`/tx/${searchResult.hash}`}>
+                            <Link
+                                href={`/tx/${searchResult.hash.toLowerCase()}`}
+                            >
                                 <CheckCheck
                                     color="var(--secondaryLight)"
                                     size={16}
                                 />
-                                {searchResult.hash}
+                                {searchResult.hash.toLowerCase()}
                             </Link>
                         </li>
                     )}
