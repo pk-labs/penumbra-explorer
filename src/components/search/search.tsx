@@ -2,13 +2,11 @@
 'use client'
 
 import clsx from 'clsx'
-import { Box, CheckCheck, Search as SearchIcon } from 'lucide-react'
+import { Search as SearchIcon } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
-import Link from 'next/link'
 import {
     ChangeEvent,
     FC,
-    ReactNode,
     useCallback,
     useEffect,
     useRef,
@@ -16,14 +14,13 @@ import {
 } from 'react'
 import { useDebounceValue, useLocalStorage } from 'usehooks-ts'
 import { useSearchQuery } from '@/lib/graphql/generated/hooks'
-import { formatNumber } from '@/lib/utils'
 import styles from './search.module.css'
-import SearchResults from './searchResults'
+import { SearchResult } from './searchResult'
+import SearchResultOverlay from './searchResultOverlay'
 
 interface Props {
-    children?: ReactNode
+    autoFocus?: boolean
     className?: string
-    narrow?: boolean
 }
 
 const Search: FC<Props> = props => {
@@ -92,56 +89,26 @@ const Search: FC<Props> = props => {
     if (query) {
         if (searchResult) {
             searchResults = (
-                <SearchResults title={searchResult.__typename}>
-                    {searchResult.__typename === 'Block' ? (
-                        <li>
-                            <Link href={`/block/${searchResult.height}`}>
-                                <Box color="var(--textSecondary)" size={16} />
-                                {formatNumber(searchResult.height)}
-                            </Link>
-                        </li>
-                    ) : (
-                        <li>
-                            <Link
-                                href={`/tx/${searchResult.hash.toLowerCase()}`}
-                            >
-                                <CheckCheck
-                                    color="var(--secondaryLight)"
-                                    size={16}
-                                />
-                                {searchResult.hash.toLowerCase()}
-                            </Link>
-                        </li>
-                    )}
-                </SearchResults>
+                <SearchResultOverlay title={searchResult.__typename}>
+                    <SearchResult
+                        heightOrHash={
+                            searchResult.__typename === 'Block'
+                                ? searchResult.height
+                                : searchResult.hash.toLowerCase()
+                        }
+                    />
+                </SearchResultOverlay>
             )
         } else {
-            searchResults = <SearchResults title="Nothing found" />
+            searchResults = <SearchResultOverlay title="Nothing found" />
         }
     } else if (recentSearchResults?.length) {
         searchResults = (
-            <SearchResults title="Recent search results">
-                {recentSearchResults.map((searchResult, i) =>
-                    typeof searchResult === 'number' ? (
-                        <li key={i}>
-                            <Link href={`/block/${searchResult}`}>
-                                <Box color="var(--textSecondary)" size={16} />
-                                {formatNumber(searchResult)}
-                            </Link>
-                        </li>
-                    ) : (
-                        <li key={i}>
-                            <Link href={`/tx/${searchResult}`}>
-                                <CheckCheck
-                                    color="var(--secondaryLight)"
-                                    size={16}
-                                />
-                                {searchResult}
-                            </Link>
-                        </li>
-                    )
-                )}
-            </SearchResults>
+            <SearchResultOverlay title="Recent search results">
+                {recentSearchResults.map((searchResult, i) => (
+                    <SearchResult key={i} heightOrHash={searchResult} />
+                ))}
+            </SearchResultOverlay>
         )
     }
 
@@ -154,6 +121,7 @@ const Search: FC<Props> = props => {
             />
             <input
                 ref={input}
+                autoFocus={props.autoFocus}
                 className={styles.input}
                 name="query"
                 onBlur={onInputBlur}

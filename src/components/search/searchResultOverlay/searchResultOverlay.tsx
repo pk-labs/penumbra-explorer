@@ -1,16 +1,25 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { FC, ReactNode } from 'react'
+import { FC, ReactElement } from 'react'
 import { fastOutSlowIn } from '@/lib/constants'
-import styles from './searchResults.module.css'
+import { SearchResultProps } from '../searchResult'
+import styles from './searchResultOverlay.module.css'
 
 interface Props {
-    children?: ReactNode
+    children?:
+        | Array<
+              | Array<ReactElement<SearchResultProps>>
+              | false
+              | null
+              | ReactElement<SearchResultProps>
+              | undefined
+          >
+        | ReactElement<SearchResultProps>
     title: string
 }
 
-const SearchResults: FC<Props> = props => (
+const SearchResultOverlay: FC<Props> = props => (
     <motion.div
         animate={{ opacity: 1, transition: { duration: 0 } }}
         className={styles.root}
@@ -25,4 +34,4 @@ const SearchResults: FC<Props> = props => (
     </motion.div>
 )
 
-export default SearchResults
+export default SearchResultOverlay

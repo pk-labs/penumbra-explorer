@@ -62,7 +62,7 @@ const NavigationBar: FC<Props> = props => {
                             open={searchModalOpen}
                         >
                             <GraphqlClientProvider>
-                                <Search />
+                                <Search autoFocus />
                             </GraphqlClientProvider>
                         </Modal>
                     </>

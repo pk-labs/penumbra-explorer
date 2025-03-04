@@ -28,24 +28,4 @@
     margin: 0;
     font: 500 var(--fontSizeSm) var(--fontMono);
     list-style: none;
-
-    li {
-        &:not(:last-child) {
-            border-bottom: 1px solid var(--surfaceLighter);
-        }
-
-        &:hover {
-            background: rgba(83, 174, 168, 0.15);
-        }
-
-        a {
-            display: flex;
-            height: calc(4 * var(--unit));
-            align-items: center;
-            padding: 0 var(--unit);
-            color: inherit;
-            gap: calc(0.5 * var(--unit));
-            text-decoration: none;
-        }
-    }
 }
