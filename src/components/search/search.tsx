@@ -55,13 +55,18 @@ const Search: FC<Props> = props => {
                 ? searchResult.height
                 : searchResult.hash.toLowerCase()
 
-        if (recentSearchResults?.includes(recentSearchResult)) {
-            return
-        }
+        if (recentSearchResults?.length) {
+            if (recentSearchResults[0] === recentSearchResult) {
+                return
+            }
 
-        if (Array.isArray(recentSearchResults)) {
             setRecentSearchResults(
-                [recentSearchResult, ...recentSearchResults].slice(0, 5)
+                [
+                    recentSearchResult,
+                    ...recentSearchResults.filter(
+                        result => result !== recentSearchResult
+                    ),
+                ].slice(0, 5)
             )
         } else {
             setRecentSearchResults([recentSearchResult])
@@ -127,7 +132,7 @@ const Search: FC<Props> = props => {
                 onBlur={onInputBlur}
                 onChange={onInputChange}
                 onFocus={onInputFocus}
-                placeholder="Search by address, hash number, blocks, etc."
+                placeholder="Search by block height or transaction hash"
             />
             {
                 <AnimatePresence initial={false}>
