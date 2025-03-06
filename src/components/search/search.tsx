@@ -33,8 +33,6 @@ const Search: FC<Props> = props => {
         variables: { slug: query },
     })
 
-    const searchResult = searchQuery.data?.search
-
     const [recentSearchResults, setRecentSearchResults] = useLocalStorage<
         Array<number | string>
     >('search', [], { initializeWithValue: false })
@@ -46,14 +44,14 @@ const Search: FC<Props> = props => {
     }, [executeSearchQuery, query])
 
     useEffect(() => {
-        if (!searchResult) {
+        if (!searchQuery.data?.search) {
             return
         }
 
         const recentSearchResult =
-            searchResult.__typename === 'Block'
-                ? searchResult.height
-                : searchResult.hash.toLowerCase()
+            searchQuery.data.search.__typename === 'Block'
+                ? searchQuery.data?.search.height
+                : searchQuery.data?.search.hash.toLowerCase()
 
         if (recentSearchResults?.length) {
             if (recentSearchResults[0] === recentSearchResult) {
@@ -71,7 +69,7 @@ const Search: FC<Props> = props => {
         } else {
             setRecentSearchResults([recentSearchResult])
         }
-    }, [recentSearchResults, searchResult, setRecentSearchResults])
+    }, [recentSearchResults, searchQuery.data?.search, setRecentSearchResults])
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
@@ -92,19 +90,19 @@ const Search: FC<Props> = props => {
     let searchResults
 
     if (query) {
-        if (searchResult) {
+        if (searchQuery.data?.search) {
             searchResults = (
-                <SearchResultOverlay title={searchResult.__typename}>
+                <SearchResultOverlay title={searchQuery.data.search.__typename}>
                     <SearchResult
                         heightOrHash={
-                            searchResult.__typename === 'Block'
-                                ? searchResult.height
-                                : searchResult.hash.toLowerCase()
+                            searchQuery.data.search.__typename === 'Block'
+                                ? searchQuery.data.search.height
+                                : searchQuery.data.search.hash.toLowerCase()
                         }
                     />
                 </SearchResultOverlay>
             )
-        } else {
+        } else if (searchQuery.data && !searchQuery.fetching) {
             searchResults = <SearchResultOverlay title="Nothing found" />
         }
     } else if (recentSearchResults?.length) {
@@ -134,11 +132,9 @@ const Search: FC<Props> = props => {
                 onFocus={onInputFocus}
                 placeholder="Search by block height or transaction hash"
             />
-            {
-                <AnimatePresence initial={false}>
-                    {focused && searchResults}
-                </AnimatePresence>
-            }
+            <AnimatePresence initial={false}>
+                {focused && searchResults}
+            </AnimatePresence>
         </div>
     )
 }
