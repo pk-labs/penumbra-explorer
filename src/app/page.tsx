@@ -3,7 +3,6 @@ import { FC } from 'react'
 import {
     BlockPanel,
     BlockTable,
-    BurnPanel,
     Button,
     Container,
     Search,
@@ -11,12 +10,14 @@ import {
     TransactionTable,
 } from '@/components'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { loadBlocks, loadTransactions } from '@/lib/loaders'
+import { loadBlocks, loadStats, loadTransactions } from '@/lib/loaders'
 import styles from './page.module.css'
 
 const HomePage: FC = async () => {
+    const stats = await loadStats()
     const latestBlocks = await loadBlocks({ latest: { limit: 10 } })
     const latestTransactions = await loadTransactions({ latest: { limit: 10 } })
+
     let latestBlockHeight
 
     if (latestBlocks?.length) {
@@ -34,8 +35,8 @@ const HomePage: FC = async () => {
             <Container>
                 <div className={styles.dashboard}>
                     <BlockPanel number={latestBlockHeight} />
-                    <TransactionPanel />
-                    <BurnPanel />
+                    <TransactionPanel number={stats?.totalTransactionsCount} />
+                    {/*<BurnPanel />*/}
                     <BlockTable
                         actions={<Button href="/blocks">View all</Button>}
                         blocks={latestBlocks}
