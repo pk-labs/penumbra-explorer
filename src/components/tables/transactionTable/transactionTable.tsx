@@ -57,10 +57,7 @@ const TransactionTable: FC<Props> = props => {
                                     size={14}
                                 />
                                 <span>{shortenHash(transaction.hash)}</span>
-                                <CopyToClipboard
-                                    data={transaction.hash}
-                                    iconSize={14}
-                                />
+                                <CopyToClipboard data={transaction.hash} />
                             </td>
                             <td>
                                 <Box color="var(--textSecondary)" size={16} />

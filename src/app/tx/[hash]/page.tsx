@@ -50,10 +50,7 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Parameters>
                     <Parameter name="Transaction hash">
                         {shortenHash(transaction.hash)}
-                        <CopyToClipboard
-                            data={transaction.hash}
-                            iconSize={14}
-                        />
+                        <CopyToClipboard data={transaction.hash} />
                     </Parameter>
                     <Parameter name="Block height">
                         {transaction.block.height}
