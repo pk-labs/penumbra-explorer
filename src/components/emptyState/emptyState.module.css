@@ -7,10 +7,10 @@
 }
 
 .title {
-    font: 400 var(--fontSizeMd) var(--fontPrimary);
+    font: 400 var(--fontSizeBase) var(--fontPrimary);
 }
 
 .message {
     color: var(--textSecondary);
-    font: 400 var(--fontSizeBase) var(--fontPrimary);
+    font: 400 var(--fontSizeSm) var(--fontPrimary);
 }
