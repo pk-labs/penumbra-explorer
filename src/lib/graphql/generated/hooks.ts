@@ -23,6 +23,7 @@ export const TransactionFragmentDoc = gql`
       }
     }
   }
+  raw
 }
     `;
 export const BlockFragmentDoc = gql`

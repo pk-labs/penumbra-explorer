@@ -205,20 +205,20 @@ export type TransactionsSelector = {
   range?: InputMaybe<TransactionRange>;
 };
 
-export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> };
+export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> };
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
 
 export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }> } };
 
-export type TransactionFragment = { __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } };
+export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } };
 
 export type BlockQueryVariables = Exact<{
   height: Scalars['Int']['input'];
 }>;
 
 
-export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> } | null };
+export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
   selector: BlocksSelector;
@@ -244,7 +244,7 @@ export type TransactionQueryVariables = Exact<{
 }>;
 
 
-export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } } | null };
+export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', actionsCount: number, memo?: string | null, actions: Array<{ __typename: 'IbcRelay' } | { __typename: 'NotYetSupportedAction' } | { __typename: 'Output' } | { __typename: 'Spend' }>, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } } | null };
 
 export type TransactionsQueryVariables = Exact<{
   selector: TransactionsSelector;
@@ -273,6 +273,7 @@ export const TransactionFragmentDoc = gql`
       }
     }
   }
+  raw
 }
     `;
 export const BlockFragmentDoc = gql`

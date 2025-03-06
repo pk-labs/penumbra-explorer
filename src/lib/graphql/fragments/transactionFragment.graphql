@@ -17,4 +17,5 @@ fragment Transaction on Transaction {
             }
         }
     }
+    raw
 }
