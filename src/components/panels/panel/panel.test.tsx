@@ -1,12 +1,16 @@
 import { getByText, render } from '@testing-library/react'
+import { NumberCountupProps } from '../../numberCountup'
 import Panel from './panel'
 
-jest.mock('../../numberCountup/numberCountup', () => (props: any) => (
-    <div>
-        {props.children}
-        {props.suffix}
-    </div>
-))
+jest.mock(
+    '../../numberCountup/numberCountup',
+    () => (props: NumberCountupProps) => (
+        <span>
+            {props.number}
+            {props.suffix}
+        </span>
+    )
+)
 
 describe('Panel', () => {
     test('renders title and children', async () => {

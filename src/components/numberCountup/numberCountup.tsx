@@ -6,7 +6,7 @@ import { FC, useEffect } from 'react'
 import { formatNumber } from '@/lib/utils'
 import styles from './numberCountup.module.css'
 
-interface Props {
+export interface Props {
     className?: string
     number: number
     suffix?: string

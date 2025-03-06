@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
-import NumberCountup from '../../numberCountup'
+import { NumberCountup } from '../../numberCountup'
 import styles from './panel.module.css'
 
 export interface Props {
