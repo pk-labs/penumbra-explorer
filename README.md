@@ -73,6 +73,6 @@ running checks and tests and deploying the application to Google Cloud at
 ## Misc
 
 - <https://day.js.org/> for date manipulation and formatting
-- <https://fakerjs.dev/> to generate test data
-- <https://github.com/glennreyes/react-countup> for dashboard number animation
+- <https://motion.dev/> for animations such as dashboard number countup
 - <https://github.com/lukeed/clsx> for conditional `className` construction
+- <https://fakerjs.dev/> to generate test data

@@ -1,0 +1,5 @@
+.root {
+    font-family: var(--fontMono);
+    font-size: var(--fontSize3Xl);
+    font-weight: 500;
+}

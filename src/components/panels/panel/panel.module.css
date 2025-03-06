@@ -35,12 +35,6 @@
     }
 }
 
-.number {
-    font-family: var(--fontMono);
-    font-size: var(--fontSize3Xl);
-    font-weight: 500;
-}
-
 .footer,
 .chart {
     color: var(--textSecondary);

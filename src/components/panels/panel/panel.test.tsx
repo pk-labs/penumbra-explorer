@@ -1,26 +1,27 @@
 import { getByText, render } from '@testing-library/react'
 import Panel from './panel'
 
-jest.mock('react-countup', () => (props: { end: number }) => (
-    <div>{props.end}</div>
+jest.mock('../../numberCountup/numberCountup', () => (props: any) => (
+    <div>
+        {props.children}
+        {props.suffix}
+    </div>
 ))
 
 describe('Panel', () => {
-    test('renders title, number and children', async () => {
-        const { container } = render(
-            <Panel number={99} title="Foo">
-                Bar
-            </Panel>
-        )
+    test('renders title and children', async () => {
+        const { container } = render(<Panel title="Foo">Bar</Panel>)
 
         getByText(container, 'Foo')
-        getByText(container, 99)
         getByText(container, 'Bar')
     })
 
-    test('renders dash when number undefined', async () => {
-        const { container } = render(<Panel title="Foo" />)
-        getByText(container, '-')
+    test('renders number and suffix', async () => {
+        const { container } = render(
+            <Panel number={99} numberSuffix="$" title="Foo" />
+        )
+
+        getByText(container, '99$')
     })
 
     test('applies custom classes', async () => {
