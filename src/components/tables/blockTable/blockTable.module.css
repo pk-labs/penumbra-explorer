@@ -1,6 +1,6 @@
 .root {
     tbody tr:hover {
-        background: rgba(83, 174, 168, 0.15);
+        background: var(--hoverGreen);
         cursor: pointer;
     }
 

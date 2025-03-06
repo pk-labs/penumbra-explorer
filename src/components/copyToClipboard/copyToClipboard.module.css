@@ -1,9 +1,28 @@
 .root {
-    stroke: var(--textSecondary);
-    transition: stroke 200ms var(--fastOutSlowIn);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(0.5 * var(--unit));
+    border: 1px solid transparent;
+    border-radius: var(--roundedSmall);
+    cursor: pointer;
+    transition: background 200ms var(--fastOutSlowIn);
+
+    &.copied {
+        animation: copiedAnimation 500ms var(--fastOutSlowIn) forwards;
+    }
 
     &:hover {
-        cursor: pointer;
-        stroke: var(--text);
+        background: var(--hoverGreen);
+    }
+}
+
+@keyframes copiedAnimation {
+    from {
+        border-color: var(--textSecondary);
+    }
+
+    to {
+        border-color: transparent;
     }
 }

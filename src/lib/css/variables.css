@@ -23,6 +23,8 @@
     --primaryLight: #f49c43;
     --secondaryLight: #53aea8;
     --successLight: #55d383;
+    --hoverGreen: rgba(83, 174, 168, 0.15);
+    --hoverPurple: rgba(193, 166, 204, 0.15);
 
     /* Layout */
     --unit: 8px;

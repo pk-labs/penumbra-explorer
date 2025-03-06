@@ -1,38 +1,59 @@
 'use client'
 
 import clsx from 'clsx'
-import { Copy, LucideProps } from 'lucide-react'
-import { FC, MouseEvent, useCallback } from 'react'
+import { Check, Copy } from 'lucide-react'
+import { FC, MouseEvent, useCallback, useState } from 'react'
 import styles from './copyToClipboard.module.css'
 
 interface Props {
     className?: string
     data: string
-    iconSize?: LucideProps['size']
 }
 
 const CopyToClipboard: FC<Props> = props => {
+    const [copied, setCopied] = useState(false)
+
     const onClick = useCallback(
         (e: MouseEvent) => {
             e.stopPropagation()
 
+            /* istanbul ignore next */
+            if (copied) {
+                return
+            }
+
+            let timeout: NodeJS.Timeout
+
             navigator.clipboard
                 .writeText(props.data)
-                .then(() => alert('Copied to clipboard'))
-                .catch(e => /* istanbul ignore next */ {
-                    console.error(e)
-                    alert('Error copying to clipboard')
+                .then(() => {
+                    setCopied(true)
+                    timeout = setTimeout(() => setCopied(false), 3000)
                 })
+                /* istanbul ignore next */
+                .catch(console.error)
+
+            return () => {
+                /* istanbul ignore next */
+                if (timeout) {
+                    clearTimeout(timeout)
+                }
+            }
         },
-        [props.data]
+        [copied, props.data]
     )
 
     return (
-        <Copy
-            className={clsx(styles.root, props.className)}
+        <div
+            className={clsx(
+                styles.root,
+                copied && styles.copied,
+                props.className
+            )}
             onClick={onClick}
-            size={props.iconSize}
-        />
+        >
+            {copied ? <Check size={16} /> : <Copy size={16} />}
+        </div>
     )
 }
 

@@ -5,7 +5,7 @@
     }
 
     tbody tr:hover {
-        background: rgba(193, 166, 204, 0.15);
+        background: var(--hoverPurple);
         cursor: pointer;
     }
 }

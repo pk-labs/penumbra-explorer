@@ -1,41 +1,41 @@
-import { fireEvent, render } from '@testing-library/react'
+import {
+    act,
+    fireEvent,
+    getByText,
+    render,
+    waitFor,
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { LucideProps } from 'lucide-react'
 import CopyToClipboard from './copyToClipboard'
 
 userEvent.setup()
 window.alert = jest.fn()
 
 jest.mock('lucide-react', () => ({
-    Copy: (props: LucideProps) => (
-        <svg
-            className={props.className}
-            onClick={props.onClick}
-            width={props.size}
-        />
-    ),
+    Check: () => <span>Check</span>,
+    Copy: () => <span>Copy</span>,
 }))
 
 describe('CopyToClipboard', () => {
     test('writes data to clipboard on click', async () => {
         const { container } = render(<CopyToClipboard data="foo" />)
 
-        if (!container.firstChild) {
-            throw Error('Missing element')
-        }
+        fireEvent.click(getByText(container, 'Copy'))
 
-        fireEvent.click(container.firstChild)
-
-        const clipboardText = await navigator.clipboard.readText()
-        expect(clipboardText).toBe('foo')
+        await waitFor(async () => {
+            const clipboardText = await navigator.clipboard.readText()
+            expect(clipboardText).toBe('foo')
+        })
     })
 
-    test('applies icon size', async () => {
-        const { container } = render(
-            <CopyToClipboard data="foo" iconSize={99} />
-        )
+    test('renders check icon for 3 seconds after copying', async () => {
+        const { container } = render(<CopyToClipboard data="foo" />)
 
-        expect(container.firstChild).toHaveAttribute('width', '99')
+        fireEvent.click(getByText(container, 'Copy'))
+        await waitFor(() => getByText(container, 'Check'))
+
+        act(() => jest.advanceTimersByTime(3000))
+        getByText(container, 'Copy')
     })
 
     test('applies custom classes', async () => {
