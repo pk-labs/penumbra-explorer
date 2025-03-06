@@ -11,7 +11,6 @@ import styles from './modal.module.css'
 interface Props {
     children?: ReactNode
     className?: string
-    keepOpen?: boolean
     onClose?: () => void
     open?: boolean
 }
@@ -37,11 +36,11 @@ const Modal: FC<Props> = props => {
     }, [props.onClose, props.open])
 
     useEffect(() => {
-        if (!props.keepOpen && pathname !== prevPathname.current) {
+        if (pathname !== prevPathname.current) {
             prevPathname.current = pathname
             props.onClose?.call(undefined)
         }
-    }, [pathname, props.keepOpen, props.onClose])
+    }, [pathname, props.onClose])
 
     return (
         <AnimatePresence initial={false}>
@@ -51,6 +50,7 @@ const Modal: FC<Props> = props => {
                     className={clsx(styles.root, props.className)}
                     exit={{ opacity: 0 }}
                     initial={{ opacity: 0 }}
+                    onClick={props.onClose}
                     transition={{ duration: 0.3, ease: fastOutSlowIn }}
                 >
                     {props.onClose && (

@@ -13,46 +13,57 @@ describe('Modal', () => {
         getByText(container, 'Foo')
     })
 
-    test('renders close button and invokes callback', async () => {
-        const onClose = jest.fn()
-        const { container } = render(<Modal onClose={onClose} open />)
+    describe('closes', () => {
+        test('when clicking close button', async () => {
+            const onClose = jest.fn()
+            const { container } = render(<Modal onClose={onClose} open />)
 
-        const closeButton = container.querySelector('button')
+            const closeButton = container.querySelector('button')
 
-        if (!closeButton) {
-            throw Error('Missing element')
-        }
+            if (!closeButton) {
+                throw Error('Missing element')
+            }
 
-        fireEvent.click(closeButton)
-        expect(onClose).toHaveBeenCalled()
-    })
+            fireEvent.click(closeButton)
+            expect(onClose).toHaveBeenCalled()
+        })
 
-    test('closes when pressing escape', async () => {
-        const onClose = jest.fn()
-        const { container } = render(<Modal onClose={onClose} open />)
+        test('when clicking backdrop', async () => {
+            const onClose = jest.fn()
+            const { container } = render(<Modal onClose={onClose} open />)
 
-        fireEvent.keyDown(container, { key: 'Enter' })
-        expect(onClose).not.toHaveBeenCalled()
+            const backdrop = container.firstChild
 
-        fireEvent.keyDown(container, { key: 'Escape' })
-        expect(onClose).toHaveBeenCalled()
-    })
+            if (!backdrop) {
+                throw Error('Missing element')
+            }
 
-    test('closes when pathname changes and no keepOpen flag', async () => {
-        const onClose = jest.fn()
-        const { rerender } = render(<Modal onClose={onClose} open />)
+            fireEvent.click(backdrop)
+            expect(onClose).toHaveBeenCalled()
+        })
 
-        expect(onClose).not.toHaveBeenCalled()
+        test('when pressing escape', async () => {
+            const onClose = jest.fn()
+            const { container } = render(<Modal onClose={onClose} open />)
 
-        usePathname.mockReturnValueOnce('/foo')
-        rerender(<Modal onClose={onClose} keepOpen open />)
+            fireEvent.keyDown(container, { key: 'Enter' })
+            expect(onClose).not.toHaveBeenCalled()
 
-        expect(onClose).not.toHaveBeenCalled()
+            fireEvent.keyDown(container, { key: 'Escape' })
+            expect(onClose).toHaveBeenCalled()
+        })
 
-        usePathname.mockReturnValueOnce('/bar')
-        rerender(<Modal onClose={onClose} open />)
+        test('when pathname changes', async () => {
+            const onClose = jest.fn()
+            const { rerender } = render(<Modal onClose={onClose} open />)
 
-        expect(onClose).toHaveBeenCalled()
+            expect(onClose).not.toHaveBeenCalled()
+
+            usePathname.mockReturnValueOnce('/foo')
+            rerender(<Modal onClose={onClose} open />)
+
+            expect(onClose).toHaveBeenCalled()
+        })
     })
 
     test('applies custom classes', async () => {
