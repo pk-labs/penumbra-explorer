@@ -7,12 +7,14 @@ import { FC, MouseEvent, useCallback } from 'react'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
+import EmptyState from '../../emptyState'
 import Pill from '../../pill'
 import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     embedded?: boolean
+    emptyStateMessage?: string
     time?: boolean
     transactions?: TransformedPartialTransactionFragment[]
 }
@@ -84,8 +86,12 @@ const TransactionTable: FC<Props> = props => {
                         </tr>
                     ))
                 ) : (
-                    <tr>
-                        <td colSpan={props.time ? 4 : 3} />
+                    <tr className={styles.empty}>
+                        <td colSpan={props.time ? 4 : 3}>
+                            <EmptyState title="No transactions">
+                                {props.emptyStateMessage}
+                            </EmptyState>
+                        </td>
                     </tr>
                 )}
             </tbody>

@@ -1,0 +1,16 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(4 * var(--unit)) calc(3 * var(--unit));
+}
+
+.title {
+    font: 400 var(--fontSizeMd) var(--fontPrimary);
+}
+
+.message {
+    color: var(--textSecondary);
+    font: 400 var(--fontSizeBase) var(--fontPrimary);
+}

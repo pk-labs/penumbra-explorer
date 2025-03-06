@@ -3,9 +3,10 @@
     --fontPrimary: Poppins, sans-serif;
     --fontSecondary: "Work Sans", sans-serif;
     --fontMono: _fontMono, monospace;
-    --fontSizeBase: 1rem;
     --fontSizeXs: calc(1rem / 16 * 12);
     --fontSizeSm: calc(1rem / 16 * 14);
+    --fontSizeBase: 1rem;
+    --fontSizeMd: calc(1rem / 16 * 18);
     --fontSize2Xl: calc(1rem / 16 * 24);
     --fontSize3Xl: calc(1rem / 16 * 30);
     --fontSize4Xl: calc(1rem / 16 * 36);

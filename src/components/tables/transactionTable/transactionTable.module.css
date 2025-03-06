@@ -4,7 +4,7 @@
         border-radius: var(--roundedSmall);
     }
 
-    tbody tr:hover {
+    tbody tr:not(.empty):hover {
         background: var(--hoverPurple);
         cursor: pointer;
     }

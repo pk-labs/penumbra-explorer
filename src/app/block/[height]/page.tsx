@@ -52,7 +52,11 @@ const BlockViewPage: FC<Props> = async props => {
                         {block.transactions.length}
                     </Parameter>
                 </Parameters>
-                <TransactionTable transactions={block.transactions} embedded />
+                <TransactionTable
+                    emptyStateMessage="This block does not contain any transactions"
+                    transactions={block.transactions}
+                    embedded
+                />
                 <JsonTree data={block} />
             </View>
         </Container>
