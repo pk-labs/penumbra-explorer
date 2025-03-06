@@ -34,7 +34,7 @@
     --zIndexModal: 30;
 
     /* Animation and effects */
-    --blur: 32px;
+    --blurSmall: 8px;
     --blurFull: 64px;
     --fastOutSlowIn: cubic-bezier(0.4, 0, 0.2, 1);
     --rounded: 16px;
