@@ -69,6 +69,7 @@ type QueryRoot {
     block(height: Int!): Block
     blocks(selector: BlocksSelector!): [Block!]!
     search(slug: String!): SearchResult
+    stats: Stats!
     transaction(hash: String!): Transaction
     transactions(selector: TransactionsSelector!): [Transaction!]!
 }
@@ -83,6 +84,10 @@ type SpendBody {
     balanceCommitment: String!
     nullifier: String!
     rk: String!
+}
+
+type Stats {
+    totalTransactionsCount: Int!
 }
 
 type Transaction {

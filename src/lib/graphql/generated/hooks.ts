@@ -95,6 +95,17 @@ export const SearchDocument = gql`
 export function useSearchQuery(options: Omit<Urql.UseQueryArgs<Types.SearchQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.SearchQuery, Types.SearchQueryVariables>({ query: Types.SearchDocument, ...options });
 };
+export const StatsDocument = gql`
+    query Stats {
+  stats {
+    totalTransactionsCount
+  }
+}
+    `;
+
+export function useStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.StatsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.StatsQuery, Types.StatsQueryVariables>({ query: Types.StatsDocument, ...options });
+};
 export const TransactionDocument = gql`
     query Transaction($hash: String!) {
   transaction(hash: $hash) {

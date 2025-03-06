@@ -102,6 +102,7 @@ export type QueryRoot = {
   block?: Maybe<Block>;
   blocks: Array<Block>;
   search?: Maybe<SearchResult>;
+  stats: Stats;
   transaction?: Maybe<Transaction>;
   transactions: Array<Transaction>;
 };
@@ -145,6 +146,11 @@ export type SpendBody = {
   balanceCommitment: Scalars['String']['output'];
   nullifier: Scalars['String']['output'];
   rk: Scalars['String']['output'];
+};
+
+export type Stats = {
+  __typename?: 'Stats';
+  totalTransactionsCount: Scalars['Int']['output'];
 };
 
 export type Transaction = {
@@ -227,6 +233,11 @@ export type SearchQueryVariables = Exact<{
 
 
 export type SearchQuery = { __typename?: 'QueryRoot', search?: { __typename: 'Block', height: number } | { __typename: 'Transaction', hash: string } | null };
+
+export type StatsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type StatsQuery = { __typename?: 'QueryRoot', stats: { __typename?: 'Stats', totalTransactionsCount: number } };
 
 export type TransactionQueryVariables = Exact<{
   hash: Scalars['String']['input'];
@@ -319,6 +330,13 @@ export const SearchDocument = gql`
     ... on Transaction {
       hash
     }
+  }
+}
+    `;
+export const StatsDocument = gql`
+    query Stats {
+  stats {
+    totalTransactionsCount
   }
 }
     `;
