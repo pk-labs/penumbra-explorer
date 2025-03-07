@@ -7,6 +7,7 @@ import {
 } from '@/lib/graphql/generated/types'
 import { transactionsQuery } from '@/lib/graphql/queries'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
+import { decodeTransaction } from '@/lib/utils'
 
 const loadTransactions = async (
     selector: TransactionsSelector
@@ -28,6 +29,7 @@ const loadTransactions = async (
 
     return result.data?.transactions?.map(transaction => ({
         ...transaction,
+        decoded: decodeTransaction(transaction.raw),
         hash: transaction.hash.toLowerCase(),
         timeAgo: transaction.block.createdAt
             ? now.to(transaction.block.createdAt)

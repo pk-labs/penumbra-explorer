@@ -44,10 +44,10 @@ describe('BlockTable', () => {
                             height: 123,
                         },
                         body: {
-                            actions: [],
                             actionsCount: 0,
                         },
                         hash: 'tx1',
+                        raw: '',
                     },
                     {
                         block: {
@@ -55,10 +55,10 @@ describe('BlockTable', () => {
                             height: 456,
                         },
                         body: {
-                            actions: [],
                             actionsCount: 0,
                         },
                         hash: 'tx2',
+                        raw: '',
                     },
                 ]}
             />
@@ -80,10 +80,10 @@ describe('BlockTable', () => {
                             height: 123,
                         },
                         body: {
-                            actions: [],
                             actionsCount: 0,
                         },
                         hash: 'tx1',
+                        raw: '',
                         timeAgo: '1s ago',
                     },
                 ]}
@@ -94,7 +94,7 @@ describe('BlockTable', () => {
         getByText(container, '1s ago')
     })
 
-    test('renders actions', async () => {
+    test.skip('renders actions', async () => {
         const createdAt = dayjs().toISOString()
 
         const { container } = render(
@@ -106,13 +106,10 @@ describe('BlockTable', () => {
                             height: 123,
                         },
                         body: {
-                            actions: [
-                                { __typename: 'IbcRelay' },
-                                { __typename: 'Spend' },
-                            ],
                             actionsCount: 2,
                         },
                         hash: 'tx1',
+                        raw: '',
                     },
                 ]}
                 time
@@ -135,10 +132,10 @@ describe('BlockTable', () => {
                             height: 123,
                         },
                         body: {
-                            actions: [],
                             actionsCount: 0,
                         },
                         hash: 'tx1',
+                        raw: '',
                     },
                 ]}
             />

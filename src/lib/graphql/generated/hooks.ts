@@ -11,9 +11,6 @@ export const TransactionFragmentDoc = gql`
     createdAt
   }
   body {
-    actions {
-      __typename
-    }
     actionsCount
     memo
     parameters {
@@ -50,11 +47,9 @@ export const PartialTransactionFragmentDoc = gql`
     createdAt
   }
   body {
-    actions {
-      __typename
-    }
     actionsCount
   }
+  raw
 }
     `;
 export const BlockDocument = gql`

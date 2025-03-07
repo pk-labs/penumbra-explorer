@@ -5,9 +5,7 @@ fragment PartialTransaction on Transaction {
         createdAt
     }
     body {
-        actions {
-            __typename
-        }
         actionsCount
     }
+    raw
 }

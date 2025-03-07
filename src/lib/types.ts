@@ -14,5 +14,6 @@ export interface TransformedTransactionFragment extends TransactionFragment {
 
 export interface TransformedPartialTransactionFragment
     extends PartialTransactionFragment {
+    decoded?: Record<string, any>
     timeAgo?: string
 }
