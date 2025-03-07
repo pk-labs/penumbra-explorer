@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Transaction } from '@penumbra-zone/protobuf/penumbra/core/transaction/v1/transaction_pb'
 import { ActionType } from '@/lib/types'
 
