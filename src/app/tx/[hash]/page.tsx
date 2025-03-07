@@ -73,7 +73,7 @@ const TransactionViewPage: FC<Props> = async props => {
                         </Parameter>
                     </Parameters>
                 </Subsection>
-                <JsonTree data={transaction.rawDecoded as object} />
+                {transaction.decoded && <JsonTree data={transaction.decoded} />}
             </View>
         </Container>
     )

@@ -1,17 +1,6 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import loadTransaction from './loadTransaction'
 
-jest.mock(
-    '@penumbra-zone/protobuf/penumbra/core/transaction/v1/transaction_pb',
-    () => ({
-        Transaction: {
-            fromBinary: () => ({
-                toJson: () => ({}),
-            }),
-        },
-    })
-)
-
 jest.mock('../../graphql/createGraphqlClient')
 
 describe('loadTransaction', () => {

@@ -1,5 +1,5 @@
-import { Transaction } from '@penumbra-zone/protobuf/penumbra/core/transaction/v1/transaction_pb'
 import { TransformedTransactionFragment } from '@/lib/types'
+import { decodeTransaction } from '@/lib/utils'
 import createGraphqlClient from '../../graphql/createGraphqlClient'
 import {
     TransactionQuery,
@@ -27,21 +27,10 @@ const loadTransaction = async (
         return
     }
 
-    let rawDecoded
-
-    try {
-        rawDecoded = Transaction.fromBinary(
-            new Uint8Array(Buffer.from(result.data.transaction.raw, 'base64'))
-        ).toJson()
-    } catch (e) {
-        console.error(e)
-        rawDecoded = { error: String(e) }
-    }
-
     return {
         ...result.data.transaction,
+        decoded: decodeTransaction(result.data.transaction.raw),
         hash: result.data.transaction.hash.toLowerCase(),
-        rawDecoded,
     }
 }
 

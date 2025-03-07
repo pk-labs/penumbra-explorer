@@ -1,4 +1,3 @@
-import { JsonValue } from 'type-fest'
 import {
     PartialBlockFragment,
     PartialTransactionFragment,
@@ -10,7 +9,7 @@ export interface TransformedPartialBlockFragment extends PartialBlockFragment {
 }
 
 export interface TransformedTransactionFragment extends TransactionFragment {
-    rawDecoded: JsonValue
+    decoded?: object
 }
 
 export interface TransformedPartialTransactionFragment
