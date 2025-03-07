@@ -2,6 +2,11 @@
 import '@testing-library/jest-dom'
 
 // TODO: Remove again when no longer using @penumbra-zone/protobuf
+jest.mock('../../lib/utils/findPrimaryAction/findPrimaryAction', () =>
+    jest.fn()
+)
+
+// TODO: Remove again when no longer using @penumbra-zone/protobuf
 jest.mock('../../lib/utils/decodeTransaction/decodeTransaction', () =>
     jest.fn()
 )

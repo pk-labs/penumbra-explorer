@@ -3,7 +3,6 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import {
-    Actions,
     Breadcrumb,
     Breadcrumbs,
     Container,
@@ -17,7 +16,7 @@ import {
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { loadTransaction } from '@/lib/loaders'
-import { shortenHash, transformActions } from '@/lib/utils'
+import { shortenHash } from '@/lib/utils'
 import styles from './page.module.css'
 
 interface Props {
@@ -35,8 +34,6 @@ const TransactionViewPage: FC<Props> = async props => {
     if (!transaction) {
         notFound()
     }
-
-    const actions = transformActions(transaction.decoded?.body?.actions ?? [])
 
     return (
         <Container className={styles.root} narrow>
@@ -62,7 +59,7 @@ const TransactionViewPage: FC<Props> = async props => {
                     </Parameter>
                 </Parameters>
                 {transaction.body.memo && <Memo />}
-                {actions.length ? <Actions actions={actions} /> : null}
+                {/*<Actions actions={[actions]} />*/}
                 <Subsection title="Parameters">
                     <Parameters>
                         <Parameter name="Transaction fee">

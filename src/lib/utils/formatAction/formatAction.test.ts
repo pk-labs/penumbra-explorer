@@ -1,11 +1,14 @@
+import { ActionType } from '@/lib/types'
 import formatAction from './formatAction'
 
 describe('formatAction', () => {
     test('formats single-word action', async () => {
-        expect(formatAction('Spend')).toBe('spend')
+        expect(formatAction(ActionType.send)).toBe('send')
     })
 
     test('formats multi-word action', async () => {
-        expect(formatAction('IbcRelay')).toBe('ibc relay')
+        expect(formatAction(ActionType.unknownInternal)).toBe(
+            'unknown internal'
+        )
     })
 })

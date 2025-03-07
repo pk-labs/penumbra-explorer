@@ -1,5 +1,5 @@
 import { TransformedTransactionFragment } from '@/lib/types'
-import { decodeTransaction } from '@/lib/utils'
+import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import createGraphqlClient from '../../graphql/createGraphqlClient'
 import {
     TransactionQuery,
@@ -27,10 +27,22 @@ const loadTransaction = async (
         return
     }
 
+    let json
+    let primaryAction
+
+    try {
+        const decoded = decodeTransaction(result.data.transaction.raw)
+        json = decoded.toJson() as Record<string, any>
+        primaryAction = findPrimaryAction(decoded)
+    } catch (e) {
+        console.error(e)
+    }
+
     return {
         ...result.data.transaction,
-        decoded: decodeTransaction(result.data.transaction.raw),
+        decoded: json,
         hash: result.data.transaction.hash.toLowerCase(),
+        primaryAction,
     }
 }
 

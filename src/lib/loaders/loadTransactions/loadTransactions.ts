@@ -7,7 +7,7 @@ import {
 } from '@/lib/graphql/generated/types'
 import { transactionsQuery } from '@/lib/graphql/queries'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import { decodeTransaction } from '@/lib/utils'
+import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 
 const loadTransactions = async (
     selector: TransactionsSelector
@@ -27,14 +27,28 @@ const loadTransactions = async (
 
     const now = dayjs()
 
-    return result.data?.transactions?.map(transaction => ({
-        ...transaction,
-        decoded: decodeTransaction(transaction.raw),
-        hash: transaction.hash.toLowerCase(),
-        timeAgo: transaction.block.createdAt
-            ? now.to(transaction.block.createdAt)
-            : undefined,
-    }))
+    return result.data?.transactions?.map(transaction => {
+        let json
+        let primaryAction
+
+        try {
+            const decoded = decodeTransaction(transaction.raw)
+            json = decoded.toJson() as Record<string, any>
+            primaryAction = findPrimaryAction(decoded)
+        } catch (e) {
+            console.error(e)
+        }
+
+        return {
+            ...transaction,
+            decoded: json,
+            hash: transaction.hash.toLowerCase(),
+            primaryAction,
+            timeAgo: transaction.block.createdAt
+                ? now.to(transaction.block.createdAt)
+                : undefined,
+        }
+    })
 }
 
 export default loadTransactions
