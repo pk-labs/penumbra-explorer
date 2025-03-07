@@ -2,7 +2,7 @@
     --panelGradientStartColor: rgba(174, 174, 174, 0.25);
     --panelGradientStopColor: rgba(174, 174, 174, 0.03);
     display: grid;
-    height: 196px;
+    /*height: 196px;*/
     padding: calc(3 * var(--unit));
     border-radius: var(--rounded);
     backdrop-filter: blur(var(--blurFull));
@@ -11,8 +11,8 @@
         var(--panelGradientStartColor) 0%,
         var(--panelGradientStopColor) 100%
     );
-
-    grid-template: 1fr 1fr / 1fr 1fr;
+    grid-template: 1fr / 1fr 1fr;
+    /*grid-template: 1fr 1fr / 1fr 1fr;*/
 }
 
 .header {
