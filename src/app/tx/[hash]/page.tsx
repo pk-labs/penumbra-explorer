@@ -17,7 +17,7 @@ import {
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { loadTransaction } from '@/lib/loaders'
-import { shortenHash } from '@/lib/utils'
+import { shortenHash, transformActions } from '@/lib/utils'
 import styles from './page.module.css'
 
 interface Props {
@@ -35,6 +35,8 @@ const TransactionViewPage: FC<Props> = async props => {
     if (!transaction) {
         notFound()
     }
+
+    const actions = transformActions(transaction.decoded?.body?.actions ?? [])
 
     return (
         <Container className={styles.root} narrow>
@@ -60,7 +62,7 @@ const TransactionViewPage: FC<Props> = async props => {
                     </Parameter>
                 </Parameters>
                 {transaction.body.memo && <Memo />}
-                <Actions actions={transaction.body.actions} />
+                {actions.length ? <Actions actions={actions} /> : null}
                 <Subsection title="Parameters">
                     <Parameters>
                         <Parameter name="Transaction fee">

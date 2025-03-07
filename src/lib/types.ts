@@ -9,7 +9,7 @@ export interface TransformedPartialBlockFragment extends PartialBlockFragment {
 }
 
 export interface TransformedTransactionFragment extends TransactionFragment {
-    decoded?: object
+    decoded?: Record<string, any>
 }
 
 export interface TransformedPartialTransactionFragment
