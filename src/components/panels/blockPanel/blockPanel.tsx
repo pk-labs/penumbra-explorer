@@ -12,7 +12,7 @@ export interface Props {
 
 const BlockPanel: FC<Props> = props => (
     <Panel
-        className={clsx(styles.root, props.className)}
+        className={clsx(styles.root, styles.gradient, props.className)}
         // footer="Block time ~12s"
         number={props.number}
         title={

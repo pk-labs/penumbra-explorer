@@ -11,7 +11,7 @@ export interface Props {
 
 const BurnPanel: FC<Props> = props => (
     <Panel
-        className={clsx(styles.root, props.className)}
+        className={clsx(styles.root, styles.gradient, props.className)}
         footer="Average"
         number={86990}
         numberSuffix=" UM"

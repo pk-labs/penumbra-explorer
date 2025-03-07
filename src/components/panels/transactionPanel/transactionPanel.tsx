@@ -12,7 +12,7 @@ export interface Props {
 
 const TransactionPanel: FC<Props> = props => (
     <Panel
-        className={clsx(styles.root, props.className)}
+        className={clsx(styles.root, styles.gradient, props.className)}
         // footer={`${formatNumber(68499)} new today`}
         number={props.number}
         title={
