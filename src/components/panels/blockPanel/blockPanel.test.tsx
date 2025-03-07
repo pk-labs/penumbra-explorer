@@ -21,6 +21,6 @@ describe('BlockPanel', () => {
 
     test('applies custom classes', async () => {
         const { container } = render(<BlockPanel className="foo bar" />)
-        getByText(container, 'root foo bar')
+        getByText(container, 'root gradient foo bar')
     })
 })
