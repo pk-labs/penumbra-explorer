@@ -8,7 +8,7 @@ import {
 import { blocksQuery } from '@/lib/graphql/queries'
 import { TransformedPartialBlockFragment } from '@/lib/types'
 
-const loadBlocks = async (
+const getBlocks = async (
     selector: BlocksSelector
 ): Promise<TransformedPartialBlockFragment[] | undefined> => {
     const graphqlClient = createGraphqlClient()
@@ -29,4 +29,4 @@ const loadBlocks = async (
     }))
 }
 
-export default loadBlocks
+export default getBlocks

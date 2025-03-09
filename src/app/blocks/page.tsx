@@ -10,8 +10,8 @@ import {
     Pagination,
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
+import { getBlocks } from '@/lib/data'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
-import { loadBlocks } from '@/lib/loaders'
 
 export const metadata: Metadata = {
     title: `Blocks - ${rootTitle}`,
@@ -32,7 +32,7 @@ const BlocksPage: FC<Props> = async props => {
     let fromPrev: number | undefined
 
     if (Number.isInteger(fromParam)) {
-        blocks = await loadBlocks({
+        blocks = await getBlocks({
             range: { from: fromParam, to: fromParam + limit - 1 },
         })
 
@@ -48,7 +48,7 @@ const BlocksPage: FC<Props> = async props => {
             redirect('/blocks')
         }
     } else {
-        blocks = await loadBlocks({ latest: { limit } })
+        blocks = await getBlocks({ latest: { limit } })
 
         if (blocks?.length) {
             const { height } = blocks[blocks.length - 1]

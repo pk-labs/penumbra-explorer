@@ -13,7 +13,7 @@ import {
     View,
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
-import { loadBlock } from '@/lib/loaders'
+import { getBlock } from '@/lib/data'
 import { formatNumber } from '@/lib/utils'
 import styles from './page.module.css'
 
@@ -27,7 +27,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => ({
 
 const BlockViewPage: FC<Props> = async props => {
     const params = await props.params
-    const block = await loadBlock(Number(params.height))
+    const block = await getBlock(Number(params.height))
 
     if (!block) {
         notFound()

@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation'
 import { FC, useCallback, useState } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
+import { UmPrice } from '@/lib/types'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
@@ -15,6 +16,7 @@ import styles from './navigationBar.module.css'
 
 interface Props {
     className?: string
+    umPrice?: UmPrice
 }
 
 const NavigationBar: FC<Props> = props => {
@@ -67,11 +69,21 @@ const NavigationBar: FC<Props> = props => {
                         </Modal>
                     </>
                 )}
-                <div className={styles.price}>
-                    <span className={styles.label}>UM Price:</span>
-                    <span>$0.98</span>
-                    <span className={styles.movement}>(+1.1%)</span>
-                </div>
+                {props.umPrice && (
+                    <div className={styles.price}>
+                        <span className={styles.label}>UM Price:</span>
+                        <span>${props.umPrice.price.toFixed(2)}</span>
+                        <span
+                            className={clsx(
+                                props.umPrice.change > 0 && styles.positive,
+                                props.umPrice.change < 0 && styles.negative
+                            )}
+                        >
+                            ({props.umPrice.change > 0 && '+'}
+                            {props.umPrice.change.toFixed(1)}%)
+                        </span>
+                    </div>
+                )}
             </div>
         </header>
     )

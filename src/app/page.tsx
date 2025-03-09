@@ -9,14 +9,14 @@ import {
     TransactionPanel,
     TransactionTable,
 } from '@/components'
+import { getBlocks, getStats, getTransactions } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { loadBlocks, loadStats, loadTransactions } from '@/lib/loaders'
 import styles from './page.module.css'
 
 const HomePage: FC = async () => {
-    const stats = await loadStats()
-    const latestBlocks = await loadBlocks({ latest: { limit: 10 } })
-    const latestTransactions = await loadTransactions({ latest: { limit: 10 } })
+    const stats = await getStats()
+    const latestBlocks = await getBlocks({ latest: { limit: 10 } })
+    const latestTransactions = await getTransactions({ latest: { limit: 10 } })
 
     let latestBlockHeight
 

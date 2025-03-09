@@ -56,7 +56,11 @@
         color: var(--textSecondary);
     }
 
-    .movement {
-        color: var(--successLight);
+    .positive {
+        color: var(--positiveLight);
+    }
+
+    .negative {
+        color: var(--negativeLight);
     }
 }

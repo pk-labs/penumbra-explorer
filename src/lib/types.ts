@@ -60,3 +60,8 @@ export enum ActionType {
     validatorDefinition = 'Validator Definition',
     validatorVote = 'Validator Vote',
 }
+
+export interface UmPrice {
+    change: number
+    price: number
+}

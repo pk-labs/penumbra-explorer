@@ -16,7 +16,7 @@ import {
     View,
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
-import { loadTransaction } from '@/lib/loaders'
+import { getTransaction } from '@/lib/data'
 import { shortenHash } from '@/lib/utils'
 import styles from './page.module.css'
 
@@ -30,7 +30,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => ({
 
 const TransactionViewPage: FC<Props> = async props => {
     const params = await props.params
-    const transaction = await loadTransaction(params.hash.toUpperCase())
+    const transaction = await getTransaction(params.hash.toUpperCase())
 
     if (!transaction) {
         notFound()

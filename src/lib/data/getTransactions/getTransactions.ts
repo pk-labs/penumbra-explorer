@@ -13,7 +13,7 @@ import {
     transformActions,
 } from '@/lib/utils'
 
-const loadTransactions = async (
+const getTransactions = async (
     selector: TransactionsSelector
 ): Promise<TransformedPartialTransactionFragment[] | undefined> => {
     const graphqlClient = createGraphqlClient()
@@ -59,4 +59,4 @@ const loadTransactions = async (
     })
 }
 
-export default loadTransactions
+export default getTransactions

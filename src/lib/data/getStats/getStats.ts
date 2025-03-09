@@ -2,7 +2,7 @@ import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import { StatsQuery, StatsQueryVariables } from '@/lib/graphql/generated/types'
 import { statsQuery } from '@/lib/graphql/queries'
 
-const loadStats = async (): Promise<StatsQuery['stats'] | undefined> => {
+const getStats = async (): Promise<StatsQuery['stats'] | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -16,4 +16,4 @@ const loadStats = async (): Promise<StatsQuery['stats'] | undefined> => {
     return result.data?.stats
 }
 
-export default loadStats
+export default getStats

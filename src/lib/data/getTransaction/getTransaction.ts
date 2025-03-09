@@ -11,7 +11,7 @@ import {
 } from '../../graphql/generated/types'
 import { transactionQuery } from '../../graphql/queries'
 
-const loadTransaction = async (
+const getTransaction = async (
     hash: string
 ): Promise<null | TransformedTransactionFragment | undefined> => {
     const graphqlClient = createGraphqlClient()
@@ -54,4 +54,4 @@ const loadTransaction = async (
     }
 }
 
-export default loadTransaction
+export default getTransaction

@@ -8,7 +8,7 @@ import {
     transformActions,
 } from '@/lib/utils'
 
-const loadBlock = async (
+const getBlock = async (
     height: number
 ): Promise<null | TransformedBlockFragment | undefined> => {
     const graphqlClient = createGraphqlClient()
@@ -48,4 +48,4 @@ const loadBlock = async (
     )
 }
 
-export default loadBlock
+export default getBlock

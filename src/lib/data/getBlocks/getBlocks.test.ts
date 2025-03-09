@@ -1,30 +1,22 @@
 import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import loadTransactions from './loadTransactions'
+import getBlocks from './getBlocks'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
-jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
-    toJson: jest.fn(),
-}))
-
-describe('loadTransactions', () => {
-    test('returns transformed hash', async () => {
+describe('getBlocks', () => {
+    test('returns data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
-                    Promise.resolve({
-                        data: {
-                            transactions: [{ block: {}, hash: 'FoO' }],
-                        },
-                    }),
+                    Promise.resolve({ data: { blocks: [{ height: 99 }] } }),
             }),
         })
 
         await expect(
-            loadTransactions({ latest: { limit: 1 } })
-        ).resolves.toMatchObject([{ hash: 'foo' }])
+            getBlocks({ latest: { limit: 1 } })
+        ).resolves.toMatchObject([{ height: 99 }])
     })
 
     test('returns transformed creation date', async () => {
@@ -34,18 +26,14 @@ describe('loadTransactions', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: {
-                            transactions: [
-                                { block: { createdAt }, hash: 'foo' },
-                            ],
-                        },
+                        data: { blocks: [{ createdAt }] },
                     }),
             }),
         })
 
         await expect(
-            loadTransactions({ latest: { limit: 1 } })
-        ).resolves.toMatchObject([{ hash: 'foo', timeAgo: '1s ago' }])
+            getBlocks({ latest: { limit: 1 } })
+        ).resolves.toMatchObject([{ timeAgo: '1s ago' }])
     })
 
     test('logs error', async () => {
@@ -57,7 +45,7 @@ describe('loadTransactions', () => {
 
         const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
-        await loadTransactions({ latest: { limit: 1 } })
+        await getBlocks({ latest: { limit: 1 } })
         expect(consoleError).toHaveBeenCalledWith('foo')
     })
 })

@@ -13,6 +13,13 @@ jest.mock('lucide-react', () => ({
     XIcon: jest.fn(),
 }))
 
+jest.mock('motion/react', () => ({
+    AnimatePresence: (props: any) => <div>{props.children}</div>,
+    motion: {
+        div: () => <div>Search modal</div>,
+    },
+}))
+
 jest.mock('../tabs/tabs', () => () => <div>Tabs</div>)
 
 jest.mock('../search/search')
@@ -20,13 +27,6 @@ jest.mock('../search/search')
 jest.mock('../../lib/graphql/graphqlClientProvider', () => (props: any) => (
     <div>{props.children}</div>
 ))
-
-jest.mock('motion/react', () => ({
-    AnimatePresence: (props: any) => <div>{props.children}</div>,
-    motion: {
-        div: () => <div>Search modal</div>,
-    },
-}))
 
 describe('NavigationBar', () => {
     test('hides search on home page', async () => {
@@ -42,6 +42,26 @@ describe('NavigationBar', () => {
 
         fireEvent.click(getByText(container, 'Search'))
         getByText(container, 'Search modal')
+    })
+
+    describe('renders UM price', () => {
+        test('with positive change', async () => {
+            const { container } = render(
+                <NavigationBar umPrice={{ change: 1.234, price: 9999 }} />
+            )
+
+            getByText(container, '$9999.00')
+            expect(getByText(container, '(+1.2%)')).toHaveClass('positive')
+        })
+
+        test('with negative change', async () => {
+            const { container } = render(
+                <NavigationBar umPrice={{ change: -1.234, price: 9.991 }} />
+            )
+
+            getByText(container, '$9.99')
+            expect(getByText(container, '(-1.2%)')).toHaveClass('negative')
+        })
     })
 
     test('applies custom classes', async () => {

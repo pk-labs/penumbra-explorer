@@ -1,5 +1,5 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import loadTransaction from './loadTransaction'
+import getTransaction from './getTransaction'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
@@ -8,7 +8,7 @@ jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
     toJson: jest.fn(),
 }))
 
-describe('loadTransaction', () => {
+describe('getTransaction', () => {
     test('returns transformed hash', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
@@ -19,7 +19,7 @@ describe('loadTransaction', () => {
             }),
         })
 
-        await expect(loadTransaction('1')).resolves.toMatchObject({
+        await expect(getTransaction('1')).resolves.toMatchObject({
             hash: 'foo',
         })
     })
@@ -33,7 +33,7 @@ describe('loadTransaction', () => {
 
         const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
-        await loadTransaction('1')
+        await getTransaction('1')
         expect(consoleError).toHaveBeenCalledWith('foo')
     })
 })

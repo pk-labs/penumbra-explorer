@@ -1,10 +1,10 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import loadStats from './loadStats'
+import getStats from './getStats'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
-describe('loadStats', () => {
+describe('getStats', () => {
     test('returns data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
@@ -15,7 +15,7 @@ describe('loadStats', () => {
             }),
         })
 
-        await expect(loadStats()).resolves.toBe(true)
+        await expect(getStats()).resolves.toBe(true)
     })
 
     test('logs error', async () => {
@@ -27,7 +27,7 @@ describe('loadStats', () => {
 
         const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
-        await loadStats()
+        await getStats()
         expect(consoleError).toHaveBeenCalledWith('foo')
     })
 })

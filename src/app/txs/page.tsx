@@ -10,7 +10,7 @@ import {
     TransactionTable,
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
-import { loadTransactions } from '@/lib/loaders'
+import { getTransactions } from '@/lib/data'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ const TransactionsPage: FC<Props> = async props => {
     let fromNext: string | undefined
 
     if (fromParam) {
-        transactions = await loadTransactions({
+        transactions = await getTransactions({
             range: { fromTxHash: fromParam.toUpperCase(), limit },
         })
 
@@ -42,7 +42,7 @@ const TransactionsPage: FC<Props> = async props => {
             redirect('/txs')
         }
     } else {
-        transactions = await loadTransactions({ latest: { limit } })
+        transactions = await getTransactions({ latest: { limit } })
 
         if (transactions?.length) {
             fromNext = transactions[transactions.length - 1].hash
