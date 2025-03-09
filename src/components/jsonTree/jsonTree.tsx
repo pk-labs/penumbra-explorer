@@ -17,13 +17,12 @@ const JsonTree: FC<Props> = props => (
     <Subsection title="Raw JSON">
         <div className={styles.container}>
             <ReactJsonView
-                enableClipboard={false}
+                collapsed={2}
                 src={props.data}
                 style={{
                     background: 'transparent',
                 }}
                 theme="twilight"
-                collapsed
             />
         </div>
     </Subsection>
