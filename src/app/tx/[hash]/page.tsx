@@ -17,7 +17,6 @@ import {
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { loadTransaction } from '@/lib/loaders'
-import { ActionType } from '@/lib/types'
 import { shortenHash } from '@/lib/utils'
 import styles from './page.module.css'
 
@@ -36,13 +35,6 @@ const TransactionViewPage: FC<Props> = async props => {
     if (!transaction) {
         notFound()
     }
-
-    const actions = transaction.json?.body?.actions?.map((action: any) => {
-        const keys = Object.keys(action)
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        return ActionType[keys[0]] ?? ActionType.unknown
-    })
 
     return (
         <Container className={styles.root} narrow>
@@ -68,7 +60,7 @@ const TransactionViewPage: FC<Props> = async props => {
                     </Parameter>
                 </Parameters>
                 {transaction.body.memo && <Memo />}
-                <Actions actions={actions} />
+                <Actions actions={transaction.actions} />
                 <Subsection title="Parameters">
                     <Parameters>
                         <Parameter name="Transaction fee">

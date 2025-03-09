@@ -7,7 +7,11 @@ import {
 } from '@/lib/graphql/generated/types'
 import { transactionsQuery } from '@/lib/graphql/queries'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
+import {
+    decodeTransaction,
+    findPrimaryAction,
+    transformActions,
+} from '@/lib/utils'
 
 const loadTransactions = async (
     selector: TransactionsSelector
@@ -30,17 +34,20 @@ const loadTransactions = async (
     return result.data?.transactions?.map(transaction => {
         let json
         let primaryAction
+        let actions
 
         try {
             const decoded = decodeTransaction(transaction.raw)
             json = decoded.toJson() as Record<string, any>
             primaryAction = findPrimaryAction(decoded)
+            actions = transformActions(decoded.body?.actions)
         } catch (e) {
             console.error(e)
         }
 
         return {
             ...transaction,
+            actions: actions ?? [],
             hash: transaction.hash.toLowerCase(),
             json,
             primaryAction,

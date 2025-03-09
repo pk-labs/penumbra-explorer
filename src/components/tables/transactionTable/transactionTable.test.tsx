@@ -39,23 +39,19 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
+                        actions: [],
                         block: {
                             createdAt,
                             height: 123,
-                        },
-                        body: {
-                            actionsCount: 0,
                         },
                         hash: 'tx1',
                         raw: '',
                     },
                     {
+                        actions: [],
                         block: {
                             createdAt,
                             height: 456,
-                        },
-                        body: {
-                            actionsCount: 0,
                         },
                         hash: 'tx2',
                         raw: '',
@@ -75,12 +71,10 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
+                        actions: [],
                         block: {
                             createdAt,
                             height: 123,
-                        },
-                        body: {
-                            actionsCount: 0,
                         },
                         hash: 'tx1',
                         raw: '',
@@ -101,12 +95,10 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
+                        actions: [],
                         block: {
                             createdAt,
                             height: 123,
-                        },
-                        body: {
-                            actionsCount: 2,
                         },
                         hash: 'tx1',
                         raw: '',
@@ -127,12 +119,10 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
+                        actions: [],
                         block: {
                             createdAt,
                             height: 123,
-                        },
-                        body: {
-                            actionsCount: 0,
                         },
                         hash: 'tx1',
                         raw: '',

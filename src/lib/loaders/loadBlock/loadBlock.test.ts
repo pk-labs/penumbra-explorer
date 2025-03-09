@@ -3,6 +3,10 @@ import loadBlock from './loadBlock'
 
 jest.mock('../../graphql/createGraphqlClient')
 
+jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
+    toJson: jest.fn(),
+}))
+
 describe('loadBlock', () => {
     test('returns data with lowercase hash', async () => {
         ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({

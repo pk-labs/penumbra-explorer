@@ -75,9 +75,9 @@ const TransactionTable: FC<Props> = props => {
                                         )}
                                     </Pill>
                                 )}
-                                {transaction.body.actionsCount > 1 && (
+                                {transaction.actions.length > 1 && (
                                     <span className={styles.moreActions}>
-                                        +{transaction.body.actionsCount - 1}
+                                        +{transaction.actions.length - 1}
                                     </span>
                                 )}
                             </td>

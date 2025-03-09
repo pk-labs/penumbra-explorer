@@ -10,8 +10,8 @@ import {
     TransactionTable,
 } from '@/components'
 import { rootTitle } from '@/lib/constants'
-import { PartialTransactionFragment } from '@/lib/graphql/generated/types'
 import { loadTransactions } from '@/lib/loaders'
+import { TransformedPartialTransactionFragment } from '@/lib/types'
 
 export const metadata: Metadata = {
     title: `Transactions - ${rootTitle}`,
@@ -27,7 +27,7 @@ const TransactionsPage: FC<Props> = async props => {
     const searchParams = await props.searchParams
     const fromParam = searchParams.from
     const limit = 20
-    let transactions: PartialTransactionFragment[] | undefined
+    let transactions: TransformedPartialTransactionFragment[] | undefined
     let fromNext: string | undefined
 
     if (fromParam) {

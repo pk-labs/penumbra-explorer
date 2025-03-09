@@ -11,7 +11,6 @@ export const TransactionFragmentDoc = gql`
     createdAt
   }
   body {
-    actionsCount
     memo
     parameters {
       chainId
@@ -45,9 +44,6 @@ export const PartialTransactionFragmentDoc = gql`
   block {
     height
     createdAt
-  }
-  body {
-    actionsCount
   }
   raw
 }
