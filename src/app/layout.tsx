@@ -25,7 +25,6 @@ interface Props {
 }
 
 const RootLayout: FC<Props> = async props => {
-    // TODO: Cache and revalidate
     const umPrice = await getUmPrice()
 
     return (
