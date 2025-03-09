@@ -40,8 +40,8 @@ const loadTransaction = async (
 
     return {
         ...result.data.transaction,
-        decoded: json,
         hash: result.data.transaction.hash.toLowerCase(),
+        json,
         primaryAction,
     }
 }

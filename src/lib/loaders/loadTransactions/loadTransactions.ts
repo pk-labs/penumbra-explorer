@@ -41,8 +41,8 @@ const loadTransactions = async (
 
         return {
             ...transaction,
-            decoded: json,
             hash: transaction.hash.toLowerCase(),
+            json,
             primaryAction,
             timeAgo: transaction.block.createdAt
                 ? now.to(transaction.block.createdAt)

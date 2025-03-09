@@ -9,13 +9,13 @@ export interface TransformedPartialBlockFragment extends PartialBlockFragment {
 }
 
 export interface TransformedTransactionFragment extends TransactionFragment {
-    decoded?: Record<string, any>
+    json?: Record<string, any>
     primaryAction?: ActionType
 }
 
 export interface TransformedPartialTransactionFragment
     extends PartialTransactionFragment {
-    decoded?: Record<string, any>
+    json?: Record<string, any>
     primaryAction?: ActionType
     timeAgo?: string
 }

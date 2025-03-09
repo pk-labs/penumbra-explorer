@@ -37,7 +37,7 @@ const TransactionViewPage: FC<Props> = async props => {
         notFound()
     }
 
-    const actions = transaction.decoded?.body?.actions?.map((action: any) => {
+    const actions = transaction.json?.body?.actions?.map((action: any) => {
         const keys = Object.keys(action)
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -81,7 +81,7 @@ const TransactionViewPage: FC<Props> = async props => {
                         </Parameter>
                     </Parameters>
                 </Subsection>
-                {transaction.decoded && <JsonTree data={transaction.decoded} />}
+                {transaction.json && <JsonTree data={transaction.json} />}
             </View>
         </Container>
     )
