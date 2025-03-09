@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 import { faker } from '@faker-js/faker'
 
 export const generateBlock = () => ({

@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 import Image from 'next/image'
 import { FC } from 'react'
 import { encrypted } from '@/lib/images'

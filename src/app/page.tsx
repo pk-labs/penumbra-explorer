@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 import { FC } from 'react'
 import {
     BlockPanel,

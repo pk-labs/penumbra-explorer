@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'

@@ -2,14 +2,15 @@ import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import loadBlock from './loadBlock'
 
 jest.mock('../../graphql/createGraphqlClient')
+const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
 jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
     toJson: jest.fn(),
 }))
 
 describe('loadBlock', () => {
-    test('returns data with lowercase hash', async () => {
-        ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
+    test('returns transformed hash', async () => {
+        createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
@@ -24,7 +25,7 @@ describe('loadBlock', () => {
     })
 
     test('logs error', async () => {
-        ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
+        createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () => Promise.resolve({ error: 'foo' }),
             }),

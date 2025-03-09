@@ -41,6 +41,7 @@ const loadTransaction = async (
         primaryAction = findPrimaryAction(decoded)
         actions = transformActions(decoded.body?.actions)
     } catch (e) {
+        // istanbul ignore next
         console.error(e)
     }
 

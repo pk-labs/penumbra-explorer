@@ -2,10 +2,11 @@ import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import loadStats from './loadStats'
 
 jest.mock('../../graphql/createGraphqlClient')
+const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
 describe('loadStats', () => {
     test('returns data', async () => {
-        ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
+        createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
@@ -18,7 +19,7 @@ describe('loadStats', () => {
     })
 
     test('logs error', async () => {
-        ;(createGraphqlClient as jest.Mocked<any>).mockReturnValue({
+        createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () => Promise.resolve({ error: 'foo' }),
             }),

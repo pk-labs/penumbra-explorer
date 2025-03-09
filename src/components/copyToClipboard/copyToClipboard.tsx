@@ -17,7 +17,7 @@ const CopyToClipboard: FC<Props> = props => {
         (e: MouseEvent) => {
             e.stopPropagation()
 
-            /* istanbul ignore next */
+            // istanbul ignore next
             if (copied) {
                 return
             }
@@ -30,11 +30,11 @@ const CopyToClipboard: FC<Props> = props => {
                     setCopied(true)
                     timeout = setTimeout(() => setCopied(false), 3000)
                 })
-                /* istanbul ignore next */
+                // istanbul ignore next
                 .catch(console.error)
 
             return () => {
-                /* istanbul ignore next */
+                // istanbul ignore next
                 if (timeout) {
                     clearTimeout(timeout)
                 }

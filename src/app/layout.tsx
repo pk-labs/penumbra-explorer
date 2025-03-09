@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 import '@/lib/css'
 import '@/lib/fonts'
 import { Metadata } from 'next'

@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 import '@testing-library/jest-dom'
 
 // TODO: Remove again when no longer using @penumbra-zone/protobuf

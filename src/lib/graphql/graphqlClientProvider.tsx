@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 'use client'
 
 import { FC, ReactNode } from 'react'

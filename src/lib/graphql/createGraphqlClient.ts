@@ -1,4 +1,4 @@
-/* istanbul ignore file */
+// istanbul ignore file
 import { cacheExchange, Client, fetchExchange } from 'urql'
 
 const createGraphqlClient = () => {
