@@ -2,24 +2,28 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: calc(0.5 * var(--unit));
+    padding: 4px;
     border: 1px solid transparent;
     border-radius: var(--roundedSmall);
     cursor: pointer;
     transition: background 200ms var(--fastOutSlowIn);
+
+    &.small {
+        padding: 2px;
+    }
 
     &.copied {
         animation: copiedAnimation 500ms var(--fastOutSlowIn) forwards;
     }
 
     &:hover {
-        background: var(--hoverGreen);
+        background: var(--surfaceLight);
     }
 }
 
 @keyframes copiedAnimation {
     from {
-        border-color: var(--textSecondary);
+        border-color: var(--surfaceLighter);
     }
 
     to {

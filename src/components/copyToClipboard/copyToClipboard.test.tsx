@@ -38,6 +38,11 @@ describe('CopyToClipboard', () => {
         getByText(container, 'Copy')
     })
 
+    test('renders small variant', async () => {
+        const { container } = render(<CopyToClipboard data="foo" small />)
+        expect(container.firstChild).toHaveClass('small')
+    })
+
     test('applies custom classes', async () => {
         const { container } = render(
             <CopyToClipboard className="foo bar" data="foo" />

@@ -8,6 +8,7 @@ import styles from './copyToClipboard.module.css'
 interface Props {
     className?: string
     data: string
+    small?: boolean
 }
 
 const CopyToClipboard: FC<Props> = props => {
@@ -43,16 +44,19 @@ const CopyToClipboard: FC<Props> = props => {
         [copied, props.data]
     )
 
+    const size = props.small ? 12 : 16
+
     return (
         <div
             className={clsx(
                 styles.root,
+                props.small && styles.small,
                 copied && styles.copied,
                 props.className
             )}
             onClick={onClick}
         >
-            {copied ? <Check size={16} /> : <Copy size={16} />}
+            {copied ? <Check size={size} /> : <Copy size={size} />}
         </div>
     )
 }
