@@ -7,6 +7,7 @@ import { AnimatePresence } from 'motion/react'
 import {
     ChangeEvent,
     FC,
+    MouseEvent,
     useCallback,
     useEffect,
     useRef,
@@ -27,6 +28,7 @@ import SearchResultOverlay from './searchResultOverlay'
 interface Props {
     autoFocus?: boolean
     className?: string
+    onBlur?: () => void
 }
 
 const Search: FC<Props> = props => {
@@ -87,7 +89,10 @@ const Search: FC<Props> = props => {
 
     const onInputFocus = useCallback(() => setFocused(true), [])
 
-    const onInputBlur = useCallback(() => setFocused(false), [])
+    const onInputBlur = useCallback(() => {
+        setFocused(false)
+        props.onBlur?.call(undefined)
+    }, [props.onBlur])
 
     const onInputChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +112,8 @@ const Search: FC<Props> = props => {
         },
         [cancelSearchQuery, executeSearchQuery]
     )
+
+    const onClick = useCallback((e: MouseEvent) => e.stopPropagation(), [])
 
     let searchResults
 
@@ -137,7 +144,7 @@ const Search: FC<Props> = props => {
     }
 
     return (
-        <div className={clsx(styles.root, props.className)}>
+        <div className={clsx(styles.root, props.className)} onClick={onClick}>
             <SearchIcon
                 className={styles.icon}
                 onClick={focusInput}
