@@ -12,8 +12,13 @@ import {
     useRef,
     useState,
 } from 'react'
-import { useDebounceValue, useLocalStorage } from 'usehooks-ts'
-import { useSearchQuery } from '@/lib/graphql/generated/hooks'
+import { useClient } from 'urql'
+import { useDebounceCallback, useLocalStorage } from 'usehooks-ts'
+import {
+    SearchQuery,
+    SearchQueryVariables,
+} from '@/lib/graphql/generated/types'
+import { searchQuery } from '@/lib/graphql/queries'
 import styles from './search.module.css'
 import { SearchResult } from './searchResult'
 import SearchResultOverlay from './searchResultOverlay'
@@ -24,52 +29,63 @@ interface Props {
 }
 
 const Search: FC<Props> = props => {
+    const graphqlClient = useClient()
     const input = useRef<HTMLInputElement>(null)
     const [focused, setFocused] = useState(false)
-    const [query, setQuery] = useDebounceValue('', 300)
+    const [inputQuery, setInputQuery] = useState('')
+    const [searchResult, setSearchResult] = useState<number | string>()
 
-    const [searchQuery, executeSearchQuery] = useSearchQuery({
-        pause: true,
-        variables: { slug: query },
-    })
+    const executeSearchQuery = useCallback(
+        async (query: string) => {
+            const result = await graphqlClient
+                .query<
+                    SearchQuery,
+                    SearchQueryVariables
+                >(searchQuery, { slug: query })
+                .toPromise()
+
+            if (result.error) {
+                setSearchResult(undefined)
+            }
+
+            return result.data?.search?.__typename === 'Block'
+                ? result.data.search.height
+                : result.data?.search?.hash.toLowerCase()
+        },
+        [graphqlClient]
+    )
+
+    const executeDebouncedSearchQuery = useDebounceCallback(
+        executeSearchQuery,
+        300
+    )
 
     const [recentSearchResults, setRecentSearchResults] = useLocalStorage<
         Array<number | string>
     >('search', [], { initializeWithValue: false })
 
     useEffect(() => {
-        if (query) {
-            executeSearchQuery()
-        }
-    }, [executeSearchQuery, query])
-
-    useEffect(() => {
-        if (!searchQuery.data?.search) {
+        if (!searchResult) {
             return
         }
 
-        const recentSearchResult =
-            searchQuery.data.search.__typename === 'Block'
-                ? searchQuery.data?.search.height
-                : searchQuery.data?.search.hash.toLowerCase()
-
         if (recentSearchResults?.length) {
-            if (recentSearchResults[0] === recentSearchResult) {
+            if (recentSearchResults[0] === searchResult) {
                 return
             }
 
             setRecentSearchResults(
                 [
-                    recentSearchResult,
+                    searchResult,
                     ...recentSearchResults.filter(
-                        result => result !== recentSearchResult
+                        result => result !== searchResult
                     ),
                 ].slice(0, 5)
             )
         } else {
-            setRecentSearchResults([recentSearchResult])
+            setRecentSearchResults([searchResult])
         }
-    }, [recentSearchResults, searchQuery.data?.search, setRecentSearchResults])
+    }, [recentSearchResults, searchResult, setRecentSearchResults])
 
     const focusInput = useCallback(() => input.current?.focus(), [])
 
@@ -80,29 +96,34 @@ const Search: FC<Props> = props => {
     const onInputChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
             const value = e.currentTarget.value
-            const cleanedValue = value.trim().replaceAll(',', '')
+            setInputQuery(value)
 
-            setQuery(cleanedValue)
+            if (value) {
+                // executeSearchQuery(value).then(setSearchResult)
+                executeDebouncedSearchQuery(value)?.then(setSearchResult)
+            } else {
+                setSearchResult(undefined)
+            }
         },
-        [setQuery]
+        [executeDebouncedSearchQuery]
     )
 
     let searchResults
 
-    if (query) {
-        if (searchQuery.data?.search) {
+    if (inputQuery) {
+        if (searchResult) {
             searchResults = (
-                <SearchResultOverlay title={searchQuery.data.search.__typename}>
-                    <SearchResult
-                        heightOrHash={
-                            searchQuery.data.search.__typename === 'Block'
-                                ? searchQuery.data.search.height
-                                : searchQuery.data.search.hash.toLowerCase()
-                        }
-                    />
+                <SearchResultOverlay
+                    title={
+                        typeof searchResult === 'number'
+                            ? 'Block'
+                            : 'Transaction'
+                    }
+                >
+                    <SearchResult heightOrHash={searchResult} />
                 </SearchResultOverlay>
             )
-        } else if (searchQuery.data && !searchQuery.fetching) {
+        } else {
             searchResults = <SearchResultOverlay title="Nothing found" />
         }
     } else if (recentSearchResults?.length) {
