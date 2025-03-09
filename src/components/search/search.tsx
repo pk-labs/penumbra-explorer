@@ -13,12 +13,13 @@ import {
     useState,
 } from 'react'
 import { useClient } from 'urql'
-import { useDebounceCallback, useLocalStorage } from 'usehooks-ts'
+import { useLocalStorage } from 'usehooks-ts'
 import {
     SearchQuery,
     SearchQueryVariables,
 } from '@/lib/graphql/generated/types'
 import { searchQuery } from '@/lib/graphql/queries'
+import { useDebounce } from '@/lib/hooks'
 import styles from './search.module.css'
 import { SearchResult } from './searchResult'
 import SearchResultOverlay from './searchResultOverlay'
@@ -30,35 +31,30 @@ interface Props {
 
 const Search: FC<Props> = props => {
     const graphqlClient = useClient()
-    const input = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
+    const queryExecutedRef = useRef(false)
     const [focused, setFocused] = useState(false)
     const [inputQuery, setInputQuery] = useState('')
     const [searchResult, setSearchResult] = useState<number | string>()
 
-    const executeSearchQuery = useCallback(
-        async (query: string) => {
-            const result = await graphqlClient
-                .query<
-                    SearchQuery,
-                    SearchQueryVariables
-                >(searchQuery, { slug: query })
-                .toPromise()
+    const [executeSearchQuery, cancelSearchQuery] = useDebounce<
+        (query: string) => Promise<number | string | undefined>
+    >(async (query: string) => {
+        const result = await graphqlClient
+            .query<
+                SearchQuery,
+                SearchQueryVariables
+            >(searchQuery, { slug: query })
+            .toPromise()
 
-            if (result.error) {
-                setSearchResult(undefined)
-            }
+        if (result.error || !result.data?.search) {
+            return
+        }
 
-            return result.data?.search?.__typename === 'Block'
-                ? result.data.search.height
-                : result.data?.search?.hash.toLowerCase()
-        },
-        [graphqlClient]
-    )
-
-    const executeDebouncedSearchQuery = useDebounceCallback(
-        executeSearchQuery,
-        300
-    )
+        return result.data.search.__typename === 'Block'
+            ? result.data.search.height
+            : result.data.search.hash.toLowerCase()
+    }, 300)
 
     const [recentSearchResults, setRecentSearchResults] = useLocalStorage<
         Array<number | string>
@@ -87,7 +83,7 @@ const Search: FC<Props> = props => {
         }
     }, [recentSearchResults, searchResult, setRecentSearchResults])
 
-    const focusInput = useCallback(() => input.current?.focus(), [])
+    const focusInput = useCallback(() => inputRef.current?.focus(), [])
 
     const onInputFocus = useCallback(() => setFocused(true), [])
 
@@ -99,18 +95,22 @@ const Search: FC<Props> = props => {
             setInputQuery(value)
 
             if (value) {
-                // executeSearchQuery(value).then(setSearchResult)
-                executeDebouncedSearchQuery(value)?.then(setSearchResult)
+                executeSearchQuery(value).then(result => {
+                    queryExecutedRef.current = true
+                    setSearchResult(result)
+                })
             } else {
+                cancelSearchQuery()
+                queryExecutedRef.current = false
                 setSearchResult(undefined)
             }
         },
-        [executeDebouncedSearchQuery]
+        [cancelSearchQuery, executeSearchQuery]
     )
 
     let searchResults
 
-    if (inputQuery) {
+    if (inputQuery && queryExecutedRef.current) {
         if (searchResult) {
             searchResults = (
                 <SearchResultOverlay
@@ -144,7 +144,7 @@ const Search: FC<Props> = props => {
                 size={16}
             />
             <input
-                ref={input}
+                ref={inputRef}
                 autoFocus={props.autoFocus}
                 className={styles.input}
                 name="query"
@@ -152,6 +152,7 @@ const Search: FC<Props> = props => {
                 onChange={onInputChange}
                 onFocus={onInputFocus}
                 placeholder="Search by block height or transaction hash"
+                value={inputQuery}
             />
             <AnimatePresence initial={false}>
                 {focused && searchResults}
