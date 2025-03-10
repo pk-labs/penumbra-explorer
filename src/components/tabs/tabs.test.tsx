@@ -17,7 +17,7 @@ describe('Tabs', () => {
         getByText(container, 'Bar')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<Tabs className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })

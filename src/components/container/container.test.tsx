@@ -12,7 +12,7 @@ describe('Container', () => {
         expect(container.firstChild).toHaveClass('narrow')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<Container className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })

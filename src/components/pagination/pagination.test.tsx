@@ -25,7 +25,7 @@ describe('Pagination', () => {
         expect(button).toHaveAttribute('href', '/?from=foo')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<Pagination className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })

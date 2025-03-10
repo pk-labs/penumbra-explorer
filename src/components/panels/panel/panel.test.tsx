@@ -28,7 +28,7 @@ describe('Panel', () => {
         getByText(container, '99$')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(
             <Panel className="foo bar" number={99} title="Foo" />
         )

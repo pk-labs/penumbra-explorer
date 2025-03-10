@@ -22,7 +22,7 @@ describe('Container', () => {
         getByText(container, '99')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(
             <NumberCountup className="foo bar" number={99} />
         )

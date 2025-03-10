@@ -47,7 +47,7 @@ describe('Table', () => {
         expect(container.firstChild?.lastChild).toHaveClass('foo')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<Table className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })

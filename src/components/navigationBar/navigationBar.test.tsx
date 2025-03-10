@@ -64,7 +64,7 @@ describe('NavigationBar', () => {
         })
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<NavigationBar className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })

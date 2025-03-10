@@ -66,7 +66,7 @@ describe('Modal', () => {
         })
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<Modal className="foo bar" open />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })

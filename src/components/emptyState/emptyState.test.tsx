@@ -9,7 +9,7 @@ describe('Container', () => {
         getByText(container, 'Bar')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(
             <EmptyState className="foo bar" title="Foo" />
         )

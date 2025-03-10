@@ -43,7 +43,7 @@ describe('CopyToClipboard', () => {
         expect(container.firstChild).toHaveClass('small')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(
             <CopyToClipboard className="foo bar" data="foo" />
         )

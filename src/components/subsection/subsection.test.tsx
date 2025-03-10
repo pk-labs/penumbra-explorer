@@ -9,7 +9,7 @@ describe('Subsection', () => {
         getByText(container, 'Bar')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<Subsection className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })

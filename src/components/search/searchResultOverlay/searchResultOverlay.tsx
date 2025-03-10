@@ -6,7 +6,7 @@ import { fastOutSlowIn } from '@/lib/constants'
 import { SearchResultProps } from '../searchResult'
 import styles from './searchResultOverlay.module.css'
 
-interface Props {
+export interface Props {
     children?:
         | Array<
               | Array<ReactElement<SearchResultProps>>

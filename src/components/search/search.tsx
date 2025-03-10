@@ -1,4 +1,3 @@
-// istanbul ignore file
 'use client'
 
 import clsx from 'clsx'
@@ -23,7 +22,7 @@ import { searchQuery } from '@/lib/graphql/queries'
 import { useDebounce } from '@/lib/hooks'
 import styles from './search.module.css'
 import { SearchResult } from './searchResult'
-import SearchResultOverlay from './searchResultOverlay'
+import { SearchResultOverlay } from './searchResultOverlay'
 
 interface Props {
     autoFocus?: boolean

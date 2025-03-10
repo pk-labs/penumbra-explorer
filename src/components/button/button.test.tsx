@@ -33,7 +33,7 @@ describe('Button', () => {
         expect(button).toHaveClass('disabled')
     })
 
-    test('applies custom classes', async () => {
+    test('applies CSS classes', async () => {
         const { container } = render(<Button className="foo bar">Foo</Button>)
         expect(getByText(container, 'Foo')).toHaveClass('foo', 'bar')
     })
