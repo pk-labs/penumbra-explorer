@@ -99,8 +99,10 @@ const Search: FC<Props> = props => {
             const value = e.currentTarget.value
             setInputQuery(value)
 
-            if (value) {
-                executeSearchQuery(value).then(result => {
+            const cleanedValue = value.trim().replaceAll(',', '')
+
+            if (cleanedValue) {
+                executeSearchQuery(cleanedValue).then(result => {
                     queryExecutedRef.current = true
                     setSearchResult(result)
                 })
