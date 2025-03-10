@@ -11,6 +11,11 @@ jest.mock('../../lib/utils/decodeTransaction/decodeTransaction', () =>
     jest.fn()
 )
 
+// TODO: Remove again when no longer using @penumbra-zone/protobuf
+jest.mock('../../lib/utils/transactionToJson/transactionToJson', () =>
+    jest.fn()
+)
+
 beforeEach(() => {
     jest.useFakeTimers()
 })

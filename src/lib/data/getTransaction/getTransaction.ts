@@ -2,6 +2,7 @@ import { TransformedTransactionFragment } from '@/lib/types'
 import {
     decodeTransaction,
     findPrimaryAction,
+    transactionToJson,
     transformActions,
 } from '@/lib/utils'
 import createGraphqlClient from '../../graphql/createGraphqlClient'
@@ -37,7 +38,7 @@ const getTransaction = async (
 
     try {
         const decoded = decodeTransaction(result.data.transaction.raw)
-        json = decoded.toJson() as Record<string, any>
+        json = transactionToJson(decoded)
         primaryAction = findPrimaryAction(decoded)
         actions = transformActions(decoded.body?.actions)
     } catch (e) {

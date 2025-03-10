@@ -10,6 +10,7 @@ import { TransformedPartialTransactionFragment } from '@/lib/types'
 import {
     decodeTransaction,
     findPrimaryAction,
+    transactionToJson,
     transformActions,
 } from '@/lib/utils'
 
@@ -38,7 +39,7 @@ const getTransactions = async (
 
         try {
             const decoded = decodeTransaction(transaction.raw)
-            json = decoded.toJson() as Record<string, any>
+            json = transactionToJson(decoded)
             primaryAction = findPrimaryAction(decoded)
             actions = transformActions(decoded.body?.actions)
         } catch (e) {
