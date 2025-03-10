@@ -18,7 +18,6 @@ Penumbra Blockchain Explorer
 | `npm run dev`               | Run app in development environment.          |
 | `npm test`                  | Run tests.                                   |
 | `npm run test:coverage`     | Run with coverage report to console and file. |
-| `npm run test:codegen`      | Generate block and transaction fixtures.     |
 | `npm run test:watch`        | Run tests in watch mode.                     |
 | `npm run lint`              | Lint JavaScript with ESLint.                 |
 | `npm run lint:fix`          | Lint and fix JavaScript with ESLint.         |
@@ -30,14 +29,20 @@ Penumbra Blockchain Explorer
 
 ### Project structure
 
-| Directory                        | Description                                                           |
-|----------------------------------|-----------------------------------------------------------------------|
-| `src/app`                        | Next.js app router with layouts and pages.                            |
-| `src/components`                 | Components used by layouts and pages.                                 |
-| `src/lib`                        | Configuration, logic, types, assets, etc. used across the app.        |
-| `src/lib/__tests__`              | Global test configuration.                                            |
-| `src/lib/__tests__/__fixtures__` | Block and transaction fixtures generated with `npm run test:codegen`. |
-| `public`                         | Static public assets accessible through the browser.                  |
+| Directory           | Description                                                                              |
+|---------------------|------------------------------------------------------------------------------------------|
+| `src/app`           | Next.js app router with layouts and pages.                                               |
+| `src/components`    | Components used by layouts and pages.                                                    |
+| `src/lib/`          | App-wide configuration, types, helpers, assets, etc.                                     |
+| `src/lib/__tests__` | Global test configuration.                                                               |
+| `src/lib/css`       | Global CSS and theme with CSS variables.                                                 |
+| `src/lib/data`      | Data fetchers for server layouts and pages.                                              |
+| `src/lib/fonts`     | Custom fonts loaded and optimized with next/font.                                        |
+| `src/lib/graphql`   | GraphQL client with schema, queries, code generated with `npm run graphql:codegen`, etc. |
+| `src/lib/hooks`     | Custom React hooks.                                                                      |
+| `src/lib/images`    | Image assets that are directly imported.                                                 |
+| `src/lib/utils`     | Utility functions for formatting, transforming, etc.                                     |
+| `public`            | Static public assets directly accessible through the browser.                            |
 
 ## CSS, icons and fonts
 
@@ -73,6 +78,5 @@ running checks and tests and deploying the application to Google Cloud at
 ## Misc
 
 - <https://day.js.org/> for date manipulation and formatting
-- <https://motion.dev/> for animations such as dashboard number countup
+- <https://motion.dev/> for animations such as dashboard number count-up
 - <https://github.com/lukeed/clsx> for conditional `className` construction
-- <https://fakerjs.dev/> to generate test data
