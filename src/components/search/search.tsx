@@ -34,10 +34,10 @@ interface Props {
 const Search: FC<Props> = props => {
     const graphqlClient = useClient()
     const inputRef = useRef<HTMLInputElement>(null)
-    const queryExecutedRef = useRef(false)
     const [focused, setFocused] = useState(false)
     const [inputQuery, setInputQuery] = useState('')
     const [searchResult, setSearchResult] = useState<number | string>()
+    const [queryExecuted, setQueryExecuted] = useState(false)
 
     const [executeSearchQuery, cancelSearchQuery] = useDebounce<
         (query: string) => Promise<number | string | undefined>
@@ -103,12 +103,12 @@ const Search: FC<Props> = props => {
 
             if (cleanedValue) {
                 executeSearchQuery(cleanedValue).then(result => {
-                    queryExecutedRef.current = true
                     setSearchResult(result)
+                    setQueryExecuted(true)
                 })
             } else {
                 cancelSearchQuery()
-                queryExecutedRef.current = false
+                setQueryExecuted(false)
                 setSearchResult(undefined)
             }
         },
@@ -119,7 +119,7 @@ const Search: FC<Props> = props => {
 
     let searchResults
 
-    if (inputQuery && queryExecutedRef.current) {
+    if (inputQuery && queryExecuted) {
         if (searchResult) {
             searchResults = (
                 <SearchResultOverlay
