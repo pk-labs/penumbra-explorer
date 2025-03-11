@@ -6,6 +6,7 @@
     padding: calc(3 * var(--unit));
     border: 1px solid var(--surfaceLighter);
     border-radius: var(--rounded);
+    backdrop-filter: blur(var(--blur));
     background: radial-gradient(
         100% 100% at 0% 0%,
         var(--viewGradientStartColor) 0%,

@@ -3,7 +3,7 @@
     flex-direction: column;
     padding: calc(3 * var(--unit));
     border-radius: var(--rounded);
-    backdrop-filter: blur(var(--blurFull));
+    backdrop-filter: blur(var(--blurLarge));
     background: var(--surface);
     gap: calc(2 * var(--unit));
 }

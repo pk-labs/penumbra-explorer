@@ -24,7 +24,7 @@
     padding-left: calc(5.5 * var(--unit));
     border: none;
     border-radius: var(--roundedSmall);
-    backdrop-filter: blur(var(--blurFull));
+    backdrop-filter: blur(var(--blurLarge));
     background: var(--surface);
     color: var(--textSecondary);
     font: var(--fontPrimary) var(--fontSizeBase);

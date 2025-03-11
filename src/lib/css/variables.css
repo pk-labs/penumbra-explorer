@@ -38,9 +38,10 @@
 
     /* Animation and effects */
     --blurSmall: 8px;
-    --blurFull: 64px;
+    --blur: 16px;
+    --blurLarge: 32px;
     --fastOutSlowIn: cubic-bezier(0.4, 0, 0.2, 1);
-    --rounded: 16px;
     --roundedSmall: 8px;
+    --rounded: 16px;
     --roundedFull: 9999px;
 }

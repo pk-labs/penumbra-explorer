@@ -9,7 +9,7 @@
     padding: calc(3 * var(--unit));
     border: 1px solid var(--surfaceLighter);
     border-radius: var(--roundedSmall);
-    backdrop-filter: blur(var(--blurFull));
+    backdrop-filter: blur(var(--blurLarge));
     background: rgba(34, 99, 98, 0.1);
     gap: calc(2 * var(--unit));
 }

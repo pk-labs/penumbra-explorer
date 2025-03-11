@@ -5,7 +5,7 @@
     /*height: 196px;*/
     padding: calc(3 * var(--unit));
     border-radius: var(--rounded);
-    backdrop-filter: blur(var(--blurFull));
+    backdrop-filter: blur(var(--blurLarge));
     background: radial-gradient(
         100% 100% at 0% 0%,
         var(--panelGradientStartColor) 0%,
