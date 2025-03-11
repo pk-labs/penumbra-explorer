@@ -2,6 +2,7 @@
 
 import clsx from 'clsx'
 import { Box, CheckCheck } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
@@ -24,7 +25,9 @@ const TransactionTable: FC<Props> = props => {
 
     const onRowClick = useCallback(
         (e: MouseEvent<HTMLTableRowElement>) => {
-            router.push(`/tx/${e.currentTarget.dataset.transactionHash}`)
+            if ((e.target as HTMLElement).tagName !== 'A') {
+                router.push(`/tx/${e.currentTarget.dataset.transactionHash}`)
+            }
         },
         [router]
     )
@@ -58,14 +61,18 @@ const TransactionTable: FC<Props> = props => {
                                     color="var(--secondaryLight)"
                                     size={14}
                                 />
-                                <span>{shortenHash(transaction.hash)}</span>
+                                <Link href={`/tx/${transaction.hash}`}>
+                                    {shortenHash(transaction.hash)}
+                                </Link>
                                 <CopyToClipboard data={transaction.hash} />
                             </td>
                             <td>
                                 <Box color="var(--textSecondary)" size={16} />
-                                <span>
+                                <Link
+                                    href={`/block/${transaction.block.height}`}
+                                >
                                     {formatNumber(transaction.block.height)}
-                                </span>
+                                </Link>
                             </td>
                             <td>
                                 {transaction.primaryAction && (

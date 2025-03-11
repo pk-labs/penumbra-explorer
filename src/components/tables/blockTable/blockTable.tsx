@@ -1,6 +1,7 @@
 'use client'
 
 import { Box } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, useCallback } from 'react'
 import { TransformedPartialBlockFragment } from '@/lib/types'
@@ -18,7 +19,9 @@ const BlockTable: FC<Props> = props => {
 
     const onRowClick = useCallback(
         (e: MouseEvent<HTMLTableRowElement>) => {
-            router.push(`/block/${e.currentTarget.dataset.blockHeight}`)
+            if ((e.target as HTMLElement).tagName !== 'A') {
+                router.push(`/block/${e.currentTarget.dataset.blockHeight}`)
+            }
         },
         [router]
     )
@@ -49,7 +52,9 @@ const BlockTable: FC<Props> = props => {
                         >
                             <td>
                                 <Box color="var(--textSecondary)" size={16} />
-                                <span>{formatNumber(block.height)}</span>
+                                <Link href={`/block/${block.height}`}>
+                                    {formatNumber(block.height)}
+                                </Link>
                             </td>
                             <td>{block.timeAgo}</td>
                             {props.proposer && <td>-</td>}

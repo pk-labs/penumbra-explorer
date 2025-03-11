@@ -23,6 +23,7 @@ body {
 }
 
 a {
+    color: var(--text);
     text-decoration: none;
     transition: color 200ms var(--fastOutSlowIn);
 
