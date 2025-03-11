@@ -20,10 +20,6 @@
     gap: calc(0.5 * var(--unit));
     text-decoration: none;
     transition: color 200ms var(--fastOutSlowIn);
-
-    &:hover {
-        color: var(--text);
-    }
 }
 
 .link2 {
