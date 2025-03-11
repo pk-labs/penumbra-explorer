@@ -4,3 +4,31 @@
         --viewGradientStopColor: rgba(193, 166, 204, 0.025);
     }
 }
+
+.group {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(0.5 * var(--unit));
+}
+
+.copyToClipboard {
+    margin-right: -2px;
+}
+
+.icon {
+    color: var(--text);
+}
+
+.link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 200ms var(--fastOutSlowIn);
+
+    &:hover {
+        color: var(--text);
+    }
+}
+
+.link2 {
+    margin-left: 4px;
+}

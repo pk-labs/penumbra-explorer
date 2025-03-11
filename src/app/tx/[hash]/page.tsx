@@ -1,5 +1,8 @@
 // istanbul ignore file
+import clsx from 'clsx'
+import { Link2 } from 'lucide-react'
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import {
@@ -49,11 +52,29 @@ const TransactionViewPage: FC<Props> = async props => {
             >
                 <Parameters>
                     <Parameter name="Transaction hash">
-                        {shortenHash(transaction.hash)}
-                        <CopyToClipboard data={transaction.hash} small />
+                        <span className={styles.group}>
+                            {shortenHash(transaction.hash)}
+                            <CopyToClipboard
+                                className={clsx(
+                                    styles.icon,
+                                    styles.copyToClipboard
+                                )}
+                                data={transaction.hash}
+                                small
+                            />
+                        </span>
                     </Parameter>
                     <Parameter name="Block height">
-                        {transaction.block.height}
+                        <Link
+                            className={clsx(styles.group, styles.link)}
+                            href={`/block/${transaction.block.height}`}
+                        >
+                            {transaction.block.height}
+                            <Link2
+                                className={clsx(styles.icon, styles.link2)}
+                                size={12}
+                            />
+                        </Link>
                     </Parameter>
                     <Parameter name="Time">
                         {transaction.block.createdAt}
