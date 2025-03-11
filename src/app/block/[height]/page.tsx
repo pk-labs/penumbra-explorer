@@ -1,4 +1,5 @@
 // istanbul ignore file
+import clsx from 'clsx'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
@@ -6,6 +7,7 @@ import {
     Breadcrumb,
     Breadcrumbs,
     Container,
+    CopyToClipboard,
     JsonTree,
     Parameter,
     Parameters,
@@ -45,6 +47,17 @@ const BlockViewPage: FC<Props> = async props => {
                 title="Block view"
             >
                 <Parameters>
+                    <Parameter name="Block height">
+                        {block.height}
+                        <CopyToClipboard
+                            className={clsx(
+                                styles.icon,
+                                styles.copyToClipboard
+                            )}
+                            data={block.height.toString()}
+                            small
+                        />
+                    </Parameter>
                     <Parameter name="Time">{block.createdAt}</Parameter>
                     {/*<Parameter name="Proposer">-</Parameter>*/}
                     <Parameter name="Txs">

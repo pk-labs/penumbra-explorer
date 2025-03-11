@@ -52,21 +52,19 @@ const TransactionViewPage: FC<Props> = async props => {
             >
                 <Parameters>
                     <Parameter name="Transaction hash">
-                        <span className={styles.group}>
-                            {shortenHash(transaction.hash)}
-                            <CopyToClipboard
-                                className={clsx(
-                                    styles.icon,
-                                    styles.copyToClipboard
-                                )}
-                                data={transaction.hash}
-                                small
-                            />
-                        </span>
+                        {shortenHash(transaction.hash)}
+                        <CopyToClipboard
+                            className={clsx(
+                                styles.icon,
+                                styles.copyToClipboard
+                            )}
+                            data={transaction.hash}
+                            small
+                        />
                     </Parameter>
                     <Parameter name="Block height">
                         <Link
-                            className={clsx(styles.group, styles.link)}
+                            className={styles.link}
                             href={`/block/${transaction.block.height}`}
                         >
                             {transaction.block.height}

@@ -10,7 +10,7 @@ const Parameter: FC<Props> = props => (
     <li className={styles.root}>
         <span className={styles.name}>{props.name}</span>
         <span className={styles.separator} />
-        {props.children}
+        <span className={styles.value}>{props.children}</span>
     </li>
 )
 

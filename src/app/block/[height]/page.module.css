@@ -4,3 +4,8 @@
         --viewGradientStopColor: rgba(83, 174, 168, 0.025);
     }
 }
+
+.copyToClipboard {
+    margin-right: -2px;
+    color: var(--text);
+}

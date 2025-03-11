@@ -5,12 +5,6 @@
     }
 }
 
-.group {
-    display: inline-flex;
-    align-items: center;
-    gap: calc(0.5 * var(--unit));
-}
-
 .copyToClipboard {
     margin-right: -2px;
 }
@@ -20,7 +14,10 @@
 }
 
 .link {
+    display: inline-flex;
+    align-items: center;
     color: inherit;
+    gap: calc(0.5 * var(--unit));
     text-decoration: none;
     transition: color 200ms var(--fastOutSlowIn);
 
