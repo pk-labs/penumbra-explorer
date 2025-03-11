@@ -45,7 +45,6 @@ const BlockViewPage: FC<Props> = async props => {
                 title="Block view"
             >
                 <Parameters>
-                    <Parameter name="Block height">{block.height}</Parameter>
                     <Parameter name="Time">{block.createdAt}</Parameter>
                     {/*<Parameter name="Proposer">-</Parameter>*/}
                     <Parameter name="Txs">
