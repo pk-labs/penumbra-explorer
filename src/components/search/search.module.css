@@ -5,6 +5,7 @@
 
 .icon {
     position: absolute;
+    z-index: var(--zIndexOverlay);
     top: 50%;
     left: calc(2 * var(--unit));
     stroke: var(--textSecondary);
@@ -22,7 +23,8 @@
     padding: calc(2 * var(--unit));
     padding-left: calc(5.5 * var(--unit));
     border: none;
-    border-radius: var(--roundedFull);
+    border-radius: var(--roundedSmall);
+    backdrop-filter: blur(var(--blurFull));
     background: var(--surface);
     color: var(--textSecondary);
     font: var(--fontPrimary) var(--fontSizeBase);
