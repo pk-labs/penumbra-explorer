@@ -14,6 +14,7 @@ import { Table, TableProps } from '../table'
 import styles from './transactionTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
+    blockHeight?: boolean
     embedded?: boolean
     emptyStateMessage?: string
     time?: boolean
@@ -43,7 +44,7 @@ const TransactionTable: FC<Props> = props => {
             <thead>
                 <tr>
                     <th>Tx hash</th>
-                    <th>Block height</th>
+                    {!props.embedded && <th>Block height</th>}
                     <th>Actions</th>
                     {props.time && <th>Time</th>}
                 </tr>
@@ -66,14 +67,19 @@ const TransactionTable: FC<Props> = props => {
                                 </Link>
                                 <CopyToClipboard data={transaction.hash} />
                             </td>
-                            <td>
-                                <Box color="var(--textSecondary)" size={16} />
-                                <Link
-                                    href={`/block/${transaction.block.height}`}
-                                >
-                                    {formatNumber(transaction.block.height)}
-                                </Link>
-                            </td>
+                            {!props.embedded && (
+                                <td>
+                                    <Box
+                                        color="var(--textSecondary)"
+                                        size={16}
+                                    />
+                                    <Link
+                                        href={`/block/${transaction.block.height}`}
+                                    >
+                                        {formatNumber(transaction.block.height)}
+                                    </Link>
+                                </td>
+                            )}
                             <td>
                                 {transaction.primaryAction && (
                                     <Pill>
@@ -93,7 +99,13 @@ const TransactionTable: FC<Props> = props => {
                     ))
                 ) : (
                     <tr className={styles.empty}>
-                        <td colSpan={props.time ? 4 : 3}>
+                        <td
+                            colSpan={
+                                4 -
+                                (props.time ? 0 : 1) -
+                                (props.embedded ? 1 : 0)
+                            }
+                        >
                             <EmptyState title="No transactions">
                                 {props.emptyStateMessage}
                             </EmptyState>

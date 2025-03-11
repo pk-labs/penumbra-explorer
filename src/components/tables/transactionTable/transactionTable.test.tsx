@@ -1,6 +1,7 @@
 import { fireEvent, getByText, render } from '@testing-library/react'
 import { router } from '@/lib/__tests__/__mocks__'
 import dayjs from '@/lib/dayjs'
+import { ActionType } from '@/lib/types'
 import { TableProps } from '../table'
 import TransactionTable from './transactionTable'
 
@@ -17,31 +18,43 @@ jest.mock('../../copyToClipboard/copyToClipboard')
 
 describe('BlockTable', () => {
     test('renders empty table', async () => {
-        const { container, rerender } = render(<TransactionTable />)
+        const { container, rerender } = render(<TransactionTable time />)
+
+        expect(container.querySelector('tbody tr td')).toHaveAttribute(
+            'colspan',
+            '4'
+        )
+
+        rerender(<TransactionTable embedded time />)
 
         expect(container.querySelector('tbody tr td')).toHaveAttribute(
             'colspan',
             '3'
         )
 
-        rerender(<TransactionTable time />)
+        rerender(<TransactionTable />)
 
         expect(container.querySelector('tbody tr td')).toHaveAttribute(
             'colspan',
-            '4'
+            '3'
+        )
+
+        rerender(<TransactionTable embedded />)
+
+        expect(container.querySelector('tbody tr td')).toHaveAttribute(
+            'colspan',
+            '2'
         )
     })
 
     test('renders transactions', async () => {
-        const createdAt = dayjs().toISOString()
-
         const { container } = render(
             <TransactionTable
                 transactions={[
                     {
                         actions: [],
                         block: {
-                            createdAt,
+                            createdAt: dayjs().toISOString(),
                             height: 123,
                         },
                         hash: 'tx1',
@@ -50,7 +63,7 @@ describe('BlockTable', () => {
                     {
                         actions: [],
                         block: {
-                            createdAt,
+                            createdAt: dayjs().toISOString(),
                             height: 456,
                         },
                         hash: 'tx2',
@@ -65,15 +78,15 @@ describe('BlockTable', () => {
     })
 
     test('renders time', async () => {
-        const createdAt = dayjs().subtract(1, 's').toISOString()
-
         const { container } = render(
             <TransactionTable
                 transactions={[
                     {
                         actions: [],
                         block: {
-                            createdAt,
+                            createdAt: dayjs()
+                                .subtract(1, 'second')
+                                .toISOString(),
                             height: 123,
                         },
                         hash: 'tx1',
@@ -88,40 +101,57 @@ describe('BlockTable', () => {
         getByText(container, '1s ago')
     })
 
-    test.skip('renders actions', async () => {
-        const createdAt = dayjs().toISOString()
+    test('renders actions', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actions: [ActionType.receive, ActionType.send],
+                        block: {
+                            createdAt: dayjs().toISOString(),
+                            height: 123,
+                        },
+                        hash: 'tx1',
+                        primaryAction: ActionType.receive,
+                        raw: '',
+                    },
+                ]}
+            />
+        )
 
+        getByText(container, 'receive')
+        getByText(container, '+1')
+    })
+
+    test('renders embedded', async () => {
         const { container } = render(
             <TransactionTable
                 transactions={[
                     {
                         actions: [],
                         block: {
-                            createdAt,
+                            createdAt: dayjs().toISOString(),
                             height: 123,
                         },
                         hash: 'tx1',
                         raw: '',
                     },
                 ]}
-                time
+                embedded
             />
         )
 
-        getByText(container, 'ibc relay')
-        getByText(container, '+1')
+        expect(container.firstChild).toHaveClass('embedded')
     })
 
     test('navigates to transaction on row click', async () => {
-        const createdAt = dayjs().toISOString()
-
         const { container } = render(
             <TransactionTable
                 transactions={[
                     {
                         actions: [],
                         block: {
-                            createdAt,
+                            createdAt: dayjs().toISOString(),
                             height: 123,
                         },
                         hash: 'tx1',
@@ -139,10 +169,5 @@ describe('BlockTable', () => {
 
         fireEvent.click(row)
         expect(router.push).toHaveBeenCalledWith('/tx/tx1')
-    })
-
-    test('renders embedded', async () => {
-        const { container } = render(<TransactionTable embedded />)
-        expect(container.firstChild).toHaveClass('embedded')
     })
 })
