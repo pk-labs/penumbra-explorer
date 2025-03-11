@@ -2,6 +2,7 @@ export default {
     extends: [
         'stylelint-config-recommended',
         'stylelint-config-idiomatic-order',
+        'stylelint-config-tailwindcss',
     ],
     ignoreFiles: ['**/*.{mjs,ts,tsx}'],
     plugins: ['stylelint-prettier'],

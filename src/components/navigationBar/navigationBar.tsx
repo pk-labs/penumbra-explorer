@@ -30,7 +30,7 @@ const NavigationBar: FC<Props> = props => {
     return (
         <header className={clsx(styles.root, props.className)}>
             <div className={styles.group}>
-                <Link className={styles.logo} href="/">
+                <Link href="/">
                     <Image
                         alt="Noctis"
                         height={36}

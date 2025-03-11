@@ -1,5 +1,5 @@
-@import "variables.css";
-@import "normalize.css";
+@import "tailwindcss";
+@import "./variables.css";
 
 html {
     box-sizing: border-box;
@@ -29,5 +29,12 @@ a {
 
     &:hover {
         color: var(--primaryLight);
+    }
+}
+
+/* https://tailwindcss.com/docs/preflight#extending-preflight */
+@layer base {
+    svg {
+        display: inline;
     }
 }

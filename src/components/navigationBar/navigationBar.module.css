@@ -7,10 +7,6 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.logo {
-    display: inline-flex;
-}
-
 .group {
     display: flex;
     align-items: center;
