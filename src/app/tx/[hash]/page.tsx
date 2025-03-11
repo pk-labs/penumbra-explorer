@@ -83,9 +83,12 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Subsection title="Parameters">
                     <Parameters>
                         <Parameter name="Transaction fee">
-                            {Number(transaction.body.parameters.fee.amount) /
-                                1000000}{' '}
-                            UM
+                            <span className={styles.fee}>
+                                {Number(
+                                    transaction.body.parameters.fee.amount
+                                ) / 1000000}{' '}
+                                UM
+                            </span>
                         </Parameter>
                         <Parameter name="Chain ID">
                             {transaction.body.parameters.chainId}

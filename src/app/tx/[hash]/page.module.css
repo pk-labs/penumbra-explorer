@@ -29,3 +29,7 @@
 .link2 {
     margin-left: 4px;
 }
+
+.fee {
+    color: var(--negativeLight);
+}
