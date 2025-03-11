@@ -8,12 +8,7 @@ import styles from './memo.module.css'
 const Memo: FC = () => (
     <Subsection title="Memo">
         <div className={styles.content}>
-            <Image
-                alt="Memo"
-                height={encrypted.height}
-                src={encrypted.src}
-                width={encrypted.width}
-            />
+            <Image alt="Memo" src={encrypted} />
             <span>Memo</span>
         </div>
     </Subsection>

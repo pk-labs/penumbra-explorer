@@ -17,12 +17,7 @@ const BlockPanel: FC<Props> = props => (
         number={props.number}
         title={
             <>
-                <Image
-                    alt="Current block"
-                    height={icon.height}
-                    src={icon.src}
-                    width={icon.width}
-                />
+                <Image alt="Current block" src={icon} />
                 <span>Current block</span>
             </>
         }

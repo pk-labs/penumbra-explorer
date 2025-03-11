@@ -17,12 +17,7 @@ const TransactionPanel: FC<Props> = props => (
         number={props.number}
         title={
             <>
-                <Image
-                    alt="Total transactions"
-                    height={icon.height}
-                    src={icon.src}
-                    width={icon.width}
-                />
+                <Image alt="Total transactions" src={icon} />
                 <span>Total transactions</span>
             </>
         }

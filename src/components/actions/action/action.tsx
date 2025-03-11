@@ -10,12 +10,7 @@ interface Props {
 
 const Action: FC<Props> = props => (
     <li className={styles.root}>
-        <Image
-            alt={props.children}
-            height={encrypted.height}
-            src={encrypted.src}
-            width={encrypted.width}
-        />
+        <Image alt={props.children} src={encrypted} />
         {props.children}
     </li>
 )

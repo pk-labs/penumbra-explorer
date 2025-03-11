@@ -17,7 +17,7 @@ const BurnPanel: FC<Props> = props => (
         numberSuffix=" UM"
         title={
             <>
-                <Image alt="Total burn" height={24} src={icon.src} width={24} />
+                <Image alt="Total burn" height={24} src={icon} />
                 <span>Total burn</span>
             </>
         }

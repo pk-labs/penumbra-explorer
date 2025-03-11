@@ -31,12 +31,7 @@ const NavigationBar: FC<Props> = props => {
         <header className={clsx(styles.root, props.className)}>
             <div className={styles.group}>
                 <Link href="/">
-                    <Image
-                        alt="Noctis"
-                        height={36}
-                        src={logo.src}
-                        width={142}
-                    />
+                    <Image alt="Noctis" height={36} src={logo} />
                 </Link>
             </div>
             <Tabs className={styles.tabs}>
