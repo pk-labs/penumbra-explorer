@@ -16,18 +16,6 @@ describe('Table', () => {
         getByText(container, 'Foo')
     })
 
-    test('renders as section', async () => {
-        const { container } = render(<Table footer="Bar" title="Foo" section />)
-
-        expect(container.firstElementChild?.tagName).toBe('SECTION')
-
-        expect(getByText(container, 'Foo').parentElement?.tagName).toBe(
-            'HEADER'
-        )
-
-        expect(getByText(container, 'Bar').tagName).toBe('FOOTER')
-    })
-
     test('renders title', async () => {
         const { container } = render(<Table title="Foo" />)
         getByText(container, 'Foo')

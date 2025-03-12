@@ -39,7 +39,6 @@ const TransactionTable: FC<Props> = props => {
             className={clsx(styles.root, props.embedded && styles.embedded)}
             footer={props.footer}
             title={props.title}
-            section
         >
             <thead>
                 <tr>

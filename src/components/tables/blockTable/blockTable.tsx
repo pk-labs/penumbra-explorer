@@ -32,7 +32,6 @@ const BlockTable: FC<Props> = props => {
             className={styles.root}
             footer={props.footer}
             title={props.title}
-            section
         >
             <thead>
                 <tr>
