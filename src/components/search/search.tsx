@@ -13,13 +13,12 @@ import {
     useState,
 } from 'react'
 import { useClient } from 'urql'
-import { useLocalStorage } from 'usehooks-ts'
 import {
     SearchQuery,
     SearchQueryVariables,
 } from '@/lib/graphql/generated/types'
 import { searchQuery } from '@/lib/graphql/queries'
-import { useDebounce } from '@/lib/hooks'
+import { useDebounce, useLocalStorage } from '@/lib/hooks'
 import styles from './search.module.css'
 import { SearchResult } from './searchResult'
 import { SearchResultOverlay } from './searchResultOverlay'
@@ -57,9 +56,8 @@ const Search: FC<Props> = props => {
             : result.data.search.hash.toLowerCase()
     }, 300)
 
-    const [recentSearchResults, setRecentSearchResults] = useLocalStorage<
-        Array<number | string>
-    >('search', [], { initializeWithValue: false })
+    const [recentSearchResults, setRecentSearchResults] =
+        useLocalStorage<Array<number | string>>('search')
 
     useEffect(() => {
         if (!searchResult) {
