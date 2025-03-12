@@ -38,3 +38,12 @@ a {
         display: inline;
     }
 }
+
+@theme {
+    /* https://tailwindcss.com/docs/responsive-design */
+    --breakpoint-sm: 37.5rem; /* 600px */
+    --breakpoint-md: 56.25rem; /* 900px */
+    --breakpoint-lg: 75rem; /* 1200px */
+    --breakpoint-xl: 100rem; /* 1600px */
+    --breakpoint-2xl: initial;
+}
