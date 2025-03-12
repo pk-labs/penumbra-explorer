@@ -33,20 +33,23 @@ const HomePage: FC = async () => {
                 </GraphqlClientProvider>
             </Container>
             <Container className="grid grid-cols-6 gap-4">
-                <BlockPanel className="col-span-3" number={latestBlockHeight} />
+                <BlockPanel
+                    className="col-span-6 sm:col-span-3"
+                    number={latestBlockHeight}
+                />
                 <TransactionPanel
-                    className="col-span-3"
+                    className="col-span-6 sm:col-span-3"
                     number={stats?.totalTransactionsCount}
                 />
                 <BlockTable
                     actions={<Button href="/blocks">View all</Button>}
                     blocks={latestBlocks}
-                    className="col-span-3"
+                    className="col-span-6 lg:col-span-3"
                     title="Latest blocks"
                 />
                 <TransactionTable
                     actions={<Button href="/txs">View all</Button>}
-                    className="col-span-3"
+                    className="col-span-6 lg:col-span-3"
                     title="Latest transactions"
                     transactions={latestTransactions}
                 />
