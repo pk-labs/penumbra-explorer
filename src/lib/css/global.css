@@ -1,18 +1,6 @@
 @import "tailwindcss";
 @import "./variables.css";
 
-html {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: inherit;
-}
-
 body {
     margin: 0;
     background: var(--background);
