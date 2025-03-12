@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { FC } from 'react'
 import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
-import { Table, TableProps, TableRow } from '../table'
+import { Table, TableCell, TableProps, TableRow } from '../table'
 import styles from './blockTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
@@ -20,10 +20,12 @@ const BlockTable: FC<Props> = props => (
     >
         <thead>
             <TableRow>
-                <th>Block height</th>
-                <th>Time</th>
-                {props.proposer && <th>Proposer</th>}
-                <th>Txs</th>
+                <TableCell header>Block height</TableCell>
+                <TableCell header>Time</TableCell>
+                {props.proposer && <TableCell header>Proposer</TableCell>}
+                <TableCell className={styles.lastCell} header>
+                    Txs
+                </TableCell>
             </TableRow>
         </thead>
         <tbody>
@@ -34,20 +36,22 @@ const BlockTable: FC<Props> = props => (
                         className={styles.clickableRow}
                         href={`/block/${block.height}`}
                     >
-                        <td>
+                        <TableCell>
                             <Box color="var(--textSecondary)" size={16} />
                             <Link href={`/block/${block.height}`}>
                                 {formatNumber(block.height)}
                             </Link>
-                        </td>
-                        <td>{block.timeAgo}</td>
-                        {props.proposer && <td>-</td>}
-                        <td>{block.transactionsCount}</td>
+                        </TableCell>
+                        <TableCell>{block.timeAgo}</TableCell>
+                        {props.proposer && <TableCell>-</TableCell>}
+                        <TableCell className={styles.lastCell}>
+                            {block.transactionsCount}
+                        </TableCell>
                     </TableRow>
                 ))
             ) : (
                 <TableRow>
-                    <td colSpan={props.proposer ? 4 : 3} />
+                    <TableCell colSpan={props.proposer ? 4 : 3} />
                 </TableRow>
             )}
         </tbody>

@@ -7,7 +7,7 @@ import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
-import { Table, TableProps, TableRow } from '../table'
+import { Table, TableCell, TableProps, TableRow } from '../table'
 import styles from './transactionTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
@@ -27,10 +27,10 @@ const TransactionTable: FC<Props> = props => (
     >
         <thead>
             <TableRow>
-                <th>Tx hash</th>
-                {!props.embedded && <th>Block height</th>}
-                <th>Actions</th>
-                {props.time && <th>Time</th>}
+                <TableCell header>Tx hash</TableCell>
+                {!props.embedded && <TableCell header>Block height</TableCell>}
+                <TableCell header>Actions</TableCell>
+                {props.time && <TableCell header>Time</TableCell>}
             </TableRow>
         </thead>
         <tbody>
@@ -41,7 +41,7 @@ const TransactionTable: FC<Props> = props => (
                         className={styles.clickableRow}
                         href={`/tx/${transaction.hash}`}
                     >
-                        <td>
+                        <TableCell>
                             <CheckCheck
                                 color="var(--secondaryLight)"
                                 size={14}
@@ -50,18 +50,18 @@ const TransactionTable: FC<Props> = props => (
                                 {shortenHash(transaction.hash)}
                             </Link>
                             <CopyToClipboard data={transaction.hash} />
-                        </td>
+                        </TableCell>
                         {!props.embedded && (
-                            <td>
+                            <TableCell>
                                 <Box color="var(--textSecondary)" size={16} />
                                 <Link
                                     href={`/block/${transaction.block.height}`}
                                 >
                                     {formatNumber(transaction.block.height)}
                                 </Link>
-                            </td>
+                            </TableCell>
                         )}
-                        <td>
+                        <TableCell>
                             {transaction.primaryAction && (
                                 <Pill>
                                     {formatAction(transaction.primaryAction)}
@@ -72,13 +72,15 @@ const TransactionTable: FC<Props> = props => (
                                     +{transaction.actions.length - 1}
                                 </span>
                             )}
-                        </td>
-                        {props.time && <td>{transaction.timeAgo}</td>}
+                        </TableCell>
+                        {props.time && (
+                            <TableCell>{transaction.timeAgo}</TableCell>
+                        )}
                     </TableRow>
                 ))
             ) : (
                 <TableRow>
-                    <td
+                    <TableCell
                         colSpan={
                             4 - (props.time ? 0 : 1) - (props.embedded ? 1 : 0)
                         }
@@ -86,7 +88,7 @@ const TransactionTable: FC<Props> = props => (
                         <EmptyState title="No transactions">
                             {props.emptyStateMessage}
                         </EmptyState>
-                    </td>
+                    </TableCell>
                 </TableRow>
             )}
         </tbody>
