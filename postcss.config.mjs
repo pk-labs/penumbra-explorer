@@ -1,6 +1,9 @@
+/* eslint-disable perfectionist/sort-objects */
 export default {
     plugins: {
-        '@tailwindcss/postcss': {},
+        // TODO: Remove postcss-nesting once Tailwind no longer complains about
+        //  unpure selectors used in tables etc.
         'postcss-nesting': {},
+        '@tailwindcss/postcss': {},
     },
 }
