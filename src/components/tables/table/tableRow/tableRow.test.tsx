@@ -1,4 +1,5 @@
-import { getByText, render } from '@testing-library/react'
+import { fireEvent, getByText, render } from '@testing-library/react'
+import { router } from '@/lib/__tests__/__mocks__'
 import TableRow from './tableRow'
 
 describe('TableRow', () => {
@@ -16,6 +17,32 @@ describe('TableRow', () => {
 
         getByText(container, 'Foo')
         getByText(container, 'Bar')
+    })
+
+    test('navigates to href on click', async () => {
+        const { container } = render(
+            <table>
+                <tbody>
+                    <TableRow href="/foo">
+                        <td>
+                            <a href="/bar">Bar</a>
+                        </td>
+                    </TableRow>
+                </tbody>
+            </table>
+        )
+
+        fireEvent.click(getByText(container, 'Bar'))
+        expect(router.push).not.toHaveBeenCalled()
+
+        const row = container.firstChild?.firstChild?.firstChild
+
+        if (!row) {
+            throw Error('Missing element')
+        }
+
+        fireEvent.click(row)
+        expect(router.push).toHaveBeenCalledWith('/foo')
     })
 
     test('applies CSS classes', async () => {
