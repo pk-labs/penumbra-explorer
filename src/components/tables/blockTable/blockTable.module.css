@@ -1,11 +1,14 @@
 .root {
-    tbody tr:hover {
-        background: var(--hoverGreen);
-        cursor: pointer;
-    }
-
     th:last-child,
     td:last-child {
         text-align: right;
+    }
+}
+
+.clickableRow {
+    cursor: pointer;
+
+    &:hover {
+        background: var(--hoverGreen);
     }
 }

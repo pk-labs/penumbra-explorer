@@ -1,12 +1,13 @@
-.root {
-    &.embedded {
-        padding: 0;
-        border-radius: var(--roundedSmall);
-    }
+.root.embedded {
+    padding: 0;
+    border-radius: var(--roundedSmall);
+}
 
-    tbody tr:not(.empty):hover {
+.clickableRow {
+    cursor: pointer;
+
+    &:hover {
         background: var(--hoverPurple);
-        cursor: pointer;
     }
 }
 
