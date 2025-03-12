@@ -1,6 +1,5 @@
 .root {
     width: 100%;
-    min-width: var(--pageMinWidth);
     max-width: var(--pageMaxWidth);
     padding-right: calc(4 * var(--unit));
     padding-left: calc(4 * var(--unit));
@@ -8,7 +7,6 @@
     margin-left: auto;
 
     &.narrow {
-        min-width: var(--pageNarrowWidth);
         max-width: var(--pageNarrowWidth);
     }
 }

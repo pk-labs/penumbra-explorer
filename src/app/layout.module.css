@@ -1,7 +1,6 @@
 .body {
     position: relative;
     display: flex;
-    min-width: var(--pageMinWidth);
     flex-direction: column;
     justify-content: flex-start;
     padding-bottom: calc(4 * var(--unit));
