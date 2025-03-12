@@ -32,22 +32,24 @@ const HomePage: FC = async () => {
                     <Search />
                 </GraphqlClientProvider>
             </Container>
-            <Container>
-                <div className={styles.dashboard}>
-                    <BlockPanel number={latestBlockHeight} />
-                    <TransactionPanel number={stats?.totalTransactionsCount} />
-                    {/*<BurnPanel />*/}
-                    <BlockTable
-                        actions={<Button href="/blocks">View all</Button>}
-                        blocks={latestBlocks}
-                        title="Latest blocks"
-                    />
-                    <TransactionTable
-                        actions={<Button href="/txs">View all</Button>}
-                        title="Latest transactions"
-                        transactions={latestTransactions}
-                    />
-                </div>
+            <Container className="grid grid-cols-6 gap-4">
+                <BlockPanel className="col-span-3" number={latestBlockHeight} />
+                <TransactionPanel
+                    className="col-span-3"
+                    number={stats?.totalTransactionsCount}
+                />
+                <BlockTable
+                    actions={<Button href="/blocks">View all</Button>}
+                    blocks={latestBlocks}
+                    className="col-span-3"
+                    title="Latest blocks"
+                />
+                <TransactionTable
+                    actions={<Button href="/txs">View all</Button>}
+                    className="col-span-3"
+                    title="Latest transactions"
+                    transactions={latestTransactions}
+                />
             </Container>
         </>
     )

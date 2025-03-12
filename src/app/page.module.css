@@ -5,21 +5,6 @@
     font-weight: 500;
 }
 
-.dashboard {
-    display: grid;
-    gap: calc(2 * var(--unit));
-    grid-template: auto auto / repeat(6, 1fr);
-
-    & > :nth-child(-n + 3) {
-        /*grid-column: span 2;*/
-        grid-column: span 3;
-    }
-
-    & > :nth-child(n + 4) {
-        grid-column: span 3;
-    }
-}
-
 .notFound {
     position: absolute;
     top: 50vh;

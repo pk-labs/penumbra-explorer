@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Box } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
@@ -8,13 +9,14 @@ import styles from './blockTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     blocks?: TransformedPartialBlockFragment[]
+    className?: string
     proposer?: boolean
 }
 
 const BlockTable: FC<Props> = props => (
     <Table
         actions={props.actions}
-        className={styles.root}
+        className={clsx(styles.root, props.className)}
         footer={props.footer}
         title={props.title}
     >

@@ -12,6 +12,7 @@ import styles from './transactionTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     blockHeight?: boolean
+    className?: string
     embedded?: boolean
     emptyStateMessage?: string
     time?: boolean
@@ -21,7 +22,11 @@ interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
 const TransactionTable: FC<Props> = props => (
     <Table
         actions={props.actions}
-        className={clsx(styles.root, props.embedded && styles.embedded)}
+        className={clsx(
+            styles.root,
+            props.embedded && styles.embedded,
+            props.className
+        )}
         footer={props.footer}
         title={props.title}
     >
