@@ -33,12 +33,14 @@
 }
 
 .search {
-    background: var(--surface);
+    backdrop-filter: blur(var(--blurLarge));
+    background: var(--surfaceLight);
     cursor: pointer;
     gap: calc(0.5 * var(--unit));
+    transition: background 200ms var(--fastOutSlowIn);
 
     &:hover {
-        background: var(--surfaceLight);
+        background: var(--surfaceLighter);
     }
 }
 
