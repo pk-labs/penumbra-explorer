@@ -7,7 +7,7 @@
     vertical-align: middle;
     white-space: nowrap;
 
-    > * {
+    & > * {
         vertical-align: middle;
 
         &:not(:last-child) {
