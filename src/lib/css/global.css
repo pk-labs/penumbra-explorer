@@ -34,4 +34,7 @@ a {
     --breakpoint-lg: 75rem; /* 1200px */
     --breakpoint-xl: 100rem; /* 1600px */
     --breakpoint-2xl: initial;
+
+    --pageMaxWidth: 96rem; /* 1536px */
+    --pageNarrowWidth: 47rem; /* 752px */
 }

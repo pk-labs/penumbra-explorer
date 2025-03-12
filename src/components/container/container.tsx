@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
-import styles from './container.module.css'
 
 interface Props {
     children?: ReactNode
@@ -11,8 +10,10 @@ interface Props {
 const Container: FC<Props> = props => (
     <div
         className={clsx(
-            styles.root,
-            props.narrow && styles.narrow,
+            'mx-auto w-full px-8',
+            props.narrow
+                ? 'max-w-(--pageNarrowWidth)'
+                : 'max-w-(--pageMaxWidth)',
             props.className
         )}
     >

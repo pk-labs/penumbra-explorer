@@ -4,12 +4,15 @@ import Container from './container'
 describe('Container', () => {
     test('renders children', async () => {
         const { container } = render(<Container>Foo</Container>)
-        getByText(container, 'Foo')
+
+        expect(getByText(container, 'Foo')).toHaveClass(
+            'max-w-(--pageMaxWidth)'
+        )
     })
 
     test('supports narrow layout', async () => {
         const { container } = render(<Container narrow>Foo</Container>)
-        expect(container.firstChild).toHaveClass('narrow')
+        expect(container.firstChild).toHaveClass('max-w-(--pageNarrowWidth)')
     })
 
     test('applies CSS classes', async () => {

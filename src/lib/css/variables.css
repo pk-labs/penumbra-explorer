@@ -29,8 +29,6 @@
 
     /* Layout */
     --unit: 8px;
-    --pageMaxWidth: 1600px;
-    --pageNarrowWidth: 752px;
     --zIndexOverlay: 10;
     --zIndexSticky: 20;
     --zIndexModal: 30;
