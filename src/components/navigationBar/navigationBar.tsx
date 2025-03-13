@@ -9,6 +9,7 @@ import { FC, useCallback, useState } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
 import { UmPrice } from '@/lib/types'
+import Container from '../container'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
@@ -28,7 +29,7 @@ const NavigationBar: FC<Props> = props => {
     const closeSearchModal = useCallback(() => setSearchModalOpen(false), [])
 
     return (
-        <header className={clsx(styles.root, props.className)}>
+        <Container as="header" className={clsx(styles.root, props.className)}>
             <div className={styles.group}>
                 <Link href="/">
                     <Image alt="Noctis" height={36} src={logo} />
@@ -80,7 +81,7 @@ const NavigationBar: FC<Props> = props => {
                     </div>
                 )}
             </div>
-        </header>
+        </Container>
     )
 }
 

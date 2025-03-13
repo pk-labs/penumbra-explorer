@@ -2,8 +2,6 @@
     display: grid;
     height: calc(9.5 * var(--unit));
     align-items: center;
-    padding-right: calc(4 * var(--unit));
-    padding-left: calc(4 * var(--unit));
     grid-template-columns: 1fr 1fr 1fr;
 }
 
