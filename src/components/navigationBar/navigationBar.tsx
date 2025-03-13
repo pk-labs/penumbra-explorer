@@ -66,13 +66,23 @@ const NavigationBar: FC<Props> = props => {
                     </>
                 )}
                 {props.umPrice && (
-                    <div className={styles.price}>
-                        <span className={styles.label}>UM Price:</span>
+                    <div
+                        className={clsx(
+                            'flex h-8 items-center justify-center gap-0.5',
+                            'rounded-full border-1 border-(--surfaceLighter)',
+                            'px-4 text-(length:--fontSizeSm) font-medium'
+                        )}
+                    >
+                        <span className="text-(--textSecondary)">
+                            UM Price:
+                        </span>
                         <span>${props.umPrice.price.toFixed(2)}</span>
                         <span
                             className={clsx(
-                                props.umPrice.change > 0 && styles.positive,
-                                props.umPrice.change < 0 && styles.negative
+                                props.umPrice.change > 0 &&
+                                    'text-(--positiveLight)',
+                                props.umPrice.change < 0 &&
+                                    'text-(--negativeLight)'
                             )}
                         >
                             ({props.umPrice.change > 0 && '+'}

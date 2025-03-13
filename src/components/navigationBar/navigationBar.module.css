@@ -19,21 +19,17 @@
     justify-self: center;
 }
 
-.search,
-.price {
+.search {
     display: flex;
     height: calc(4 * var(--unit));
     align-items: center;
     padding: 0 calc(2 * var(--unit));
     border-radius: var(--roundedFull);
-    font-size: var(--fontSizeSm);
-    font-weight: 500;
-}
-
-.search {
     backdrop-filter: blur(var(--blurLarge));
     background: var(--surfaceLight);
     cursor: pointer;
+    font-size: var(--fontSizeSm);
+    font-weight: 500;
     gap: calc(0.5 * var(--unit));
     transition: background 200ms var(--fastOutSlowIn);
 
@@ -45,22 +41,4 @@
 .searchModal {
     align-items: flex-start;
     padding-top: calc(14 * var(--unit));
-}
-
-.price {
-    justify-content: center;
-    border: 1px solid var(--surfaceLighter);
-    gap: calc(0.5 * var(--unit));
-
-    .label {
-        color: var(--textSecondary);
-    }
-
-    .positive {
-        color: var(--positiveLight);
-    }
-
-    .negative {
-        color: var(--negativeLight);
-    }
 }

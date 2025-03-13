@@ -51,7 +51,10 @@ describe('NavigationBar', () => {
             )
 
             getByText(container, '$9999.00')
-            expect(getByText(container, '(+1.2%)')).toHaveClass('positive')
+
+            expect(getByText(container, '(+1.2%)')).toHaveClass(
+                'text-(--positiveLight)'
+            )
         })
 
         test('with negative change', async () => {
@@ -60,7 +63,10 @@ describe('NavigationBar', () => {
             )
 
             getByText(container, '$9.99')
-            expect(getByText(container, '(-1.2%)')).toHaveClass('negative')
+
+            expect(getByText(container, '(-1.2%)')).toHaveClass(
+                'text-(--negativeLight)'
+            )
         })
     })
 
