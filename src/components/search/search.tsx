@@ -19,7 +19,6 @@ import {
 } from '@/lib/graphql/generated/types'
 import { searchQuery } from '@/lib/graphql/queries'
 import { useDebounce, useLocalStorage } from '@/lib/hooks'
-import styles from './search.module.css'
 import { SearchResult } from './searchResult'
 import { SearchResultOverlay } from './searchResultOverlay'
 
@@ -143,16 +142,26 @@ const Search: FC<Props> = props => {
     }
 
     return (
-        <div className={clsx(styles.root, props.className)} onClick={onClick}>
+        <div className="relative w-[650px]" onClick={onClick}>
             <SearchIcon
-                className={styles.icon}
+                className={clsx(
+                    'transition-stroke absolute top-1/2 left-4 z-10',
+                    '-translate-y-1/2 cursor-pointer stroke-(--textSecondary)',
+                    'duration-200 ease-(--fastOutSlowIn) hover:stroke-(--text)'
+                )}
                 onClick={focusInput}
                 size={16}
             />
             <input
                 ref={inputRef}
                 autoFocus={props.autoFocus}
-                className={styles.input}
+                className={clsx(
+                    'w-full rounded-lg bg-(--surface) p-4 pl-11',
+                    'font-(family-name:--fontPrimary)',
+                    'text-(length:--fontSizeBase) text-(--textSecondary)',
+                    'outline-2 outline-transparent backdrop-blur-[32px]',
+                    'focus:outline-(--textSecondary) focus:transition-none'
+                )}
                 name="query"
                 onBlur={onInputBlur}
                 onChange={onInputChange}
