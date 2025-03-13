@@ -57,8 +57,13 @@ const findPrimaryAction = (transaction?: Transaction): ActionType => {
         return ActionType.communityPoolDeposit
     } else if (cases.has('communityPoolOutput')) {
         return ActionType.communityPoolOutput
+    } else if (cases.has('spend')) {
+        return ActionType.spend
+    } else if (cases.has('output')) {
+        return ActionType.output
     }
 
+    /*
     const hasOpaqueSpend = false
     const allSpendsVisible = !hasOpaqueSpend
 
@@ -107,6 +112,7 @@ const findPrimaryAction = (transaction?: Transaction): ActionType => {
     if (isInternal) {
         return ActionType.unknownInternal
     }
+    */
 
     return ActionType.unknown
 }
