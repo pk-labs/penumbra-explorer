@@ -15,6 +15,14 @@ describe('Container', () => {
         expect(container.firstChild).toHaveClass('max-w-(--pageNarrowWidth)')
     })
 
+    test('supports custom element', async () => {
+        const { container } = render(<Container as="section">Foo</Container>)
+
+        expect(getByText(container, 'Foo').tagName.toLowerCase()).toBe(
+            'section'
+        )
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(<Container className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')

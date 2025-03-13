@@ -14,8 +14,8 @@ describe('TableCell', () => {
             </table>
         )
 
-        expect(getByText(container, 'Foo').tagName).toBe('TH')
-        expect(getByText(container, 'Bar').tagName).toBe('TD')
+        expect(getByText(container, 'Foo').tagName.toLowerCase()).toBe('th')
+        expect(getByText(container, 'Bar').tagName.toLowerCase()).toBe('td')
     })
 
     test('applies CSS classes', async () => {
