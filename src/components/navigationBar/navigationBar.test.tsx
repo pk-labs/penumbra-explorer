@@ -44,8 +44,19 @@ describe('NavigationBar', () => {
         getByText(container, 'Search modal')
     })
 
-    describe('renders UM price', () => {
-        test('with positive change', async () => {
+    describe('UM price', () => {
+        test('is hidden below sm', async () => {
+            const { container } = render(
+                <NavigationBar umPrice={{ change: 0, price: 0 }} />
+            )
+
+            expect(getByText(container, '$0.00').parentNode).toHaveClass(
+                'hidden',
+                'sm:flex'
+            )
+        })
+
+        test('renders positive change', async () => {
             const { container } = render(
                 <NavigationBar umPrice={{ change: 1.234, price: 9999 }} />
             )

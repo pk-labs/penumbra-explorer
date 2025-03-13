@@ -68,12 +68,12 @@ const NavigationBar: FC<Props> = props => {
                 {props.umPrice && (
                     <div
                         className={clsx(
-                            'flex h-8 items-center justify-center gap-0.5',
+                            'hidden h-8 items-center justify-center gap-0.5',
                             'rounded-full border-1 border-(--surfaceLighter)',
-                            'px-4 text-(length:--fontSizeSm) font-medium'
+                            'px-4 text-(length:--fontSizeSm) font-medium sm:flex'
                         )}
                     >
-                        <span className="text-(--textSecondary)">
+                        <span className="whitespace-nowrap text-(--textSecondary)">
                             UM Price:
                         </span>
                         <span>${props.umPrice.price.toFixed(2)}</span>
