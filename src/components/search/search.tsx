@@ -142,7 +142,10 @@ const Search: FC<Props> = props => {
     }
 
     return (
-        <div className="relative w-[650px]" onClick={onClick}>
+        <div
+            className={clsx('relative md:w-[650px]', props.className)}
+            onClick={onClick}
+        >
             <SearchIcon
                 className={clsx(
                     'transition-stroke absolute top-1/2 left-4 z-10',
