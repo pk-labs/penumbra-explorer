@@ -143,7 +143,7 @@ const Search: FC<Props> = props => {
 
     return (
         <div
-            className={clsx('relative md:w-[650px]', props.className)}
+            className={clsx('relative sm:w-[568px]', props.className)}
             onClick={onClick}
         >
             <SearchIcon
