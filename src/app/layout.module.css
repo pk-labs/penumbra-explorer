@@ -1,13 +1,3 @@
-.body {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-bottom: calc(4 * var(--unit));
-    gap: calc(5 * var(--unit));
-    overflow-x: hidden;
-}
-
 .background {
     --width: 1200px;
     --height: 1239px;

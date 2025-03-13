@@ -14,7 +14,7 @@ const Container: FC<Props> = props => {
     return (
         <Element
             className={clsx(
-                'mx-auto w-full px-8',
+                'mx-auto w-full px-4 md:px-8',
                 props.narrow
                     ? 'max-w-(--pageNarrowWidth)'
                     : 'max-w-(--pageMaxWidth)',

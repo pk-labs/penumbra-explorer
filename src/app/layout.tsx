@@ -1,6 +1,7 @@
 // istanbul ignore file
 import '@/lib/css'
 import '@/lib/fonts'
+import clsx from 'clsx'
 import { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
 import { NavigationBar } from '@/components'
@@ -29,7 +30,12 @@ const RootLayout: FC<Props> = async props => {
 
     return (
         <html lang="en">
-            <body className={styles.body}>
+            <body
+                className={clsx(
+                    'relative flex flex-col justify-start gap-10',
+                    'overflow-x-hidden pb-4 md:pb-8'
+                )}
+            >
                 <NavigationBar umPrice={umPrice} />
                 {props.children}
                 <div
