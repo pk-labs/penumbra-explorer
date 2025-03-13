@@ -3,14 +3,6 @@
         padding: 0;
         border-radius: var(--roundedSmall);
     }
-
-    .clickableRow {
-        cursor: pointer;
-
-        &:hover {
-            background: var(--hoverPurple);
-        }
-    }
 }
 
 .moreActions {

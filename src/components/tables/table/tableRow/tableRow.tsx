@@ -24,7 +24,14 @@ const TableRow: FC<Props> = props => {
     )
 
     return (
-        <tr className={clsx(styles.root, props.className)} onClick={onClick}>
+        <tr
+            className={clsx(
+                styles.root,
+                props.href && styles.clickable,
+                props.className
+            )}
+            onClick={onClick}
+        >
             {props.children}
         </tr>
     )
