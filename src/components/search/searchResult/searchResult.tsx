@@ -20,18 +20,26 @@ const SearchResult: FC<Props> = props => (
     >
         {typeof props.heightOrHash === 'number' ? (
             <Link
-                className="flex h-8 items-center gap-1 py-2 text-(--text)!"
+                className="flex gap-1 px-2 py-1.5 break-all text-(--text)!"
                 href={`/block/${props.heightOrHash}`}
             >
-                <Box color="var(--textSecondary)" size={16} />
+                <Box
+                    className="min-w-4"
+                    color="var(--textSecondary)"
+                    size={16}
+                />
                 {formatNumber(props.heightOrHash)}
             </Link>
         ) : (
             <Link
-                className="flex h-8 items-center gap-1 py-2 text-(--text)!"
+                className="flex gap-1 px-2 py-1.5 break-all text-(--text)!"
                 href={`/tx/${props.heightOrHash}`}
             >
-                <CheckCheck color="var(--secondaryLight)" size={16} />
+                <CheckCheck
+                    className="min-w-4"
+                    color="var(--secondaryLight)"
+                    size={16}
+                />
                 {props.heightOrHash}
             </Link>
         )}
