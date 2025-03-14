@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
-import styles from './subsection.module.css'
 
 interface Props {
     children?: ReactNode
@@ -9,8 +8,8 @@ interface Props {
 }
 
 const Subsection: FC<Props> = props => (
-    <div className={clsx(styles.root, props.className)}>
-        {props.title && <h3 className={styles.title}>{props.title}</h3>}
+    <div className={clsx('flex flex-col gap-1', props.className)}>
+        {props.title && <h3 className="text-xs">{props.title}</h3>}
         {props.children}
     </div>
 )
