@@ -46,9 +46,8 @@ const TransactionViewPage: FC<Props> = async props => {
             </Breadcrumbs>
             <View
                 className={clsx(
-                    'bg-radial-[100%_100%_at_0%_0%]!',
-                    'from-[rgba(193,166,204,0.25)]',
-                    'from-0% to-[rgba(193,166,204,0.025)] to-100%'
+                    'from-[rgba(193,166,204,0.25)]!',
+                    'to-[rgba(193,166,204,0.025)]!'
                 )}
                 subtitle={transaction.hash}
                 title="Transaction view"

@@ -42,9 +42,8 @@ const BlockViewPage: FC<Props> = async props => {
             </Breadcrumbs>
             <View
                 className={clsx(
-                    'bg-radial-[100%_100%_at_0%_0%]!',
-                    'from-[rgba(83,174,168,0.25)]',
-                    'from-0% to-[rgba(83,174,168,0.025)] to-100%'
+                    'from-[rgba(83,174,168,0.25)]!',
+                    'to-[rgba(83,174,168,0.025)]!'
                 )}
                 subtitle={formatNumber(block.height)}
                 title="Block view"
