@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import { motion, useAnimate, useMotionValue, useTransform } from 'motion/react'
 import { FC, useEffect } from 'react'
 import { formatNumber } from '@/lib/utils'
-import styles from './numberCountup.module.css'
 
 export interface Props {
     className?: string
@@ -33,7 +32,10 @@ const NumberCountup: FC<Props> = props => {
     }, [animate, motionValue, props.number])
 
     return (
-        <motion.span ref={scope} className={clsx(styles.root, props.className)}>
+        <motion.span
+            ref={scope}
+            className={clsx('font-mono text-3xl font-medium', props.className)}
+        >
             {transformedValue}
         </motion.span>
     )
