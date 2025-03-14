@@ -21,7 +21,6 @@ import {
 import { rootTitle } from '@/lib/constants'
 import { getTransaction } from '@/lib/data'
 import { shortenHash } from '@/lib/utils'
-import styles from './page.module.css'
 
 interface Props {
     params: Promise<{ hash: string }>
@@ -40,13 +39,17 @@ const TransactionViewPage: FC<Props> = async props => {
     }
 
     return (
-        <Container className={styles.root} narrow>
+        <Container narrow>
             <Breadcrumbs>
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/txs">Transactions</Breadcrumb>
             </Breadcrumbs>
             <View
-                className={styles.view}
+                className={clsx(
+                    'bg-radial-[100%_100%_at_0%_0%]!',
+                    'from-[rgba(193,166,204,0.25)]',
+                    'from-0% to-[rgba(193,166,204,0.025)] to-100%'
+                )}
                 subtitle={transaction.hash}
                 title="Transaction view"
             >
@@ -54,24 +57,21 @@ const TransactionViewPage: FC<Props> = async props => {
                     <Parameter name="Transaction hash">
                         {shortenHash(transaction.hash)}
                         <CopyToClipboard
-                            className={clsx(
-                                styles.icon,
-                                styles.copyToClipboard
-                            )}
+                            className="-mr-0.5 text-(--text)"
                             data={transaction.hash}
                             small
                         />
                     </Parameter>
                     <Parameter name="Block height">
                         <Link
-                            className={styles.link}
+                            className={clsx(
+                                'inline-flex items-center gap-1 text-inherit',
+                                'hover:text-(--primaryLight)'
+                            )}
                             href={`/block/${transaction.block.height}`}
                         >
                             {transaction.block.height}
-                            <Link2
-                                className={clsx(styles.icon, styles.link2)}
-                                size={12}
-                            />
+                            <Link2 className="ml-1 text-(--text)" size={12} />
                         </Link>
                     </Parameter>
                     <Parameter name="Time">
@@ -83,7 +83,7 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Subsection title="Parameters">
                     <Parameters>
                         <Parameter name="Transaction fee">
-                            <span className={styles.fee}>
+                            <span className="text-(--negativeLight)">
                                 {Number(
                                     transaction.body.parameters.fee.amount
                                 ) / 1000000}{' '}
