@@ -17,7 +17,6 @@ import {
 import { rootTitle } from '@/lib/constants'
 import { getBlock } from '@/lib/data'
 import { formatNumber } from '@/lib/utils'
-import styles from './page.module.css'
 
 interface Props {
     params: Promise<{ height: string }>
@@ -36,13 +35,17 @@ const BlockViewPage: FC<Props> = async props => {
     }
 
     return (
-        <Container className={styles.root} narrow>
+        <Container narrow>
             <Breadcrumbs>
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/blocks">Blocks</Breadcrumb>
             </Breadcrumbs>
             <View
-                className={styles.view}
+                className={clsx(
+                    'bg-radial-[100%_100%_at_0%_0%]!',
+                    'from-[rgba(83,174,168,0.25)]',
+                    'from-0% to-[rgba(83,174,168,0.025)] to-100%'
+                )}
                 subtitle={formatNumber(block.height)}
                 title="Block view"
             >
@@ -50,10 +53,7 @@ const BlockViewPage: FC<Props> = async props => {
                     <Parameter name="Block height">
                         {block.height}
                         <CopyToClipboard
-                            className={clsx(
-                                styles.icon,
-                                styles.copyToClipboard
-                            )}
+                            className="-mr-0.5 text-(--text)"
                             data={block.height.toString()}
                             small
                         />
