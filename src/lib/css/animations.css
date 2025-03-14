@@ -1,0 +1,13 @@
+@theme {
+    --animate-bg: bg-animation 30s linear infinite alternate;
+
+    @keyframes bg-animation {
+        from {
+            transform: rotate(0);
+        }
+
+        to {
+            transform: rotate(30deg);
+        }
+    }
+}

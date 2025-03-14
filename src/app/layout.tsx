@@ -8,7 +8,6 @@ import { NavigationBar } from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { getUmPrice } from '@/lib/data'
 import { background } from '@/lib/images'
-import styles from './layout.module.css'
 
 export const metadata: Metadata = {
     icons: [
@@ -39,7 +38,11 @@ const RootLayout: FC<Props> = async props => {
                 <NavigationBar umPrice={umPrice} />
                 {props.children}
                 <div
-                    className={styles.background}
+                    className={clsx(
+                        'animate-bg pointer-events-none absolute',
+                        '-top-[1486.8px] left-[calc(50%-900px)] -z-1',
+                        'h-[1858.5px] w-[1800px] bg-cover'
+                    )}
                     style={{ backgroundImage: `url(${background.src})` }}
                 />
             </body>
