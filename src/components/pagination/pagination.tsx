@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { FC } from 'react'
 import Button from '../button'
-import styles from './pagination.module.css'
 
 interface Props {
     className?: string
@@ -31,16 +30,21 @@ const Pagination: FC<Props> = props => {
     }
 
     return (
-        <div className={clsx(styles.root, props.className)}>
+        <div
+            className={clsx(
+                'flex items-center justify-center gap-6',
+                props.className
+            )}
+        >
             <Button
-                className={styles.button}
+                className="font-normal!"
                 disabled={!props.fromPrev}
                 href={prevHref}
             >
                 Prev
             </Button>
             <Button
-                className={styles.button}
+                className="font-normal!"
                 disabled={!props.fromNext}
                 href={nextHref}
             >
