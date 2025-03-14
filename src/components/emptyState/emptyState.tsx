@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
-import styles from './emptyState.module.css'
 
 interface Props {
     children?: ReactNode
@@ -9,10 +8,21 @@ interface Props {
 }
 
 const EmptyState: FC<Props> = props => (
-    <div className={clsx(styles.root, props.className)}>
-        <div className={styles.title}>{props.title}</div>
+    <div
+        className={clsx(
+            'flex flex-col items-center justify-center px-6 py-8',
+            props.className
+        )}
+    >
+        <div className="font-primary text-base font-normal">{props.title}</div>
         {props.children && (
-            <div className={styles.message}>{props.children}</div>
+            <div
+                className={clsx(
+                    'font-primary text-sm font-normal text-(--textSecondary)'
+                )}
+            >
+                {props.children}
+            </div>
         )}
     </div>
 )
