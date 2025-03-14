@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { FC, ReactElement } from 'react'
 import { TabProps } from './tab'
-import styles from './tabs.module.css'
 
 interface Props {
     children?:
@@ -17,7 +16,15 @@ interface Props {
 }
 
 const Tabs: FC<Props> = props => (
-    <nav className={clsx(styles.root, props.className)}>{props.children}</nav>
+    <nav
+        className={clsx(
+            'relative flex h-9 items-center rounded-full bg-(--surface) px-4',
+            'backdrop-blur-[32px]',
+            props.className
+        )}
+    >
+        {props.children}
+    </nav>
 )
 
 export default Tabs
