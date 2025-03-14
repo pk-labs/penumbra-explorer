@@ -1,19 +1,24 @@
 import Link from 'next/link'
 import { FC } from 'react'
-import styles from './breadcrumb.module.css'
 
 export interface Props {
     children: string
     href?: string
 }
 
-const Breadcrumb: FC<Props> = props =>
-    props.href ? (
-        <Link className={styles.root} href={props.href}>
+const Breadcrumb: FC<Props> = props => {
+    return props.href ? (
+        <Link
+            className="font-secondary text-3xl font-medium text-(--textSecondary) hover:text-(--text)"
+            href={props.href}
+        >
             {props.children}
         </Link>
     ) : (
-        <span className={styles.root}>{props.children}</span>
+        <span className="font-secondary text-3xl font-medium">
+            {props.children}
+        </span>
     )
+}
 
 export default Breadcrumb
