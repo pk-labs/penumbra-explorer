@@ -13,8 +13,8 @@
 
     --pageMaxWidth: 96rem; /* 1536px */
     --pageNarrowWidth: 47rem; /* 752px */
-    --font-poppins: Poppins, sans-serif;
-    --font-work-sans: "Work Sans", sans-serif;
+    --font-primary: Poppins, sans-serif;
+    --font-secondary: "Work Sans", sans-serif;
     --font-mono: _fontMono, monospace;
 
     --text-xs: 0.75rem;
@@ -40,7 +40,7 @@
     body {
         background: #0d0d0d;
         color: var(--text);
-        font-family: var(--font-poppins);
+        font-family: var(--font-primary);
         font-size: var(--text-base);
         line-height: var(--text-base--line-height);
     }

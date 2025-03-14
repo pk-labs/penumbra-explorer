@@ -1,4 +1,5 @@
 // istanbul ignore file
+import clsx from 'clsx'
 import { FC } from 'react'
 import {
     BlockPanel,
@@ -11,7 +12,6 @@ import {
 } from '@/components'
 import { getBlocks, getStats, getTransactions } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import styles from './page.module.css'
 
 const HomePage: FC = async () => {
     const stats = await getStats()
@@ -27,7 +27,11 @@ const HomePage: FC = async () => {
     return (
         <>
             <Container>
-                <h1 className={styles.title}>Penumbra Blockchain Explorer</h1>
+                <h1
+                    className={clsx('font-secondary mb-2 text-4xl font-medium')}
+                >
+                    Penumbra Blockchain Explorer
+                </h1>
                 <GraphqlClientProvider>
                     <Search />
                 </GraphqlClientProvider>
