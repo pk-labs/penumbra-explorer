@@ -1,7 +1,7 @@
+import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
 import { encrypted } from '@/lib/images'
-import styles from './action.module.css'
 
 interface Props {
     // TODO: Implement encrypted flag for icon
@@ -9,7 +9,12 @@ interface Props {
 }
 
 const Action: FC<Props> = props => (
-    <li className={styles.root}>
+    <li
+        className={clsx(
+            'flex items-center gap-2 rounded-lg bg-(--surface) px-3 py-2',
+            'font-mono text-sm font-medium text-(--textSecondary)'
+        )}
+    >
         <Image alt={props.children} src={encrypted} />
         {props.children}
     </li>
