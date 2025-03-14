@@ -1,9 +1,0 @@
-.container {
-    padding: calc(1.5 * var(--unit));
-    border-radius: var(--roundedSmall);
-    background: var(--surface);
-    font-family: var(--fontMono);
-    font-size: var(--fontSizeXs);
-    font-weight: 500;
-    overflow-wrap: anywhere;
-}
