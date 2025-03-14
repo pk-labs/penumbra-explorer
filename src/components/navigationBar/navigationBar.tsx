@@ -13,7 +13,6 @@ import Container from '../container'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
-import styles from './navigationBar.module.css'
 
 interface Props {
     className?: string
@@ -29,13 +28,19 @@ const NavigationBar: FC<Props> = props => {
     const closeSearchModal = useCallback(() => setSearchModalOpen(false), [])
 
     return (
-        <Container as="header" className={clsx(styles.root, props.className)}>
-            <div className={styles.group}>
+        <Container
+            as="header"
+            className={clsx(
+                'grid h-19 grid-cols-3 items-center',
+                props.className
+            )}
+        >
+            <div className="flex items-center gap-2">
                 <Link href="/">
                     <Image alt="Noctis" height={36} src={logo} />
                 </Link>
             </div>
-            <Tabs className={styles.tabs}>
+            <Tabs className="justify-self-center">
                 <Tab href="/">Home</Tab>
                 <Tab href="/blocks" paths={['/block']}>
                     Blocks
@@ -44,18 +49,26 @@ const NavigationBar: FC<Props> = props => {
                     Transactions
                 </Tab>
             </Tabs>
-            <div className={styles.group}>
+            <div className="flex items-center gap-2 justify-self-end">
                 {pathname !== '/' && (
                     <>
                         <div
-                            className={styles.search}
+                            className={clsx(
+                                'transition-background flex h-8 cursor-pointer',
+                                'items-center gap-1 rounded-full',
+                                'bg-(--surfaceLight) px-4 text-sm font-medium',
+                                'backdrop-blur-[32px] duration-200',
+                                'ease-(--fastOutSlowIn)',
+                                'hover:bg-(--surfaceLighter)'
+                            )}
                             onClick={openSearchModal}
                         >
                             <SearchIcon size={16} />
                             Search
                         </div>
                         <Modal
-                            className={styles.searchModal}
+                            // FIXME: Remove !important after refactoring modal
+                            className="items-start! pt-28"
                             onClose={closeSearchModal}
                             open={searchModalOpen}
                         >
