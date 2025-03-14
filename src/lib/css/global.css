@@ -1,32 +1,7 @@
 @import "tailwindcss";
 @import "./variables.css";
 
-body {
-    margin: 0;
-    background: var(--background);
-    color: var(--text);
-    font-family: var(--fontPrimary);
-    font-size: var(--fontSizeBase);
-    line-height: 1.5;
-}
-
-a {
-    color: var(--text);
-    text-decoration: none;
-    transition: color 200ms var(--fastOutSlowIn);
-
-    &:hover {
-        color: var(--primaryLight);
-    }
-}
-
-/* https://tailwindcss.com/docs/preflight#extending-preflight */
-@layer base {
-    svg {
-        display: inline;
-    }
-}
-
+/* https://tailwindcss.com/docs/theme */
 @theme {
     /* https://tailwindcss.com/docs/responsive-design */
     --breakpoint-sm: 37.5rem; /* 600px */
@@ -37,4 +12,49 @@ a {
 
     --pageMaxWidth: 96rem; /* 1536px */
     --pageNarrowWidth: 47rem; /* 752px */
+    --font-poppins: Poppins, sans-serif;
+    --font-work-sans: "Work Sans", sans-serif;
+    --font-mono: _fontMono, monospace;
+
+    --text-xs: 0.75rem;
+    --text-xs--line-height: 1rem;
+    --text-sm: 0.875rem;
+    --text-sm--line-height: 1.25rem;
+    --text-base: 1rem;
+    --text-base--line-height: 1.5rem;
+    --text-lg: 1.125rem;
+    --text-lg--line-height: 1.75rem;
+    --text-xl: 1.25rem;
+    --text-xl--line-height: 2rem;
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: 2.25rem;
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: 2.5rem;
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: 2.75rem;
+}
+
+/* https://tailwindcss.com/docs/preflight#extending-preflight */
+@layer base {
+    body {
+        background: #0d0d0d;
+        color: var(--text);
+        font-family: var(--font-poppins);
+        font-size: var(--text-base);
+        line-height: var(--text-base--line-height);
+    }
+
+    a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 200ms var(--fastOutSlowIn);
+
+        &:hover {
+            color: var(--primaryLight);
+        }
+    }
+
+    svg {
+        display: inline;
+    }
 }
