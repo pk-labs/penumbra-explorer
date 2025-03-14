@@ -10,4 +10,16 @@
             transform: rotate(30deg);
         }
     }
+
+    --animate-copy: copy-animation 500ms var(--fastOutSlowIn) forwards;
+
+    @keyframes copy-animation {
+        from {
+            border-color: var(--surfaceLighter);
+        }
+
+        to {
+            border-color: transparent;
+        }
+    }
 }

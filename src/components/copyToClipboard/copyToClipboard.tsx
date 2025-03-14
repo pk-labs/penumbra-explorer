@@ -3,7 +3,6 @@
 import clsx from 'clsx'
 import { Check, Copy } from 'lucide-react'
 import { FC, MouseEvent, useCallback, useState } from 'react'
-import styles from './copyToClipboard.module.css'
 
 interface Props {
     className?: string
@@ -49,9 +48,9 @@ const CopyToClipboard: FC<Props> = props => {
     return (
         <div
             className={clsx(
-                styles.root,
-                props.small && styles.small,
-                copied && styles.copied,
+                'transition-background inline-flex cursor-pointer items-center justify-center rounded-lg border-1 border-transparent duration-200 ease-(--fastOutSlowIn) hover:bg-(--surfaceLight)',
+                props.small ? 'p-0.5' : 'p-1',
+                copied && 'animate-copy',
                 props.className
             )}
             onClick={onClick}
