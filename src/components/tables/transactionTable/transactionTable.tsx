@@ -8,7 +8,6 @@ import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
-import styles from './transactionTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     blockHeight?: boolean
@@ -23,8 +22,7 @@ const TransactionTable: FC<Props> = props => (
     <Table
         actions={props.actions}
         className={twMerge(
-            styles.root,
-            props.embedded && styles.embedded,
+            props.embedded && 'rounded-lg p-0 backdrop-blur-none',
             props.className
         )}
         footer={props.footer}
@@ -43,7 +41,6 @@ const TransactionTable: FC<Props> = props => (
                 props.transactions.map(transaction => (
                     <TableRow
                         key={transaction.hash}
-                        className={styles.clickableRow}
                         href={`/tx/${transaction.hash}`}
                     >
                         <TableCell>
@@ -73,7 +70,7 @@ const TransactionTable: FC<Props> = props => (
                                 </Pill>
                             )}
                             {transaction.actions.length > 1 && (
-                                <span className={styles.moreActions}>
+                                <span className="text-(--textSecondary)">
                                     +{transaction.actions.length - 1}
                                 </span>
                             )}

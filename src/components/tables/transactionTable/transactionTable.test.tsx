@@ -141,7 +141,7 @@ describe('BlockTable', () => {
             />
         )
 
-        expect(container.firstChild).toHaveClass('embedded')
+        expect(container.firstChild).toHaveClass('p-0')
     })
 
     test('navigates to transaction on row click', async () => {
