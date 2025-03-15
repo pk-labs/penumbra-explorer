@@ -37,14 +37,14 @@ const Pagination: FC<Props> = props => {
             )}
         >
             <Button
-                className="font-normal!"
+                className="font-normal"
                 disabled={!props.fromPrev}
                 href={prevHref}
             >
                 Prev
             </Button>
             <Button
-                className="font-normal!"
+                className="font-normal"
                 disabled={!props.fromNext}
                 href={nextHref}
             >
