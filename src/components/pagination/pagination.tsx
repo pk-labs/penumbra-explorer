@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import Button from '../button'
 
 interface Props {
@@ -31,7 +31,7 @@ const Pagination: FC<Props> = props => {
 
     return (
         <div
-            className={clsx(
+            className={twMerge(
                 'flex items-center justify-center gap-6',
                 props.className
             )}

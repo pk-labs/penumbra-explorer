@@ -1,6 +1,6 @@
 // istanbul ignore file
-import clsx from 'clsx'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import {
     BlockPanel,
     BlockTable,
@@ -28,7 +28,9 @@ const HomePage: FC = async () => {
         <>
             <Container>
                 <h1
-                    className={clsx('font-secondary mb-2 text-4xl font-medium')}
+                    className={twMerge(
+                        'font-secondary mb-2 text-4xl font-medium'
+                    )}
                 >
                     Penumbra Blockchain Explorer
                 </h1>

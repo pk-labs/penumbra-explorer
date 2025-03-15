@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { FC, ReactElement, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 import styles from './table.module.css'
 
 export interface Props {
@@ -17,7 +17,7 @@ export interface Props {
 }
 
 const Table: FC<Props> = props => (
-    <div className={clsx(styles.root, props.className)}>
+    <div className={twMerge(styles.root, props.className)}>
         {Boolean(props.title || props.actions) && (
             <div className={styles.header}>
                 <h2 className={styles.title}>{props.title}</h2>
@@ -26,7 +26,7 @@ const Table: FC<Props> = props => (
         )}
         <table className={styles.table}>{props.children}</table>
         {props.footer && (
-            <div className={clsx(styles.footer, props.footerClassName)}>
+            <div className={twMerge(styles.footer, props.footerClassName)}>
                 {props.footer}
             </div>
         )}

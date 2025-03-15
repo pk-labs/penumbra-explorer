@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 import styles from './tableCell.module.css'
 
 export interface Props {
@@ -14,7 +14,7 @@ const TableCell: FC<Props> = props => {
 
     return (
         <Element
-            className={clsx(styles.root, props.className)}
+            className={twMerge(styles.root, props.className)}
             colSpan={props.colSpan}
         >
             {props.children}

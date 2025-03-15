@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import { FC, useCallback, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 import Subsection from '../subsection'
 
 const ReactJsonView = dynamic(() => import('@microlink/react-json-view'), {
@@ -21,7 +21,7 @@ const JsonTree: FC<Props> = props => {
     return (
         <Subsection title="Raw JSON">
             <div
-                className={clsx(
+                className={twMerge(
                     'rounded-lg bg-(--surface) p-3 font-mono text-xs',
                     'font-medium break-all'
                 )}

@@ -1,6 +1,5 @@
 'use client'
 
-import clsx from 'clsx'
 import { Search as SearchIcon } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 import {
@@ -12,6 +11,7 @@ import {
     useRef,
     useState,
 } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { useClient } from 'urql'
 import {
     SearchQuery,
@@ -143,11 +143,11 @@ const Search: FC<Props> = props => {
 
     return (
         <div
-            className={clsx('relative sm:w-[568px]', props.className)}
+            className={twMerge('relative sm:w-[568px]', props.className)}
             onClick={onClick}
         >
             <SearchIcon
-                className={clsx(
+                className={twMerge(
                     'transition-stroke absolute top-1/2 left-4 z-10',
                     '-translate-y-1/2 cursor-pointer stroke-(--textSecondary)',
                     'duration-200 ease-(--fastOutSlowIn) hover:stroke-(--text)'
@@ -158,7 +158,7 @@ const Search: FC<Props> = props => {
             <input
                 ref={inputRef}
                 autoFocus={props.autoFocus}
-                className={clsx(
+                className={twMerge(
                     'w-full rounded-lg bg-(--surface) p-4 pl-11',
                     'font-(family-name:--fontPrimary)',
                     'text-(length:--fontSizeBase) text-(--textSecondary)',

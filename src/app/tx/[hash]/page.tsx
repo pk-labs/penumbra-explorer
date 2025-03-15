@@ -1,10 +1,10 @@
 // istanbul ignore file
-import clsx from 'clsx'
 import { Link2 } from 'lucide-react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import {
     Actions,
     Breadcrumb,
@@ -45,7 +45,7 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/txs">Transactions</Breadcrumb>
             </Breadcrumbs>
             <View
-                className={clsx(
+                className={twMerge(
                     'from-[rgba(193,166,204,0.25)]!',
                     'to-[rgba(193,166,204,0.025)]!'
                 )}
@@ -63,7 +63,7 @@ const TransactionViewPage: FC<Props> = async props => {
                     </Parameter>
                     <Parameter name="Block height">
                         <Link
-                            className={clsx(
+                            className={twMerge(
                                 'inline-flex items-center gap-1 text-inherit',
                                 'hover:text-(--primaryLight)'
                             )}

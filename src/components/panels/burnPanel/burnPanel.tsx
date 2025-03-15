@@ -1,17 +1,17 @@
-import clsx from 'clsx'
 import Image from 'next/image'
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { Panel } from '../panel'
 import styles from './burnPanel.module.css'
 import icon from './burnPanelIcon.png'
 
 export interface Props {
-    className?: ReactNode
+    className?: string
 }
 
 const BurnPanel: FC<Props> = props => (
     <Panel
-        className={clsx(styles.root, styles.gradient, props.className)}
+        className={twMerge(styles.root, styles.gradient, props.className)}
         footer="Average"
         number={86990}
         numberSuffix=" UM"

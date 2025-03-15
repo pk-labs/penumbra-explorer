@@ -1,9 +1,9 @@
 // istanbul ignore file
 import '@/lib/css'
 import '@/lib/fonts'
-import clsx from 'clsx'
 import { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { NavigationBar } from '@/components'
 import { rootTitle } from '@/lib/constants'
 import { getUmPrice } from '@/lib/data'
@@ -30,7 +30,7 @@ const RootLayout: FC<Props> = async props => {
     return (
         <html lang="en">
             <body
-                className={clsx(
+                className={twMerge(
                     'relative flex flex-col justify-start gap-10',
                     'overflow-x-hidden pb-4 md:pb-8'
                 )}
@@ -38,7 +38,7 @@ const RootLayout: FC<Props> = async props => {
                 <NavigationBar umPrice={umPrice} />
                 {props.children}
                 <div
-                    className={clsx(
+                    className={twMerge(
                         'animate-bg pointer-events-none absolute',
                         '-top-[1486.8px] left-[calc(50%-900px)] -z-1',
                         'h-[1858.5px] w-[1800px] bg-cover'

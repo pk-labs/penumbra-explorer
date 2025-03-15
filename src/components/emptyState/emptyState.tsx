@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface Props {
     children?: ReactNode
@@ -9,7 +9,7 @@ interface Props {
 
 const EmptyState: FC<Props> = props => (
     <div
-        className={clsx(
+        className={twMerge(
             'flex flex-col items-center justify-center px-6 py-8',
             props.className
         )}
@@ -17,7 +17,7 @@ const EmptyState: FC<Props> = props => (
         <div className="font-primary text-base font-normal">{props.title}</div>
         {props.children && (
             <div
-                className={clsx(
+                className={twMerge(
                     'font-primary text-sm font-normal text-(--textSecondary)'
                 )}
             >

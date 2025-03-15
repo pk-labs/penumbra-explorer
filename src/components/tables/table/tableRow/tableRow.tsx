@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
+import { twMerge } from 'tailwind-merge'
 import styles from './tableRow.module.css'
 
 export interface Props {
@@ -25,7 +25,7 @@ const TableRow: FC<Props> = props => {
 
     return (
         <tr
-            className={clsx(
+            className={twMerge(
                 styles.root,
                 props.href && styles.clickable,
                 props.className

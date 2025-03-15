@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
 import { motion, useAnimate, useMotionValue, useTransform } from 'motion/react'
 import { FC, useEffect } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { formatNumber } from '@/lib/utils'
 
 export interface Props {
@@ -34,7 +34,10 @@ const NumberCountup: FC<Props> = props => {
     return (
         <motion.span
             ref={scope}
-            className={clsx('font-mono text-3xl font-medium', props.className)}
+            className={twMerge(
+                'font-mono text-3xl font-medium',
+                props.className
+            )}
         >
             {transformedValue}
         </motion.span>

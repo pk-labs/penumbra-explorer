@@ -1,7 +1,7 @@
-import clsx from 'clsx'
 import { Box, CheckCheck } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
@@ -22,7 +22,7 @@ interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
 const TransactionTable: FC<Props> = props => (
     <Table
         actions={props.actions}
-        className={clsx(
+        className={twMerge(
             styles.root,
             props.embedded && styles.embedded,
             props.className

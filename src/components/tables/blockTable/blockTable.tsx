@@ -1,7 +1,7 @@
-import clsx from 'clsx'
 import { Box } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
 import { Table, TableCell, TableProps, TableRow } from '../table'
@@ -16,7 +16,7 @@ interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
 const BlockTable: FC<Props> = props => (
     <Table
         actions={props.actions}
-        className={clsx(styles.root, props.className)}
+        className={twMerge(styles.root, props.className)}
         footer={props.footer}
         title={props.title}
     >

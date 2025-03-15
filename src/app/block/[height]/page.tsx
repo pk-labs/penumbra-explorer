@@ -1,8 +1,8 @@
 // istanbul ignore file
-import clsx from 'clsx'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import {
     Breadcrumb,
     Breadcrumbs,
@@ -41,7 +41,7 @@ const BlockViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/blocks">Blocks</Breadcrumb>
             </Breadcrumbs>
             <View
-                className={clsx(
+                className={twMerge(
                     'from-[rgba(83,174,168,0.25)]!',
                     'to-[rgba(83,174,168,0.025)]!'
                 )}

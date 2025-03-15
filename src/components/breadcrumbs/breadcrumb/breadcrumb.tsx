@@ -1,6 +1,6 @@
-import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 export interface Props {
     children: string
@@ -8,11 +8,11 @@ export interface Props {
 }
 
 const Breadcrumb: FC<Props> = props => {
-    const className = clsx('font-secondary text-3xl font-medium')
+    const className = twMerge('font-secondary text-3xl font-medium')
 
     return props.href ? (
         <Link
-            className={clsx(
+            className={twMerge(
                 className,
                 'text-(--textSecondary) hover:text-(--text)'
             )}

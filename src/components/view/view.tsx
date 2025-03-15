@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 export interface Props {
     children?: ReactNode
@@ -10,7 +10,7 @@ export interface Props {
 
 const View: FC<Props> = props => (
     <article
-        className={clsx(
+        className={twMerge(
             'flex flex-col gap-4 rounded-2xl border-1',
             'border-(--surfaceLighter) bg-radial-[100%_100%_at_0%_0%]',
             'from-[rgba(174,174,174,0.25)]',

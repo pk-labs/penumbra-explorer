@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
 import { Check, Copy } from 'lucide-react'
 import { FC, MouseEvent, useCallback, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface Props {
     className?: string
@@ -47,7 +47,7 @@ const CopyToClipboard: FC<Props> = props => {
 
     return (
         <div
-            className={clsx(
+            className={twMerge(
                 'transition-background inline-flex cursor-pointer items-center',
                 'justify-center rounded-lg border-1 border-transparent',
                 'duration-200 ease-(--fastOutSlowIn) hover:bg-(--surfaceLight)',

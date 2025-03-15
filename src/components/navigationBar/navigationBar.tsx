@@ -1,11 +1,11 @@
 'use client'
 
-import clsx from 'clsx'
 import { Search as SearchIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC, useCallback, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
 import { UmPrice } from '@/lib/types'
@@ -30,7 +30,7 @@ const NavigationBar: FC<Props> = props => {
     return (
         <Container
             as="header"
-            className={clsx(
+            className={twMerge(
                 'grid h-19 grid-cols-3 items-center',
                 props.className
             )}
@@ -53,7 +53,7 @@ const NavigationBar: FC<Props> = props => {
                 {pathname !== '/' && (
                     <>
                         <div
-                            className={clsx(
+                            className={twMerge(
                                 'transition-background flex h-8 cursor-pointer',
                                 'items-center gap-1 rounded-full',
                                 'bg-(--surfaceLight) px-4 text-sm font-medium',
@@ -79,7 +79,7 @@ const NavigationBar: FC<Props> = props => {
                 )}
                 {props.umPrice && (
                     <div
-                        className={clsx(
+                        className={twMerge(
                             'hidden h-8 items-center justify-center gap-0.5',
                             'rounded-full border-1 border-(--surfaceLighter)',
                             'px-4 text-(length:--fontSizeSm) font-medium sm:flex'
@@ -90,7 +90,7 @@ const NavigationBar: FC<Props> = props => {
                         </span>
                         <span>${props.umPrice.price.toFixed(2)}</span>
                         <span
-                            className={clsx(
+                            className={twMerge(
                                 props.umPrice.change > 0 &&
                                     'text-(--positiveLight)',
                                 props.umPrice.change < 0 &&

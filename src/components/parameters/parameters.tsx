@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { FC, ReactElement } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { ParameterProps } from './parameter'
 import styles from './parameters.module.css'
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const Parameters: FC<Props> = props => (
-    <ul className={clsx(styles.root, props.className)}>{props.children}</ul>
+    <ul className={twMerge(styles.root, props.className)}>{props.children}</ul>
 )
 
 export default Parameters

@@ -1,10 +1,10 @@
 // istanbul ignore file
-import clsx from 'clsx'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 const NotFoundPage: FC = async () => (
     <div
-        className={clsx(
+        className={twMerge(
             'absolute top-[50vh] left-[50vw] flex -translate-1/2 items-center',
             'justify-center gap-6'
         )}

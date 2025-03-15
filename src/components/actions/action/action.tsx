@@ -1,6 +1,6 @@
-import clsx from 'clsx'
 import Image from 'next/image'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { encrypted } from '@/lib/images'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 const Action: FC<Props> = props => (
     <li
-        className={clsx(
+        className={twMerge(
             'flex items-center gap-2 rounded-lg bg-(--surface) px-3 py-2',
             'font-mono text-sm font-medium text-(--textSecondary)'
         )}

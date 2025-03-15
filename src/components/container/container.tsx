@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { ElementType, FC, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface Props {
     as?: ElementType
@@ -13,7 +13,7 @@ const Container: FC<Props> = props => {
 
     return (
         <Element
-            className={clsx(
+            className={twMerge(
                 'mx-auto w-full px-4 md:px-8',
                 props.narrow
                     ? 'max-w-(--pageNarrowWidth)'

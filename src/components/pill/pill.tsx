@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface Props {
     children: ReactNode
@@ -8,7 +8,7 @@ interface Props {
 
 const Pill: FC<Props> = props => (
     <span
-        className={clsx(
+        className={twMerge(
             'inline-flex h-8 max-w-47 items-center truncate rounded-full',
             'bg-(--surface) px-3 text-sm font-medium text-(--text)',
             props.className

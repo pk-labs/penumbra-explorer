@@ -1,13 +1,13 @@
 'use client'
 
-import clsx from 'clsx'
 import { FC, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { NumberCountup } from '../../numberCountup'
 import styles from './panel.module.css'
 
 export interface Props {
     children?: ReactNode
-    className?: ReactNode
+    className?: string
     footer?: ReactNode
     number?: number
     numberSuffix?: string
@@ -15,7 +15,7 @@ export interface Props {
 }
 
 const Panel: FC<Props> = props => (
-    <section className={clsx(styles.root, props.className)}>
+    <section className={twMerge(styles.root, props.className)}>
         <header className={styles.header}>
             <h2 className={styles.title}>{props.title}</h2>
             {typeof props.number === 'number' && (

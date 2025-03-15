@@ -1,9 +1,9 @@
 'use client'
 
-import clsx from 'clsx'
 import { Box, CheckCheck } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { formatNumber } from '@/lib/utils'
 
 export interface Props {
@@ -11,13 +11,13 @@ export interface Props {
 }
 
 const SearchResult: FC<Props> = props => {
-    const linkClassName = clsx(
+    const linkClassName = twMerge(
         'flex gap-1 px-2 py-1.5 break-all text-(--text)!'
     )
 
     return (
         <li
-            className={clsx(
+            className={twMerge(
                 'transition-background duration-200 ease-(--fastOutSlowIn)',
                 'not-last:border-b-1 not-last:border-b-(--surfaceLighter)',
                 'hover:bg-(--surface)'
