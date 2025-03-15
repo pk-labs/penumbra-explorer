@@ -1,10 +1,9 @@
 'use client'
 
-import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
-import styles from './tab.module.css'
+import { twMerge } from 'tailwind-merge'
 
 export interface Props {
     children: string
@@ -23,7 +22,20 @@ const Tab: FC<Props> = props => {
 
     return (
         <Link
-            className={clsx(styles.root, active && styles.active)}
+            className={twMerge(
+                'relative flex h-full items-center',
+                'bg-radial-[50%_100%_at_50%_100%] from-[rgba(186,77,20,0.35))]',
+                'from-0% to-[rgba(186,77,20,0)] to-95% bg-no-repeat px-4',
+                'text-sm font-medium transition-[color,background-position]',
+                'duration-200 before:absolute before:bottom-[4px]',
+                'before:left-1/2 before:h-[2px] before:-translate-x-1/2',
+                'before:bg-[var(--primary)]',
+                'before:transition-[width,transform] before:duration-200',
+                'before:ease-(--fastOutSlowIn) hover:text-(--text)',
+                active
+                    ? 'bg-[0px_0px] text-(--text) before:w-[calc(100%-16px)]'
+                    : 'bg-[0px_36px] text-(--textSecondary) before:w-0'
+            )}
             href={props.href}
         >
             {props.children}
