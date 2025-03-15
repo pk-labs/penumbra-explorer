@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Link from 'next/link'
 import { FC } from 'react'
 
@@ -7,17 +8,20 @@ export interface Props {
 }
 
 const Breadcrumb: FC<Props> = props => {
+    const className = clsx('font-secondary text-3xl font-medium')
+
     return props.href ? (
         <Link
-            className="font-secondary text-3xl font-medium text-(--textSecondary) hover:text-(--text)"
+            className={clsx(
+                className,
+                'text-(--textSecondary) hover:text-(--text)'
+            )}
             href={props.href}
         >
             {props.children}
         </Link>
     ) : (
-        <span className="font-secondary text-3xl font-medium">
-            {props.children}
-        </span>
+        <span className={className}>{props.children}</span>
     )
 }
 
