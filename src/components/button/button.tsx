@@ -3,7 +3,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, MouseEvent, ReactNode } from 'react'
-import styles from './button.module.css'
 
 interface Props {
     children?: ReactNode
@@ -16,9 +15,16 @@ interface Props {
 
 const Button: FC<Props> = props => {
     const className = clsx(
-        styles.root,
-        props.light && styles.light,
-        props.disabled && styles.disabled,
+        'font-primary transition-background inline-flex h-8 transform-none',
+        'items-center justify-center gap-2 rounded-full px-4 text-sm',
+        'font-medium whitespace-nowrap text-(--text) capitalize duration-200',
+        'ease-(--fastOutSlowIn) select-none',
+        props.disabled
+            ? 'cursor-not-allowed bg-(--surfaceDisabled) text-(--textDisabled)'
+            : 'cursor-pointer hover:text-(--text) active:scale-98',
+        !props.disabled && props.light
+            ? 'bg-(--surfaceLight) hover:bg-(--surfaceLighter)'
+            : 'bg-(--surface) hover:bg-(--surfaceLight)',
         props.className
     )
 

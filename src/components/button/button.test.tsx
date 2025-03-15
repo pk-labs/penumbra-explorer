@@ -9,7 +9,10 @@ describe('Button', () => {
 
     test('renders light button', async () => {
         const { container } = render(<Button light>Foo</Button>)
-        expect(getByText(container, 'Foo')).toHaveClass('light')
+
+        expect(getByText(container, 'Foo')).toHaveClass(
+            'hover:bg-(--surfaceLighter)'
+        )
     })
 
     test('renders link button', async () => {
@@ -22,7 +25,7 @@ describe('Button', () => {
 
         const button = getByText(container, 'Foo')
         expect(button).toBeDisabled()
-        expect(button).toHaveClass('disabled')
+        expect(button).toHaveClass('cursor-not-allowed')
 
         rerender(
             <Button href="/" disabled>
@@ -30,7 +33,7 @@ describe('Button', () => {
             </Button>
         )
 
-        expect(button).toHaveClass('disabled')
+        expect(button).toHaveClass('cursor-not-allowed')
     })
 
     test('applies CSS classes', async () => {

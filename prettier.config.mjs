@@ -5,5 +5,6 @@ export default {
     semi: false,
     singleQuote: true,
     tabWidth: 4,
+    tailwindFunctions: ['clsx'],
     trailingComma: 'es5',
 }
