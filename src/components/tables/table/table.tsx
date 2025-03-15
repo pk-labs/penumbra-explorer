@@ -35,8 +35,7 @@ const Table: FC<Props> = props => (
         {props.footer && (
             <div
                 className={twMerge(
-                    '-mt-2 border-t border-(--surfaceLighter) pt-4 text-xs',
-                    'text-(--textSecondary)',
+                    '-mt-2 pt-4 text-xs text-(--textSecondary)',
                     props.footerClassName
                 )}
             >

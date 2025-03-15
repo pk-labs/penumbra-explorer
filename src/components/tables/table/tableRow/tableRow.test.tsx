@@ -41,7 +41,7 @@ describe('TableRow', () => {
             throw Error('Missing element')
         }
 
-        expect(row).toHaveClass('clickable')
+        expect(row).toHaveClass('cursor-pointer')
 
         fireEvent.click(row)
         expect(router.push).toHaveBeenCalledWith('/foo')

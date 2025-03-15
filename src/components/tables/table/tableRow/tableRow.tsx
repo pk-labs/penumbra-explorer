@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
-import styles from './tableRow.module.css'
 
 export interface Props {
     children?: ReactNode
@@ -26,8 +25,10 @@ const TableRow: FC<Props> = props => {
     return (
         <tr
             className={twMerge(
-                styles.root,
-                props.href && styles.clickable,
+                'border-(--surfaceLighter) not-only:border-t',
+                props.href &&
+                    'transition-background ease-(var(--fastOutSlowIn)) ' +
+                        'cursor-pointer duration-200 hover:bg-(--surface)',
                 props.className
             )}
             onClick={onClick}
