@@ -1,7 +1,6 @@
 import { FC, ReactElement } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ParameterProps } from './parameter'
-import styles from './parameters.module.css'
 
 interface Props {
     children?:
@@ -17,7 +16,15 @@ interface Props {
 }
 
 const Parameters: FC<Props> = props => (
-    <ul className={twMerge(styles.root, props.className)}>{props.children}</ul>
+    <ul
+        className={twMerge(
+            'flex flex-col gap-1 rounded-lg bg-(--surface) p-3',
+            'font-mono text-xs font-medium text-(--textSecondary)',
+            props.className
+        )}
+    >
+        {props.children}
+    </ul>
 )
 
 export default Parameters
