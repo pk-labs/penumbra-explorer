@@ -82,7 +82,7 @@ const NavigationBar: FC<Props> = props => {
                         className={twMerge(
                             'hidden h-8 items-center justify-center gap-0.5',
                             'rounded-full border-1 border-(--surfaceLighter)',
-                            'px-4 text-(length:--fontSizeSm) font-medium sm:flex'
+                            'px-4 text-sm font-medium sm:flex'
                         )}
                     >
                         <span className="whitespace-nowrap text-(--textSecondary)">
