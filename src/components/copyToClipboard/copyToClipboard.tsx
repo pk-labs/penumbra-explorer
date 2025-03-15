@@ -49,9 +49,9 @@ const CopyToClipboard: FC<Props> = props => {
         <div
             className={clsx(
                 'transition-background inline-flex cursor-pointer items-center',
-                'justify-center rounded-lg border-1 border-transparent p-1',
+                'justify-center rounded-lg border-1 border-transparent',
                 'duration-200 ease-(--fastOutSlowIn) hover:bg-(--surfaceLight)',
-                props.small && 'p-0.5',
+                props.small ? 'p-0.5' : 'p-1',
                 copied && 'animate-copy',
                 props.className
             )}
