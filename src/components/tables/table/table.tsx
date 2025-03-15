@@ -18,7 +18,7 @@ export interface Props {
 const Table: FC<Props> = props => (
     <div
         className={twMerge(
-            'flex flex-col gap-4 overflow-x-auto rounded-2xl bg-(--surface)',
+            'flex flex-col gap-6 overflow-x-auto rounded-2xl bg-(--surface)',
             'p-6 backdrop-blur-[32px]',
             props.className
         )}
@@ -35,7 +35,7 @@ const Table: FC<Props> = props => (
         {props.footer && (
             <div
                 className={twMerge(
-                    '-mt-2 pt-4 text-xs text-(--textSecondary)',
+                    'text-xs text-(--textSecondary)',
                     props.footerClassName
                 )}
             >
