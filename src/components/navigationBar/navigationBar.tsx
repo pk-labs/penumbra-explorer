@@ -67,8 +67,7 @@ const NavigationBar: FC<Props> = props => {
                             Search
                         </div>
                         <Modal
-                            // FIXME: Remove !important after refactoring modal
-                            className="items-start! pt-28"
+                            className="items-start pt-28"
                             onClose={closeSearchModal}
                             open={searchModalOpen}
                         >

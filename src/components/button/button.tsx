@@ -1,8 +1,8 @@
 'use client'
 
-import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, MouseEvent, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface Props {
     children?: ReactNode
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Button: FC<Props> = props => {
-    const className = clsx(
+    const className = twMerge(
         'font-primary transition-background inline-flex h-8 transform-none',
         'items-center justify-center gap-2 rounded-full px-4 text-sm',
         'font-medium whitespace-nowrap text-(--text) capitalize duration-200',

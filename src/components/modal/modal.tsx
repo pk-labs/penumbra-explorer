@@ -1,12 +1,12 @@
 'use client'
 
-import clsx from 'clsx'
 import { XIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import { FC, ReactNode, useEffect, useRef } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { fastOutSlowIn } from '@/lib/constants'
-import styles from './modal.module.css'
+import Button from '../button'
 
 interface Props {
     children?: ReactNode
@@ -47,19 +47,25 @@ const Modal: FC<Props> = props => {
             {props.open && (
                 <motion.div
                     animate={{ opacity: 1 }}
-                    className={clsx(styles.root, props.className)}
+                    className={twMerge(
+                        'fixed top-0 right-0 bottom-0 left-0 z-30 flex',
+                        'items-center justify-center bg-(--surface)',
+                        'backdrop-blur-sm backdrop-brightness-50',
+                        props.className
+                    )}
                     exit={{ opacity: 0 }}
                     initial={{ opacity: 0 }}
                     onClick={props.onClose}
                     transition={{ duration: 0.3, ease: fastOutSlowIn }}
                 >
                     {props.onClose && (
-                        <button
-                            className={styles.closeButton}
+                        <Button
+                            className="absolute top-4 right-4 w-8 p-0"
                             onClick={props.onClose}
+                            light
                         >
                             <XIcon size={16} />
-                        </button>
+                        </Button>
                     )}
                     {props.children}
                 </motion.div>
