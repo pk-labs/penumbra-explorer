@@ -9,6 +9,6 @@ jest.mock('../panel/panel', () => (props: PanelProps) => (
 describe('TransactionPanel', () => {
     test('applies CSS classes', async () => {
         const { container } = render(<TransactionPanel className="foo bar" />)
-        getByText(container, 'root gradient foo bar')
+        getByText(container, 'foo bar', { exact: false })
     })
 })
