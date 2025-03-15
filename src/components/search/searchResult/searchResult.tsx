@@ -18,7 +18,7 @@ const SearchResult: FC<Props> = props => {
     return (
         <li
             className={clsx(
-                'transition-bg duration-200 ease-(--fastOutSlowIn)',
+                'transition-background duration-200 ease-(--fastOutSlowIn)',
                 'not-last:border-b-1 not-last:border-b-(--surfaceLighter)',
                 'hover:bg-(--surface)'
             )}
