@@ -25,7 +25,7 @@ const TableRow: FC<Props> = props => {
     return (
         <tr
             className={twMerge(
-                'border-(--surfaceLighter) not-only:border-t',
+                'border-(--surfaceLighter) not-last:border-b',
                 props.href &&
                     'transition-background ease-(var(--fastOutSlowIn)) ' +
                         'cursor-pointer duration-200 hover:bg-(--surface)',
