@@ -1,11 +1,9 @@
 import { Box } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
 import { Table, TableCell, TableProps, TableRow } from '../table'
-import styles from './blockTable.module.css'
 
 interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     blocks?: TransformedPartialBlockFragment[]
@@ -16,7 +14,7 @@ interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
 const BlockTable: FC<Props> = props => (
     <Table
         actions={props.actions}
-        className={twMerge(styles.root, props.className)}
+        className={props.className}
         footer={props.footer}
         title={props.title}
     >
@@ -25,7 +23,7 @@ const BlockTable: FC<Props> = props => (
                 <TableCell header>Block height</TableCell>
                 <TableCell header>Time</TableCell>
                 {props.proposer && <TableCell header>Proposer</TableCell>}
-                <TableCell className={styles.lastCell} header>
+                <TableCell className="text-right" header>
                     Txs
                 </TableCell>
             </TableRow>
@@ -35,7 +33,6 @@ const BlockTable: FC<Props> = props => (
                 props.blocks.map(block => (
                     <TableRow
                         key={block.height}
-                        className={styles.clickableRow}
                         href={`/block/${block.height}`}
                     >
                         <TableCell>
@@ -46,7 +43,7 @@ const BlockTable: FC<Props> = props => (
                         </TableCell>
                         <TableCell>{block.timeAgo}</TableCell>
                         {props.proposer && <TableCell>-</TableCell>}
-                        <TableCell className={styles.lastCell}>
+                        <TableCell className="text-right">
                             {block.transactionsCount}
                         </TableCell>
                     </TableRow>
