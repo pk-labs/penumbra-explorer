@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react'
-import styles from './parameter.module.css'
 
 export interface Props {
     children?: ReactNode
@@ -7,10 +6,10 @@ export interface Props {
 }
 
 const Parameter: FC<Props> = props => (
-    <li className={styles.root}>
-        <span className={styles.name}>{props.name}</span>
-        <span className={styles.separator} />
-        <span className={styles.value}>{props.children}</span>
+    <li className="flex items-center justify-between gap-2">
+        <span className="capitalize">{props.name}</span>
+        <span className="flex-1 border-b border-dashed border-(--surfaceLighter)" />
+        <span className="inline-flex items-center gap-1">{props.children}</span>
     </li>
 )
 
