@@ -2,9 +2,9 @@
 
 import { motion } from 'motion/react'
 import { FC, ReactElement } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { fastOutSlowIn } from '@/lib/constants'
 import { SearchResultProps } from '../searchResult'
-import styles from './searchResultOverlay.module.css'
 
 export interface Props {
     children?:
@@ -22,15 +22,23 @@ export interface Props {
 const SearchResultOverlay: FC<Props> = props => (
     <motion.div
         animate={{ opacity: 1, transition: { duration: 0 } }}
-        className={styles.root}
+        className={twMerge(
+            'absolute top-16 z-10 flex max-h-[276px] w-full flex-col gap-4',
+            'rounded-lg border border-(--surfaceLighter)',
+            'bg-[rgba(34,99,98,0.1)] p-6 backdrop-blur-[32px]'
+        )}
         exit={{
             opacity: 0,
             transition: { duration: 0.2, ease: fastOutSlowIn },
         }}
         initial={{ opacity: 0 }}
     >
-        <h3 className={styles.title}>{props.title}</h3>
-        {props.children && <ul className={styles.list}>{props.children}</ul>}
+        <h3 className="text-xs text-(--textSecondary)">{props.title}</h3>
+        {props.children && (
+            <ul className="flex flex-col font-mono text-sm font-medium">
+                {props.children}
+            </ul>
+        )}
     </motion.div>
 )
 

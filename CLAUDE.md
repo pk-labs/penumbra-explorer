@@ -26,7 +26,7 @@
   - Use `e` as the catch parameter (not `error`)
   - Log errors simply without custom messages: `console.error(e)`
 - **Components:** React functional components with `FC<Props>` typing
-- **CSS:** Use CSS modules with componentName.module.css naming
+- **CSS:** Use Tailwind CSS with twMerge to merge in props.className or to split long lines
 - **Tests:** 
   - Always use `test()` instead of `it()`
   - All test functions should be async
