@@ -75,3 +75,73 @@
         display: inline;
     }
 }
+
+@layer utilities {
+    @media (max-width: 37.5rem) {
+        .text-xs {
+            font-size: calc(0.75rem * 0.875);
+        }
+
+        .text-sm {
+            font-size: calc(0.875rem * 0.875);
+        }
+
+        .text-base {
+            font-size: calc(1rem * 0.875);
+        }
+
+        .text-lg {
+            font-size: calc(1.125rem * 0.875);
+        }
+
+        .text-xl {
+            font-size: calc(1.25rem * 0.875);
+        }
+
+        .text-2xl {
+            font-size: calc(1.5rem * 0.875);
+        }
+
+        .text-3xl {
+            font-size: calc(1.875rem * 0.875);
+        }
+
+        .text-4xl {
+            font-size: calc(2.25rem * 0.875);
+        }
+    }
+
+    @media (min-width: 100rem) {
+        .text-xs {
+            font-size: calc(0.75rem * 1.125);
+        }
+
+        .text-sm {
+            font-size: calc(0.875rem * 1.125);
+        }
+
+        .text-base {
+            font-size: calc(1rem * 1.125);
+        }
+
+        .text-lg {
+            font-size: calc(1.125rem * 1.125);
+        }
+
+        .text-xl {
+            font-size: calc(1.25rem * 1.125);
+        }
+
+        .text-2xl {
+            font-size: calc(1.5rem * 1.125);
+        }
+
+        .text-3xl {
+            font-size: calc(1.875rem * 1.125);
+        }
+
+        .text-4xl {
+            font-size: calc(2.25rem * 1.125);
+        }
+    }
+}

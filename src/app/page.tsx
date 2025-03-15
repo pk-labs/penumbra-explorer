@@ -1,6 +1,5 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import {
     BlockPanel,
     BlockTable,
@@ -27,11 +26,7 @@ const HomePage: FC = async () => {
     return (
         <>
             <Container>
-                <h1
-                    className={twMerge(
-                        'font-secondary mb-2 text-4xl font-medium'
-                    )}
-                >
+                <h1 className="font-secondary mb-2 text-4xl font-medium">
                     Penumbra Blockchain Explorer
                 </h1>
                 <GraphqlClientProvider>
