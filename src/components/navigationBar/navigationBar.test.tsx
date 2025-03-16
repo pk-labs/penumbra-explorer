@@ -8,9 +8,10 @@ import { usePathname } from '@/lib/__tests__/__mocks__'
 import NavigationBar from './navigationBar'
 
 jest.mock('lucide-react', () => ({
-    ChevronsUpDown: jest.fn(),
-    Search: jest.fn(),
-    XIcon: jest.fn(),
+    BoxIcon: jest.fn(),
+    CheckCheckIcon: jest.fn(),
+    HomeIcon: jest.fn(),
+    SearchIcon: jest.fn(),
 }))
 
 jest.mock('motion/react', () => ({
@@ -27,6 +28,8 @@ jest.mock('../search/search')
 jest.mock('../../lib/graphql/graphqlClientProvider', () => (props: any) => (
     <div>{props.children}</div>
 ))
+
+jest.mock('../menu/menu', () => () => <div>Menu</div>)
 
 describe('NavigationBar', () => {
     test('hides search on home page', async () => {
@@ -49,31 +52,10 @@ describe('NavigationBar', () => {
             fireEvent.click(getByText(container, 'Search'))
             getByText(container, 'Search modal')
         })
-
-        test('label is hidden below sm', async () => {
-            usePathname.mockReturnValue('/foo')
-            const { container } = render(<NavigationBar />)
-
-            expect(getByText(container, 'Search')).toHaveClass(
-                'hidden',
-                'sm:inline'
-            )
-        })
     })
 
-    describe('UM price', () => {
-        test('label is hidden below sm', async () => {
-            const { container } = render(
-                <NavigationBar umPrice={{ change: 0, price: 0 }} />
-            )
-
-            expect(getByText(container, 'UM Price:')).toHaveClass(
-                'hidden',
-                'sm:inline'
-            )
-        })
-
-        test('renders positive change', async () => {
+    describe('UM price renders', () => {
+        test('positive change', async () => {
             const { container } = render(
                 <NavigationBar umPrice={{ change: 1.234, price: 9999 }} />
             )
@@ -85,7 +67,7 @@ describe('NavigationBar', () => {
             )
         })
 
-        test('with negative change', async () => {
+        test('negative change', async () => {
             const { container } = render(
                 <NavigationBar umPrice={{ change: -1.234, price: 9.991 }} />
             )

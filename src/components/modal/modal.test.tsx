@@ -16,7 +16,9 @@ describe('Modal', () => {
     describe('closes', () => {
         test('when clicking close button', async () => {
             const onClose = jest.fn()
-            const { container } = render(<Modal onClose={onClose} open />)
+            const { container } = render(
+                <Modal onClose={onClose} closeButton open />
+            )
 
             const closeButton = container.querySelector('button')
 

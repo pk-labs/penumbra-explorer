@@ -8,9 +8,11 @@ import { twMerge } from 'tailwind-merge'
 import { fastOutSlowIn } from '@/lib/constants'
 import Button from '../button'
 
+// TODO: Implement as prop for custom element type
 interface Props {
     children?: ReactNode
     className?: string
+    closeButton?: boolean
     onClose?: () => void
     open?: boolean
 }
@@ -48,7 +50,7 @@ const Modal: FC<Props> = props => {
                 <motion.div
                     animate={{ opacity: 1 }}
                     className={twMerge(
-                        'fixed top-0 right-0 bottom-0 left-0 z-30 flex',
+                        'fixed top-0 right-0 bottom-0 left-0 z-40 flex',
                         'items-center justify-center bg-(--surface)',
                         'backdrop-blur-sm backdrop-brightness-50',
                         props.className
@@ -58,7 +60,7 @@ const Modal: FC<Props> = props => {
                     onClick={props.onClose}
                     transition={{ duration: 0.3, ease: fastOutSlowIn }}
                 >
-                    {props.onClose && (
+                    {props.closeButton && props.onClose && (
                         <Button
                             className="absolute top-4 right-4"
                             onClick={props.onClose}

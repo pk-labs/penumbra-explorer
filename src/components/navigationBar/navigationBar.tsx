@@ -1,6 +1,6 @@
 'use client'
 
-import { Search as SearchIcon } from 'lucide-react'
+import { BoxIcon, CheckCheckIcon, HomeIcon, SearchIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -11,6 +11,7 @@ import { logo } from '@/lib/images'
 import { UmPrice } from '@/lib/types'
 import Button from '../button'
 import Container from '../container'
+import { Menu, MenuItem } from '../menu'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
@@ -23,25 +24,36 @@ interface Props {
 const NavigationBar: FC<Props> = props => {
     const pathname = usePathname()
     const [searchModalOpen, setSearchModalOpen] = useState(false)
-
-    const openSearchModal = useCallback(() => setSearchModalOpen(true), [])
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const closeSearchModal = useCallback(() => setSearchModalOpen(false), [])
+
+    const closeMenu = useCallback(() => setMenuOpen(false), [])
+
+    const openSearchModal = useCallback(() => {
+        closeMenu()
+        setSearchModalOpen(true)
+    }, [closeMenu])
+
+    const openMenu = useCallback(() => {
+        closeSearchModal()
+        setMenuOpen(true)
+    }, [closeSearchModal])
 
     return (
         <Container
             as="header"
             className={twMerge(
-                'grid h-19 grid-cols-2 items-center lg:grid-cols-3',
+                'grid h-19 grid-cols-2 items-center md:grid-cols-3',
                 props.className
             )}
         >
-            <div className="flex items-center gap-2">
+            <div className="relative z-50 flex items-center gap-2">
                 <Link href="/">
                     <Image alt="Noctis" height={36} src={logo} />
                 </Link>
             </div>
-            <Tabs className="hidden justify-self-center lg:flex">
+            <Tabs className="hidden justify-self-center md:flex">
                 <Tab href="/">Home</Tab>
                 <Tab href="/blocks" paths={['/block']}>
                     Blocks
@@ -54,12 +66,17 @@ const NavigationBar: FC<Props> = props => {
                 {pathname !== '/' && (
                     <>
                         <Button
-                            className="w-8 gap-1 px-0 backdrop-blur-[32px] sm:w-auto sm:px-4"
+                            className={twMerge(
+                                'relative z-50 w-8 gap-1 px-0',
+                                'backdrop-blur-[32px] sm:w-auto sm:px-4'
+                            )}
                             onClick={openSearchModal}
                             light
                         >
                             <SearchIcon size={16} />
-                            <span className="hidden sm:inline">Search</span>
+                            <span className="hidden sm:inline md:hidden lg:inline!">
+                                Search
+                            </span>
                         </Button>
                         <Modal
                             className="items-start pt-28"
@@ -75,15 +92,16 @@ const NavigationBar: FC<Props> = props => {
                 {props.umPrice && (
                     <div
                         className={twMerge(
-                            'flex h-8 items-center justify-center gap-0.5',
-                            'rounded-full border-1 border-(--surfaceLighter)',
-                            'px-4 text-sm font-medium'
+                            'relative z-50 flex h-8 items-center',
+                            'justify-center gap-0.5 rounded-full border-1',
+                            'border-(--surfaceLighter) px-4 text-sm font-medium'
                         )}
                     >
                         <span
                             className={twMerge(
-                                'hidden whitespace-nowrap sm:inline',
-                                'text-(--textSecondary)'
+                                'hidden whitespace-nowrap',
+                                'text-(--textSecondary) sm:inline md:hidden',
+                                'lg:inline!'
                             )}
                         >
                             UM Price:
@@ -102,6 +120,34 @@ const NavigationBar: FC<Props> = props => {
                         </span>
                     </div>
                 )}
+                <Menu
+                    className="relative z-50 md:hidden"
+                    onClose={closeMenu}
+                    onOpen={openMenu}
+                    open={menuOpen}
+                >
+                    <MenuItem href="/">
+                        <HomeIcon
+                            className="stroke-(--primaryLight)"
+                            size={16}
+                        />
+                        Home
+                    </MenuItem>
+                    <MenuItem href="/blocks" paths={['/block']}>
+                        <BoxIcon
+                            className="stroke-(--primaryLight)"
+                            size={16}
+                        />
+                        Blocks
+                    </MenuItem>
+                    <MenuItem href="/txs" paths={['/tx']}>
+                        <CheckCheckIcon
+                            className="stroke-(--primaryLight)"
+                            size={16}
+                        />
+                        Transactions
+                    </MenuItem>
+                </Menu>
             </div>
         </Container>
     )
