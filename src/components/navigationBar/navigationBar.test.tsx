@@ -12,6 +12,7 @@ jest.mock('lucide-react', () => ({
     CheckCheckIcon: jest.fn(),
     HomeIcon: jest.fn(),
     SearchIcon: jest.fn(),
+    XIcon: jest.fn(),
 }))
 
 jest.mock('motion/react', () => ({

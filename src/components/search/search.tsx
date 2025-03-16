@@ -143,7 +143,10 @@ const Search: FC<Props> = props => {
 
     return (
         <div
-            className={twMerge('relative sm:w-[568px]', props.className)}
+            className={twMerge(
+                'relative w-[calc(100%-32px)] sm:w-[568px]',
+                props.className
+            )}
             onClick={onClick}
         >
             <SearchIcon

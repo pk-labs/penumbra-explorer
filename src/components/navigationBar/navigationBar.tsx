@@ -48,7 +48,7 @@ const NavigationBar: FC<Props> = props => {
                 props.className
             )}
         >
-            <div className="relative z-50 flex items-center gap-2">
+            <div className="relative z-40 flex items-center gap-2">
                 <Link href="/">
                     <Image alt="Noctis" height={36} src={logo} />
                 </Link>
@@ -67,7 +67,7 @@ const NavigationBar: FC<Props> = props => {
                     <>
                         <Button
                             className={twMerge(
-                                'relative z-50 w-8 gap-1 px-0',
+                                'relative z-40 w-8 gap-1 px-0',
                                 'backdrop-blur-[32px] sm:w-auto sm:px-4'
                             )}
                             onClick={openSearchModal}
@@ -79,9 +79,10 @@ const NavigationBar: FC<Props> = props => {
                             </span>
                         </Button>
                         <Modal
-                            className="items-start pt-28"
+                            className="z-50 items-start pt-28"
                             onClose={closeSearchModal}
                             open={searchModalOpen}
+                            closeButton
                         >
                             <GraphqlClientProvider>
                                 <Search onBlur={closeSearchModal} autoFocus />
@@ -92,7 +93,7 @@ const NavigationBar: FC<Props> = props => {
                 {props.umPrice && (
                     <div
                         className={twMerge(
-                            'relative z-50 flex h-8 items-center',
+                            'relative z-40 flex h-8 items-center',
                             'justify-center gap-0.5 rounded-full border-1',
                             'border-(--surfaceLighter) px-4 text-sm font-medium'
                         )}
@@ -121,7 +122,7 @@ const NavigationBar: FC<Props> = props => {
                     </div>
                 )}
                 <Menu
-                    className="relative z-50 md:hidden"
+                    className="relative z-40 md:hidden"
                     onClose={closeMenu}
                     onOpen={openMenu}
                     open={menuOpen}
