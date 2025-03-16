@@ -85,7 +85,11 @@ const NavigationBar: FC<Props> = props => {
                             closeButton
                         >
                             <GraphqlClientProvider>
-                                <Search onBlur={closeSearchModal} autoFocus />
+                                <Search
+                                    className="w-[calc(100%-32px)]"
+                                    onBlur={closeSearchModal}
+                                    autoFocus
+                                />
                             </GraphqlClientProvider>
                         </Modal>
                     </>
