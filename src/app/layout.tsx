@@ -28,7 +28,7 @@ const RootLayout: FC<Props> = async props => {
     const umPrice = await getUmPrice()
 
     return (
-        <html lang="en">
+        <html className="overflow-x-hidden" lang="en">
             <body
                 className={twMerge(
                     'relative flex flex-col justify-start gap-10',
