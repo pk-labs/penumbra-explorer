@@ -4,34 +4,34 @@
 /* https://tailwindcss.com/docs/theme */
 @theme {
     /* https://tailwindcss.com/docs/responsive-design */
-    --breakpoint-sm: 37.5rem; /* 600px */
-    --breakpoint-md: 56.25rem; /* 900px */
-    --breakpoint-lg: 75rem; /* 1200px */
-    --breakpoint-xl: 100rem; /* 1600px */
+    --breakpoint-sm: calc(1rem / 16 * 600);
+    --breakpoint-md: calc(1rem / 16 * 900);
+    --breakpoint-lg: calc(1rem / 16 * 1200);
+    --breakpoint-xl: calc(1rem / 16 * 1600);
     --breakpoint-2xl: initial;
 
-    --pageMaxWidth: 96rem; /* 1536px */
-    --pageNarrowWidth: 47rem; /* 752px */
+    --pageMaxWidth: calc(1rem / 16 * 1536);
+    --pageNarrowWidth: calc(1rem / 16 * 752);
     --font-primary: Poppins, sans-serif;
     --font-secondary: "Work Sans", sans-serif;
     --font-mono: _fontMono, monospace;
 
-    --text-xs: 0.75rem;
+    --text-xs: calc(1rem / 16 * 12);
     --text-xs--line-height: 1rem;
-    --text-sm: 0.875rem;
-    --text-sm--line-height: 1.25rem;
+    --text-sm: calc(1rem / 16 * 14);
+    --text-sm--line-height: calc(1rem / 16 * 20);
     --text-base: 1rem;
-    --text-base--line-height: 1.5rem;
-    --text-lg: 1.125rem;
-    --text-lg--line-height: 1.75rem;
-    --text-xl: 1.25rem;
-    --text-xl--line-height: 2rem;
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: 2.25rem;
-    --text-3xl: 1.875rem;
-    --text-3xl--line-height: 2.5rem;
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: 2.75rem;
+    --text-base--line-height: calc(1rem / 16 * 24);
+    --text-lg: calc(1rem / 16 * 18);
+    --text-lg--line-height: calc(1rem / 16 * 28);
+    --text-xl: calc(1rem / 16 * 20);
+    --text-xl--line-height: calc(1rem / 16 * 32);
+    --text-2xl: calc(1rem / 16 * 24);
+    --text-2xl--line-height: calc(1rem / 16 * 36);
+    --text-3xl: calc(1rem / 16 * 30);
+    --text-3xl--line-height: calc(1rem / 16 * 40);
+    --text-4xl: calc(1rem / 16 * 36);
+    --text-4xl--line-height: calc(1rem / 16 * 44);
 
     --text: #fafafa;
     --textSecondary: #a3a3a3;
@@ -77,71 +77,73 @@
 }
 
 @layer utilities {
-    @media (max-width: 37.5rem) {
+    @media (max-width: calc(1rem / 16 * 600)) {
         .text-xs {
-            font-size: calc(0.75rem * 0.875);
+            font-size: calc(1rem / 16 * 11);
         }
 
         .text-sm {
-            font-size: calc(0.875rem * 0.875);
+            font-size: calc(1rem / 16 * 12);
         }
 
         .text-base {
-            font-size: calc(1rem * 0.875);
+            font-size: calc(1rem / 16 * 14);
         }
 
+        /* TODO: Set values from Figma when available
         .text-lg {
             font-size: calc(1.125rem * 0.875);
         }
 
         .text-xl {
             font-size: calc(1.25rem * 0.875);
-        }
+        }*/
 
         .text-2xl {
-            font-size: calc(1.5rem * 0.875);
+            font-size: calc(1rem / 16 * 21);
         }
 
         .text-3xl {
-            font-size: calc(1.875rem * 0.875);
+            font-size: calc(1rem / 16 * 26);
         }
 
         .text-4xl {
-            font-size: calc(2.25rem * 0.875);
+            font-size: calc(1rem / 16 * 32);
         }
     }
 
-    @media (min-width: 100rem) {
+    @media (min-width: calc(1rem / 16 * 1600)) {
         .text-xs {
-            font-size: calc(0.75rem * 1.125);
+            font-size: calc(1em / 16 * 14);
         }
 
         .text-sm {
-            font-size: calc(0.875rem * 1.125);
+            font-size: 1rem;
         }
 
         .text-base {
-            font-size: calc(1rem * 1.125);
+            font-size: calc(1rem / 16 * 18);
         }
 
+        /* TODO: Set values from Figma when available
         .text-lg {
             font-size: calc(1.125rem * 1.125);
         }
 
         .text-xl {
             font-size: calc(1.25rem * 1.125);
-        }
+        }*/
 
         .text-2xl {
-            font-size: calc(1.5rem * 1.125);
+            font-size: calc(1rem / 16 * 27);
         }
 
         .text-3xl {
-            font-size: calc(1.875rem * 1.125);
+            font-size: calc(1rem / 16 * 34);
         }
 
         .text-4xl {
-            font-size: calc(2.25rem * 1.125);
+            font-size: calc(1rem / 16 * 40);
         }
     }
 }

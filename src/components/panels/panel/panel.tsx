@@ -27,7 +27,7 @@ const Panel: FC<Props> = props => (
             <h2
                 className={twMerge(
                     'flex items-center gap-2 text-base font-medium',
-                    'text-(--textSecondary) capitalize'
+                    'whitespace-nowrap text-(--textSecondary) capitalize'
                 )}
             >
                 {props.title}
