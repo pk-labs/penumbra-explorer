@@ -60,9 +60,10 @@ const Modal: FC<Props> = props => {
                 >
                     {props.onClose && (
                         <Button
-                            className="absolute top-4 right-4 w-8 p-0"
+                            className="absolute top-4 right-4"
                             onClick={props.onClose}
                             light
+                            round
                         >
                             <XIcon size={16} />
                         </Button>

@@ -15,6 +15,13 @@ describe('Button', () => {
         )
     })
 
+    test('renders round button', async () => {
+        const { container } = render(<Button round>Foo</Button>)
+
+        expect(getByText(container, 'Foo')).toHaveClass('w-8')
+        expect(getByText(container, 'Foo')).not.toHaveClass('p-4')
+    })
+
     test('renders link button', async () => {
         const { container } = render(<Button href="/foo">Foo</Button>)
         expect(getByText(container, 'Foo')).toHaveAttribute('href', '/foo')

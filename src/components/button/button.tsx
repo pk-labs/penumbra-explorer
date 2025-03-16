@@ -11,14 +11,16 @@ interface Props {
     href?: string
     light?: boolean
     onClick?: (e: MouseEvent) => void
+    round?: boolean
 }
 
 const Button: FC<Props> = props => {
     const className = twMerge(
         'font-primary transition-background inline-flex h-8 transform-none',
-        'items-center justify-center gap-2 rounded-full px-4 text-sm',
+        'items-center justify-center gap-2 rounded-full text-sm',
         'font-medium whitespace-nowrap text-(--text) capitalize duration-200',
         'ease-(--fastOutSlowIn) select-none',
+        props.round ? 'w-8' : 'px-4',
         props.disabled
             ? 'cursor-not-allowed bg-(--surfaceDisabled) text-(--textDisabled)'
             : 'cursor-pointer hover:text-(--text) active:scale-98',
