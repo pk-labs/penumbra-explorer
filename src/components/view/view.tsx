@@ -21,7 +21,9 @@ const View: FC<Props> = props => (
         <header className="flex flex-col gap-1">
             <h2 className="text-base font-medium capitalize">{props.title}</h2>
             {props.subtitle && (
-                <div className="font-mono">{props.subtitle}</div>
+                <div className="font-mono text-base break-all">
+                    {props.subtitle}
+                </div>
             )}
         </header>
         {props.children}
