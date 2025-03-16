@@ -50,7 +50,11 @@ const NavigationBar: FC<Props> = props => {
         >
             <div className="relative z-40 flex items-center gap-2">
                 <Link href="/">
-                    <Image alt="Noctis" height={36} src={logo} />
+                    <Image
+                        alt="Noctis"
+                        className="max-h-7 w-auto sm:max-h-9"
+                        src={logo}
+                    />
                 </Link>
             </div>
             <Tabs className="hidden justify-self-center md:flex">
