@@ -34,14 +34,31 @@ describe('NavigationBar', () => {
         expect(queryByText(container, 'Search')).toBeNull()
     })
 
-    test('toggles search on non-home page', async () => {
-        usePathname.mockReturnValue('/foo')
-        const { container } = render(<NavigationBar />)
+    describe('search button', () => {
+        test('is not rendered on home page', async () => {
+            const { container } = render(<NavigationBar />)
+            expect(queryByText(container, 'Search')).toBeNull()
+        })
 
-        expect(queryByText(container, 'Search modal')).toBeNull()
+        test('opens search modal', async () => {
+            usePathname.mockReturnValue('/foo')
+            const { container } = render(<NavigationBar />)
 
-        fireEvent.click(getByText(container, 'Search'))
-        getByText(container, 'Search modal')
+            expect(queryByText(container, 'Search modal')).toBeNull()
+
+            fireEvent.click(getByText(container, 'Search'))
+            getByText(container, 'Search modal')
+        })
+
+        test('label is hidden below sm', async () => {
+            usePathname.mockReturnValue('/foo')
+            const { container } = render(<NavigationBar />)
+
+            expect(getByText(container, 'Search')).toHaveClass(
+                'hidden',
+                'sm:inline'
+            )
+        })
     })
 
     describe('UM price', () => {

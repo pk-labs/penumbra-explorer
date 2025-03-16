@@ -54,12 +54,12 @@ const NavigationBar: FC<Props> = props => {
                 {pathname !== '/' && (
                     <>
                         <Button
-                            className="gap-1 backdrop-blur-[32px]"
+                            className="w-8 gap-1 px-0 backdrop-blur-[32px] sm:w-auto sm:px-4"
                             onClick={openSearchModal}
                             light
                         >
                             <SearchIcon size={16} />
-                            Search
+                            <span className="hidden sm:inline">Search</span>
                         </Button>
                         <Modal
                             className="items-start pt-28"
