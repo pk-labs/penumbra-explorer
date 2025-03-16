@@ -7,14 +7,6 @@ import {
 import { usePathname } from '@/lib/__tests__/__mocks__'
 import NavigationBar from './navigationBar'
 
-jest.mock('lucide-react', () => ({
-    BoxIcon: jest.fn(),
-    CheckCheckIcon: jest.fn(),
-    HomeIcon: jest.fn(),
-    SearchIcon: jest.fn(),
-    XIcon: jest.fn(),
-}))
-
 jest.mock('motion/react', () => ({
     AnimatePresence: (props: any) => <div>{props.children}</div>,
     motion: {

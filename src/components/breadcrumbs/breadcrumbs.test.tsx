@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbProps } from './breadcrumb'
 import Breadcrumbs from './breadcrumbs'
 
 jest.mock('lucide-react', () => ({
-    ChevronRight: () => <div>ChevronRight</div>,
+    ChevronRightIcon: () => <div>ChevronRight</div>,
 }))
 
 jest.mock('./breadcrumb/breadcrumb', () => (props: BreadcrumbProps) => (
@@ -19,7 +19,7 @@ describe('Breadcrumbs', () => {
         )
 
         getByText(container, 'Foo')
-        expect(queryByText(container, 'ChevronRight')).toBeNull()
+        expect(queryByText(container, 'ChevronRightIcon')).toBeNull()
     })
 
     test('renders multiple breadcrumbs', async () => {

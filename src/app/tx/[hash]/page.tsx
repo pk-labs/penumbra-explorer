@@ -1,5 +1,5 @@
 // istanbul ignore file
-import { Link2 } from 'lucide-react'
+import { Link2Icon } from 'lucide-react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -70,7 +70,10 @@ const TransactionViewPage: FC<Props> = async props => {
                             href={`/block/${transaction.block.height}`}
                         >
                             {transaction.block.height}
-                            <Link2 className="ml-1 text-(--text)" size={12} />
+                            <Link2Icon
+                                className="ml-1 text-(--text)"
+                                size={12}
+                            />
                         </Link>
                     </Parameter>
                     <Parameter name="Time">

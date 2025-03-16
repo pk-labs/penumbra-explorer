@@ -1,6 +1,6 @@
 'use client'
 
-import { Search as SearchIcon } from 'lucide-react'
+import { SearchIcon } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 import {
     ChangeEvent,

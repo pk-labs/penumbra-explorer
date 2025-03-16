@@ -1,4 +1,4 @@
-import { Box } from 'lucide-react'
+import { BoxIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 import { TransformedPartialBlockFragment } from '@/lib/types'
@@ -36,7 +36,7 @@ const BlockTable: FC<Props> = props => (
                         href={`/block/${block.height}`}
                     >
                         <TableCell>
-                            <Box color="var(--textSecondary)" size={16} />
+                            <BoxIcon color="var(--textSecondary)" size={16} />
                             <Link href={`/block/${block.height}`}>
                                 {formatNumber(block.height)}
                             </Link>

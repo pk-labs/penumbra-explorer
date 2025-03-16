@@ -1,4 +1,4 @@
-import { Box, CheckCheck } from 'lucide-react'
+import { BoxIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -44,7 +44,7 @@ const TransactionTable: FC<Props> = props => (
                         href={`/tx/${transaction.hash}`}
                     >
                         <TableCell>
-                            <CheckCheck
+                            <CheckCheckIcon
                                 color="var(--secondaryLight)"
                                 size={14}
                             />
@@ -55,7 +55,10 @@ const TransactionTable: FC<Props> = props => (
                         </TableCell>
                         {!props.embedded && (
                             <TableCell>
-                                <Box color="var(--textSecondary)" size={16} />
+                                <BoxIcon
+                                    color="var(--textSecondary)"
+                                    size={16}
+                                />
                                 <Link
                                     href={`/block/${transaction.block.height}`}
                                 >

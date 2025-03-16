@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, CheckCheck } from 'lucide-react'
+import { BoxIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -28,7 +28,7 @@ const SearchResult: FC<Props> = props => {
                     className={linkClassName}
                     href={`/block/${props.heightOrHash}`}
                 >
-                    <Box
+                    <BoxIcon
                         className="min-w-4"
                         color="var(--textSecondary)"
                         size={16}
@@ -40,7 +40,7 @@ const SearchResult: FC<Props> = props => {
                     className={linkClassName}
                     href={`/tx/${props.heightOrHash}`}
                 >
-                    <CheckCheck
+                    <CheckCheckIcon
                         className="min-w-4"
                         color="var(--secondaryLight)"
                         size={16}

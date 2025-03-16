@@ -12,8 +12,8 @@ userEvent.setup()
 window.alert = jest.fn()
 
 jest.mock('lucide-react', () => ({
-    Check: () => <span>Check</span>,
-    Copy: () => <span>Copy</span>,
+    CheckIcon: () => <span>Check</span>,
+    CopyIcon: () => <span>Copy</span>,
 }))
 
 describe('CopyToClipboard', () => {

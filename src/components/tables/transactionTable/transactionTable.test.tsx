@@ -5,11 +5,6 @@ import { ActionType } from '@/lib/types'
 import { TableProps } from '../table'
 import TransactionTable from './transactionTable'
 
-jest.mock('lucide-react', () => ({
-    Box: jest.fn(),
-    CheckCheck: jest.fn(),
-}))
-
 jest.mock('../table/table', () => (props: TableProps) => (
     <table className={props.className}>{props.children}</table>
 ))

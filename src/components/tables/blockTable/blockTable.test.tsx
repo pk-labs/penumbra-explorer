@@ -4,10 +4,6 @@ import dayjs from '@/lib/dayjs'
 import { TableProps } from '../table'
 import BlockTable from './blockTable'
 
-jest.mock('lucide-react', () => ({
-    Box: jest.fn(),
-}))
-
 jest.mock('../table/table', () => (props: TableProps) => (
     <table>{props.children}</table>
 ))

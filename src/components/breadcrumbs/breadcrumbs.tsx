@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react'
+import { ChevronRightIcon } from 'lucide-react'
 import { Children, FC, ReactElement } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { BreadcrumbProps } from './breadcrumb'
@@ -27,7 +27,7 @@ const Breadcrumbs: FC<Props> = props => {
                 <>
                     {child}
                     {index < lastIndex && (
-                        <ChevronRight
+                        <ChevronRightIcon
                             className="text-(--textSecondary)"
                             size={24}
                         />

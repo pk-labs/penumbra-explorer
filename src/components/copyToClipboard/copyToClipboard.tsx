@@ -1,6 +1,6 @@
 'use client'
 
-import { Check, Copy } from 'lucide-react'
+import { CheckIcon, CopyIcon } from 'lucide-react'
 import { FC, MouseEvent, useCallback, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -57,7 +57,7 @@ const CopyToClipboard: FC<Props> = props => {
             )}
             onClick={onClick}
         >
-            {copied ? <Check size={size} /> : <Copy size={size} />}
+            {copied ? <CheckIcon size={size} /> : <CopyIcon size={size} />}
         </div>
     )
 }
