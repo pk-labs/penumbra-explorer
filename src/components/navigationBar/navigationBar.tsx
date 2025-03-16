@@ -75,12 +75,17 @@ const NavigationBar: FC<Props> = props => {
                 {props.umPrice && (
                     <div
                         className={twMerge(
-                            'hidden h-8 items-center justify-center gap-0.5',
+                            'flex h-8 items-center justify-center gap-0.5',
                             'rounded-full border-1 border-(--surfaceLighter)',
-                            'px-4 text-sm font-medium sm:flex'
+                            'px-4 text-sm font-medium'
                         )}
                     >
-                        <span className="whitespace-nowrap text-(--textSecondary)">
+                        <span
+                            className={twMerge(
+                                'hidden whitespace-nowrap sm:inline',
+                                'text-(--textSecondary)'
+                            )}
+                        >
                             UM Price:
                         </span>
                         <span>${props.umPrice.price.toFixed(2)}</span>

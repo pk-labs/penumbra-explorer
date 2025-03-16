@@ -45,14 +45,14 @@ describe('NavigationBar', () => {
     })
 
     describe('UM price', () => {
-        test('is hidden below sm', async () => {
+        test('label is hidden below sm', async () => {
             const { container } = render(
                 <NavigationBar umPrice={{ change: 0, price: 0 }} />
             )
 
-            expect(getByText(container, '$0.00').parentNode).toHaveClass(
+            expect(getByText(container, 'UM Price:')).toHaveClass(
                 'hidden',
-                'sm:flex'
+                'sm:inline'
             )
         })
 
