@@ -31,7 +31,7 @@ const NavigationBar: FC<Props> = props => {
         <Container
             as="header"
             className={twMerge(
-                'grid h-19 grid-cols-3 items-center',
+                'grid h-19 grid-cols-2 items-center lg:grid-cols-3',
                 props.className
             )}
         >
@@ -40,7 +40,7 @@ const NavigationBar: FC<Props> = props => {
                     <Image alt="Noctis" height={36} src={logo} />
                 </Link>
             </div>
-            <Tabs className="justify-self-center">
+            <Tabs className="hidden justify-self-center lg:flex">
                 <Tab href="/">Home</Tab>
                 <Tab href="/blocks" paths={['/block']}>
                     Blocks
