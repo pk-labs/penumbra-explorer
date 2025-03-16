@@ -9,6 +9,7 @@ import { twMerge } from 'tailwind-merge'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
 import { UmPrice } from '@/lib/types'
+import Button from '../button'
 import Container from '../container'
 import Modal from '../modal'
 import Search from '../search'
@@ -52,20 +53,14 @@ const NavigationBar: FC<Props> = props => {
             <div className="flex items-center gap-2 justify-self-end">
                 {pathname !== '/' && (
                     <>
-                        <div
-                            className={twMerge(
-                                'transition-background flex h-8 cursor-pointer',
-                                'items-center gap-1 rounded-full',
-                                'bg-(--surfaceLight) px-4 text-sm font-medium',
-                                'backdrop-blur-[32px] duration-200',
-                                'ease-(--fastOutSlowIn)',
-                                'hover:bg-(--surfaceLighter)'
-                            )}
+                        <Button
+                            className="gap-1 backdrop-blur-[32px]"
                             onClick={openSearchModal}
+                            light
                         >
                             <SearchIcon size={16} />
                             Search
-                        </div>
+                        </Button>
                         <Modal
                             className="items-start pt-28"
                             onClose={closeSearchModal}
