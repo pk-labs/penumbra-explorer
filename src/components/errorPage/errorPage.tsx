@@ -14,8 +14,12 @@ const ErrorPage: FC<Props> = props => (
         <div className="relative">
             <h2
                 className={twMerge(
-                    'font-mono text-[calc(1rem/16*300)]',
-                    'leading-[calc(1rem/16*360)] font-bold blur-[10px]'
+                    'font-mono text-[calc(1rem/16*150)]',
+                    'leading-[calc(1rem/16*180)] font-bold blur-[5px]',
+                    'sm:text-[calc(1rem/16*225)]',
+                    'sm:leading-[calc(1rem/16*270)] sm:blur-[7.5px]',
+                    'xl:text-[calc(1rem/16*300)]!',
+                    'xl:leading-[calc(1rem/16*360)]! xl:blur-[10px]!'
                 )}
             >
                 {props.statusCode}
