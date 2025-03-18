@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import { FC, useCallback, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import CopyToClipboard from '../copyToClipboard'
 import Subsection from '../subsection'
 
 const ReactJsonView = dynamic(() => import('@microlink/react-json-view'), {
@@ -19,7 +20,17 @@ const JsonTree: FC<Props> = props => {
     const onClick = useCallback(() => setClicked(true), [])
 
     return (
-        <Subsection title="Raw JSON">
+        <Subsection
+            title={
+                <>
+                    <span>Raw JSON</span>
+                    <CopyToClipboard
+                        data={JSON.stringify(props.data, null, 2)}
+                        small
+                    />
+                </>
+            }
+        >
             <div
                 className={twMerge(
                     'rounded-lg bg-(--surface) p-3 font-mono text-xs',
@@ -30,6 +41,7 @@ const JsonTree: FC<Props> = props => {
                 <ReactJsonView
                     // Expand two levels when expanding for the first time
                     collapsed={clicked ? 2 : true}
+                    enableClipboard={false}
                     src={props.data}
                     style={{ background: 'transparent' }}
                     theme="twilight"

@@ -5,7 +5,10 @@ import {
     render,
     waitFor,
 } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import JsonTree from './jsonTree'
+
+userEvent.setup()
 
 describe('JsonTree', () => {
     test('is collapsed by default', async () => {
@@ -43,6 +46,23 @@ describe('JsonTree', () => {
             getByText(container, 'level1')
             getByText(container, 'level2')
             expect(queryByText(container, 'level3')).toBeNull()
+        })
+    })
+
+    test('copies data to clipboard', async () => {
+        const { container } = render(<JsonTree data={{ foo: 'bar' }} />)
+
+        const copyToClipboard = getByText(container, 'Raw JSON').nextSibling
+
+        if (!copyToClipboard) {
+            throw Error('Missing element')
+        }
+
+        fireEvent.click(copyToClipboard)
+
+        await waitFor(async () => {
+            const clipboardText = await navigator.clipboard.readText()
+            expect(clipboardText.replaceAll(/\n|\s/g, '')).toBe('{"foo":"bar"}')
         })
     })
 })

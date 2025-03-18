@@ -9,7 +9,6 @@ import userEvent from '@testing-library/user-event'
 import CopyToClipboard from './copyToClipboard'
 
 userEvent.setup()
-window.alert = jest.fn()
 
 jest.mock('lucide-react', () => ({
     CheckIcon: () => <span>Check</span>,
