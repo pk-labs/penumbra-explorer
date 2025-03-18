@@ -52,7 +52,7 @@ const NavigationBar: FC<Props> = props => {
                 <Link href="/">
                     <Image
                         alt="Noctis"
-                        className="max-h-7 w-auto sm:max-h-9"
+                        className="max-h-8 w-auto sm:max-h-none"
                         src={logo}
                     />
                 </Link>
