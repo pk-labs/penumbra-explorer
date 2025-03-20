@@ -5,4 +5,4 @@ extensions:
       headers:
         user-agent: JS GraphQL
       introspect: false
-      url: https://penumbra-explorer.buber.eepy.sh/
+      url: https://pe.dev.galaxid.xyz/

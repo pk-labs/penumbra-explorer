@@ -128,6 +128,13 @@ type TransactionResult {
     log: String!
 }
 
+enum RangeDirection {
+    "Next will return transactions what are older than the given transaction hash."
+    NEXT
+    "Previous will return transactions what are newer than the given transaction hash."
+    PREVIOUS
+}
+
 """
 
 Implement the DateTime<Utc> scalar
@@ -157,6 +164,7 @@ input LatestTransactions {
 }
 
 input TransactionRange {
+    direction: RangeDirection! = NEXT
     fromTxHash: String!
     limit: Int!
 }

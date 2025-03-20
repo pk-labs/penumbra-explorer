@@ -132,6 +132,13 @@ export type QueryRootTransactionsArgs = {
   selector: TransactionsSelector;
 };
 
+export enum RangeDirection {
+  /** Next will return transactions what are older than the given transaction hash. */
+  Next = 'NEXT',
+  /** Previous will return transactions what are newer than the given transaction hash. */
+  Previous = 'PREVIOUS'
+}
+
 export type SearchResult = Block | Transaction;
 
 export type Spend = {
@@ -184,6 +191,7 @@ export type TransactionParameters = {
 };
 
 export type TransactionRange = {
+  direction?: RangeDirection;
   fromTxHash: Scalars['String']['input'];
   limit: Scalars['Int']['input'];
 };
