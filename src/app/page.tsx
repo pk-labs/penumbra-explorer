@@ -14,7 +14,7 @@ import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
-    'Notctis',
+    'Noctis',
     'Explore Penumbra blockchain blocks, transactions, and other data with ' +
         'Noctis - a fast, secure, and privacy-focused explorer built for ' +
         'Penumbra blockchain.',
