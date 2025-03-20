@@ -9,22 +9,26 @@ import {
     Container,
     Pagination,
 } from '@/components'
-import { appName } from '@/lib/constants'
+import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getBlocks } from '@/lib/data'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
 
 const title = `Blocks - ${appName}`
-
 const description =
     'Explore Penumbra blockchain blocks, transactions, and other data ' +
     'with Noctis - a fast, secure, and privacy-focused explorer built ' +
     'for Penumbra blockchain.'
+const pathname = '/blocks'
 
 export const metadata: Metadata = {
+    alternates: {
+        canonical: canonicalBaseUrl + pathname,
+    },
     description,
     openGraph: {
         description,
         title,
+        url: pathname,
     },
     title,
     twitter: {

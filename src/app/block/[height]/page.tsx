@@ -14,7 +14,7 @@ import {
     TransactionTable,
     View,
 } from '@/components'
-import { appName } from '@/lib/constants'
+import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getBlock } from '@/lib/data'
 import { formatNumber } from '@/lib/utils'
 
@@ -29,12 +29,17 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
         `Explore ${params.height} block parameters, transactions, and other ` +
         'data with Noctis - a fast, secure, and privacy-focused explorer ' +
         'built for Penumbra blockchain.'
+    const pathname = `/block/${params.height}`
 
     return {
+        alternates: {
+            canonical: canonicalBaseUrl + pathname,
+        },
         description,
         openGraph: {
             description,
             title,
+            url: pathname,
         },
         title,
         twitter: {

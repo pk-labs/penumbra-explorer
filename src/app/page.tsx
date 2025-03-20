@@ -10,7 +10,7 @@ import {
     TransactionPanel,
     TransactionTable,
 } from '@/components'
-import { appName } from '@/lib/constants'
+import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getBlocks, getStats, getTransactions } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 
@@ -22,10 +22,14 @@ const description =
     'Penumbra blockchain.'
 
 export const metadata: Metadata = {
+    alternates: {
+        canonical: `${canonicalBaseUrl}/`,
+    },
     description,
     openGraph: {
         description,
         title,
+        url: '/',
     },
     title,
     twitter: {

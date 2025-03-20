@@ -18,7 +18,7 @@ import {
     Subsection,
     View,
 } from '@/components'
-import { appName } from '@/lib/constants'
+import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getTransaction } from '@/lib/data'
 import { shortenHash } from '@/lib/utils'
 
@@ -33,12 +33,17 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
         `Explore ${params.hash} transaction parameters, actions, and other ` +
         'data with Noctis - a fast, secure, and privacy-focused explorer ' +
         'built for Penumbra blockchain.'
+    const pathname = `/tx/${params.hash}`
 
     return {
+        alternates: {
+            canonical: canonicalBaseUrl + pathname,
+        },
         description,
         openGraph: {
             description,
             title,
+            url: pathname,
         },
         title,
         twitter: {
