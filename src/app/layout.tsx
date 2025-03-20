@@ -12,10 +12,20 @@ export const metadata: Metadata = {
     icons: [
         {
             rel: 'icon',
-            sizes: '32x32',
+            sizes: '48x48',
             url: '/favicon.ico',
         },
+        {
+            rel: 'icon',
+            type: 'image/svg+xml',
+            url: '/favicon.svg',
+        },
+        {
+            rel: 'apple-touch-icon',
+            url: '/favicon-180.png',
+        },
     ],
+    manifest: '/manifest.webmanifest',
 }
 
 interface Props {
