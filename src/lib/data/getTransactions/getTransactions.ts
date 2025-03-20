@@ -32,32 +32,34 @@ const getTransactions = async (
 
     const now = dayjs()
 
-    return result.data?.transactions?.map(transaction => {
-        let json
-        let primaryAction
-        let actions
+    return result.data?.transactions
+        ?.map(transaction => {
+            let json
+            let primaryAction
+            let actions
 
-        try {
-            const decoded = decodeTransaction(transaction.raw)
-            json = transactionToJson(decoded)
-            primaryAction = findPrimaryAction(decoded)
-            actions = transformActions(decoded.body?.actions)
-        } catch (e) {
-            // istanbul ignore next
-            console.error(e)
-        }
+            try {
+                const decoded = decodeTransaction(transaction.raw)
+                json = transactionToJson(decoded)
+                primaryAction = findPrimaryAction(decoded)
+                actions = transformActions(decoded.body?.actions)
+            } catch (e) {
+                // istanbul ignore next
+                console.error(e)
+            }
 
-        return {
-            ...transaction,
-            actions: actions ?? [],
-            hash: transaction.hash.toLowerCase(),
-            json,
-            primaryAction,
-            timeAgo: transaction.block.createdAt
-                ? now.to(transaction.block.createdAt)
-                : undefined,
-        }
-    })
+            return {
+                ...transaction,
+                actions: actions ?? [],
+                hash: transaction.hash.toLowerCase(),
+                json,
+                primaryAction,
+                timeAgo: transaction.block.createdAt
+                    ? now.to(transaction.block.createdAt)
+                    : undefined,
+            }
+        })
+        .toSorted((a, b) => b.block.height - a.block.height)
 }
 
 export default getTransactions

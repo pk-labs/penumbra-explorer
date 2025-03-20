@@ -40,7 +40,6 @@ const BlocksPage: FC<Props> = async props => {
         })
 
         if (blocks?.length) {
-            blocks.sort((a, b) => b.height - a.height)
             fromPrev = fromParam + limit
 
             fromNext =

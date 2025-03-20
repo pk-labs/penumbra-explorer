@@ -23,10 +23,12 @@ const getBlocks = async (
 
     const now = dayjs()
 
-    return result.data?.blocks?.map(block => ({
-        ...block,
-        timeAgo: block.createdAt ? now.to(block.createdAt) : undefined,
-    }))
+    return result.data?.blocks
+        ?.map(block => ({
+            ...block,
+            timeAgo: block.createdAt ? now.to(block.createdAt) : undefined,
+        }))
+        .toSorted((a, b) => b.height - a.height)
 }
 
 export default getBlocks

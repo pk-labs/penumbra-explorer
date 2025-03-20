@@ -39,7 +39,6 @@ const TransactionsPage: FC<Props> = async props => {
         })
 
         if (transactions?.length) {
-            transactions.sort((a, b) => b.block.createdAt - a.block.createdAt)
             fromNext = transactions[transactions.length - 1].hash
         } else {
             redirect('/txs')
