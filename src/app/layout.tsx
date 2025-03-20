@@ -25,7 +25,7 @@ export const metadata: Metadata = {
             url: '/favicon-180.png',
         },
     ],
-    manifest: '/manifest.webmanifest',
+    manifest: '/manifest.json',
 }
 
 interface Props {
