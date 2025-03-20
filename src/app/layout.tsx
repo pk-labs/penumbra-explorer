@@ -26,14 +26,6 @@ export const metadata: Metadata = {
         },
     ],
     manifest: '/manifest.webmanifest',
-    openGraph: {
-        images: `${process.env.BASE_URL}/sharing-preview.png`,
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        images: `${process.env.BASE_URL}/sharing-preview.png`,
-    },
 }
 
 interface Props {

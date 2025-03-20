@@ -1,6 +1,5 @@
 // istanbul ignore file
 import { Link2Icon } from 'lucide-react'
-import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
@@ -18,39 +17,23 @@ import {
     Subsection,
     View,
 } from '@/components'
-import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getTransaction } from '@/lib/data'
-import { shortenHash } from '@/lib/utils'
+import { generatePageMetadata, shortenHash } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ hash: string }>
 }
 
-export const generateMetadata = async (props: Props): Promise<Metadata> => {
-    const params = await props.params
-    const title = `Transaction ${params.hash} - ${appName}`
-    const description =
-        `Explore ${params.hash} transaction parameters, actions, and other ` +
-        'data with Noctis - a fast, secure, and privacy-focused explorer ' +
-        'built for Penumbra blockchain.'
-    const pathname = `/tx/${params.hash}`
+export const generateMetadata = async (props: Props) => {
+    const { hash } = await props.params
 
-    return {
-        alternates: {
-            canonical: canonicalBaseUrl + pathname,
-        },
-        description,
-        openGraph: {
-            description,
-            title,
-            url: pathname,
-        },
-        title,
-        twitter: {
-            description,
-            title,
-        },
-    }
+    return generatePageMetadata(
+        `Transaction ${hash}`,
+        `Explore ${hash} transaction parameters, actions, and other data ` +
+            'with Noctis - a fast, secure, and privacy-focused explorer ' +
+            'built for Penumbra blockchain.',
+        `/tx/${hash}`
+    )
 }
 
 const TransactionViewPage: FC<Props> = async props => {

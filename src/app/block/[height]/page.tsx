@@ -1,5 +1,4 @@
 // istanbul ignore file
-import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -14,39 +13,23 @@ import {
     TransactionTable,
     View,
 } from '@/components'
-import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getBlock } from '@/lib/data'
-import { formatNumber } from '@/lib/utils'
+import { formatNumber, generatePageMetadata } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ height: string }>
 }
 
-export const generateMetadata = async (props: Props): Promise<Metadata> => {
-    const params = await props.params
-    const title = `Block ${params.height} - ${appName}`
-    const description =
-        `Explore ${params.height} block parameters, transactions, and other ` +
-        'data with Noctis - a fast, secure, and privacy-focused explorer ' +
-        'built for Penumbra blockchain.'
-    const pathname = `/block/${params.height}`
+export const generateMetadata = async (props: Props) => {
+    const { height } = await props.params
 
-    return {
-        alternates: {
-            canonical: canonicalBaseUrl + pathname,
-        },
-        description,
-        openGraph: {
-            description,
-            title,
-            url: pathname,
-        },
-        title,
-        twitter: {
-            description,
-            title,
-        },
-    }
+    return generatePageMetadata(
+        `Block ${height}`,
+        `Explore ${height} block parameters, transactions, and other data ` +
+            'with Noctis - a fast, secure, and privacy-focused explorer ' +
+            'built for Penumbra blockchain.',
+        `/block/${height}`
+    )
 }
 
 const BlockViewPage: FC<Props> = async props => {

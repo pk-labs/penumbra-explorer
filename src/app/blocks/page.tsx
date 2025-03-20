@@ -1,5 +1,4 @@
 // istanbul ignore file
-import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { FC } from 'react'
 import {
@@ -9,33 +8,17 @@ import {
     Container,
     Pagination,
 } from '@/components'
-import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getBlocks } from '@/lib/data'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
+import { generatePageMetadata } from '@/lib/utils'
 
-const title = `Blocks - ${appName}`
-const description =
-    'Explore Penumbra blockchain blocks, transactions, and other data ' +
-    'with Noctis - a fast, secure, and privacy-focused explorer built ' +
-    'for Penumbra blockchain.'
-const pathname = '/blocks'
-
-export const metadata: Metadata = {
-    alternates: {
-        canonical: canonicalBaseUrl + pathname,
-    },
-    description,
-    openGraph: {
-        description,
-        title,
-        url: pathname,
-    },
-    title,
-    twitter: {
-        description,
-        title,
-    },
-}
+export const metadata = generatePageMetadata(
+    'Blocks',
+    'Explore Penumbra blockchain blocks, transactions, and other data with ' +
+        'Noctis - a fast, secure, and privacy-focused explorer built for ' +
+        'Penumbra blockchain.',
+    '/blocks'
+)
 
 interface Props {
     searchParams: Promise<{

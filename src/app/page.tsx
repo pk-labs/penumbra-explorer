@@ -1,5 +1,4 @@
 // istanbul ignore file
-import { Metadata } from 'next'
 import { FC } from 'react'
 import {
     BlockPanel,
@@ -10,33 +9,17 @@ import {
     TransactionPanel,
     TransactionTable,
 } from '@/components'
-import { appName, canonicalBaseUrl } from '@/lib/constants'
 import { getBlocks, getStats, getTransactions } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { generatePageMetadata } from '@/lib/utils'
 
-const title = `Noctis - ${appName}`
-
-const description =
+export const metadata = generatePageMetadata(
+    'Notctis',
     'Explore Penumbra blockchain blocks, transactions, and other data with ' +
-    'Noctis - a fast, secure, and privacy-focused explorer built for ' +
-    'Penumbra blockchain.'
-
-export const metadata: Metadata = {
-    alternates: {
-        canonical: `${canonicalBaseUrl}/`,
-    },
-    description,
-    openGraph: {
-        description,
-        title,
-        url: '/',
-    },
-    title,
-    twitter: {
-        description,
-        title,
-    },
-}
+        'Noctis - a fast, secure, and privacy-focused explorer built for ' +
+        'Penumbra blockchain.',
+    '/'
+)
 
 const HomePage: FC = async () => {
     const stats = await getStats()
