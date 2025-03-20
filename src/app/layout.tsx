@@ -5,7 +5,6 @@ import { Metadata } from 'next'
 import { FC, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { NavigationBar } from '@/components'
-import { rootTitle } from '@/lib/constants'
 import { getUmPrice } from '@/lib/data'
 import { background } from '@/lib/images'
 
@@ -17,7 +16,6 @@ export const metadata: Metadata = {
             url: '/favicon.ico',
         },
     ],
-    title: rootTitle,
 }
 
 interface Props {

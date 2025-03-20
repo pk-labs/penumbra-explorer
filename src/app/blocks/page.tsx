@@ -9,12 +9,28 @@ import {
     Container,
     Pagination,
 } from '@/components'
-import { rootTitle } from '@/lib/constants'
+import { appName } from '@/lib/constants'
 import { getBlocks } from '@/lib/data'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
 
+const title = `Blocks - ${appName}`
+
+const description =
+    'Explore Penumbra blockchain blocks, transactions, and other data ' +
+    'with Noctis - a fast, secure, and privacy-focused explorer built ' +
+    'for Penumbra blockchain.'
+
 export const metadata: Metadata = {
-    title: `Blocks - ${rootTitle}`,
+    description,
+    openGraph: {
+        description,
+        title,
+    },
+    title,
+    twitter: {
+        description,
+        title,
+    },
 }
 
 interface Props {

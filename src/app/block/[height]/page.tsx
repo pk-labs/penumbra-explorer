@@ -14,7 +14,7 @@ import {
     TransactionTable,
     View,
 } from '@/components'
-import { rootTitle } from '@/lib/constants'
+import { appName } from '@/lib/constants'
 import { getBlock } from '@/lib/data'
 import { formatNumber } from '@/lib/utils'
 
@@ -22,9 +22,27 @@ interface Props {
     params: Promise<{ height: string }>
 }
 
-export const generateMetadata = async (props: Props): Promise<Metadata> => ({
-    title: `Block ${(await props.params).height} - ${rootTitle}`,
-})
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+    const params = await props.params
+    const title = `Block ${params.height} - ${appName}`
+    const description =
+        `Explore ${params.height} block parameters, transactions, and other ` +
+        'data with Noctis - a fast, secure, and privacy-focused explorer ' +
+        'built for Penumbra blockchain.'
+
+    return {
+        description,
+        openGraph: {
+            description,
+            title,
+        },
+        title,
+        twitter: {
+            description,
+            title,
+        },
+    }
+}
 
 const BlockViewPage: FC<Props> = async props => {
     const params = await props.params

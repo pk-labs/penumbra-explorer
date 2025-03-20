@@ -9,12 +9,28 @@ import {
     Pagination,
     TransactionTable,
 } from '@/components'
-import { rootTitle } from '@/lib/constants'
+import { appName } from '@/lib/constants'
 import { getTransactions } from '@/lib/data'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 
+const title = `Transactions - ${appName}`
+
+const description =
+    'Explore Penumbra blockchain blocks, transactions, and other data ' +
+    'with Noctis - a fast, secure, and privacy-focused explorer built ' +
+    'for Penumbra blockchain.'
+
 export const metadata: Metadata = {
-    title: `Transactions - ${rootTitle}`,
+    description,
+    openGraph: {
+        description,
+        title,
+    },
+    title,
+    twitter: {
+        description,
+        title,
+    },
 }
 
 interface Props {

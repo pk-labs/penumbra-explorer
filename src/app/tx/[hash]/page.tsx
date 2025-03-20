@@ -18,7 +18,7 @@ import {
     Subsection,
     View,
 } from '@/components'
-import { rootTitle } from '@/lib/constants'
+import { appName } from '@/lib/constants'
 import { getTransaction } from '@/lib/data'
 import { shortenHash } from '@/lib/utils'
 
@@ -26,9 +26,27 @@ interface Props {
     params: Promise<{ hash: string }>
 }
 
-export const generateMetadata = async (props: Props): Promise<Metadata> => ({
-    title: `Transaction ${(await props.params).hash} - ${rootTitle}`,
-})
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+    const params = await props.params
+    const title = `Transaction ${params.hash} - ${appName}`
+    const description =
+        `Explore ${params.hash} transaction parameters, actions, and other ` +
+        'data with Noctis - a fast, secure, and privacy-focused explorer ' +
+        'built for Penumbra blockchain.'
+
+    return {
+        description,
+        openGraph: {
+            description,
+            title,
+        },
+        title,
+        twitter: {
+            description,
+            title,
+        },
+    }
+}
 
 const TransactionViewPage: FC<Props> = async props => {
     const params = await props.params

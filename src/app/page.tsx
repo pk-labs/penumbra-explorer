@@ -1,4 +1,5 @@
 // istanbul ignore file
+import { Metadata } from 'next'
 import { FC } from 'react'
 import {
     BlockPanel,
@@ -9,8 +10,29 @@ import {
     TransactionPanel,
     TransactionTable,
 } from '@/components'
+import { appName } from '@/lib/constants'
 import { getBlocks, getStats, getTransactions } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+
+const title = `Noctis - ${appName}`
+
+const description =
+    'Explore Penumbra blockchain blocks, transactions, and other data with ' +
+    'Noctis - a fast, secure, and privacy-focused explorer built for ' +
+    'Penumbra blockchain.'
+
+export const metadata: Metadata = {
+    description,
+    openGraph: {
+        description,
+        title,
+    },
+    title,
+    twitter: {
+        description,
+        title,
+    },
+}
 
 const HomePage: FC = async () => {
     const stats = await getStats()
