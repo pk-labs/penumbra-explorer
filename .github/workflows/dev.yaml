@@ -11,5 +11,5 @@ jobs:
     with:
       env_name_long: development
       env_name_short: dev
-      gcp_region: europe-west6
+      gcp_region: europe-west4
     secrets: inherit
