@@ -22,7 +22,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: development
-          environment-url: https://pe-frontend-564694434950.europe-west6.run.app/
+          #environment-url: https://pe-frontend-564694434950.europe-west6.run.app/
           initial-status: in_progress
 
       - name: Set up Node.js
@@ -99,7 +99,7 @@ jobs:
       - name: Deploy to Google Cloud
         run: |
           gcloud config set compute/region ${{ secrets.GCP_REGION }}
-          gcloud builds submit --config cloudbuild.yaml --substitutions=_BRANCH_NAME=${{ github.ref_name }},_COMMIT_SHA=${{ github.sha }},_REGION=${{ secrets.GCP_REGION }}
+          gcloud builds submit --config cloudbuild.yaml --substitutions=_BRANCH_NAME=${{ github.ref_name }},_COMMIT_SHA=${{ github.sha }},_REGION=${{ secrets.GCP_REGION }},_ENV_NAME=dev
 
       - uses: chrnorm/deployment-status@v2
         with:
