@@ -1,0 +1,13 @@
+name: Deploy to development
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  call_workflow:
+    uses: ./.github/workflows/gcp.yaml
+    with:
+      env_name_long: development
+      env_name_short: dev

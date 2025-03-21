@@ -1,5 +1,5 @@
 steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
-    args: [run, deploy, 'pe-frontend-${_ENV_NAME}', --source, ., --region, '${_REGION}', --allow-unauthenticated,
+    args: [run, deploy, 'penumbra-explorer-${_ENV_NAME}', --source, ., --region, '${_REGION}', --allow-unauthenticated,
            --set-env-vars, '_BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA}']
