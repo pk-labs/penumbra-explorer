@@ -10,6 +10,7 @@ const createGraphqlClient = () => {
         exchanges: [cacheExchange, fetchExchange],
         fetchOptions: {
             credentials: 'omit',
+            signal: AbortSignal.timeout(10000),
         },
         requestPolicy: 'network-only',
         url: process.env.NEXT_PUBLIC_GRAPHQL_URL,
