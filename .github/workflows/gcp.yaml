@@ -9,12 +9,6 @@ on:
       env_name_long:
         required: true
         type: string
-      github_ref_name:
-        required: true
-        type: string
-      github_sha:
-        required: true
-        type: string
       gcp_region:
         required: true
         type: string
