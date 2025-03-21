@@ -3,7 +3,7 @@ name: Test workflow
 on:
   workflow_call:
     inputs:
-      github_token:
+      foo:
         type: string
         required: true
 
@@ -11,6 +11,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Print token
+      - name: Print stuff
         run: |
-          echo "The token is: ${{ inputs.github_token }}"
+          echo "foo is: ${{ inputs.bar }}"
+          echo "GITHUB_TOKEN is: ${{ secrets.GITHUB_TOKEN }}"

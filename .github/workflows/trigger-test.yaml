@@ -9,4 +9,5 @@ jobs:
   trigger_workflow:
     uses: ./.github/workflows/test.yaml
     with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      foo: bar
+    secrets: inherit
