@@ -1,4 +1,4 @@
-name: Deploy to staging
+name: Deploy to production
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ jobs:
   trigger_gcp_workflow:
     uses: ./.github/workflows/gcp.yaml
     with:
-      env_name_long: staging
-      env_name_short: staging
+      env_name_long: production
+      env_name_short: prod
       gcp_region: us-east4
     secrets: inherit

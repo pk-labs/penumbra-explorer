@@ -11,7 +11,5 @@ jobs:
     with:
       env_name_long: development
       env_name_short: dev
-      github_ref_name: ${{ github.ref_name }}
-      github_sha: ${{ github.sha }}
       gcp_region: europe-west6
     secrets: inherit

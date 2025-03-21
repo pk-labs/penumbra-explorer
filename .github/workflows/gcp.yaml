@@ -113,7 +113,7 @@ jobs:
       - name: Deploy to Google Cloud
         run: |
           gcloud config set compute/region ${{ inputs.gcp_region }}
-          gcloud builds submit --config cloudbuild.yaml --substitutions=_BRANCH_NAME=${{ inputs.github_ref_name }},_COMMIT_SHA=${{ inputs.github_sha }},_REGION=${{ inputs.gcp_region }},_ENV_NAME=${{ inputs.env_name_short }}
+          gcloud builds submit --config cloudbuild.yaml --substitutions=_BRANCH_NAME=${{ github.ref_name }},_COMMIT_SHA=${{ github.sha }},_REGION=${{ inputs.gcp_region }},_ENV_NAME=${{ inputs.env_name_short }}
 
       - uses: chrnorm/deployment-status@v2
         with:
