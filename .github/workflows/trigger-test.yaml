@@ -9,4 +9,4 @@ jobs:
   trigger_workflow:
     uses: ./.github/workflows/test.yaml
     with:
-      token: ${{ secrets.GITHUB_TOKEN }}
+      github_token: ${{ secrets.GITHUB_TOKEN }}
