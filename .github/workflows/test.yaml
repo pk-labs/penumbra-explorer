@@ -13,5 +13,5 @@ jobs:
     steps:
       - name: Print stuff
         run: |
-          echo "foo is: ${{ inputs.bar }}"
+          echo "foo is: ${{ inputs.foo }}"
           echo "GITHUB_TOKEN is: ${{ secrets.GITHUB_TOKEN }}"
