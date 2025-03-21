@@ -1,0 +1,15 @@
+name: Deploy to staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trigger_gcp_workflow:
+    uses: ./.github/workflows/gcp.yaml
+    with:
+      env_name_long: staging
+      env_name_short: staging
+      github_ref_name: ${{ github.ref_name }}
+      github_sha: ${{ github.sha }}
+      gcp_region: us-east4
+    secrets: inherit
