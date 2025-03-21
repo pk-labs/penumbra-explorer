@@ -75,7 +75,7 @@ and written to file with `npm run test:coverage`.
 
 The following environments are hosted and auto-scaled on Google Cloud:
 
-- Development: https://penumbra-explorer-dev-564694434950.europe-west6.run.app
+- Development: https://penumbra-explorer-dev-564694434950.europe-west4.run.app
 - Staging: https://penumbra-explorer-staging-564694434950.us-east4.run.app
 - Production: https://penumbra-explorer-prod-564694434950.us-east4.run.app
 
