@@ -7,6 +7,6 @@ on:
 
 jobs:
   trigger_workflow:
-    uses: ./.github/workflows/triggger-test.yaml
+    uses: ./.github/workflows/trigger-test.yaml
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
