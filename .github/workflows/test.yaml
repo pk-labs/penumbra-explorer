@@ -1,0 +1,16 @@
+name: Test workflow
+
+on:
+  workflow_call:
+    inputs:
+      github_token:
+        type: string
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print token
+        run: |
+          echo "The token is: ${{ inputs.github_token }}"
