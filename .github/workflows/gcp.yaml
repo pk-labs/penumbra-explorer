@@ -9,22 +9,10 @@ on:
       env_name_long:
         required: true
         type: string
-      github_token:
-        required: true
-        type: string
       github_ref_name:
         required: true
         type: string
       github_sha:
-        required: true
-        type: string
-      gist_token:
-        required: true
-        type: string
-      gcp_project_id:
-        required: true
-        type: string
-      gcp_credentials:
         required: true
         type: string
       gcp_region:
@@ -46,7 +34,7 @@ jobs:
       - uses: chrnorm/deployment-action@v2
         id: deployment
         with:
-          token: ${{ inputs.github_token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           environment: ${{ inputs.env_name_long }}
           #environment-url: https://pe-frontend-564694434950.europe-west6.run.app/
           initial-status: in_progress
@@ -79,7 +67,7 @@ jobs:
         uses: gaelgirodon/ci-badges-action@v1
         with:
           gist-id: 9208254a7b67b695d104a875931624d8
-          token: ${{ inputs.gist_token }}
+          token: ${{ secrets.GIST_TOKEN }}
 
       - name: Cache .next directory
         uses: actions/cache@v4
@@ -97,7 +85,7 @@ jobs:
       - if: failure()
         uses: chrnorm/deployment-status@v2
         with:
-          token: ${{ inputs.github_token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           state: failure
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
 
@@ -115,12 +103,12 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ inputs.gcp_credentials }}
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: ${{ inputs.gcp_project_id }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Deploy to Google Cloud
         run: |
@@ -129,14 +117,14 @@ jobs:
 
       - uses: chrnorm/deployment-status@v2
         with:
-          token: ${{ inputs.github_token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           state: success
           deployment-id: ${{ needs.test.outputs.deployment_id }}
 
       - if: failure()
         uses: chrnorm/deployment-status@v2
         with:
-          token: ${{ inputs.github_token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           state: failure
           deployment-id: ${{ needs.test.outputs.deployment_id }}
 

@@ -11,10 +11,7 @@ jobs:
     with:
       env_name_long: development
       env_name_short: dev
-      github_token: ${{ secrets.GITHUB_TOKEN }}
       github_ref_name: ${{ github.ref_name }}
       github_sha: ${{ github.sha }}
-      gist_token: ${{ secrets.GIST_TOKEN }}
-      gcp_project_id: ${{ secrets.GCP_PROJECT_ID }}
-      gcp_credentials: ${{ secrets.GCP_CREDENTIALS }}
       gcp_region: europe-west6
+    secrets: inherit
