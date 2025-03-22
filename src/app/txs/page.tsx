@@ -9,6 +9,7 @@ import {
     TransactionTable,
 } from '@/components'
 import { getTransactions } from '@/lib/data'
+import { RangeDirection } from '@/lib/graphql/generated/types'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { generatePageMetadata } from '@/lib/utils'
 
@@ -32,16 +33,43 @@ const TransactionsPage: FC<Props> = async props => {
     const limit = 20
     let transactions: TransformedPartialTransactionFragment[] | undefined
     let fromNext: string | undefined
+    let fromPrev: string | undefined
 
     if (fromParam) {
-        transactions = await getTransactions({
-            range: { fromTxHash: fromParam.toUpperCase(), limit },
+        const latestTransactions = await getTransactions({
+            latest: { limit: 1 },
         })
 
-        if (transactions?.length) {
-            fromNext = transactions[transactions.length - 1].hash
-        } else {
+        if (
+            latestTransactions?.length &&
+            fromParam === latestTransactions[0].hash
+        ) {
             redirect('/txs')
+        } else {
+            transactions = await getTransactions({
+                range: { fromTxHash: fromParam.toUpperCase(), limit },
+            })
+
+            if (transactions?.length) {
+                fromNext = transactions[transactions.length - 1].hash
+
+                const prevTransactions = await getTransactions({
+                    range: {
+                        direction: RangeDirection.Previous,
+                        fromTxHash: fromParam.toUpperCase(),
+                        limit,
+                    },
+                })
+
+                console.log('prevTransactions:', prevTransactions?.length)
+                prevTransactions?.forEach(tx => console.log(tx.hash))
+
+                if (prevTransactions?.length) {
+                    fromPrev = prevTransactions[0].hash
+                }
+            } else {
+                redirect('/txs')
+            }
         }
     } else {
         transactions = await getTransactions({ latest: { limit } })
@@ -58,7 +86,7 @@ const TransactionsPage: FC<Props> = async props => {
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
             <TransactionTable
-                footer={<Pagination fromNext={fromNext} />}
+                footer={<Pagination fromNext={fromNext} fromPrev={fromPrev} />}
                 transactions={transactions}
                 time
             />
