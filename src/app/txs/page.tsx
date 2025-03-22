@@ -61,9 +61,6 @@ const TransactionsPage: FC<Props> = async props => {
                     },
                 })
 
-                console.log('prevTransactions:', prevTransactions?.length)
-                prevTransactions?.forEach(tx => console.log(tx.hash))
-
                 if (prevTransactions?.length) {
                     fromPrev = prevTransactions[0].hash
                 }
