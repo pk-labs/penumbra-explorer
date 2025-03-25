@@ -1,12 +1,19 @@
 // istanbul ignore file
 import '@/lib/css'
 import '@/lib/fonts'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { NavigationBar } from '@/components'
 import { getUmPrice } from '@/lib/data'
 import { background } from '@/lib/images'
+
+export const viewport: Viewport = {
+    initialScale: 1,
+    // Fixes iOS auto-zoom on focused input with less than 16 px font size
+    maximumScale: 1,
+    width: 'device-width',
+}
 
 export const metadata: Metadata = {
     icons: [
