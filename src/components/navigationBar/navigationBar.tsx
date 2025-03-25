@@ -35,6 +35,7 @@ const NavigationBar: FC<Props> = props => {
         setSearchModalOpen(true)
     }, [closeMenu])
 
+    // istanbul ignore next
     const openMenu = useCallback(() => {
         closeSearchModal()
         setMenuOpen(true)

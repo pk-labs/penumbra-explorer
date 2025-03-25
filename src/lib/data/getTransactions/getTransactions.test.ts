@@ -48,6 +48,26 @@ describe('getTransactions', () => {
         ).resolves.toMatchObject([{ hash: 'foo', timeAgo: '1s ago' }])
     })
 
+    test('returns sorted by descending block height', async () => {
+        createGraphqlClientMock.mockReturnValue({
+            query: () => ({
+                toPromise: () =>
+                    Promise.resolve({
+                        data: {
+                            transactions: [
+                                { block: { height: 123 }, hash: 'older' },
+                                { block: { height: 456 }, hash: 'newer' },
+                            ],
+                        },
+                    }),
+            }),
+        })
+
+        await expect(
+            getTransactions({ latest: { limit: 2 } })
+        ).resolves.toMatchObject([{ hash: 'newer' }, { hash: 'older' }])
+    })
+
     test('logs error', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
