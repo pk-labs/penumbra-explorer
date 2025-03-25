@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { appName, canonicalBaseUrl } from '@/lib/constants'
+import { appName } from '@/lib/constants'
 
 const generatePageMetadata = (
     title: string,
@@ -10,7 +10,7 @@ const generatePageMetadata = (
 
     return {
         alternates: {
-            canonical: canonicalBaseUrl + pathname,
+            canonical: process.env.BASE_URL + pathname,
         },
         description,
         openGraph: {

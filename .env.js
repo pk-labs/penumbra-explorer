@@ -6,7 +6,7 @@ const environments = {
         NEXT_PUBLIC_GRAPHQL_URL: 'https://pe.dev.galaxid.xyz/',
     },
     prod: {
-        BASE_URL: 'http://explorer.penumbra.zone',
+        BASE_URL: 'https://explorer.penumbra.zone',
         NEXT_PUBLIC_GRAPHQL_URL: 'https://pe.dev.galaxid.xyz/',
     },
     staging: {
