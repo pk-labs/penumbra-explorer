@@ -169,6 +169,7 @@ const Search: FC<Props> = props => {
                 onChange={onInputChange}
                 onFocus={onInputFocus}
                 placeholder="Search by block height or transaction hash"
+                type="text"
                 value={inputQuery}
             />
             <AnimatePresence initial={false}>
