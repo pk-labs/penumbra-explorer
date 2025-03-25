@@ -18,8 +18,8 @@ export interface Props {
 const Table: FC<Props> = props => (
     <div
         className={twMerge(
-            'flex flex-col gap-6 overflow-x-auto rounded-2xl bg-(--surface)',
-            'p-6 backdrop-blur-[32px]',
+            'flex flex-col gap-6 rounded-2xl bg-(--surface) p-6',
+            'backdrop-blur-[32px]',
             props.className
         )}
     >
@@ -31,7 +31,9 @@ const Table: FC<Props> = props => (
                 <div className="text-(--textSecondary)">{props.actions}</div>
             </div>
         )}
-        <table className="flex-1">{props.children}</table>
+        <div className="flex-1 overflow-x-auto">
+            <table className="w-full">{props.children}</table>
+        </div>
         {props.footer && (
             <div
                 className={twMerge(
