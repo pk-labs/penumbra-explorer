@@ -131,7 +131,7 @@ const NavigationBar: FC<Props> = props => {
                     </div>
                 )}
                 <Menu
-                    className="relative z-40 md:hidden"
+                    className="relative z-40 backdrop-blur-[32px] md:hidden"
                     onClose={closeMenu}
                     onOpen={openMenu}
                     open={menuOpen}
