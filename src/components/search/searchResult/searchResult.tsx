@@ -18,9 +18,8 @@ const SearchResult: FC<Props> = props => {
     return (
         <li
             className={twMerge(
-                'transition-background duration-200 ease-(--fastOutSlowIn)',
-                'not-last:border-b-1 not-last:border-b-(--surfaceLighter)',
-                'hover:bg-(--surface)'
+                'transition-background rounded-lg duration-200',
+                'ease-(--fastOutSlowIn) hover:bg-(--hoverGreen)'
             )}
         >
             {typeof props.heightOrHash === 'number' ? (
