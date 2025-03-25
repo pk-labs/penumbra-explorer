@@ -1,7 +1,26 @@
 import getUmPrice from './getUmPrice'
 
 describe('getUmPrice', () => {
-    test('returns data', async () => {
+    test('returns positive change', async () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            Promise.resolve({
+                json: () => ({
+                    change: {
+                        percent: '9.99',
+                        sign: 'positive',
+                    },
+                    price: '9999',
+                }),
+            })
+        )
+
+        await expect(getUmPrice()).resolves.toEqual({
+            change: 9.99,
+            price: 9999,
+        })
+    })
+
+    test('returns negative change', async () => {
         global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
                 json: () => ({
