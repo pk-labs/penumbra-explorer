@@ -51,8 +51,8 @@ const Modal: FC<Props> = props => {
                     animate={{ opacity: 1 }}
                     className={twMerge(
                         'fixed top-0 right-0 bottom-0 left-0 z-30 flex',
-                        'items-center justify-center bg-(--surface)',
-                        'backdrop-blur-sm backdrop-brightness-50',
+                        'items-center justify-center backdrop-blur-sm',
+                        'backdrop-brightness-75',
                         props.className
                     )}
                     exit={{ opacity: 0 }}
