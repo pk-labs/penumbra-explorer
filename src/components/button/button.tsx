@@ -18,7 +18,7 @@ interface Props {
 const Button: FC<Props> = props => {
     const className = twMerge(
         'font-primary transition-background inline-flex h-8 transform-none',
-        'items-center justify-center gap-2 rounded-full text-sm',
+        'items-center justify-center gap-1 rounded-full text-sm',
         'font-medium whitespace-nowrap text-(--text) capitalize duration-200',
         'ease-(--fastOutSlowIn) select-none',
         props.round ? 'w-8' : 'px-4',

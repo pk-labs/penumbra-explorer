@@ -71,17 +71,12 @@ const NavigationBar: FC<Props> = props => {
                 {pathname !== '/' && (
                     <>
                         <Button
-                            className={twMerge(
-                                'relative z-40 w-8 gap-1 px-0',
-                                'backdrop-blur-[32px] sm:w-auto sm:px-4'
-                            )}
+                            className="relative z-40 backdrop-blur-[32px]"
                             onClick={openSearchModal}
                             light
                         >
                             <SearchIcon size={16} />
-                            <span className="hidden sm:inline md:hidden lg:inline!">
-                                Search
-                            </span>
+                            Search
                         </Button>
                         <Modal
                             className="z-50 items-start pt-28"
@@ -102,16 +97,16 @@ const NavigationBar: FC<Props> = props => {
                 {props.umPrice && (
                     <div
                         className={twMerge(
-                            'relative z-40 flex h-8 items-center',
+                            'relative z-40 hidden h-8 items-center',
                             'justify-center gap-0.5 rounded-full border-1',
-                            'border-(--surfaceLighter) px-4 text-sm font-medium'
+                            'border-(--surfaceLighter) px-4 text-sm',
+                            'font-medium sm:flex'
                         )}
                     >
                         <span
                             className={twMerge(
-                                'hidden whitespace-nowrap',
-                                'text-(--textSecondary) sm:inline md:hidden',
-                                'lg:inline!'
+                                'whitespace-nowrap text-(--textSecondary)',
+                                'md:hidden lg:inline!'
                             )}
                         >
                             UM Price:
