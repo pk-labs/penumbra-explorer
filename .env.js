@@ -4,14 +4,17 @@ const environments = {
     dev: {
         BASE_URL: 'https://dev.explorer.penumbra.pklabs.me',
         NEXT_PUBLIC_GRAPHQL_URL: 'https://pe.dev.galaxid.xyz/',
+        NO_INDEX: true,
     },
     prod: {
         BASE_URL: 'https://explorer.penumbra.zone',
         NEXT_PUBLIC_GRAPHQL_URL: 'https://pe.dev.galaxid.xyz/',
+        NO_INDEX: false,
     },
     staging: {
         BASE_URL: 'https://explorer.penumbra.pklabs.me',
         NEXT_PUBLIC_GRAPHQL_URL: 'https://pe.dev.galaxid.xyz/',
+        NO_INDEX: true,
     },
 }
 

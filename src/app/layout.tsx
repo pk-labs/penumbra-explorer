@@ -33,6 +33,10 @@ export const metadata: Metadata = {
         },
     ],
     manifest: '/manifest.json',
+    robots: {
+        follow: process.env.NO_INDEX !== 'true',
+        index: process.env.NO_INDEX !== 'true',
+    },
 }
 
 interface Props {
