@@ -4,7 +4,7 @@ import '@/lib/fonts'
 import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { NavigationBar } from '@/components'
+import { NavigationBar, PageViewTracker } from '@/components'
 import { getUmPrice } from '@/lib/data'
 import { background } from '@/lib/images'
 
@@ -54,6 +54,7 @@ const RootLayout: FC<Props> = async props => {
                     'overflow-x-hidden pb-4 md:pb-8'
                 )}
             >
+                <PageViewTracker fathomId={process.env.NEXT_PUBLIC_FATHOM_ID} />
                 <NavigationBar umPrice={umPrice} />
                 {props.children}
                 <div
