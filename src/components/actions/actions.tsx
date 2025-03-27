@@ -1,9 +1,10 @@
 import { FC } from 'react'
+import { ActionType } from '@/lib/types'
 import Subsection from '../subsection'
 import Action from './action'
 
 interface Props {
-    actions: string[]
+    actions: ActionType[]
 }
 
 const Actions: FC<Props> = props => (

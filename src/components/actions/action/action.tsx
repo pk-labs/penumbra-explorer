@@ -2,10 +2,11 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { encrypted } from '@/lib/images'
+import { ActionType } from '@/lib/types'
 
 interface Props {
     // TODO: Implement encrypted flag for icon
-    children: string
+    children: ActionType
 }
 
 const Action: FC<Props> = props => (
@@ -16,7 +17,10 @@ const Action: FC<Props> = props => (
         )}
     >
         <Image alt={props.children} src={encrypted} />
-        {props.children}
+        <span className="flex-1">{props.children}</span>
+        {![ActionType.spend, ActionType.output].includes(props.children) && (
+            <span>Unimplemented</span>
+        )}
     </li>
 )
 
