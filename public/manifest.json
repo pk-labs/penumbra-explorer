@@ -1,5 +1,5 @@
 {
-    "background_color": "#fff",
+    "background_color": "#0d0d0d",
     "display": "standalone",
     "icons": [
         {
@@ -17,5 +17,5 @@
     ],
     "name": "Noctis",
     "short_name": "Noctis",
-    "theme_color": "#fff"
+    "theme_color": "#0d0d0d"
 }
