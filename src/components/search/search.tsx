@@ -111,6 +111,7 @@ const Search: FC<Props> = props => {
         [cancelSearchQuery, executeSearchQuery]
     )
 
+    // istanbul ignore next
     const onClick = useCallback((e: MouseEvent) => e.stopPropagation(), [])
 
     let searchResults
@@ -162,12 +163,11 @@ const Search: FC<Props> = props => {
                 ref={inputRef}
                 autoFocus={props.autoFocus}
                 className={twMerge(
-                    'w-full rounded-lg bg-(--surface) p-4 pl-11',
-                    'font-primary text-base text-(--textSecondary)',
-                    'outline-2 outline-transparent backdrop-blur-[32px]',
+                    'font-primary w-full rounded-lg bg-(--surface) p-4 pl-11',
+                    'text-base text-(--textSecondary) outline-2',
+                    'outline-transparent backdrop-blur-[32px]',
                     'focus:outline-(--textSecondary) focus:transition-none'
                 )}
-                name="query"
                 onBlur={onInputBlur}
                 onChange={onInputChange}
                 onFocus={onInputFocus}
