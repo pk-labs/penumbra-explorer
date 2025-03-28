@@ -22,7 +22,7 @@ const TransactionTable: FC<Props> = props => (
     <Table
         actions={props.actions}
         className={twMerge(
-            props.embedded && 'rounded-lg p-0 backdrop-blur-none',
+            props.embedded && 'rounded-sm p-0 backdrop-blur-none',
             props.className
         )}
         footer={props.footer}

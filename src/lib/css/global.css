@@ -10,6 +10,14 @@
     --breakpoint-xl: calc(1rem / 16 * 1600);
     --breakpoint-2xl: initial;
 
+    /* https://tailwindcss.com/docs/border-radius */
+    --radius-xs: calc(1rem / 16 * 4);
+    --radius-sm: calc(1rem / 16 * 8);
+    --radius-md: calc(1rem / 16 * 12);
+    --radius-lg: 1rem;
+    --radius-xl: calc(1rem / 16 * 20);
+    --radius-2xl: calc(1rem / 16 * 24);
+
     --pageMaxWidth: calc(1rem / 16 * 1536);
     --pageNarrowWidth: calc(1rem / 16 * 752);
     --font-primary: Poppins, sans-serif;

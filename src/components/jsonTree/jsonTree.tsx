@@ -33,7 +33,7 @@ const JsonTree: FC<Props> = props => {
         >
             <div
                 className={twMerge(
-                    'rounded-lg bg-(--surface) p-3 font-mono text-xs',
+                    'rounded-sm bg-(--surface) p-3 font-mono text-xs',
                     'font-medium break-all'
                 )}
                 onClick={onClick}

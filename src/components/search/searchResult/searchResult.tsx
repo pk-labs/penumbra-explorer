@@ -18,7 +18,7 @@ const SearchResult: FC<Props> = props => {
     return (
         <li
             className={twMerge(
-                'transition-background rounded-lg duration-200',
+                'transition-background rounded-sm duration-200',
                 'ease-(--fastOutSlowIn) hover:bg-(--hoverGreen)'
             )}
         >
