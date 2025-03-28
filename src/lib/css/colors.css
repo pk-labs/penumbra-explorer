@@ -54,23 +54,9 @@
     --color-text-special: var(--color-orange-400);
 
     /* Action */
-    --color-action-hoverOverlay: color-mix(
-        in oklab,
-        var(--color-teal-400) 15%,
-        transparent
-    );
-
-    --color-action-activeOverlay: color-mix(
-        in oklab,
-        var(--color-neutral-950) 15%,
-        transparent
-    );
-
-    --color-action-disabledOverlay: color-mix(
-        in oklab,
-        var(--color-neutral-950) 80%,
-        transparent
-    );
+    --color-action-hoverOverlay: --alpha(var(--color-teal-400) / 15%);
+    --color-action-activeOverlay: --alpha(var(--color-neutral-950) / 15%);
+    --color-action-disabledOverlay: --alpha(var(--color-neutral-950) / 80%);
 
     --color-action-primaryFocusOutline: var(--color-orange-400);
     --color-action-secondaryFocusOutline: var(--color-teal-400);
@@ -80,37 +66,12 @@
     --color-action-successFocusOutline: var(--color-green-400);
 
     /* Other */
-    --color-other-tonalStroke: color-mix(
-        in oklab,
-        var(--color-neutral-50) 15%,
-        transparent
-    );
-
-    --color-other-tonalFill5: color-mix(
-        in oklab,
-        var(--color-neutral-50) 5%,
-        transparent
-    );
-
-    --color-other-tonalFill10: color-mix(
-        in oklab,
-        var(--color-neutral-50) 10%,
-        transparent
-    );
-
+    --color-other-tonalStroke: --alpha(var(--color-neutral-50) / 15%);
+    --color-other-tonalFill5: --alpha(var(--color-neutral-50) / 5%);
+    --color-other-tonalFill10: --alpha(var(--color-neutral-50) / 10%);
     --color-other-solidStroke: var(--color-neutral-900);
-
-    --color-other-dialogBackground: color-mix(
-        in oklab,
-        var(--color-teal-700) 10%,
-        transparent
-    );
-
-    --color-other-overlay: color-mix(
-        in oklab,
-        var(--color-black) 50%,
-        transparent
-    );
+    --color-other-dialogBackground: --alpha(var(--color-teal-700) / 10%);
+    --color-other-overlay: --alpha(var(--color-black) / 50%);
 
     /* Gradient */
     --color-card: "linear-gradient(136deg, rgba(250, 250, 250, 0.1) 6.32%, rgba(250, 250, 250, 0.01) 75.55%)";
