@@ -14,11 +14,11 @@ const EmptyState: FC<Props> = props => (
             props.className
         )}
     >
-        <div className="font-primary text-base font-normal">{props.title}</div>
+        <div className="font-default text-base font-normal">{props.title}</div>
         {props.children && (
             <div
                 className={twMerge(
-                    'font-primary text-sm font-normal text-(--textSecondary)'
+                    'font-default text-sm font-normal text-(--textSecondary)'
                 )}
             >
                 {props.children}

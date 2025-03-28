@@ -8,7 +8,6 @@
     --breakpoint-md: calc(1rem / 16 * 900);
     --breakpoint-lg: calc(1rem / 16 * 1200);
     --breakpoint-xl: calc(1rem / 16 * 1600);
-    --breakpoint-2xl: initial;
 
     /* https://tailwindcss.com/docs/border-radius */
     --radius-xs: calc(1rem / 16 * 4);
@@ -25,8 +24,8 @@
 
     --pageMaxWidth: calc(1rem / 16 * 1536);
     --pageNarrowWidth: calc(1rem / 16 * 752);
-    --font-primary: Poppins, sans-serif;
-    --font-secondary: "Work Sans", sans-serif;
+    --font-default: Poppins, sans-serif;
+    --font-heading: "Work Sans", sans-serif;
     --font-mono: _fontMono, monospace;
 
     --text-xs: calc(1rem / 16 * 12);
@@ -69,7 +68,7 @@
     body {
         background: #0d0d0d;
         color: var(--text);
-        font-family: var(--font-primary);
+        font-family: var(--font-default);
         font-size: var(--text-base);
         line-height: var(--text-base--line-height);
     }

@@ -17,7 +17,7 @@ interface Props {
 // TODO: Replace round prop with icon prop and implement hiding label below sm
 const Button: FC<Props> = props => {
     const className = twMerge(
-        'font-primary transition-background inline-flex h-8 transform-none',
+        'font-default transition-background inline-flex h-8 transform-none',
         'items-center justify-center gap-1 rounded-full text-sm',
         'font-medium whitespace-nowrap text-(--text) capitalize duration-200',
         'ease-(--fastOutSlowIn) select-none',

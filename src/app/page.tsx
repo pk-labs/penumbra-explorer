@@ -35,7 +35,7 @@ const HomePage: FC = async () => {
     return (
         <>
             <Container>
-                <h1 className="font-secondary mb-2 text-4xl font-medium">
+                <h1 className="font-heading mb-2 text-4xl font-medium">
                     Penumbra Blockchain Explorer
                 </h1>
                 <GraphqlClientProvider>

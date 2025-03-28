@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const Breadcrumb: FC<Props> = props => {
-    const className = twMerge('font-secondary text-3xl font-medium')
+    const className = twMerge('font-heading text-3xl font-medium')
 
     return props.href ? (
         <Link
