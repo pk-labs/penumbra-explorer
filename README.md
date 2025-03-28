@@ -75,9 +75,9 @@ and written to file with `npm run test:coverage`.
 
 The following environments are hosted and auto-scaled on Google Cloud:
 
-- Development: https://dev.explorer.penumbra.pklabs.me
-- Staging: https://explorer.penumbra.pklabs.me
-- Production: http://explorer.penumbra.zone
+- Development (`main`): https://dev.explorer.penumbra.pklabs.me
+- Staging (`staging`): https://explorer.penumbra.pklabs.me
+- Production (`production`): http://explorer.penumbra.zone
 
 ## CI/CD
 
@@ -86,8 +86,9 @@ deployments. After running checks and tests it triggers Google Cloud Build that
 deploys to Google Cloud Run.
 
 Development is deployed continuously on push with `.github/workflows/dev.yaml`
-as entry point. Staging and production deployments are triggered manually in the
-GitHub Actions web interface with `.github/workflows/staging.yaml` or
+as entry point. Staging is also deployed on push with
+`.github/workflows/staging.yaml` as entry point and production deployments are
+triggered manually in the GitHub Actions web interface with
 `.github/workflows/prod.yaml` as entry point.
 
 ## Misc
