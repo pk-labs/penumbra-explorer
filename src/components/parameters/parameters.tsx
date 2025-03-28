@@ -19,7 +19,7 @@ const Parameters: FC<Props> = props => (
     <ul
         className={twMerge(
             'flex flex-col gap-1 rounded-sm bg-(--surface) p-3',
-            'font-mono text-xs font-medium text-(--textSecondary)',
+            'text-text-secondary font-mono text-xs font-medium',
             props.className
         )}
     >

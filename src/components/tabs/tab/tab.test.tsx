@@ -8,7 +8,7 @@ describe('Tab', () => {
 
         const tab = getByText(container, 'Foo')
         expect(tab).toHaveAttribute('href', '/foo')
-        expect(tab).not.toHaveClass('text-(--text)')
+        expect(tab).not.toHaveClass('text-text-primary')
     })
 
     test('renders active', async () => {
@@ -16,7 +16,7 @@ describe('Tab', () => {
 
         const tab = getByText(container, 'Foo')
         expect(tab).toHaveAttribute('href', '/')
-        expect(tab).toHaveClass('text-(--text)')
+        expect(tab).toHaveClass('text-text-primary')
     })
 
     test('renders active for matching paths', async () => {
@@ -30,6 +30,6 @@ describe('Tab', () => {
 
         const tab = getByText(container, 'Foo')
         expect(tab).toHaveAttribute('href', '/blocks')
-        expect(tab).toHaveClass('text-(--text)')
+        expect(tab).toHaveClass('text-text-primary')
     })
 })

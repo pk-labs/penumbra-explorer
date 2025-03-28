@@ -36,7 +36,10 @@ const BlockTable: FC<Props> = props => (
                         href={`/block/${block.height}`}
                     >
                         <TableCell>
-                            <BoxIcon color="var(--textSecondary)" size={16} />
+                            <BoxIcon
+                                color="var(--color-text-secondary)"
+                                size={16}
+                            />
                             <Link href={`/block/${block.height}`}>
                                 {formatNumber(block.height)}
                             </Link>

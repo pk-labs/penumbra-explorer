@@ -35,7 +35,7 @@ const ErrorPage: FC<Props> = props => (
                 )}
             />
         </div>
-        <h1 className="text-2xl text-(--textSecondary)">{props.message}</h1>
+        <h1 className="text-text-secondary text-2xl">{props.message}</h1>
         <Button
             className={twMerge(
                 'hover:border(--primaryLight) mt-16 h-12 rounded-sm border',

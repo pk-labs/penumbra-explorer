@@ -31,10 +31,10 @@ const Tab: FC<Props> = props => {
                 'before:left-1/2 before:h-[2px] before:-translate-x-1/2',
                 'before:bg-[var(--primary)]',
                 'before:transition-[width,transform] before:duration-200',
-                'before:ease-(--fastOutSlowIn) hover:text-(--text)',
+                'hover:text-text-primary before:ease-(--fastOutSlowIn)',
                 active
-                    ? 'bg-[0px_0px] text-(--text) before:w-[calc(100%-16px)]'
-                    : 'bg-[0px_36px] text-(--textSecondary) before:w-0'
+                    ? 'text-text-primary bg-[0px_0px] before:w-[calc(100%-16px)]'
+                    : 'text-text-secondary bg-[0px_36px] before:w-0'
             )}
             href={props.href}
         >

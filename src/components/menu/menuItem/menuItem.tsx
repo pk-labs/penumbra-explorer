@@ -28,8 +28,8 @@ const MenuItem: FC<Props> = props => {
             className={twMerge(
                 'ease-(var(--fastOutSlowIn)) flex h-8 items-center gap-2 px-7',
                 'text-sm transition-[color,background] duration-200',
-                'hover:bg-(--surface) hover:text-(--text)',
-                active ? 'text-(--text)' : 'text-(--textSecondary)'
+                'hover:text-text-primary hover:bg-(--surface)',
+                active ? 'text-text-primary' : 'text-text-secondary'
             )}
             href={props.href}
             onClick={onClick}

@@ -19,12 +19,12 @@ const Button: FC<Props> = props => {
     const className = twMerge(
         'font-default transition-background inline-flex h-8 transform-none',
         'items-center justify-center gap-1 rounded-full text-sm',
-        'font-medium whitespace-nowrap text-(--text) capitalize duration-200',
+        'text-text-primary font-medium whitespace-nowrap capitalize duration-200',
         'ease-(--fastOutSlowIn) select-none',
         props.round ? 'w-8' : 'px-4',
         props.disabled
-            ? 'cursor-not-allowed bg-(--surfaceDisabled) text-(--textDisabled)'
-            : 'cursor-pointer hover:text-(--text) active:scale-98',
+            ? 'text-text-muted cursor-not-allowed bg-(--surfaceDisabled)'
+            : 'hover:text-text-primary cursor-pointer active:scale-98',
         !props.disabled && props.light
             ? 'bg-(--surfaceLight) hover:bg-(--surfaceLighter)'
             : 'bg-(--surface) hover:bg-(--surfaceLight)',

@@ -12,7 +12,7 @@ export interface Props {
 
 const SearchResult: FC<Props> = props => {
     const linkClassName = twMerge(
-        'flex gap-1 px-2 py-1.5 break-all text-(--text)!'
+        'text-text-primary! flex gap-1 px-2 py-1.5 break-all'
     )
 
     return (
@@ -29,7 +29,7 @@ const SearchResult: FC<Props> = props => {
                 >
                     <BoxIcon
                         className="min-w-4"
-                        color="var(--textSecondary)"
+                        color="var(--color-text-secondary)"
                         size={16}
                     />
                     {formatNumber(props.heightOrHash)}

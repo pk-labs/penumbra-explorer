@@ -13,7 +13,7 @@ const Action: FC<Props> = props => (
     <li
         className={twMerge(
             'flex items-center gap-2 rounded-sm bg-(--surface) px-3 py-2',
-            'font-mono text-sm font-medium text-(--textSecondary)'
+            'text-text-secondary font-mono text-sm font-medium'
         )}
     >
         <Image alt={props.children} src={encrypted} />

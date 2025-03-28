@@ -106,7 +106,7 @@ const NavigationBar: FC<Props> = props => {
                     >
                         <span
                             className={twMerge(
-                                'whitespace-nowrap text-(--textSecondary)',
+                                'text-text-secondary whitespace-nowrap',
                                 'md:hidden lg:inline!'
                             )}
                         >

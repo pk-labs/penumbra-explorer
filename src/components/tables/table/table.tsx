@@ -28,7 +28,7 @@ const Table: FC<Props> = props => (
                 <h2 className="text-2xl font-medium capitalize">
                     {props.title}
                 </h2>
-                <div className="text-(--textSecondary)">{props.actions}</div>
+                <div className="text-text-secondary">{props.actions}</div>
             </div>
         )}
         <div className="flex-1 overflow-x-auto">
@@ -37,7 +37,7 @@ const Table: FC<Props> = props => (
         {props.footer && (
             <div
                 className={twMerge(
-                    'text-xs text-(--textSecondary)',
+                    'text-text-secondary text-xs',
                     props.footerClassName
                 )}
             >

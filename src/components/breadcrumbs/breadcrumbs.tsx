@@ -28,7 +28,7 @@ const Breadcrumbs: FC<Props> = props => {
                     {child}
                     {index < lastIndex && (
                         <ChevronRightIcon
-                            className="text-(--textSecondary)"
+                            className="text-text-secondary"
                             size={24}
                         />
                     )}

@@ -10,7 +10,7 @@ const Memo: FC = () => (
         <div
             className={twMerge(
                 'flex items-center gap-2 rounded-sm bg-(--surface) px-3 py-2',
-                'text-sm font-normal text-(--textSecondary)'
+                'text-text-secondary text-sm font-normal'
             )}
         >
             <Image alt="Memo" src={encrypted} />

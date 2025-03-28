@@ -33,7 +33,7 @@ const SearchResultOverlay: FC<Props> = props => (
         }}
         initial={{ opacity: 0 }}
     >
-        <h3 className="text-xs text-(--textSecondary)">{props.title}</h3>
+        <h3 className="text-text-secondary text-xs">{props.title}</h3>
         {props.children && (
             <ul className="flex flex-col font-mono text-sm font-medium">
                 {props.children}

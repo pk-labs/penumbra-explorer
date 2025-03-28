@@ -10,7 +10,7 @@ const Pill: FC<Props> = props => (
     <span
         className={twMerge(
             'inline-flex h-8 max-w-47 items-center truncate rounded-full',
-            'bg-(--surface) px-3 text-sm font-medium text-(--text)',
+            'text-text-primary bg-(--surface) px-3 text-sm font-medium',
             props.className
         )}
     >

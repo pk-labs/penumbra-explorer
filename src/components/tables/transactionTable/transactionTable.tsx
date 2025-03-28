@@ -56,7 +56,7 @@ const TransactionTable: FC<Props> = props => (
                         {!props.embedded && (
                             <TableCell>
                                 <BoxIcon
-                                    color="var(--textSecondary)"
+                                    color="var(--color-text-secondary)"
                                     size={16}
                                 />
                                 <Link
@@ -73,7 +73,7 @@ const TransactionTable: FC<Props> = props => (
                                 </Pill>
                             )}
                             {transaction.actions.length > 1 && (
-                                <span className="text-(--textSecondary)">
+                                <span className="text-text-secondary">
                                     +{transaction.actions.length - 1}
                                 </span>
                             )}

@@ -27,7 +27,7 @@ const Panel: FC<Props> = props => (
             <h2
                 className={twMerge(
                     'flex items-center gap-2 text-base font-medium',
-                    'whitespace-nowrap text-(--textSecondary) capitalize'
+                    'text-text-secondary whitespace-nowrap capitalize'
                 )}
             >
                 {props.title}
@@ -44,7 +44,7 @@ const Panel: FC<Props> = props => (
                 className={twMerge(
                     "[grid-area:'span 2 / 2'] self-end justify-self-end",
                     'overflow-hidden font-mono text-xs font-medium',
-                    'text-(--textSecondary)'
+                    'text-text-secondary'
                 )}
             >
                 {props.children}
@@ -54,7 +54,7 @@ const Panel: FC<Props> = props => (
             <footer
                 className={twMerge(
                     "[grid-area:'2 / 1'] self-end font-mono text-xs",
-                    'font-medium text-(--textSecondary)'
+                    'text-text-secondary font-medium'
                 )}
             >
                 {props.footer}

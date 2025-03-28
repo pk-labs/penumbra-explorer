@@ -58,7 +58,7 @@ const BlockViewPage: FC<Props> = async props => {
                     <Parameter name="Block height">
                         {block.height}
                         <CopyToClipboard
-                            className="-mr-0.5 text-(--text)"
+                            className="text-text-primary -mr-0.5"
                             data={block.height.toString()}
                             small
                         />

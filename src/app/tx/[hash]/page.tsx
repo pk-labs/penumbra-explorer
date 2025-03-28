@@ -62,7 +62,7 @@ const TransactionViewPage: FC<Props> = async props => {
                     <Parameter name="Transaction hash">
                         {shortenHash(transaction.hash)}
                         <CopyToClipboard
-                            className="-mr-0.5 text-(--text)"
+                            className="text-text-primary -mr-0.5"
                             data={transaction.hash}
                             small
                         />
@@ -77,7 +77,7 @@ const TransactionViewPage: FC<Props> = async props => {
                         >
                             {transaction.block.height}
                             <Link2Icon
-                                className="ml-1 text-(--text)"
+                                className="text-text-primary ml-1"
                                 size={12}
                             />
                         </Link>

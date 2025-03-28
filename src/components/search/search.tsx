@@ -153,8 +153,8 @@ const Search: FC<Props> = props => {
             <SearchIcon
                 className={twMerge(
                     'transition-stroke absolute top-1/2 left-4 z-10',
-                    '-translate-y-1/2 cursor-pointer stroke-(--textSecondary)',
-                    'duration-200 ease-(--fastOutSlowIn) hover:stroke-(--text)'
+                    'stroke-text-secondary -translate-y-1/2 cursor-pointer',
+                    'hover:stroke-text-primary duration-200 ease-(--fastOutSlowIn)'
                 )}
                 onClick={focusInput}
                 size={16}
@@ -164,9 +164,9 @@ const Search: FC<Props> = props => {
                 autoFocus={props.autoFocus}
                 className={twMerge(
                     'font-default w-full rounded-sm bg-(--surface) p-4 pl-11',
-                    'text-base text-(--textSecondary) outline-2',
+                    'text-text-secondary text-base outline-2',
                     'outline-transparent backdrop-blur-[32px]',
-                    'focus:outline-(--textSecondary) focus:transition-none'
+                    'focus:outline-text-secondary focus:transition-none'
                 )}
                 onBlur={onInputBlur}
                 onChange={onInputChange}
