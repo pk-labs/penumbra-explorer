@@ -1,45 +1,45 @@
 @theme {
     /* Neutral */
     --color-neutral-main: var(--color-neutral-700);
-    --color-neutral-light: var(--color-neutral-400);
+    --color-neutral-light: #a3a3a3;
     --color-neutral-dark: var(--color-neutral-900);
     --color-neutral-contrast: var(--color-neutral-50);
 
     /* Primary */
-    --color-primary-main: var(--color-orange-700);
-    --color-primary-light: var(--color-orange-400);
-    --color-primary-dark: var(--color-orange-950);
+    --color-primary-main: #ba4d14;
+    --color-primary-light: #f49c43;
+    --color-primary-dark: #200b04;
     --color-primary-contrast: var(--color-orange-50);
 
     /* Secondary */
-    --color-secondary-main: var(--color-teal-700);
-    --color-secondary-light: var(--color-teal-400);
-    --color-secondary-dark: var(--color-teal-950);
-    --color-secondary-contrast: var(--color-teal-50);
+    --color-secondary-main: #226362;
+    --color-secondary-light: #53aea8;
+    --color-secondary-dark: #031516;
+    --color-secondary-contrast: #f1fcfa;
 
     /* Unshield */
-    --color-unshield-main: var(--color-purple-700);
-    --color-unshield-light: var(--color-purple-400);
-    --color-unshield-dark: var(--color-purple-950);
-    --color-unshield-contrast: var(--color-purple-50);
+    --color-unshield-main: #705279;
+    --color-unshield-light: #c1a6cc;
+    --color-unshield-dark: #180e1b;
+    --color-unshield-contrast: #faf7fc;
 
     /* Destructive */
-    --color-destructive-main: var(--color-red-700);
-    --color-destructive-light: var(--color-red-400);
-    --color-destructive-dark: var(--color-red-950);
-    --color-destructive-contrast: var(--color-red-50);
+    --color-destructive-main: #af2626;
+    --color-destructive-light: #f17878;
+    --color-destructive-dark: #1e0606;
+    --color-destructive-contrast: #fef2f2;
 
     /* Caution */
-    --color-caution-main: var(--color-yellow-700);
-    --color-caution-light: var(--color-yellow-400);
-    --color-caution-dark: var(--color-yellow-950);
-    --color-caution-contrast: var(--color-yellow-50);
+    --color-caution-main: #99610f;
+    --color-caution-light: #e8c127;
+    --color-caution-dark: #201004;
+    --color-caution-contrast: #fdfce9;
 
     /* Success */
-    --color-success-main: var(--color-green-700);
-    --color-success-light: var(--color-green-400);
-    --color-success-dark: var(--color-green-950);
-    --color-success-contrast: var(--color-green-50);
+    --color-success-main: #1c793f;
+    --color-success-light: #55d383;
+    --color-success-dark: #03160b;
+    --color-success-contrast: #f0fdf4;
 
     /* Base */
     --color-base-black: #000;
@@ -49,28 +49,28 @@
 
     /* Text */
     --color-text-primary: var(--color-neutral-50);
-    --color-text-secondary: var(--color-neutral-400);
+    --color-text-secondary: #a3a3a3;
     --color-text-muted: var(--color-neutral-700);
-    --color-text-special: var(--color-orange-400);
+    --color-text-special: #f49c43;
 
     /* Action */
-    --color-action-hoverOverlay: --alpha(var(--color-teal-400) / 15%);
+    --color-action-hoverOverlay: rgb(from #53aea8 r g b / 15%);
     --color-action-activeOverlay: --alpha(var(--color-neutral-950) / 15%);
     --color-action-disabledOverlay: --alpha(var(--color-neutral-950) / 80%);
 
-    --color-action-primaryFocusOutline: var(--color-orange-400);
-    --color-action-secondaryFocusOutline: var(--color-teal-400);
-    --color-action-unshieldFocusOutline: var(--color-purple-400);
-    --color-action-neutralFocusOutline: var(--color-neutral-400);
-    --color-action-destructiveFocusOutline: var(--color-red-400);
-    --color-action-successFocusOutline: var(--color-green-400);
+    --color-action-primaryFocusOutline: #f49c43;
+    --color-action-secondaryFocusOutline: #53aea8;
+    --color-action-unshieldFocusOutline: #c1a6cc;
+    --color-action-neutralFocusOutline: #a3a3a3;
+    --color-action-destructiveFocusOutline: #f17878;
+    --color-action-successFocusOutline: #55d383;
 
     /* Other */
     --color-other-tonalStroke: --alpha(var(--color-neutral-50) / 15%);
     --color-other-tonalFill5: --alpha(var(--color-neutral-50) / 5%);
     --color-other-tonalFill10: --alpha(var(--color-neutral-50) / 10%);
     --color-other-solidStroke: var(--color-neutral-900);
-    --color-other-dialogBackground: --alpha(var(--color-teal-700) / 10%);
+    --color-other-dialogBackground: rgb(from #226362 r g b / 10%);
     --color-other-overlay: --alpha(var(--color-black) / 50%);
 
     /* Gradient */
