@@ -26,6 +26,7 @@
     --blur-lg: 32px;
     --blur-xl: 64px;
 
+    /* Custom */
     --pageMaxWidth: calc(1rem / 16 * 1536);
     --pageNarrowWidth: calc(1rem / 16 * 752);
 
