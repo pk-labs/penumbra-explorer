@@ -4,68 +4,82 @@
     --font-heading: "Work Sans", sans-serif;
     --font-mono: _fontMono, monospace;
 
-    /* Font size */
-    --text-xs: calc(1rem / 16 * 12);
-    --text-sm: calc(1rem / 16 * 14);
-    --text-base: 1rem;
-    --text-lg: calc(1rem / 16 * 18);
-    --text-xl: calc(1rem / 16 * 20);
-    --text-2xl: calc(1rem / 16 * 24);
-    --text-3xl: calc(1rem / 16 * 30);
-    --text-4xl: calc(1rem / 16 * 36);
-
     /* Line height */
     --text-xs--line-height: 1rem;
-    --text-sm--line-height: calc(1rem / 16 * 20);
-    --text-base--line-height: calc(1rem / 16 * 24);
-    --text-lg--line-height: calc(1rem / 16 * 28);
-    --text-xl--line-height: calc(1rem / 16 * 32);
-    --text-2xl--line-height: calc(1rem / 16 * 36);
-    --text-3xl--line-height: calc(1rem / 16 * 40);
-    --text-4xl--line-height: calc(1rem / 16 * 44);
+    --text-sm--line-height: 1.25rem;
+    --text-base--line-height: 1.5rem;
+    --text-lg--line-height: 1.75rem;
+    --text-xl--line-height: 2rem;
+    --text-2xl--line-height: 2.25rem;
+    --text-3xl--line-height: 2.5rem;
+    --text-4xl--line-height: 2.75rem;
+    --text-5xl--line-height: 3.5rem;
+    --text-6xl--line-height: 4.25rem;
+    --text-7xl--line-height: 5rem;
+    --text-8xl--line-height: 6.25rem;
+    --text-9xl--line-height: 8.25rem;
 }
 
 @layer utilities {
     /* Reduce font size below sm */
     @media (max-width: calc(1rem / 16 * 600)) {
         .text-xs {
-            font-size: calc(1rem / 16 * 11);
+            font-size: 0.6875rem;
         }
 
         .text-sm {
-            font-size: calc(1rem / 16 * 12);
+            font-size: 0.75rem;
         }
 
         .text-base {
-            font-size: calc(1rem / 16 * 14);
+            font-size: 0.875rem;
         }
 
-        /* TODO: Set values from Figma when available
         .text-lg {
-            font-size: calc(1.125rem * 0.875);
+            font-size: 1rem;
         }
 
         .text-xl {
-            font-size: calc(1.25rem * 0.875);
-        }*/
+            font-size: 1.125rem;
+        }
 
         .text-2xl {
-            font-size: calc(1rem / 16 * 21);
+            font-size: 1.3125rem;
         }
 
         .text-3xl {
-            font-size: calc(1rem / 16 * 26);
+            font-size: 1.625rem;
         }
 
         .text-4xl {
-            font-size: calc(1rem / 16 * 32);
+            font-size: 2rem;
+        }
+
+        .text-5xl {
+            font-size: 2.625rem;
+        }
+
+        .text-6xl {
+            font-size: 3.25rem;
+        }
+
+        .text-7xl {
+            font-size: 3.9375rem;
+        }
+
+        .text-8xl {
+            font-size: 5.25rem;
+        }
+
+        .text-9xl {
+            font-size: 7rem;
         }
     }
 
     /* Increase font size above xl */
     @media (min-width: calc(1rem / 16 * 1600)) {
         .text-xs {
-            font-size: calc(1em / 16 * 14);
+            font-size: 0.875rem;
         }
 
         .text-sm {
@@ -73,28 +87,47 @@
         }
 
         .text-base {
-            font-size: calc(1rem / 16 * 18);
+            font-size: 1.125rem;
         }
 
-        /* TODO: Set values from Figma when available
         .text-lg {
-            font-size: calc(1.125rem * 1.125);
+            font-size: 1.25rem;
         }
 
         .text-xl {
-            font-size: calc(1.25rem * 1.125);
-        }*/
+            font-size: 1.375rem;
+        }
 
         .text-2xl {
-            font-size: calc(1rem / 16 * 27);
+            font-size: 1.6875rem;
         }
 
         .text-3xl {
-            font-size: calc(1rem / 16 * 34);
+            font-size: 2.125rem;
         }
 
         .text-4xl {
-            font-size: calc(1rem / 16 * 40);
+            font-size: 2.5rem;
+        }
+
+        .text-5xl {
+            font-size: 3.375rem;
+        }
+
+        .text-6xl {
+            font-size: 4.25rem;
+        }
+
+        .text-7xl {
+            font-size: 5.0625rem;
+        }
+
+        .text-8xl {
+            font-size: 6.75rem;
+        }
+
+        .text-9xl {
+            font-size: 9rem;
         }
     }
 }
