@@ -1,38 +1,11 @@
 @import "tailwindcss";
 @import "./animations.css";
+@import "./colors.css";
 
 @source "../../../node_modules/@penumbra-zone/ui/dist";
 
 /* https://tailwindcss.com/docs/theme */
 @theme {
-    /* https://tailwindcss.com/docs/colors */
-    --color-other-tonalStroke: color-mix(
-        in oklab,
-        var(--color-neutral-50) 15%,
-        transparent
-    );
-    --color-other-tonalFill5: color-mix(
-        in oklab,
-        var(--color-neutral-50) 5%,
-        transparent
-    );
-    --color-other-tonalFill10: color-mix(
-        in oklab,
-        var(--color-neutral-50) 10%,
-        transparent
-    );
-    --color-other-solidStroke: var(--color-neutral-900);
-    --color-other-dialogBackground: color-mix(
-        in oklab,
-        var(--color-teal-700) 10%,
-        transparent
-    );
-    --color-other-overlay: color-mix(
-        in oklab,
-        var(--color-black) 50%,
-        transparent
-    );
-
     /* https://tailwindcss.com/docs/responsive-design */
     --breakpoint-sm: calc(1rem / 16 * 600);
     --breakpoint-md: calc(1rem / 16 * 900);
