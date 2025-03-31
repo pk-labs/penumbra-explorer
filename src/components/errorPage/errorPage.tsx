@@ -1,4 +1,3 @@
-import { ArrowLeftIcon } from 'lucide-react'
 import { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Button from '../button'
@@ -37,15 +36,12 @@ const ErrorPage: FC<Props> = props => (
         </div>
         <h1 className="text-text-secondary text-2xl">{props.message}</h1>
         <Button
-            className={twMerge(
-                'hover:border(--primaryLight) mt-16 h-12 rounded-sm border',
-                'border-(--primary) bg-transparent',
-                'transition-[background,border-color]',
-                'hover:bg-[rgba(83,174,168,0.15)]'
-            )}
+            actionType="accent"
+            className="mt-16"
             href="/"
+            icon="ArrowLeft"
+            priority="secondary"
         >
-            <ArrowLeftIcon size={16} />
             Back to the homepage
         </Button>
     </Container>

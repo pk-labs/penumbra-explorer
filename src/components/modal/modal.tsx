@@ -63,11 +63,12 @@ const Modal: FC<Props> = props => {
                     {props.closeButton && props.onClose && (
                         <Button
                             className="absolute top-4 right-4"
+                            density="compact"
+                            icon="X"
                             onClick={props.onClose}
-                            light
-                            round
+                            iconOnly
                         >
-                            <XIcon size={16} />
+                            Close
                         </Button>
                     )}
                     {props.children}

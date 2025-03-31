@@ -72,9 +72,9 @@ const NavigationBar: FC<Props> = props => {
                 {pathname !== '/' && (
                     <>
                         <Button
-                            className="relative z-40 backdrop-blur-[32px]"
+                            className="relative z-40"
+                            density="compact"
                             onClick={openSearchModal}
-                            light
                         >
                             <SearchIcon size={16} />
                             Search

@@ -52,13 +52,21 @@ const HomePage: FC = async () => {
                     number={stats?.totalTransactionsCount}
                 />
                 <BlockTable
-                    actions={<Button href="/blocks">View all</Button>}
+                    actions={
+                        <Button density="compact" href="/blocks">
+                            View All
+                        </Button>
+                    }
                     blocks={latestBlocks}
                     className="col-span-6 lg:col-span-3"
                     title="Latest blocks"
                 />
                 <TransactionTable
-                    actions={<Button href="/txs">View all</Button>}
+                    actions={
+                        <Button density="compact" href="/txs">
+                            View All
+                        </Button>
+                    }
                     className="col-span-6 lg:col-span-3"
                     title="Latest transactions"
                     transactions={latestTransactions}

@@ -43,7 +43,7 @@ describe('Menu', () => {
             <Menu onClose={jest.fn()} onOpen={onOpen} open={false} />
         )
 
-        const button = container.firstChild
+        const button = container.firstChild?.firstChild
 
         if (!button) {
             throw Error('Missing element')
@@ -61,7 +61,7 @@ describe('Menu', () => {
             <Menu onClose={onClose} onOpen={jest.fn()} open />
         )
 
-        const button = container.firstChild
+        const button = container.firstChild?.firstChild
 
         if (!button) {
             throw Error('Missing element')

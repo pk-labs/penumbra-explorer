@@ -1,50 +1,37 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 
+import {
+    Button as PenumbraButton,
+    ButtonProps as PenumbraButtonProps,
+} from '@penumbra-zone/ui/Button'
 import Link from 'next/link'
-import { FC, MouseEvent, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { FC } from 'react'
+import icons from '@/lib/icons'
 
-interface Props {
-    children?: ReactNode
+interface Props extends Omit<PenumbraButtonProps, 'icon'> {
     className?: string
-    disabled?: boolean
     href?: string
-    light?: boolean
-    onClick?: (e: MouseEvent) => void
-    round?: boolean
+    icon?: keyof typeof icons
 }
 
-// TODO: Replace round prop with icon prop and implement hiding label below sm
-const Button: FC<Props> = props => {
-    const className = twMerge(
-        'font-default transition-background inline-flex h-8 transform-none',
-        'items-center justify-center gap-1 rounded-full text-sm',
-        'text-text-primary font-medium whitespace-nowrap capitalize duration-200',
-        'ease-(--fastOutSlowIn) select-none',
-        props.round ? 'w-8' : 'px-4',
-        props.disabled
-            ? 'text-text-muted cursor-not-allowed bg-(--surfaceDisabled)'
-            : 'hover:text-text-primary cursor-pointer active:scale-98',
-        !props.disabled && props.light
-            ? 'bg-(--surfaceLight) hover:bg-(--surfaceLighter)'
-            : 'bg-(--surface) hover:bg-(--surfaceLight)',
-        props.className
-    )
-
-    return props.href ? (
-        <Link className={className} href={props.href} onClick={props.onClick}>
-            {props.children}
+const Button: FC<Props> = ({ className, href, icon, ...props }) =>
+    href ? (
+        <Link className={className} href={href}>
+            <PenumbraButton
+                // @ts-ignore
+                icon={icon && icons[icon]}
+                {...props}
+            />
         </Link>
     ) : (
-        <button
-            className={className}
-            disabled={props.disabled}
-            onClick={props.onClick}
-            type="button"
-        >
-            {props.children}
-        </button>
+        <span className={className}>
+            <PenumbraButton
+                // @ts-ignore
+                icon={icon && icons[icon]}
+                {...props}
+            />
+        </span>
     )
-}
 
 export default Button

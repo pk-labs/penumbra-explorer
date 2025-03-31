@@ -1,6 +1,5 @@
 'use client'
 
-import { MenuIcon } from 'lucide-react'
 import { FC, ReactElement, useCallback } from 'react'
 import Button from '../button'
 import Modal from '../modal'
@@ -33,8 +32,14 @@ const Menu: FC<Props> = props => {
 
     return (
         <>
-            <Button className={props.className} onClick={toggle} light round>
-                <MenuIcon size={16} />
+            <Button
+                className={props.className}
+                density="compact"
+                icon="Menu"
+                onClick={toggle}
+                iconOnly
+            >
+                Menu
             </Button>
             <Modal
                 className="flex-col items-stretch justify-start gap-4 pt-[76px]"

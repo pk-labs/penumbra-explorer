@@ -14,7 +14,7 @@ describe('Pagination', () => {
 
         const button = getByText(container, 'Prev')
         expect(button).toBeEnabled()
-        expect(button).toHaveAttribute('href', '/?from=foo')
+        expect(button.parentNode).toHaveAttribute('href', '/?from=foo')
     })
 
     test('net button links to next page', async () => {
@@ -22,7 +22,7 @@ describe('Pagination', () => {
 
         const button = getByText(container, 'Next')
         expect(button).toBeEnabled()
-        expect(button).toHaveAttribute('href', '/?from=foo')
+        expect(button.parentNode).toHaveAttribute('href', '/?from=foo')
     })
 
     test('applies CSS classes', async () => {
