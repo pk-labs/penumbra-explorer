@@ -33,7 +33,7 @@
         "resolveJsonModule": true,
         "skipLibCheck": true,
         "strict": true,
-        "target": "ES2017",
+        "target": "es5",
         "useUnknownInCatchVariables": false
     },
     "exclude": [
