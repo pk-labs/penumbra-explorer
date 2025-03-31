@@ -1,5 +1,5 @@
 import type { Config } from 'jest'
-import nextJest from 'next/jest.js'
+import nextJest from 'next/jest'
 
 const createJestConfig = nextJest({ dir: './' })
 
@@ -16,7 +16,7 @@ const config: Config = {
     testEnvironment: 'jsdom',
     testRegex: '.+\\.test\\.tsx?$',
     transform: {
-        '^.+\\.graphql$': '@graphql-tools/jest-transform',
+        '\\.graphql$': '@graphql-tools/jest-transform',
     },
 }
 
