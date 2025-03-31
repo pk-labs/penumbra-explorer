@@ -1,6 +1,5 @@
 'use client'
 
-import { XIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import { FC, ReactNode, useEffect, useRef } from 'react'
