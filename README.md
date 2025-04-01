@@ -4,7 +4,7 @@
 ![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fstpch%2F9208254a7b67b695d104a875931624d8%2Fraw%2Fpe-frontend-lcov-coverage.json&label=Coverage)
 
 Penumbra Blockchain Explorer
-
+s
 ## Getting started
 
 1. Set up Node.js v22
@@ -46,12 +46,19 @@ Penumbra Blockchain Explorer
 | `src/lib/utils`     | Utility functions for formatting, transforming, etc.          |
 | `public`            | Static public assets directly accessible through the browser. |
 
+## GraphQL
+
+GraphQL code such as queries and fragments is located in `sc/lib/graphql` and
+uses the [urql](https://commerce.nearform.com/open-source/urql/) client to
+connect to the backend. `scr/lib/graphql/generated` contains types, hooks, etc.
+generated using `npm run graphql:codegen`.
+
 ## CSS, icons and fonts
 
-The project uses CSS modules with the global CSS and theme at `src/lib/css`.
-Theming is done with CSS variables and most components can be overridden with
-`className`. PostCSS plugins add additional features such as normalizing and
-nesting.
+The project uses [Tailwind CSS](https://tailwindcss.com/) with the global CSS
+and theme at `src/lib/css`. It replicates the
+[@penumbra-zone/ui](https://github.com/penumbra-zone/web/tree/main/packages/ui)
+Tailwind v3 configuration in v4 and uses their components where possible.
 
 https://lucide.dev/ is used for most icons. Some are custom and exported from
 Figma.
