@@ -1,6 +1,6 @@
 'use client'
 
-import { BoxIcon, CheckCheckIcon, HomeIcon, SearchIcon } from 'lucide-react'
+import { BoxIcon, CheckCheckIcon, HomeIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -72,11 +72,11 @@ const NavigationBar: FC<Props> = props => {
                 {pathname !== '/' && (
                     <>
                         <Button
-                            className="relative z-40"
+                            className="relative z-40 rounded-full backdrop-blur-[32px]"
                             density="compact"
+                            icon="Search"
                             onClick={openSearchModal}
                         >
-                            <SearchIcon size={16} />
                             Search
                         </Button>
                         <Modal
