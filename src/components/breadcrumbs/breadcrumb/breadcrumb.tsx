@@ -14,7 +14,7 @@ const Breadcrumb: FC<Props> = props => {
         <Link
             className={twMerge(
                 className,
-                'hover:text-text-primary text-text-secondary'
+                'hover:text-text-primary text-text-muted'
             )}
             href={props.href}
         >
