@@ -10,7 +10,7 @@ describe('SearchResultOverlay', () => {
 
     test('renders children', async () => {
         const { container } = render(
-            <SearchResultOverlay title="Foo">
+            <SearchResultOverlay>
                 <SearchResult heightOrHash={123} />
             </SearchResultOverlay>
         )

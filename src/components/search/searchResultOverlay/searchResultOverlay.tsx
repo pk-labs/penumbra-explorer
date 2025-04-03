@@ -16,7 +16,7 @@ export interface Props {
               | undefined
           >
         | ReactElement<SearchResultProps>
-    title: string
+    title?: string
 }
 
 const SearchResultOverlay: FC<Props> = props => (
@@ -33,7 +33,9 @@ const SearchResultOverlay: FC<Props> = props => (
         }}
         initial={{ opacity: 0 }}
     >
-        <h3 className="text-text-secondary text-xs">{props.title}</h3>
+        {props.title && (
+            <h3 className="text-text-secondary text-xs">{props.title}</h3>
+        )}
         {props.children && (
             <ul className="flex flex-col font-mono text-sm font-medium">
                 {props.children}

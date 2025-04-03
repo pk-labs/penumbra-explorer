@@ -86,7 +86,7 @@ const Search: FC<Props> = props => {
     const onInputFocus = useCallback(() => setFocused(true), [])
 
     const onInputBlur = useCallback(() => {
-        setFocused(false)
+        // setFocused(false)
         props.onBlur?.call(undefined)
     }, [props.onBlur])
 
@@ -130,7 +130,17 @@ const Search: FC<Props> = props => {
                 </SearchResultOverlay>
             )
         } else {
-            searchResults = <SearchResultOverlay title="Nothing found" />
+            searchResults = (
+                <SearchResultOverlay>
+                    <p className="text-text-primary font-default text-sm font-normal">
+                        We couldn’t find any matching results.
+                    </p>
+                    <p className="text-text-secondary font-default text-sm font-normal">
+                        Please check the transaction hash or block height and
+                        try again.
+                    </p>
+                </SearchResultOverlay>
+            )
         }
     } else if (recentSearchResults?.length) {
         searchResults = (
