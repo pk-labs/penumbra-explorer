@@ -23,9 +23,7 @@ const BlockTable: FC<Props> = props => (
                 <TableCell header>Block height</TableCell>
                 <TableCell header>Time</TableCell>
                 {props.proposer && <TableCell header>Proposer</TableCell>}
-                <TableCell className="text-right" header>
-                    Txs
-                </TableCell>
+                <TableCell header>Txs</TableCell>
             </TableRow>
         </thead>
         <tbody>
@@ -46,9 +44,7 @@ const BlockTable: FC<Props> = props => (
                         </TableCell>
                         <TableCell>{block.timeAgo}</TableCell>
                         {props.proposer && <TableCell>-</TableCell>}
-                        <TableCell className="text-right">
-                            {block.transactionsCount}
-                        </TableCell>
+                        <TableCell>{block.transactionsCount}</TableCell>
                     </TableRow>
                 ))
             ) : (
