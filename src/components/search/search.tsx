@@ -86,8 +86,8 @@ const Search: FC<Props> = props => {
     const onInputFocus = useCallback(() => setFocused(true), [])
 
     const onInputBlur = useCallback(() => {
-        // setFocused(false)
-        // props.onBlur?.call(undefined)
+        setFocused(false)
+        props.onBlur?.call(undefined)
     }, [props.onBlur])
 
     const onInputChange = useCallback(
