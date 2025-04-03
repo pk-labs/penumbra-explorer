@@ -7,9 +7,7 @@ const findPrimaryAction = (transaction?: Transaction): ActionType => {
         return ActionType.unknown
     }
 
-    const cases = new Set(
-        transaction.body?.actions.map((a: any) => a.action.case)
-    )
+    const cases = new Set(transaction.body?.actions.map(a => a.action.case))
 
     if (cases.has('swap')) {
         return ActionType.swap

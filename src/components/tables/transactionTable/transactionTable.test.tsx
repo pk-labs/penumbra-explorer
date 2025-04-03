@@ -47,7 +47,7 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
-                        actions: [],
+                        actionCount: 0,
                         block: {
                             createdAt: dayjs().toISOString(),
                             height: 123,
@@ -56,7 +56,7 @@ describe('BlockTable', () => {
                         raw: '',
                     },
                     {
-                        actions: [],
+                        actionCount: 0,
                         block: {
                             createdAt: dayjs().toISOString(),
                             height: 456,
@@ -77,7 +77,7 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
-                        actions: [],
+                        actionCount: 0,
                         block: {
                             createdAt: dayjs()
                                 .subtract(1, 'second')
@@ -101,7 +101,7 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
-                        actions: [ActionType.receive, ActionType.send],
+                        actionCount: 2,
                         block: {
                             createdAt: dayjs().toISOString(),
                             height: 123,
@@ -123,7 +123,7 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
-                        actions: [],
+                        actionCount: 0,
                         block: {
                             createdAt: dayjs().toISOString(),
                             height: 123,
@@ -144,7 +144,7 @@ describe('BlockTable', () => {
             <TransactionTable
                 transactions={[
                     {
-                        actions: [],
+                        actionCount: 0,
                         block: {
                             createdAt: dayjs().toISOString(),
                             height: 123,

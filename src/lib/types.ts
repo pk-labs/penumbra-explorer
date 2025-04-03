@@ -15,14 +15,14 @@ export interface TransformedPartialBlockFragment extends PartialBlockFragment {
 }
 
 export interface TransformedTransactionFragment extends TransactionFragment {
-    actions: ActionType[]
+    actionCount: number
     json?: Record<string, any>
     primaryAction?: ActionType
 }
 
 export interface TransformedPartialTransactionFragment
     extends PartialTransactionFragment {
-    actions: ActionType[]
+    actionCount: number
     json?: Record<string, any>
     primaryAction?: ActionType
     timeAgo?: string

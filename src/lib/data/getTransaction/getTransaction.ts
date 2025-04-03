@@ -3,7 +3,6 @@ import {
     decodeTransaction,
     findPrimaryAction,
     transactionToJson,
-    transformActions,
 } from '@/lib/utils'
 import createGraphqlClient from '../../graphql/createGraphqlClient'
 import {
@@ -34,13 +33,13 @@ const getTransaction = async (
 
     let json
     let primaryAction
-    let actions
+    let actionCount
 
     try {
         const decoded = decodeTransaction(result.data.transaction.raw)
         json = transactionToJson(decoded)
         primaryAction = findPrimaryAction(decoded)
-        actions = transformActions(decoded.body?.actions)
+        actionCount = decoded.body?.actions.length
     } catch (e) {
         // istanbul ignore next
         console.error(e)
@@ -48,7 +47,7 @@ const getTransaction = async (
 
     return {
         ...result.data.transaction,
-        actions: actions ?? [],
+        actionCount: actionCount ?? 0,
         hash: result.data.transaction.hash.toLowerCase(),
         json,
         primaryAction,

@@ -2,11 +2,7 @@ import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import { BlockQuery, BlockQueryVariables } from '@/lib/graphql/generated/types'
 import { blockQuery } from '@/lib/graphql/queries'
 import { TransformedBlockFragment } from '@/lib/types'
-import {
-    decodeTransaction,
-    findPrimaryAction,
-    transformActions,
-} from '@/lib/utils'
+import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 
 const getBlock = async (
     height: number
@@ -26,12 +22,12 @@ const getBlock = async (
             ...result.data.block,
             transactions: result.data.block.transactions.map(transaction => {
                 let primaryAction
-                let actions
+                let actionCount
 
                 try {
                     const decoded = decodeTransaction(transaction.raw)
                     primaryAction = findPrimaryAction(decoded)
-                    actions = transformActions(decoded.body?.actions)
+                    actionCount = decoded.body?.actions.length
                 } catch (e) {
                     // istanbul ignore next
                     console.error(e)
@@ -39,7 +35,7 @@ const getBlock = async (
 
                 return {
                     ...transaction,
-                    actions: actions ?? [],
+                    actionCount: actionCount ?? 0,
                     hash: transaction.hash.toLowerCase(),
                     primaryAction,
                 }

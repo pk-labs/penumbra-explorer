@@ -72,9 +72,9 @@ const TransactionTable: FC<Props> = props => (
                                     {formatAction(transaction.primaryAction)}
                                 </Pill>
                             )}
-                            {transaction.actions.length > 1 && (
+                            {transaction.actionCount > 1 && (
                                 <span className="text-text-secondary">
-                                    +{transaction.actions.length - 1}
+                                    +{transaction.actionCount - 1}
                                 </span>
                             )}
                         </TableCell>

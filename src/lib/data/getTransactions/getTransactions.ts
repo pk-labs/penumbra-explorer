@@ -11,7 +11,6 @@ import {
     decodeTransaction,
     findPrimaryAction,
     transactionToJson,
-    transformActions,
 } from '@/lib/utils'
 
 const getTransactions = async (
@@ -36,13 +35,13 @@ const getTransactions = async (
         ?.map(transaction => {
             let json
             let primaryAction
-            let actions
+            let actionCount
 
             try {
                 const decoded = decodeTransaction(transaction.raw)
                 json = transactionToJson(decoded)
                 primaryAction = findPrimaryAction(decoded)
-                actions = transformActions(decoded.body?.actions)
+                actionCount = decoded.body?.actions.length
             } catch (e) {
                 // istanbul ignore next
                 console.error(e)
@@ -50,7 +49,7 @@ const getTransactions = async (
 
             return {
                 ...transaction,
-                actions: actions ?? [],
+                actionCount: actionCount ?? 0,
                 hash: transaction.hash.toLowerCase(),
                 json,
                 primaryAction,
