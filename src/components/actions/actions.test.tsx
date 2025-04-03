@@ -1,34 +1,22 @@
 import { getByText, render } from '@testing-library/react'
-import { ActionType } from '@/lib/types'
 import Actions from './actions'
+
+jest.mock('../../lib/utils/transactionToView/transactionToView', () => () => ({
+    bodyView: {
+        actionViews: [
+            { actionView: { case: 'bar' } },
+            { actionView: { case: 'baz' } },
+        ],
+    },
+}))
 
 describe('Actions', () => {
     test('renders actions', async () => {
         const { container } = render(
-            <Actions actions={[ActionType.ibcRelayAction, ActionType.spend]} />
+            <Actions blockHeight={99} hash="foo" rawTransaction="foo" />
         )
 
-        getByText(container, 'IBC Relay Action')
-        getByText(container, 'Spend')
-    })
-
-    test('marks unimplemented actions', async () => {
-        const { container } = render(
-            <Actions
-                actions={[ActionType.spend, ActionType.output, ActionType.swap]}
-            />
-        )
-
-        expect(getByText(container, 'Spend').parentNode).not.toHaveTextContent(
-            'Unimplemented'
-        )
-
-        expect(getByText(container, 'Output').parentNode).not.toHaveTextContent(
-            'Unimplemented'
-        )
-
-        expect(getByText(container, 'Swap').parentNode).toHaveTextContent(
-            'Unimplemented'
-        )
+        getByText(container, 'bar')
+        getByText(container, 'baz')
     })
 })

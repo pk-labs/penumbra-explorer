@@ -87,7 +87,11 @@ const TransactionViewPage: FC<Props> = async props => {
                     </Parameter>
                 </Parameters>
                 {transaction.body.memo && <Memo />}
-                <Actions actions={transaction.actions} />
+                <Actions
+                    blockHeight={transaction.block.height}
+                    hash={transaction.hash}
+                    rawTransaction={transaction.raw}
+                />
                 <Subsection title="Parameters">
                     <Parameters>
                         <Parameter name="Transaction fee">
