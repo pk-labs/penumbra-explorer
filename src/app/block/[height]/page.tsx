@@ -49,7 +49,7 @@ const BlockViewPage: FC<Props> = async props => {
             <View
                 className={twMerge(
                     'from-[rgba(83,174,168,0.25)]!',
-                    'to-[rgba(83,174,168,0.025)]!'
+                    'to-[rgba(83,174,168,0.03)]!'
                 )}
                 subtitle={formatNumber(block.height)}
                 title="Block view"

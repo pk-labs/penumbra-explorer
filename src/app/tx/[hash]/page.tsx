@@ -53,7 +53,7 @@ const TransactionViewPage: FC<Props> = async props => {
             <View
                 className={twMerge(
                     'from-[rgba(193,166,204,0.25)]!',
-                    'to-[rgba(193,166,204,0.025)]!'
+                    'to-[rgba(193,166,204,0.03)]!'
                 )}
                 subtitle={transaction.hash}
                 title="Transaction view"
