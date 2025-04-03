@@ -23,8 +23,8 @@ const SearchResultOverlay: FC<Props> = props => (
     <motion.div
         animate={{ opacity: 1, transition: { duration: 0 } }}
         className={twMerge(
-            'border-other-tonalFill10 absolute top-16 z-10 flex w-full',
-            'flex-col gap-4 rounded-sm border bg-[rgba(34,99,98,0.1)] p-6',
+            'border-other-tonalStroke bg-other-dialogBackground absolute',
+            'top-16 z-10 flex w-full flex-col gap-4 rounded-sm border p-6',
             'backdrop-blur-[32px]'
         )}
         exit={{
