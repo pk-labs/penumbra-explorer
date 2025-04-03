@@ -27,11 +27,7 @@ const SearchResult: FC<Props> = props => {
                     className={linkClassName}
                     href={`/block/${props.heightOrHash}`}
                 >
-                    <BoxIcon
-                        className="min-w-4"
-                        color="var(--color-text-secondary)"
-                        size={16}
-                    />
+                    <BoxIcon className="-mt-0.5 min-w-6 p-1" />
                     {formatNumber(props.heightOrHash)}
                 </Link>
             ) : (
@@ -39,10 +35,7 @@ const SearchResult: FC<Props> = props => {
                     className={linkClassName}
                     href={`/tx/${props.heightOrHash}`}
                 >
-                    <CheckCheckIcon
-                        className="text-secondary-light min-w-4"
-                        size={16}
-                    />
+                    <CheckCheckIcon className="-mt-0.5 min-w-6 p-1" />
                     {props.heightOrHash}
                 </Link>
             )}
