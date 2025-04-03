@@ -2,6 +2,7 @@
 
 import { ActionView } from '@penumbra-zone/ui/ActionView'
 import { FC, useMemo } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { decodeTransaction, transactionToView } from '@/lib/utils'
 import Subsection from '../subsection'
 
@@ -21,7 +22,14 @@ const Actions: FC<Props> = props => {
         <Subsection title="Actions">
             <ul className="flex flex-col gap-2">
                 {view?.bodyView?.actionViews.map((action, i) => (
-                    <li key={i}>
+                    <li
+                        key={i}
+                        className={twMerge(
+                            'relative before:absolute before:top-full',
+                            'before:left-5 before:h-2 before:w-[1px]',
+                            'before:bg-other-tonalStroke last:before:hidden'
+                        )}
+                    >
                         <ActionView action={action} />
                     </li>
                 ))}
