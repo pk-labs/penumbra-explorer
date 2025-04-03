@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 interface Props {
     children?: ReactNode
     className?: string
-    title: string
+    title?: string
 }
 
 const EmptyState: FC<Props> = props => (
@@ -14,7 +14,11 @@ const EmptyState: FC<Props> = props => (
             props.className
         )}
     >
-        <div className="font-default text-base font-normal">{props.title}</div>
+        {props.title && (
+            <div className="font-default text-base font-normal">
+                {props.title}
+            </div>
+        )}
         {props.children && (
             <div
                 className={twMerge(

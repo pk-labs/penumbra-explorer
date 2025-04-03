@@ -70,7 +70,7 @@ const BlockViewPage: FC<Props> = async props => {
                     </Parameter>
                 </Parameters>
                 <TransactionTable
-                    emptyStateMessage="This block does not contain any transactions"
+                    emptyStateMessage="This block contains no transactions"
                     transactions={block.transactions}
                     embedded
                 />

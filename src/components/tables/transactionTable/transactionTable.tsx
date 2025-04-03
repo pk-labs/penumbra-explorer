@@ -90,9 +90,7 @@ const TransactionTable: FC<Props> = props => (
                             4 - (props.time ? 0 : 1) - (props.embedded ? 1 : 0)
                         }
                     >
-                        <EmptyState title="No transactions">
-                            {props.emptyStateMessage}
-                        </EmptyState>
+                        <EmptyState>{props.emptyStateMessage}</EmptyState>
                     </TableCell>
                 </TableRow>
             )}
