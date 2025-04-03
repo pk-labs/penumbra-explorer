@@ -24,8 +24,8 @@ const SearchResultOverlay: FC<Props> = props => (
         animate={{ opacity: 1, transition: { duration: 0 } }}
         className={twMerge(
             'border-other-tonalStroke bg-other-dialogBackground absolute',
-            'top-16 z-10 flex w-full flex-col gap-4 rounded-sm border p-6',
-            'backdrop-blur-[32px]'
+            'top-16 z-10 flex w-full flex-col gap-2 rounded-sm border px-2',
+            'py-3 backdrop-blur-[32px]'
         )}
         exit={{
             opacity: 0,
@@ -34,13 +34,11 @@ const SearchResultOverlay: FC<Props> = props => (
         initial={{ opacity: 0 }}
     >
         {props.title && (
-            <h3 className="text-text-secondary text-xs">{props.title}</h3>
+            <h3 className="text-text-secondary px-2 py-1 text-sm">
+                {props.title}
+            </h3>
         )}
-        {props.children && (
-            <ul className="flex flex-col font-mono text-sm font-medium">
-                {props.children}
-            </ul>
-        )}
+        {props.children}
     </motion.div>
 )
 

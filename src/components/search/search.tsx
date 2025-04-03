@@ -86,8 +86,8 @@ const Search: FC<Props> = props => {
     const onInputFocus = useCallback(() => setFocused(true), [])
 
     const onInputBlur = useCallback(() => {
-        setFocused(false)
-        props.onBlur?.call(undefined)
+        // setFocused(false)
+        // props.onBlur?.call(undefined)
     }, [props.onBlur])
 
     const onInputChange = useCallback(
@@ -126,18 +126,28 @@ const Search: FC<Props> = props => {
                             : 'Transaction'
                     }
                 >
-                    <SearchResult heightOrHash={searchResult} />
+                    <ul
+                        className={twMerge(
+                            'flex flex-col gap-2 font-mono text-sm',
+                            'font-medium'
+                        )}
+                    >
+                        <SearchResult heightOrHash={searchResult} />
+                    </ul>
                 </SearchResultOverlay>
             )
         } else {
             searchResults = (
                 <SearchResultOverlay>
-                    <p className="text-text-primary font-default text-sm font-normal">
-                        We couldn’t find any matching results.
-                    </p>
-                    <p className="text-text-secondary font-default text-sm font-normal">
-                        Please check the transaction hash or block height and
-                        try again.
+                    <p className="font-default px-2 pt-1 text-sm font-normal">
+                        <span className="text-text-primary">
+                            We couldn’t find any matching results.
+                        </span>
+                        <br />
+                        <span className="text-text-secondary">
+                            Please check the transaction hash or block height
+                            and try again.
+                        </span>
                     </p>
                 </SearchResultOverlay>
             )
@@ -145,9 +155,16 @@ const Search: FC<Props> = props => {
     } else if (recentSearchResults?.length) {
         searchResults = (
             <SearchResultOverlay title="Recent search results">
-                {recentSearchResults.map((searchResult, i) => (
-                    <SearchResult key={i} heightOrHash={searchResult} />
-                ))}
+                <ul
+                    className={twMerge(
+                        'flex flex-col gap-2 font-mono text-sm',
+                        'font-medium'
+                    )}
+                >
+                    {recentSearchResults.map((searchResult, i) => (
+                        <SearchResult key={i} heightOrHash={searchResult} />
+                    ))}
+                </ul>
             </SearchResultOverlay>
         )
     }

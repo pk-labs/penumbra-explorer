@@ -12,7 +12,7 @@ export interface Props {
 
 const SearchResult: FC<Props> = props => {
     const linkClassName = twMerge(
-        'text-text-primary! flex gap-1 px-2 py-1.5 break-all'
+        'text-text-primary! flex gap-1 px-2 py-1 break-all'
     )
 
     return (
