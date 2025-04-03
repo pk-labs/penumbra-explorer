@@ -47,7 +47,11 @@ const TransactionsPage: FC<Props> = async props => {
             redirect('/txs')
         } else {
             transactions = await getTransactions({
-                range: { fromTxHash: fromParam.toUpperCase(), limit },
+                range: {
+                    direction: RangeDirection.Next,
+                    fromTxHash: fromParam.toUpperCase(),
+                    limit,
+                },
             })
 
             if (transactions?.length) {

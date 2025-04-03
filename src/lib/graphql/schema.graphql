@@ -4,13 +4,6 @@ schema {
     query: QueryRoot
 }
 
-"""
-
-Indicates that an Input Object is a OneOf Input Object (and thus requires
-exactly one of its field be provided)
-"""
-directive @oneOf on INPUT_OBJECT
-
 union Action = IbcRelay | NotYetSupportedAction | Output | Spend
 
 union SearchResult = Block | Transaction
@@ -25,8 +18,31 @@ type Block {
     createdAt: DateTime!
     height: Int!
     rawEvents: [Event!]!
+    rawJson: JSON
     transactions: [Transaction!]!
     transactionsCount: Int!
+}
+
+type DbBlock {
+    blockHashHex: String
+    chainId: String
+    height: Int!
+    numTransactions: Int!
+    previousBlockHashHex: String
+    rootHex: String!
+    timestamp: DateTime!
+    totalFees: String
+    validatorIdentityKey: String
+}
+
+type DbRawTransaction {
+    blockHeight: Int!
+    chainId: String
+    feeAmount: String
+    rawDataHex: String
+    rawJson: JSON
+    timestamp: DateTime!
+    txHashHex: String!
 }
 
 type Event {
@@ -35,7 +51,7 @@ type Event {
 }
 
 type Fee {
-    amount: U128!
+    amount: String!
     assetId: AssetId
 }
 
@@ -66,11 +82,31 @@ type OutputBody {
 }
 
 type QueryRoot {
+    "Get a block by height"
     block(height: Int!): Block
+    "Get blocks by selector"
     blocks(selector: BlocksSelector!): [Block!]!
+    """
+
+    --- Direct database queries ---
+    Get a block directly from the database by height
+    """
+    dbBlock(height: Int!): DbBlock
+    "Get a list of blocks directly from the database"
+    dbBlocks(limit: Int, offset: Int): [DbBlock!]!
+    "Get the latest block directly from the database"
+    dbLatestBlock: DbBlock
+    "Get raw transaction data directly from the database by hash"
+    dbRawTransaction(txHashHex: String!): DbRawTransaction
+    "Get raw transaction data directly from the database"
+    dbRawTransactions(limit: Int, offset: Int): [DbRawTransaction!]!
+    "Search for blocks or transactions"
     search(slug: String!): SearchResult
+    "Get blockchain statistics"
     stats: Stats!
+    "Get a transaction by hash"
     transaction(hash: String!): Transaction
+    "Get transactions by selector"
     transactions(selector: TransactionsSelector!): [Transaction!]!
 }
 
@@ -99,7 +135,7 @@ type Transaction {
     index: Int!
     raw: String!
     rawEvents: [Event!]!
-    result: TransactionResult!
+    rawJson: JSON!
 }
 
 type TransactionBody {
@@ -117,33 +153,15 @@ type TransactionParameters {
     fee: Fee!
 }
 
-type TransactionResult {
-    code: Int!
-    codespace: String!
-    data: String!
-    events: [String!]!
-    gasUsed: Int!
-    gasWanted: Int!
-    info: String!
-    log: String!
-}
-
 enum RangeDirection {
-    "Next will return transactions what are older than the given transaction hash."
     NEXT
-    "Previous will return transactions what are newer than the given transaction hash."
     PREVIOUS
 }
 
-"""
-
-Implement the DateTime<Utc> scalar
-
-The input/output is a string in RFC3339 format.
-"""
 scalar DateTime
 
-scalar U128
+"A scalar that can represent any JSON value."
+scalar JSON
 
 input BlockHeightRange {
     from: Int!
@@ -164,7 +182,7 @@ input LatestTransactions {
 }
 
 input TransactionRange {
-    direction: RangeDirection! = NEXT
+    direction: RangeDirection!
     fromTxHash: String!
     limit: Int!
 }
