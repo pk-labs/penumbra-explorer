@@ -1,4 +1,4 @@
-import { UmPrice } from '@/lib/types'
+import { UmPriceData } from '@/lib/types'
 
 const searchParams = new URLSearchParams({
     baseAsset: 'UM',
@@ -16,7 +16,7 @@ interface Data {
     price: string
 }
 
-const getUmPrice = async (): Promise<UmPrice | undefined> => {
+const getUmPrice = async (): Promise<UmPriceData | undefined> => {
     try {
         const data: Data = await fetch(url).then(res => res.json())
 
