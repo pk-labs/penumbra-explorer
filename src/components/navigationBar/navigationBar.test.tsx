@@ -47,30 +47,12 @@ describe('NavigationBar', () => {
         })
     })
 
-    describe('UM price renders', () => {
-        test('positive change', async () => {
-            const { container } = render(
-                <NavigationBar umPrice={{ change: 1.234, price: 9999 }} />
-            )
+    test('renders UM price', async () => {
+        const { container } = render(
+            <NavigationBar umPrice={{ change: 0, price: 9999 }} />
+        )
 
-            getByText(container, '$9999.00')
-
-            expect(getByText(container, '(+1.2%)')).toHaveClass(
-                'text-success-light'
-            )
-        })
-
-        test('negative change', async () => {
-            const { container } = render(
-                <NavigationBar umPrice={{ change: -1.234, price: 9.991 }} />
-            )
-
-            getByText(container, '$9.99')
-
-            expect(getByText(container, '(-1.2%)')).toHaveClass(
-                'text-destructive-light'
-            )
-        })
+        getByText(container, '$9999.00')
     })
 
     test('applies CSS classes', async () => {

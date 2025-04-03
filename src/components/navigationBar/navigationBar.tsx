@@ -8,17 +8,18 @@ import { FC, useCallback, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
-import { UmPrice } from '@/lib/types'
+import { UmPriceData } from '@/lib/types'
 import Button from '../button'
 import Container from '../container'
 import { Menu, MenuItem } from '../menu'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
+import UmPrice from '../umPrice'
 
 interface Props {
     className?: string
-    umPrice?: UmPrice
+    umPrice?: UmPriceData
 }
 
 const NavigationBar: FC<Props> = props => {
@@ -96,35 +97,7 @@ const NavigationBar: FC<Props> = props => {
                     </>
                 )}
                 {props.umPrice && (
-                    <div
-                        className={twMerge(
-                            'border-other-tonalFill10 relative z-40 hidden',
-                            'h-8 items-center justify-center gap-0.5',
-                            'rounded-full border-1 px-4 text-sm font-medium',
-                            'sm:flex'
-                        )}
-                    >
-                        <span
-                            className={twMerge(
-                                'text-text-secondary whitespace-nowrap',
-                                'md:hidden lg:inline!'
-                            )}
-                        >
-                            UM Price:
-                        </span>
-                        <span>${props.umPrice.price.toFixed(2)}</span>
-                        <span
-                            className={twMerge(
-                                props.umPrice.change > 0 &&
-                                    'text-success-light',
-                                props.umPrice.change < 0 &&
-                                    'text-destructive-light'
-                            )}
-                        >
-                            ({props.umPrice.change > 0 && '+'}
-                            {props.umPrice.change.toFixed(1)}%)
-                        </span>
-                    </div>
+                    <UmPrice className="hidden sm:flex" {...props.umPrice} />
                 )}
                 <Menu
                     className="relative z-40 backdrop-blur-[32px] md:hidden"
@@ -132,6 +105,12 @@ const NavigationBar: FC<Props> = props => {
                     onOpen={openMenu}
                     open={menuOpen}
                 >
+                    {props.umPrice && (
+                        <UmPrice
+                            className="ml-4 self-start sm:hidden"
+                            {...props.umPrice}
+                        />
+                    )}
                     <MenuItem href="/">
                         <HomeIcon className="stroke-primary-light" size={16} />
                         Home
