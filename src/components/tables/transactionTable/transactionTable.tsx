@@ -45,7 +45,7 @@ const TransactionTable: FC<Props> = props => (
                     >
                         <TableCell>
                             <CheckCheckIcon
-                                color="var(--secondaryLight)"
+                                className="text-secondary-light"
                                 size={14}
                             />
                             <Link href={`/tx/${transaction.hash}`}>

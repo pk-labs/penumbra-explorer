@@ -50,7 +50,8 @@ const CopyToClipboard: FC<Props> = props => {
             className={twMerge(
                 'transition-background inline-flex cursor-pointer items-center',
                 'justify-center rounded-sm border-1 border-transparent',
-                'duration-200 ease-(--fastOutSlowIn) hover:bg-(--surfaceLight)',
+                'hover:bg-other-tonalFill10 duration-200',
+                'ease-(--fastOutSlowIn)',
                 props.small ? 'p-0.5' : 'p-1',
                 copied && 'animate-copy',
                 props.className

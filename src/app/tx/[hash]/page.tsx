@@ -71,7 +71,7 @@ const TransactionViewPage: FC<Props> = async props => {
                         <Link
                             className={twMerge(
                                 'inline-flex items-center gap-1 text-inherit',
-                                'hover:text-(--primaryLight)'
+                                'hover:text-primary-light'
                             )}
                             href={`/block/${transaction.block.height}`}
                         >
@@ -95,7 +95,7 @@ const TransactionViewPage: FC<Props> = async props => {
                 <Subsection title="Parameters">
                     <Parameters>
                         <Parameter name="Transaction fee">
-                            <span className="text-(--negativeLight)">
+                            <span className="text-destructive-light">
                                 {Number(
                                     transaction.body.parameters.fee.amount
                                 ) / 1000000}{' '}

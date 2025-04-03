@@ -23,8 +23,8 @@ const TableCell: FC<Props> = props => {
             className={twMerge(
                 'h-12 px-3 text-left text-sm font-medium whitespace-nowrap',
                 props.header
-                    ? 'border-b border-(--surfaceLighter) ' +
-                          'text-text-secondary capitalize'
+                    ? 'border-other-tonalFill10 text-text-secondary border-b ' +
+                          'capitalize'
                     : 'font-mono',
                 props.className
             )}

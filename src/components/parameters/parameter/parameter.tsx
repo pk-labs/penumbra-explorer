@@ -8,7 +8,7 @@ export interface Props {
 const Parameter: FC<Props> = props => (
     <li className="flex items-center justify-between gap-2">
         <span className="capitalize">{props.name}</span>
-        <span className="flex-1 border-b border-dashed border-(--surfaceLighter)" />
+        <span className="border-other-tonalFill10 flex-1 border-b border-dashed" />
         <span className="inline-flex items-center gap-1">{props.children}</span>
     </li>
 )

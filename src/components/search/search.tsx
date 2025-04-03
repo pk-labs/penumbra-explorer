@@ -163,8 +163,8 @@ const Search: FC<Props> = props => {
                 ref={inputRef}
                 autoFocus={props.autoFocus}
                 className={twMerge(
-                    'font-default w-full rounded-sm bg-(--surface) p-4 pl-11',
-                    'text-text-secondary text-base outline-2',
+                    'font-default bg-other-tonalFill5 w-full rounded-sm p-4',
+                    'text-text-secondary pl-11 text-base outline-2',
                     'outline-transparent backdrop-blur-[32px]',
                     'focus:outline-text-secondary focus:transition-none'
                 )}

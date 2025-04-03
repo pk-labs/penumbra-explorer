@@ -15,7 +15,7 @@
 
     @keyframes copy-animation {
         from {
-            border-color: var(--surfaceLighter);
+            border-color: var(--color-other-tonalFill10);
         }
 
         to {

@@ -98,10 +98,10 @@ const NavigationBar: FC<Props> = props => {
                 {props.umPrice && (
                     <div
                         className={twMerge(
-                            'relative z-40 hidden h-8 items-center',
-                            'justify-center gap-0.5 rounded-full border-1',
-                            'border-(--surfaceLighter) px-4 text-sm',
-                            'font-medium sm:flex'
+                            'border-other-tonalFill10 relative z-40 hidden',
+                            'h-8 items-center justify-center gap-0.5',
+                            'rounded-full border-1 px-4 text-sm font-medium',
+                            'sm:flex'
                         )}
                     >
                         <span
@@ -116,9 +116,9 @@ const NavigationBar: FC<Props> = props => {
                         <span
                             className={twMerge(
                                 props.umPrice.change > 0 &&
-                                    'text-(--positiveLight)',
+                                    'text-success-light',
                                 props.umPrice.change < 0 &&
-                                    'text-(--negativeLight)'
+                                    'text-destructive-light'
                             )}
                         >
                             ({props.umPrice.change > 0 && '+'}
@@ -133,22 +133,16 @@ const NavigationBar: FC<Props> = props => {
                     open={menuOpen}
                 >
                     <MenuItem href="/">
-                        <HomeIcon
-                            className="stroke-(--primaryLight)"
-                            size={16}
-                        />
+                        <HomeIcon className="stroke-primary-light" size={16} />
                         Home
                     </MenuItem>
                     <MenuItem href="/blocks" paths={['/block']}>
-                        <BoxIcon
-                            className="stroke-(--primaryLight)"
-                            size={16}
-                        />
+                        <BoxIcon className="stroke-primary-light" size={16} />
                         Blocks
                     </MenuItem>
                     <MenuItem href="/txs" paths={['/tx']}>
                         <CheckCheckIcon
-                            className="stroke-(--primaryLight)"
+                            className="stroke-primary-light"
                             size={16}
                         />
                         Transactions

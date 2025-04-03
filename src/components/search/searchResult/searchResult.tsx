@@ -19,7 +19,7 @@ const SearchResult: FC<Props> = props => {
         <li
             className={twMerge(
                 'transition-background rounded-sm duration-200',
-                'ease-(--fastOutSlowIn) hover:bg-(--hoverGreen)'
+                'hover:bg-action-hoverOverlay ease-(--fastOutSlowIn)'
             )}
         >
             {typeof props.heightOrHash === 'number' ? (
@@ -40,8 +40,7 @@ const SearchResult: FC<Props> = props => {
                     href={`/tx/${props.heightOrHash}`}
                 >
                     <CheckCheckIcon
-                        className="min-w-4"
-                        color="var(--secondaryLight)"
+                        className="text-secondary-light min-w-4"
                         size={16}
                     />
                     {props.heightOrHash}

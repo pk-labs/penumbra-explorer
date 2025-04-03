@@ -29,7 +29,7 @@ const Tab: FC<Props> = props => {
                 'text-sm font-medium transition-[color,background-position]',
                 'duration-200 before:absolute before:bottom-[4px]',
                 'before:left-1/2 before:h-[2px] before:-translate-x-1/2',
-                'before:bg-[var(--primary)]',
+                'before:bg-primary-main',
                 'before:transition-[width,transform] before:duration-200',
                 'hover:text-text-primary before:ease-(--fastOutSlowIn)',
                 active

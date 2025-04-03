@@ -18,8 +18,8 @@ interface Props {
 const Tabs: FC<Props> = props => (
     <nav
         className={twMerge(
-            'relative flex h-9 items-center rounded-full bg-(--surface) px-4',
-            'backdrop-blur-[32px]',
+            'bg-other-tonalFill5 relative flex h-9 items-center rounded-full',
+            'px-4 backdrop-blur-[32px]',
             props.className
         )}
     >

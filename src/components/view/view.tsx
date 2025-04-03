@@ -11,8 +11,8 @@ export interface Props {
 const View: FC<Props> = props => (
     <article
         className={twMerge(
-            'flex flex-col gap-4 rounded-lg border-1',
-            'border-(--surfaceLighter) bg-radial-[100%_100%_at_0%_0%]',
+            'border-other-tonalFill10 flex flex-col gap-4 rounded-lg',
+            'border-1 bg-radial-[100%_100%_at_0%_0%]',
             'from-[rgba(174,174,174,0.25)]',
             'from-0% to-[rgba(174,174,174,0.025)] to-100% p-6 backdrop-blur-lg',
             props.className

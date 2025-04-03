@@ -25,10 +25,10 @@ const TableRow: FC<Props> = props => {
     return (
         <tr
             className={twMerge(
-                'border-(--surfaceLighter) not-last:border-b',
+                'border-other-tonalFill10 not-last:border-b',
                 props.href &&
                     'transition-background ease-(var(--fastOutSlowIn)) ' +
-                        'cursor-pointer duration-200 hover:bg-(--surface)',
+                        'hover:bg-other-tonalFill5 cursor-pointer duration-200',
                 props.className
             )}
             onClick={onClick}
