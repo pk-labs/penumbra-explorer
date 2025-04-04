@@ -3,16 +3,20 @@
 import { ActionView } from '@penumbra-zone/ui/ActionView'
 import { FC, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { useGetMetadata } from '@/lib/hooks'
 import { decodeTransaction, transactionToView } from '@/lib/utils'
 import Subsection from '../subsection'
 
 interface Props {
     blockHeight: number
+    chainId: string
     hash: string
     rawTransaction: string
 }
 
 const Actions: FC<Props> = props => {
+    const getMetadata = useGetMetadata(props.chainId)
+
     const view = useMemo(() => {
         const transaction = decodeTransaction(props.rawTransaction)
         return transactionToView(transaction, props.hash, props.blockHeight)
@@ -30,7 +34,7 @@ const Actions: FC<Props> = props => {
                             'before:bg-other-tonalStroke last:before:hidden'
                         )}
                     >
-                        <ActionView action={action} />
+                        <ActionView action={action} getMetadata={getMetadata} />
                     </li>
                 ))}
             </ul>

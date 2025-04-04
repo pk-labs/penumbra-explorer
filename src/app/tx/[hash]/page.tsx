@@ -89,6 +89,7 @@ const TransactionViewPage: FC<Props> = async props => {
                 {transaction.body.memo && <Memo />}
                 <Actions
                     blockHeight={transaction.block.height}
+                    chainId={transaction.body.parameters.chainId}
                     hash={transaction.hash}
                     rawTransaction={transaction.raw}
                 />

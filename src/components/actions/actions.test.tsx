@@ -1,6 +1,11 @@
 import { getByText, render } from '@testing-library/react'
 import Actions from './actions'
 
+jest.mock(
+    '../../lib/hooks/useGetMetadata/useGetMetadata',
+    () => () => undefined
+)
+
 jest.mock('../../lib/utils/transactionToView/transactionToView', () => () => ({
     bodyView: {
         actionViews: [
@@ -13,7 +18,12 @@ jest.mock('../../lib/utils/transactionToView/transactionToView', () => () => ({
 describe('Actions', () => {
     test('renders actions', async () => {
         const { container } = render(
-            <Actions blockHeight={99} hash="foo" rawTransaction="foo" />
+            <Actions
+                blockHeight={99}
+                chainId="foo"
+                hash="foo"
+                rawTransaction="foo"
+            />
         )
 
         getByText(container, 'bar')
