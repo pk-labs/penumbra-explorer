@@ -68,7 +68,7 @@ const TransactionTable: FC<Props> = props => (
                         )}
                         <TableCell>
                             {transaction.primaryAction && (
-                                <Pill>
+                                <Pill context="technical-default">
                                     {formatAction(transaction.primaryAction)}
                                 </Pill>
                             )}

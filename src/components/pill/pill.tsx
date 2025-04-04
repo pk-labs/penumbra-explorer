@@ -1,20 +1,15 @@
-import { FC, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+'use client'
 
-interface Props {
-    children: ReactNode
+import { Pill as PenumbraPill, PillProps } from '@penumbra-zone/ui/Pill'
+import { FC } from 'react'
+
+interface Props extends PillProps {
     className?: string
 }
 
-const Pill: FC<Props> = props => (
-    <span
-        className={twMerge(
-            'inline-flex h-8 max-w-47 items-center truncate rounded-full',
-            'text-text-primary bg-other-tonalFill5 px-3 text-sm font-medium',
-            props.className
-        )}
-    >
-        {props.children}
+const Pill: FC<Props> = ({ className, ...props }) => (
+    <span className={className}>
+        <PenumbraPill {...props} />
     </span>
 )
 
