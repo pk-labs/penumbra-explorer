@@ -33,6 +33,7 @@
         "next": "^15.1.6",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "react-error-boundary": "^5.0.0",
         "tailwind-merge": "^3.0.2",
         "urql": "^4.2.1"
     },
