@@ -15,7 +15,7 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   DateTime: { input: any; output: any; }
-  U128: { input: any; output: any; }
+  JSON: { input: any; output: any; }
 };
 
 export type Action = IbcRelay | NotYetSupportedAction | Output | Spend;
@@ -32,6 +32,7 @@ export type Block = {
   createdAt: Scalars['DateTime']['output'];
   height: Scalars['Int']['output'];
   rawEvents: Array<Event>;
+  rawJson?: Maybe<Scalars['JSON']['output']>;
   transactions: Array<Transaction>;
   transactionsCount: Scalars['Int']['output'];
 };
@@ -46,6 +47,30 @@ export type BlocksSelector = {
   range?: InputMaybe<BlockHeightRange>;
 };
 
+export type DbBlock = {
+  __typename?: 'DbBlock';
+  blockHashHex?: Maybe<Scalars['String']['output']>;
+  chainId?: Maybe<Scalars['String']['output']>;
+  height: Scalars['Int']['output'];
+  numTransactions: Scalars['Int']['output'];
+  previousBlockHashHex?: Maybe<Scalars['String']['output']>;
+  rootHex: Scalars['String']['output'];
+  timestamp: Scalars['DateTime']['output'];
+  totalFees?: Maybe<Scalars['String']['output']>;
+  validatorIdentityKey?: Maybe<Scalars['String']['output']>;
+};
+
+export type DbRawTransaction = {
+  __typename?: 'DbRawTransaction';
+  blockHeight: Scalars['Int']['output'];
+  chainId?: Maybe<Scalars['String']['output']>;
+  feeAmount?: Maybe<Scalars['String']['output']>;
+  rawDataHex?: Maybe<Scalars['String']['output']>;
+  rawJson?: Maybe<Scalars['JSON']['output']>;
+  timestamp: Scalars['DateTime']['output'];
+  txHashHex: Scalars['String']['output'];
+};
+
 export type Event = {
   __typename?: 'Event';
   type: Scalars['String']['output'];
@@ -54,7 +79,7 @@ export type Event = {
 
 export type Fee = {
   __typename?: 'Fee';
-  amount: Scalars['U128']['output'];
+  amount: Scalars['String']['output'];
   assetId?: Maybe<AssetId>;
 };
 
@@ -99,11 +124,30 @@ export type OutputBody = {
 
 export type QueryRoot = {
   __typename?: 'QueryRoot';
+  /** Get a block by height */
   block?: Maybe<Block>;
+  /** Get blocks by selector */
   blocks: Array<Block>;
+  /**
+   * --- Direct database queries ---
+   * Get a block directly from the database by height
+   */
+  dbBlock?: Maybe<DbBlock>;
+  /** Get a list of blocks directly from the database */
+  dbBlocks: Array<DbBlock>;
+  /** Get the latest block directly from the database */
+  dbLatestBlock?: Maybe<DbBlock>;
+  /** Get raw transaction data directly from the database by hash */
+  dbRawTransaction?: Maybe<DbRawTransaction>;
+  /** Get raw transaction data directly from the database */
+  dbRawTransactions: Array<DbRawTransaction>;
+  /** Search for blocks or transactions */
   search?: Maybe<SearchResult>;
+  /** Get blockchain statistics */
   stats: Stats;
+  /** Get a transaction by hash */
   transaction?: Maybe<Transaction>;
+  /** Get transactions by selector */
   transactions: Array<Transaction>;
 };
 
@@ -115,6 +159,28 @@ export type QueryRootBlockArgs = {
 
 export type QueryRootBlocksArgs = {
   selector: BlocksSelector;
+};
+
+
+export type QueryRootDbBlockArgs = {
+  height: Scalars['Int']['input'];
+};
+
+
+export type QueryRootDbBlocksArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryRootDbRawTransactionArgs = {
+  txHashHex: Scalars['String']['input'];
+};
+
+
+export type QueryRootDbRawTransactionsArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -133,9 +199,7 @@ export type QueryRootTransactionsArgs = {
 };
 
 export enum RangeDirection {
-  /** Next will return transactions what are older than the given transaction hash. */
   Next = 'NEXT',
-  /** Previous will return transactions what are newer than the given transaction hash. */
   Previous = 'PREVIOUS'
 }
 
@@ -170,7 +234,7 @@ export type Transaction = {
   index: Scalars['Int']['output'];
   raw: Scalars['String']['output'];
   rawEvents: Array<Event>;
-  result: TransactionResult;
+  rawJson: Scalars['JSON']['output'];
 };
 
 export type TransactionBody = {
@@ -191,21 +255,9 @@ export type TransactionParameters = {
 };
 
 export type TransactionRange = {
-  direction?: RangeDirection;
+  direction: RangeDirection;
   fromTxHash: Scalars['String']['input'];
   limit: Scalars['Int']['input'];
-};
-
-export type TransactionResult = {
-  __typename?: 'TransactionResult';
-  code: Scalars['Int']['output'];
-  codespace: Scalars['String']['output'];
-  data: Scalars['String']['output'];
-  events: Array<Scalars['String']['output']>;
-  gasUsed: Scalars['Int']['output'];
-  gasWanted: Scalars['Int']['output'];
-  info: Scalars['String']['output'];
-  log: Scalars['String']['output'];
 };
 
 export type TransactionsSelector = {
@@ -213,20 +265,20 @@ export type TransactionsSelector = {
   range?: InputMaybe<TransactionRange>;
 };
 
-export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> };
+export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } }> };
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
 
 export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
 
-export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } };
+export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
 
 export type BlockQueryVariables = Exact<{
   height: Scalars['Int']['input'];
 }>;
 
 
-export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } }> } | null };
+export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
   selector: BlocksSelector;
@@ -252,7 +304,7 @@ export type TransactionQueryVariables = Exact<{
 }>;
 
 
-export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: any } } } } | null };
+export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', memo?: string | null, parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } } | null };
 
 export type TransactionsQueryVariables = Exact<{
   selector: TransactionsSelector;
