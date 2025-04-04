@@ -1,65 +1,33 @@
 'use client'
 
-import { CheckIcon, CopyIcon } from 'lucide-react'
-import { FC, MouseEvent, useCallback, useState } from 'react'
+import {
+    CopyToClipboardButton as PenumbraCopyToClipboard,
+    CopyToClipboardButtonProps as PenumbtaCopyToClipboardProps,
+} from '@penumbra-zone/ui/CopyToClipboardButton'
+import { FC, MouseEvent, useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-interface Props {
+interface Props extends PenumbtaCopyToClipboardProps {
     className?: string
-    data: string
     small?: boolean
 }
 
 const CopyToClipboard: FC<Props> = props => {
-    const [copied, setCopied] = useState(false)
-
-    const onClick = useCallback(
-        (e: MouseEvent) => {
-            e.stopPropagation()
-
-            // istanbul ignore next
-            if (copied) {
-                return
-            }
-
-            let timeout: NodeJS.Timeout
-
-            navigator.clipboard
-                .writeText(props.data)
-                .then(() => {
-                    setCopied(true)
-                    timeout = setTimeout(() => setCopied(false), 3000)
-                })
-                // istanbul ignore next
-                .catch(console.error)
-
-            return () => {
-                // istanbul ignore next
-                if (timeout) {
-                    clearTimeout(timeout)
-                }
-            }
-        },
-        [copied, props.data]
-    )
-
-    const size = props.small ? 12 : 16
+    const onClick = useCallback((e: MouseEvent) => {
+        e.stopPropagation()
+    }, [])
 
     return (
-        <div
+        <span
             className={twMerge(
-                'transition-background inline-flex cursor-pointer items-center',
-                'justify-center rounded-sm border-1 border-transparent',
-                'hover:bg-other-tonalFill10 duration-200',
-                'ease-(--fastOutSlowIn)',
-                props.small ? 'p-0.5' : 'p-1',
-                copied && 'animate-copy',
+                'inline-block origin-top-left',
+                props.small ? 'h-6 w-6 scale-50' : 'h-8 w-8 scale-[calc(2/3)]',
                 props.className
             )}
             onClick={onClick}
         >
-            {copied ? <CheckIcon size={size} /> : <CopyIcon size={size} />}
-        </div>
+            <PenumbraCopyToClipboard text={props.text} />
+        </span>
     )
 }
 

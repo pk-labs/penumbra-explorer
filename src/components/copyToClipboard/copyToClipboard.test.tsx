@@ -1,50 +1,20 @@
-import {
-    act,
-    fireEvent,
-    getByText,
-    render,
-    waitFor,
-} from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render } from '@testing-library/react'
 import CopyToClipboard from './copyToClipboard'
 
-userEvent.setup()
-
-jest.mock('lucide-react', () => ({
-    CheckIcon: () => <span>Check</span>,
-    CopyIcon: () => <span>Copy</span>,
-}))
-
 describe('CopyToClipboard', () => {
-    test('writes data to clipboard on click', async () => {
-        const { container } = render(<CopyToClipboard data="foo" />)
-
-        fireEvent.click(getByText(container, 'Copy'))
-
-        await waitFor(async () => {
-            const clipboardText = await navigator.clipboard.readText()
-            expect(clipboardText).toBe('foo')
-        })
+    test('renders at default size', async () => {
+        const { container } = render(<CopyToClipboard text="foo" />)
+        expect(container.firstChild).toHaveClass('w-8', 'h-8')
     })
 
-    test('renders check icon for 3 seconds after copying', async () => {
-        const { container } = render(<CopyToClipboard data="foo" />)
-
-        fireEvent.click(getByText(container, 'Copy'))
-        await waitFor(() => getByText(container, 'Check'))
-
-        act(() => jest.advanceTimersByTime(3000))
-        getByText(container, 'Copy')
-    })
-
-    test('renders small variant', async () => {
-        const { container } = render(<CopyToClipboard data="foo" small />)
-        expect(container.firstChild).toHaveClass('p-0.5')
+    test('renders at small size', async () => {
+        const { container } = render(<CopyToClipboard text="foo" small />)
+        expect(container.firstChild).toHaveClass('w-6', 'h-6')
     })
 
     test('applies CSS classes', async () => {
         const { container } = render(
-            <CopyToClipboard className="foo bar" data="foo" />
+            <CopyToClipboard className="foo bar" text="foo" />
         )
 
         expect(container.firstChild).toHaveClass('foo', 'bar')

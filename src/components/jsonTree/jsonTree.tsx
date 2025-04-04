@@ -25,7 +25,7 @@ const JsonTree: FC<Props> = props => {
                 <>
                     <span>Raw JSON</span>
                     <CopyToClipboard
-                        data={JSON.stringify(props.data, null, 2)}
+                        text={JSON.stringify(props.data, null, 2)}
                         small
                     />
                 </>

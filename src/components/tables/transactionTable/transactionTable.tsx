@@ -51,7 +51,7 @@ const TransactionTable: FC<Props> = props => (
                             <Link href={`/tx/${transaction.hash}`}>
                                 {shortenHash(transaction.hash)}
                             </Link>
-                            <CopyToClipboard data={transaction.hash} />
+                            <CopyToClipboard text={transaction.hash} />
                         </TableCell>
                         {!props.embedded && (
                             <TableCell>

@@ -48,21 +48,4 @@ describe('JsonTree', () => {
             expect(queryByText(container, 'level3')).toBeNull()
         })
     })
-
-    test('copies data to clipboard', async () => {
-        const { container } = render(<JsonTree data={{ foo: 'bar' }} />)
-
-        const copyToClipboard = getByText(container, 'Raw JSON').nextSibling
-
-        if (!copyToClipboard) {
-            throw Error('Missing element')
-        }
-
-        fireEvent.click(copyToClipboard)
-
-        await waitFor(async () => {
-            const clipboardText = await navigator.clipboard.readText()
-            expect(clipboardText.replaceAll(/\n|\s/g, '')).toBe('{"foo":"bar"}')
-        })
-    })
 })

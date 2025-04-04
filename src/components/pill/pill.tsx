@@ -1,9 +1,12 @@
 'use client'
 
-import { Pill as PenumbraPill, PillProps } from '@penumbra-zone/ui/Pill'
+import {
+    Pill as PenumbraPill,
+    PillProps as PenumbraPillProps,
+} from '@penumbra-zone/ui/Pill'
 import { FC } from 'react'
 
-interface Props extends PillProps {
+interface Props extends PenumbraPillProps {
     className?: string
 }
 

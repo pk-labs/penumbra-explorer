@@ -6,5 +6,3 @@ export const Button = (props: ButtonProps) => (
         {props.children}
     </button>
 )
-
-export type { ButtonProps }
