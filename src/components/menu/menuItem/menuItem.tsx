@@ -27,7 +27,7 @@ const MenuItem: FC<Props> = props => {
         <Link
             className={twMerge(
                 'ease-(var(--fastOutSlowIn)) flex h-8 items-center gap-2 px-7',
-                'text-sm transition-[color,background] duration-200',
+                'text-md transition-[color,background] duration-200',
                 'hover:text-text-primary hover:bg-other-tonalFill5',
                 active ? 'text-text-primary' : 'text-text-secondary'
             )}
