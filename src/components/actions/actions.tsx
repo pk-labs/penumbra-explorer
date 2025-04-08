@@ -1,8 +1,8 @@
 'use client'
 
 import { ActionView } from '@penumbra-zone/ui/ActionView'
-import { FC, useCallback, useMemo } from 'react'
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
+import { FC, useMemo } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { twMerge } from 'tailwind-merge'
 import { useGetMetadata } from '@/lib/hooks'
 import { decodeTransaction, transactionToView } from '@/lib/utils'
