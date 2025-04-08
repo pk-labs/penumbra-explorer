@@ -23,20 +23,6 @@ const Actions: FC<Props> = props => {
         return transactionToView(transaction, props.hash, props.blockHeight)
     }, [props.blockHeight, props.hash, props.rawTransaction])
 
-    const fallbackRender = useCallback(
-        ({ error }: FallbackProps) => (
-            <div
-                className={twMerge(
-                    'bg-other-tonalFill5 text-destructive-light flex h-10',
-                    'items-center rounded-sm px-3 py-2 text-sm'
-                )}
-            >
-                {String(error)}
-            </div>
-        ),
-        []
-    )
-
     return (
         <Subsection title="Actions">
             <ul className="flex flex-col gap-2">
@@ -49,7 +35,24 @@ const Actions: FC<Props> = props => {
                             'before:bg-other-tonalStroke last:before:hidden'
                         )}
                     >
-                        <ErrorBoundary fallbackRender={fallbackRender}>
+                        <ErrorBoundary
+                            fallback={
+                                <div
+                                    className={twMerge(
+                                        'bg-other-tonalFill5 flex h-10 w-full',
+                                        'items-center justify-between gap-1',
+                                        'rounded-sm px-3 py-2 font-mono'
+                                    )}
+                                >
+                                    <span className="truncate capitalize">
+                                        {action.actionView.case}
+                                    </span>
+                                    <span className="text-text-secondary truncate">
+                                        Unimplemented
+                                    </span>
+                                </div>
+                            }
+                        >
                             <ActionView
                                 action={action}
                                 getMetadata={getMetadata}
