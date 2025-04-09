@@ -26,7 +26,7 @@ const getTransactions = async (
         .toPromise()
 
     if (result.error) {
-        console.error(result.error)
+        throw result.error
     }
 
     const now = dayjs()

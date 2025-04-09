@@ -24,7 +24,7 @@ const getTransaction = async (
         .toPromise()
 
     if (result.error) {
-        console.error(result.error)
+        throw result.error
     }
 
     if (!result.data?.transaction) {

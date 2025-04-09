@@ -10,7 +10,7 @@ const getStats = async (): Promise<StatsQuery['stats'] | undefined> => {
         .toPromise()
 
     if (result.error) {
-        console.error(result.error)
+        throw result.error
     }
 
     return result.data?.stats

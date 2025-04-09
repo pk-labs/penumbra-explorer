@@ -14,7 +14,7 @@ const getBlock = async (
         .toPromise()
 
     if (result.error) {
-        console.error(result.error)
+        throw result.error
     }
 
     return (
