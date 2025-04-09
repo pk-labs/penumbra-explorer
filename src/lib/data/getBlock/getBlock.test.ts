@@ -24,16 +24,12 @@ describe('getBlock', () => {
         })
     })
 
-    test('logs error', async () => {
+    test('throws error', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () => Promise.resolve({ error: 'foo' }),
             }),
         })
-
-        const consoleError = jest.spyOn(console, 'error').mockImplementation()
-
-        await getBlock(1)
-        expect(consoleError).toHaveBeenCalledWith('foo')
+        await expect(getBlock(1)).rejects.toBe('foo')
     })
 })

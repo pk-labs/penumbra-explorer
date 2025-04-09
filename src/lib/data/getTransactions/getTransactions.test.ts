@@ -68,16 +68,15 @@ describe('getTransactions', () => {
         ).resolves.toMatchObject([{ hash: 'newer' }, { hash: 'older' }])
     })
 
-    test('logs error', async () => {
+    test('throws error', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () => Promise.resolve({ error: 'foo' }),
             }),
         })
 
-        const consoleError = jest.spyOn(console, 'error').mockImplementation()
-
-        await getTransactions({ latest: { limit: 1 } })
-        expect(consoleError).toHaveBeenCalledWith('foo')
+        await expect(getTransactions({ latest: { limit: 1 } })).rejects.toBe(
+            'foo'
+        )
     })
 })

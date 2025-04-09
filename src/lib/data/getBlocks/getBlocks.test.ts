@@ -38,16 +38,13 @@ describe('getBlocks', () => {
         ).resolves.toMatchObject([{ timeAgo: '1s ago' }])
     })
 
-    test('logs error', async () => {
+    test('throws error', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () => Promise.resolve({ error: 'foo' }),
             }),
         })
 
-        const consoleError = jest.spyOn(console, 'error').mockImplementation()
-
-        await getBlocks({ latest: { limit: 1 } })
-        expect(consoleError).toHaveBeenCalledWith('foo')
+        await expect(getBlocks({ latest: { limit: 1 } })).rejects.toBe('foo')
     })
 })
