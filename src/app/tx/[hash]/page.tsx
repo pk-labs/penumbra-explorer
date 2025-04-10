@@ -86,7 +86,7 @@ const TransactionViewPage: FC<Props> = async props => {
                         {transaction.block.createdAt}
                     </Parameter>
                 </Parameters>
-                <Memo />
+                {transaction.body.memo && <Memo />}
                 <Actions
                     blockHeight={transaction.block.height}
                     chainId={transaction.body.parameters.chainId}
