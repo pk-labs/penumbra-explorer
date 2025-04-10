@@ -11,7 +11,7 @@ export interface Props extends Omit<TransactionTableProps, 'transactions'> {
 
 const TransactionTableLoader: FC<Props> = async ({ limit, ...props }) => {
     const transactions = await getTransactions({ latest: { limit } })
-    await new Promise(resolve => setTimeout(resolve, 5000))
+    await new Promise(resolve => setTimeout(resolve, 4500))
 
     return <TransactionTable transactions={transactions} {...props} />
 }

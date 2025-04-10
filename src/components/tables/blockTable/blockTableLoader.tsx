@@ -9,7 +9,7 @@ export interface Props extends Omit<BlockTableProps, 'blocks'> {
 
 const BlockTableLoader: FC<Props> = async ({ limit, ...props }) => {
     const blocks = await getBlocks({ latest: { limit } })
-    await new Promise(resolve => setTimeout(resolve, 3000))
+    await new Promise(resolve => setTimeout(resolve, 4000))
 
     return <BlockTable blocks={blocks} {...props} />
 }

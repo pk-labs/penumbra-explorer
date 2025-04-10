@@ -1,13 +1,10 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Panel } from '../panel'
+import { Panel, PanelProps } from '../panel'
 import icon from './transactionPanelIcon.svg'
 
-export interface Props {
-    className?: string
-    number?: number
-}
+export type Props = Pick<PanelProps, 'className' | 'number'>
 
 const TransactionPanel: FC<Props> = props => (
     <Panel
