@@ -6,10 +6,10 @@ import {
     Button,
     Container,
     Search,
-    TransactionPanel,
+    TransactionPanelContainer,
     TransactionTableContainer,
 } from '@/components'
-import { getBlocks, getStats } from '@/lib/data'
+import { getBlocks } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { generatePageMetadata } from '@/lib/utils'
 
@@ -22,7 +22,6 @@ export const metadata = generatePageMetadata(
 )
 
 const HomePage: FC = async () => {
-    const stats = await getStats()
     const latestBlocks = await getBlocks({ latest: { limit: 1 } })
 
     let latestBlockHeight
@@ -46,10 +45,7 @@ const HomePage: FC = async () => {
                     className="col-span-6 sm:col-span-3"
                     number={latestBlockHeight}
                 />
-                <TransactionPanel
-                    className="col-span-6 sm:col-span-3"
-                    number={stats?.totalTransactionsCount}
-                />
+                <TransactionPanelContainer className="col-span-6 sm:col-span-3" />
                 <BlockTableContainer
                     actions={
                         <Button density="compact" href="/blocks">
