@@ -2,7 +2,7 @@
 import { FC } from 'react'
 import {
     BlockPanel,
-    BlockTable,
+    BlockTableContainer,
     Button,
     Container,
     Search,
@@ -23,9 +23,8 @@ export const metadata = generatePageMetadata(
 
 const HomePage: FC = async () => {
     const stats = await getStats()
-    const latestBlocks = await getBlocks({ latest: { limit: 10 } })
+    const latestBlocks = await getBlocks({ latest: { limit: 1 } })
     const latestTransactions = await getTransactions({ latest: { limit: 10 } })
-    await new Promise(resolve => setTimeout(resolve, 3000))
 
     let latestBlockHeight
 
@@ -52,14 +51,14 @@ const HomePage: FC = async () => {
                     className="col-span-6 sm:col-span-3"
                     number={stats?.totalTransactionsCount}
                 />
-                <BlockTable
+                <BlockTableContainer
                     actions={
                         <Button density="compact" href="/blocks">
                             View All
                         </Button>
                     }
-                    blocks={latestBlocks}
                     className="col-span-6 lg:col-span-3"
+                    limit={10}
                     title="Latest blocks"
                 />
                 <TransactionTable

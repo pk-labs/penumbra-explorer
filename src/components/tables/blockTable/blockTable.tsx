@@ -5,7 +5,8 @@ import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
-interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
+export interface Props
+    extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     blocks?: TransformedPartialBlockFragment[]
     className?: string
     proposer?: boolean
