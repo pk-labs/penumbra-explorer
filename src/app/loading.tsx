@@ -1,37 +1,38 @@
-// istanbul ignore file
 import { FC } from 'react'
 import {
     BlockPanel,
-    BlockTable,
     Button,
     Container,
     Search,
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
     TransactionPanel,
-    TransactionTable,
 } from '@/components'
-import { getBlocks, getStats, getTransactions } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { generatePageMetadata } from '@/lib/utils'
 
-export const metadata = generatePageMetadata(
-    'Noctis',
-    'Explore Penumbra blockchain blocks, transactions, and other data with ' +
-        'Noctis - a fast, secure, and privacy-focused explorer built for ' +
-        'Penumbra blockchain.',
-    '/'
-)
-
-const HomePage: FC = async () => {
-    const stats = await getStats()
-    const latestBlocks = await getBlocks({ latest: { limit: 10 } })
-    const latestTransactions = await getTransactions({ latest: { limit: 10 } })
-    await new Promise(resolve => setTimeout(resolve, 3000))
-
-    let latestBlockHeight
-
-    if (latestBlocks?.length) {
-        latestBlockHeight = latestBlocks[0].height
-    }
+const HomePageLoading: FC = () => {
+    const skeletonTableChildren = (
+        <>
+            <thead>
+                <TableRow>
+                    <TableCell header>
+                        <Skeleton className="h-6" />
+                    </TableCell>
+                </TableRow>
+            </thead>
+            <tbody>
+                {Array.from({ length: 10 }).map((_, i) => (
+                    <TableRow key={i}>
+                        <TableCell>
+                            <Skeleton className="h-6" />
+                        </TableCell>
+                    </TableRow>
+                ))}
+            </tbody>
+        </>
+    )
 
     return (
         <>
@@ -44,25 +45,23 @@ const HomePage: FC = async () => {
                 </GraphqlClientProvider>
             </Container>
             <Container className="grid grid-cols-6 gap-4">
-                <BlockPanel
-                    className="col-span-6 sm:col-span-3"
-                    number={latestBlockHeight}
-                />
+                <BlockPanel className="col-span-6 sm:col-span-3" number={0} />
                 <TransactionPanel
                     className="col-span-6 sm:col-span-3"
-                    number={stats?.totalTransactionsCount}
+                    number={0}
                 />
-                <BlockTable
+                <Table
                     actions={
                         <Button density="compact" href="/blocks">
                             View All
                         </Button>
                     }
-                    blocks={latestBlocks}
                     className="col-span-6 lg:col-span-3"
                     title="Latest blocks"
-                />
-                <TransactionTable
+                >
+                    {skeletonTableChildren}
+                </Table>
+                <Table
                     actions={
                         <Button density="compact" href="/txs">
                             View All
@@ -70,11 +69,12 @@ const HomePage: FC = async () => {
                     }
                     className="col-span-6 lg:col-span-3"
                     title="Latest transactions"
-                    transactions={latestTransactions}
-                />
+                >
+                    {skeletonTableChildren}
+                </Table>
             </Container>
         </>
     )
 }
 
-export default HomePage
+export default HomePageLoading
