@@ -4,7 +4,9 @@ import TransactionPanel from './transactionPanel'
 import TransactionPanelLoader, { Props } from './transactionPanelLoader'
 
 const TransactionPanelContainer: FC<Props> = props => (
-    <Suspense fallback={<TransactionPanel number={0} />}>
+    <Suspense
+        fallback={<TransactionPanel className={props.className} number={0} />}
+    >
         <TransactionPanelLoader {...props} />
     </Suspense>
 )
