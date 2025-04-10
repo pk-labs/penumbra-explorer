@@ -5,7 +5,6 @@ import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { NavigationBar, PageViewTracker } from '@/components'
-import { getUmPrice } from '@/lib/data'
 import { background } from '@/lib/images'
 
 export const viewport: Viewport = {
@@ -43,32 +42,28 @@ interface Props {
     children: ReactNode
 }
 
-const RootLayout: FC<Props> = async props => {
-    const umPrice = await getUmPrice()
-
-    return (
-        <html className="overflow-x-hidden" lang="en">
-            <body
+const RootLayout: FC<Props> = props => (
+    <html className="overflow-x-hidden" lang="en">
+        <body
+            className={twMerge(
+                'relative flex flex-col justify-start gap-10',
+                'overflow-x-hidden pb-4 md:pb-8'
+            )}
+        >
+            <PageViewTracker fathomId={process.env.NEXT_PUBLIC_FATHOM_ID} />
+            <NavigationBar />
+            {props.children}
+            <div
                 className={twMerge(
-                    'relative flex flex-col justify-start gap-10',
-                    'overflow-x-hidden pb-4 md:pb-8'
+                    'animate-bg pointer-events-none absolute',
+                    '-top-[1486.8px] left-[calc(50%-900px)] -z-1',
+                    'h-[1858.5px] w-[1800px] bg-cover'
                 )}
-            >
-                <PageViewTracker fathomId={process.env.NEXT_PUBLIC_FATHOM_ID} />
-                <NavigationBar umPrice={umPrice} />
-                {props.children}
-                <div
-                    className={twMerge(
-                        'animate-bg pointer-events-none absolute',
-                        '-top-[1486.8px] left-[calc(50%-900px)] -z-1',
-                        'h-[1858.5px] w-[1800px] bg-cover'
-                    )}
-                    style={{ backgroundImage: `url(${background.src})` }}
-                />
-            </body>
-        </html>
-    )
-}
+                style={{ backgroundImage: `url(${background.src})` }}
+            />
+        </body>
+    </html>
+)
 
 // Disable all caching for now
 export const dynamic = 'force-dynamic'

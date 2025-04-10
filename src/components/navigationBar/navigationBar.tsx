@@ -8,18 +8,16 @@ import { FC, useCallback, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
-import { UmPriceData } from '@/lib/types'
 import Button from '../button'
 import Container from '../container'
 import { Menu, MenuItem } from '../menu'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
-import UmPrice from '../umPrice'
+import { UmPriceContainer } from '../umPrice'
 
 interface Props {
     className?: string
-    umPrice?: UmPriceData
 }
 
 const NavigationBar: FC<Props> = props => {
@@ -96,21 +94,14 @@ const NavigationBar: FC<Props> = props => {
                         </Modal>
                     </>
                 )}
-                {props.umPrice && (
-                    <UmPrice className="hidden sm:flex" {...props.umPrice} />
-                )}
+                <UmPriceContainer className="hidden sm:flex" />
                 <Menu
                     className="relative z-40 backdrop-blur-[32px] md:hidden"
                     onClose={closeMenu}
                     onOpen={openMenu}
                     open={menuOpen}
                 >
-                    {props.umPrice && (
-                        <UmPrice
-                            className="ml-4 self-start sm:hidden"
-                            {...props.umPrice}
-                        />
-                    )}
+                    <UmPriceContainer className="ml-4 self-start sm:hidden" />
                     <MenuItem href="/">
                         <HomeIcon className="stroke-primary-light" size={16} />
                         Home

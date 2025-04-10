@@ -22,7 +22,6 @@ interface Data {
 const getUmPrice = async (): Promise<UmPriceData | undefined> => {
     try {
         const data: Data = await fetch(url).then(res => res.json())
-        console.log(data)
 
         return {
             change: data.market_data.price_change_percentage_24h,

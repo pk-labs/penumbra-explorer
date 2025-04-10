@@ -24,6 +24,8 @@ jest.mock('../../lib/graphql/graphqlClientProvider', () => (props: any) => (
 
 jest.mock('../menu/menu', () => () => <div>Menu</div>)
 
+jest.mock('../umPrice/umPrice')
+
 describe('NavigationBar', () => {
     test('hides search on home page', async () => {
         const { container } = render(<NavigationBar />)
@@ -45,14 +47,6 @@ describe('NavigationBar', () => {
             fireEvent.click(getByText(container, 'Search'))
             getByText(container, 'Search modal')
         })
-    })
-
-    test('renders UM price', async () => {
-        const { container } = render(
-            <NavigationBar umPrice={{ change: 0, price: 9999 }} />
-        )
-
-        getByText(container, '$9999.00')
     })
 
     test('applies CSS classes', async () => {
