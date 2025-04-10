@@ -8,7 +8,7 @@ export interface Props {
     children?: ReactNode
     className?: string
     footer?: ReactNode
-    number?: number
+    number?: number | ReactNode
     numberSuffix?: string
     title: ReactNode
 }
@@ -32,11 +32,13 @@ const Panel: FC<Props> = props => (
             >
                 {props.title}
             </h2>
-            {typeof props.number === 'number' && (
+            {typeof props.number === 'number' ? (
                 <NumberCountup
                     number={props.number}
                     suffix={props.numberSuffix}
                 />
+            ) : (
+                props.number
             )}
         </header>
         {props.children && (

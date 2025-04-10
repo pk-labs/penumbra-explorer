@@ -28,6 +28,14 @@ describe('Panel', () => {
         getByText(container, '99$')
     })
 
+    test('renders any node as number', async () => {
+        const { container } = render(
+            <Panel number="Bar" numberSuffix="$" title="Foo" />
+        )
+
+        getByText(container, 'Bar')
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(
             <Panel className="foo bar" number={99} title="Foo" />
