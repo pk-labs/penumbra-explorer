@@ -1,5 +1,22 @@
 steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
-    args: [run, deploy, 'penumbra-explorer-${_ENV_NAME}', --source, ., --region, '${_REGION}', --allow-unauthenticated,
-           --set-env-vars, '_BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA},_ENV_NAME=${_ENV_NAME}']
+    args:
+      # Deploy from source
+      - run
+      - deploy
+      - penumbra-explorer-${_ENV_NAME}
+      - --source
+      - .
+      - --region
+      - ${_REGION}
+      - --allow-unauthenticated
+      # Settings recommended by AI for this Next.js setup
+      - --memory=2Gi
+      - --cpu=2
+      - --min-instances=1
+      - --concurrency=20
+      - --platform=managed
+      # Environment variables
+      - --set-env-vars
+      - _BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA},_ENV_NAME=${_ENV_NAME}
