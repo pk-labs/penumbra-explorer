@@ -9,8 +9,8 @@ import EmptyState from '../../emptyState'
 import Pill from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
-interface Props extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
-    blockHeight?: boolean
+export interface Props
+    extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     className?: string
     embedded?: boolean
     emptyStateMessage?: string
