@@ -1,8 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import Pagination from '../../pagination'
-import Skeleton from '../../skeleton'
-import { Table, TableCell, TableRow } from '../table'
+import { Pagination, Skeleton, Table, TableCell, TableRow } from '@/components'
 import TransactionTableLoader, { Props } from './transactionTableLoader'
 
 const TransactionTableContainer: FC<Props> = props => (

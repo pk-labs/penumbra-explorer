@@ -6,9 +6,8 @@ import {
     Container,
     Search,
     TransactionPanelContainer,
-    TransactionTableContainer,
 } from '@/components'
-import { BlockTableContainer } from '@/containers'
+import { BlockTableContainer, TransactionTableContainer } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { generatePageMetadata } from '@/lib/utils'
 

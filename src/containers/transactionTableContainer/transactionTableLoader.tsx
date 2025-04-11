@@ -1,13 +1,14 @@
 // istanbul ignore file
 import { redirect } from 'next/navigation'
 import { FC } from 'react'
+import {
+    Pagination,
+    TransactionTable,
+    TransactionTableProps,
+} from '@/components'
 import { getTransactions } from '@/lib/data'
 import { RangeDirection } from '@/lib/graphql/generated/types'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import Pagination from '../../pagination'
-import TransactionTable, {
-    Props as TransactionTableProps,
-} from './transactionTable'
 
 export interface Props
     extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
