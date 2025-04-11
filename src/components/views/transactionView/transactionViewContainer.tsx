@@ -15,7 +15,14 @@ const TransactionViewContainer: FC<Props> = props => (
                     'to-[rgba(193,166,204,0.03)]!',
                     props.className
                 )}
-                subtitle={<Skeleton className="h-6 w-131" />}
+                subtitle={
+                    <Skeleton
+                        className={twMerge(
+                            'mt-0.5 h-11.5 min-[530px]:h-5.5',
+                            'min-[530px]:w-112 sm:w-128!'
+                        )}
+                    />
+                }
                 title="Transaction view"
             >
                 <Skeleton className="h-22" />

@@ -20,8 +20,6 @@ const TransactionViewLoader: FC<Props> = async ({
         notFound()
     }
 
-    await new Promise(resolve => setTimeout(resolve, 3000))
-
     return <TransactionView transaction={transaction} {...props} />
 }
 
