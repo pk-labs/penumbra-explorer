@@ -72,8 +72,6 @@ const TransactionTableLoader: FC<Props> = async ({
         }
     }
 
-    await new Promise(resolve => setTimeout(resolve, 4500))
-
     return (
         <TransactionTable
             footer={

@@ -43,8 +43,6 @@ const BlockTableLoader: FC<Props> = async ({ limit, pagination, ...props }) => {
         }
     }
 
-    await new Promise(resolve => setTimeout(resolve, 4000))
-
     return (
         <BlockTable
             blocks={blocks}
