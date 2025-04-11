@@ -31,20 +31,21 @@ Penumbra Blockchain Explorer
 
 ### Project structure
 
-| Directory           | Description                                                   |
-|---------------------|---------------------------------------------------------------|
-| `src/app`           | Next.js app router with layouts and pages.                    |
-| `src/components`    | Components used by layouts and pages.                         |
-| `src/lib/`          | App-wide configuration, types, helpers, assets, etc.          |
-| `src/lib/__tests__` | Global test configuration.                                    |
-| `src/lib/css`       | Global CSS and theme with CSS variables.                      |
-| `src/lib/data`      | Data fetchers for server layouts and pages.                   |
-| `src/lib/fonts`     | Custom fonts loaded and optimized with next/font.             |
-| `src/lib/graphql`   | GraphQL client with schema, queries, etc.                     |
-| `src/lib/hooks`     | Custom React hooks.                                           |
-| `src/lib/images`    | Image assets that are directly imported.                      |
-| `src/lib/utils`     | Utility functions for formatting, transforming, etc.          |
-| `public`            | Static public assets directly accessible through the browser. |
+| Directory           | Description                                                                                                                                                                                                    |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `src/app`           | Next.js app router with layouts and pages.                                                                                                                                                                     |
+| `src/components`    | Presentational components with little logic.                                                                                                                                                                   |
+| `src/containers`    | Container components that perform data fetching or have logic other<br/>than presentational. Server components use React Suspense to show<br/>loading skeletons until Next.js finishes streaming fetched data. |
+| `src/lib/`          | App-wide configuration, types, helpers, assets, etc.                                                                                                                                                           |
+| `src/lib/__tests__` | Global test configuration.                                                                                                                                                                                     |
+| `src/lib/css`       | Tailwind CSS configuration and theme.                                                                                                                                                                          |
+| `src/lib/data`      | Data fetchers and transformers.                                                                                                                                                                                |
+| `src/lib/fonts`     | Custom fonts loaded and optimized with next/font.                                                                                                                                                              |
+| `src/lib/graphql`   | GraphQL client with schema, queries, generated code, etc.                                                                                                                                                      |
+| `src/lib/hooks`     | Custom React hooks.                                                                                                                                                                                            |
+| `src/lib/images`    | Image assets that are directly imported.                                                                                                                                                                       |
+| `src/lib/utils`     | Utility functions for formatting, transforming, etc.                                                                                                                                                           |
+| `public`            | Static public assets directly accessible through the browser.                                                                                                                                                  |
 
 ## GraphQL
 
@@ -74,7 +75,7 @@ and autoformatted with Stylelint.
 
 ## Testing
 
-Jest tests are collocated with the components. Global test configuration and
+Jest tests are collocated with the tested files. Global test configuration and
 mocks reside in `src/lib/__tests__`. Test coverage can be reported to console
 and written to file with `npm run test:coverage`.
 
