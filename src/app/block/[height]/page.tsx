@@ -1,12 +1,8 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import {
-    BlockViewContainer,
-    Breadcrumb,
-    Breadcrumbs,
-    Container,
-} from '@/components'
+import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import { BlockViewContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 interface Props {

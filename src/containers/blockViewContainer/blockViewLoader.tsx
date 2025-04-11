@@ -1,8 +1,8 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
+import { BlockView, BlockViewProps } from '@/components'
 import { getBlock } from '@/lib/data'
-import BlockView, { Props as BlockViewProps } from './blockView'
 
 export interface Props extends Omit<BlockViewProps, 'block'> {
     blockHeight: number
