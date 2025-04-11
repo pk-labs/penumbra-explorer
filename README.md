@@ -4,7 +4,7 @@
 ![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Fstpch%2F9208254a7b67b695d104a875931624d8%2Fraw%2Fpe-frontend-lcov-coverage.json&label=Coverage)
 
 Penumbra Blockchain Explorer
-s
+
 ## Getting started
 
 1. Set up Node.js v22
@@ -84,7 +84,7 @@ The following environments are hosted and auto-scaled on Google Cloud:
 
 - Development (`main`): https://dev.explorer.penumbra.pklabs.me
 - Staging (`staging`): https://explorer.penumbra.pklabs.me
-- Production (`production`): http://explorer.penumbra.zone
+- Production (`production`): https://explorer.penumbra.zone
 
 ## CI/CD
 
