@@ -1,7 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import Skeleton from '../../skeleton'
-import TransactionPanel from './transactionPanel'
+import { Skeleton, TransactionPanel } from '@/components'
 import TransactionPanelLoader, { Props } from './transactionPanelLoader'
 
 const TransactionPanelContainer: FC<Props> = props => (

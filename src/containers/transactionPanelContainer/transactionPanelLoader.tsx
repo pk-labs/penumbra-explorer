@@ -1,9 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
+import { TransactionPanel, TransactionPanelProps } from '@/components'
 import { getStats } from '@/lib/data'
-import TransactionPanel, {
-    Props as TransactionPanelProps,
-} from './transactionPanel'
 
 export type Props = Omit<TransactionPanelProps, 'number'>
 

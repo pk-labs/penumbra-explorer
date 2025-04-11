@@ -1,14 +1,10 @@
 // istanbul ignore file
 import { FC } from 'react'
-import {
-    Button,
-    Container,
-    Search,
-    TransactionPanelContainer,
-} from '@/components'
+import { Button, Container, Search } from '@/components'
 import {
     BlockPanelContainer,
     BlockTableContainer,
+    TransactionPanelContainer,
     TransactionTableContainer,
 } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
