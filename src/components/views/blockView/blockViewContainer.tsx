@@ -15,7 +15,7 @@ const BlockViewContainer: FC<Props> = props => (
                     'to-[rgba(83,174,168,0.03)]!',
                     props.className
                 )}
-                subtitle={<Skeleton className="h-6 w-20" />}
+                subtitle={<Skeleton className="mt-0.5 h-5.5 w-16 sm:w-19" />}
                 title="Block view"
             >
                 <Skeleton className="h-22" />

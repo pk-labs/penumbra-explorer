@@ -15,8 +15,6 @@ const BlockViewLoader: FC<Props> = async ({ blockHeight, ...props }) => {
         notFound()
     }
 
-    await new Promise(resolve => setTimeout(resolve, 3000))
-
     return <BlockView block={block} {...props} />
 }
 
