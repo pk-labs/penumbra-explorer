@@ -25,10 +25,10 @@ const TransactionViewContainer: FC<Props> = props => (
                 }
                 title="Transaction view"
             >
-                <Skeleton className="h-22" />
-                <Skeleton className="h-33" />
-                <Skeleton className="h-20" />
-                <Skeleton className="h-17" />
+                <Skeleton className="h-22 rounded-sm" />
+                <Skeleton className="h-33 rounded-sm" />
+                <Skeleton className="h-20 rounded-sm" />
+                <Skeleton className="h-17 rounded-sm" />
             </View>
         }
     >

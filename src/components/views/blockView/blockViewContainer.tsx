@@ -18,9 +18,9 @@ const BlockViewContainer: FC<Props> = props => (
                 subtitle={<Skeleton className="mt-0.5 h-5.5 w-16 sm:w-19" />}
                 title="Block view"
             >
-                <Skeleton className="h-22" />
-                <Skeleton className="h-33" />
-                <Skeleton className="h-17" />
+                <Skeleton className="h-22 rounded-sm" />
+                <Skeleton className="h-33 rounded-sm" />
+                <Skeleton className="h-17 rounded-sm" />
             </View>
         }
     >
