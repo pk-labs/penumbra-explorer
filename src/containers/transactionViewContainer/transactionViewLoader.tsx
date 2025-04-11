@@ -1,10 +1,8 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
+import { TransactionView, TransactionViewProps } from '@/components'
 import { getTransaction } from '@/lib/data'
-import TransactionView, {
-    Props as TransactionViewProps,
-} from './transactionView'
 
 export interface Props extends Omit<TransactionViewProps, 'transaction'> {
     transactionHash: string

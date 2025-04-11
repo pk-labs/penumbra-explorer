@@ -1,8 +1,7 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
-import Skeleton from '../../skeleton'
-import { View } from '../view'
+import { Skeleton, View } from '@/components'
 import TransactionViewLoader, { Props } from './transactionViewLoader'
 
 const TransactionViewContainer: FC<Props> = props => (
