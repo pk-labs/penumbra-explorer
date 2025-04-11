@@ -1,6 +1,3 @@
-'use client'
-
-import { usePathname, useSearchParams } from 'next/navigation'
 import { FC } from 'react'
 import { twMerge } from 'tailwind-merge'
 import Button from '../button'
@@ -9,24 +6,19 @@ interface Props {
     className?: string
     fromNext?: string
     fromPrev?: string
+    pathname: string
 }
 
 const Pagination: FC<Props> = props => {
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
     let prevHref: string | undefined
     let nextHref: string | undefined
 
     if (props.fromPrev) {
-        const params = new URLSearchParams(searchParams)
-        params.set('from', props.fromPrev)
-        prevHref = `${pathname}?${params}`
+        prevHref = `${props.pathname}?from=${props.fromPrev}`
     }
 
     if (props.fromNext) {
-        const params = new URLSearchParams(searchParams)
-        params.set('from', props.fromNext)
-        nextHref = `${pathname}?${params}`
+        nextHref = `${props.pathname}?from=${props.fromNext}`
     }
 
     return (

@@ -3,14 +3,14 @@ import Pagination from './pagination'
 
 describe('Pagination', () => {
     test('has disabled pagination buttons by default', async () => {
-        const { container } = render(<Pagination />)
+        const { container } = render(<Pagination pathname="/" />)
 
         expect(getByText(container, 'Prev')).toBeDisabled()
         expect(getByText(container, 'Next')).toBeDisabled()
     })
 
     test('prev button links to previous page', async () => {
-        const { container } = render(<Pagination fromPrev="foo" />)
+        const { container } = render(<Pagination fromPrev="foo" pathname="/" />)
 
         const button = getByText(container, 'Prev')
         expect(button).toBeEnabled()
@@ -18,7 +18,7 @@ describe('Pagination', () => {
     })
 
     test('net button links to next page', async () => {
-        const { container } = render(<Pagination fromNext="foo" />)
+        const { container } = render(<Pagination fromNext="foo" pathname="/" />)
 
         const button = getByText(container, 'Next')
         expect(button).toBeEnabled()
@@ -26,7 +26,10 @@ describe('Pagination', () => {
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<Pagination className="foo bar" />)
+        const { container } = render(
+            <Pagination className="foo bar" pathname="/" />
+        )
+
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })
