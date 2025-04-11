@@ -1,2 +1,2 @@
 export * from './blockView'
-export { View } from './view'
+export * from './transactionView'
