@@ -27,7 +27,7 @@ Penumbra Blockchain Explorer
 | `npm run typecheck`       | Check TypeScript code.                                |
 | `npm run build`           | Build app for deployment.                             |
 | `npm run clean`           | Removes build artifacts.                              |
-| `npm start`               | Run app in deployment environment.                    |
+| `npm start`               | Run app in deployment mode.                           |
 
 ### Project structure
 
