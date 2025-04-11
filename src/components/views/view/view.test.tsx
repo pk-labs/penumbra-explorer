@@ -14,6 +14,11 @@ describe('View', () => {
         getByText(container, 'Baz')
     })
 
+    test('renders any node as subtitle ', async () => {
+        const { container } = render(<View subtitle={123} title="Foo" />)
+        getByText(container, 123)
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(
             <View className="foo bar" title="Foo">

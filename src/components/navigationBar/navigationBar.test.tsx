@@ -24,7 +24,7 @@ jest.mock('../../lib/graphql/graphqlClientProvider', () => (props: any) => (
 
 jest.mock('../menu/menu', () => () => <div>Menu</div>)
 
-jest.mock('../umPrice/umPrice')
+jest.mock('../umPrice/umPriceContainer')
 
 describe('NavigationBar', () => {
     test('hides search on home page', async () => {
