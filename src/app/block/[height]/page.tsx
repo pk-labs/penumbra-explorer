@@ -1,20 +1,13 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import {
+    BlockViewContainer,
     Breadcrumb,
     Breadcrumbs,
     Container,
-    CopyToClipboard,
-    JsonTree,
-    Parameter,
-    Parameters,
-    TransactionTable,
-    View,
 } from '@/components'
-import { getBlock } from '@/lib/data'
-import { formatNumber, generatePageMetadata } from '@/lib/utils'
+import { generatePageMetadata } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ height: string }>
@@ -34,9 +27,9 @@ export const generateMetadata = async (props: Props) => {
 
 const BlockViewPage: FC<Props> = async props => {
     const params = await props.params
-    const block = await getBlock(Number(params.height))
+    const blockHeight = Number(params.height)
 
-    if (!block) {
+    if (Number.isNaN(blockHeight)) {
         notFound()
     }
 
@@ -46,36 +39,7 @@ const BlockViewPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb href="/blocks">Blocks</Breadcrumb>
             </Breadcrumbs>
-            <View
-                className={twMerge(
-                    'from-[rgba(83,174,168,0.25)]!',
-                    'to-[rgba(83,174,168,0.03)]!'
-                )}
-                subtitle={formatNumber(block.height)}
-                title="Block view"
-            >
-                <Parameters>
-                    <Parameter name="Block height">
-                        {block.height}
-                        <CopyToClipboard
-                            className="text-text-primary -mr-0.5"
-                            text={block.height.toString()}
-                            small
-                        />
-                    </Parameter>
-                    <Parameter name="Time">{block.createdAt}</Parameter>
-                    {/*<Parameter name="Proposer">-</Parameter>*/}
-                    <Parameter name="Txs">
-                        {block.transactions.length}
-                    </Parameter>
-                </Parameters>
-                <TransactionTable
-                    emptyStateMessage="This block contains no transactions"
-                    transactions={block.transactions}
-                    embedded
-                />
-                <JsonTree data={block} />
-            </View>
+            <BlockViewContainer blockHeight={blockHeight} />
         </Container>
     )
 }

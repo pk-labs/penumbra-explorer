@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 export interface Props {
     children?: ReactNode
     className?: string
-    subtitle?: string
+    subtitle?: ReactNode | string
     title: string
 }
 
@@ -20,10 +20,12 @@ const View: FC<Props> = props => (
     >
         <header className="flex flex-col gap-1">
             <h2 className="text-base font-medium capitalize">{props.title}</h2>
-            {props.subtitle && (
+            {typeof props.subtitle === 'string' ? (
                 <div className="font-mono text-base break-all">
                     {props.subtitle}
                 </div>
+            ) : (
+                props.subtitle
             )}
         </header>
         {props.children}
