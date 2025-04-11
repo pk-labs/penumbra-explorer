@@ -23,7 +23,10 @@ const UmPriceContainer: FC<Props> = props => {
         <UmPrice className={props.className} {...umPrice} />
     ) : (
         <Skeleton
-            className={twMerge('h-8 w-32 rounded-full', props.className)}
+            className={twMerge(
+                'h-8 w-43 rounded-full sm:w-49 md:w-33 lg:w-49!',
+                props.className
+            )}
         />
     )
 }
