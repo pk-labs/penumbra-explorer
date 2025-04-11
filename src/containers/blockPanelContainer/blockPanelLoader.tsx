@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
+import { BlockPanel, BlockPanelProps } from '@/components'
 import { getBlocks } from '@/lib/data'
-import BlockPanel, { Props as BlockPanelProps } from './blockPanel'
 
 export type Props = Omit<BlockPanelProps, 'number'>
 

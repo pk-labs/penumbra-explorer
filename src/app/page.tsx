@@ -1,13 +1,16 @@
 // istanbul ignore file
 import { FC } from 'react'
 import {
-    BlockPanelContainer,
     Button,
     Container,
     Search,
     TransactionPanelContainer,
 } from '@/components'
-import { BlockTableContainer, TransactionTableContainer } from '@/containers'
+import {
+    BlockPanelContainer,
+    BlockTableContainer,
+    TransactionTableContainer,
+} from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { generatePageMetadata } from '@/lib/utils'
 

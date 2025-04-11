@@ -1,7 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import Skeleton from '../../skeleton'
-import BlockPanel from './blockPanel'
+import { BlockPanel, Skeleton } from '@/components'
 import BlockPanelLoader, { Props } from './blockPanelLoader'
 
 const BlockPanelContainer: FC<Props> = props => (
