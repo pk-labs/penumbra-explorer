@@ -96,7 +96,10 @@ const NavigationBar: FC<Props> = props => {
                 )}
                 <UmPriceContainer className="hidden sm:flex" />
                 <Menu
-                    className="relative z-40 backdrop-blur-[32px] md:hidden"
+                    className={twMerge(
+                        'relative z-40 rounded-full backdrop-blur-[32px]',
+                        'md:hidden'
+                    )}
                     onClose={closeMenu}
                     onOpen={openMenu}
                     open={menuOpen}
