@@ -9,7 +9,7 @@ const BlockPanelContainer: FC<Props> = props => (
         fallback={
             <BlockPanel
                 className={props.className}
-                number={<Skeleton className="mt-2 h-8" />}
+                number={<Skeleton className="my-1 h-8 w-30 sm:w-34" />}
             />
         }
     >
