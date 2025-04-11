@@ -4,7 +4,8 @@ import '@/lib/fonts'
 import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { NavigationBar, PageViewTracker } from '@/components'
+import { NavigationBar } from '@/components'
+import { PageViewTracker } from '@/containers'
 import { background } from '@/lib/images'
 
 export const viewport: Viewport = {
