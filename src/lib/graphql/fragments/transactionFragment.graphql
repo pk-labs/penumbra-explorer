@@ -14,4 +14,5 @@ fragment Transaction on Transaction {
         }
     }
     raw
+    rawJson
 }

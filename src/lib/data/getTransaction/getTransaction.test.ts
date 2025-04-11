@@ -14,7 +14,12 @@ describe('getTransaction', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { transaction: { hash: 'FoO' } },
+                        data: {
+                            transaction: {
+                                hash: 'FoO',
+                                rawJson: { tx_result_decoded: {} },
+                            },
+                        },
                     }),
             }),
         })

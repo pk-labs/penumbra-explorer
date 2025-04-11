@@ -38,7 +38,7 @@ const BlockView: FC<Props> = props => (
             transactions={props.block.transactions}
             embedded
         />
-        <JsonTree data={props.block} />
+        <JsonTree data={props.block.rawJson} />
     </View>
 )
 

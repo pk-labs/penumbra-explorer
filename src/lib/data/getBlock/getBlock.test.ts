@@ -14,7 +14,12 @@ describe('getBlock', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { block: { transactions: [{ hash: 'FoO' }] } },
+                        data: {
+                            block: {
+                                rawJson: { block: {} },
+                                transactions: [{ hash: 'FoO' }],
+                            },
+                        },
                     }),
             }),
         })

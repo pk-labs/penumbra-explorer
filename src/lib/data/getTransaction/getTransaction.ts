@@ -1,9 +1,5 @@
 import { TransformedTransactionFragment } from '@/lib/types'
-import {
-    decodeTransaction,
-    findPrimaryAction,
-    transactionToJson,
-} from '@/lib/utils'
+import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import createGraphqlClient from '../../graphql/createGraphqlClient'
 import {
     TransactionQuery,
@@ -31,13 +27,11 @@ const getTransaction = async (
         return
     }
 
-    let json
     let primaryAction
     let actionCount
 
     try {
         const decoded = decodeTransaction(result.data.transaction.raw)
-        json = transactionToJson(decoded)
         primaryAction = findPrimaryAction(decoded)
         actionCount = decoded.body?.actions.length
     } catch (e) {
@@ -49,8 +43,17 @@ const getTransaction = async (
         ...result.data.transaction,
         actionCount: actionCount ?? 0,
         hash: result.data.transaction.hash.toLowerCase(),
-        json,
         primaryAction,
+        rawJson: {
+            anchor: result.data.transaction.rawJson.tx_result_decoded.anchor,
+            bindingSig:
+                result.data.transaction.rawJson.tx_result_decoded.bindingSig,
+            body: result.data.transaction.rawJson.tx_result_decoded.body,
+            events: result.data.transaction.rawJson.events,
+            hash: result.data.transaction.rawJson.hash,
+            height: result.data.transaction.rawJson.height,
+            timestamp: result.data.transaction.rawJson.timestamp,
+        },
     }
 }
 

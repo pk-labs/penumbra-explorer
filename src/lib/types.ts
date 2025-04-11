@@ -6,7 +6,8 @@ import {
 } from '@/lib/graphql/generated/types'
 
 export interface TransformedBlockFragment
-    extends Omit<BlockFragment, 'transactions'> {
+    extends Omit<BlockFragment, 'rawJson' | 'transactions'> {
+    rawJson: object
     transactions: TransformedPartialTransactionFragment[]
 }
 
@@ -14,16 +15,16 @@ export interface TransformedPartialBlockFragment extends PartialBlockFragment {
     timeAgo?: string
 }
 
-export interface TransformedTransactionFragment extends TransactionFragment {
+export interface TransformedTransactionFragment
+    extends Omit<TransactionFragment, 'rawJson'> {
     actionCount: number
-    json?: Record<string, any>
     primaryAction?: ActionType
+    rawJson: object
 }
 
 export interface TransformedPartialTransactionFragment
     extends PartialTransactionFragment {
     actionCount: number
-    json?: Record<string, any>
     primaryAction?: ActionType
     timeAgo?: string
 }

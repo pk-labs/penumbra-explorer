@@ -20,6 +20,7 @@ export const TransactionFragmentDoc = gql`
     }
   }
   raw
+  rawJson
 }
     `;
 export const BlockFragmentDoc = gql`
@@ -29,6 +30,7 @@ export const BlockFragmentDoc = gql`
   transactions {
     ...Transaction
   }
+  rawJson
 }
     ${TransactionFragmentDoc}`;
 export const PartialBlockFragmentDoc = gql`
