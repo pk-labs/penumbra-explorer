@@ -1,10 +1,9 @@
 // istanbul ignore file
 import { redirect } from 'next/navigation'
 import { FC } from 'react'
+import { BlockTable, BlockTableProps, Pagination } from '@/components'
 import { getBlocks } from '@/lib/data'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
-import Pagination from '../../pagination'
-import BlockTable, { Props as BlockTableProps } from './blockTable'
 
 export interface Props extends Omit<BlockTableProps, 'blocks' | 'footer'> {
     limit: number

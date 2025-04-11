@@ -2,13 +2,13 @@
 import { FC } from 'react'
 import {
     BlockPanelContainer,
-    BlockTableContainer,
     Button,
     Container,
     Search,
     TransactionPanelContainer,
     TransactionTableContainer,
 } from '@/components'
+import { BlockTableContainer } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { generatePageMetadata } from '@/lib/utils'
 

@@ -1,11 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
-import {
-    BlockTableContainer,
-    Breadcrumb,
-    Breadcrumbs,
-    Container,
-} from '@/components'
+import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import { BlockTableContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
