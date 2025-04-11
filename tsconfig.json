@@ -20,6 +20,9 @@
             "@/components": [
                 "./src/components"
             ],
+            "@/containers": [
+                "./src/containers"
+            ],
             "@/lib/*": [
                 "./src/lib/*"
             ]

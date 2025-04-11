@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC, useCallback, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { UmPriceContainer } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
 import Button from '../button'
@@ -14,7 +15,6 @@ import { Menu, MenuItem } from '../menu'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
-import { UmPriceContainer } from '../umPrice'
 
 interface Props {
     className?: string

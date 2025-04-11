@@ -3,10 +3,9 @@
 
 import { FC, useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { Skeleton, UmPrice } from '@/components'
 import { getUmPrice } from '@/lib/data'
 import { UmPriceData } from '@/lib/types'
-import Skeleton from '../skeleton'
-import UmPrice from './umPrice'
 
 interface Props {
     className?: string
