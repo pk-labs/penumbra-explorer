@@ -12,37 +12,33 @@ import { TransformedPartialTransactionFragment } from '@/lib/types'
 
 export interface Props
     extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
+    from?: string
     limit: number
-    pagination?: {
-        from?: string
-        pathname: string
-    }
+    pathname: string
 }
 
-const TransactionTableLoader: FC<Props> = async ({
+const PaginatedTransactionsLoader: FC<Props> = async ({
+    from,
     limit,
-    pagination,
+    pathname,
     ...props
 }) => {
     let transactions: TransformedPartialTransactionFragment[] | undefined
     let fromNext: string | undefined
     let fromPrev: string | undefined
 
-    if (pagination?.from) {
+    if (from) {
         const latestTransactions = await getTransactions({
             latest: { limit: 1 },
         })
 
-        if (
-            latestTransactions?.length &&
-            pagination.from === latestTransactions[0].hash
-        ) {
-            redirect(pagination.pathname)
+        if (latestTransactions?.length && from === latestTransactions[0].hash) {
+            redirect(pathname)
         } else {
             transactions = await getTransactions({
                 range: {
                     direction: RangeDirection.Next,
-                    fromTxHash: pagination.from.toUpperCase(),
+                    fromTxHash: from.toUpperCase(),
                     limit,
                 },
             })
@@ -53,7 +49,7 @@ const TransactionTableLoader: FC<Props> = async ({
                 const prevTransactions = await getTransactions({
                     range: {
                         direction: RangeDirection.Previous,
-                        fromTxHash: pagination.from.toUpperCase(),
+                        fromTxHash: from.toUpperCase(),
                         limit,
                     },
                 })
@@ -62,13 +58,13 @@ const TransactionTableLoader: FC<Props> = async ({
                     fromPrev = prevTransactions[0].hash
                 }
             } else {
-                redirect(pagination.pathname)
+                redirect(pathname)
             }
         }
     } else {
         transactions = await getTransactions({ latest: { limit } })
 
-        if (pagination && transactions?.length) {
+        if (transactions?.length) {
             fromNext = transactions[transactions.length - 1].hash
         }
     }
@@ -76,13 +72,11 @@ const TransactionTableLoader: FC<Props> = async ({
     return (
         <TransactionTable
             footer={
-                pagination ? (
-                    <Pagination
-                        fromNext={fromNext?.toString()}
-                        fromPrev={fromPrev?.toString()}
-                        pathname={pagination.pathname}
-                    />
-                ) : undefined
+                <Pagination
+                    fromNext={fromNext?.toString()}
+                    fromPrev={fromPrev?.toString()}
+                    pathname={pathname}
+                />
             }
             transactions={transactions}
             {...props}
@@ -90,4 +84,4 @@ const TransactionTableLoader: FC<Props> = async ({
     )
 }
 
-export default TransactionTableLoader
+export default PaginatedTransactionsLoader

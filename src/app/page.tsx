@@ -4,8 +4,8 @@ import { Button, Container, Search } from '@/components'
 import {
     BlockPanelContainer,
     LatestBlocksContainer,
+    LatestTransactionsContainer,
     TransactionPanelContainer,
-    TransactionTableContainer,
 } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { generatePageMetadata } from '@/lib/utils'
@@ -41,7 +41,7 @@ const HomePage: FC = async () => (
                 limit={10}
                 title="Latest blocks"
             />
-            <TransactionTableContainer
+            <LatestTransactionsContainer
                 actions={
                     <Button density="compact" href="/txs">
                         View All

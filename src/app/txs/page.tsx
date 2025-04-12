@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
-import { TransactionTableContainer } from '@/containers'
+import { PaginatedTransactionsContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
@@ -27,12 +27,10 @@ const TransactionsPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
-            <TransactionTableContainer
+            <PaginatedTransactionsContainer
+                from={searchParams.from}
                 limit={20}
-                pagination={{
-                    from: searchParams.from,
-                    pathname: '/txs',
-                }}
+                pathname="/txs"
                 time
             />
         </Container>

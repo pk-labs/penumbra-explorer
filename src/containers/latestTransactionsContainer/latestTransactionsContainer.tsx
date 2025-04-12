@@ -1,23 +1,15 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Pagination, Skeleton, Table, TableCell, TableRow } from '@/components'
-import TransactionTableLoader, { Props } from './transactionTableLoader'
+import { Skeleton, Table, TableCell, TableRow } from '@/components'
+import LatestTransactionsLoader, { Props } from './latestTransactionsLoader'
 
-const TransactionTableContainer: FC<Props> = props => (
+const LatestTransactionsContainer: FC<Props> = props => (
     <Suspense
-        key={JSON.stringify({
-            limit: props.limit,
-            pagination: props.pagination,
-        })}
+        key={props.limit}
         fallback={
             <Table
                 actions={props.actions}
                 className={props.className}
-                footer={
-                    props.pagination ? (
-                        <Pagination pathname={props.pagination.pathname} />
-                    ) : undefined
-                }
                 title={props.title}
             >
                 <thead>
@@ -39,8 +31,8 @@ const TransactionTableContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <TransactionTableLoader {...props} />
+        <LatestTransactionsLoader {...props} />
     </Suspense>
 )
 
-export default TransactionTableContainer
+export default LatestTransactionsContainer
