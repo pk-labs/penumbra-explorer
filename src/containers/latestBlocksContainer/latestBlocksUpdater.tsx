@@ -3,7 +3,7 @@
 
 import { FC, useEffect, useState } from 'react'
 import { BlockPanel, BlockTable } from '@/components'
-import { heartbeat } from '@/lib/constants'
+import { pollingInterval } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
 import { useBlocksQuery } from '@/lib/graphql/generated/hooks'
 import { TransformedPartialBlockFragment } from '@/lib/types'
@@ -26,7 +26,7 @@ const LatestBlocksUpdater: FC<Props> = props => {
     useEffect(() => {
         const timeout = setInterval(() => {
             executeBlocksQuery()
-        }, heartbeat)
+        }, pollingInterval)
 
         return () => clearTimeout(timeout)
     }, [executeBlocksQuery])
