@@ -23,6 +23,7 @@ const getBlocks = async (
 
     const now = dayjs()
 
+    // TODO: Extract to utils
     return result.data?.blocks
         ?.map(block => ({
             ...block,
