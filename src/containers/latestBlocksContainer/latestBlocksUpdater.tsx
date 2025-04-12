@@ -2,7 +2,7 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
-import { BlockTable } from '@/components'
+import { BlockPanel, BlockTable } from '@/components'
 import { heartbeat } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
 import { useBlocksQuery } from '@/lib/graphql/generated/hooks'
@@ -13,13 +13,13 @@ interface Props extends LatestBlocksLoaderProps {
     initialBlocks?: TransformedPartialBlockFragment[]
 }
 
-const LatestBlocksUpdater: FC<Props> = ({ limit, ...props }) => {
+const LatestBlocksUpdater: FC<Props> = props => {
     const [blocks, setBlocks] = useState(props.initialBlocks)
 
     const [blocksQuery, executeBlocksQuery] = useBlocksQuery({
         pause: true,
         variables: {
-            selector: { latest: { limit } },
+            selector: { latest: { limit: props.limit } },
         },
     })
 
@@ -49,7 +49,22 @@ const LatestBlocksUpdater: FC<Props> = ({ limit, ...props }) => {
         }
     }, [blocksQuery.data])
 
-    return <BlockTable blocks={blocks} {...props} />
+    const latestBlockHeight = blocks?.length ? blocks[0].height : undefined
+
+    return (
+        <>
+            <BlockPanel
+                className={props.blockPanelClassName}
+                number={latestBlockHeight}
+            />
+            <BlockTable
+                actions={props.actions}
+                blocks={blocks}
+                className={props.blockTableClassName}
+                title={props.title}
+            />
+        </>
+    )
 }
 
 export default LatestBlocksUpdater

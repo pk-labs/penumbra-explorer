@@ -1,8 +1,8 @@
 // istanbul ignore file
 import { FC } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { Button, Container, Search } from '@/components'
 import {
-    BlockPanelContainer,
     LatestBlocksContainer,
     LatestTransactionsContainer,
     TransactionPanelContainer,
@@ -29,17 +29,20 @@ const HomePage: FC = async () => (
             </GraphqlClientProvider>
         </Container>
         <Container className="grid grid-cols-6 gap-4">
-            <BlockPanelContainer className="col-span-6 sm:col-span-3" />
-            <TransactionPanelContainer className="col-span-6 sm:col-span-3" />
             <LatestBlocksContainer
-                actions={
-                    <Button density="compact" href="/blocks">
-                        View All
-                    </Button>
-                }
-                className="col-span-6 lg:col-span-3"
+                blockPanelClassName={twMerge(
+                    'col-span-6 col-start-1 row-1 sm:col-span-3 sm:col-start-1'
+                )}
+                blockTableClassName={twMerge(
+                    'col-span-6 col-start-1 row-3 lg:col-span-3 lg:row-2'
+                )}
                 limit={10}
-                title="Latest blocks"
+            />
+            <TransactionPanelContainer
+                className={twMerge(
+                    'col-span-6 col-start-1 row-2 sm:col-span-3',
+                    'sm:col-start-4 sm:row-1'
+                )}
             />
             <LatestTransactionsContainer
                 actions={
@@ -47,7 +50,10 @@ const HomePage: FC = async () => (
                         View All
                     </Button>
                 }
-                className="col-span-6 lg:col-span-3"
+                className={twMerge(
+                    'col-span-6 col-start-1 row-4 lg:col-span-3',
+                    'lg:col-start-4 lg:row-2'
+                )}
                 limit={10}
                 title="Latest transactions"
             />
