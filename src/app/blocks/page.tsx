@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
-import { BlockTableContainer } from '@/containers'
+import { PaginatedBlocksContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
@@ -27,12 +27,10 @@ const BlocksPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb>Blocks</Breadcrumb>
             </Breadcrumbs>
-            <BlockTableContainer
+            <PaginatedBlocksContainer
+                from={Number(searchParams.from)}
                 limit={20}
-                pagination={{
-                    from: Number(searchParams.from),
-                    pathname: '/blocks',
-                }}
+                pathname="/blocks"
             />
         </Container>
     )

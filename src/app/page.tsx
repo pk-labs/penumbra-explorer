@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Button, Container, Search } from '@/components'
 import {
     BlockPanelContainer,
-    BlockTableContainer,
+    LatestBlocksContainer,
     TransactionPanelContainer,
     TransactionTableContainer,
 } from '@/containers'
@@ -31,7 +31,7 @@ const HomePage: FC = async () => (
         <Container className="grid grid-cols-6 gap-4">
             <BlockPanelContainer className="col-span-6 sm:col-span-3" />
             <TransactionPanelContainer className="col-span-6 sm:col-span-3" />
-            <BlockTableContainer
+            <LatestBlocksContainer
                 actions={
                     <Button density="compact" href="/blocks">
                         View All

@@ -6,37 +6,40 @@ import { getBlocks } from '@/lib/data'
 import { PartialBlockFragment } from '@/lib/graphql/generated/types'
 
 export interface Props extends Omit<BlockTableProps, 'blocks' | 'footer'> {
+    from: number
     limit: number
-    pagination?: {
-        from: number
-        pathname: string
-    }
+    pathname: string
 }
 
-const BlockTableLoader: FC<Props> = async ({ limit, pagination, ...props }) => {
+const PaginatedBlocksLoader: FC<Props> = async ({
+    from,
+    limit,
+    pathname,
+    ...props
+}) => {
     let blocks: PartialBlockFragment[] | undefined
     let fromNext: number | undefined
     let fromPrev: number | undefined
 
-    if (pagination && Number.isInteger(pagination.from)) {
+    if (Number.isInteger(from)) {
         blocks = await getBlocks({
-            range: { from: pagination.from, to: pagination.from + limit - 1 },
+            range: { from, to: from + limit - 1 },
         })
 
         if (blocks?.length) {
-            fromPrev = pagination.from + limit
+            fromPrev = from + limit
 
             fromNext =
                 blocks[blocks.length - 1].height > 1
-                    ? Math.max(pagination.from - limit, 1)
+                    ? Math.max(from - limit, 1)
                     : undefined
         } else {
-            redirect(pagination.pathname)
+            redirect(pathname)
         }
     } else {
         blocks = await getBlocks({ latest: { limit } })
 
-        if (pagination && blocks?.length) {
+        if (blocks?.length) {
             const { height } = blocks[blocks.length - 1]
             fromNext = height > 1 ? Math.max(height - limit, 1) : undefined
         }
@@ -46,17 +49,15 @@ const BlockTableLoader: FC<Props> = async ({ limit, pagination, ...props }) => {
         <BlockTable
             blocks={blocks}
             footer={
-                pagination ? (
-                    <Pagination
-                        fromNext={fromNext?.toString()}
-                        fromPrev={fromPrev?.toString()}
-                        pathname={pagination.pathname}
-                    />
-                ) : undefined
+                <Pagination
+                    fromNext={fromNext?.toString()}
+                    fromPrev={fromPrev?.toString()}
+                    pathname={pathname}
+                />
             }
             {...props}
         />
     )
 }
 
-export default BlockTableLoader
+export default PaginatedBlocksLoader

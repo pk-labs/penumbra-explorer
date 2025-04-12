@@ -1,23 +1,20 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import { Pagination, Skeleton, Table, TableCell, TableRow } from '@/components'
-import BlockTableLoader, { Props } from './blockTableLoader'
+import PaginatedBlocksLoader, { Props } from './paginatedBlocksLoader'
 
-const BlockTableContainer: FC<Props> = props => (
+const PaginatedBlocksContainer: FC<Props> = props => (
     <Suspense
         key={JSON.stringify({
+            from: props.from,
             limit: props.limit,
-            pagination: props.pagination,
+            pathname: props.pathname,
         })}
         fallback={
             <Table
                 actions={props.actions}
                 className={props.className}
-                footer={
-                    props.pagination ? (
-                        <Pagination pathname={props.pagination.pathname} />
-                    ) : undefined
-                }
+                footer={<Pagination pathname={props.pathname} />}
                 title={props.title}
             >
                 <thead>
@@ -39,8 +36,8 @@ const BlockTableContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <BlockTableLoader {...props} />
+        <PaginatedBlocksLoader {...props} />
     </Suspense>
 )
 
-export default BlockTableContainer
+export default PaginatedBlocksContainer
