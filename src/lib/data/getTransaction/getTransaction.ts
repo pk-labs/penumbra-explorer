@@ -29,11 +29,13 @@ const getTransaction = async (
 
     let primaryAction
     let actionCount
+    let memo
 
     try {
         const decoded = decodeTransaction(result.data.transaction.raw)
         primaryAction = findPrimaryAction(decoded)
         actionCount = decoded.body?.actions.length
+        memo = Boolean(decoded.body?.memo)
     } catch (e) {
         // istanbul ignore next
         console.error(e)
@@ -43,6 +45,7 @@ const getTransaction = async (
         ...result.data.transaction,
         actionCount: actionCount ?? 0,
         hash: result.data.transaction.hash.toLowerCase(),
+        memo: memo ?? false,
         primaryAction,
         rawJson: {
             anchor: result.data.transaction.rawJson.tx_result_decoded.anchor,

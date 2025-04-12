@@ -11,7 +11,6 @@ export const TransactionFragmentDoc = gql`
     createdAt
   }
   body {
-    memo
     parameters {
       chainId
       fee {

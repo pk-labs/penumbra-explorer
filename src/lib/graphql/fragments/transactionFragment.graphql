@@ -5,7 +5,6 @@ fragment Transaction on Transaction {
         createdAt
     }
     body {
-        memo
         parameters {
             chainId
             fee {

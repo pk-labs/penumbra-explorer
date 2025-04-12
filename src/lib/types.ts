@@ -18,6 +18,7 @@ export interface TransformedPartialBlockFragment extends PartialBlockFragment {
 export interface TransformedTransactionFragment
     extends Omit<TransactionFragment, 'rawJson'> {
     actionCount: number
+    memo: boolean
     primaryAction?: ActionType
     rawJson: object
 }

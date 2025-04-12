@@ -51,7 +51,7 @@ const TransactionView: FC<Props> = props => (
                 {props.transaction.block.createdAt}
             </Parameter>
         </Parameters>
-        {props.transaction.body.memo && <Memo />}
+        {props.transaction.memo && <Memo />}
         <Actions
             blockHeight={props.transaction.block.height}
             chainId={props.transaction.body.parameters.chainId}
