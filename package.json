@@ -28,7 +28,7 @@
         "fathom-client": "^3.7.2",
         "graphql": "^16.10.0",
         "graphql-tag": "^2.12.6",
-        "lucide-react": "^0.487.0",
+        "lucide-react": "^0.488.0",
         "motion": "^12.4.10",
         "next": "^15.1.6",
         "react": "^19.0.0",
