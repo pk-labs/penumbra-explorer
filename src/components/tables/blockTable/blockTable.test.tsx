@@ -33,20 +33,83 @@ describe('BlockTable', () => {
                 blocks={[
                     {
                         createdAt,
-                        height: 123,
-                        transactionsCount: 98,
+                        height: 456,
+                        transactionsCount: 99,
                     },
                     {
                         createdAt,
-                        height: 456,
-                        transactionsCount: 99,
+                        height: 123,
+                        transactionsCount: 98,
                     },
                 ]}
             />
         )
 
-        expect(getByText(container, 123).closest('tr')).toHaveTextContent('98')
         expect(getByText(container, 456).closest('tr')).toHaveTextContent('99')
+        expect(getByText(container, 123).closest('tr')).toHaveTextContent('98')
+    })
+
+    test('highlights new blocks', async () => {
+        const createdAt = dayjs('2025-01-01').toISOString()
+
+        const { container, rerender } = render(
+            <BlockTable
+                blocks={[
+                    {
+                        createdAt,
+                        height: 2,
+                        transactionsCount: 0,
+                    },
+                    {
+                        createdAt,
+                        height: 1,
+                        transactionsCount: 0,
+                    },
+                ]}
+            />
+        )
+
+        expect(getByText(container, 2).closest('tr')).not.toHaveClass(
+            'animate-new-data-bg'
+        )
+
+        expect(getByText(container, 1).closest('tr')).not.toHaveClass(
+            'animate-new-data-bg'
+        )
+
+        rerender(
+            <BlockTable
+                blocks={[
+                    {
+                        createdAt,
+                        height: 3,
+                        transactionsCount: 0,
+                    },
+                    {
+                        createdAt,
+                        height: 2,
+                        transactionsCount: 0,
+                    },
+                    {
+                        createdAt,
+                        height: 1,
+                        transactionsCount: 0,
+                    },
+                ]}
+            />
+        )
+
+        expect(getByText(container, 3).closest('tr')).toHaveClass(
+            'animate-new-data-bg'
+        )
+
+        expect(getByText(container, 2).closest('tr')).not.toHaveClass(
+            'animate-new-data-bg'
+        )
+
+        expect(getByText(container, 1).closest('tr')).not.toHaveClass(
+            'animate-new-data-bg'
+        )
     })
 
     test('renders proposer', async () => {
