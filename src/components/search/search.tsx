@@ -184,7 +184,7 @@ const Search: FC<Props> = props => {
                 className={classNames(
                     'transition-stroke absolute top-1/2 left-4 z-10',
                     'stroke-text-secondary -translate-y-1/2 cursor-pointer',
-                    'hover:stroke-text-primary duration-200 ease-(--fastOutSlowIn)'
+                    'hover:stroke-text-primary ease-fast-out-slow-in duration-200'
                 )}
                 onClick={focusInput}
                 size={16}

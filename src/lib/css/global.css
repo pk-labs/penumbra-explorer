@@ -26,10 +26,12 @@
     --blur-lg: 32px;
     --blur-xl: 64px;
 
+    /* Easings */
+    --ease-fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
+
     /* Custom */
     --pageMaxWidth: calc(1rem / 16 * 1536);
     --pageNarrowWidth: calc(1rem / 16 * 752);
-    --fastOutSlowIn: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* https://tailwindcss.com/docs/preflight#extending-preflight */
@@ -45,7 +47,7 @@
     a {
         color: var(--color-text-primary);
         text-decoration: none;
-        transition: color 200ms var(--fastOutSlowIn);
+        transition: color 200ms var(--ease-fast-out-slow-in);
 
         &:hover {
             color: var(--color-text-special);

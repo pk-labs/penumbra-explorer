@@ -31,7 +31,7 @@ const Tab: FC<Props> = props => {
                 'before:left-1/2 before:h-[2px] before:-translate-x-1/2',
                 'before:bg-primary-main',
                 'before:transition-[width,transform] before:duration-200',
-                'hover:text-text-primary before:ease-(--fastOutSlowIn)',
+                'hover:text-text-primary before:ease-fast-out-slow-in',
                 active
                     ? 'text-text-primary bg-[0px_0px] before:w-[calc(100%-16px)]'
                     : 'text-text-secondary bg-[0px_36px] before:w-0'
