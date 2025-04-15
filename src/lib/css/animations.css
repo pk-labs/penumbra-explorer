@@ -60,4 +60,16 @@
             left: 150%;
         }
     }
+
+    --animate-new-data-bg: new-data-bg-animation 3s ease-out;
+
+    @keyframes new-data-bg-animation {
+        from {
+            background-color: var(--color-action-hoverOverlay);
+        }
+
+        to {
+            background-color: transparent;
+        }
+    }
 }
