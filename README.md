@@ -103,6 +103,6 @@ triggered manually in the GitHub Actions web interface with
 
 - https://day.js.org/ for date manipulation and formatting
 - https://motion.dev/ for animations such as dashboard number count-up
-- https://github.com/dcastil/tailwind-merge for conditional or multi-line
-  `className` construction 
+- https://github.com/lukeed/clsx for conditional `className` construction
+- https://github.com/dcastil/tailwind-merge for merging Tailwind classes
 - https://usefathom.com/ for production page view analytics

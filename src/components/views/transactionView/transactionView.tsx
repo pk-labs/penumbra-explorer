@@ -1,9 +1,8 @@
 import { Link2Icon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { TransformedTransactionFragment } from '@/lib/types'
-import { shortenHash } from '@/lib/utils'
+import { classNames, shortenHash } from '@/lib/utils'
 import Actions from '../../actions'
 import CopyToClipboard from '../../copyToClipboard'
 import JsonTree from '../../jsonTree'
@@ -18,7 +17,7 @@ export interface Props extends Pick<ViewProps, 'className'> {
 
 const TransactionView: FC<Props> = props => (
     <View
-        className={twMerge(
+        className={classNames(
             'from-[rgba(193,166,204,0.25)]!',
             'to-[rgba(193,166,204,0.03)]!',
             props.className
@@ -37,7 +36,7 @@ const TransactionView: FC<Props> = props => (
             </Parameter>
             <Parameter name="Block height">
                 <Link
-                    className={twMerge(
+                    className={classNames(
                         'inline-flex items-center gap-1 text-inherit',
                         'hover:text-primary-light'
                     )}

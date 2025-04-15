@@ -11,7 +11,6 @@ import {
     useRef,
     useState,
 } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { useClient } from 'urql'
 import {
     SearchQuery,
@@ -19,6 +18,7 @@ import {
 } from '@/lib/graphql/generated/types'
 import { searchQuery } from '@/lib/graphql/queries'
 import { useDebounce, useLocalStorage } from '@/lib/hooks'
+import { classNames } from '@/lib/utils'
 import { SearchResult } from './searchResult'
 import { SearchResultOverlay } from './searchResultOverlay'
 
@@ -130,7 +130,7 @@ const Search: FC<Props> = props => {
                     }
                 >
                     <ul
-                        className={twMerge(
+                        className={classNames(
                             'flex flex-col gap-2 font-mono text-sm',
                             'font-medium'
                         )}
@@ -159,7 +159,7 @@ const Search: FC<Props> = props => {
         searchResults = (
             <SearchResultOverlay title="Recent search results">
                 <ul
-                    className={twMerge(
+                    className={classNames(
                         'flex flex-col gap-2 font-mono text-sm',
                         'font-medium'
                     )}
@@ -174,14 +174,14 @@ const Search: FC<Props> = props => {
 
     return (
         <div
-            className={twMerge(
+            className={classNames(
                 'relative w-full sm:w-[568px] xl:w-[639px]!',
                 props.className
             )}
             onClick={onClick}
         >
             <SearchIcon
-                className={twMerge(
+                className={classNames(
                     'transition-stroke absolute top-1/2 left-4 z-10',
                     'stroke-text-secondary -translate-y-1/2 cursor-pointer',
                     'hover:stroke-text-primary duration-200 ease-(--fastOutSlowIn)'
@@ -192,7 +192,7 @@ const Search: FC<Props> = props => {
             <input
                 ref={inputRef}
                 autoFocus={props.autoFocus}
-                className={twMerge(
+                className={classNames(
                     'font-default bg-other-tonalFill5 w-full rounded-sm p-4',
                     'text-text-secondary pl-11 text-base outline-2',
                     'outline-transparent backdrop-blur-[32px]',

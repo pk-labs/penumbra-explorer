@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { Skeleton, View } from '@/components'
+import { classNames } from '@/lib/utils'
 import BlockViewLoader, { Props } from './blockViewLoader'
 
 const BlockViewContainer: FC<Props> = props => (
@@ -9,7 +9,7 @@ const BlockViewContainer: FC<Props> = props => (
         key={props.blockHeight}
         fallback={
             <View
-                className={twMerge(
+                className={classNames(
                     'from-[rgba(83,174,168,0.25)]!',
                     'to-[rgba(83,174,168,0.03)]!',
                     props.className

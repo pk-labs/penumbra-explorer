@@ -1,6 +1,5 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { Button, Container, Search } from '@/components'
 import {
     LatestBlocksContainer,
@@ -8,7 +7,7 @@ import {
     TransactionPanelContainer,
 } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { generatePageMetadata } from '@/lib/utils'
+import { classNames, generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
     'Noctis',
@@ -30,16 +29,16 @@ const HomePage: FC = async () => (
         </Container>
         <Container className="grid grid-cols-6 gap-4">
             <LatestBlocksContainer
-                blockPanelClassName={twMerge(
+                blockPanelClassName={classNames(
                     'col-span-6 col-start-1 row-1 sm:col-span-3 sm:col-start-1'
                 )}
-                blockTableClassName={twMerge(
+                blockTableClassName={classNames(
                     'col-span-6 col-start-1 row-3 lg:col-span-3 lg:row-2'
                 )}
                 limit={10}
             />
             <TransactionPanelContainer
-                className={twMerge(
+                className={classNames(
                     'col-span-6 col-start-1 row-2 sm:col-span-3',
                     'sm:col-start-4 sm:row-1'
                 )}
@@ -50,7 +49,7 @@ const HomePage: FC = async () => (
                         View All
                     </Button>
                 }
-                className={twMerge(
+                className={classNames(
                     'col-span-6 col-start-1 row-4 lg:col-span-3',
                     'lg:col-start-4 lg:row-2'
                 )}

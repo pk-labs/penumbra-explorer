@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from 'lucide-react'
 import { Children, FC, ReactElement } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import { BreadcrumbProps } from './breadcrumb'
 
 interface Props {
@@ -21,7 +21,10 @@ const Breadcrumbs: FC<Props> = props => {
 
     return (
         <nav
-            className={twMerge('mb-4 flex items-center gap-2', props.className)}
+            className={classNames(
+                'mb-4 flex items-center gap-2',
+                props.className
+            )}
         >
             {Children.map(props.children, (child, index) => (
                 <>

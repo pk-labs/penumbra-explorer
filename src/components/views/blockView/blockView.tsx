@@ -1,7 +1,6 @@
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { TransformedBlockFragment } from '@/lib/types'
-import { formatNumber } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
 import { Parameter, Parameters } from '../../parameters'
 import { View, ViewProps } from '../view'
@@ -12,7 +11,7 @@ export interface Props extends Pick<ViewProps, 'className'> {
 
 const BlockView: FC<Props> = props => (
     <View
-        className={twMerge(
+        className={classNames(
             'from-[rgba(83,174,168,0.25)]!',
             'to-[rgba(83,174,168,0.03)]!',
             props.className

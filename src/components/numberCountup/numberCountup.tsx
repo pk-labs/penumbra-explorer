@@ -2,8 +2,7 @@
 
 import { motion, useAnimate, useMotionValue, useTransform } from 'motion/react'
 import { FC, useEffect } from 'react'
-import { twMerge } from 'tailwind-merge'
-import { formatNumber } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
     className?: string
@@ -34,7 +33,7 @@ const NumberCountup: FC<Props> = props => {
     return (
         <motion.span
             ref={scope}
-            className={twMerge(
+            className={classNames(
                 'font-mono text-3xl font-medium',
                 props.className
             )}

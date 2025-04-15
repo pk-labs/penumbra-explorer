@@ -5,10 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC, useCallback, useState } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { UmPriceContainer } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { logo } from '@/lib/images'
+import { classNames } from '@/lib/utils'
 import Button from '../button'
 import Container from '../container'
 import { Menu, MenuItem } from '../menu'
@@ -43,7 +43,7 @@ const NavigationBar: FC<Props> = props => {
     return (
         <Container
             as="header"
-            className={twMerge(
+            className={classNames(
                 'grid h-19 grid-cols-2 items-center md:grid-cols-3',
                 props.className
             )}
@@ -96,7 +96,7 @@ const NavigationBar: FC<Props> = props => {
                 )}
                 <UmPriceContainer className="hidden sm:flex" />
                 <Menu
-                    className={twMerge(
+                    className={classNames(
                         'relative z-40 rounded-full backdrop-blur-[32px]',
                         'md:hidden'
                     )}

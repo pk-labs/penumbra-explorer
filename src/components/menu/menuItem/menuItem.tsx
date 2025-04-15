@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 
 export interface Props {
     children: ReactNode
@@ -25,7 +25,7 @@ const MenuItem: FC<Props> = props => {
 
     return (
         <Link
-            className={twMerge(
+            className={classNames(
                 'ease-(var(--fastOutSlowIn)) flex h-8 items-center gap-2 px-7',
                 'text-md transition-[color,background] duration-200',
                 'hover:text-text-primary hover:bg-other-tonalFill5',

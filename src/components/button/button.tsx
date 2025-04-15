@@ -7,8 +7,8 @@ import {
 } from '@penumbra-zone/ui/Button'
 import Link from 'next/link'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import icons from '@/lib/icons'
+import { classNames } from '@/lib/utils'
 
 interface Props extends Omit<PenumbraButtonProps, 'icon'> {
     className?: string
@@ -18,7 +18,7 @@ interface Props extends Omit<PenumbraButtonProps, 'icon'> {
 
 const Button: FC<Props> = ({ className, href, icon, ...props }) =>
     href ? (
-        <Link className={twMerge('outline-none', className)} href={href}>
+        <Link className={classNames('outline-none', className)} href={href}>
             <PenumbraButton
                 // @ts-ignore
                 icon={icon && icons[icon]}
@@ -26,7 +26,7 @@ const Button: FC<Props> = ({ className, href, icon, ...props }) =>
             />
         </Link>
     ) : (
-        <span className={twMerge('outline-none', className)}>
+        <span className={classNames('outline-none', className)}>
             <PenumbraButton
                 // @ts-ignore
                 icon={icon && icons[icon]}

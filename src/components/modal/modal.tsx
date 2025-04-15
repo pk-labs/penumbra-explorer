@@ -3,8 +3,8 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import { FC, ReactNode, useEffect, useRef } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { fastOutSlowIn } from '@/lib/constants'
+import { classNames } from '@/lib/utils'
 import Button from '../button'
 
 // TODO: Implement as prop for custom element type
@@ -48,7 +48,7 @@ const Modal: FC<Props> = props => {
             {props.open && (
                 <motion.div
                     animate={{ opacity: 1 }}
-                    className={twMerge(
+                    className={classNames(
                         'fixed top-0 right-0 bottom-0 left-0 z-30 flex',
                         'items-center justify-center backdrop-blur-sm',
                         'backdrop-brightness-75',

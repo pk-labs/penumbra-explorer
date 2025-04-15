@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import { NumberCountup } from '../../numberCountup'
 
 export interface Props {
@@ -15,7 +15,7 @@ export interface Props {
 
 const Panel: FC<Props> = props => (
     <section
-        className={twMerge(
+        className={classNames(
             'grid-te grid grid-cols-2 grid-rows-1 rounded-lg',
             'bg-radial-[100%_100%_at_0%_0%] from-[rgba(174,174,174,0.25)]',
             'from-0% to-[rgba(174,174,174,0.03)] to-100% p-6',
@@ -25,7 +25,7 @@ const Panel: FC<Props> = props => (
     >
         <header className="flex flex-col gap-2">
             <h2
-                className={twMerge(
+                className={classNames(
                     'flex items-center gap-2 text-base font-medium',
                     'text-text-secondary whitespace-nowrap capitalize'
                 )}
@@ -43,7 +43,7 @@ const Panel: FC<Props> = props => (
         </header>
         {props.children && (
             <div
-                className={twMerge(
+                className={classNames(
                     "[grid-area:'span 2 / 2'] self-end justify-self-end",
                     'overflow-hidden font-mono text-xs font-medium',
                     'text-text-secondary'
@@ -54,7 +54,7 @@ const Panel: FC<Props> = props => (
         )}
         {props.footer && (
             <footer
-                className={twMerge(
+                className={classNames(
                     "[grid-area:'2 / 1'] self-end font-mono text-xs",
                     'text-text-secondary font-medium'
                 )}

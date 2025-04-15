@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { FC, MouseEvent, ReactNode, useCallback } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 
 export interface Props {
     children?: ReactNode
@@ -24,7 +24,7 @@ const TableRow: FC<Props> = props => {
 
     return (
         <tr
-            className={twMerge(
+            className={classNames(
                 'border-other-tonalFill10 not-last:border-b',
                 props.href &&
                     'transition-background ease-(var(--fastOutSlowIn)) ' +

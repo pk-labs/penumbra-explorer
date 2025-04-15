@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import { TabProps } from './tab'
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 
 const Tabs: FC<Props> = props => (
     <nav
-        className={twMerge(
+        className={classNames(
             'bg-other-tonalFill5 relative flex h-9 items-center rounded-full',
             'px-4 backdrop-blur-[32px]',
             props.className

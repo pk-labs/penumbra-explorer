@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 
 export interface Props {
     children: string
@@ -22,7 +22,7 @@ const Tab: FC<Props> = props => {
 
     return (
         <Link
-            className={twMerge(
+            className={classNames(
                 'relative flex h-full items-center',
                 'bg-radial-[50%_100%_at_50%_100%] from-[rgba(186,77,20,0.35))]',
                 'from-0% to-[rgba(186,77,20,0)] to-95% bg-no-repeat px-4',

@@ -2,10 +2,10 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { Skeleton, UmPrice } from '@/components'
 import { getUmPrice } from '@/lib/data'
 import { UmPriceData } from '@/lib/types'
+import { classNames } from '@/lib/utils'
 
 interface Props {
     className?: string
@@ -22,7 +22,7 @@ const UmPriceContainer: FC<Props> = props => {
         <UmPrice className={props.className} {...umPrice} />
     ) : (
         <Skeleton
-            className={twMerge(
+            className={classNames(
                 'h-8 w-43 rounded-full sm:w-49 md:w-33 lg:w-49!',
                 props.className
             )}

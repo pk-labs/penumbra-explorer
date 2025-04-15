@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { UmPriceData } from '@/lib/types'
+import { classNames } from '@/lib/utils'
 
 interface Props extends UmPriceData {
     className?: string
@@ -8,7 +8,7 @@ interface Props extends UmPriceData {
 
 const UmPrice: FC<Props> = props => (
     <div
-        className={twMerge(
+        className={classNames(
             'border-other-tonalFill10 relative z-40 flex h-8 items-center',
             'justify-center gap-0.5 rounded-full border-1 px-4 text-sm',
             'font-medium',
@@ -16,7 +16,7 @@ const UmPrice: FC<Props> = props => (
         )}
     >
         <span
-            className={twMerge(
+            className={classNames(
                 'text-text-secondary whitespace-nowrap md:hidden lg:inline!'
             )}
         >
@@ -24,7 +24,7 @@ const UmPrice: FC<Props> = props => (
         </span>
         <span>${props.price.toFixed(2)}</span>
         <span
-            className={twMerge(
+            className={classNames(
                 props.change > 0 && 'text-success-light',
                 props.change < 0 && 'text-destructive-light'
             )}

@@ -3,9 +3,8 @@
 import { ActionView } from '@penumbra-zone/ui/ActionView'
 import { FC, useMemo } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { twMerge } from 'tailwind-merge'
 import { useGetMetadata } from '@/lib/hooks'
-import { decodeTransaction, transactionToView } from '@/lib/utils'
+import { classNames, decodeTransaction, transactionToView } from '@/lib/utils'
 import Subsection from '../subsection'
 
 interface Props {
@@ -29,7 +28,7 @@ const Actions: FC<Props> = props => {
                 {view?.bodyView?.actionViews.map((action, i) => (
                     <li
                         key={i}
-                        className={twMerge(
+                        className={classNames(
                             'relative before:absolute before:top-full',
                             'before:left-5 before:h-2 before:w-[1px]',
                             'before:bg-other-tonalStroke last:before:hidden'
@@ -38,7 +37,7 @@ const Actions: FC<Props> = props => {
                         <ErrorBoundary
                             fallback={
                                 <div
-                                    className={twMerge(
+                                    className={classNames(
                                         'bg-other-tonalFill5 flex h-10 w-full',
                                         'items-center justify-between gap-1',
                                         'rounded-sm px-3 py-2 font-mono'

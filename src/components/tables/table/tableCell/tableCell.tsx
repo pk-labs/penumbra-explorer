@@ -6,7 +6,7 @@ import {
     ReactElement,
     ReactNode,
 } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 
 export interface Props {
     children?: ReactNode
@@ -20,7 +20,7 @@ const TableCell: FC<Props> = props => {
 
     return (
         <Element
-            className={twMerge(
+            className={classNames(
                 'h-12 px-3 text-left text-sm font-medium whitespace-nowrap',
                 props.header
                     ? 'border-other-tonalFill10 text-text-secondary border-b ' +
@@ -38,7 +38,7 @@ const TableCell: FC<Props> = props => {
                 const element = child as ReactElement<{ className?: string }>
 
                 return cloneElement(element, {
-                    className: twMerge(
+                    className: classNames(
                         element.props.className ?? '',
                         'align-middle not-last:mr-2'
                     ),

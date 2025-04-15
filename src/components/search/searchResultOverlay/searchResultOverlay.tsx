@@ -2,8 +2,8 @@
 
 import { motion } from 'motion/react'
 import { FC, ReactElement } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { fastOutSlowIn } from '@/lib/constants'
+import { classNames } from '@/lib/utils'
 import { SearchResultProps } from '../searchResult'
 
 export interface Props {
@@ -22,7 +22,7 @@ export interface Props {
 const SearchResultOverlay: FC<Props> = props => (
     <motion.div
         animate={{ opacity: 1, transition: { duration: 0 } }}
-        className={twMerge(
+        className={classNames(
             'border-other-tonalStroke bg-other-dialogBackground absolute',
             'top-16 z-10 flex w-full flex-col gap-2 rounded-sm border px-2',
             'py-3 backdrop-blur-[32px]'

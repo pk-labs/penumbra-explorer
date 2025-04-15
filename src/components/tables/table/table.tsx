@@ -1,5 +1,5 @@
 import { FC, ReactElement, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 
 export interface Props {
     actions?: ReactNode
@@ -17,7 +17,7 @@ export interface Props {
 
 const Table: FC<Props> = props => (
     <div
-        className={twMerge(
+        className={classNames(
             'bg-other-tonalFill5 flex flex-col gap-6 rounded-lg p-6',
             'backdrop-blur-[32px]',
             props.className
@@ -36,7 +36,7 @@ const Table: FC<Props> = props => (
         </div>
         {props.footer && (
             <div
-                className={twMerge(
+                className={classNames(
                     'text-text-secondary text-xs',
                     props.footerClassName
                 )}

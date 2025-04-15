@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import Button from '../button'
 
 interface Props {
@@ -23,7 +23,7 @@ const Pagination: FC<Props> = props => {
 
     return (
         <div
-            className={twMerge(
+            className={classNames(
                 'flex items-center justify-center gap-6',
                 props.className
             )}

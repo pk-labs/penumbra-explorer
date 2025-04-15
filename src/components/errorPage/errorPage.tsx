@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import Button from '../button'
 import Container from '../container'
 
@@ -12,7 +12,7 @@ const ErrorPage: FC<Props> = props => (
     <Container className="flex flex-col items-center">
         <div className="relative">
             <h2
-                className={twMerge(
+                className={classNames(
                     'font-mono text-[calc(1rem/16*208)]',
                     'leading-[calc(1rem/16*250)] font-bold blur-[7px]',
                     'sm:text-[calc(1rem/16*300)]',
@@ -22,13 +22,13 @@ const ErrorPage: FC<Props> = props => (
                 {props.statusCode}
             </h2>
             <div
-                className={twMerge(
+                className={classNames(
                     'absolute bottom-1/2 left-1/2 z-10 h-3/7 w-3/4',
                     `backdrop-blur-lg`
                 )}
             />
             <div
-                className={twMerge(
+                className={classNames(
                     'absolute top-1/2 right-1/2 z-10 h-3/7 w-3/4',
                     'backdrop-blur-lg'
                 )}

@@ -5,7 +5,7 @@ import {
     CopyToClipboardButtonProps as PenumbtaCopyToClipboardProps,
 } from '@penumbra-zone/ui/CopyToClipboardButton'
 import { FC, MouseEvent, useCallback } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 
 interface Props extends PenumbtaCopyToClipboardProps {
     className?: string
@@ -19,7 +19,7 @@ const CopyToClipboard: FC<Props> = props => {
 
     return (
         <span
-            className={twMerge(
+            className={classNames(
                 'inline-block origin-top-left',
                 props.small ? 'h-6 w-6 scale-50' : 'h-8 w-8 scale-[calc(2/3)]',
                 props.className

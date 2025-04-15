@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import { Panel } from '../panel'
 import icon from './burnPanelIcon.png'
 
@@ -10,7 +10,7 @@ export interface Props {
 
 const BurnPanel: FC<Props> = props => (
     <Panel
-        className={twMerge(
+        className={classNames(
             'from-[rgba(193,166,204,0.25)] to-[rgba(193,166,204,0.03)]',
             props.className
         )}

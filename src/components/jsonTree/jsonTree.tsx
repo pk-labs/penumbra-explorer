@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { FC, useCallback, useState } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import CopyToClipboard from '../copyToClipboard'
 import Subsection from '../subsection'
 
@@ -32,7 +32,7 @@ const JsonTree: FC<Props> = props => {
             }
         >
             <div
-                className={twMerge(
+                className={classNames(
                     'bg-other-tonalFill5 rounded-sm p-3 font-mono text-xs',
                     'font-medium break-all'
                 )}

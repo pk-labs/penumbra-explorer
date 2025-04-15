@@ -1,13 +1,13 @@
 import { Skeleton as PenumbraSkeleton } from '@penumbra-zone/ui/Skeleton'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 
 interface Props {
     className?: string
 }
 
 const Skeleton: FC<Props> = props => (
-    <div className={twMerge('overflow-hidden', props.className)}>
+    <div className={classNames('overflow-hidden', props.className)}>
         <PenumbraSkeleton />
     </div>
 )

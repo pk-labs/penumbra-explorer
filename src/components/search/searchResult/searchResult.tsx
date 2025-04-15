@@ -3,21 +3,20 @@
 import { BoxIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
-import { formatNumber } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
     heightOrHash: number | string
 }
 
 const SearchResult: FC<Props> = props => {
-    const linkClassName = twMerge(
+    const linkClassName = classNames(
         'text-text-primary! flex gap-1 px-2 py-1 break-all'
     )
 
     return (
         <li
-            className={twMerge(
+            className={classNames(
                 'transition-background rounded-sm duration-200',
                 'hover:bg-action-hoverOverlay ease-(--fastOutSlowIn)'
             )}

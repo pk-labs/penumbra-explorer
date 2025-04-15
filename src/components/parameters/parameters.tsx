@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { classNames } from '@/lib/utils'
 import { ParameterProps } from './parameter'
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 
 const Parameters: FC<Props> = props => (
     <ul
-        className={twMerge(
+        className={classNames(
             'bg-other-tonalFill5 flex flex-col gap-1 rounded-sm p-3',
             'text-text-secondary font-mono text-xs font-medium',
             props.className

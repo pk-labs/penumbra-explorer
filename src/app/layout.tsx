@@ -3,10 +3,10 @@ import '@/lib/css'
 import '@/lib/fonts'
 import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { NavigationBar } from '@/components'
 import { PageViewTracker } from '@/containers'
 import { background } from '@/lib/images'
+import { classNames } from '@/lib/utils'
 
 export const viewport: Viewport = {
     initialScale: 1,
@@ -46,7 +46,7 @@ interface Props {
 const RootLayout: FC<Props> = props => (
     <html className="overflow-x-hidden" lang="en">
         <body
-            className={twMerge(
+            className={classNames(
                 'relative flex flex-col justify-start gap-10',
                 'overflow-x-hidden pb-4 md:pb-8'
             )}
@@ -55,7 +55,7 @@ const RootLayout: FC<Props> = props => (
             <NavigationBar />
             {props.children}
             <div
-                className={twMerge(
+                className={classNames(
                     'animate-bg pointer-events-none absolute',
                     '-top-[1486.8px] left-[calc(50%-900px)] -z-1',
                     'h-[1858.5px] w-[1800px] bg-cover'

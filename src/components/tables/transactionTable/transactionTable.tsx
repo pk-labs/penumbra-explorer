@@ -1,9 +1,13 @@
 import { BoxIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
+import {
+    classNames,
+    formatAction,
+    formatNumber,
+    shortenHash,
+} from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
@@ -21,7 +25,7 @@ export interface Props
 const TransactionTable: FC<Props> = props => (
     <Table
         actions={props.actions}
-        className={twMerge(
+        className={classNames(
             props.embedded && 'rounded-sm p-0 backdrop-blur-none',
             props.className
         )}

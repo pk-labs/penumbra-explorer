@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { Skeleton, View } from '@/components'
+import { classNames } from '@/lib/utils'
 import TransactionViewLoader, { Props } from './transactionViewLoader'
 
 const TransactionViewContainer: FC<Props> = props => (
@@ -9,14 +9,14 @@ const TransactionViewContainer: FC<Props> = props => (
         key={props.transactionHash}
         fallback={
             <View
-                className={twMerge(
+                className={classNames(
                     'from-[rgba(193,166,204,0.25)]!',
                     'to-[rgba(193,166,204,0.03)]!',
                     props.className
                 )}
                 subtitle={
                     <Skeleton
-                        className={twMerge(
+                        className={classNames(
                             'mt-0.5 h-11.5 min-[530px]:h-5.5',
                             'min-[530px]:w-112 sm:w-128!'
                         )}

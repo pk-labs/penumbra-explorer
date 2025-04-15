@@ -1,4 +1,5 @@
 export { default as actionToView } from './actionToView'
+export { default as classNames } from './classNames'
 export { default as decodeTransaction } from './decodeTransaction'
 export { default as findPrimaryAction } from './findPrimaryAction'
 export { default as formatAction } from './formatAction'
