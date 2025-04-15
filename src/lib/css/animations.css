@@ -11,56 +11,6 @@
         }
     }
 
-    --animate-copy: copy-animation 500ms var(--fastOutSlowIn) forwards;
-
-    @keyframes copy-animation {
-        from {
-            border-color: var(--color-other-tonalFill10);
-        }
-
-        to {
-            border-color: transparent;
-        }
-    }
-
-    --animate-scale: scale-animation 150ms ease-out;
-
-    @keyframes scale-animation {
-        from {
-            opacity: 0;
-            transform: scale(0);
-        }
-
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    --animate-progress: progress-animation 1s linear infinite;
-
-    @keyframes progress-animation {
-        from {
-            left: -20%;
-        }
-
-        to {
-            left: 100%;
-        }
-    }
-
-    --animate-shimmer: shimmer-animation 2s infinite;
-
-    @keyframes shimmer-animation {
-        from {
-            left: -50%;
-        }
-
-        to {
-            left: 150%;
-        }
-    }
-
     --animate-new-data-bg: new-data-bg-animation 3s ease-out;
 
     @keyframes new-data-bg-animation {
