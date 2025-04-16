@@ -45,8 +45,7 @@ const Panel: FC<Props> = props => (
             <div
                 className={classNames(
                     "[grid-area:'span 2 / 2'] self-end justify-self-end",
-                    'overflow-hidden font-mono text-xs font-medium',
-                    'text-text-secondary'
+                    'text-text-secondary font-mono text-xs font-medium'
                 )}
             >
                 {props.children}
