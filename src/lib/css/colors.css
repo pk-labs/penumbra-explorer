@@ -54,9 +54,13 @@
     --color-text-special: #f49c43;
 
     /* Action */
-    --color-action-hoverOverlay: rgb(from #53aea8 r g b / 15%);
-    --color-action-activeOverlay: --alpha(var(--color-neutral-950) / 15%);
-    --color-action-disabledOverlay: --alpha(var(--color-neutral-950) / 80%);
+    --color-action-hoverOverlay: rgb(from #53aea8 r g b / 0.15);
+    --color-action-activeOverlay: oklch(
+        from var(--color-neutral-950) l c h / 0.15
+    );
+    --color-action-disabledOverlay: oklch(
+        from var(--color-neutral-950) l c h / 0.8
+    );
 
     --color-action-primaryFocusOutline: #f49c43;
     --color-action-secondaryFocusOutline: #53aea8;
@@ -66,10 +70,10 @@
     --color-action-successFocusOutline: #55d383;
 
     /* Other */
-    --color-other-tonalStroke: --alpha(var(--color-neutral-50) / 15%);
-    --color-other-tonalFill5: --alpha(var(--color-neutral-50) / 5%);
-    --color-other-tonalFill10: --alpha(var(--color-neutral-50) / 10%);
+    --color-other-tonalStroke: oklch(from var(--color-neutral-50) l c h / 0.15);
+    --color-other-tonalFill5: oklch(from var(--color-neutral-50) l c h / 0.05);
+    --color-other-tonalFill10: oklch(from var(--color-neutral-50) l c h / 0.1);
     --color-other-solidStroke: var(--color-neutral-900);
-    --color-other-dialogBackground: rgb(from #226362 r g b / 10%);
-    --color-other-overlay: --alpha(var(--color-black) / 50%);
+    --color-other-dialogBackground: rgb(from #226362 r g b / 0.1);
+    --color-other-overlay: oklch(from var(--color-black) l c h / 0.5);
 }
