@@ -5,4 +5,4 @@ extensions:
       headers:
         user-agent: JS GraphQL
       introspect: false
-      url: https://api.explorer.penumbra.pklabs.me/graphql
+      url: https://dev.api.explorer.penumbra.pklabs.me/graphql

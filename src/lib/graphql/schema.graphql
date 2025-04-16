@@ -2,6 +2,7 @@
 
 schema {
     query: QueryRoot
+    subscription: Root
 }
 
 union Action = IbcRelay | NotYetSupportedAction | Output | Spend
@@ -20,6 +21,17 @@ type Block {
     rawEvents: [Event!]!
     rawJson: JSON
     transactions: [Transaction!]!
+    transactionsCount: Int!
+}
+
+type BlockCollection {
+    items: [Block!]!
+    total: Int!
+}
+
+type BlockUpdate {
+    createdAt: DateTime!
+    height: Int!
     transactionsCount: Int!
 }
 
@@ -86,6 +98,8 @@ type QueryRoot {
     block(height: Int!): Block
     "Get blocks by selector"
     blocks(selector: BlocksSelector!): [Block!]!
+    "Get blocks with pagination and optional filtering"
+    blocksCollection(filter: BlockFilter, limit: CollectionLimit!): BlockCollection!
     """
 
     --- Direct database queries ---
@@ -108,6 +122,16 @@ type QueryRoot {
     transaction(hash: String!): Transaction
     "Get transactions by selector"
     transactions(selector: TransactionsSelector!): [Transaction!]!
+    "Get transactions with pagination and optional filtering"
+    transactionsCollection(filter: TransactionFilter, limit: CollectionLimit!): TransactionCollection!
+}
+
+type Root {
+    blocks: BlockUpdate!
+    latestBlocks(limit: Int): BlockUpdate!
+    latestTransactions(limit: Int): TransactionUpdate!
+    transactionCount: TransactionCountUpdate!
+    transactions: TransactionUpdate!
 }
 
 type Spend {
@@ -147,10 +171,25 @@ type TransactionBody {
     rawActions: [String!]!
 }
 
+type TransactionCollection {
+    items: [Transaction!]!
+    total: Int!
+}
+
+type TransactionCountUpdate {
+    count: Int!
+}
+
 type TransactionParameters {
     chainId: String!
     expiryHeight: Int!
     fee: Fee!
+}
+
+type TransactionUpdate {
+    hash: String!
+    id: Int!
+    raw: String!
 }
 
 enum RangeDirection {
@@ -163,6 +202,10 @@ scalar DateTime
 "A scalar that can represent any JSON value."
 scalar JSON
 
+input BlockFilter {
+    height: Int
+}
+
 input BlockHeightRange {
     from: Int!
     to: Int!
@@ -173,12 +216,21 @@ input BlocksSelector {
     range: BlockHeightRange
 }
 
+input CollectionLimit {
+    length: Int
+    offset: Int
+}
+
 input LatestBlock {
     limit: Int!
 }
 
 input LatestTransactions {
     limit: Int!
+}
+
+input TransactionFilter {
+    hash: String
 }
 
 input TransactionRange {

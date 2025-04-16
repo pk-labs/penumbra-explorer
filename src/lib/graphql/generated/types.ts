@@ -37,14 +37,36 @@ export type Block = {
   transactionsCount: Scalars['Int']['output'];
 };
 
+export type BlockCollection = {
+  __typename?: 'BlockCollection';
+  items: Array<Block>;
+  total: Scalars['Int']['output'];
+};
+
+export type BlockFilter = {
+  height?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type BlockHeightRange = {
   from: Scalars['Int']['input'];
   to: Scalars['Int']['input'];
 };
 
+export type BlockUpdate = {
+  __typename?: 'BlockUpdate';
+  createdAt: Scalars['DateTime']['output'];
+  height: Scalars['Int']['output'];
+  transactionsCount: Scalars['Int']['output'];
+};
+
 export type BlocksSelector = {
   latest?: InputMaybe<LatestBlock>;
   range?: InputMaybe<BlockHeightRange>;
+};
+
+export type CollectionLimit = {
+  length?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type DbBlock = {
@@ -128,6 +150,8 @@ export type QueryRoot = {
   block?: Maybe<Block>;
   /** Get blocks by selector */
   blocks: Array<Block>;
+  /** Get blocks with pagination and optional filtering */
+  blocksCollection: BlockCollection;
   /**
    * --- Direct database queries ---
    * Get a block directly from the database by height
@@ -149,6 +173,8 @@ export type QueryRoot = {
   transaction?: Maybe<Transaction>;
   /** Get transactions by selector */
   transactions: Array<Transaction>;
+  /** Get transactions with pagination and optional filtering */
+  transactionsCollection: TransactionCollection;
 };
 
 
@@ -159,6 +185,12 @@ export type QueryRootBlockArgs = {
 
 export type QueryRootBlocksArgs = {
   selector: BlocksSelector;
+};
+
+
+export type QueryRootBlocksCollectionArgs = {
+  filter?: InputMaybe<BlockFilter>;
+  limit: CollectionLimit;
 };
 
 
@@ -198,10 +230,35 @@ export type QueryRootTransactionsArgs = {
   selector: TransactionsSelector;
 };
 
+
+export type QueryRootTransactionsCollectionArgs = {
+  filter?: InputMaybe<TransactionFilter>;
+  limit: CollectionLimit;
+};
+
 export enum RangeDirection {
   Next = 'NEXT',
   Previous = 'PREVIOUS'
 }
+
+export type Root = {
+  __typename?: 'Root';
+  blocks: BlockUpdate;
+  latestBlocks: BlockUpdate;
+  latestTransactions: TransactionUpdate;
+  transactionCount: TransactionCountUpdate;
+  transactions: TransactionUpdate;
+};
+
+
+export type RootLatestBlocksArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type RootLatestTransactionsArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
 
 export type SearchResult = Block | Transaction;
 
@@ -247,6 +304,21 @@ export type TransactionBody = {
   rawActions: Array<Scalars['String']['output']>;
 };
 
+export type TransactionCollection = {
+  __typename?: 'TransactionCollection';
+  items: Array<Transaction>;
+  total: Scalars['Int']['output'];
+};
+
+export type TransactionCountUpdate = {
+  __typename?: 'TransactionCountUpdate';
+  count: Scalars['Int']['output'];
+};
+
+export type TransactionFilter = {
+  hash?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TransactionParameters = {
   __typename?: 'TransactionParameters';
   chainId: Scalars['String']['output'];
@@ -258,6 +330,13 @@ export type TransactionRange = {
   direction: RangeDirection;
   fromTxHash: Scalars['String']['input'];
   limit: Scalars['Int']['input'];
+};
+
+export type TransactionUpdate = {
+  __typename?: 'TransactionUpdate';
+  hash: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  raw: Scalars['String']['output'];
 };
 
 export type TransactionsSelector = {
