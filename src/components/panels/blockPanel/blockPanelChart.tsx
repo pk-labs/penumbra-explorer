@@ -55,14 +55,17 @@ const BlockPanelChart: FC = () => {
 
     return (
         <div className="flex flex-col gap-2">
-            <div ref={chartRef} className="flex gap-1">
+            <div
+                ref={chartRef}
+                className="flex justify-between sm:justify-start sm:gap-1"
+            >
                 {Array.from({ length: barCount }).map((_, i) => (
                     <div
                         key={i}
                         className={classNames(
-                            'bg-other-tonalFill10 h-8 w-[3px] rounded-xs',
+                            'bg-other-tonalFill10 h-10 w-1.25 rounded-xs',
                             'transition-all duration-60 sm:h-9 sm:w-1 xl:h-10!',
-                            'xl:w-[5px]!',
+                            'xl:w-1.25!',
                             styles.bar
                         )}
                     />
