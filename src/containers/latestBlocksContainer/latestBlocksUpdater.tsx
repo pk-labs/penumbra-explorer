@@ -3,51 +3,51 @@
 
 import { FC, useEffect, useState } from 'react'
 import { BlockPanel, BlockTable } from '@/components'
-import { pollingInterval } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
-import { useBlocksQuery } from '@/lib/graphql/generated/hooks'
-import { TransformedPartialBlockFragment } from '@/lib/types'
+import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
+import {
+    TransformedPartialBlockFragment,
+    TransformedPartialBlockUpdateFragment,
+} from '@/lib/types'
 import { Props as LatestBlocksLoaderProps } from './latestBlocksLoader'
 
 interface Props extends LatestBlocksLoaderProps {
-    initialBlocks?: TransformedPartialBlockFragment[]
+    initialBlocks?: Array<
+        TransformedPartialBlockFragment | TransformedPartialBlockUpdateFragment
+    >
 }
 
 const LatestBlocksUpdater: FC<Props> = props => {
     const [blocks, setBlocks] = useState(props.initialBlocks)
 
-    const [blocksQuery, executeBlocksQuery] = useBlocksQuery({
-        pause: true,
-        variables: {
-            selector: { latest: { limit: props.limit } },
-        },
+    const [blockUpdateSubscription] = useBlockUpdateSubscription({
+        variables: { limit: 10 },
     })
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            executeBlocksQuery()
-        }, pollingInterval)
+        if (blockUpdateSubscription.data?.latestBlocks) {
+            const blockUpdate = blockUpdateSubscription.data?.latestBlocks
 
-        return () => clearInterval(interval)
-    }, [executeBlocksQuery])
+            setBlocks(prev => {
+                if (
+                    !prev ||
+                    prev.some(block => blockUpdate.height === block.height)
+                ) {
+                    return prev
+                }
 
-    useEffect(() => {
-        if (blocksQuery.data) {
-            const now = dayjs()
-
-            setBlocks(
-                // TODO: Extract to utils
-                blocksQuery.data.blocks
-                    .map(block => ({
-                        ...block,
-                        timeAgo: block.createdAt
-                            ? now.to(block.createdAt)
+                return [
+                    {
+                        ...blockUpdate,
+                        timeAgo: blockUpdate.createdAt
+                            ? dayjs().to(blockUpdate.createdAt)
                             : undefined,
-                    }))
-                    .toSorted((a, b) => b.height - a.height)
-            )
+                    },
+                    ...prev.slice(0, -1),
+                ]
+            })
         }
-    }, [blocksQuery.data])
+    }, [blockUpdateSubscription.data?.latestBlocks])
 
     const latestBlockHeight = blocks?.length ? blocks[0].height : undefined
 

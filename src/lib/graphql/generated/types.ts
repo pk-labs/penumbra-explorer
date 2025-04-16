@@ -348,6 +348,8 @@ export type BlockFragment = { __typename?: 'Block', height: number, createdAt: a
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
 
+export type PartialBlockUpdateFragment = { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number };
+
 export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
 
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
@@ -392,6 +394,13 @@ export type TransactionsQueryVariables = Exact<{
 
 export type TransactionsQuery = { __typename?: 'QueryRoot', transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
 
+export type BlockUpdateSubscriptionVariables = Exact<{
+  limit: Scalars['Int']['input'];
+}>;
+
+
+export type BlockUpdateSubscription = { __typename?: 'Root', latestBlocks: { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number } };
+
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
   hash
@@ -423,6 +432,13 @@ export const BlockFragmentDoc = gql`
     ${TransactionFragmentDoc}`;
 export const PartialBlockFragmentDoc = gql`
     fragment PartialBlock on Block {
+  height
+  createdAt
+  transactionsCount
+}
+    `;
+export const PartialBlockUpdateFragmentDoc = gql`
+    fragment PartialBlockUpdate on BlockUpdate {
   height
   createdAt
   transactionsCount
@@ -486,3 +502,10 @@ export const TransactionsDocument = gql`
   }
 }
     ${PartialTransactionFragmentDoc}`;
+export const BlockUpdateDocument = gql`
+    subscription BlockUpdate($limit: Int!) {
+  latestBlocks(limit: $limit) {
+    ...PartialBlockUpdate
+  }
+}
+    ${PartialBlockUpdateFragmentDoc}`;

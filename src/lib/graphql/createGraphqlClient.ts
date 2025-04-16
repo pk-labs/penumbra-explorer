@@ -15,7 +15,7 @@ const createGraphqlClient = () => {
     }
 
     const wsClient = createWsClient({
-        url: `ws://${host}/subscriptions`,
+        url: `wss://${host}/graphql/ws`,
     })
 
     return new Client({

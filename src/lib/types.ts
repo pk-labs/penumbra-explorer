@@ -1,6 +1,7 @@
 import {
     BlockFragment,
     PartialBlockFragment,
+    PartialBlockUpdateFragment,
     PartialTransactionFragment,
     TransactionFragment,
 } from '@/lib/graphql/generated/types'
@@ -12,6 +13,11 @@ export interface TransformedBlockFragment
 }
 
 export interface TransformedPartialBlockFragment extends PartialBlockFragment {
+    timeAgo?: string
+}
+
+export interface TransformedPartialBlockUpdateFragment
+    extends PartialBlockUpdateFragment {
     timeAgo?: string
 }
 

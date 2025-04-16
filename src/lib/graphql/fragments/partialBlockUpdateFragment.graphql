@@ -1,0 +1,5 @@
+fragment PartialBlockUpdate on BlockUpdate {
+    height
+    createdAt
+    transactionsCount
+}
