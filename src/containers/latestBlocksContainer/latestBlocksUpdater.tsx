@@ -24,11 +24,11 @@ const LatestBlocksUpdater: FC<Props> = props => {
     })
 
     useEffect(() => {
-        const timeout = setInterval(() => {
+        const interval = setInterval(() => {
             executeBlocksQuery()
         }, pollingInterval)
 
-        return () => clearTimeout(timeout)
+        return () => clearInterval(interval)
     }, [executeBlocksQuery])
 
     useEffect(() => {
