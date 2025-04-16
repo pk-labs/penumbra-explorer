@@ -1,19 +1,49 @@
 // istanbul ignore file
-import { cacheExchange, Client, fetchExchange } from 'urql'
+import { createClient as createWsClient } from 'graphql-ws'
+import {
+    cacheExchange,
+    Client,
+    fetchExchange,
+    subscriptionExchange,
+} from 'urql'
 
 const createGraphqlClient = () => {
-    if (!process.env.NEXT_PUBLIC_GRAPHQL_URL) {
-        throw Error('Missing NEXT_PUBLIC_GRAPHQL_URL')
+    const host = process.env.NEXT_PUBLIC_GRAPHQL_HOST
+
+    if (!host) {
+        throw Error('Missing NEXT_PUBLIC_GRAPHQL_HOST')
     }
 
+    const wsClient = createWsClient({
+        url: `ws://${host}/subscriptions`,
+    })
+
     return new Client({
-        exchanges: [cacheExchange, fetchExchange],
+        exchanges: [
+            cacheExchange,
+            fetchExchange,
+            subscriptionExchange({
+                forwardSubscription: request => {
+                    const input = { ...request, query: request.query ?? '' }
+
+                    return {
+                        subscribe(sink) {
+                            const dispose = wsClient.subscribe(input, sink)
+
+                            return {
+                                unsubscribe: dispose,
+                            }
+                        },
+                    }
+                },
+            }),
+        ],
         fetchOptions: {
             credentials: 'omit',
             signal: AbortSignal.timeout(10000),
         },
         requestPolicy: 'network-only',
-        url: process.env.NEXT_PUBLIC_GRAPHQL_URL,
+        url: `https://${host}/graphql`,
     })
 }
 
