@@ -61,6 +61,8 @@ and theme at `src/lib/css`. It replicates the
 [@penumbra-zone/ui](https://github.com/penumbra-zone/web/tree/main/packages/ui)
 Tailwind v3 configuration in v4 and uses their components where possible.
 
+Some components have custom styles (e.g. animations) collocated as CSS module.
+
 https://lucide.dev/ is used for most icons. Some are custom and exported from
 Figma.
 
