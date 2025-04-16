@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useAnimate, useMotionValue, useTransform } from 'motion/react'
-import { FC, useEffect } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
@@ -12,25 +12,30 @@ export interface Props {
 
 const NumberCountup: FC<Props> = props => {
     const [scope, animate] = useAnimate()
+    const [animated, setAnimated] = useState(true)
     const motionValue = useMotionValue(0)
 
-    const transformedValue = useTransform(
-        motionValue,
-        value => `${formatNumber(Math.round(value))}${props.suffix ?? ''}`
+    const transformValue = useCallback(
+        (value: number) => {
+            return `${formatNumber(Math.round(value))}${props.suffix ?? ''}`
+        },
+        [props.suffix]
     )
+
+    const transformedValue = useTransform(motionValue, transformValue)
 
     useEffect(() => {
         const animation = animate(motionValue, props.number, {
-            duration: 1,
+            duration: 0.5,
             ease: [0.4, 0, 0.2, 1],
-            // FIXME: Why does this cause a type error for props.number?
-            // ease: fastOutSlowIn,
         })
+
+        animation.finished.then(() => setAnimated(false))
 
         return () => animation.stop()
     }, [animate, motionValue, props.number])
 
-    return (
+    return animated ? (
         <motion.span
             ref={scope}
             className={classNames(
@@ -40,6 +45,15 @@ const NumberCountup: FC<Props> = props => {
         >
             {transformedValue}
         </motion.span>
+    ) : (
+        <span
+            className={classNames(
+                'font-mono text-3xl font-medium',
+                props.className
+            )}
+        >
+            {transformValue(props.number)}
+        </span>
     )
 }
 
