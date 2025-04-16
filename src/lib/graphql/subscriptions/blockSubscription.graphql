@@ -1,9 +1,9 @@
-#import "../fragments/partialBlockUpdateFragment.graphql"
-
 subscription BlockUpdate(
     $limit: Int!
 ) {
     latestBlocks(limit: $limit) {
-        ...PartialBlockUpdate
+        height
+        createdAt
+        transactionsCount
     }
 }

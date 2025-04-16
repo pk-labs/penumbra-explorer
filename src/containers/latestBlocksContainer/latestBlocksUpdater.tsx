@@ -6,14 +6,14 @@ import { BlockPanel, BlockTable } from '@/components'
 import dayjs from '@/lib/dayjs'
 import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import {
+    TransformedBlockUpdateFragment,
     TransformedPartialBlockFragment,
-    TransformedPartialBlockUpdateFragment,
 } from '@/lib/types'
 import { Props as LatestBlocksLoaderProps } from './latestBlocksLoader'
 
 interface Props extends LatestBlocksLoaderProps {
     initialBlocks?: Array<
-        TransformedPartialBlockFragment | TransformedPartialBlockUpdateFragment
+        TransformedBlockUpdateFragment | TransformedPartialBlockFragment
     >
 }
 

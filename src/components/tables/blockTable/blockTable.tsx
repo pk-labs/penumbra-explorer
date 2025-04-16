@@ -4,8 +4,8 @@ import { BoxIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
 import {
+    TransformedBlockUpdateFragment,
     TransformedPartialBlockFragment,
-    TransformedPartialBlockUpdateFragment,
 } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
 import { Table, TableCell, TableProps, TableRow } from '../table'
@@ -13,7 +13,7 @@ import { Table, TableCell, TableProps, TableRow } from '../table'
 export interface Props
     extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
     blocks?: Array<
-        TransformedPartialBlockFragment | TransformedPartialBlockUpdateFragment
+        TransformedBlockUpdateFragment | TransformedPartialBlockFragment
     >
     className?: string
     proposer?: boolean

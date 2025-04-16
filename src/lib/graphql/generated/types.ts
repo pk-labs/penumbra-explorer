@@ -348,8 +348,6 @@ export type BlockFragment = { __typename?: 'Block', height: number, createdAt: a
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
 
-export type PartialBlockUpdateFragment = { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number };
-
 export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
 
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
@@ -437,13 +435,6 @@ export const PartialBlockFragmentDoc = gql`
   transactionsCount
 }
     `;
-export const PartialBlockUpdateFragmentDoc = gql`
-    fragment PartialBlockUpdate on BlockUpdate {
-  height
-  createdAt
-  transactionsCount
-}
-    `;
 export const PartialTransactionFragmentDoc = gql`
     fragment PartialTransaction on Transaction {
   hash
@@ -505,7 +496,9 @@ export const TransactionsDocument = gql`
 export const BlockUpdateDocument = gql`
     subscription BlockUpdate($limit: Int!) {
   latestBlocks(limit: $limit) {
-    ...PartialBlockUpdate
+    height
+    createdAt
+    transactionsCount
   }
 }
-    ${PartialBlockUpdateFragmentDoc}`;
+    `;

@@ -39,13 +39,6 @@ export const PartialBlockFragmentDoc = gql`
   transactionsCount
 }
     `;
-export const PartialBlockUpdateFragmentDoc = gql`
-    fragment PartialBlockUpdate on BlockUpdate {
-  height
-  createdAt
-  transactionsCount
-}
-    `;
 export const PartialTransactionFragmentDoc = gql`
     fragment PartialTransaction on Transaction {
   hash
@@ -131,10 +124,12 @@ export function useTransactionsQuery(options: Omit<Urql.UseQueryArgs<Types.Trans
 export const BlockUpdateDocument = gql`
     subscription BlockUpdate($limit: Int!) {
   latestBlocks(limit: $limit) {
-    ...PartialBlockUpdate
+    height
+    createdAt
+    transactionsCount
   }
 }
-    ${PartialBlockUpdateFragmentDoc}`;
+    `;
 
 export function useBlockUpdateSubscription<TData = Types.BlockUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.BlockUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.BlockUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.BlockUpdateSubscription, TData, Types.BlockUpdateSubscriptionVariables>({ query: Types.BlockUpdateDocument, ...options }, handler);
