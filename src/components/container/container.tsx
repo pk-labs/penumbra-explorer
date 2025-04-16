@@ -1,5 +1,6 @@
 import { ElementType, FC, ReactNode } from 'react'
 import { classNames } from '@/lib/utils'
+import styles from './container.module.css'
 
 interface Props {
     as?: ElementType
@@ -14,10 +15,8 @@ const Container: FC<Props> = props => {
     return (
         <Element
             className={classNames(
-                'mx-auto w-full px-4 md:px-8',
-                props.narrow
-                    ? 'max-w-(--pageNarrowWidth)'
-                    : 'max-w-(--pageMaxWidth)',
+                styles.root,
+                props.narrow && styles.narrow,
                 props.className
             )}
         >

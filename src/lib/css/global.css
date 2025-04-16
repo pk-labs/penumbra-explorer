@@ -28,10 +28,6 @@
 
     /* Easings */
     --ease-fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Custom */
-    --pageMaxWidth: calc(1rem / 16 * 1536);
-    --pageNarrowWidth: calc(1rem / 16 * 752);
 }
 
 /* https://tailwindcss.com/docs/preflight#extending-preflight */

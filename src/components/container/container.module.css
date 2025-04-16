@@ -1,0 +1,10 @@
+@reference "../../lib/css/global.css";
+
+.root {
+    @apply m-auto w-full px-4 md:px-8;
+    max-width: calc(1rem / 16 * 1536);
+
+    &.narrow {
+        max-width: calc(1rem / 16 * 752);
+    }
+}
