@@ -5,7 +5,9 @@ import { Panel, PanelProps } from '../panel'
 import BlockPanelChart from './blockPanelChart'
 import icon from './blockPanelIcon.svg'
 
-export type Props = Pick<PanelProps, 'className' | 'number'>
+export interface Props extends Pick<PanelProps, 'className' | 'number'> {
+    fallback?: boolean
+}
 
 const BlockPanel: FC<Props> = props => (
     <Panel
@@ -21,7 +23,7 @@ const BlockPanel: FC<Props> = props => (
             </>
         }
     >
-        <BlockPanelChart />
+        <BlockPanelChart animate={!props.fallback} />
     </Panel>
 )
 

@@ -8,11 +8,15 @@ import styles from './blockPanel.module.css'
 const barCount = 24
 const animationDuration = 1500
 
-const BlockPanelChart: FC = () => {
+interface Props {
+    animate?: boolean
+}
+
+const BlockPanelChart: FC<Props> = props => {
     const chartRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (!chartRef.current) {
+        if (!chartRef.current || !props.animate) {
             return
         }
 
@@ -51,7 +55,7 @@ const BlockPanelChart: FC = () => {
                 cancelAnimationFrame(animationFrame)
             }
         }
-    }, [])
+    }, [props.animate])
 
     return (
         <div className="flex flex-col gap-2">
