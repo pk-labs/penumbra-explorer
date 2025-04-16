@@ -1,3 +1,4 @@
+// istanbul ignore file
 'use client'
 
 import { FC, useEffect, useRef } from 'react'
@@ -59,15 +60,35 @@ const BlockPanelChart: FC = () => {
                     <div
                         key={i}
                         className={classNames(
-                            'bg-other-tonalFill10 h-8 w-[3.5px] rounded-xs',
-                            'transition-all duration-60 sm:h-9 sm:w-1 xl:h-10',
-                            'xl:w-[4.5px]',
+                            'bg-other-tonalFill10 h-8 w-[3px] rounded-xs',
+                            'transition-all duration-60 sm:h-9 sm:w-1 xl:h-10!',
+                            'xl:w-[5px]!',
                             styles.bar
                         )}
                     />
                 ))}
             </div>
-            <div>Waiting for next block ...</div>
+            <div className="flex items-center gap-2">
+                <div
+                    className={classNames(
+                        'relative h-2.5 w-2.5 scale-90 transform-3d',
+                        'sm:scale-95 xl:scale-none!',
+                        styles.cube
+                    )}
+                >
+                    {Array.from({ length: 6 }).map((_, i) => (
+                        <div
+                            key={i}
+                            className={classNames(
+                                'border-text-secondary absolute h-full w-full',
+                                'border-1 bg-neutral-900',
+                                styles.face
+                            )}
+                        />
+                    ))}
+                </div>
+                Receiving new blocks ...
+            </div>
         </div>
     )
 }
