@@ -16,10 +16,10 @@ export interface Props {
 const Panel: FC<Props> = props => (
     <section
         className={classNames(
-            'grid-te grid grid-cols-2 grid-rows-1 rounded-lg',
+            'grid auto-rows-auto grid-cols-1 gap-4 rounded-lg',
             'bg-radial-[100%_100%_at_0%_0%] from-[rgba(174,174,174,0.25)]',
             'from-0% to-[rgba(174,174,174,0.03)] to-100% p-6',
-            'backdrop-blur-[32px]',
+            'backdrop-blur-[32px] sm:grid-cols-2 sm:grid-rows-1 sm:gap-0',
             props.className
         )}
     >
@@ -44,8 +44,8 @@ const Panel: FC<Props> = props => (
         {props.children && (
             <div
                 className={classNames(
-                    "[grid-area:'span 2 / 2'] self-end justify-self-end",
-                    'text-text-secondary font-mono text-xs font-medium'
+                    "[grid-area:'span 2 / 2'] text-text-secondary font-mono",
+                    'text-xs font-medium sm:self-end sm:justify-self-end'
                 )}
             >
                 {props.children}

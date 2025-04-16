@@ -30,7 +30,7 @@ const HomePage: FC = async () => (
         <Container className="grid grid-cols-6 gap-4">
             <LatestBlocksContainer
                 blockPanelClassName={classNames(
-                    'col-span-6 col-start-1 row-1 sm:col-span-3 sm:col-start-1'
+                    'col-span-6 col-start-1 row-1 md:col-span-3 md:col-start-1'
                 )}
                 blockTableClassName={classNames(
                     'col-span-6 col-start-1 row-3 lg:col-span-3 lg:row-2'
@@ -39,8 +39,8 @@ const HomePage: FC = async () => (
             />
             <TransactionPanelContainer
                 className={classNames(
-                    'col-span-6 col-start-1 row-2 sm:col-span-3',
-                    'sm:col-start-4 sm:row-1'
+                    'col-span-6 col-start-1 row-2 md:col-span-3',
+                    'md:col-start-4 md:row-1'
                 )}
             />
             <LatestTransactionsContainer
