@@ -80,7 +80,8 @@ const BlockPanelChart: FC<Props> = props => {
                     className={classNames(
                         'relative h-2.5 w-2.5 scale-90 transform-3d',
                         'sm:scale-95 xl:scale-none!',
-                        styles.cube
+                        styles.cube,
+                        props.animate && styles.animated
                     )}
                 >
                     {Array.from({ length: 6 }).map((_, i) => (

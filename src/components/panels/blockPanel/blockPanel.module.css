@@ -19,7 +19,11 @@
 }
 
 .cube {
-    animation: cube-animation 3s linear infinite;
+    transform: rotateX(-35deg) rotateY(0deg);
+
+    &.animated {
+        animation: cube-animation 3s linear infinite;
+    }
 
     .face {
         &:nth-child(1) {
