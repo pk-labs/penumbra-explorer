@@ -399,6 +399,11 @@ export type BlockUpdateSubscriptionVariables = Exact<{
 
 export type BlockUpdateSubscription = { __typename?: 'Root', latestBlocks: { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number } };
 
+export type TransactionCountUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TransactionCountUpdateSubscription = { __typename?: 'Root', transactionCount: { __typename?: 'TransactionCountUpdate', count: number } };
+
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
   hash
@@ -499,6 +504,13 @@ export const BlockUpdateDocument = gql`
     height
     createdAt
     transactionsCount
+  }
+}
+    `;
+export const TransactionCountUpdateDocument = gql`
+    subscription TransactionCountUpdate {
+  transactionCount {
+    count
   }
 }
     `;

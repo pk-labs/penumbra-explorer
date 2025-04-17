@@ -1,0 +1,5 @@
+subscription TransactionCountUpdate {
+    transactionCount {
+        count
+    }
+}
