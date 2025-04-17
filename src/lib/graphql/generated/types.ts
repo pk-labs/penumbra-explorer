@@ -404,6 +404,13 @@ export type TransactionCountUpdateSubscriptionVariables = Exact<{ [key: string]:
 
 export type TransactionCountUpdateSubscription = { __typename?: 'Root', transactionCount: { __typename?: 'TransactionCountUpdate', count: number } };
 
+export type TransactionUpdateSubscriptionVariables = Exact<{
+  limit: Scalars['Int']['input'];
+}>;
+
+
+export type TransactionUpdateSubscription = { __typename?: 'Root', latestTransactions: { __typename?: 'TransactionUpdate', hash: string, id: number, raw: string } };
+
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
   hash
@@ -511,6 +518,15 @@ export const TransactionCountUpdateDocument = gql`
     subscription TransactionCountUpdate {
   transactionCount {
     count
+  }
+}
+    `;
+export const TransactionUpdateDocument = gql`
+    subscription TransactionUpdate($limit: Int!) {
+  latestTransactions(limit: $limit) {
+    hash
+    id
+    raw
   }
 }
     `;

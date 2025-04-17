@@ -6,14 +6,14 @@ import { BlockPanel, BlockTable } from '@/components'
 import dayjs from '@/lib/dayjs'
 import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import {
-    TransformedBlockUpdateFragment,
+    TransformedBlockUpdate,
     TransformedPartialBlockFragment,
 } from '@/lib/types'
 import { Props as LatestBlocksLoaderProps } from './latestBlocksLoader'
 
 interface Props extends LatestBlocksLoaderProps {
     initialBlocks?: Array<
-        TransformedBlockUpdateFragment | TransformedPartialBlockFragment
+        TransformedBlockUpdate | TransformedPartialBlockFragment
     >
 }
 
@@ -21,12 +21,12 @@ const LatestBlocksUpdater: FC<Props> = props => {
     const [blocks, setBlocks] = useState(props.initialBlocks)
 
     const [blockUpdateSubscription] = useBlockUpdateSubscription({
-        variables: { limit: 10 },
+        variables: { limit: props.limit },
     })
 
     useEffect(() => {
         if (blockUpdateSubscription.data?.latestBlocks) {
-            const blockUpdate = blockUpdateSubscription.data?.latestBlocks
+            const blockUpdate = blockUpdateSubscription.data.latestBlocks
 
             setBlocks(prev => {
                 if (

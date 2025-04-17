@@ -1,0 +1,9 @@
+subscription TransactionUpdate(
+    $limit: Int!
+) {
+    latestTransactions(limit: $limit) {
+        hash
+        id
+        raw
+    }
+}

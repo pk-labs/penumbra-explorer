@@ -145,3 +145,16 @@ export const TransactionCountUpdateDocument = gql`
 export function useTransactionCountUpdateSubscription<TData = Types.TransactionCountUpdateSubscription>(options?: Omit<Urql.UseSubscriptionArgs<Types.TransactionCountUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.TransactionCountUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.TransactionCountUpdateSubscription, TData, Types.TransactionCountUpdateSubscriptionVariables>({ query: Types.TransactionCountUpdateDocument, ...options }, handler);
 };
+export const TransactionUpdateDocument = gql`
+    subscription TransactionUpdate($limit: Int!) {
+  latestTransactions(limit: $limit) {
+    hash
+    id
+    raw
+  }
+}
+    `;
+
+export function useTransactionUpdateSubscription<TData = Types.TransactionUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.TransactionUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.TransactionUpdateSubscription, TData>) {
+  return Urql.useSubscription<Types.TransactionUpdateSubscription, TData, Types.TransactionUpdateSubscriptionVariables>({ query: Types.TransactionUpdateDocument, ...options }, handler);
+};

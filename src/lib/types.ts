@@ -4,6 +4,7 @@ import {
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
+    TransactionUpdate,
 } from '@/lib/graphql/generated/types'
 
 export interface TransformedBlockFragment
@@ -16,7 +17,7 @@ export interface TransformedPartialBlockFragment extends PartialBlockFragment {
     timeAgo?: string
 }
 
-export interface TransformedBlockUpdateFragment extends BlockUpdate {
+export interface TransformedBlockUpdate extends BlockUpdate {
     timeAgo?: string
 }
 
@@ -31,6 +32,16 @@ export interface TransformedTransactionFragment
 export interface TransformedPartialTransactionFragment
     extends PartialTransactionFragment {
     actionCount: number
+    primaryAction?: ActionType
+    timeAgo?: string
+}
+
+export interface TransformedTransactionUpdate
+    extends Omit<TransactionUpdate, 'id'> {
+    actionCount: number
+    block: {
+        height: number
+    }
     primaryAction?: ActionType
     timeAgo?: string
 }
