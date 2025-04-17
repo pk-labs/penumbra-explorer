@@ -55,7 +55,7 @@ const LatestTransactionsUpdater: FC<Props> = props => {
                     console.error(e)
                 }
 
-                const newTransactions = [
+                return [
                     {
                         actionCount: actionCount ?? 0,
                         block: { height: transactionUpdate.id },
@@ -65,21 +65,6 @@ const LatestTransactionsUpdater: FC<Props> = props => {
                     },
                     ...prev.slice(0, -1),
                 ]
-
-                console.log(newTransactions)
-
-                return newTransactions
-
-                // return [
-                //     {
-                //         ...transactionUpdate,
-                //         actionCount: actionCount ?? 0,
-                //         block: { height: transactionUpdate.id },
-                //         hash: transactionUpdate.hash.toLowerCase(),
-                //         primaryAction,
-                //     },
-                //     ...prev.slice(0, -1),
-                // ]
             })
         }
     }, [transactionUpdateSubscription.data?.latestTransactions])
