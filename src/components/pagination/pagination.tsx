@@ -2,6 +2,7 @@
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
 import Button from '../button'
+import Skeleton from '../skeleton'
 
 interface Props {
     className?: string
@@ -29,9 +30,13 @@ const Pagination: FC<Props> = props => (
         >
             Prev
         </Button>
-        <span className="text-sm">
-            {props.page} of {props.totalPages}
-        </span>
+        {props.page === 0 && props.totalPages === 0 ? (
+            <Skeleton className="h-8 w-22" />
+        ) : (
+            <span className="text-sm">
+                {props.page} of {props.totalPages}
+            </span>
+        )}
         <Button
             className="font-normal"
             density="compact"
