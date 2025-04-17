@@ -58,7 +58,7 @@ const BlockPanelChart: FC<Props> = props => {
     }, [props.animate])
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4 sm:gap-2">
             <div
                 ref={chartRef}
                 className="flex justify-between sm:justify-start sm:gap-1"
@@ -75,11 +75,11 @@ const BlockPanelChart: FC<Props> = props => {
                     />
                 ))}
             </div>
-            <div className="flex items-center justify-end gap-2">
+            <div className="flex items-center justify-end gap-1.5">
                 <div
                     className={classNames(
-                        'relative h-2.5 w-2.5 scale-80 transform-3d',
-                        'sm:scale-85 xl:scale-90!',
+                        'relative h-2.5 w-2.5 scale-75 transform-3d',
+                        'sm:scale-80 xl:scale-85!',
                         styles.cube,
                         props.animate && styles.animated
                     )}
