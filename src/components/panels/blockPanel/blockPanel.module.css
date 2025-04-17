@@ -1,20 +1,38 @@
+@reference "../../../lib/css/global.css";
+
 .bar {
     &.active {
         background: var(--color-secondary-light);
         box-shadow: 0 0 64px 8px var(--color-secondary-light);
-        transform: scaleY(1.3);
+        transform: scaleY(2);
 
         & + div {
             background: rgba(83, 174, 168, 0.5);
             box-shadow: 0 0 4px 2px rgba(83, 174, 168, 0.1);
-            transform: scaleY(1.1);
+            transform: scaleY(1.5);
         }
     }
 
     &:has(+ .active) {
         background: rgba(83, 174, 168, 0.5);
         box-shadow: 0 0 4px 2px rgba(83, 174, 168, 0.1);
-        transform: scaleY(1.1);
+        transform: scaleY(1.5);
+    }
+}
+
+@media (min-width: calc(1rem / 16 * 600)) {
+    .bar {
+        &.active {
+            transform: scaleY(1.3);
+
+            & + div {
+                transform: scaleY(1.1);
+            }
+        }
+
+        &:has(+ .active) {
+            transform: scaleY(1.1);
+        }
     }
 }
 

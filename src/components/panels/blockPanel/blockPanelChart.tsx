@@ -67,7 +67,7 @@ const BlockPanelChart: FC<Props> = props => {
                     <div
                         key={i}
                         className={classNames(
-                            'bg-other-tonalFill10 h-10 w-1.25 rounded-xs',
+                            'bg-other-tonalFill10 h-2.5 w-1.25 rounded-xs',
                             'transition-all duration-120 sm:h-9 sm:w-1 xl:h-10!',
                             'xl:w-1.25!',
                             styles.bar
