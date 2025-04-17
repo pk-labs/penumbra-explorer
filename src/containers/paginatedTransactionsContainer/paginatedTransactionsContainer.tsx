@@ -8,8 +8,8 @@ import PaginatedTransactionsLoader, {
 const PaginatedTransactionsContainer: FC<Props> = props => (
     <Suspense
         key={JSON.stringify({
-            from: props.from,
-            limit: props.limit,
+            length: props.length,
+            offset: props.offset,
             pathname: props.pathname,
         })}
         fallback={
@@ -27,7 +27,7 @@ const PaginatedTransactionsContainer: FC<Props> = props => (
                     </TableRow>
                 </thead>
                 <tbody>
-                    {Array.from({ length: props.limit }).map((_, i) => (
+                    {Array.from({ length: props.length }).map((_, i) => (
                         <TableRow key={i}>
                             <TableCell>
                                 <Skeleton className="h-6" />

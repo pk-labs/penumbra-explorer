@@ -14,12 +14,15 @@ export const metadata = generatePageMetadata(
 
 interface Props {
     searchParams: Promise<{
-        from?: string
+        page?: string
     }>
 }
 
 const TransactionsPage: FC<Props> = async props => {
     const searchParams = await props.searchParams
+    const page = searchParams.page ? Number(searchParams.page) - 1 : 0
+    const length = 20
+    const offset = page * length
 
     return (
         <Container>
@@ -28,8 +31,8 @@ const TransactionsPage: FC<Props> = async props => {
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
             <PaginatedTransactionsContainer
-                from={searchParams.from}
-                limit={20}
+                length={length}
+                offset={offset}
                 pathname="/txs"
                 time
             />

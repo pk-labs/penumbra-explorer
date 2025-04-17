@@ -114,9 +114,12 @@ export function useTransactionQuery(options: Omit<Urql.UseQueryArgs<Types.Transa
   return Urql.useQuery<Types.TransactionQuery, Types.TransactionQueryVariables>({ query: Types.TransactionDocument, ...options });
 };
 export const TransactionsDocument = gql`
-    query Transactions($selector: TransactionsSelector!) {
-  transactions(selector: $selector) {
-    ...PartialTransaction
+    query Transactions($limit: CollectionLimit!, $filter: TransactionFilter) {
+  transactionsCollection(limit: $limit, filter: $filter) {
+    items {
+      ...PartialTransaction
+    }
+    total
   }
 }
     ${PartialTransactionFragmentDoc}`;

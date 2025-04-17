@@ -387,11 +387,12 @@ export type TransactionQueryVariables = Exact<{
 export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } } | null };
 
 export type TransactionsQueryVariables = Exact<{
-  selector: TransactionsSelector;
+  limit: CollectionLimit;
+  filter?: InputMaybe<TransactionFilter>;
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'QueryRoot', transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
+export type TransactionsQuery = { __typename?: 'QueryRoot', transactionsCollection: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -503,9 +504,12 @@ export const TransactionDocument = gql`
 }
     ${TransactionFragmentDoc}`;
 export const TransactionsDocument = gql`
-    query Transactions($selector: TransactionsSelector!) {
-  transactions(selector: $selector) {
-    ...PartialTransaction
+    query Transactions($limit: CollectionLimit!, $filter: TransactionFilter) {
+  transactionsCollection(limit: $limit, filter: $filter) {
+    items {
+      ...PartialTransaction
+    }
+    total
   }
 }
     ${PartialTransactionFragmentDoc}`;

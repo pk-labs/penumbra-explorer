@@ -1,9 +1,10 @@
 import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
+    CollectionLimit,
+    TransactionFilter,
     TransactionsQuery,
     TransactionsQueryVariables,
-    TransactionsSelector,
 } from '@/lib/graphql/generated/types'
 import { transactionsQuery } from '@/lib/graphql/queries'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
@@ -14,15 +15,19 @@ import {
 } from '@/lib/utils'
 
 const getTransactions = async (
-    selector: TransactionsSelector
+    limit: CollectionLimit,
+    filter?: TransactionFilter
 ): Promise<TransformedPartialTransactionFragment[] | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
-        .query<
-            TransactionsQuery,
-            TransactionsQueryVariables
-        >(transactionsQuery, { selector })
+        .query<TransactionsQuery, TransactionsQueryVariables>(
+            transactionsQuery,
+            {
+                filter,
+                limit,
+            }
+        )
         .toPromise()
 
     if (result.error) {
@@ -31,7 +36,7 @@ const getTransactions = async (
 
     const now = dayjs()
 
-    return result.data?.transactions
+    return result.data?.transactionsCollection.items
         ?.map(transaction => {
             let json
             let primaryAction

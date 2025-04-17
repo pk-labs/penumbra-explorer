@@ -20,7 +20,7 @@ interface Props {
 
 const BlocksPage: FC<Props> = async props => {
     const searchParams = await props.searchParams
-    const page = searchParams.page ? Number(searchParams.page) : 1
+    const page = searchParams.page ? Number(searchParams.page) - 1 : 0
     const length = 20
     const offset = page * length
 

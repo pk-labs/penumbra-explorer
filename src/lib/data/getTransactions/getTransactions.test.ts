@@ -16,15 +16,17 @@ describe('getTransactions', () => {
                 toPromise: () =>
                     Promise.resolve({
                         data: {
-                            transactions: [{ block: {}, hash: 'FoO' }],
+                            transactionsCollection: {
+                                items: [{ block: {}, hash: 'FoO' }],
+                            },
                         },
                     }),
             }),
         })
 
-        await expect(
-            getTransactions({ latest: { limit: 1 } })
-        ).resolves.toMatchObject([{ hash: 'foo' }])
+        await expect(getTransactions({ length: 1 })).resolves.toMatchObject([
+            { hash: 'foo' },
+        ])
     })
 
     test('returns transformed creation date', async () => {
@@ -35,17 +37,17 @@ describe('getTransactions', () => {
                 toPromise: () =>
                     Promise.resolve({
                         data: {
-                            transactions: [
-                                { block: { createdAt }, hash: 'foo' },
-                            ],
+                            transactionsCollection: {
+                                items: [{ block: { createdAt }, hash: 'foo' }],
+                            },
                         },
                     }),
             }),
         })
 
-        await expect(
-            getTransactions({ latest: { limit: 1 } })
-        ).resolves.toMatchObject([{ hash: 'foo', timeAgo: '1s ago' }])
+        await expect(getTransactions({ length: 1 })).resolves.toMatchObject([
+            { hash: 'foo', timeAgo: '1s ago' },
+        ])
     })
 
     test('returns sorted by descending block height', async () => {
@@ -54,18 +56,21 @@ describe('getTransactions', () => {
                 toPromise: () =>
                     Promise.resolve({
                         data: {
-                            transactions: [
-                                { block: { height: 123 }, hash: 'older' },
-                                { block: { height: 456 }, hash: 'newer' },
-                            ],
+                            transactionsCollection: {
+                                items: [
+                                    { block: { height: 123 }, hash: 'older' },
+                                    { block: { height: 456 }, hash: 'newer' },
+                                ],
+                            },
                         },
                     }),
             }),
         })
 
-        await expect(
-            getTransactions({ latest: { limit: 2 } })
-        ).resolves.toMatchObject([{ hash: 'newer' }, { hash: 'older' }])
+        await expect(getTransactions({ length: 2 })).resolves.toMatchObject([
+            { hash: 'newer' },
+            { hash: 'older' },
+        ])
     })
 
     test('throws error', async () => {
@@ -75,8 +80,6 @@ describe('getTransactions', () => {
             }),
         })
 
-        await expect(getTransactions({ latest: { limit: 1 } })).rejects.toBe(
-            'foo'
-        )
+        await expect(getTransactions({ length: 1 })).rejects.toBe('foo')
     })
 })

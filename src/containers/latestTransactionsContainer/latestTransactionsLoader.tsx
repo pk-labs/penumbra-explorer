@@ -12,7 +12,7 @@ export interface Props
 
 const LatestTransactionsLoader: FC<Props> = async props => {
     const transactions = await getTransactions({
-        latest: { limit: props.limit },
+        length: props.limit,
     })
 
     return (

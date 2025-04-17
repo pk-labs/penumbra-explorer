@@ -1,7 +1,13 @@
 #import "../fragments/partialTransactionFragment.graphql"
 
-query Transactions($selector: TransactionsSelector!) {
-    transactions(selector: $selector) {
-        ...PartialTransaction
+query Transactions(
+    $limit: CollectionLimit!,
+    $filter: TransactionFilter
+) {
+    transactionsCollection(limit: $limit, filter: $filter) {
+        items {
+            ...PartialTransaction
+        }
+        total
     }
 }
