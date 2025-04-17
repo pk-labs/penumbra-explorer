@@ -360,11 +360,12 @@ export type BlockQueryVariables = Exact<{
 export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, rawJson?: any | null, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
-  selector: BlocksSelector;
+  limit: CollectionLimit;
+  filter?: InputMaybe<BlockFilter>;
 }>;
 
 
-export type BlocksQuery = { __typename?: 'QueryRoot', blocks: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> };
+export type BlocksQuery = { __typename?: 'QueryRoot', blocksCollection: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
 
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -465,9 +466,12 @@ export const BlockDocument = gql`
 }
     ${BlockFragmentDoc}`;
 export const BlocksDocument = gql`
-    query Blocks($selector: BlocksSelector!) {
-  blocks(selector: $selector) {
-    ...PartialBlock
+    query Blocks($limit: CollectionLimit!, $filter: BlockFilter) {
+  blocksCollection(limit: $limit, filter: $filter) {
+    items {
+      ...PartialBlock
+    }
+    total
   }
 }
     ${PartialBlockFragmentDoc}`;

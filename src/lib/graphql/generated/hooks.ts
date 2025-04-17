@@ -61,9 +61,12 @@ export function useBlockQuery(options: Omit<Urql.UseQueryArgs<Types.BlockQueryVa
   return Urql.useQuery<Types.BlockQuery, Types.BlockQueryVariables>({ query: Types.BlockDocument, ...options });
 };
 export const BlocksDocument = gql`
-    query Blocks($selector: BlocksSelector!) {
-  blocks(selector: $selector) {
-    ...PartialBlock
+    query Blocks($limit: CollectionLimit!, $filter: BlockFilter) {
+  blocksCollection(limit: $limit, filter: $filter) {
+    items {
+      ...PartialBlock
+    }
+    total
   }
 }
     ${PartialBlockFragmentDoc}`;

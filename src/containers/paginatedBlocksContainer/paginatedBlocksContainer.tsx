@@ -6,8 +6,8 @@ import PaginatedBlocksLoader, { Props } from './paginatedBlocksLoader'
 const PaginatedBlocksContainer: FC<Props> = props => (
     <Suspense
         key={JSON.stringify({
-            from: props.from,
-            limit: props.limit,
+            length: props.length,
+            offset: props.offset,
             pathname: props.pathname,
         })}
         fallback={
@@ -25,7 +25,7 @@ const PaginatedBlocksContainer: FC<Props> = props => (
                     </TableRow>
                 </thead>
                 <tbody>
-                    {Array.from({ length: props.limit }).map((_, i) => (
+                    {Array.from({ length: props.length }).map((_, i) => (
                         <TableRow key={i}>
                             <TableCell>
                                 <Skeleton className="h-6" />

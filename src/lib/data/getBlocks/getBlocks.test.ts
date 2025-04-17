@@ -11,14 +11,19 @@ describe('getBlocks', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { blocks: [{ height: 123 }, { height: 456 }] },
+                        data: {
+                            blocksCollection: {
+                                items: [{ height: 123 }, { height: 456 }],
+                            },
+                        },
                     }),
             }),
         })
 
-        await expect(
-            getBlocks({ latest: { limit: 2 } })
-        ).resolves.toMatchObject([{ height: 456 }, { height: 123 }])
+        await expect(getBlocks({ length: 2 })).resolves.toMatchObject([
+            { height: 456 },
+            { height: 123 },
+        ])
     })
 
     test('returns transformed creation date', async () => {
@@ -28,14 +33,16 @@ describe('getBlocks', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { blocks: [{ createdAt }] },
+                        data: {
+                            blocksCollection: { items: [{ createdAt }] },
+                        },
                     }),
             }),
         })
 
-        await expect(
-            getBlocks({ latest: { limit: 1 } })
-        ).resolves.toMatchObject([{ timeAgo: '1s ago' }])
+        await expect(getBlocks({ length: 1 })).resolves.toMatchObject([
+            { timeAgo: '1s ago' },
+        ])
     })
 
     test('throws error', async () => {
@@ -45,6 +52,6 @@ describe('getBlocks', () => {
             }),
         })
 
-        await expect(getBlocks({ latest: { limit: 1 } })).rejects.toBe('foo')
+        await expect(getBlocks({ length: 1 })).rejects.toBe('foo')
     })
 })

@@ -1,20 +1,25 @@
 import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
+    BlockFilter,
     BlocksQuery,
     BlocksQueryVariables,
-    BlocksSelector,
+    CollectionLimit,
 } from '@/lib/graphql/generated/types'
 import { blocksQuery } from '@/lib/graphql/queries'
 import { TransformedPartialBlockFragment } from '@/lib/types'
 
 const getBlocks = async (
-    selector: BlocksSelector
+    limit: CollectionLimit,
+    filter?: BlockFilter
 ): Promise<TransformedPartialBlockFragment[] | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
-        .query<BlocksQuery, BlocksQueryVariables>(blocksQuery, { selector })
+        .query<BlocksQuery, BlocksQueryVariables>(blocksQuery, {
+            filter,
+            limit,
+        })
         .toPromise()
 
     if (result.error) {
@@ -24,7 +29,7 @@ const getBlocks = async (
     const now = dayjs()
 
     // TODO: Extract to utils
-    return result.data?.blocks
+    return result.data?.blocksCollection.items
         ?.map(block => ({
             ...block,
             timeAgo: block.createdAt ? now.to(block.createdAt) : undefined,
