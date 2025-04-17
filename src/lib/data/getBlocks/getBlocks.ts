@@ -12,7 +12,7 @@ import { TransformedPartialBlockFragment } from '@/lib/types'
 const getBlocks = async (
     limit: CollectionLimit,
     filter?: BlockFilter
-): Promise<TransformedPartialBlockFragment[] | undefined> => {
+): Promise<{ blocks: TransformedPartialBlockFragment[]; total: number }> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -24,17 +24,21 @@ const getBlocks = async (
 
     if (result.error) {
         throw result.error
+    } else if (!result.data) {
+        return { blocks: [], total: 0 }
     }
 
     const now = dayjs()
 
     // TODO: Extract to utils
-    return result.data?.blocksCollection.items
-        ?.map(block => ({
+    const blocks = result.data.blocksCollection.items
+        .map(block => ({
             ...block,
             timeAgo: block.createdAt ? now.to(block.createdAt) : undefined,
         }))
         .toSorted((a, b) => b.height - a.height)
+
+    return { blocks, total: result.data.blocksCollection.total }
 }
 
 export default getBlocks

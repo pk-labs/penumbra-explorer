@@ -12,7 +12,7 @@ export interface Props extends Pick<BlockTableProps, 'actions' | 'title'> {
 }
 
 const LatestBlocksLoader: FC<Props> = async props => {
-    const blocks = await getBlocks({ length: props.limit })
+    const { blocks } = await getBlocks({ length: props.limit })
 
     return (
         <GraphqlClientProvider>

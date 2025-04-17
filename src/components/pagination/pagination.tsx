@@ -1,51 +1,50 @@
+// istanbul ignore file
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
 import Button from '../button'
 
 interface Props {
     className?: string
-    fromNext?: string
-    fromPrev?: string
+    page: number
     pathname: string
+    totalPages: number
 }
 
-const Pagination: FC<Props> = props => {
-    let prevHref: string | undefined
-    let nextHref: string | undefined
-
-    if (props.fromPrev) {
-        prevHref = `${props.pathname}?from=${props.fromPrev}`
-    }
-
-    if (props.fromNext) {
-        nextHref = `${props.pathname}?from=${props.fromNext}`
-    }
-
-    return (
-        <div
-            className={classNames(
-                'flex items-center justify-center gap-6',
-                props.className
-            )}
+const Pagination: FC<Props> = props => (
+    <div
+        className={classNames(
+            'flex items-center justify-center gap-6',
+            props.className
+        )}
+    >
+        <Button
+            className="font-normal"
+            density="compact"
+            disabled={props.page <= 1}
+            href={
+                props.page > 2
+                    ? `${props.pathname}?page=${props.page - 1}`
+                    : props.pathname
+            }
         >
-            <Button
-                className="font-normal"
-                density="compact"
-                disabled={!props.fromPrev}
-                href={prevHref}
-            >
-                Prev
-            </Button>
-            <Button
-                className="font-normal"
-                density="compact"
-                disabled={!props.fromNext}
-                href={nextHref}
-            >
-                Next
-            </Button>
-        </div>
-    )
-}
+            Prev
+        </Button>
+        <span className="text-sm">
+            {props.page} of {props.totalPages}
+        </span>
+        <Button
+            className="font-normal"
+            density="compact"
+            disabled={props.page >= props.totalPages}
+            href={
+                props.page < props.totalPages
+                    ? `${props.pathname}?page=${props.page + 1}`
+                    : `${props.pathname}?page=${props.totalPages}`
+            }
+        >
+            Next
+        </Button>
+    </div>
+)
 
 export default Pagination

@@ -24,9 +24,9 @@ describe('getTransactions', () => {
             }),
         })
 
-        await expect(getTransactions({ length: 1 })).resolves.toMatchObject([
-            { hash: 'foo' },
-        ])
+        await expect(getTransactions({ length: 1 })).resolves.toMatchObject({
+            transactions: [{ hash: 'foo' }],
+        })
     })
 
     test('returns transformed creation date', async () => {
@@ -45,9 +45,9 @@ describe('getTransactions', () => {
             }),
         })
 
-        await expect(getTransactions({ length: 1 })).resolves.toMatchObject([
-            { hash: 'foo', timeAgo: '1s ago' },
-        ])
+        await expect(getTransactions({ length: 1 })).resolves.toMatchObject({
+            transactions: [{ hash: 'foo', timeAgo: '1s ago' }],
+        })
     })
 
     test('returns sorted by descending block height', async () => {
@@ -67,10 +67,9 @@ describe('getTransactions', () => {
             }),
         })
 
-        await expect(getTransactions({ length: 2 })).resolves.toMatchObject([
-            { hash: 'newer' },
-            { hash: 'older' },
-        ])
+        await expect(getTransactions({ length: 2 })).resolves.toMatchObject({
+            transactions: [{ hash: 'newer' }, { hash: 'older' }],
+        })
     })
 
     test('throws error', async () => {

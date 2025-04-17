@@ -11,7 +11,7 @@ export interface Props
 }
 
 const LatestTransactionsLoader: FC<Props> = async props => {
-    const transactions = await getTransactions({
+    const { transactions } = await getTransactions({
         length: props.limit,
     })
 

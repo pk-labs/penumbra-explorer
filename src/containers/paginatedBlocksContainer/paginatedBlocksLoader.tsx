@@ -16,16 +16,25 @@ const PaginatedBlocksLoader: FC<Props> = async ({
     pathname,
     ...props
 }) => {
-    const blocks = await getBlocks({ length, offset })
+    const { blocks, total } = await getBlocks({ length, offset })
 
     if (!blocks?.length) {
         redirect(pathname)
     }
 
+    const page = offset / length + 1
+    const totalPages = Math.ceil(total / length)
+
     return (
         <BlockTable
             blocks={blocks}
-            footer={<Pagination pathname={pathname} />}
+            footer={
+                <Pagination
+                    page={page}
+                    pathname={pathname}
+                    totalPages={totalPages}
+                />
+            }
             {...props}
         />
     )

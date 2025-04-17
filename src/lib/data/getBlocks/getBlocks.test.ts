@@ -20,10 +20,9 @@ describe('getBlocks', () => {
             }),
         })
 
-        await expect(getBlocks({ length: 2 })).resolves.toMatchObject([
-            { height: 456 },
-            { height: 123 },
-        ])
+        await expect(getBlocks({ length: 2 })).resolves.toMatchObject({
+            blocks: [{ height: 456 }, { height: 123 }],
+        })
     })
 
     test('returns transformed creation date', async () => {
@@ -40,9 +39,9 @@ describe('getBlocks', () => {
             }),
         })
 
-        await expect(getBlocks({ length: 1 })).resolves.toMatchObject([
-            { timeAgo: '1s ago' },
-        ])
+        await expect(getBlocks({ length: 1 })).resolves.toMatchObject({
+            blocks: [{ timeAgo: '1s ago' }],
+        })
     })
 
     test('throws error', async () => {

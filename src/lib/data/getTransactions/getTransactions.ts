@@ -17,7 +17,10 @@ import {
 const getTransactions = async (
     limit: CollectionLimit,
     filter?: TransactionFilter
-): Promise<TransformedPartialTransactionFragment[] | undefined> => {
+): Promise<{
+    total: number
+    transactions: TransformedPartialTransactionFragment[]
+}> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -32,12 +35,14 @@ const getTransactions = async (
 
     if (result.error) {
         throw result.error
+    } else if (!result.data) {
+        return { total: 0, transactions: [] }
     }
 
     const now = dayjs()
 
-    return result.data?.transactionsCollection.items
-        ?.map(transaction => {
+    const transactions = result.data.transactionsCollection.items
+        .map(transaction => {
             let json
             let primaryAction
             let actionCount
@@ -64,6 +69,8 @@ const getTransactions = async (
             }
         })
         .toSorted((a, b) => b.block.height - a.block.height)
+
+    return { total: result.data.transactionsCollection.total, transactions }
 }
 
 export default getTransactions

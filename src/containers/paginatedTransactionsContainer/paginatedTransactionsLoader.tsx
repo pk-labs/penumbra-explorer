@@ -1,4 +1,5 @@
 // istanbul ignore file
+import { redirect } from 'next/navigation'
 import { FC } from 'react'
 import {
     Pagination,
@@ -20,11 +21,24 @@ const PaginatedTransactionsLoader: FC<Props> = async ({
     pathname,
     ...props
 }) => {
-    const transactions = await getTransactions({ length, offset })
+    const { total, transactions } = await getTransactions({ length, offset })
+
+    if (!transactions?.length) {
+        redirect(pathname)
+    }
+
+    const page = offset / length + 1
+    const totalPages = Math.ceil(total / length)
 
     return (
         <TransactionTable
-            footer={<Pagination pathname={pathname} />}
+            footer={
+                <Pagination
+                    page={page}
+                    pathname={pathname}
+                    totalPages={totalPages}
+                />
+            }
             transactions={transactions}
             {...props}
         />

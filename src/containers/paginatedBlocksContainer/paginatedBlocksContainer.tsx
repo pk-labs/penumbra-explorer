@@ -14,7 +14,13 @@ const PaginatedBlocksContainer: FC<Props> = props => (
             <Table
                 actions={props.actions}
                 className={props.className}
-                footer={<Pagination pathname={props.pathname} />}
+                footer={
+                    <Pagination
+                        page={0}
+                        pathname={props.pathname}
+                        totalPages={0}
+                    />
+                }
                 title={props.title}
             >
                 <thead>
