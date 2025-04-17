@@ -36,14 +36,21 @@ const LatestBlocksUpdater: FC<Props> = props => {
                     return prev
                 }
 
+                const now = dayjs()
+
                 return [
                     {
                         ...blockUpdate,
                         timeAgo: blockUpdate.createdAt
-                            ? dayjs().to(blockUpdate.createdAt)
+                            ? now.to(blockUpdate.createdAt)
                             : undefined,
                     },
-                    ...prev.slice(0, -1),
+                    ...prev.slice(0, -1).map(block => ({
+                        ...block,
+                        timeAgo: block.createdAt
+                            ? now.to(block.createdAt)
+                            : undefined,
+                    })),
                 ]
             })
         }
