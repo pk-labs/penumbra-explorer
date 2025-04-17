@@ -6,7 +6,7 @@ import { classNames } from '@/lib/utils'
 import styles from './blockPanel.module.css'
 
 const barCount = 24
-const animationDuration = 1500
+const animationDuration = 3000
 
 interface Props {
     animate?: boolean
@@ -68,18 +68,18 @@ const BlockPanelChart: FC<Props> = props => {
                         key={i}
                         className={classNames(
                             'bg-other-tonalFill10 h-10 w-1.25 rounded-xs',
-                            'transition-all duration-60 sm:h-9 sm:w-1 xl:h-10!',
+                            'transition-all duration-120 sm:h-9 sm:w-1 xl:h-10!',
                             'xl:w-1.25!',
                             styles.bar
                         )}
                     />
                 ))}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-end gap-2">
                 <div
                     className={classNames(
-                        'relative h-2.5 w-2.5 scale-90 transform-3d',
-                        'sm:scale-95 xl:scale-none!',
+                        'relative h-2.5 w-2.5 scale-80 transform-3d',
+                        'sm:scale-85 xl:scale-90!',
                         styles.cube,
                         props.animate && styles.animated
                     )}
