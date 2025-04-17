@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { classNames } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 import Button from '../button'
 import Skeleton from '../skeleton'
 
@@ -31,10 +31,10 @@ const Pagination: FC<Props> = props => (
             Prev
         </Button>
         {props.page === 0 && props.totalPages === 0 ? (
-            <Skeleton className="h-8 w-22" />
+            <Skeleton className="h-8 w-24" />
         ) : (
             <span className="text-sm">
-                {props.page} of {props.totalPages}
+                {formatNumber(props.page)} of {formatNumber(props.totalPages)}
             </span>
         )}
         <Button
