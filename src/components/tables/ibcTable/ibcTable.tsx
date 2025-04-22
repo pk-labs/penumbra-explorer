@@ -42,7 +42,10 @@ const IbcTable: FC<Props> = props => (
         <tbody>
             {ibcConnections.length ? (
                 ibcConnections.map(connection => (
-                    <TableRow key={connection.chainId}>
+                    <TableRow
+                        key={connection.chainId}
+                        href={`/ibc/${connection.chainId}`}
+                    >
                         <TableCell>
                             <Image
                                 alt={connection.name}
