@@ -15,13 +15,7 @@ const UmPrice: FC<Props> = props => (
             props.className
         )}
     >
-        <span
-            className={classNames(
-                'text-text-secondary whitespace-nowrap md:hidden lg:inline!'
-            )}
-        >
-            UM Price:
-        </span>
+        <span className="text-text-secondary whitespace-nowrap">UM Price:</span>
         <span>${props.price.toFixed(2)}</span>
         <span
             className={classNames(

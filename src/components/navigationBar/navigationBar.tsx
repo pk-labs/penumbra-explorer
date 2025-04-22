@@ -44,7 +44,7 @@ const NavigationBar: FC<Props> = props => {
         <Container
             as="header"
             className={classNames(
-                'grid h-19 grid-cols-2 items-center md:grid-cols-3',
+                'grid h-19 grid-cols-2 items-center lg:grid-cols-3',
                 props.className
             )}
         >
@@ -58,7 +58,7 @@ const NavigationBar: FC<Props> = props => {
                     />
                 </Link>
             </div>
-            <Tabs className="hidden justify-self-center md:flex">
+            <Tabs className="hidden justify-self-center lg:flex">
                 <Tab href="/">Home</Tab>
                 <Tab href="/blocks" paths={['/block']}>
                     Blocks
@@ -101,7 +101,7 @@ const NavigationBar: FC<Props> = props => {
                 <Menu
                     className={classNames(
                         'relative z-40 rounded-full backdrop-blur-[32px]',
-                        'md:hidden'
+                        'lg:hidden'
                     )}
                     onClose={closeMenu}
                     onOpen={openMenu}
