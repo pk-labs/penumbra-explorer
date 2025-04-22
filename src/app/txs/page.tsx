@@ -1,4 +1,5 @@
 // istanbul ignore file
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import { PaginatedTransactionsContainer } from '@/containers'
@@ -21,6 +22,11 @@ interface Props {
 const TransactionsPage: FC<Props> = async props => {
     const searchParams = await props.searchParams
     const page = searchParams.page ? Number(searchParams.page) - 1 : 0
+
+    if (Number.isNaN(page) || page < 0) {
+        notFound()
+    }
+
     const length = 20
     const offset = page * length
 
