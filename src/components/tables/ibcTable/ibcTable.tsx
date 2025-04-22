@@ -1,4 +1,6 @@
+import Image from 'next/image'
 import { FC } from 'react'
+import { ibcConnections } from '@/lib/constants'
 import EmptyState from '../../emptyState'
 import { Table, TableCell, TableRow } from '../table'
 
@@ -35,11 +37,35 @@ const IbcTable: FC<Props> = props => (
             </TableRow>
         </thead>
         <tbody>
-            <TableRow>
-                <TableCell colSpan={6}>
-                    <EmptyState>No chains configured</EmptyState>
-                </TableCell>
-            </TableRow>
+            {ibcConnections.length ? (
+                ibcConnections.map(connection => (
+                    <TableRow key={connection.chainId}>
+                        <TableCell>
+                            <Image
+                                alt={connection.name}
+                                className="inline"
+                                height={32}
+                                src={connection.image}
+                                width={32}
+                            />
+                            <span className="font-default text-lg font-normal">
+                                {connection.name}
+                            </span>
+                        </TableCell>
+                        <TableCell />
+                        <TableCell />
+                        <TableCell />
+                        <TableCell />
+                        <TableCell />
+                    </TableRow>
+                ))
+            ) : (
+                <TableRow>
+                    <TableCell colSpan={6}>
+                        <EmptyState>No chains configured</EmptyState>
+                    </TableCell>
+                </TableRow>
+            )}
         </tbody>
     </Table>
 )
