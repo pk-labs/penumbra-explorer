@@ -1,5 +1,5 @@
 // istanbul ignore file
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { FC } from 'react'
 import {
     Pagination,
@@ -24,7 +24,7 @@ const PaginatedTransactionsLoader: FC<Props> = async ({
     const { total, transactions } = await getTransactions({ length, offset })
 
     if (!transactions?.length) {
-        redirect(pathname)
+        notFound()
     }
 
     const page = offset / length + 1
