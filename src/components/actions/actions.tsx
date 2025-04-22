@@ -22,10 +22,16 @@ const Actions: FC<Props> = props => {
         return transactionToView(transaction, props.hash, props.blockHeight)
     }, [props.blockHeight, props.hash, props.rawTransaction])
 
+    const actionViews = view?.bodyView?.actionViews
+
+    if (!actionViews?.length) {
+        return
+    }
+
     return (
         <Subsection title="Actions">
             <ul className="flex flex-col gap-2">
-                {view?.bodyView?.actionViews.map((action, i) => (
+                {actionViews.map((action, i) => (
                     <li
                         key={i}
                         className={classNames(
