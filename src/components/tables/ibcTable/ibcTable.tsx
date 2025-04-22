@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { ibcConnections } from '@/lib/constants'
 import EmptyState from '../../emptyState'
+import Pill from '../../pill'
 import { Table, TableCell, TableRow } from '../table'
 
 export interface Props {
@@ -52,7 +53,24 @@ const IbcTable: FC<Props> = props => (
                                 {connection.name}
                             </span>
                         </TableCell>
-                        <TableCell />
+                        <TableCell>
+                            <Pill
+                                className="capitalize"
+                                context={
+                                    connection.clientStatus === 'active'
+                                        ? 'technical-success'
+                                        : connection.clientStatus === 'frozen'
+                                          ? 'technical-caution'
+                                          : connection.clientStatus ===
+                                              'expired'
+                                            ? 'technical-destructive'
+                                            : 'technical-default'
+                                }
+                                priority="secondary"
+                            >
+                                {connection.clientStatus}
+                            </Pill>
+                        </TableCell>
                         <TableCell />
                         <TableCell />
                         <TableCell />
