@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import { Breadcrumb, Breadcrumbs, Container, IbcTable } from '@/components'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata('IBC', 'TODO: Description', '/ibc')
@@ -12,6 +12,7 @@ const IbcPage: FC = async () => {
                 <Breadcrumb href="/">Explorer</Breadcrumb>
                 <Breadcrumb>IBC Chains</Breadcrumb>
             </Breadcrumbs>
+            <IbcTable />
         </Container>
     )
 }
