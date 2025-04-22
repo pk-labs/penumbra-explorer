@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { ibcConnections } from '@/lib/constants'
+import { formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
 import { Table, TableCell, TableRow } from '../table'
@@ -71,9 +72,40 @@ const IbcTable: FC<Props> = props => (
                                 {connection.clientStatus}
                             </Pill>
                         </TableCell>
-                        <TableCell />
-                        <TableCell />
-                        <TableCell />
+                        <TableCell>
+                            <span className="text-base font-normal">
+                                ${formatNumber(connection.volumeShielded)}
+                            </span>
+                            <br />
+                            <span className="text-text-secondary">
+                                {formatNumber(connection.txsShielded)}
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="text-base font-normal">
+                                ${formatNumber(connection.volumeUnshielded)}
+                            </span>
+                            <br />
+                            <span className="text-text-secondary">
+                                {formatNumber(connection.txsUnshielded)}
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="text-base font-normal">
+                                $
+                                {formatNumber(
+                                    connection.volumeShielded +
+                                        connection.volumeUnshielded
+                                )}
+                            </span>
+                            <br />
+                            <span className="text-text-secondary">
+                                {formatNumber(
+                                    connection.txsShielded +
+                                        connection.txsUnshielded
+                                )}
+                            </span>
+                        </TableCell>
                         <TableCell />
                     </TableRow>
                 ))
