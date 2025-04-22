@@ -1,5 +1,5 @@
 // istanbul ignore file
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import {
     Pagination,
