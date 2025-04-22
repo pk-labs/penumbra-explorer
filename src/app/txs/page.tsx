@@ -23,7 +23,7 @@ const TransactionsPage: FC<Props> = async props => {
     const searchParams = await props.searchParams
     const page = searchParams.page ? Number(searchParams.page) - 1 : 0
 
-    if (Number.isNaN(page) || page < 0) {
+    if (Number.isNaN(page) || page <= 0) {
         notFound()
     }
 
