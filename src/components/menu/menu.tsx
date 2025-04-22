@@ -35,7 +35,7 @@ const Menu: FC<Props> = props => {
             <Button
                 className={props.className}
                 density="compact"
-                icon="Menu"
+                icon={props.open ? 'X' : 'Menu'}
                 onClick={toggle}
                 iconOnly
             >
