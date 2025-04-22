@@ -1,7 +1,8 @@
+import { Clock4Icon, TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC } from 'react'
 import { ibcConnections } from '@/lib/constants'
-import { formatNumber } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
 import { Table, TableCell, TableRow } from '../table'
@@ -106,7 +107,32 @@ const IbcTable: FC<Props> = props => (
                                 )}
                             </span>
                         </TableCell>
-                        <TableCell />
+                        <TableCell>
+                            <span
+                                className={classNames(
+                                    'flex items-center gap-1 text-base',
+                                    'font-normal'
+                                )}
+                            >
+                                <Clock4Icon
+                                    className="text-caution-light"
+                                    size={12}
+                                />
+                                {formatNumber(connection.txsPending)}
+                            </span>
+                            <span
+                                className={classNames(
+                                    'text-text-secondary flex items-center',
+                                    'gap-1'
+                                )}
+                            >
+                                <TimerOffIcon
+                                    className="text-neutral-light"
+                                    size={12}
+                                />
+                                {formatNumber(connection.txsPending)}
+                            </span>
+                        </TableCell>
                     </TableRow>
                 ))
             ) : (
