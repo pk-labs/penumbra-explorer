@@ -12,10 +12,26 @@ const IbcTable: FC<Props> = props => (
             <TableRow>
                 <TableCell header>Name</TableCell>
                 <TableCell header>Client status</TableCell>
-                <TableCell header>Volume shielded</TableCell>
-                <TableCell header>Volume unshielded</TableCell>
-                <TableCell header>Volume total</TableCell>
-                <TableCell header>Txs pending</TableCell>
+                <TableCell header>
+                    Volume shielded
+                    <br />
+                    <span className="text-xs font-normal">Txs shielded</span>
+                </TableCell>
+                <TableCell header>
+                    Volume unshielded
+                    <br />
+                    <span className="text-xs font-normal">Txs unshielded</span>
+                </TableCell>
+                <TableCell header>
+                    Volume total
+                    <br />
+                    <span className="text-xs font-normal">Txs total</span>
+                </TableCell>
+                <TableCell header>
+                    Txs pending
+                    <br />
+                    <span className="text-xs font-normal">Txs expired</span>
+                </TableCell>
             </TableRow>
         </thead>
         <tbody>
