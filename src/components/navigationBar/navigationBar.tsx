@@ -66,6 +66,9 @@ const NavigationBar: FC<Props> = props => {
                 <Tab href="/txs" paths={['/tx']}>
                     Transactions
                 </Tab>
+                <Tab href="/ibc" paths={['/ibc']}>
+                    IBC
+                </Tab>
             </Tabs>
             <div className="flex items-center gap-2 justify-self-end">
                 {pathname !== '/' && (
