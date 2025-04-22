@@ -1,6 +1,11 @@
 'use client'
 
-import { BoxIcon, CheckCheckIcon, HomeIcon } from 'lucide-react'
+import {
+    BoxIcon,
+    CheckCheckIcon,
+    HomeIcon,
+    SatelliteDishIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -122,6 +127,13 @@ const NavigationBar: FC<Props> = props => {
                             size={16}
                         />
                         Transactions
+                    </MenuItem>
+                    <MenuItem href="/ibc" paths={['/ibc']}>
+                        <SatelliteDishIcon
+                            className="stroke-primary-light"
+                            size={16}
+                        />
+                        IBC
                     </MenuItem>
                 </Menu>
             </div>
