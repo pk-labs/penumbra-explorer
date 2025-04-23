@@ -1,9 +1,12 @@
+'use client'
+
 import { Clock4Icon, TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { ibcConnections } from '@/lib/constants'
 import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
+import { SegmentedControl } from '../../index'
 import Pill from '../../pill'
 import { Table, TableCell, TableRow } from '../table'
 
@@ -11,151 +14,179 @@ export interface Props {
     className?: string
 }
 
-const IbcTable: FC<Props> = props => (
-    <Table className={props.className}>
-        <thead>
-            <TableRow>
-                <TableCell className="align-baseline" header>
-                    Name
-                </TableCell>
-                <TableCell className="align-baseline" header>
-                    Client status
-                </TableCell>
-                <TableCell className="align-baseline" header>
-                    Volume shielded
-                    <br />
-                    <span className="text-xs font-normal">Txs shielded</span>
-                </TableCell>
-                <TableCell className="align-baseline" header>
-                    Volume unshielded
-                    <br />
-                    <span className="text-xs font-normal">Txs unshielded</span>
-                </TableCell>
-                <TableCell className="align-baseline" header>
-                    Volume total
-                    <br />
-                    <span className="text-xs font-normal">Txs total</span>
-                </TableCell>
-                <TableCell className="align-baseline" header>
-                    Txs pending
-                    <br />
-                    <span className="text-xs font-normal">Txs expired</span>
-                </TableCell>
-            </TableRow>
-        </thead>
-        <tbody>
-            {ibcConnections.length ? (
-                ibcConnections.map(connection => (
-                    <TableRow
-                        key={connection.chainId}
-                        href={`/ibc/${connection.chainId}`}
-                    >
-                        <TableCell className="h-20">
-                            <Image
-                                alt={connection.name}
-                                className="inline"
-                                height={32}
-                                src={connection.image}
-                                width={32}
-                            />
-                            <span className="font-default text-lg font-normal">
-                                {connection.name}
-                            </span>
-                        </TableCell>
-                        <TableCell className="h-20">
-                            <Pill
-                                className="capitalize"
-                                context={
-                                    connection.clientStatus === 'active'
-                                        ? 'technical-success'
-                                        : connection.clientStatus === 'frozen'
-                                          ? 'technical-caution'
-                                          : connection.clientStatus ===
-                                              'expired'
-                                            ? 'technical-destructive'
-                                            : 'technical-default'
-                                }
-                                priority="secondary"
-                            >
-                                {connection.clientStatus}
-                            </Pill>
-                        </TableCell>
-                        <TableCell className="h-20">
-                            <div className="flex flex-col gap-2">
-                                <span className="text-base font-normal">
-                                    ${formatNumber(connection.volumeShielded)}
-                                </span>
-                                <span className="text-text-secondary">
-                                    {formatNumber(connection.txsShielded)}
-                                </span>
-                            </div>
-                        </TableCell>
-                        <TableCell className="h-20">
-                            <div className="flex flex-col gap-2">
-                                <span className="text-base font-normal">
-                                    ${formatNumber(connection.volumeUnshielded)}
-                                </span>
-                                <span className="text-text-secondary">
-                                    {formatNumber(connection.txsUnshielded)}
-                                </span>
-                            </div>
-                        </TableCell>
-                        <TableCell className="h-20">
-                            <div className="flex flex-col gap-2">
-                                <span className="text-base font-normal">
-                                    $
-                                    {formatNumber(
-                                        connection.volumeShielded +
-                                            connection.volumeUnshielded
-                                    )}
-                                </span>
-                                <span className="text-text-secondary">
-                                    {formatNumber(
-                                        connection.txsShielded +
-                                            connection.txsUnshielded
-                                    )}
-                                </span>
-                            </div>
-                        </TableCell>
-                        <TableCell className="h-20">
-                            <div className="flex flex-col gap-2">
-                                <span
-                                    className={classNames(
-                                        'flex items-center gap-1 text-base',
-                                        'font-normal'
-                                    )}
-                                >
-                                    <Clock4Icon
-                                        className="text-caution-light"
-                                        size={12}
-                                    />
-                                    {formatNumber(connection.txsPending)}
-                                </span>
-                                <span
-                                    className={classNames(
-                                        'text-text-secondary flex items-center',
-                                        'gap-1'
-                                    )}
-                                >
-                                    <TimerOffIcon
-                                        className="text-neutral-light"
-                                        size={12}
-                                    />
-                                    {formatNumber(connection.txsPending)}
-                                </span>
-                            </div>
-                        </TableCell>
-                    </TableRow>
-                ))
-            ) : (
+const IbcTable: FC<Props> = props => {
+    const [timeInterval, setTimeInterval] = useState<string>('24h')
+
+    return (
+        <Table
+            className={props.className}
+            header={
+                <SegmentedControl
+                    className="self-start"
+                    onChange={setTimeInterval}
+                    value={timeInterval}
+                >
+                    <SegmentedControl.Item style="filled" value="24h" />
+                    <SegmentedControl.Item style="filled" value="30d" />
+                    <SegmentedControl.Item style="filled" value="all" />
+                </SegmentedControl>
+            }
+        >
+            <thead>
                 <TableRow>
-                    <TableCell className="h-20" colSpan={6}>
-                        <EmptyState>No chains configured</EmptyState>
+                    <TableCell className="align-baseline" header>
+                        Name
+                    </TableCell>
+                    <TableCell className="align-baseline" header>
+                        Client status
+                    </TableCell>
+                    <TableCell className="align-baseline" header>
+                        Volume shielded
+                        <br />
+                        <span className="text-xs font-normal">
+                            Txs shielded
+                        </span>
+                    </TableCell>
+                    <TableCell className="align-baseline" header>
+                        Volume unshielded
+                        <br />
+                        <span className="text-xs font-normal">
+                            Txs unshielded
+                        </span>
+                    </TableCell>
+                    <TableCell className="align-baseline" header>
+                        Volume total
+                        <br />
+                        <span className="text-xs font-normal">Txs total</span>
+                    </TableCell>
+                    <TableCell className="align-baseline" header>
+                        Txs pending
+                        <br />
+                        <span className="text-xs font-normal">Txs expired</span>
                     </TableCell>
                 </TableRow>
-            )}
-        </tbody>
-    </Table>
-)
+            </thead>
+            <tbody>
+                {ibcConnections.length ? (
+                    ibcConnections.map(connection => (
+                        <TableRow
+                            key={connection.chainId}
+                            href={`/ibc/${connection.chainId}`}
+                        >
+                            <TableCell className="h-20">
+                                <Image
+                                    alt={connection.name}
+                                    className="inline"
+                                    height={32}
+                                    src={connection.image}
+                                    width={32}
+                                />
+                                <span className="font-default text-lg font-normal">
+                                    {connection.name}
+                                </span>
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <Pill
+                                    className="capitalize"
+                                    context={
+                                        connection.clientStatus === 'active'
+                                            ? 'technical-success'
+                                            : connection.clientStatus ===
+                                                'frozen'
+                                              ? 'technical-caution'
+                                              : connection.clientStatus ===
+                                                  'expired'
+                                                ? 'technical-destructive'
+                                                : 'technical-default'
+                                    }
+                                    priority="secondary"
+                                >
+                                    {connection.clientStatus}
+                                </Pill>
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <div className="flex flex-col gap-2">
+                                    <span className="text-base font-normal">
+                                        $
+                                        {formatNumber(
+                                            connection.volumeShielded
+                                        )}
+                                    </span>
+                                    <span className="text-text-secondary">
+                                        {formatNumber(connection.txsShielded)}
+                                    </span>
+                                </div>
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <div className="flex flex-col gap-2">
+                                    <span className="text-base font-normal">
+                                        $
+                                        {formatNumber(
+                                            connection.volumeUnshielded
+                                        )}
+                                    </span>
+                                    <span className="text-text-secondary">
+                                        {formatNumber(connection.txsUnshielded)}
+                                    </span>
+                                </div>
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <div className="flex flex-col gap-2">
+                                    <span className="text-base font-normal">
+                                        $
+                                        {formatNumber(
+                                            connection.volumeShielded +
+                                                connection.volumeUnshielded
+                                        )}
+                                    </span>
+                                    <span className="text-text-secondary">
+                                        {formatNumber(
+                                            connection.txsShielded +
+                                                connection.txsUnshielded
+                                        )}
+                                    </span>
+                                </div>
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <div className="flex flex-col gap-2">
+                                    <span
+                                        className={classNames(
+                                            'flex items-center gap-1 text-base',
+                                            'font-normal'
+                                        )}
+                                    >
+                                        <Clock4Icon
+                                            className="text-caution-light"
+                                            size={12}
+                                        />
+                                        {formatNumber(connection.txsPending)}
+                                    </span>
+                                    <span
+                                        className={classNames(
+                                            'text-text-secondary flex items-center',
+                                            'gap-1'
+                                        )}
+                                    >
+                                        <TimerOffIcon
+                                            className="text-neutral-light"
+                                            size={12}
+                                        />
+                                        {formatNumber(connection.txsPending)}
+                                    </span>
+                                </div>
+                            </TableCell>
+                        </TableRow>
+                    ))
+                ) : (
+                    <TableRow>
+                        <TableCell className="h-20" colSpan={6}>
+                            <EmptyState>No chains configured</EmptyState>
+                        </TableCell>
+                    </TableRow>
+                )}
+            </tbody>
+        </Table>
+    )
+}
 
 export default IbcTable
