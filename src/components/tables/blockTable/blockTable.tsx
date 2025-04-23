@@ -10,10 +10,8 @@ import {
 import { formatNumber } from '@/lib/utils'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
-export interface Props
-    extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
+export interface Props extends Omit<TableProps, 'children'> {
     blocks?: Array<TransformedBlockUpdate | TransformedPartialBlockFragment>
-    className?: string
     proposer?: boolean
 }
 
@@ -26,10 +24,9 @@ const BlockTable: FC<Props> = props => {
 
     return (
         <Table
-            actions={props.actions}
             className={props.className}
             footer={props.footer}
-            title={props.title}
+            header={props.header}
         >
             <thead>
                 <TableRow>

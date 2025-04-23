@@ -18,9 +18,7 @@ import EmptyState from '../../emptyState'
 import Pill from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
-export interface Props
-    extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
-    className?: string
+export interface Props extends Omit<TableProps, 'children'> {
     embedded?: boolean
     emptyStateMessage?: string
     time?: boolean
@@ -38,13 +36,12 @@ const TransactionTable: FC<Props> = props => {
 
     return (
         <Table
-            actions={props.actions}
             className={classNames(
                 props.embedded && 'rounded-sm p-0 backdrop-blur-none',
                 props.className
             )}
             footer={props.footer}
-            title={props.title}
+            header={props.header}
         >
             <thead>
                 <TableRow>

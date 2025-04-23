@@ -44,17 +44,11 @@ const HomePage: FC = async () => (
                 )}
             />
             <LatestTransactionsContainer
-                actions={
-                    <Button density="compact" href="/txs">
-                        View All
-                    </Button>
-                }
                 className={classNames(
                     'col-span-6 col-start-1 row-4 lg:col-span-3',
                     'lg:col-start-4 lg:row-2'
                 )}
                 limit={10}
-                title="Latest transactions"
             />
         </Container>
     </>

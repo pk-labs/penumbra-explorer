@@ -2,7 +2,6 @@ import { FC, ReactElement, ReactNode } from 'react'
 import { classNames } from '@/lib/utils'
 
 export interface Props {
-    actions?: ReactNode
     children?:
         | Array<ReactElement<HTMLTableSectionElement>>
         | false
@@ -11,8 +10,7 @@ export interface Props {
         | undefined
     className?: string
     footer?: ReactNode
-    footerClassName?: string
-    title?: string
+    header?: ReactNode
 }
 
 const Table: FC<Props> = props => (
@@ -23,27 +21,11 @@ const Table: FC<Props> = props => (
             props.className
         )}
     >
-        {Boolean(props.title || props.actions) && (
-            <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-medium capitalize">
-                    {props.title}
-                </h2>
-                <div className="text-text-secondary">{props.actions}</div>
-            </div>
-        )}
+        {props.header}
         <div className="flex-1 overflow-x-auto">
             <table className="w-full">{props.children}</table>
         </div>
-        {props.footer && (
-            <div
-                className={classNames(
-                    'text-text-secondary text-xs',
-                    props.footerClassName
-                )}
-            >
-                {props.footer}
-            </div>
-        )}
+        {props.footer}
     </div>
 )
 

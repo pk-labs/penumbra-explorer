@@ -65,10 +65,9 @@ const LatestBlocksUpdater: FC<Props> = props => {
                 number={latestBlockHeight}
             />
             <BlockTable
-                actions={props.actions}
                 blocks={blocks}
                 className={props.blockTableClassName}
-                title={props.title}
+                header={props.header}
             />
         </>
     )

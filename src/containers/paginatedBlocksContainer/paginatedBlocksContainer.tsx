@@ -12,7 +12,6 @@ const PaginatedBlocksContainer: FC<Props> = props => (
         })}
         fallback={
             <Table
-                actions={props.actions}
                 className={props.className}
                 footer={
                     <Pagination
@@ -21,7 +20,7 @@ const PaginatedBlocksContainer: FC<Props> = props => (
                         totalPages={0}
                     />
                 }
-                title={props.title}
+                header={props.header}
             >
                 <thead>
                     <TableRow>
