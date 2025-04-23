@@ -24,7 +24,7 @@ const TableCell: FC<Props> = props => {
                 'h-12 px-3 text-left text-sm font-medium whitespace-nowrap',
                 props.header
                     ? 'border-other-tonalFill10 text-text-secondary border-b ' +
-                          'align-baseline capitalize'
+                          'align-middle capitalize'
                     : 'font-mono',
                 props.className
             )}

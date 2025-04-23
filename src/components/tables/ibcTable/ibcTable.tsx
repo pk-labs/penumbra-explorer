@@ -15,24 +15,28 @@ const IbcTable: FC<Props> = props => (
     <Table className={props.className}>
         <thead>
             <TableRow>
-                <TableCell header>Name</TableCell>
-                <TableCell header>Client status</TableCell>
-                <TableCell header>
+                <TableCell className="align-baseline" header>
+                    Name
+                </TableCell>
+                <TableCell className="align-baseline" header>
+                    Client status
+                </TableCell>
+                <TableCell className="align-baseline" header>
                     Volume shielded
                     <br />
                     <span className="text-xs font-normal">Txs shielded</span>
                 </TableCell>
-                <TableCell header>
+                <TableCell className="align-baseline" header>
                     Volume unshielded
                     <br />
                     <span className="text-xs font-normal">Txs unshielded</span>
                 </TableCell>
-                <TableCell header>
+                <TableCell className="align-baseline" header>
                     Volume total
                     <br />
                     <span className="text-xs font-normal">Txs total</span>
                 </TableCell>
-                <TableCell header>
+                <TableCell className="align-baseline" header>
                     Txs pending
                     <br />
                     <span className="text-xs font-normal">Txs expired</span>
@@ -46,7 +50,7 @@ const IbcTable: FC<Props> = props => (
                         key={connection.chainId}
                         href={`/ibc/${connection.chainId}`}
                     >
-                        <TableCell>
+                        <TableCell className="h-20">
                             <Image
                                 alt={connection.name}
                                 className="inline"
@@ -58,7 +62,7 @@ const IbcTable: FC<Props> = props => (
                                 {connection.name}
                             </span>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="h-20">
                             <Pill
                                 className="capitalize"
                                 context={
@@ -76,71 +80,76 @@ const IbcTable: FC<Props> = props => (
                                 {connection.clientStatus}
                             </Pill>
                         </TableCell>
-                        <TableCell>
-                            <span className="text-base font-normal">
-                                ${formatNumber(connection.volumeShielded)}
-                            </span>
-                            <br />
-                            <span className="text-text-secondary">
-                                {formatNumber(connection.txsShielded)}
-                            </span>
+                        <TableCell className="h-20">
+                            <div className="flex flex-col gap-2">
+                                <span className="text-base font-normal">
+                                    ${formatNumber(connection.volumeShielded)}
+                                </span>
+                                <span className="text-text-secondary">
+                                    {formatNumber(connection.txsShielded)}
+                                </span>
+                            </div>
                         </TableCell>
-                        <TableCell>
-                            <span className="text-base font-normal">
-                                ${formatNumber(connection.volumeUnshielded)}
-                            </span>
-                            <br />
-                            <span className="text-text-secondary">
-                                {formatNumber(connection.txsUnshielded)}
-                            </span>
+                        <TableCell className="h-20">
+                            <div className="flex flex-col gap-2">
+                                <span className="text-base font-normal">
+                                    ${formatNumber(connection.volumeUnshielded)}
+                                </span>
+                                <span className="text-text-secondary">
+                                    {formatNumber(connection.txsUnshielded)}
+                                </span>
+                            </div>
                         </TableCell>
-                        <TableCell>
-                            <span className="text-base font-normal">
-                                $
-                                {formatNumber(
-                                    connection.volumeShielded +
-                                        connection.volumeUnshielded
-                                )}
-                            </span>
-                            <br />
-                            <span className="text-text-secondary">
-                                {formatNumber(
-                                    connection.txsShielded +
-                                        connection.txsUnshielded
-                                )}
-                            </span>
+                        <TableCell className="h-20">
+                            <div className="flex flex-col gap-2">
+                                <span className="text-base font-normal">
+                                    $
+                                    {formatNumber(
+                                        connection.volumeShielded +
+                                            connection.volumeUnshielded
+                                    )}
+                                </span>
+                                <span className="text-text-secondary">
+                                    {formatNumber(
+                                        connection.txsShielded +
+                                            connection.txsUnshielded
+                                    )}
+                                </span>
+                            </div>
                         </TableCell>
-                        <TableCell>
-                            <span
-                                className={classNames(
-                                    'flex items-center gap-1 text-base',
-                                    'font-normal'
-                                )}
-                            >
-                                <Clock4Icon
-                                    className="text-caution-light"
-                                    size={12}
-                                />
-                                {formatNumber(connection.txsPending)}
-                            </span>
-                            <span
-                                className={classNames(
-                                    'text-text-secondary flex items-center',
-                                    'gap-1'
-                                )}
-                            >
-                                <TimerOffIcon
-                                    className="text-neutral-light"
-                                    size={12}
-                                />
-                                {formatNumber(connection.txsPending)}
-                            </span>
+                        <TableCell className="h-20">
+                            <div className="flex flex-col gap-2">
+                                <span
+                                    className={classNames(
+                                        'flex items-center gap-1 text-base',
+                                        'font-normal'
+                                    )}
+                                >
+                                    <Clock4Icon
+                                        className="text-caution-light"
+                                        size={12}
+                                    />
+                                    {formatNumber(connection.txsPending)}
+                                </span>
+                                <span
+                                    className={classNames(
+                                        'text-text-secondary flex items-center',
+                                        'gap-1'
+                                    )}
+                                >
+                                    <TimerOffIcon
+                                        className="text-neutral-light"
+                                        size={12}
+                                    />
+                                    {formatNumber(connection.txsPending)}
+                                </span>
+                            </div>
                         </TableCell>
                     </TableRow>
                 ))
             ) : (
                 <TableRow>
-                    <TableCell colSpan={6}>
+                    <TableCell className="h-20" colSpan={6}>
                         <EmptyState>No chains configured</EmptyState>
                     </TableCell>
                 </TableRow>
