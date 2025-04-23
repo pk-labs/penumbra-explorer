@@ -13,32 +13,25 @@ jest.mock('../../copyToClipboard/copyToClipboard')
 
 describe('BlockTable', () => {
     test('renders empty table', async () => {
-        const { container, rerender } = render(<TransactionTable time />)
-
-        expect(container.querySelector('tbody tr td')).toHaveAttribute(
-            'colspan',
-            '4'
-        )
-
-        rerender(<TransactionTable embedded time />)
-
-        expect(container.querySelector('tbody tr td')).toHaveAttribute(
-            'colspan',
-            '3'
-        )
-
-        rerender(<TransactionTable />)
-
-        expect(container.querySelector('tbody tr td')).toHaveAttribute(
-            'colspan',
-            '3'
-        )
-
-        rerender(<TransactionTable embedded />)
+        const { container, rerender } = render(<TransactionTable />)
 
         expect(container.querySelector('tbody tr td')).toHaveAttribute(
             'colspan',
             '2'
+        )
+
+        rerender(<TransactionTable blockHeight />)
+
+        expect(container.querySelector('tbody tr td')).toHaveAttribute(
+            'colspan',
+            '3'
+        )
+
+        rerender(<TransactionTable blockHeight time />)
+
+        expect(container.querySelector('tbody tr td')).toHaveAttribute(
+            'colspan',
+            '4'
         )
     })
 
@@ -68,8 +61,51 @@ describe('BlockTable', () => {
             />
         )
 
+        getByText(container, 'tx1')
+        getByText(container, 'tx2')
+    })
+
+    test('renders block height', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actionCount: 0,
+                        block: {
+                            createdAt: dayjs().toISOString(),
+                            height: 123,
+                        },
+                        hash: 'tx1',
+                        raw: '',
+                    },
+                ]}
+                blockHeight
+            />
+        )
+
         getByText(container, 123)
-        getByText(container, 456)
+    })
+
+    test('renders actions', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actionCount: 2,
+                        block: {
+                            createdAt: dayjs().toISOString(),
+                            height: 123,
+                        },
+                        hash: 'tx1',
+                        primaryAction: ActionType.receive,
+                        raw: '',
+                    },
+                ]}
+            />
+        )
+
+        getByText(container, 'receive')
+        getByText(container, '+1')
     })
 
     test('renders time', async () => {
@@ -96,49 +132,6 @@ describe('BlockTable', () => {
         getByText(container, '1s ago')
     })
 
-    test('renders actions', async () => {
-        const { container } = render(
-            <TransactionTable
-                transactions={[
-                    {
-                        actionCount: 2,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
-                        hash: 'tx1',
-                        primaryAction: ActionType.receive,
-                        raw: '',
-                    },
-                ]}
-            />
-        )
-
-        getByText(container, 'receive')
-        getByText(container, '+1')
-    })
-
-    test('renders embedded', async () => {
-        const { container } = render(
-            <TransactionTable
-                transactions={[
-                    {
-                        actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
-                        hash: 'tx1',
-                        raw: '',
-                    },
-                ]}
-                embedded
-            />
-        )
-
-        expect(container.firstChild).toHaveClass('p-0')
-    })
-
     test('navigates to transaction on row click', async () => {
         const { container } = render(
             <TransactionTable
@@ -156,7 +149,7 @@ describe('BlockTable', () => {
             />
         )
 
-        const row = getByText(container, 123).parentElement
+        const row = getByText(container, 'tx1').parentElement
 
         if (!row) {
             throw Error('Missing element')

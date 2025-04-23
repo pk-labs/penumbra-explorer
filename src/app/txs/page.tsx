@@ -40,6 +40,7 @@ const TransactionsPage: FC<Props> = async props => {
                 length={length}
                 offset={offset}
                 pathname="/txs"
+                blockHeight
                 time
             />
         </Container>

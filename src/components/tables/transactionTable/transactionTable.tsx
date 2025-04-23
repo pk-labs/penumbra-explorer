@@ -7,19 +7,14 @@ import {
     TransformedPartialTransactionFragment,
     TransformedTransactionUpdate,
 } from '@/lib/types'
-import {
-    classNames,
-    formatAction,
-    formatNumber,
-    shortenHash,
-} from '@/lib/utils'
+import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
-    embedded?: boolean
+    blockHeight?: boolean
     emptyStateMessage?: string
     time?: boolean
     transactions?: Array<
@@ -36,17 +31,14 @@ const TransactionTable: FC<Props> = props => {
 
     return (
         <Table
-            className={classNames(
-                props.embedded && 'rounded-sm p-0 backdrop-blur-none',
-                props.className
-            )}
+            className={props.className}
             footer={props.footer}
             header={props.header}
         >
             <thead>
                 <TableRow>
                     <TableCell header>Tx hash</TableCell>
-                    {!props.embedded && (
+                    {props.blockHeight && (
                         <TableCell header>Block height</TableCell>
                     )}
                     <TableCell header>Actions</TableCell>
@@ -81,7 +73,7 @@ const TransactionTable: FC<Props> = props => {
                                 </Link>
                                 <CopyToClipboard text={transaction.hash} />
                             </TableCell>
-                            {!props.embedded && (
+                            {props.blockHeight && (
                                 <TableCell>
                                     <BoxIcon
                                         color="var(--color-text-secondary)"
@@ -117,9 +109,9 @@ const TransactionTable: FC<Props> = props => {
                     <TableRow>
                         <TableCell
                             colSpan={
-                                4 -
-                                (props.time ? 0 : 1) -
-                                (props.embedded ? 1 : 0)
+                                2 +
+                                (props.blockHeight ? 1 : 0) +
+                                (props.time ? 1 : 0)
                             }
                         >
                             <EmptyState>{props.emptyStateMessage}</EmptyState>

@@ -49,6 +49,7 @@ const HomePage: FC = async () => (
                     'lg:col-start-4 lg:row-2'
                 )}
                 limit={10}
+                time
             />
         </Container>
     </>
