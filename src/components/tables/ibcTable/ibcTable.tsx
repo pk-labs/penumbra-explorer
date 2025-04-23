@@ -3,7 +3,7 @@
 import { Clock4Icon, TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC, useState } from 'react'
-import { ibcConnections } from '@/lib/constants'
+import { ibc } from '@/lib/constants'
 import { classNames, formatNumber } from '@/lib/utils'
 import Density from '../../density'
 import EmptyState from '../../emptyState'
@@ -70,8 +70,8 @@ const IbcTable: FC<Props> = props => {
                 </TableRow>
             </thead>
             <tbody>
-                {ibcConnections.length ? (
-                    ibcConnections.map(connection => (
+                {ibc.length ? (
+                    ibc.map(connection => (
                         <TableRow
                             key={connection.chainId}
                             href={`/ibc/${connection.chainId}`}

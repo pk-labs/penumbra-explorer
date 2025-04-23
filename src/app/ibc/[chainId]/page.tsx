@@ -2,10 +2,16 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import {
+    Breadcrumb,
+    Breadcrumbs,
+    Container,
+    Parameter,
+    Parameters,
+} from '@/components'
 import { PaginatedTransactionsContainer } from '@/containers'
-import { ibcConnections } from '@/lib/constants'
-import { classNames, generatePageMetadata } from '@/lib/utils'
+import { ibc } from '@/lib/constants'
+import { classNames, formatNumber, generatePageMetadata } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ chainId: string }>
@@ -24,10 +30,7 @@ export const generateMetadata = async (props: Props) => {
 
 const ChainPage: FC<Props> = async props => {
     const params = await props.params
-
-    const connection = ibcConnections.find(
-        connection => connection.chainId === params.chainId
-    )
+    const connection = ibc.find(c => c.chainId === params.chainId)
 
     if (!connection) {
         notFound()
@@ -57,7 +60,7 @@ const ChainPage: FC<Props> = async props => {
             >
                 <div
                     className={classNames(
-                        'bg-other-tonalFill5 flex flex-col gap-3 rounded-lg',
+                        'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg',
                         'p-6 backdrop-blur-lg lg:col-1 lg:row-span-2'
                     )}
                 >
@@ -93,6 +96,46 @@ const ChainPage: FC<Props> = async props => {
                             <span>???</span>
                         </div>
                     </div>
+                    <Parameters className="bg-transparent p-0" title="Shielded">
+                        <Parameter name="Volume shielded">
+                            ${formatNumber(connection.volumeShielded)}
+                        </Parameter>
+                        <Parameter name="Txs shielded">
+                            {formatNumber(connection.txsShielded)}
+                        </Parameter>
+                    </Parameters>
+                    <Parameters
+                        className="bg-transparent p-0"
+                        title="Unshielded"
+                    >
+                        <Parameter name="Volume unshielded">
+                            ${formatNumber(connection.volumeUnshielded)}
+                        </Parameter>
+                        <Parameter name="Txs unshielded">
+                            {formatNumber(connection.txsUnshielded)}
+                        </Parameter>
+                    </Parameters>
+                    <Parameters className="bg-transparent p-0" title="Total">
+                        <Parameter name="Volume total">
+                            $
+                            {formatNumber(
+                                connection.volumeShielded +
+                                    connection.volumeUnshielded
+                            )}
+                        </Parameter>
+                        <Parameter name="Txs total">
+                            {formatNumber(
+                                connection.txsShielded +
+                                    connection.txsUnshielded
+                            )}
+                        </Parameter>
+                        <Parameter name="Txs pending">
+                            {formatNumber(connection.txsPending)}
+                        </Parameter>
+                        <Parameter name="Txs expired">
+                            {formatNumber(connection.txsExpired)}
+                        </Parameter>
+                    </Parameters>
                 </div>
                 <div
                     className={classNames(
@@ -101,6 +144,7 @@ const ChainPage: FC<Props> = async props => {
                     )}
                 />
                 <PaginatedTransactionsContainer
+                    className="min-w-0"
                     header={
                         <h2
                             className={classNames(
