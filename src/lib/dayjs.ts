@@ -10,22 +10,24 @@ dayjs.extend(timezone)
 dayjs.extend(relativeTime)
 dayjs.extend(updateLocale)
 
-// TODO: Implement displaying 1-3wk ago
 dayjs.updateLocale('en', {
     relativeTime: {
         d: '1d',
-        dd: '%dd',
+        dd: (days: number) =>
+            days >= 7 ? `${Math.round(days / 7)}wk` : `${days}d`,
         future: '0s ago',
         h: '1hr',
         hh: '%dhr',
         m: '1min',
-        M: '1m',
+        M: '1mo',
         mm: '%dmin',
-        MM: '%dm',
+        MM: '%dmo',
         past: '%s ago',
         s: '%ds',
-        y: '1y',
-        yy: '%dy',
+        w: '1w',
+        ww: '%dw',
+        y: '1yr',
+        yy: '%dyr',
     },
 })
 
