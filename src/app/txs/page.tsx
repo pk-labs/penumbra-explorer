@@ -14,9 +14,7 @@ export const metadata = generatePageMetadata(
 )
 
 interface Props {
-    searchParams: Promise<{
-        page?: string
-    }>
+    searchParams: Promise<{ page?: string }>
 }
 
 const TransactionsPage: FC<Props> = async props => {

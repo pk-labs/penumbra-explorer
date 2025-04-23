@@ -16,7 +16,7 @@ export interface Props {
 const Table: FC<Props> = props => (
     <div
         className={classNames(
-            'bg-other-tonalFill5 flex flex-col gap-6 rounded-lg p-6',
+            'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg p-6',
             'backdrop-blur-lg',
             props.className
         )}
