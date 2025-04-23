@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react'
 import { classNames } from '@/lib/utils'
-import { ParameterProps } from './parameter'
+import { Props as ParameterProps } from './parameter'
 
 interface Props {
     children?:

@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react'
-import { Parameter } from './parameter'
+import Parameter from './parameter'
 import Parameters from './parameters'
 
 describe('Parameters', () => {
