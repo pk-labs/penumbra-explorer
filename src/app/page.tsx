@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { Button, Container, Search } from '@/components'
+import { Container, Search } from '@/components'
 import {
     LatestBlocksContainer,
     LatestTransactionsContainer,
