@@ -5,9 +5,10 @@ import Image from 'next/image'
 import { FC, useState } from 'react'
 import { ibcConnections } from '@/lib/constants'
 import { classNames, formatNumber } from '@/lib/utils'
+import Density from '../../density'
 import EmptyState from '../../emptyState'
-import { SegmentedControl } from '../../index'
 import Pill from '../../pill'
+import SegmentedControl from '../../segmentedControl'
 import { Table, TableCell, TableRow } from '../table'
 
 export interface Props {
@@ -21,15 +22,17 @@ const IbcTable: FC<Props> = props => {
         <Table
             className={props.className}
             header={
-                <SegmentedControl
-                    className="self-start"
-                    onChange={setTimeInterval}
-                    value={timeInterval}
-                >
-                    <SegmentedControl.Item style="filled" value="24h" />
-                    <SegmentedControl.Item style="filled" value="30d" />
-                    <SegmentedControl.Item style="filled" value="all" />
-                </SegmentedControl>
+                <Density compact>
+                    <SegmentedControl
+                        className="self-start"
+                        onChange={setTimeInterval}
+                        value={timeInterval}
+                    >
+                        <SegmentedControl.Item style="filled" value="24h" />
+                        <SegmentedControl.Item style="filled" value="30d" />
+                        <SegmentedControl.Item style="filled" value="All" />
+                    </SegmentedControl>
+                </Density>
             }
         >
             <thead>
