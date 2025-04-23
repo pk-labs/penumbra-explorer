@@ -195,7 +195,7 @@ const Search: FC<Props> = props => {
                 className={classNames(
                     'font-default bg-other-tonalFill5 w-full rounded-sm p-4',
                     'text-text-secondary pl-11 text-base outline-2',
-                    'outline-transparent backdrop-blur-[32px]',
+                    'outline-transparent backdrop-blur-lg',
                     'focus:outline-text-secondary focus:transition-none'
                 )}
                 onBlur={onInputBlur}

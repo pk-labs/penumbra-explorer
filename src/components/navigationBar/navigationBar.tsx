@@ -79,7 +79,9 @@ const NavigationBar: FC<Props> = props => {
                 {pathname !== '/' && (
                     <>
                         <Button
-                            className="relative z-40 rounded-full backdrop-blur-[32px]"
+                            className={classNames(
+                                'relative z-40 rounded-full backdrop-blur-lg'
+                            )}
                             density="compact"
                             icon="Search"
                             onClick={openSearchModal}
@@ -105,7 +107,7 @@ const NavigationBar: FC<Props> = props => {
                 <UmPriceContainer className="hidden sm:flex" />
                 <Menu
                     className={classNames(
-                        'relative z-40 rounded-full backdrop-blur-[32px]',
+                        'relative z-40 rounded-full backdrop-blur-lg',
                         'lg:hidden'
                     )}
                     onClose={closeMenu}

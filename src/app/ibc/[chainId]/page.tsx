@@ -40,7 +40,7 @@ const ChainPage: FC<Props> = async props => {
             <div
                 className={classNames(
                     'bg-other-tonalFill5 flex flex-col gap-3 rounded-lg p-6',
-                    'backdrop-blur-[32px]'
+                    'backdrop-blur-lg'
                 )}
             >
                 <h1

@@ -19,7 +19,7 @@ const Panel: FC<Props> = props => (
             'grid auto-rows-auto grid-cols-1 gap-4 rounded-lg',
             'bg-radial-[100%_100%_at_0%_0%] from-[rgba(174,174,174,0.25)]',
             'from-0% to-[rgba(174,174,174,0.03)] to-100% p-6',
-            'backdrop-blur-[32px] sm:grid-cols-2 sm:grid-rows-1 sm:gap-0',
+            'backdrop-blur-lg sm:grid-cols-2 sm:grid-rows-1 sm:gap-0',
             props.className
         )}
     >

@@ -19,7 +19,7 @@ const Tabs: FC<Props> = props => (
     <nav
         className={classNames(
             'bg-other-tonalFill5 relative flex h-9 items-center rounded-full',
-            'px-4 backdrop-blur-[32px]',
+            'px-4 backdrop-blur-lg',
             props.className
         )}
     >
