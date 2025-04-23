@@ -96,46 +96,56 @@ const ChainPage: FC<Props> = async props => {
                             <span>???</span>
                         </div>
                     </div>
-                    <Parameters className="bg-transparent p-0" title="Shielded">
-                        <Parameter name="Volume shielded">
-                            ${formatNumber(connection.volumeShielded)}
-                        </Parameter>
-                        <Parameter name="Txs shielded">
-                            {formatNumber(connection.txsShielded)}
-                        </Parameter>
-                    </Parameters>
-                    <Parameters
-                        className="bg-transparent p-0"
-                        title="Unshielded"
-                    >
-                        <Parameter name="Volume unshielded">
-                            ${formatNumber(connection.volumeUnshielded)}
-                        </Parameter>
-                        <Parameter name="Txs unshielded">
-                            {formatNumber(connection.txsUnshielded)}
-                        </Parameter>
-                    </Parameters>
-                    <Parameters className="bg-transparent p-0" title="Total">
-                        <Parameter name="Volume total">
-                            $
-                            {formatNumber(
-                                connection.volumeShielded +
-                                    connection.volumeUnshielded
-                            )}
-                        </Parameter>
-                        <Parameter name="Txs total">
-                            {formatNumber(
-                                connection.txsShielded +
-                                    connection.txsUnshielded
-                            )}
-                        </Parameter>
-                        <Parameter name="Txs pending">
-                            {formatNumber(connection.txsPending)}
-                        </Parameter>
-                        <Parameter name="Txs expired">
-                            {formatNumber(connection.txsExpired)}
-                        </Parameter>
-                    </Parameters>
+                    <div className="grid gap-4">
+                        <div className="flex flex-col gap-4">
+                            <Parameters
+                                className="bg-transparent p-0"
+                                title="Shielded"
+                            >
+                                <Parameter name="Volume shielded">
+                                    ${formatNumber(connection.volumeShielded)}
+                                </Parameter>
+                                <Parameter name="Txs shielded">
+                                    {formatNumber(connection.txsShielded)}
+                                </Parameter>
+                            </Parameters>
+                            <Parameters
+                                className="bg-transparent p-0"
+                                title="Unshielded"
+                            >
+                                <Parameter name="Volume unshielded">
+                                    ${formatNumber(connection.volumeUnshielded)}
+                                </Parameter>
+                                <Parameter name="Txs unshielded">
+                                    {formatNumber(connection.txsUnshielded)}
+                                </Parameter>
+                            </Parameters>
+                        </div>
+                        <Parameters
+                            className="bg-transparent p-0 sm:col-2 lg:col-auto!"
+                            title="Total"
+                        >
+                            <Parameter name="Volume total">
+                                $
+                                {formatNumber(
+                                    connection.volumeShielded +
+                                        connection.volumeUnshielded
+                                )}
+                            </Parameter>
+                            <Parameter name="Txs total">
+                                {formatNumber(
+                                    connection.txsShielded +
+                                        connection.txsUnshielded
+                                )}
+                            </Parameter>
+                            <Parameter name="Txs pending">
+                                {formatNumber(connection.txsPending)}
+                            </Parameter>
+                            <Parameter name="Txs expired">
+                                {formatNumber(connection.txsExpired)}
+                            </Parameter>
+                        </Parameters>
+                    </div>
                 </div>
                 <div
                     className={classNames(
