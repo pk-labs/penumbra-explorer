@@ -16,6 +16,7 @@ import { Table, TableCell, TableProps, TableRow } from '../table'
 export interface Props extends Omit<TableProps, 'children'> {
     blockHeight?: boolean
     emptyStateMessage?: string
+    status?: boolean
     time?: boolean
     transactions?: Array<
         TransformedPartialTransactionFragment | TransformedTransactionUpdate
@@ -41,6 +42,7 @@ const TransactionTable: FC<Props> = props => {
                     {props.blockHeight && (
                         <TableCell header>Block height</TableCell>
                     )}
+                    {props.status && <TableCell header>Tx status</TableCell>}
                     <TableCell header>Actions</TableCell>
                     {props.time && <TableCell header>Time</TableCell>}
                 </TableRow>
@@ -84,6 +86,17 @@ const TransactionTable: FC<Props> = props => {
                                     >
                                         {formatNumber(transaction.block.height)}
                                     </Link>
+                                </TableCell>
+                            )}
+                            {props.status && (
+                                <TableCell>
+                                    <Pill
+                                        className="capitalize"
+                                        context="technical-success"
+                                        priority="secondary"
+                                    >
+                                        Completed
+                                    </Pill>
                                 </TableCell>
                             )}
                             <TableCell>
