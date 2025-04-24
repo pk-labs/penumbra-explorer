@@ -14,6 +14,7 @@ import Pill from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
+    amount?: boolean
     blockHeight?: boolean
     emptyStateMessage?: string
     status?: boolean
@@ -42,6 +43,7 @@ const TransactionTable: FC<Props> = props => {
                     {props.blockHeight && (
                         <TableCell header>Block height</TableCell>
                     )}
+                    {props.amount && <TableCell header>Amount</TableCell>}
                     {props.status && <TableCell header>Tx status</TableCell>}
                     <TableCell header>Actions</TableCell>
                     {props.time && <TableCell header>Time</TableCell>}
@@ -88,10 +90,14 @@ const TransactionTable: FC<Props> = props => {
                                     </Link>
                                 </TableCell>
                             )}
+                            {props.amount && (
+                                <TableCell>
+                                    {formatNumber(1234.56)} UM
+                                </TableCell>
+                            )}
                             {props.status && (
                                 <TableCell>
                                     <Pill
-                                        className="capitalize"
                                         context="technical-success"
                                         priority="secondary"
                                     >

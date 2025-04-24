@@ -168,6 +168,7 @@ const ChainPage: FC<Props> = async props => {
                     length={length}
                     offset={offset}
                     pathname={`/ibc/${params.chainId}`}
+                    amount
                     blockHeight
                     status
                     time

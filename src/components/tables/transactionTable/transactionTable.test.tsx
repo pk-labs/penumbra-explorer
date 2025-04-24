@@ -86,6 +86,27 @@ describe('BlockTable', () => {
         getByText(container, 123)
     })
 
+    test('renders amount', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actionCount: 0,
+                        block: {
+                            createdAt: dayjs().toISOString(),
+                            height: 123,
+                        },
+                        hash: 'tx1',
+                        raw: '',
+                    },
+                ]}
+                amount
+            />
+        )
+
+        getByText(container, '1,234.56 UM')
+    })
+
     test('renders status', async () => {
         const { container } = render(
             <TransactionTable
