@@ -1,6 +1,8 @@
 steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
+    env:
+      - '_ENV_NAME=${_ENV_NAME}'
     args:
       # Deploy from source
       - run
