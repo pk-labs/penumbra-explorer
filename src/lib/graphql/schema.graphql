@@ -16,10 +16,11 @@ type AssetId {
 }
 
 type Block {
+    chainId: String
     createdAt: DateTime!
     height: Int!
     rawEvents: [Event!]!
-    rawJson: JSON
+    rawJson: String
     transactions: [Transaction!]!
     transactionsCount: Int!
 }
@@ -159,7 +160,7 @@ type Transaction {
     index: Int!
     raw: String!
     rawEvents: [Event!]!
-    rawJson: JSON!
+    rawJson: String!
 }
 
 type TransactionBody {

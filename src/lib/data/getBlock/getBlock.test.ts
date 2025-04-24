@@ -16,7 +16,7 @@ describe('getBlock', () => {
                     Promise.resolve({
                         data: {
                             block: {
-                                rawJson: { block: {} },
+                                rawJson: 'null',
                                 transactions: [{ hash: 'FoO' }],
                             },
                         },

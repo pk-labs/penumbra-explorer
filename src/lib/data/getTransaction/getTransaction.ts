@@ -47,16 +47,7 @@ const getTransaction = async (
         hash: result.data.transaction.hash.toLowerCase(),
         memo: memo ?? false,
         primaryAction,
-        rawJson: {
-            anchor: result.data.transaction.rawJson.tx_result_decoded.anchor,
-            bindingSig:
-                result.data.transaction.rawJson.tx_result_decoded.bindingSig,
-            body: result.data.transaction.rawJson.tx_result_decoded.body,
-            events: result.data.transaction.rawJson.events,
-            hash: result.data.transaction.rawJson.hash,
-            height: result.data.transaction.rawJson.height,
-            timestamp: result.data.transaction.rawJson.timestamp,
-        },
+        rawJson: JSON.parse(result.data.transaction.rawJson),
     }
 }
 

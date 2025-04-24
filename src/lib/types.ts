@@ -9,7 +9,7 @@ import {
 
 export interface TransformedBlockFragment
     extends Omit<BlockFragment, 'rawJson' | 'transactions'> {
-    rawJson: object
+    rawJson?: object
     transactions: TransformedPartialTransactionFragment[]
 }
 

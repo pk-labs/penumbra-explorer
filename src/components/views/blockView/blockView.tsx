@@ -37,7 +37,7 @@ const BlockView: FC<Props> = props => (
             emptyStateMessage="This block contains no transactions"
             transactions={props.block.transactions}
         />
-        <JsonTree data={props.block.rawJson} />
+        {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
     </View>
 )
 

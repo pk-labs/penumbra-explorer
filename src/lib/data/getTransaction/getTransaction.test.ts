@@ -17,7 +17,7 @@ describe('getTransaction', () => {
                         data: {
                             transaction: {
                                 hash: 'FoO',
-                                rawJson: { tx_result_decoded: {} },
+                                rawJson: 'null',
                             },
                         },
                     }),

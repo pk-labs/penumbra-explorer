@@ -20,7 +20,9 @@ const getBlock = async (
     return (
         result.data?.block && {
             ...result.data.block,
-            rawJson: result.data.block.rawJson.block,
+            rawJson:
+                result.data.block.rawJson &&
+                JSON.parse(result.data.block.rawJson),
             transactions: result.data.block.transactions.map(transaction => {
                 let primaryAction
                 let actionCount
