@@ -1,4 +1,4 @@
-const envName = process.env._ENV_NAME || 'dev'
+const envName = process.env._ENV_NAME || 'prod'
 
 const environments = {
     dev: {
