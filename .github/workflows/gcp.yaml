@@ -30,7 +30,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: ${{ inputs.env_name_label }}
-          #environment-url: https://pe-frontend-564694434950.europe-west6.run.app/
           initial-status: in_progress
 
       - name: Set up Node.js

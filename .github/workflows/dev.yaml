@@ -9,7 +9,7 @@ jobs:
   trigger_gcp_workflow:
     uses: ./.github/workflows/gcp.yaml
     with:
-      env_name: dev
+      env_name: prod
       env_name_label: development
       gcp_region: europe-west4
     secrets: inherit
