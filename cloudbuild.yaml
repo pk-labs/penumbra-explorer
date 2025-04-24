@@ -2,8 +2,7 @@ steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
     env:
-      - _ENV_NAME=prod
-      #- _ENV_NAME=${_ENV_NAME}
+      - _ENV_NAME=${_ENV_NAME}
     args:
       # Deploy from source
       - run
@@ -22,5 +21,4 @@ steps:
       - --platform=managed
       # Environment variables
       - --set-env-vars
-      #- _BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA},_ENV_NAME=${_ENV_NAME}
-      - _BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA},_ENV_NAME=prod
+      - _BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA},_ENV_NAME=${_ENV_NAME}
