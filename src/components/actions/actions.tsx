@@ -1,10 +1,9 @@
 'use client'
 
-import { ActionView } from '@penumbra-zone/ui/ActionView'
 import { FC, useMemo } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { useGetMetadata } from '@/lib/hooks'
 import { classNames, decodeTransaction, transactionToView } from '@/lib/utils'
+import ActionView from '../actionView'
 import Subsection from '../subsection'
 
 interface Props {
@@ -15,8 +14,6 @@ interface Props {
 }
 
 const Actions: FC<Props> = props => {
-    const getMetadata = useGetMetadata(props.chainId)
-
     const view = useMemo(() => {
         const transaction = decodeTransaction(props.rawTransaction)
         return transactionToView(transaction, props.hash, props.blockHeight)
@@ -60,7 +57,7 @@ const Actions: FC<Props> = props => {
                         >
                             <ActionView
                                 action={action}
-                                getMetadata={getMetadata}
+                                chainId={props.chainId}
                             />
                         </ErrorBoundary>
                     </li>
