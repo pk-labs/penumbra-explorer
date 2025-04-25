@@ -7,11 +7,13 @@ import {
 } from '@penumbra-zone/ui/ValueView'
 import { FC } from 'react'
 
-interface Props extends Value, ValueViewComponentProps<'default'> {
+interface Props extends Omit<ValueViewComponentProps<'default'>, 'valueView'> {
+    ammount: NonNullable<Value['amount']>
+    assetId: NonNullable<Value['assetId']>
     className?: string
 }
 
-const PenumbraValue: FC<Props> = ({ className, ...props }) => {
+const AssetValue: FC<Props> = ({ className, ...props }) => {
     // const getMetadata = useGetMetadata(chainId)
 
     return (
@@ -21,4 +23,4 @@ const PenumbraValue: FC<Props> = ({ className, ...props }) => {
     )
 }
 
-export default PenumbraValue
+export default AssetValue
