@@ -15,7 +15,7 @@ const UmPrice: FC<Props> = props => (
             props.className
         )}
     >
-        <span className="text-text-secondary whitespace-nowrap">UM Price:</span>
+        <span className="text-text-secondary whitespace-nowrap">UM price:</span>
         <span>${props.price.toFixed(2)}</span>
         <span
             className={classNames(

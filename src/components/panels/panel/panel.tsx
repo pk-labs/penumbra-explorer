@@ -27,7 +27,7 @@ const Panel: FC<Props> = props => (
             <h2
                 className={classNames(
                     'flex items-center gap-2 text-base font-medium',
-                    'text-text-secondary whitespace-nowrap capitalize'
+                    'text-text-secondary whitespace-nowrap'
                 )}
             >
                 {props.title}

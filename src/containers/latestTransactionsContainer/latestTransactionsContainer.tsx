@@ -10,11 +10,9 @@ type Props = Omit<LatestTrasactionsLoaderProps, 'header'>
 const LatestTransactionsContainer: FC<Props> = props => {
     const header = (
         <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-medium capitalize">
-                Latest transactions
-            </h2>
+            <h2 className="text-2xl font-medium">Latest transactions</h2>
             <Button density="compact" href="/txs">
-                View All
+                View all
             </Button>
         </div>
     )

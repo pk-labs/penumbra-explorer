@@ -7,7 +7,7 @@ import {
     TransformedPartialTransactionFragment,
     TransformedTransactionUpdate,
 } from '@/lib/types'
-import { formatAction, formatNumber, shortenHash } from '@/lib/utils'
+import { formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
@@ -108,9 +108,7 @@ const TransactionTable: FC<Props> = props => {
                             <TableCell>
                                 {transaction.primaryAction && (
                                     <Pill context="technical-default">
-                                        {formatAction(
-                                            transaction.primaryAction
-                                        )}
+                                        {transaction.primaryAction}
                                     </Pill>
                                 )}
                                 {transaction.actionCount > 1 && (

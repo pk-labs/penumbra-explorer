@@ -146,7 +146,7 @@ describe('BlockTable', () => {
             />
         )
 
-        getByText(container, 'receive')
+        getByText(container, 'Receive')
         getByText(container, '+1')
     })
 

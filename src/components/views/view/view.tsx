@@ -19,7 +19,7 @@ const View: FC<Props> = props => (
         )}
     >
         <header className="flex flex-col gap-1">
-            <h2 className="text-base font-medium capitalize">{props.title}</h2>
+            <h2 className="text-base font-medium">{props.title}</h2>
             {typeof props.subtitle === 'string' ? (
                 <div className="font-mono text-base break-all">
                     {props.subtitle}

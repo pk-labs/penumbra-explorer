@@ -17,9 +17,9 @@ type Props = Omit<LatestBlocksLoaderProps, 'header'>
 const LatestBlocksContainer: FC<Props> = props => {
     const header = (
         <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-medium capitalize">Latest blocks</h2>
+            <h2 className="text-2xl font-medium">Latest blocks</h2>
             <Button density="compact" href="/blocks">
-                View All
+                View all
             </Button>
         </div>
     )

@@ -49,7 +49,7 @@ const Actions: FC<Props> = props => {
                                         'rounded-sm px-3 py-2 font-mono'
                                     )}
                                 >
-                                    <span className="truncate capitalize">
+                                    <span className="truncate">
                                         {action.actionView.case}
                                     </span>
                                     <span className="text-text-secondary truncate">
