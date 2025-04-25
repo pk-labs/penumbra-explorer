@@ -1,11 +1,6 @@
 import { getByText, render } from '@testing-library/react'
 import Actions from './actions'
 
-jest.mock(
-    '../../lib/hooks/useGetMetadata/useGetMetadata',
-    () => () => undefined
-)
-
 jest.mock('../../lib/utils/transactionToView/transactionToView', () => () => ({
     bodyView: {
         actionViews: [

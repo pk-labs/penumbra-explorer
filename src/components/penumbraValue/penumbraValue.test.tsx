@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { render } from '@testing-library/react'
-import ActionView from './actionView'
+import PenumbraValue from './penumbraValue'
 
 jest.mock('../../lib/hooks/useGetMetadata')
 
-describe('ActionView', () => {
+describe('PenumbraValue', () => {
     test('applies CSS classes', async () => {
         const { container } = render(
-            <ActionView
+            <PenumbraValue
                 // @ts-ignore
                 action={{ actionView: { case: 'delegate' } }}
                 className="foo bar"

@@ -3,7 +3,7 @@
 import { FC, useMemo } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { classNames, decodeTransaction, transactionToView } from '@/lib/utils'
-import ActionView from '../actionView'
+import PenumbraAction from '../penumbraAction'
 import Subsection from '../subsection'
 
 interface Props {
@@ -55,7 +55,7 @@ const Actions: FC<Props> = props => {
                                 </div>
                             }
                         >
-                            <ActionView
+                            <PenumbraAction
                                 action={action}
                                 chainId={props.chainId}
                             />
