@@ -1,4 +1,5 @@
 // istanbul ignore file
+import { CheckIcon } from 'lucide-react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
@@ -8,6 +9,7 @@ import {
     Container,
     Parameter,
     Parameters,
+    Pill,
 } from '@/components'
 import { PaginatedTransactionsContainer } from '@/containers'
 import { ibc } from '@/lib/constants'
@@ -149,10 +151,80 @@ const ChainPage: FC<Props> = async props => {
                 </div>
                 <div
                     className={classNames(
-                        'bg-other-tonalFill5 h-[106px] rounded-lg p-6',
-                        'backdrop-blur-lg lg:col-2 lg:row-1'
+                        'bg-other-tonalFill5 flex h-[106px] items-center',
+                        'rounded-lg p-6 backdrop-blur-lg lg:col-2 lg:row-1'
                     )}
-                />
+                >
+                    <div
+                        className={classNames(
+                            'border-success-light',
+                            'before:border-other-tonalStroke relative flex',
+                            'h-10 w-10 items-center justify-center',
+                            'rounded-full border-1 before:absolute',
+                            'before:-z-1 before:h-[calc(100%+4px)]',
+                            'before:w-[calc(100%+4px)] before:rounded-full',
+                            'before:border-3'
+                        )}
+                    >
+                        <Image
+                            alt="Penumbra"
+                            height={32}
+                            src={connection.image}
+                            width={32}
+                        />
+                    </div>
+                    <Pill context="technical-default">
+                        {connection.channelId}
+                    </Pill>
+                    <div
+                        className={classNames(
+                            'bg-success-light border-other-tonalStroke h-0.5',
+                            'flex-1 border-1'
+                        )}
+                    />
+                    <div
+                        className={classNames(
+                            'bg-other-tonalFill10 relative flex h-8 w-8',
+                            'items-center justify-center rounded-full'
+                        )}
+                    >
+                        <CheckIcon className="text-success-light" size={16} />
+                        <span
+                            className={classNames(
+                                'text-success-light absolute top-8 font-mono text-sm font-medium'
+                            )}
+                        >
+                            Open
+                        </span>
+                    </div>
+                    <div
+                        className={classNames(
+                            'bg-success-light border-other-tonalStroke h-0.5',
+                            'flex-1 border-1'
+                        )}
+                    />
+                    <Pill context="technical-default">
+                        {connection.counterpartyChannelId}
+                    </Pill>
+                    <div
+                        className={classNames(
+                            'border-success-light',
+                            'before:border-other-tonalStroke relative flex',
+                            'h-10 w-10 items-center justify-center',
+                            'rounded-full border-1 before:absolute',
+                            'before:-z-1 before:h-[calc(100%+4px)]',
+                            'before:w-[calc(100%+4px)] before:rounded-full',
+                            'before:border-3'
+                        )}
+                    >
+                        <Image
+                            alt={connection.name}
+                            height={32}
+                            src={connection.image}
+                            width={32}
+                        />
+                    </div>
+                </div>
                 <PaginatedTransactionsContainer
                     className="min-w-0"
                     header={
