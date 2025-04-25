@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { FC } from 'react'
 import { TransformedTransactionFragment } from '@/lib/types'
 import { classNames, shortenHash } from '@/lib/utils'
-import Actions from '../../actions'
+import ActionHistory from '../../actionHistory'
 import CopyToClipboard from '../../copyToClipboard'
 import JsonTree from '../../jsonTree'
 import Memo from '../../memo'
@@ -51,7 +51,7 @@ const TransactionView: FC<Props> = props => (
             </Parameter>
         </Parameters>
         {props.transaction.memo && <Memo />}
-        <Actions
+        <ActionHistory
             blockHeight={props.transaction.block.height}
             chainId={props.transaction.body.parameters.chainId}
             hash={props.transaction.hash}

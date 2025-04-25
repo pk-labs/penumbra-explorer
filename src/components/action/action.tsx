@@ -9,7 +9,7 @@ interface Props extends Pick<ActionViewProps, 'action'> {
     className?: string
 }
 
-const PenumbraAction: FC<Props> = ({ chainId, className, ...props }) => {
+const Action: FC<Props> = ({ chainId, className, ...props }) => {
     const getMetadata = useGetMetadata(chainId)
 
     return (
@@ -19,4 +19,4 @@ const PenumbraAction: FC<Props> = ({ chainId, className, ...props }) => {
     )
 }
 
-export default PenumbraAction
+export default Action

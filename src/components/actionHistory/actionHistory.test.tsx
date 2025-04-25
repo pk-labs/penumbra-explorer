@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react'
-import Actions from './actions'
+import ActionHistory from './actionHistory'
 
 jest.mock('../../lib/utils/transactionToView/transactionToView', () => () => ({
     bodyView: {
@@ -10,10 +10,10 @@ jest.mock('../../lib/utils/transactionToView/transactionToView', () => () => ({
     },
 }))
 
-describe('Actions', () => {
+describe('ActionHistory', () => {
     test('renders actions', async () => {
         const { container } = render(
-            <Actions
+            <ActionHistory
                 blockHeight={99}
                 chainId="foo"
                 hash="foo"

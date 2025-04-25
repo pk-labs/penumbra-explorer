@@ -3,7 +3,7 @@
 import { FC, useMemo } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { classNames, decodeTransaction, transactionToView } from '@/lib/utils'
-import PenumbraAction from '../penumbraAction'
+import Action from '../action'
 import Subsection from '../subsection'
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
     rawTransaction: string
 }
 
-const Actions: FC<Props> = props => {
+const ActionHistory: FC<Props> = props => {
     const view = useMemo(() => {
         const transaction = decodeTransaction(props.rawTransaction)
         return transactionToView(transaction, props.hash, props.blockHeight)
@@ -55,10 +55,7 @@ const Actions: FC<Props> = props => {
                                 </div>
                             }
                         >
-                            <PenumbraAction
-                                action={action}
-                                chainId={props.chainId}
-                            />
+                            <Action action={action} chainId={props.chainId} />
                         </ErrorBoundary>
                     </li>
                 ))}
@@ -67,4 +64,4 @@ const Actions: FC<Props> = props => {
     )
 }
 
-export default Actions
+export default ActionHistory
