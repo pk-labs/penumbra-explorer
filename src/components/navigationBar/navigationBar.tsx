@@ -59,7 +59,6 @@ const NavigationBar: FC<Props> = props => {
                         alt="Noctis"
                         className="max-h-8 w-auto sm:max-h-none"
                         src={logo}
-                        priority
                     />
                 </Link>
             </div>
