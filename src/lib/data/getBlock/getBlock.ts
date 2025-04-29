@@ -17,35 +17,37 @@ const getBlock = async (
         throw result.error
     }
 
-    return (
-        result.data?.block && {
-            ...result.data.block,
-            rawJson:
-                result.data.block.rawJson &&
-                JSON.parse(result.data.block.rawJson),
-            transactions: result.data.block.transactions.map(transaction => {
-                let primaryAction
-                let actionCount
+    if (!result.data?.block) {
+        return
+    }
 
-                try {
-                    const decoded = decodeTransaction(transaction.raw)
-                    primaryAction = findPrimaryAction(decoded)
-                    actionCount = decoded.body?.actions.length
-                } catch (e) {
-                    // istanbul ignore next
-                    console.error(e)
-                }
+    return {
+        created: result.data.block.createdAt,
+        height: result.data.block.height,
+        rawJson:
+            result.data.block.rawJson && JSON.parse(result.data.block.rawJson),
+        transactions: result.data.block.transactions.map(transaction => {
+            let primaryAction
+            let actionCount
 
-                return {
-                    actionCount: actionCount ?? 0,
-                    blockHeight: height,
-                    hash: transaction.hash.toLowerCase(),
-                    primaryAction,
-                    raw: transaction.raw,
-                }
-            }),
-        }
-    )
+            try {
+                const decoded = decodeTransaction(transaction.raw)
+                primaryAction = findPrimaryAction(decoded)
+                actionCount = decoded.body?.actions.length
+            } catch (e) {
+                // istanbul ignore next
+                console.error(e)
+            }
+
+            return {
+                actionCount: actionCount ?? 0,
+                blockHeight: height,
+                hash: transaction.hash.toLowerCase(),
+                primaryAction,
+                raw: transaction.raw,
+            }
+        }),
+    }
 }
 
 export default getBlock

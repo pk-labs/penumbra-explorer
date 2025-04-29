@@ -7,7 +7,8 @@ import {
 } from '@/lib/graphql/generated/types'
 
 export interface TransformedBlockFragment
-    extends Omit<BlockFragment, 'rawJson' | 'transactions'> {
+    extends Pick<BlockFragment, 'height'> {
+    created: string
     rawJson?: object
     transactions: TransformedPartialTransactionFragment[]
 }

@@ -28,7 +28,7 @@ const BlockView: FC<Props> = props => (
                     small
                 />
             </Parameter>
-            <Parameter name="Time">{props.block.createdAt}</Parameter>
+            <Parameter name="Time">{props.block.created}</Parameter>
             {/*<Parameter name="Proposer">-</Parameter>*/}
             <Parameter name="Txs">{props.block.transactions.length}</Parameter>
         </Parameters>
