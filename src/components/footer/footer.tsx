@@ -71,7 +71,7 @@ const Footer: FC<Props> = props => (
         </div>
         <div
             className={classNames(
-                'text-text-secondary row-3 text-center text-xs sm:col-2',
+                'text-text-secondary text-center text-xs sm:col-2 sm:row-3',
                 'sm:self-end'
             )}
         >
