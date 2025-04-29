@@ -3,7 +3,7 @@ import '@/lib/css'
 import '@/lib/fonts'
 import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
-import { NavigationBar } from '@/components'
+import { Footer, NavigationBar } from '@/components'
 import { PageViewTracker } from '@/containers'
 import { background } from '@/lib/images'
 import { classNames } from '@/lib/utils'
@@ -48,12 +48,13 @@ const RootLayout: FC<Props> = props => (
         <body
             className={classNames(
                 'relative flex flex-col justify-start gap-10',
-                'overflow-x-hidden pb-4 md:pb-8'
+                'overflow-x-hidden'
             )}
         >
             <PageViewTracker fathomId={process.env.NEXT_PUBLIC_FATHOM_ID} />
             <NavigationBar />
             {props.children}
+            <Footer />
             <div
                 className={classNames(
                     'animate-bg pointer-events-none absolute',

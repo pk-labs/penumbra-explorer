@@ -171,7 +171,7 @@ const IbcTable: FC<Props> = props => {
                                         )}
                                     >
                                         <TimerOffIcon
-                                            className="text-neutral-light"
+                                            className="text-text-secondary"
                                             size={12}
                                         />
                                         {formatNumber(connection.txsPending)}
