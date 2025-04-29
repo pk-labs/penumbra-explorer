@@ -9,7 +9,6 @@ import {
     Container,
     Parameter,
     Parameters,
-    Pill,
 } from '@/components'
 import { PaginatedTransactionsContainer } from '@/containers'
 import { ibc } from '@/lib/constants'
@@ -173,9 +172,15 @@ const ChainPage: FC<Props> = async props => {
                             width={32}
                         />
                     </div>
-                    <Pill context="technical-default">
+                    <div
+                        className={classNames(
+                            'bg-other-tonalFill10 flex h-7 items-center',
+                            'justify-center rounded-full px-1.5 font-mono',
+                            'text-xs font-medium backdrop-blur-lg'
+                        )}
+                    >
                         {connection.channelId}
-                    </Pill>
+                    </div>
                     <div
                         className={classNames(
                             'bg-success-light border-other-tonalStroke h-0.5',
@@ -203,9 +208,15 @@ const ChainPage: FC<Props> = async props => {
                             'flex-1 border-1'
                         )}
                     />
-                    <Pill context="technical-default">
+                    <div
+                        className={classNames(
+                            'bg-other-tonalFill10 flex h-7 items-center',
+                            'justify-center rounded-full px-1.5 font-mono',
+                            'text-xs font-medium backdrop-blur-lg'
+                        )}
+                    >
                         {connection.counterpartyChannelId}
-                    </Pill>
+                    </div>
                     <div
                         className={classNames(
                             'border-success-light',
