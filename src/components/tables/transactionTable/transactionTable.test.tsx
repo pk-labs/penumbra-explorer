@@ -1,6 +1,5 @@
 import { fireEvent, getByText, render } from '@testing-library/react'
 import { router } from '@/lib/__tests__/__mocks__'
-import dayjs from '@/lib/dayjs'
 import { ActionType } from '@/lib/types'
 import { TableProps } from '../table'
 import TransactionTable from './transactionTable'
@@ -41,19 +40,13 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
                     },
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 456,
-                        },
+                        blockHeight: 456,
                         hash: 'tx2',
                         raw: '',
                     },
@@ -71,10 +64,7 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
                     },
@@ -92,10 +82,7 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
                     },
@@ -113,10 +100,7 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
                     },
@@ -134,10 +118,7 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 2,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
                         primaryAction: ActionType.receive,
                         raw: '',
@@ -156,12 +137,7 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs()
-                                .subtract(1, 'second')
-                                .toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
                         timeAgo: '1s ago',
@@ -180,10 +156,7 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
                     },

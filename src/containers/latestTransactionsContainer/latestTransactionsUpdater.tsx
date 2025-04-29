@@ -4,10 +4,7 @@
 import { FC, useEffect, useState } from 'react'
 import { TransactionTable } from '@/components'
 import { useTransactionUpdateSubscription } from '@/lib/graphql/generated/hooks'
-import {
-    TransformedPartialTransactionFragment,
-    TransformedTransactionUpdate,
-} from '@/lib/types'
+import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import { Props as LatestTransactionsLoaderProps } from './latestTransactionsLoader'
 
@@ -17,11 +14,7 @@ interface Props extends LatestTransactionsLoaderProps {
 
 const LatestTransactionsUpdater: FC<Props> = props => {
     const [transactions, setTransactions] = useState<
-        | Array<
-              | TransformedPartialTransactionFragment
-              | TransformedTransactionUpdate
-          >
-        | undefined
+        TransformedPartialTransactionFragment[] | undefined
     >(props.initialTransactions)
 
     const [transactionUpdateSubscription] = useTransactionUpdateSubscription({
@@ -58,7 +51,7 @@ const LatestTransactionsUpdater: FC<Props> = props => {
                 return [
                     {
                         actionCount: actionCount ?? 0,
-                        block: { height: transactionUpdate.id },
+                        blockHeight: transactionUpdate.id,
                         hash: transactionUpdate.hash.toLowerCase(),
                         primaryAction,
                         raw: transactionUpdate.raw,

@@ -37,10 +37,11 @@ const getBlock = async (
                 }
 
                 return {
-                    ...transaction,
                     actionCount: actionCount ?? 0,
+                    blockHeight: height,
                     hash: transaction.hash.toLowerCase(),
                     primaryAction,
+                    raw: transaction.raw,
                 }
             }),
         }

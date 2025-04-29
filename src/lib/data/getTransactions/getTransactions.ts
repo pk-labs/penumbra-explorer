@@ -8,11 +8,7 @@ import {
 } from '@/lib/graphql/generated/types'
 import { transactionsQuery } from '@/lib/graphql/queries'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import {
-    decodeTransaction,
-    findPrimaryAction,
-    transactionToJson,
-} from '@/lib/utils'
+import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 
 const getTransactions = async (
     limit: CollectionLimit,
@@ -43,13 +39,11 @@ const getTransactions = async (
 
     const transactions = result.data.transactionsCollection.items
         .map(transaction => {
-            let json
             let primaryAction
             let actionCount
 
             try {
                 const decoded = decodeTransaction(transaction.raw)
-                json = transactionToJson(decoded)
                 primaryAction = findPrimaryAction(decoded)
                 actionCount = decoded.body?.actions.length
             } catch (e) {
@@ -58,17 +52,17 @@ const getTransactions = async (
             }
 
             return {
-                ...transaction,
                 actionCount: actionCount ?? 0,
+                blockHeight: transaction.block.height,
                 hash: transaction.hash.toLowerCase(),
-                json,
                 primaryAction,
+                raw: transaction.raw,
                 timeAgo: transaction.block.createdAt
                     ? now.to(transaction.block.createdAt)
                     : undefined,
             }
         })
-        .toSorted((a, b) => b.block.height - a.block.height)
+        .toSorted((a, b) => b.blockHeight - a.blockHeight)
 
     return { total: result.data.transactionsCollection.total, transactions }
 }

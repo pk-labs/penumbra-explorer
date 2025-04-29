@@ -3,10 +3,7 @@
 import { BoxIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
-import {
-    TransformedPartialTransactionFragment,
-    TransformedTransactionUpdate,
-} from '@/lib/types'
+import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
@@ -19,9 +16,7 @@ export interface Props extends Omit<TableProps, 'children'> {
     emptyStateMessage?: string
     status?: boolean
     time?: boolean
-    transactions?: Array<
-        TransformedPartialTransactionFragment | TransformedTransactionUpdate
-    >
+    transactions?: TransformedPartialTransactionFragment[]
 }
 
 const TransactionTable: FC<Props> = props => {
@@ -84,9 +79,9 @@ const TransactionTable: FC<Props> = props => {
                                         size={16}
                                     />
                                     <Link
-                                        href={`/block/${transaction.block.height}`}
+                                        href={`/block/${transaction.blockHeight}`}
                                     >
-                                        {formatNumber(transaction.block.height)}
+                                        {formatNumber(transaction.blockHeight)}
                                     </Link>
                                 </TableCell>
                             )}
