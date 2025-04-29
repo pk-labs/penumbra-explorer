@@ -16,6 +16,10 @@ describe('getTransaction', () => {
                     Promise.resolve({
                         data: {
                             transaction: {
+                                block: {},
+                                body: {
+                                    parameters: { fee: {} },
+                                },
                                 hash: 'FoO',
                                 rawJson: 'null',
                             },

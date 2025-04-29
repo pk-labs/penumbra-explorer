@@ -42,11 +42,15 @@ const getTransaction = async (
     }
 
     return {
-        ...result.data.transaction,
         actionCount: actionCount ?? 0,
+        blockHeight: result.data.transaction.block.height,
+        chainId: result.data.transaction.body.parameters.chainId,
+        created: result.data.transaction.block.createdAt,
+        fee: Number(result.data.transaction.body.parameters.fee.amount),
         hash: result.data.transaction.hash.toLowerCase(),
         memo: memo ?? false,
         primaryAction,
+        raw: result.data.transaction.raw,
         rawJson: JSON.parse(result.data.transaction.rawJson),
     }
 }

@@ -22,8 +22,12 @@ export interface TransformedBlockUpdate extends BlockUpdate {
 }
 
 export interface TransformedTransactionFragment
-    extends Omit<TransactionFragment, 'rawJson'> {
+    extends Pick<TransactionFragment, 'hash' | 'raw'> {
     actionCount: number
+    blockHeight: number
+    chainId: string
+    created: string
+    fee: number
     memo: boolean
     primaryAction?: ActionType
     rawJson: object

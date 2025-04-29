@@ -40,20 +40,18 @@ const TransactionView: FC<Props> = props => (
                         'inline-flex items-center gap-1 text-inherit',
                         'hover:text-primary-light'
                     )}
-                    href={`/block/${props.transaction.block.height}`}
+                    href={`/block/${props.transaction.blockHeight}`}
                 >
-                    {props.transaction.block.height}
+                    {props.transaction.blockHeight}
                     <Link2Icon className="text-text-primary ml-1" size={12} />
                 </Link>
             </Parameter>
-            <Parameter name="Time">
-                {props.transaction.block.createdAt}
-            </Parameter>
+            <Parameter name="Time">{props.transaction.created}</Parameter>
         </Parameters>
         {props.transaction.memo && <Memo />}
         <ActionHistory
-            blockHeight={props.transaction.block.height}
-            chainId={props.transaction.body.parameters.chainId}
+            blockHeight={props.transaction.blockHeight}
+            chainId={props.transaction.chainId}
             hash={props.transaction.hash}
             rawTransaction={props.transaction.raw}
         />
@@ -61,13 +59,11 @@ const TransactionView: FC<Props> = props => (
             <Parameters>
                 <Parameter name="Transaction fee">
                     <span className="text-destructive-light">
-                        {Number(props.transaction.body.parameters.fee.amount) /
-                            1000000}{' '}
-                        UM
+                        {props.transaction.fee / 1000000} UM
                     </span>
                 </Parameter>
                 <Parameter name="Chain ID">
-                    {props.transaction.body.parameters.chainId}
+                    {props.transaction.chainId}
                 </Parameter>
             </Parameters>
         </Subsection>
