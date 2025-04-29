@@ -5,16 +5,11 @@ import { FC, useEffect, useState } from 'react'
 import { BlockPanel, BlockTable } from '@/components'
 import dayjs from '@/lib/dayjs'
 import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
-import {
-    TransformedBlockUpdate,
-    TransformedPartialBlockFragment,
-} from '@/lib/types'
+import { TransformedPartialBlockFragment } from '@/lib/types'
 import { Props as LatestBlocksLoaderProps } from './latestBlocksLoader'
 
 interface Props extends LatestBlocksLoaderProps {
-    initialBlocks?: Array<
-        TransformedBlockUpdate | TransformedPartialBlockFragment
-    >
+    initialBlocks?: TransformedPartialBlockFragment[]
 }
 
 const LatestBlocksUpdater: FC<Props> = props => {
@@ -40,15 +35,17 @@ const LatestBlocksUpdater: FC<Props> = props => {
 
                 return [
                     {
-                        ...blockUpdate,
+                        created: blockUpdate.createdAt,
+                        height: blockUpdate.height,
                         timeAgo: blockUpdate.createdAt
                             ? now.to(blockUpdate.createdAt)
                             : undefined,
+                        transactionsCount: blockUpdate.transactionsCount,
                     },
                     ...prev.slice(0, -1).map(block => ({
                         ...block,
-                        timeAgo: block.createdAt
-                            ? now.to(block.createdAt)
+                        timeAgo: block.created
+                            ? now.to(block.created)
                             : undefined,
                     })),
                 ]

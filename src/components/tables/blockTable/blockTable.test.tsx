@@ -26,18 +26,18 @@ describe('BlockTable', () => {
     })
 
     test('renders blocks', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const created = dayjs('2025-01-01').toISOString()
 
         const { container } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
+                        created,
                         height: 456,
                         transactionsCount: 99,
                     },
                     {
-                        createdAt,
+                        created,
                         height: 123,
                         transactionsCount: 98,
                     },
@@ -50,18 +50,18 @@ describe('BlockTable', () => {
     })
 
     test('highlights new blocks', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const created = dayjs('2025-01-01').toISOString()
 
         const { container, rerender } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
+                        created,
                         height: 2,
                         transactionsCount: 0,
                     },
                     {
-                        createdAt,
+                        created,
                         height: 1,
                         transactionsCount: 0,
                     },
@@ -81,17 +81,17 @@ describe('BlockTable', () => {
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
+                        created,
                         height: 3,
                         transactionsCount: 0,
                     },
                     {
-                        createdAt,
+                        created,
                         height: 2,
                         transactionsCount: 0,
                     },
                     {
-                        createdAt,
+                        created,
                         height: 1,
                         transactionsCount: 0,
                     },
@@ -113,13 +113,13 @@ describe('BlockTable', () => {
     })
 
     test('renders proposer', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const created = dayjs('2025-01-01').toISOString()
 
         const { container } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
+                        created,
                         height: 123,
                         transactionsCount: 0,
                     },
@@ -132,13 +132,13 @@ describe('BlockTable', () => {
     })
 
     test('navigates to block on row click', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
+        const created = dayjs('2025-01-01').toISOString()
 
         const { container } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
+                        created,
                         height: 123,
                         transactionsCount: 0,
                     },

@@ -30,11 +30,12 @@ const getBlocks = async (
 
     const now = dayjs()
 
-    // TODO: Extract to utils
     const blocks = result.data.blocksCollection.items
         .map(block => ({
-            ...block,
+            created: block.createdAt,
+            height: block.height,
             timeAgo: block.createdAt ? now.to(block.createdAt) : undefined,
+            transactionsCount: block.transactionsCount,
         }))
         .toSorted((a, b) => b.height - a.height)
 

@@ -1,6 +1,5 @@
 import {
     BlockFragment,
-    BlockUpdate,
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
@@ -13,11 +12,9 @@ export interface TransformedBlockFragment
     transactions: TransformedPartialTransactionFragment[]
 }
 
-export interface TransformedPartialBlockFragment extends PartialBlockFragment {
-    timeAgo?: string
-}
-
-export interface TransformedBlockUpdate extends BlockUpdate {
+export interface TransformedPartialBlockFragment
+    extends Pick<PartialBlockFragment, 'height' | 'transactionsCount'> {
+    created: string
     timeAgo?: string
 }
 

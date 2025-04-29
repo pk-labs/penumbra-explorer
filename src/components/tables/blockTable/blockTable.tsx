@@ -3,15 +3,12 @@
 import { BoxIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
-import {
-    TransformedBlockUpdate,
-    TransformedPartialBlockFragment,
-} from '@/lib/types'
+import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
-    blocks?: Array<TransformedBlockUpdate | TransformedPartialBlockFragment>
+    blocks?: TransformedPartialBlockFragment[]
     proposer?: boolean
 }
 
