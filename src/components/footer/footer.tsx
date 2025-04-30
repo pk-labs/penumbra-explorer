@@ -59,60 +59,45 @@ const Footer: FC<Props> = props => (
         </div>
         <div
             className={classNames(
-                'text-text-secondary text-center text-xs sm:col-3 sm:row-3',
+                'text-text-secondary text-center text-xs sm:col-3 sm:row-2',
                 'sm:text-right'
             )}
         >
             Supported by
             <br />
-            <a
-                className="text-text-secondary hover:text-text-special"
-                href="https://numogrammatics.org/"
-                target="_blank"
-            >
+            <a href="https://numogrammatics.org/" target="_blank">
                 IAN
             </a>
             ,{' '}
-            <a
-                className="text-text-secondary hover:text-text-special"
-                href="https://penumbralabs.xyz/"
-                target="_blank"
-            >
+            <a href="https://penumbralabs.xyz/" target="_blank">
                 Penumbra Labs
             </a>
             ,{' '}
-            <a
-                className="text-text-secondary hover:text-text-special"
-                href="https://radiantcommons.com/"
-                target="_blank"
-            >
+            <a href="https://radiantcommons.com/" target="_blank">
                 Radiant Commons
             </a>
         </div>
-        <a
-            className={classNames(
-                'flex items-center justify-center gap-1 text-xs sm:col-1',
-                'sm:row-2 sm:justify-start'
-            )}
-            href="mailto:penumbra@pklabs.me"
-            target="_blank"
-        >
-            <MailIcon size={12} />
-            penumbra@pklabs.me
-        </a>
         <div
             className={classNames(
-                'text-text-secondary text-center text-xs sm:col-1 sm:row-3',
+                'text-text-secondary text-center text-xs sm:col-1 sm:row-2',
                 'sm:self-end sm:text-left'
             )}
         >
-            Built by <br className="sm:hidden" />
+            Built by{' '}
             <a
                 className="text-text-secondary hover:text-text-special"
                 href="https://www.pklabs.me/"
                 target="_blank"
             >
                 PK Labs
+            </a>
+            <br />
+            <MailIcon
+                className="text-text-primary inline align-middle"
+                size={12}
+            />{' '}
+            <a href="mailto:penumbra@pklabs.me" target="_blank">
+                penumbra@pklabs.me
             </a>
         </div>
     </Container>
