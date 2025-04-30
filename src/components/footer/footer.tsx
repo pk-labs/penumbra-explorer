@@ -24,7 +24,7 @@ const Footer: FC<Props> = props => (
                         'border-other-tonalStroke inline-flex h-8 w-8',
                         'items-center justify-center rounded-full border-1'
                     )}
-                    href="https://github.com/penumbra-zone"
+                    href="http://discord.gg/penumbrazone"
                     target="_blank"
                 >
                     <Discord />
