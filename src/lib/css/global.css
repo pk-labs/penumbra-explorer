@@ -49,8 +49,4 @@
             color: var(--color-text-special);
         }
     }
-
-    svg {
-        display: inline;
-    }
 }

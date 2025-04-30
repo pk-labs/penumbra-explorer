@@ -64,7 +64,7 @@ const TransactionTable: FC<Props> = props => {
                         >
                             <TableCell>
                                 <CheckCheckIcon
-                                    className="text-secondary-light"
+                                    className="text-secondary-light inline"
                                     size={14}
                                 />
                                 <Link href={`/tx/${transaction.hash}`}>
@@ -75,6 +75,7 @@ const TransactionTable: FC<Props> = props => {
                             {props.blockHeight && (
                                 <TableCell>
                                     <BoxIcon
+                                        className="inline"
                                         color="var(--color-text-secondary)"
                                         size={16}
                                     />

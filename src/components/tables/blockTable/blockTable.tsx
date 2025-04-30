@@ -51,6 +51,7 @@ const BlockTable: FC<Props> = props => {
                         >
                             <TableCell>
                                 <BoxIcon
+                                    className="inline"
                                     color="var(--color-text-secondary)"
                                     size={16}
                                 />
