@@ -3,8 +3,7 @@
 
 import '@/lib/css'
 import { FC } from 'react'
-import { ErrorPage, NavigationBar } from '@/components'
-import { background } from '@/lib/images'
+import { Background, ErrorPage, NavigationBar } from '@/components'
 import { classNames } from '@/lib/utils'
 
 const NotFoundPage: FC = () => (
@@ -17,13 +16,12 @@ const NotFoundPage: FC = () => (
         >
             <NavigationBar />
             <ErrorPage message="Internal server error" statusCode={500} />
-            <div
+            <Background
                 className={classNames(
                     'animate-bg pointer-events-none absolute',
                     '-top-[1486.8px] left-[calc(50%-900px)] -z-1',
-                    'h-[1858.5px] w-[1800px] bg-cover'
+                    'h-[1858.5px] w-[1800px]'
                 )}
-                style={{ backgroundImage: `url(${background.src})` }}
             />
         </body>
     </html>

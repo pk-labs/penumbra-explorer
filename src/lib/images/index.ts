@@ -1,6 +1,0 @@
-export { default as background } from './background.svg'
-export { default as encrypted } from './encrypted.svg'
-export { default as logo } from './logo.svg'
-export { default as logoMinimal } from './logo-minimal.svg'
-export { default as penumbra } from './penumbra.svg'
-export { default as public } from './public.svg'

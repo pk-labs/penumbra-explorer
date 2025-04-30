@@ -6,13 +6,11 @@ import {
     HomeIcon,
     SatelliteDishIcon,
 } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC, useCallback, useState } from 'react'
 import { UmPriceContainer } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { logo } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import Button from '../button'
 import Container from '../container'
@@ -20,6 +18,7 @@ import { Menu, MenuItem } from '../menu'
 import Modal from '../modal'
 import Search from '../search'
 import { Tab, Tabs } from '../tabs'
+import { Logo } from '../vectors'
 
 interface Props {
     className?: string
@@ -55,11 +54,7 @@ const NavigationBar: FC<Props> = props => {
         >
             <div className="relative z-40 flex items-center gap-2">
                 <Link href="/">
-                    <Image
-                        alt="Noctis"
-                        className="max-h-8 w-auto sm:max-h-none"
-                        src={logo}
-                    />
+                    <Logo className="max-h-8 w-auto sm:max-h-none" />
                 </Link>
             </div>
             <Tabs className="hidden justify-self-center lg:flex">

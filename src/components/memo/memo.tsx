@@ -1,7 +1,6 @@
 // istanbul ignore file
-import Image from 'next/image'
 import { FC } from 'react'
-import { encrypted } from '@/lib/images'
+import { Encrypted } from '@/components'
 import { classNames } from '@/lib/utils'
 import Subsection from '../subsection'
 
@@ -13,7 +12,7 @@ const Memo: FC = () => (
                 'text-text-secondary py-2 text-sm font-normal'
             )}
         >
-            <Image alt="Memo" src={encrypted} />
+            <Encrypted />
             <span>Memo</span>
         </div>
     </Subsection>

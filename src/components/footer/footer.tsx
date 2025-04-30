@@ -1,9 +1,8 @@
 import { MailIcon } from 'lucide-react'
-import Image from 'next/image'
 import { FC } from 'react'
-import { logoMinimal, penumbra } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import Container from '../container'
+import { Discord, GitHub, LogoMinimal, Penumbra, Twitter } from '../vectors'
 
 interface Props {
     className?: string
@@ -17,13 +16,45 @@ const Footer: FC<Props> = props => (
             props.className
         )}
     >
-        <div className="flex flex-col items-center gap-1 sm:items-start">
-            <Image alt="Noctis" height={21} src={logoMinimal} width={132} />
+        <div className="flex flex-col items-center gap-2 sm:items-start">
+            <LogoMinimal />
+            <div className="flex gap-2">
+                <a
+                    className={classNames(
+                        'border-other-tonalStroke inline-flex h-8 w-8',
+                        'items-center justify-center rounded-full border-1'
+                    )}
+                    href="https://github.com/penumbra-zone"
+                    target="_blank"
+                >
+                    <Discord />
+                </a>
+                <a
+                    className={classNames(
+                        'border-other-tonalStroke inline-flex h-8 w-8',
+                        'items-center justify-center rounded-full border-1'
+                    )}
+                    href="https://github.com/pk-labs/penumbra-explorer"
+                    target="_blank"
+                >
+                    <GitHub />
+                </a>
+                <a
+                    className={classNames(
+                        'border-other-tonalStroke inline-flex h-8 w-8',
+                        'items-center justify-center rounded-full border-1'
+                    )}
+                    href="https://twitter.com/penumbrazone"
+                    target="_blank"
+                >
+                    <Twitter />
+                </a>
+            </div>
         </div>
         <div className="flex flex-col items-center gap-1 sm:col-3 sm:items-end">
             <span className="text-text-secondary text-xs">Powered by</span>
             <a href="https://penumbra.zone/" target="_blank">
-                <Image alt="Penumbra" height="13" src={penumbra} width="134" />
+                <Penumbra />
             </a>
         </div>
         <a
