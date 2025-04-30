@@ -54,7 +54,7 @@ const NavigationBar: FC<Props> = props => {
         >
             <div className="relative z-40 flex items-center gap-2">
                 <Link href="/">
-                    <Logo className="max-h-8 w-auto sm:max-h-none" />
+                    <Logo className="max-h-6 w-auto sm:max-h-7" />
                 </Link>
             </div>
             <Tabs className="hidden justify-self-center lg:flex">
