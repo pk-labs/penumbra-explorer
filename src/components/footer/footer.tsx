@@ -57,21 +57,10 @@ const Footer: FC<Props> = props => (
                 <Penumbra />
             </a>
         </div>
-        <a
-            className={classNames(
-                'flex items-center justify-center gap-1 text-xs sm:col-1',
-                'sm:row-2 sm:justify-start'
-            )}
-            href="mailto:penumbra@pklabs.me"
-            target="_blank"
-        >
-            <MailIcon size={12} />
-            penumbra@pklabs.me
-        </a>
         <div
             className={classNames(
-                'text-text-secondary text-center text-xs sm:col-1 sm:row-3',
-                'sm:text-left'
+                'text-text-secondary text-center text-xs sm:col-3 sm:row-3',
+                'sm:text-right'
             )}
         >
             Supported by
@@ -100,10 +89,21 @@ const Footer: FC<Props> = props => (
                 Radiant Commons
             </a>
         </div>
+        <a
+            className={classNames(
+                'flex items-center justify-center gap-1 text-xs sm:col-1',
+                'sm:row-2 sm:justify-start'
+            )}
+            href="mailto:penumbra@pklabs.me"
+            target="_blank"
+        >
+            <MailIcon size={12} />
+            penumbra@pklabs.me
+        </a>
         <div
             className={classNames(
-                'text-text-secondary text-center text-xs sm:col-2 sm:row-3',
-                'sm:self-end'
+                'text-text-secondary text-center text-xs sm:col-1 sm:row-3',
+                'sm:self-end sm:text-left'
             )}
         >
             Built by <br className="sm:hidden" />
