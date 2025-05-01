@@ -1,5 +1,6 @@
 import {
     BlockFragment,
+    IbcStatus,
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
@@ -35,6 +36,7 @@ export interface TransformedPartialTransactionFragment
     actionCount: number
     blockHeight: number
     primaryAction?: ActionType
+    status: IbcStatus
     timeAgo?: string
 }
 

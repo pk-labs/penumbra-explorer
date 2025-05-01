@@ -45,6 +45,7 @@ const getBlock = async (
                 hash: transaction.hash.toLowerCase(),
                 primaryAction,
                 raw: transaction.raw,
+                status: transaction.ibcStatus,
             }
         }),
     }

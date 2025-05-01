@@ -4,6 +4,7 @@
 import { FC, useEffect, useState } from 'react'
 import { TransactionTable } from '@/components'
 import { useTransactionUpdateSubscription } from '@/lib/graphql/generated/hooks'
+import { IbcStatus } from '@/lib/graphql/generated/types'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import { Props as LatestTransactionsLoaderProps } from './latestTransactionsLoader'
@@ -55,6 +56,7 @@ const LatestTransactionsUpdater: FC<Props> = props => {
                         hash: transactionUpdate.hash.toLowerCase(),
                         primaryAction,
                         raw: transactionUpdate.raw,
+                        status: IbcStatus.Completed, // FIXME
                     },
                     ...prev.slice(0, -1),
                 ]

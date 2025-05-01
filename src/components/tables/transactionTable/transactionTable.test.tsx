@@ -1,5 +1,6 @@
 import { fireEvent, getByText, render } from '@testing-library/react'
 import { router } from '@/lib/__tests__/__mocks__'
+import { IbcStatus } from '@/lib/graphql/generated/types'
 import { ActionType } from '@/lib/types'
 import { TableProps } from '../table'
 import TransactionTable from './transactionTable'
@@ -10,7 +11,7 @@ jest.mock('../table/table', () => (props: TableProps) => (
 
 jest.mock('../../copyToClipboard/copyToClipboard')
 
-describe('BlockTable', () => {
+describe('TransactionTable', () => {
     test('renders empty table', async () => {
         const { container, rerender } = render(<TransactionTable />)
 
@@ -43,12 +44,14 @@ describe('BlockTable', () => {
                         blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
+                        status: IbcStatus.Completed,
                     },
                     {
                         actionCount: 0,
                         blockHeight: 456,
                         hash: 'tx2',
                         raw: '',
+                        status: IbcStatus.Completed,
                     },
                 ]}
             />
@@ -67,6 +70,7 @@ describe('BlockTable', () => {
                         blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
+                        status: IbcStatus.Completed,
                     },
                 ]}
                 blockHeight
@@ -85,6 +89,7 @@ describe('BlockTable', () => {
                         blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
+                        status: IbcStatus.Completed,
                     },
                 ]}
                 amount
@@ -103,6 +108,7 @@ describe('BlockTable', () => {
                         blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
+                        status: IbcStatus.Completed,
                     },
                 ]}
                 status
@@ -122,6 +128,7 @@ describe('BlockTable', () => {
                         hash: 'tx1',
                         primaryAction: ActionType.receive,
                         raw: '',
+                        status: IbcStatus.Completed,
                     },
                 ]}
             />
@@ -140,6 +147,7 @@ describe('BlockTable', () => {
                         blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
+                        status: IbcStatus.Completed,
                         timeAgo: '1s ago',
                     },
                 ]}
@@ -159,6 +167,7 @@ describe('BlockTable', () => {
                         blockHeight: 123,
                         hash: 'tx1',
                         raw: '',
+                        status: IbcStatus.Completed,
                     },
                 ]}
             />

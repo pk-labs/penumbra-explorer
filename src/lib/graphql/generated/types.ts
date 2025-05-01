@@ -466,11 +466,11 @@ export type TransactionsSelector = {
   range?: InputMaybe<TransactionRange>;
 };
 
-export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson?: string | null, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, rawJson: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } }> };
+export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson?: string | null, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
 
-export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
+export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
 
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
 
@@ -479,7 +479,7 @@ export type BlockQueryVariables = Exact<{
 }>;
 
 
-export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, rawJson?: string | null, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, rawJson: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } }> } | null };
+export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, rawJson?: string | null, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
   limit: CollectionLimit;
@@ -514,7 +514,7 @@ export type TransactionsQueryVariables = Exact<{
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'QueryRoot', transactionsCollection: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
+export type TransactionsQuery = { __typename?: 'QueryRoot', transactionsCollection: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -535,6 +535,34 @@ export type TransactionUpdateSubscriptionVariables = Exact<{
 
 export type TransactionUpdateSubscription = { __typename?: 'Root', latestTransactions: { __typename?: 'TransactionUpdate', hash: string, id: number, raw: string } };
 
+export const PartialTransactionFragmentDoc = gql`
+    fragment PartialTransaction on Transaction {
+  hash
+  block {
+    height
+    createdAt
+  }
+  ibcStatus
+  raw
+}
+    `;
+export const BlockFragmentDoc = gql`
+    fragment Block on Block {
+  height
+  createdAt
+  transactions {
+    ...PartialTransaction
+  }
+  rawJson
+}
+    ${PartialTransactionFragmentDoc}`;
+export const PartialBlockFragmentDoc = gql`
+    fragment PartialBlock on Block {
+  height
+  createdAt
+  transactionsCount
+}
+    `;
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
   hash
@@ -552,33 +580,6 @@ export const TransactionFragmentDoc = gql`
   }
   raw
   rawJson
-}
-    `;
-export const BlockFragmentDoc = gql`
-    fragment Block on Block {
-  height
-  createdAt
-  transactions {
-    ...Transaction
-  }
-  rawJson
-}
-    ${TransactionFragmentDoc}`;
-export const PartialBlockFragmentDoc = gql`
-    fragment PartialBlock on Block {
-  height
-  createdAt
-  transactionsCount
-}
-    `;
-export const PartialTransactionFragmentDoc = gql`
-    fragment PartialTransaction on Transaction {
-  hash
-  block {
-    height
-    createdAt
-  }
-  raw
 }
     `;
 export const BlockDocument = gql`

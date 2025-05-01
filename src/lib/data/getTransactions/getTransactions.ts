@@ -57,6 +57,7 @@ const getTransactions = async (
                 hash: transaction.hash.toLowerCase(),
                 primaryAction,
                 raw: transaction.raw,
+                status: transaction.ibcStatus,
                 timeAgo: transaction.block.createdAt
                     ? now.to(transaction.block.createdAt)
                     : undefined,

@@ -3,6 +3,34 @@ import * as Types from './types';
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export const PartialTransactionFragmentDoc = gql`
+    fragment PartialTransaction on Transaction {
+  hash
+  block {
+    height
+    createdAt
+  }
+  ibcStatus
+  raw
+}
+    `;
+export const BlockFragmentDoc = gql`
+    fragment Block on Block {
+  height
+  createdAt
+  transactions {
+    ...PartialTransaction
+  }
+  rawJson
+}
+    ${PartialTransactionFragmentDoc}`;
+export const PartialBlockFragmentDoc = gql`
+    fragment PartialBlock on Block {
+  height
+  createdAt
+  transactionsCount
+}
+    `;
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
   hash
@@ -20,33 +48,6 @@ export const TransactionFragmentDoc = gql`
   }
   raw
   rawJson
-}
-    `;
-export const BlockFragmentDoc = gql`
-    fragment Block on Block {
-  height
-  createdAt
-  transactions {
-    ...Transaction
-  }
-  rawJson
-}
-    ${TransactionFragmentDoc}`;
-export const PartialBlockFragmentDoc = gql`
-    fragment PartialBlock on Block {
-  height
-  createdAt
-  transactionsCount
-}
-    `;
-export const PartialTransactionFragmentDoc = gql`
-    fragment PartialTransaction on Transaction {
-  hash
-  block {
-    height
-    createdAt
-  }
-  raw
 }
     `;
 export const BlockDocument = gql`
