@@ -11,8 +11,8 @@ import {
     Parameters,
 } from '@/components'
 import { PaginatedTransactionsContainer } from '@/containers'
-import { ibc } from '@/lib/constants'
-import { classNames, formatNumber, generatePageMetadata } from '@/lib/utils'
+import ibc from '@/lib/ibc'
+import { classNames, generatePageMetadata } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ chainId: string }>
@@ -104,10 +104,10 @@ const ChainPage: FC<Props> = async props => {
                                 title="Shielded"
                             >
                                 <Parameter name="Volume shielded">
-                                    ${formatNumber(connection.volumeShielded)}
+                                    {/*${formatNumber(connection.volumeShielded)}*/}
                                 </Parameter>
                                 <Parameter name="Txs shielded">
-                                    {formatNumber(connection.txsShielded)}
+                                    {/*{formatNumber(connection.txsShielded)}*/}
                                 </Parameter>
                             </Parameters>
                             <Parameters
@@ -115,10 +115,10 @@ const ChainPage: FC<Props> = async props => {
                                 title="Unshielded"
                             >
                                 <Parameter name="Volume unshielded">
-                                    ${formatNumber(connection.volumeUnshielded)}
+                                    {/*${formatNumber(connection.volumeUnshielded)}*/}
                                 </Parameter>
                                 <Parameter name="Txs unshielded">
-                                    {formatNumber(connection.txsUnshielded)}
+                                    {/*{formatNumber(connection.txsUnshielded)}*/}
                                 </Parameter>
                             </Parameters>
                         </div>
@@ -127,23 +127,22 @@ const ChainPage: FC<Props> = async props => {
                             title="Total"
                         >
                             <Parameter name="Volume total">
-                                $
-                                {formatNumber(
-                                    connection.volumeShielded +
-                                        connection.volumeUnshielded
-                                )}
+                                ${/*{formatNumber(*/}
+                                {/*    connection.volumeShielded +*/}
+                                {/*        connection.volumeUnshielded*/}
+                                {/*)}*/}
                             </Parameter>
                             <Parameter name="Txs total">
-                                {formatNumber(
-                                    connection.txsShielded +
-                                        connection.txsUnshielded
-                                )}
+                                {/*{formatNumber(*/}
+                                {/*    connection.txsShielded +*/}
+                                {/*        connection.txsUnshielded*/}
+                                {/*)}*/}
                             </Parameter>
                             <Parameter name="Txs pending">
-                                {formatNumber(connection.txsPending)}
+                                {/*{formatNumber(connection.txsPending)}*/}
                             </Parameter>
                             <Parameter name="Txs expired">
-                                {formatNumber(connection.txsExpired)}
+                                {/*{formatNumber(connection.txsExpired)}*/}
                             </Parameter>
                         </Parameters>
                     </div>
@@ -179,7 +178,7 @@ const ChainPage: FC<Props> = async props => {
                             'text-xs font-medium backdrop-blur-lg'
                         )}
                     >
-                        {connection.channelId}
+                        {/*{connection.channelId}*/}
                     </div>
                     <div
                         className={classNames(
@@ -215,7 +214,7 @@ const ChainPage: FC<Props> = async props => {
                             'text-xs font-medium backdrop-blur-lg'
                         )}
                     >
-                        {connection.counterpartyChannelId}
+                        {/*{connection.counterpartyChannelId}*/}
                     </div>
                     <div
                         className={classNames(

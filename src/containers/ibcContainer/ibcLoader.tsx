@@ -16,8 +16,6 @@ const IbcLoader: FC<Props> = async ({ timePeriod, ...props }) => {
         notFound()
     }
 
-    await new Promise(resolve => setTimeout(resolve, 3000))
-
     return <IbcTable stats={stats} {...props} />
 }
 
