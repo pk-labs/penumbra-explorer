@@ -1,5 +1,5 @@
-query IbcStats($timePeriod: String) {
-    ibcStats(timePeriod: $timePeriod) {
+query IbcStats($clientId: String, $timePeriod: String) {
+    ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
         clientId
         shieldedVolume
         shieldedTxCount

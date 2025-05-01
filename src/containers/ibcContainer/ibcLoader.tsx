@@ -10,7 +10,7 @@ export interface Props extends Omit<IbcTableProps, 'stats'> {
 }
 
 const IbcLoader: FC<Props> = async ({ timePeriod, ...props }) => {
-    const stats = await getIbcStats(timePeriod)
+    const stats = await getIbcStats({ timePeriod })
 
     if (!stats) {
         notFound()

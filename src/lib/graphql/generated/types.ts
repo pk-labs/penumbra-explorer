@@ -489,7 +489,15 @@ export type BlocksQueryVariables = Exact<{
 
 export type BlocksQuery = { __typename?: 'QueryRoot', blocksCollection: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
 
+export type IbcChannelPairsQueryVariables = Exact<{
+  clientId: Scalars['String']['input'];
+}>;
+
+
+export type IbcChannelPairsQuery = { __typename?: 'QueryRoot', ibcChannelPairsByClientId: Array<{ __typename?: 'ChannelPair', channelId: string, counterpartyChannelId?: string | null }> };
+
 export type IbcStatsQueryVariables = Exact<{
+  clientId?: InputMaybe<Scalars['String']['input']>;
   timePeriod?: InputMaybe<Scalars['String']['input']>;
 }>;
 
@@ -606,9 +614,17 @@ export const BlocksDocument = gql`
   }
 }
     ${PartialBlockFragmentDoc}`;
+export const IbcChannelPairsDocument = gql`
+    query IbcChannelPairs($clientId: String!) {
+  ibcChannelPairsByClientId(clientId: $clientId) {
+    channelId
+    counterpartyChannelId
+  }
+}
+    `;
 export const IbcStatsDocument = gql`
-    query IbcStats($timePeriod: String) {
-  ibcStats(timePeriod: $timePeriod) {
+    query IbcStats($clientId: String, $timePeriod: String) {
+  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
     clientId
     shieldedVolume
     shieldedTxCount

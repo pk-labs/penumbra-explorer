@@ -75,9 +75,21 @@ export const BlocksDocument = gql`
 export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });
 };
+export const IbcChannelPairsDocument = gql`
+    query IbcChannelPairs($clientId: String!) {
+  ibcChannelPairsByClientId(clientId: $clientId) {
+    channelId
+    counterpartyChannelId
+  }
+}
+    `;
+
+export function useIbcChannelPairsQuery(options: Omit<Urql.UseQueryArgs<Types.IbcChannelPairsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.IbcChannelPairsQuery, Types.IbcChannelPairsQueryVariables>({ query: Types.IbcChannelPairsDocument, ...options });
+};
 export const IbcStatsDocument = gql`
-    query IbcStats($timePeriod: String) {
-  ibcStats(timePeriod: $timePeriod) {
+    query IbcStats($clientId: String, $timePeriod: String) {
+  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
     clientId
     shieldedVolume
     shieldedTxCount

@@ -6,14 +6,15 @@ import {
 import { ibcStatsQuery } from '@/lib/graphql/queries'
 import { TimePeriod } from '@/lib/types'
 
-const getIbcStats = async (
+const getIbcStats = async (args?: {
+    clientId?: string
     timePeriod?: TimePeriod
-): Promise<IbcStatsQuery['ibcStats'] | undefined> => {
+}): Promise<IbcStatsQuery['ibcStats'] | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
         .query<IbcStatsQuery, IbcStatsQueryVariables>(ibcStatsQuery, {
-            timePeriod,
+            ...args,
         })
         .toPromise()
 
