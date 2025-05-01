@@ -10,18 +10,23 @@ import { getTransactions } from '@/lib/data'
 
 export interface Props
     extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
+    clientId?: string
     length: number
     offset: number
     pathname: string
 }
 
 const PaginatedTransactionsLoader: FC<Props> = async ({
+    clientId,
     length,
     offset,
     pathname,
     ...props
 }) => {
-    const { total, transactions } = await getTransactions({ length, offset })
+    const { total, transactions } = await getTransactions(
+        { length, offset },
+        { clientId }
+    )
 
     if (!transactions?.length) {
         notFound()

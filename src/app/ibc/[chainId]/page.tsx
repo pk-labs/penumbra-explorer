@@ -58,6 +58,7 @@ const ChainPage: FC<Props> = async props => {
                 />
                 <PaginatedTransactionsContainer
                     className="min-w-0"
+                    // clientId={connection.clientId}
                     header={
                         <h2
                             className={classNames(
