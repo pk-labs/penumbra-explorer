@@ -65,6 +65,16 @@ export type BlocksSelector = {
   range?: InputMaybe<BlockHeightRange>;
 };
 
+export type ChannelPair = {
+  __typename?: 'ChannelPair';
+  channelId: Scalars['String']['output'];
+  clientId: Scalars['String']['output'];
+  completedTxCount: Scalars['Int']['output'];
+  connectionId?: Maybe<Scalars['String']['output']>;
+  counterpartyChannelId?: Maybe<Scalars['String']['output']>;
+  pendingTxCount: Scalars['Int']['output'];
+};
+
 export type CollectionLimit = {
   length?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -87,7 +97,9 @@ export type DbRawTransaction = {
   __typename?: 'DbRawTransaction';
   blockHeight: Scalars['Int']['output'];
   chainId?: Maybe<Scalars['String']['output']>;
+  clientId?: Maybe<Scalars['String']['output']>;
   feeAmount?: Maybe<Scalars['String']['output']>;
+  ibcStatus: Scalars['String']['output'];
   rawDataHex?: Maybe<Scalars['String']['output']>;
   rawJson?: Maybe<Scalars['JSON']['output']>;
   timestamp: Scalars['DateTime']['output'];
@@ -109,6 +121,44 @@ export type Fee = {
 export type IbcRelay = {
   __typename?: 'IbcRelay';
   rawAction: Scalars['String']['output'];
+};
+
+export type IbcStats = {
+  __typename?: 'IbcStats';
+  clientId: Scalars['String']['output'];
+  expiredTxCount: Scalars['Int']['output'];
+  lastUpdated?: Maybe<Scalars['DateTime']['output']>;
+  pendingTxCount: Scalars['Int']['output'];
+  shieldedTxCount: Scalars['Int']['output'];
+  shieldedVolume: Scalars['String']['output'];
+  unshieldedTxCount: Scalars['Int']['output'];
+  unshieldedVolume: Scalars['String']['output'];
+};
+
+export enum IbcStatus {
+  Completed = 'COMPLETED',
+  Error = 'ERROR',
+  Expired = 'EXPIRED',
+  Pending = 'PENDING',
+  Unknown = 'UNKNOWN'
+}
+
+export type IbcTransactionUpdate = {
+  __typename?: 'IbcTransactionUpdate';
+  /** Block height where the transaction was included */
+  blockHeight: Scalars['Int']['output'];
+  /** IBC client ID associated with the transaction */
+  clientId: Scalars['String']['output'];
+  /** Flag indicating if this is a status update to an existing transaction */
+  isStatusUpdate: Scalars['Boolean']['output'];
+  /** Raw transaction data */
+  raw: Scalars['String']['output'];
+  /** Current transaction status (pending, completed, expired, error) */
+  status: Scalars['String']['output'];
+  /** Timestamp when the transaction was processed */
+  timestamp: Scalars['DateTime']['output'];
+  /** Transaction hash in hex format */
+  txHash: Scalars['String']['output'];
 };
 
 export type LatestBlock = {
@@ -166,6 +216,16 @@ export type QueryRoot = {
   dbRawTransaction?: Maybe<DbRawTransaction>;
   /** Get raw transaction data directly from the database */
   dbRawTransactions: Array<DbRawTransaction>;
+  /** Get IBC channel pairs with optional filtering */
+  ibcChannelPairs: Array<ChannelPair>;
+  /** Get IBC channel pairs for a specific client ID */
+  ibcChannelPairsByClientId: Array<ChannelPair>;
+  /** Get IBC stats with optional filtering */
+  ibcStats: Array<IbcStats>;
+  /** Get IBC stats by client ID */
+  ibcStatsByClientId?: Maybe<IbcStats>;
+  /** Get total shielded volume across all IBC clients */
+  ibcTotalShieldedVolume: TotalShieldedVolume;
   /** Search for blocks or transactions */
   search?: Maybe<SearchResult>;
   /** Get blockchain statistics */
@@ -217,6 +277,32 @@ export type QueryRootDbRawTransactionsArgs = {
 };
 
 
+export type QueryRootIbcChannelPairsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryRootIbcChannelPairsByClientIdArgs = {
+  clientId: Scalars['String']['input'];
+};
+
+
+export type QueryRootIbcStatsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  timePeriod?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryRootIbcStatsByClientIdArgs = {
+  clientId: Scalars['String']['input'];
+  timePeriod?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type QueryRootSearchArgs = {
   slug: Scalars['String']['input'];
 };
@@ -245,14 +331,33 @@ export enum RangeDirection {
 export type Root = {
   __typename?: 'Root';
   blocks: BlockUpdate;
+  /** Subscribe to IBC transactions with optional client ID filtering and pagination */
+  ibcTransactions: IbcTransactionUpdate;
   latestBlocks: BlockUpdate;
+  /** Subscribe to latest IBC transactions with optional client ID filtering */
+  latestIbcTransactions: IbcTransactionUpdate;
   latestTransactions: TransactionUpdate;
+  /** Subscribe to total shielded volume updates */
+  totalShieldedVolume: TotalShieldedVolumeUpdate;
   transactionCount: TransactionCountUpdate;
   transactions: TransactionUpdate;
 };
 
 
+export type RootIbcTransactionsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
 export type RootLatestBlocksArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type RootLatestIbcTransactionsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -282,13 +387,27 @@ export type Stats = {
   totalTransactionsCount: Scalars['Int']['output'];
 };
 
+export type TotalShieldedVolume = {
+  __typename?: 'TotalShieldedVolume';
+  /** Total shielded volume across all IBC clients */
+  value: Scalars['String']['output'];
+};
+
+export type TotalShieldedVolumeUpdate = {
+  __typename?: 'TotalShieldedVolumeUpdate';
+  /** Total shielded volume across all IBC clients */
+  value: Scalars['String']['output'];
+};
+
 export type Transaction = {
   __typename?: 'Transaction';
   anchor: Scalars['String']['output'];
   bindingSig: Scalars['String']['output'];
   block: Block;
   body: TransactionBody;
+  clientId?: Maybe<Scalars['String']['output']>;
   hash: Scalars['String']['output'];
+  ibcStatus: IbcStatus;
   index: Scalars['Int']['output'];
   raw: Scalars['String']['output'];
   rawEvents: Array<Event>;
@@ -317,6 +436,7 @@ export type TransactionCountUpdate = {
 };
 
 export type TransactionFilter = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -341,6 +461,7 @@ export type TransactionUpdate = {
 };
 
 export type TransactionsSelector = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
   latest?: InputMaybe<LatestTransactions>;
   range?: InputMaybe<TransactionRange>;
 };

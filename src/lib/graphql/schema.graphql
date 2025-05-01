@@ -36,6 +36,15 @@ type BlockUpdate {
     transactionsCount: Int!
 }
 
+type ChannelPair {
+    channelId: String!
+    clientId: String!
+    completedTxCount: Int!
+    connectionId: String
+    counterpartyChannelId: String
+    pendingTxCount: Int!
+}
+
 type DbBlock {
     blockHashHex: String
     chainId: String
@@ -51,7 +60,9 @@ type DbBlock {
 type DbRawTransaction {
     blockHeight: Int!
     chainId: String
+    clientId: String
     feeAmount: String
+    ibcStatus: String!
     rawDataHex: String
     rawJson: JSON
     timestamp: DateTime!
@@ -70,6 +81,34 @@ type Fee {
 
 type IbcRelay {
     rawAction: String!
+}
+
+type IbcStats {
+    clientId: String!
+    expiredTxCount: Int!
+    lastUpdated: DateTime
+    pendingTxCount: Int!
+    shieldedTxCount: Int!
+    shieldedVolume: String!
+    unshieldedTxCount: Int!
+    unshieldedVolume: String!
+}
+
+type IbcTransactionUpdate {
+    "Block height where the transaction was included"
+    blockHeight: Int!
+    "IBC client ID associated with the transaction"
+    clientId: String!
+    "Flag indicating if this is a status update to an existing transaction"
+    isStatusUpdate: Boolean!
+    "Raw transaction data"
+    raw: String!
+    "Current transaction status (pending, completed, expired, error)"
+    status: String!
+    "Timestamp when the transaction was processed"
+    timestamp: DateTime!
+    "Transaction hash in hex format"
+    txHash: String!
 }
 
 type NotYetSupportedAction {
@@ -115,6 +154,16 @@ type QueryRoot {
     dbRawTransaction(txHashHex: String!): DbRawTransaction
     "Get raw transaction data directly from the database"
     dbRawTransactions(limit: Int, offset: Int): [DbRawTransaction!]!
+    "Get IBC channel pairs with optional filtering"
+    ibcChannelPairs(clientId: String, limit: Int, offset: Int): [ChannelPair!]!
+    "Get IBC channel pairs for a specific client ID"
+    ibcChannelPairsByClientId(clientId: String!): [ChannelPair!]!
+    "Get IBC stats with optional filtering"
+    ibcStats(clientId: String, limit: Int, offset: Int, timePeriod: String): [IbcStats!]!
+    "Get IBC stats by client ID"
+    ibcStatsByClientId(clientId: String!, timePeriod: String): IbcStats
+    "Get total shielded volume across all IBC clients"
+    ibcTotalShieldedVolume: TotalShieldedVolume!
     "Search for blocks or transactions"
     search(slug: String!): SearchResult
     "Get blockchain statistics"
@@ -129,8 +178,14 @@ type QueryRoot {
 
 type Root {
     blocks: BlockUpdate!
+    "Subscribe to IBC transactions with optional client ID filtering and pagination"
+    ibcTransactions(clientId: String, limit: Int, offset: Int): IbcTransactionUpdate!
     latestBlocks(limit: Int): BlockUpdate!
+    "Subscribe to latest IBC transactions with optional client ID filtering"
+    latestIbcTransactions(clientId: String, limit: Int): IbcTransactionUpdate!
     latestTransactions(limit: Int): TransactionUpdate!
+    "Subscribe to total shielded volume updates"
+    totalShieldedVolume: TotalShieldedVolumeUpdate!
     transactionCount: TransactionCountUpdate!
     transactions: TransactionUpdate!
 }
@@ -151,12 +206,24 @@ type Stats {
     totalTransactionsCount: Int!
 }
 
+type TotalShieldedVolume {
+    "Total shielded volume across all IBC clients"
+    value: String!
+}
+
+type TotalShieldedVolumeUpdate {
+    "Total shielded volume across all IBC clients"
+    value: String!
+}
+
 type Transaction {
     anchor: String!
     bindingSig: String!
     block: Block!
     body: TransactionBody!
+    clientId: String
     hash: String!
+    ibcStatus: IbcStatus!
     index: Int!
     raw: String!
     rawEvents: [Event!]!
@@ -191,6 +258,14 @@ type TransactionUpdate {
     hash: String!
     id: Int!
     raw: String!
+}
+
+enum IbcStatus {
+    COMPLETED
+    ERROR
+    EXPIRED
+    PENDING
+    UNKNOWN
 }
 
 enum RangeDirection {
@@ -231,6 +306,7 @@ input LatestTransactions {
 }
 
 input TransactionFilter {
+    clientId: String
     hash: String
 }
 
@@ -241,6 +317,7 @@ input TransactionRange {
 }
 
 input TransactionsSelector {
+    clientId: String
     latest: LatestTransactions
     range: TransactionRange
 }
