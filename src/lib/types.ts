@@ -77,3 +77,8 @@ export interface UmPriceData {
     change: number
     price: number
 }
+
+export enum TimePeriod {
+    day = '24h',
+    month = '30d',
+}

@@ -1,6 +1,4 @@
-subscription BlockUpdate(
-    $limit: Int!
-) {
+subscription BlockUpdate($limit: Int!) {
     latestBlocks(limit: $limit) {
         height
         createdAt

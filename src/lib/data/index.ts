@@ -1,5 +1,6 @@
 export { default as getBlock } from './getBlock'
 export { default as getBlocks } from './getBlocks'
+export { default as getIbcStats } from './getIbcStats'
 export { default as getStats } from './getStats'
 export { default as getTransaction } from './getTransaction'
 export { default as getTransactions } from './getTransactions'

@@ -2,38 +2,54 @@
 
 import { Clock4Icon, TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
-import { FC, useState } from 'react'
-import { ibc } from '@/lib/constants'
+import { FC, useMemo } from 'react'
+import { IbcStatsQuery } from '@/lib/graphql/generated/types'
+import ibc from '@/lib/ibc'
 import { classNames, formatNumber } from '@/lib/utils'
-import Density from '../../density'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
-import SegmentedControl from '../../segmentedControl'
-import { Table, TableCell, TableRow } from '../table'
+import { Table, TableCell, TableProps, TableRow } from '../table'
 
-export interface Props {
-    className?: string
+export interface Props extends Omit<TableProps, 'children'> {
+    stats: IbcStatsQuery['ibcStats']
 }
 
 const IbcTable: FC<Props> = props => {
-    const [timeInterval, setTimeInterval] = useState<string>('24h')
+    const connections = useMemo(() => {
+        const matches = []
+
+        for (const connection of ibc) {
+            const stats = props.stats.find(
+                s => s.clientId === connection.clientId
+            )
+
+            if (stats) {
+                matches.push({
+                    ...connection,
+                    ...stats,
+                })
+            }
+        }
+
+        return matches
+    }, [props.stats])
 
     return (
         <Table
             className={props.className}
-            header={
-                <Density compact>
-                    <SegmentedControl
-                        className="self-start"
-                        onChange={setTimeInterval}
-                        value={timeInterval}
-                    >
-                        <SegmentedControl.Item style="filled" value="24h" />
-                        <SegmentedControl.Item style="filled" value="30d" />
-                        <SegmentedControl.Item style="filled" value="All" />
-                    </SegmentedControl>
-                </Density>
-            }
+            // header={
+            //     <Density compact>
+            //         <SegmentedControl
+            //             className="self-start"
+            //             onChange={settimePeriod}
+            //             value={timePeriod}
+            //         >
+            //             <SegmentedControl.Item style="filled" value="24h" />
+            //             <SegmentedControl.Item style="filled" value="30d" />
+            //             <SegmentedControl.Item style="filled" value="All" />
+            //         </SegmentedControl>
+            //     </Density>
+            // }
         >
             <thead>
                 <TableRow>
@@ -70,8 +86,8 @@ const IbcTable: FC<Props> = props => {
                 </TableRow>
             </thead>
             <tbody>
-                {ibc.length ? (
-                    ibc.map(connection => (
+                {connections.length ? (
+                    connections.map(connection => (
                         <TableRow
                             key={connection.chainId}
                             href={`/ibc/${connection.chainId}`}
@@ -91,20 +107,10 @@ const IbcTable: FC<Props> = props => {
                             <TableCell className="h-20">
                                 <Pill
                                     className="capitalize"
-                                    context={
-                                        connection.clientStatus === 'active'
-                                            ? 'technical-success'
-                                            : connection.clientStatus ===
-                                                'frozen'
-                                              ? 'technical-caution'
-                                              : connection.clientStatus ===
-                                                  'expired'
-                                                ? 'technical-destructive'
-                                                : 'technical-default'
-                                    }
+                                    context="technical-success"
                                     priority="secondary"
                                 >
-                                    {connection.clientStatus}
+                                    Active
                                 </Pill>
                             </TableCell>
                             <TableCell className="h-20">
@@ -112,11 +118,14 @@ const IbcTable: FC<Props> = props => {
                                     <span className="text-base font-normal">
                                         $
                                         {formatNumber(
-                                            connection.volumeShielded
+                                            // FIXME: Shouldn't type be number?
+                                            Number(connection.shieldedVolume)
                                         )}
                                     </span>
                                     <span className="text-text-secondary">
-                                        {formatNumber(connection.txsShielded)}
+                                        {formatNumber(
+                                            connection.shieldedTxCount
+                                        )}
                                     </span>
                                 </div>
                             </TableCell>
@@ -125,11 +134,13 @@ const IbcTable: FC<Props> = props => {
                                     <span className="text-base font-normal">
                                         $
                                         {formatNumber(
-                                            connection.volumeUnshielded
+                                            Number(connection.unshieldedVolume)
                                         )}
                                     </span>
                                     <span className="text-text-secondary">
-                                        {formatNumber(connection.txsUnshielded)}
+                                        {formatNumber(
+                                            connection.unshieldedTxCount
+                                        )}
                                     </span>
                                 </div>
                             </TableCell>
@@ -138,14 +149,16 @@ const IbcTable: FC<Props> = props => {
                                     <span className="text-base font-normal">
                                         $
                                         {formatNumber(
-                                            connection.volumeShielded +
-                                                connection.volumeUnshielded
+                                            Number(connection.shieldedVolume) +
+                                                Number(
+                                                    connection.unshieldedVolume
+                                                )
                                         )}
                                     </span>
                                     <span className="text-text-secondary">
                                         {formatNumber(
-                                            connection.txsShielded +
-                                                connection.txsUnshielded
+                                            connection.shieldedTxCount +
+                                                connection.unshieldedTxCount
                                         )}
                                     </span>
                                 </div>
@@ -162,7 +175,9 @@ const IbcTable: FC<Props> = props => {
                                             className="text-caution-light"
                                             size={12}
                                         />
-                                        {formatNumber(connection.txsPending)}
+                                        {formatNumber(
+                                            connection.pendingTxCount
+                                        )}
                                     </span>
                                     <span
                                         className={classNames(
@@ -174,7 +189,9 @@ const IbcTable: FC<Props> = props => {
                                             className="text-text-secondary"
                                             size={12}
                                         />
-                                        {formatNumber(connection.txsPending)}
+                                        {formatNumber(
+                                            connection.expiredTxCount
+                                        )}
                                     </span>
                                 </div>
                             </TableCell>

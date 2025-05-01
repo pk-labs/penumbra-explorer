@@ -489,6 +489,13 @@ export type BlocksQueryVariables = Exact<{
 
 export type BlocksQuery = { __typename?: 'QueryRoot', blocksCollection: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
 
+export type IbcStatsQueryVariables = Exact<{
+  timePeriod?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', clientId: string, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, pendingTxCount: number, expiredTxCount: number }> };
+
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -599,6 +606,19 @@ export const BlocksDocument = gql`
   }
 }
     ${PartialBlockFragmentDoc}`;
+export const IbcStatsDocument = gql`
+    query IbcStats($timePeriod: String) {
+  ibcStats(timePeriod: $timePeriod) {
+    clientId
+    shieldedVolume
+    shieldedTxCount
+    unshieldedVolume
+    unshieldedTxCount
+    pendingTxCount
+    expiredTxCount
+  }
+}
+    `;
 export const SearchDocument = gql`
     query Search($slug: String!) {
   search(slug: $slug) {

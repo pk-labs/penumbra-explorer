@@ -75,6 +75,23 @@ export const BlocksDocument = gql`
 export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });
 };
+export const IbcStatsDocument = gql`
+    query IbcStats($timePeriod: String) {
+  ibcStats(timePeriod: $timePeriod) {
+    clientId
+    shieldedVolume
+    shieldedTxCount
+    unshieldedVolume
+    unshieldedTxCount
+    pendingTxCount
+    expiredTxCount
+  }
+}
+    `;
+
+export function useIbcStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.IbcStatsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.IbcStatsQuery, Types.IbcStatsQueryVariables>({ query: Types.IbcStatsDocument, ...options });
+};
 export const SearchDocument = gql`
     query Search($slug: String!) {
   search(slug: $slug) {

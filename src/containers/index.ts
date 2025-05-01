@@ -1,4 +1,5 @@
 export { default as BlockViewContainer } from './blockViewContainer'
+export { default as IbcContainer } from './ibcContainer'
 export { default as LatestBlocksContainer } from './latestBlocksContainer'
 export { default as LatestTransactionsContainer } from './latestTransactionsContainer'
 export { default as PageViewTracker } from './pageViewTracker'
