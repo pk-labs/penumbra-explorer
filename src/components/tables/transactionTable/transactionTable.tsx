@@ -1,6 +1,6 @@
 'use client'
 
-import { BoxIcon, CheckCheckIcon } from 'lucide-react'
+import { BoxIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
@@ -8,6 +8,7 @@ import { formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
+import StatusIcon from '../../statusIcon'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -63,10 +64,7 @@ const TransactionTable: FC<Props> = props => {
                             href={`/tx/${transaction.hash}`}
                         >
                             <TableCell>
-                                <CheckCheckIcon
-                                    className="text-secondary-light inline"
-                                    size={14}
-                                />
+                                <StatusIcon status={transaction.status} />
                                 <Link href={`/tx/${transaction.hash}`}>
                                     {shortenHash(transaction.hash)}
                                 </Link>
