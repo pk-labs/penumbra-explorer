@@ -3,8 +3,9 @@ import '@/lib/css'
 import '@/lib/fonts'
 import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
-import { Background, Footer, NavigationBar } from '@/components'
+import { Footer, NavigationBar } from '@/components'
 import { PageViewTracker } from '@/containers'
+import { background } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 
 export const viewport: Viewport = {
@@ -54,12 +55,13 @@ const RootLayout: FC<Props> = props => (
             <NavigationBar />
             {props.children}
             <Footer />
-            <Background
+            <div
                 className={classNames(
-                    'animate-bg pointer-events-none absolute',
-                    '-top-[1486.8px] left-[calc(50%-900px)] -z-1',
-                    'h-[1858.5px] w-[1800px]'
+                    'animate-bg pointer-events-none absolute -top-[1486.8px]',
+                    'left-[calc(50%-900px)] -z-1 h-[1858.5px] w-[1800px]',
+                    'bg-cover'
                 )}
+                style={{ backgroundImage: `url(${background.src})` }}
             />
         </body>
     </html>

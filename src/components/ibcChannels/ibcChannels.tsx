@@ -1,6 +1,7 @@
 import { CheckIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC } from 'react'
+import { penumbra } from '@/lib/images'
 import { IbcChannelPair } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 
@@ -40,7 +41,7 @@ const IbcChannels: FC<Props> = props => (
                             alt="Penumbra"
                             className="rounded-full"
                             height={32}
-                            src="/penumbra.png"
+                            src={penumbra}
                             width={32}
                         />
                     </div>
