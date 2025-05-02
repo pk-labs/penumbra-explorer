@@ -53,8 +53,8 @@ const ChainPage: FC<Props> = async props => {
             >
                 <ChainContainer
                     {...connection}
-                    connectionPanelClassName="lg:col-2 lg:row-1"
-                    statsPanelClassName="lg:col-1 lg:row-span-2"
+                    channelsClassName="lg:col-1 lg:row-span-2"
+                    statsClassName="lg:col-2 lg:row-1"
                 />
                 <PaginatedTransactionsContainer
                     className="min-w-0"

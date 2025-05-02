@@ -8,11 +8,11 @@ import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
     chainId: string
+    channelsClassName?: string
     clientId: string
-    connectionPanelClassName?: string
     image: string
     name: string
-    statsPanelClassName?: string
+    statsClassName?: string
 }
 
 const ChainLoader: FC<Props> = async props => {
@@ -33,7 +33,7 @@ const ChainLoader: FC<Props> = async props => {
                 className={classNames(
                     'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg',
                     'p-6 backdrop-blur-lg',
-                    props.statsPanelClassName
+                    props.channelsClassName
                 )}
             >
                 <h1
@@ -124,7 +124,7 @@ const ChainLoader: FC<Props> = async props => {
             <IbcChannels
                 chainImage={props.image}
                 chainName={props.name}
-                className={props.connectionPanelClassName}
+                className={props.statsClassName}
                 pairs={pairs}
             />
         </>
