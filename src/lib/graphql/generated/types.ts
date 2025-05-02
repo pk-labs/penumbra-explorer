@@ -516,6 +516,11 @@ export type StatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type StatsQuery = { __typename?: 'QueryRoot', stats: { __typename?: 'Stats', totalTransactionsCount: number } };
 
+export type TotalShieldedVolumeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TotalShieldedVolumeQuery = { __typename?: 'QueryRoot', ibcTotalShieldedVolume: { __typename?: 'TotalShieldedVolume', value: string } };
+
 export type TransactionQueryVariables = Exact<{
   hash: Scalars['String']['input'];
 }>;
@@ -537,6 +542,11 @@ export type BlockUpdateSubscriptionVariables = Exact<{
 
 
 export type BlockUpdateSubscription = { __typename?: 'Root', latestBlocks: { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number } };
+
+export type TotalShieldedVolumeUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TotalShieldedVolumeUpdateSubscription = { __typename?: 'Root', totalShieldedVolume: { __typename?: 'TotalShieldedVolumeUpdate', value: string } };
 
 export type TransactionCountUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -655,6 +665,13 @@ export const StatsDocument = gql`
   }
 }
     `;
+export const TotalShieldedVolumeDocument = gql`
+    query TotalShieldedVolume {
+  ibcTotalShieldedVolume {
+    value
+  }
+}
+    `;
 export const TransactionDocument = gql`
     query Transaction($hash: String!) {
   transaction(hash: $hash) {
@@ -678,6 +695,13 @@ export const BlockUpdateDocument = gql`
     height
     createdAt
     transactionsCount
+  }
+}
+    `;
+export const TotalShieldedVolumeUpdateDocument = gql`
+    subscription TotalShieldedVolumeUpdate {
+  totalShieldedVolume {
+    value
   }
 }
     `;

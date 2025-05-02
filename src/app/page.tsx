@@ -1,9 +1,10 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { Container, Search, ShieldedPanel } from '@/components'
+import { Container, Search } from '@/components'
 import {
     LatestBlocksContainer,
     LatestTransactionsContainer,
+    ShieldedPanelContainer,
     TransactionPanelContainer,
 } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
@@ -43,12 +44,11 @@ const HomePage: FC = async () => (
                     'lg:col-start-3 lg:row-1'
                 )}
             />
-            <ShieldedPanel
+            <ShieldedPanelContainer
                 className={classNames(
                     'col-span-6 col-start-1 row-3 lg:col-span-2',
                     'lg:col-start-5 lg:row-1'
                 )}
-                number={123}
             />
             <LatestTransactionsContainer
                 className={classNames(

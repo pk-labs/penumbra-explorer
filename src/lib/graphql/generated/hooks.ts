@@ -132,6 +132,17 @@ export const StatsDocument = gql`
 export function useStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.StatsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.StatsQuery, Types.StatsQueryVariables>({ query: Types.StatsDocument, ...options });
 };
+export const TotalShieldedVolumeDocument = gql`
+    query TotalShieldedVolume {
+  ibcTotalShieldedVolume {
+    value
+  }
+}
+    `;
+
+export function useTotalShieldedVolumeQuery(options?: Omit<Urql.UseQueryArgs<Types.TotalShieldedVolumeQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.TotalShieldedVolumeQuery, Types.TotalShieldedVolumeQueryVariables>({ query: Types.TotalShieldedVolumeDocument, ...options });
+};
 export const TransactionDocument = gql`
     query Transaction($hash: String!) {
   transaction(hash: $hash) {
@@ -169,6 +180,17 @@ export const BlockUpdateDocument = gql`
 
 export function useBlockUpdateSubscription<TData = Types.BlockUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.BlockUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.BlockUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.BlockUpdateSubscription, TData, Types.BlockUpdateSubscriptionVariables>({ query: Types.BlockUpdateDocument, ...options }, handler);
+};
+export const TotalShieldedVolumeUpdateDocument = gql`
+    subscription TotalShieldedVolumeUpdate {
+  totalShieldedVolume {
+    value
+  }
+}
+    `;
+
+export function useTotalShieldedVolumeUpdateSubscription<TData = Types.TotalShieldedVolumeUpdateSubscription>(options?: Omit<Urql.UseSubscriptionArgs<Types.TotalShieldedVolumeUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.TotalShieldedVolumeUpdateSubscription, TData>) {
+  return Urql.useSubscription<Types.TotalShieldedVolumeUpdateSubscription, TData, Types.TotalShieldedVolumeUpdateSubscriptionVariables>({ query: Types.TotalShieldedVolumeUpdateDocument, ...options }, handler);
 };
 export const TransactionCountUpdateDocument = gql`
     subscription TransactionCountUpdate {
