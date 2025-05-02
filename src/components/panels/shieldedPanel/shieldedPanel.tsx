@@ -8,6 +8,7 @@ const ShieldedPanel: FC<Props> = props => (
     <Panel
         className={props.className}
         number={props.number}
+        numberPrefix="$"
         title={
             <>
                 <ShieldedPanelIcon />

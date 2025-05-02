@@ -9,6 +9,7 @@ export interface Props {
     className?: string
     footer?: ReactNode
     number?: number | ReactNode
+    numberPrefix?: string
     numberSuffix?: string
     title: ReactNode
 }
@@ -35,6 +36,7 @@ const Panel: FC<Props> = props => (
             {typeof props.number === 'number' ? (
                 <NumberCountup
                     number={props.number}
+                    prefix={props.numberPrefix}
                     suffix={props.numberSuffix}
                 />
             ) : (

@@ -118,7 +118,6 @@ const IbcTable: FC<Props> = props => {
                                     <span className="text-base font-normal">
                                         $
                                         {formatNumber(
-                                            // FIXME: Shouldn't type be number?
                                             Number(connection.shieldedVolume)
                                         )}
                                     </span>

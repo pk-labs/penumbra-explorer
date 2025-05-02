@@ -6,6 +6,7 @@ jest.mock(
     '../../numberCountup/numberCountup',
     () => (props: NumberCountupProps) => (
         <span>
+            {props.prefix}
             {props.number}
             {props.suffix}
         </span>
@@ -20,12 +21,20 @@ describe('Panel', () => {
         getByText(container, 'Bar')
     })
 
-    test('renders number and suffix', async () => {
+    test('renders number with prefix', async () => {
         const { container } = render(
-            <Panel number={99} numberSuffix="$" title="Foo" />
+            <Panel number={99} numberPrefix="$" title="Foo" />
         )
 
-        getByText(container, '99$')
+        getByText(container, '$99')
+    })
+
+    test('renders number with suffix', async () => {
+        const { container } = render(
+            <Panel number={99} numberSuffix=" UM" title="Foo" />
+        )
+
+        getByText(container, '99 UM')
     })
 
     test('renders any node as number', async () => {
