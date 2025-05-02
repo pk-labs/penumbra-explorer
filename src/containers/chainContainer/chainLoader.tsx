@@ -39,7 +39,7 @@ const ChainLoader: FC<Props> = async props => {
             >
                 <h1
                     className={classNames(
-                        'font-heading flex items-center gap-2 text-4xl',
+                        'font-heading flex items-center gap-2 text-2xl',
                         'font-medium'
                     )}
                 >

@@ -62,7 +62,7 @@ const ChainPage: FC<Props> = async props => {
                     header={
                         <h2
                             className={classNames(
-                                'font-heading text-4xl font-medium lg:col-2',
+                                'font-heading text-2xl font-medium lg:col-2',
                                 'lg:row-2'
                             )}
                         >
