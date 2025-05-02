@@ -82,3 +82,8 @@ export enum TimePeriod {
     day = '24h',
     month = '30d',
 }
+
+export interface IbcChannelPair {
+    channelId: string
+    counterpartyChannelId: string
+}

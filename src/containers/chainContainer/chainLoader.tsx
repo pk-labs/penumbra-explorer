@@ -1,9 +1,8 @@
 // istanbul ignore file
-import { CheckIcon } from 'lucide-react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { FC, Fragment } from 'react'
-import { Parameter, Parameters } from '@/components'
+import { FC } from 'react'
+import { IbcChannels, Parameter, Parameters } from '@/components'
 import { getIbcChannelPairs, getIbcStats } from '@/lib/data'
 import { classNames, formatNumber } from '@/lib/utils'
 
@@ -122,102 +121,12 @@ const ChainLoader: FC<Props> = async props => {
                     </Parameters>
                 </div>
             </div>
-            <div
-                className={classNames(
-                    'bg-other-tonalFill5 flex flex-col gap-6',
-                    'rounded-lg p-6 backdrop-blur-lg',
-                    props.connectionPanelClassName
-                )}
-            >
-                {pairs.map((pair, i) => (
-                    <div key={i} className="flex items-center">
-                        <div
-                            className={classNames(
-                                'border-success-light',
-                                'before:border-other-tonalStroke relative flex',
-                                'h-10 w-10 items-center justify-center',
-                                'rounded-full border-1 before:absolute',
-                                'before:-z-1 before:h-[calc(100%+4px)]',
-                                'before:w-[calc(100%+4px)] before:rounded-full',
-                                'before:border-3'
-                            )}
-                        >
-                            <Image
-                                alt="Penumbra"
-                                height={32}
-                                src="/penumbra.png"
-                                width={32}
-                            />
-                        </div>
-                        <div
-                            className={classNames(
-                                'bg-other-tonalFill10 flex h-7 items-center',
-                                'justify-center rounded-full px-1.5 font-mono',
-                                'text-xs font-medium backdrop-blur-lg'
-                            )}
-                        >
-                            {pair.channelId}
-                        </div>
-                        <div
-                            className={classNames(
-                                'bg-success-light border-other-tonalStroke h-0.5',
-                                'flex-1 border-1'
-                            )}
-                        />
-                        <div
-                            className={classNames(
-                                'bg-other-tonalFill10 relative flex h-8 w-8',
-                                'items-center justify-center rounded-full'
-                            )}
-                        >
-                            <CheckIcon
-                                className="text-success-light"
-                                size={16}
-                            />
-                            <span
-                                className={classNames(
-                                    'text-success-light absolute top-8 font-mono text-sm font-medium'
-                                )}
-                            >
-                                Open
-                            </span>
-                        </div>
-                        <div
-                            className={classNames(
-                                'bg-success-light border-other-tonalStroke h-0.5',
-                                'flex-1 border-1'
-                            )}
-                        />
-                        <div
-                            className={classNames(
-                                'bg-other-tonalFill10 flex h-7 items-center',
-                                'justify-center rounded-full px-1.5 font-mono',
-                                'text-xs font-medium backdrop-blur-lg'
-                            )}
-                        >
-                            {pair.counterpartyChannelId}
-                        </div>
-                        <div
-                            className={classNames(
-                                'border-success-light',
-                                'before:border-other-tonalStroke relative flex',
-                                'h-10 w-10 items-center justify-center',
-                                'rounded-full border-1 before:absolute',
-                                'before:-z-1 before:h-[calc(100%+4px)]',
-                                'before:w-[calc(100%+4px)] before:rounded-full',
-                                'before:border-3'
-                            )}
-                        >
-                            <Image
-                                alt={props.name}
-                                height={32}
-                                src={props.image}
-                                width={32}
-                            />
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <IbcChannels
+                chainImage={props.image}
+                chainName={props.name}
+                className={props.connectionPanelClassName}
+                pairs={pairs}
+            />
         </>
     )
 }
