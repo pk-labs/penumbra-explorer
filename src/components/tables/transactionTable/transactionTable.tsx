@@ -8,7 +8,7 @@ import { formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
 import Pill from '../../pill'
-import StatusIcon from '../../statusIcon'
+import TransactionStatusIcon from '../../transactionStatusIcon'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -64,7 +64,9 @@ const TransactionTable: FC<Props> = props => {
                             href={`/tx/${transaction.hash}`}
                         >
                             <TableCell>
-                                <StatusIcon status={transaction.status} />
+                                <TransactionStatusIcon
+                                    status={transaction.status}
+                                />
                                 <Link href={`/tx/${transaction.hash}`}>
                                     {shortenHash(transaction.hash)}
                                 </Link>

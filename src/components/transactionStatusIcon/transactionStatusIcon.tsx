@@ -14,7 +14,7 @@ interface Props {
     status?: IbcStatus
 }
 
-const StatusIcon: FC<Props> = props => {
+const TransactionStatusIcon: FC<Props> = props => {
     const size = props.size ?? 14
 
     switch (props.status) {
@@ -61,4 +61,4 @@ const StatusIcon: FC<Props> = props => {
     }
 }
 
-export default StatusIcon
+export default TransactionStatusIcon

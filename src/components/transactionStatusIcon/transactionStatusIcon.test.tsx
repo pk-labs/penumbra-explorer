@@ -1,6 +1,6 @@
 import { getByText, render } from '@testing-library/react'
 import { IbcStatus } from '@/lib/graphql/generated/types'
-import StatusIcon from './statusIcon'
+import TransactionStatusIcon from './transactionStatusIcon'
 
 jest.mock('lucide-react', () => ({
     CheckCheckIcon: (props: any) => (
@@ -25,44 +25,54 @@ jest.mock('lucide-react', () => ({
     ),
 }))
 
-describe('StatusIcon', () => {
+describe('TransactionStatusIcon', () => {
     test('renders completed status by default', async () => {
-        const { container } = render(<StatusIcon />)
+        const { container } = render(<TransactionStatusIcon />)
         getByText(container, 'CheckCheckIcon')
     })
 
     test('renders pending status', async () => {
-        const { container } = render(<StatusIcon status={IbcStatus.Pending} />)
+        const { container } = render(
+            <TransactionStatusIcon status={IbcStatus.Pending} />
+        )
         getByText(container, 'Clock4Icon')
     })
 
     test('renders expired status', async () => {
-        const { container } = render(<StatusIcon status={IbcStatus.Expired} />)
+        const { container } = render(
+            <TransactionStatusIcon status={IbcStatus.Expired} />
+        )
         getByText(container, 'TimerOffIcon')
     })
 
     test('renders error status', async () => {
-        const { container } = render(<StatusIcon status={IbcStatus.Error} />)
+        const { container } = render(
+            <TransactionStatusIcon status={IbcStatus.Error} />
+        )
         getByText(container, 'CircleXIcon')
     })
 
     test('renders unknown status as completed', async () => {
-        const { container } = render(<StatusIcon status={IbcStatus.Unknown} />)
+        const { container } = render(
+            <TransactionStatusIcon status={IbcStatus.Unknown} />
+        )
         getByText(container, 'CheckCheckIcon')
     })
 
     test('has default size', async () => {
-        const { container } = render(<StatusIcon />)
+        const { container } = render(<TransactionStatusIcon />)
         expect(container.firstChild).toHaveAttribute('data-size', '14')
     })
 
     test('has custom size', async () => {
-        const { container } = render(<StatusIcon size={9} />)
+        const { container } = render(<TransactionStatusIcon size={9} />)
         expect(container.firstChild).toHaveAttribute('data-size', '9')
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<StatusIcon className="foo bar" />)
+        const { container } = render(
+            <TransactionStatusIcon className="foo bar" />
+        )
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })
