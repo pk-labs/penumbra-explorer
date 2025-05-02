@@ -143,7 +143,7 @@ const ChainLoader: FC<Props> = async props => {
                     <Image
                         alt="Penumbra"
                         height={32}
-                        src={props.image}
+                        src="/penumbra.png"
                         width={32}
                     />
                 </div>
