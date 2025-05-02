@@ -1,10 +1,10 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import getIbcChannelPair from './getIbcChannelPair'
+import getIbcChannelPairs from './getIbcChannelPairs'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
-describe('getIbcChannelPair', () => {
+describe('getIbcChannelPairs', () => {
     test('returns data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
@@ -16,16 +16,30 @@ describe('getIbcChannelPair', () => {
                                     channelId: 'foo',
                                     counterpartyChannelId: 'bar',
                                 },
+                                {
+                                    channelId: 'bar',
+                                    counterpartyChannelId: 'foo',
+                                },
+                                {
+                                    channelId: 'baz',
+                                    counterpartyChannelId: null,
+                                },
                             ],
                         },
                     }),
             }),
         })
 
-        await expect(getIbcChannelPair('foo')).resolves.toEqual({
-            channelId: 'foo',
-            counterpartyChannelId: 'bar',
-        })
+        await expect(getIbcChannelPairs('foo')).resolves.toEqual([
+            {
+                channelId: 'foo',
+                counterpartyChannelId: 'bar',
+            },
+            {
+                channelId: 'bar',
+                counterpartyChannelId: 'foo',
+            },
+        ])
     })
 
     test('throws error', async () => {
@@ -35,6 +49,6 @@ describe('getIbcChannelPair', () => {
             }),
         })
 
-        await expect(getIbcChannelPair('foo')).rejects.toBe('foo')
+        await expect(getIbcChannelPairs('foo')).rejects.toBe('foo')
     })
 })

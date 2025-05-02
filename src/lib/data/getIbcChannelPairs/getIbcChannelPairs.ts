@@ -5,14 +5,14 @@ import {
 } from '@/lib/graphql/generated/types'
 import { ibcChannelPairsQuery } from '@/lib/graphql/queries'
 
-interface IbcChannelPairData {
+type IbcChannelPairs = Array<{
     channelId: string
     counterpartyChannelId: string
-}
+}>
 
-const getIbcChannelPair = async (
+const getIbcChannelPairs = async (
     clientId: string
-): Promise<IbcChannelPairData | undefined> => {
+): Promise<IbcChannelPairs | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -24,20 +24,11 @@ const getIbcChannelPair = async (
 
     if (result.error) {
         throw result.error
-    } else if (!result.data?.ibcChannelPairsByClientId.length) {
-        return
     }
 
-    const [pair] = result.data.ibcChannelPairsByClientId
-
-    if (!pair.counterpartyChannelId) {
-        return
-    }
-
-    return {
-        channelId: pair.channelId,
-        counterpartyChannelId: pair.counterpartyChannelId,
-    }
+    return result.data?.ibcChannelPairsByClientId.filter(
+        pair => pair.channelId && pair.counterpartyChannelId
+    ) as IbcChannelPairs
 }
 
-export default getIbcChannelPair
+export default getIbcChannelPairs
