@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { Container, Search } from '@/components'
+import { Container, Search, ShieldedPanel } from '@/components'
 import {
     LatestBlocksContainer,
     LatestTransactionsContainer,
@@ -30,22 +30,29 @@ const HomePage: FC = async () => (
         <Container className="grid grid-cols-6 gap-4">
             <LatestBlocksContainer
                 blockPanelClassName={classNames(
-                    'col-span-6 col-start-1 row-1 md:col-span-3 md:col-start-1'
+                    'col-span-6 col-start-1 row-1 lg:col-span-2 lg:col-start-1'
                 )}
                 blockTableClassName={classNames(
-                    'col-span-6 col-start-1 row-3 lg:col-span-3 lg:row-2'
+                    'col-span-6 col-start-1 row-4 lg:col-span-3 lg:row-2'
                 )}
                 limit={10}
             />
             <TransactionPanelContainer
                 className={classNames(
-                    'col-span-6 col-start-1 row-2 md:col-span-3',
-                    'md:col-start-4 md:row-1'
+                    'col-span-6 col-start-1 row-2 lg:col-span-2',
+                    'lg:col-start-3 lg:row-1'
                 )}
+            />
+            <ShieldedPanel
+                className={classNames(
+                    'col-span-6 col-start-1 row-3 lg:col-span-2',
+                    'lg:col-start-5 lg:row-1'
+                )}
+                number={123}
             />
             <LatestTransactionsContainer
                 className={classNames(
-                    'col-span-6 col-start-1 row-4 lg:col-span-3',
+                    'col-span-6 col-start-1 row-5 lg:col-span-3',
                     'lg:col-start-4 lg:row-2'
                 )}
                 limit={10}
