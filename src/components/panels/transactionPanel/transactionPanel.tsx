@@ -1,8 +1,7 @@
-import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
 import { Panel, PanelProps } from '../panel'
-import icon from './transactionPanelIcon.svg'
+import TransactionPanelIcon from './transactionPanelIcon'
 
 export type Props = Pick<PanelProps, 'className' | 'number'>
 
@@ -15,7 +14,7 @@ const TransactionPanel: FC<Props> = props => (
         number={props.number}
         title={
             <>
-                <Image alt="Total transactions" src={icon} />
+                <TransactionPanelIcon />
                 <span>Total transactions</span>
             </>
         }
