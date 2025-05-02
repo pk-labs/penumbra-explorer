@@ -38,6 +38,7 @@ const IbcChannels: FC<Props> = props => (
                     >
                         <Image
                             alt="Penumbra"
+                            className="rounded-full"
                             height={32}
                             src="/penumbra.png"
                             width={32}
@@ -105,6 +106,7 @@ const IbcChannels: FC<Props> = props => (
                     >
                         <Image
                             alt={props.chainName}
+                            className="rounded-full"
                             height={32}
                             src={props.chainImage}
                             width={32}
