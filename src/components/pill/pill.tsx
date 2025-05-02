@@ -6,7 +6,7 @@ import {
 } from '@penumbra-zone/ui/Pill'
 import { FC } from 'react'
 
-interface Props extends PenumbraPillProps {
+export interface Props extends PenumbraPillProps {
     className?: string
 }
 

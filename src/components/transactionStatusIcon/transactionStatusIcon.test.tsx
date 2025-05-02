@@ -8,6 +8,11 @@ jest.mock('lucide-react', () => ({
             CheckCheckIcon
         </div>
     ),
+    CircleHelpIcon: (props: any) => (
+        <div className={props.className} data-size={props.size}>
+            CircleHelpIcon
+        </div>
+    ),
     CircleXIcon: (props: any) => (
         <div className={props.className} data-size={props.size}>
             CircleXIcon
@@ -26,8 +31,16 @@ jest.mock('lucide-react', () => ({
 }))
 
 describe('TransactionStatusIcon', () => {
-    test('renders completed status by default', async () => {
+    test('renders unknown status by default', async () => {
         const { container } = render(<TransactionStatusIcon />)
+        getByText(container, 'CircleHelpIcon')
+    })
+
+    test('renders completed status', async () => {
+        const { container } = render(
+            <TransactionStatusIcon status={IbcStatus.Completed} />
+        )
+
         getByText(container, 'CheckCheckIcon')
     })
 
@@ -35,6 +48,7 @@ describe('TransactionStatusIcon', () => {
         const { container } = render(
             <TransactionStatusIcon status={IbcStatus.Pending} />
         )
+
         getByText(container, 'Clock4Icon')
     })
 
@@ -42,6 +56,7 @@ describe('TransactionStatusIcon', () => {
         const { container } = render(
             <TransactionStatusIcon status={IbcStatus.Expired} />
         )
+
         getByText(container, 'TimerOffIcon')
     })
 
@@ -49,14 +64,8 @@ describe('TransactionStatusIcon', () => {
         const { container } = render(
             <TransactionStatusIcon status={IbcStatus.Error} />
         )
-        getByText(container, 'CircleXIcon')
-    })
 
-    test('renders unknown status as completed', async () => {
-        const { container } = render(
-            <TransactionStatusIcon status={IbcStatus.Unknown} />
-        )
-        getByText(container, 'CheckCheckIcon')
+        getByText(container, 'CircleXIcon')
     })
 
     test('has default size', async () => {
@@ -73,6 +82,7 @@ describe('TransactionStatusIcon', () => {
         const { container } = render(
             <TransactionStatusIcon className="foo bar" />
         )
+
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

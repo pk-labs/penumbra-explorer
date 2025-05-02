@@ -7,8 +7,9 @@ import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
-import Pill from '../../pill'
+import { Pill } from '../../pill'
 import TransactionStatusIcon from '../../transactionStatusIcon'
+import TransactionStatusPill from '../../transactionStatusPill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -93,12 +94,9 @@ const TransactionTable: FC<Props> = props => {
                             )}
                             {props.status && (
                                 <TableCell>
-                                    <Pill
-                                        context="technical-success"
-                                        priority="secondary"
-                                    >
-                                        Completed
-                                    </Pill>
+                                    <TransactionStatusPill
+                                        status={transaction.status}
+                                    />
                                 </TableCell>
                             )}
                             <TableCell>

@@ -7,7 +7,7 @@ import { IbcStatsQuery } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
-import Pill from '../../pill'
+import { Pill } from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {

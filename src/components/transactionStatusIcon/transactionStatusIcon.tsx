@@ -1,5 +1,6 @@
 import {
     CheckCheckIcon,
+    CircleHelpIcon,
     CircleXIcon,
     Clock4Icon,
     TimerOffIcon,
@@ -15,9 +16,20 @@ interface Props {
 }
 
 const TransactionStatusIcon: FC<Props> = props => {
+    const status = props.status ?? IbcStatus.Unknown
     const size = props.size ?? 14
 
-    switch (props.status) {
+    switch (status) {
+        case IbcStatus.Completed:
+            return (
+                <CheckCheckIcon
+                    className={classNames(
+                        'text-secondary-light inline',
+                        props.className
+                    )}
+                    size={size}
+                />
+            )
         case IbcStatus.Pending:
             return (
                 <Clock4Icon
@@ -50,9 +62,9 @@ const TransactionStatusIcon: FC<Props> = props => {
             )
         default:
             return (
-                <CheckCheckIcon
+                <CircleHelpIcon
                     className={classNames(
-                        'text-secondary-light inline',
+                        'text-text-secondary inline',
                         props.className
                     )}
                     size={size}
