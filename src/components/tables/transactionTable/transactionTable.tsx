@@ -1,23 +1,15 @@
 'use client'
 
-import { BoxIcon } from 'lucide-react'
-import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import { formatNumber, shortenHash } from '@/lib/utils'
-import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
-import { Pill } from '../../pill'
-import TransactionStatusIcon from '../../transactionStatusIcon'
-import TransactionStatusPill from '../../transactionStatusPill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
+import TransactionRow, { Props as TransationRowProps } from './transactionRow'
 
-export interface Props extends Omit<TableProps, 'children'> {
-    amount?: boolean
-    blockHeight?: boolean
+export interface Props
+    extends Omit<TableProps, 'children'>,
+        Omit<TransationRowProps, 'new' | 'transaction'> {
     emptyStateMessage?: string
-    status?: boolean
-    time?: boolean
     transactions?: TransformedPartialTransactionFragment[]
 }
 
@@ -49,9 +41,11 @@ const TransactionTable: FC<Props> = props => {
             <tbody>
                 {props.transactions?.length ? (
                     props.transactions.map(transaction => (
-                        <TableRow
+                        <TransactionRow
                             key={transaction.hash}
-                            className={
+                            amount={props.amount}
+                            blockHeight={props.blockHeight}
+                            new={
                                 typeof prevTransactionsRef.current !==
                                     'undefined' &&
                                 !prevTransactionsRef.current.some(
@@ -59,62 +53,11 @@ const TransactionTable: FC<Props> = props => {
                                         prevTransaction.hash ===
                                         transaction.hash
                                 )
-                                    ? 'animate-new-data-bg'
-                                    : undefined
                             }
-                            href={`/tx/${transaction.hash}`}
-                        >
-                            <TableCell>
-                                <TransactionStatusIcon
-                                    status={transaction.status}
-                                />
-                                <Link href={`/tx/${transaction.hash}`}>
-                                    {shortenHash(transaction.hash)}
-                                </Link>
-                                <CopyToClipboard text={transaction.hash} />
-                            </TableCell>
-                            {props.blockHeight && (
-                                <TableCell>
-                                    <BoxIcon
-                                        className="inline"
-                                        color="var(--color-text-secondary)"
-                                        size={16}
-                                    />
-                                    <Link
-                                        href={`/block/${transaction.blockHeight}`}
-                                    >
-                                        {formatNumber(transaction.blockHeight)}
-                                    </Link>
-                                </TableCell>
-                            )}
-                            {props.amount && (
-                                <TableCell>
-                                    {formatNumber(1234.56)} UM
-                                </TableCell>
-                            )}
-                            {props.status && (
-                                <TableCell>
-                                    <TransactionStatusPill
-                                        status={transaction.status}
-                                    />
-                                </TableCell>
-                            )}
-                            <TableCell>
-                                {transaction.primaryAction && (
-                                    <Pill context="technical-default">
-                                        {transaction.primaryAction}
-                                    </Pill>
-                                )}
-                                {transaction.actionCount > 1 && (
-                                    <span className="text-text-secondary">
-                                        +{transaction.actionCount - 1}
-                                    </span>
-                                )}
-                            </TableCell>
-                            {props.time && (
-                                <TableCell>{transaction.timeAgo}</TableCell>
-                            )}
-                        </TableRow>
+                            status={props.status}
+                            time={props.time}
+                            transaction={transaction}
+                        />
                     ))
                 ) : (
                     <TableRow>

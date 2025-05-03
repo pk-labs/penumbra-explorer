@@ -11,6 +11,31 @@ jest.mock('../table/table', () => (props: TableProps) => (
 
 jest.mock('../../copyToClipboard/copyToClipboard')
 
+jest.mock(
+    '../../../lib/utils/decodeTransaction/decodeTransaction',
+    () => () => ({
+        body: {
+            actions: [
+                {
+                    action: {
+                        case: 'ics20Withdrawal',
+                        value: '1,234.56 UM',
+                    },
+                },
+            ],
+        },
+    })
+)
+
+jest.mock(
+    '../../../lib/utils/valueToView/valueToView',
+    () => (value: any) => value
+)
+
+jest.mock('../../assetValue/assetValue', () => (props: any) => (
+    <div>{props.valueView}</div>
+))
+
 describe('TransactionTable', () => {
     test('renders empty table', async () => {
         const { container, rerender } = render(<TransactionTable />)

@@ -8,7 +8,6 @@ import Subsection from '../subsection'
 
 interface Props {
     blockHeight: number
-    chainId: string
     hash: string
     rawTransaction: string
 }
@@ -55,7 +54,7 @@ const ActionHistory: FC<Props> = props => {
                                 </div>
                             }
                         >
-                            <Action action={action} chainId={props.chainId} />
+                            <Action action={action} />
                         </ErrorBoundary>
                     </li>
                 ))}

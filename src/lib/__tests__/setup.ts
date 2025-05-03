@@ -1,6 +1,8 @@
 // istanbul ignore file
 import '@testing-library/jest-dom'
 
+jest.mock('../../lib/hooks/useGetMetadata/useGetMetadata', () => jest.fn())
+
 jest.mock('../../lib/utils/actionToView/actionToView', () => jest.fn())
 
 jest.mock('../../lib/utils/decodeTransaction/decodeTransaction', () =>
@@ -11,13 +13,11 @@ jest.mock('../../lib/utils/findPrimaryAction/findPrimaryAction', () =>
     jest.fn()
 )
 
-jest.mock('../../lib/utils/transactionToJson/transactionToJson', () =>
-    jest.fn()
-)
-
 jest.mock('../../lib/utils/transactionToView/transactionToView', () =>
     jest.fn()
 )
+
+jest.mock('../../lib/utils/valueToView/valueToView', () => jest.fn())
 
 beforeEach(() => {
     jest.useFakeTimers()

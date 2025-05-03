@@ -6,7 +6,7 @@ import {
 } from '@penumbra-zone/ui/ValueView'
 import { FC } from 'react'
 
-interface Props extends ValueViewComponentProps<'default'> {
+interface Props extends ValueViewComponentProps<'default' | 'table'> {
     className?: string
 }
 

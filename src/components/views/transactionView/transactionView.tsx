@@ -51,7 +51,6 @@ const TransactionView: FC<Props> = props => (
         {props.transaction.memo && <Memo />}
         <ActionHistory
             blockHeight={props.transaction.blockHeight}
-            chainId={props.transaction.chainId}
             hash={props.transaction.hash}
             rawTransaction={props.transaction.raw}
         />

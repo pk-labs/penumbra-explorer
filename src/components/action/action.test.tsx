@@ -2,8 +2,6 @@
 import { render } from '@testing-library/react'
 import Action from './action'
 
-jest.mock('../../lib/hooks/useGetMetadata')
-
 describe('Action', () => {
     test('applies CSS classes', async () => {
         const { container } = render(

@@ -5,12 +5,11 @@ import { FC } from 'react'
 import { useGetMetadata } from '@/lib/hooks'
 
 interface Props extends Pick<ActionViewProps, 'action'> {
-    chainId: string
     className?: string
 }
 
-const Action: FC<Props> = ({ chainId, className, ...props }) => {
-    const getMetadata = useGetMetadata(chainId)
+const Action: FC<Props> = ({ className, ...props }) => {
+    const getMetadata = useGetMetadata()
 
     return (
         <div className={className}>
