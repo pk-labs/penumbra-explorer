@@ -43,16 +43,12 @@ const TransactionRow: FC<Props> = props => {
         )
 
         if (ics20Withdrawal?.action.value) {
-            console.log('value:', ics20Withdrawal.action.value)
-
             return valueToView(
                 ics20Withdrawal.action.value as Value,
                 getMetadata
             )
         }
     }, [getMetadata, props.amount, props.transaction.raw])
-
-    console.log('valueView:', valueView)
 
     return (
         <TableRow
