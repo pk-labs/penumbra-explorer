@@ -4,11 +4,13 @@ import { FC, useEffect, useRef } from 'react'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import EmptyState from '../../emptyState'
 import { Table, TableCell, TableProps, TableRow } from '../table'
-import TransactionRow, { Props as TransationRowProps } from './transactionRow'
+import TransactionTableRow, {
+    Props as TransationTableRowProps,
+} from './transactionTableRow'
 
 export interface Props
     extends Omit<TableProps, 'children'>,
-        Omit<TransationRowProps, 'new' | 'transaction'> {
+        Omit<TransationTableRowProps, 'new' | 'transaction'> {
     emptyStateMessage?: string
     transactions?: TransformedPartialTransactionFragment[]
 }
@@ -41,7 +43,7 @@ const TransactionTable: FC<Props> = props => {
             <tbody>
                 {props.transactions?.length ? (
                     props.transactions.map(transaction => (
-                        <TransactionRow
+                        <TransactionTableRow
                             key={transaction.hash}
                             amount={props.amount}
                             blockHeight={props.blockHeight}

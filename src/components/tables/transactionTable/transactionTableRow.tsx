@@ -28,7 +28,7 @@ export interface Props {
     transaction: TransformedPartialTransactionFragment
 }
 
-const TransactionRow: FC<Props> = props => {
+const TransactionTableRow: FC<Props> = props => {
     const getMetadata = useGetMetadata()
 
     const valueView = useMemo(() => {
@@ -105,4 +105,4 @@ const TransactionRow: FC<Props> = props => {
     )
 }
 
-export default TransactionRow
+export default TransactionTableRow
