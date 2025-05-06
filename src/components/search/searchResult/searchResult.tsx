@@ -1,6 +1,6 @@
 'use client'
 
-import { BoxIcon, CheckCheckIcon } from 'lucide-react'
+import { BoxIcon, CircleHelpIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 import { classNames, formatNumber } from '@/lib/utils'
@@ -34,7 +34,7 @@ const SearchResult: FC<Props> = props => {
                     className={linkClassName}
                     href={`/tx/${props.heightOrHash}`}
                 >
-                    <CheckCheckIcon className="-mt-0.5 min-w-6 p-1" />
+                    <CircleHelpIcon className="-mt-0.5 min-w-6 p-1" />
                     {props.heightOrHash}
                 </Link>
             )}
