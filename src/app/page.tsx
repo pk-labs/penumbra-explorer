@@ -1,9 +1,10 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { Container, Search } from '@/components'
+import { Container } from '@/components'
 import {
     LatestBlocksContainer,
     LatestTransactionsContainer,
+    SearchContainer,
     ShieldedPanelContainer,
     TransactionPanelContainer,
 } from '@/containers'
@@ -25,7 +26,7 @@ const HomePage: FC = async () => (
                 Penumbra Blockchain Explorer
             </h1>
             <GraphqlClientProvider>
-                <Search />
+                <SearchContainer />
             </GraphqlClientProvider>
         </Container>
         <Container className="grid grid-cols-6 gap-4">

@@ -6,6 +6,7 @@ export { default as LatestTransactionsContainer } from './latestTransactionsCont
 export { default as PageViewTracker } from './pageViewTracker'
 export { default as PaginatedBlocksContainer } from './paginatedBlocksContainer'
 export { default as PaginatedTransactionsContainer } from './paginatedTransactionsContainer'
+export { default as SearchContainer } from './searchContainer'
 export { default as ShieldedPanelContainer } from './shieldedPanelContainer'
 export { default as TransactionPanelContainer } from './transactionPanelContainer'
 export { default as TransactionViewContainer } from './transactionViewContainer'

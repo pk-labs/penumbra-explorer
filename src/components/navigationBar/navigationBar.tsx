@@ -9,14 +9,13 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { FC, useCallback, useState } from 'react'
-import { UmPriceContainer } from '@/containers'
+import { SearchContainer, UmPriceContainer } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { classNames } from '@/lib/utils'
 import Button from '../button'
 import Container from '../container'
 import { Menu, MenuItem } from '../menu'
 import Modal from '../modal'
-import Search from '../search'
 import { Tab, Tabs } from '../tabs'
 import { Logo } from '../vectors'
 
@@ -89,7 +88,7 @@ const NavigationBar: FC<Props> = props => {
                             closeButton
                         >
                             <GraphqlClientProvider>
-                                <Search
+                                <SearchContainer
                                     className="w-[calc(100%-32px)]"
                                     onBlur={closeSearchModal}
                                     autoFocus

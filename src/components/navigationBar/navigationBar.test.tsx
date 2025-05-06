@@ -16,11 +16,7 @@ jest.mock('motion/react', () => ({
 
 jest.mock('../tabs/tabs', () => () => <div>Tabs</div>)
 
-jest.mock('../search/search')
-
-jest.mock('../../lib/graphql/graphqlClientProvider', () => (props: any) => (
-    <div>{props.children}</div>
-))
+jest.mock('../../containers/searchContainer/searchContainer')
 
 jest.mock('../menu/menu', () => () => <div>Menu</div>)
 

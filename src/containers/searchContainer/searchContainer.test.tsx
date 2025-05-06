@@ -7,9 +7,8 @@ import {
     render,
 } from '@testing-library/react'
 import { useClient } from 'urql'
-import Search from './search'
-import { SearchResultProps } from './searchResult'
-import { SearchResultOverlayProps } from './searchResultOverlay'
+import { SearchResultOverlayProps, SearchResultProps } from '@/components'
+import SearchContainer from './searchContainer'
 
 jest.mock('urql', () => ({
     useClient: () => ({
@@ -24,7 +23,7 @@ jest.mock('motion/react', () => ({
 }))
 
 jest.mock(
-    './searchResultOverlay/searchResultOverlay',
+    '../../components/search/searchResultOverlay/searchResultOverlay',
     () => (props: SearchResultOverlayProps) => (
         <div>
             <div>SearchResultOverlay</div>
@@ -33,13 +32,14 @@ jest.mock(
     )
 )
 
-jest.mock('./searchResult/searchResult', () => (props: SearchResultProps) => (
-    <div>{props.heightOrHash}</div>
-))
+jest.mock(
+    '../../components/search/searchResult/searchResult',
+    () => (props: SearchResultProps) => <div>{props.heightOrHash}</div>
+)
 
-describe('Search', () => {
+describe('SearchContainer', () => {
     test('is not focused by default', async () => {
-        const { container } = render(<Search />)
+        const { container } = render(<SearchContainer />)
 
         expect(
             getByPlaceholderText(
@@ -50,7 +50,7 @@ describe('Search', () => {
     })
 
     test('autofocuses when flag set', async () => {
-        const { container } = render(<Search autoFocus />)
+        const { container } = render(<SearchContainer autoFocus />)
 
         expect(
             getByPlaceholderText(
@@ -61,7 +61,7 @@ describe('Search', () => {
     })
 
     test('renders search result overlay when focused', async () => {
-        const { container } = render(<Search />)
+        const { container } = render(<SearchContainer />)
 
         fireEvent.focus(
             getByPlaceholderText(
@@ -75,7 +75,7 @@ describe('Search', () => {
 
     test('invokes callback on blur', async () => {
         const onBlur = jest.fn()
-        const { container } = render(<Search onBlur={onBlur} />)
+        const { container } = render(<SearchContainer onBlur={onBlur} />)
 
         fireEvent.blur(
             getByPlaceholderText(
@@ -90,7 +90,7 @@ describe('Search', () => {
     test('renders recent search results', async () => {
         window.localStorage.setItem('search', JSON.stringify([123, 'foo']))
 
-        const { container } = render(<Search />)
+        const { container } = render(<SearchContainer />)
 
         fireEvent.focus(
             getByPlaceholderText(
@@ -105,7 +105,7 @@ describe('Search', () => {
     })
 
     test.skip('executes debounced search query on input change', async () => {
-        const { container } = render(<Search />)
+        const { container } = render(<SearchContainer />)
 
         fireEvent.change(
             getByPlaceholderText(
@@ -125,7 +125,7 @@ describe('Search', () => {
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<Search className="foo bar" />)
+        const { container } = render(<SearchContainer className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

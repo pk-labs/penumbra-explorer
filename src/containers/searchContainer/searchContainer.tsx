@@ -12,6 +12,7 @@ import {
     useState,
 } from 'react'
 import { useClient } from 'urql'
+import { SearchResult, SearchResultOverlay } from '@/components'
 import {
     SearchQuery,
     SearchQueryVariables,
@@ -19,8 +20,6 @@ import {
 import { searchQuery } from '@/lib/graphql/queries'
 import { useDebounce, useLocalStorage } from '@/lib/hooks'
 import { classNames } from '@/lib/utils'
-import { SearchResult } from './searchResult'
-import { SearchResultOverlay } from './searchResultOverlay'
 
 interface Props {
     autoFocus?: boolean
@@ -28,10 +27,9 @@ interface Props {
     onBlur?: () => void
 }
 
-// TODO: Extract logic/data part of this to container
 // TODO: Refactor to server component and wrap client logic in client component
 // TODO: Refactor UM price container to server component to circumvent API CORS
-const Search: FC<Props> = props => {
+const SearchContainer: FC<Props> = props => {
     const graphqlClient = useClient()
     const inputRef = useRef<HTMLInputElement>(null)
     const [focused, setFocused] = useState(false)
@@ -212,4 +210,4 @@ const Search: FC<Props> = props => {
     )
 }
 
-export default Search
+export default SearchContainer

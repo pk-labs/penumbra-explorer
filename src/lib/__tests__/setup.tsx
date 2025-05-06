@@ -1,6 +1,10 @@
 // istanbul ignore file
 import '@testing-library/jest-dom'
 
+jest.mock('../../lib/graphql/graphqlClientProvider', () => (props: any) => (
+    <div>{props.children} </div>
+))
+
 jest.mock('../../lib/hooks/useGetMetadata/useGetMetadata', () => jest.fn())
 
 jest.mock('../../lib/utils/actionToView/actionToView', () => jest.fn())
