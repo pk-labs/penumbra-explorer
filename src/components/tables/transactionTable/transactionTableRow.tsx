@@ -75,13 +75,15 @@ const TransactionTableRow: FC<Props> = props => {
                     </Link>
                 </TableCell>
             )}
-            {valueView && (
+            {props.amount && (
                 <TableCell>
-                    <AssetValue
-                        context="table"
-                        density="compact"
-                        valueView={valueView}
-                    />
+                    {valueView && (
+                        <AssetValue
+                            context="table"
+                            density="compact"
+                            valueView={valueView}
+                        />
+                    )}
                 </TableCell>
             )}
             {props.status && (
