@@ -1,3 +1,4 @@
+import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import { BlockQuery, BlockQueryVariables } from '@/lib/graphql/generated/types'
 import { blockQuery } from '@/lib/graphql/queries'
@@ -21,12 +22,15 @@ const getBlock = async (
         return
     }
 
+    let date = dayjs(result.data.block.createdAt)
+
     return {
-        created: result.data.block.createdAt,
         height: result.data.block.height,
         rawJson:
             result.data.block.rawJson && JSON.parse(result.data.block.rawJson),
+        timestamp: date.valueOf(),
         transactions: result.data.block.transactions.map(transaction => {
+            date = dayjs(transaction.block.createdAt)
             let primaryAction
             let actionCount
 
@@ -43,9 +47,11 @@ const getBlock = async (
                 actionCount: actionCount ?? 0,
                 blockHeight: height,
                 hash: transaction.hash.toLowerCase(),
+                initialTimeAgo: dayjs().to(date),
                 primaryAction,
                 raw: transaction.raw,
                 status: transaction.ibcStatus,
+                timestamp: dayjs(transaction.block.createdAt).valueOf(),
             }
         }),
     }

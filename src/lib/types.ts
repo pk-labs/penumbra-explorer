@@ -8,15 +8,15 @@ import {
 
 export interface TransformedBlockFragment
     extends Pick<BlockFragment, 'height'> {
-    created: string
     rawJson?: object
+    timestamp: number
     transactions: TransformedPartialTransactionFragment[]
 }
 
 export interface TransformedPartialBlockFragment
     extends Pick<PartialBlockFragment, 'height' | 'transactionsCount'> {
-    created: string
-    timeAgo?: string
+    initialTimeAgo: string
+    timestamp: number
 }
 
 export interface TransformedTransactionFragment
@@ -24,20 +24,21 @@ export interface TransformedTransactionFragment
     actionCount: number
     blockHeight: number
     chainId: string
-    created: string
     fee: number
     memo: boolean
     primaryAction?: ActionType
     rawJson: object
+    timestamp: number
 }
 
 export interface TransformedPartialTransactionFragment
     extends Pick<PartialTransactionFragment, 'hash' | 'raw'> {
     actionCount: number
     blockHeight: number
+    initialTimeAgo: string
     primaryAction?: ActionType
     status: IbcStatus
-    timeAgo?: string
+    timestamp: number
 }
 
 export enum ActionType {

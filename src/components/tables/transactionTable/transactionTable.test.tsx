@@ -68,15 +68,19 @@ describe('TransactionTable', () => {
                         actionCount: 0,
                         blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         raw: '',
-                        status: IbcStatus.Completed,
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                     {
                         actionCount: 0,
                         blockHeight: 456,
                         hash: 'tx2',
+                        initialTimeAgo: '',
                         raw: '',
-                        status: IbcStatus.Completed,
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
             />
@@ -94,8 +98,10 @@ describe('TransactionTable', () => {
                         actionCount: 0,
                         blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         raw: '',
-                        status: IbcStatus.Completed,
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
                 blockHeight
@@ -113,8 +119,10 @@ describe('TransactionTable', () => {
                         actionCount: 0,
                         blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         raw: '',
-                        status: IbcStatus.Completed,
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
                 amount
@@ -132,8 +140,10 @@ describe('TransactionTable', () => {
                         actionCount: 0,
                         blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         raw: '',
                         status: IbcStatus.Completed,
+                        timestamp: 0,
                     },
                 ]}
                 status
@@ -151,9 +161,11 @@ describe('TransactionTable', () => {
                         actionCount: 2,
                         blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         primaryAction: ActionType.receive,
                         raw: '',
-                        status: IbcStatus.Completed,
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
             />
@@ -171,9 +183,10 @@ describe('TransactionTable', () => {
                         actionCount: 0,
                         blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '1s ago',
                         raw: '',
-                        status: IbcStatus.Completed,
-                        timeAgo: '1s ago',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
                 time
@@ -191,8 +204,10 @@ describe('TransactionTable', () => {
                         actionCount: 0,
                         blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         raw: '',
-                        status: IbcStatus.Completed,
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
             />

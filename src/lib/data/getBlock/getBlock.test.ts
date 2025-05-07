@@ -17,7 +17,7 @@ describe('getBlock', () => {
                         data: {
                             block: {
                                 rawJson: 'null',
-                                transactions: [{ hash: 'FoO' }],
+                                transactions: [{ block: {}, hash: 'FoO' }],
                             },
                         },
                     }),

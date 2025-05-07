@@ -29,8 +29,8 @@ describe('getTransactions', () => {
         })
     })
 
-    test('returns transformed creation date', async () => {
-        const createdAt = dayjs().subtract(1, 'second').toISOString()
+    test('returns timestamp and initial time ago', async () => {
+        const createdAt = dayjs().subtract(1, 'second')
 
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
@@ -38,7 +38,14 @@ describe('getTransactions', () => {
                     Promise.resolve({
                         data: {
                             transactionsCollection: {
-                                items: [{ block: { createdAt }, hash: 'foo' }],
+                                items: [
+                                    {
+                                        block: {
+                                            createdAt: createdAt.toISOString(),
+                                        },
+                                        hash: 'foo',
+                                    },
+                                ],
                             },
                         },
                     }),
@@ -46,7 +53,12 @@ describe('getTransactions', () => {
         })
 
         await expect(getTransactions({ length: 1 })).resolves.toMatchObject({
-            transactions: [{ hash: 'foo', timeAgo: '1s ago' }],
+            transactions: [
+                {
+                    initialTimeAgo: '1s ago',
+                    timestamp: createdAt.valueOf(),
+                },
+            ],
         })
     })
 

@@ -1,3 +1,4 @@
+import dayjs from '@/lib/dayjs'
 import { TransformedTransactionFragment } from '@/lib/types'
 import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import createGraphqlClient from '../../graphql/createGraphqlClient'
@@ -45,13 +46,13 @@ const getTransaction = async (
         actionCount: actionCount ?? 0,
         blockHeight: result.data.transaction.block.height,
         chainId: result.data.transaction.body.parameters.chainId,
-        created: result.data.transaction.block.createdAt,
         fee: Number(result.data.transaction.body.parameters.fee.amount),
         hash: result.data.transaction.hash.toLowerCase(),
         memo: memo ?? false,
         primaryAction,
         raw: result.data.transaction.raw,
         rawJson: JSON.parse(result.data.transaction.rawJson),
+        timestamp: dayjs(result.data.transaction.block.createdAt).valueOf(),
     }
 }
 

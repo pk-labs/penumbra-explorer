@@ -54,9 +54,11 @@ const LatestTransactionsUpdater: FC<Props> = props => {
                         actionCount: actionCount ?? 0,
                         blockHeight: transactionUpdate.id,
                         hash: transactionUpdate.hash.toLowerCase(),
+                        initialTimeAgo: '',
                         primaryAction,
                         raw: transactionUpdate.raw,
-                        status: IbcStatus.Completed, // FIXME
+                        status: IbcStatus.Unknown, // FIXME: Query ibcStatus
+                        timestamp: 0, // FIXME: Query block.createdAt
                     },
                     ...prev.slice(0, -1),
                 ]

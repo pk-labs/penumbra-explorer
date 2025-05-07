@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import dayjs from '@/lib/dayjs'
 import { TransformedBlockFragment } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
@@ -28,7 +29,9 @@ const BlockView: FC<Props> = props => (
                     small
                 />
             </Parameter>
-            <Parameter name="Time">{props.block.created}</Parameter>
+            <Parameter name="Time">
+                {dayjs(props.block.timestamp).format('YYYY-MM-DD HH:mm:ss z')}
+            </Parameter>
             {/*<Parameter name="Proposer">-</Parameter>*/}
             <Parameter name="Txs">{props.block.transactions.length}</Parameter>
         </Parameters>

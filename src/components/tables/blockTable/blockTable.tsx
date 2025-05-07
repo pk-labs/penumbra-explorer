@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
 import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
+import TimeAgo from '../../timeAgo'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -59,7 +60,12 @@ const BlockTable: FC<Props> = props => {
                                     {formatNumber(block.height)}
                                 </Link>
                             </TableCell>
-                            <TableCell>{block.timeAgo}</TableCell>
+                            <TableCell>
+                                <TimeAgo
+                                    initialTimeAgo={block.initialTimeAgo}
+                                    timestamp={block.timestamp}
+                                />
+                            </TableCell>
                             {props.proposer && <TableCell>-</TableCell>}
                             <TableCell>{block.transactionsCount}</TableCell>
                         </TableRow>

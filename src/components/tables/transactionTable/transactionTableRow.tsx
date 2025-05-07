@@ -15,6 +15,7 @@ import {
 import AssetValue from '../../assetValue'
 import CopyToClipboard from '../../copyToClipboard'
 import { Pill } from '../../pill'
+import TimeAgo from '../../timeAgo'
 import TransactionStatusIcon from '../../transactionStatusIcon'
 import TransactionStatusPill from '../../transactionStatusPill'
 import { TableCell, TableRow } from '../table'
@@ -100,7 +101,14 @@ const TransactionTableRow: FC<Props> = props => {
                     </span>
                 )}
             </TableCell>
-            {props.time && <TableCell>{props.transaction.timeAgo}</TableCell>}
+            {props.time && (
+                <TableCell>
+                    <TimeAgo
+                        initialTimeAgo={props.transaction.initialTimeAgo}
+                        timestamp={props.transaction.timestamp}
+                    />
+                </TableCell>
+            )}
         </TableRow>
     )
 }

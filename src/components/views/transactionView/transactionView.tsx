@@ -1,6 +1,7 @@
 import { Link2Icon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
+import dayjs from '@/lib/dayjs'
 import { TransformedTransactionFragment } from '@/lib/types'
 import { classNames, shortenHash } from '@/lib/utils'
 import ActionHistory from '../../actionHistory'
@@ -46,7 +47,11 @@ const TransactionView: FC<Props> = props => (
                     <Link2Icon className="text-text-primary ml-1" size={12} />
                 </Link>
             </Parameter>
-            <Parameter name="Time">{props.transaction.created}</Parameter>
+            <Parameter name="Time">
+                {dayjs(props.transaction.timestamp).format(
+                    'YYYY-MM-DD HH:mm:ss z'
+                )}
+            </Parameter>
         </Parameters>
         {props.transaction.memo && <Memo />}
         <ActionHistory

@@ -20,10 +20,7 @@ describe('Container', () => {
     test.skip('renders final number at animation end', async () => {
         const { container } = render(<NumberCountup number={99} />)
 
-        act(() => {
-            jest.advanceTimersByTime(1000)
-        })
-
+        act(() => jest.advanceTimersByTime(1000))
         getByText(container, '99')
     })
 
