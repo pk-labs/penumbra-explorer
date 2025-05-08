@@ -13,6 +13,9 @@ steps:
       - build
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
+    env:
+      # Skip running install and build npm scripts again
+      - GOOGLE_NODE_RUN_SCRIPTS=
     args:
       # Deploy from source
       - run
