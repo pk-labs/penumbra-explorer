@@ -1,5 +1,6 @@
 import { MailIcon } from 'lucide-react'
 import { FC } from 'react'
+import { appVersion, envName } from '@/lib/constants'
 import { classNames } from '@/lib/utils'
 import Container from '../container'
 import { Discord, GitHub, LogoMinimal, Penumbra, Twitter } from '../vectors'
@@ -99,6 +100,14 @@ const Footer: FC<Props> = props => (
             <a href="mailto:penumbra@pklabs.me" target="_blank">
                 penumbra@pklabs.me
             </a>
+        </div>
+        <div
+            className={classNames(
+                'text-text-muted text-center text-xs sm:col-2 sm:row-2',
+                'sm:self-end'
+            )}
+        >
+            {envName !== 'prod' ? `${envName}-` : ''}v{appVersion}
         </div>
     </Container>
 )
