@@ -1,5 +1,5 @@
 substitutions:
-  _IMAGE_NAME: gcr.io/${PROJECT_ID}/penumbra-explorer
+  _IMAGE_NAME: 'gcr.io/${PROJECT_ID}/penumbra-explorer'
 
 options:
   automapSubstitutions: true
