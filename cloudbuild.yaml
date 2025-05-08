@@ -1,6 +1,7 @@
 steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
+    # Cloud Build environment variables
     env:
       - _ENV_NAME=${_ENV_NAME}
     args:
@@ -19,6 +20,6 @@ steps:
       - --min-instances=1
       - --concurrency=20
       - --platform=managed
-      # Environment variables
+      # Cloud Run environment variables
       - --set-env-vars
       - _BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA},_ENV_NAME=${_ENV_NAME}
