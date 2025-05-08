@@ -1,6 +1,6 @@
 steps:
   # Debugging step
-  - name: 'gcr.io/cloud-builders/bash'
+  - name: gcr.io/cloud-builders/gcloud
     env:
       - _ENV_NAME=${_ENV_NAME}
       - _REGION=${_REGION}
