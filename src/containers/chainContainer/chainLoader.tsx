@@ -70,12 +70,6 @@ const ChainLoader: FC<Props> = async props => {
                             className="bg-transparent p-0"
                             title="Shielded"
                         >
-                            <Parameter name="Volume shielded">
-                                $
-                                {formatNumber(
-                                    Number(connection.shieldedVolume)
-                                )}
-                            </Parameter>
                             <Parameter name="Txs shielded">
                                 {formatNumber(connection.shieldedTxCount)}
                             </Parameter>
@@ -84,12 +78,6 @@ const ChainLoader: FC<Props> = async props => {
                             className="bg-transparent p-0"
                             title="Unshielded"
                         >
-                            <Parameter name="Volume unshielded">
-                                $
-                                {formatNumber(
-                                    Number(connection.unshieldedVolume)
-                                )}
-                            </Parameter>
                             <Parameter name="Txs unshielded">
                                 {formatNumber(connection.unshieldedTxCount)}
                             </Parameter>
@@ -99,13 +87,6 @@ const ChainLoader: FC<Props> = async props => {
                         className="bg-transparent p-0 sm:col-2 lg:col-auto!"
                         title="Total"
                     >
-                        <Parameter name="Volume total">
-                            $
-                            {formatNumber(
-                                Number(connection.shieldedVolume) +
-                                    Number(connection.unshieldedVolume)
-                            )}
-                        </Parameter>
                         <Parameter name="Txs total">
                             {formatNumber(
                                 connection.shieldedTxCount +

@@ -55,9 +55,6 @@ const ChainContainer: FC<Props> = props => (
                                 className="bg-transparent p-0"
                                 title="Shielded"
                             >
-                                <Parameter name="Volume shielded">
-                                    <Skeleton className="h-4 w-24" />
-                                </Parameter>
                                 <Parameter name="Txs shielded">
                                     <Skeleton className="h-4 w-24" />
                                 </Parameter>
@@ -66,9 +63,6 @@ const ChainContainer: FC<Props> = props => (
                                 className="bg-transparent p-0"
                                 title="Unshielded"
                             >
-                                <Parameter name="Volume unshielded">
-                                    <Skeleton className="h-4 w-24" />
-                                </Parameter>
                                 <Parameter name="Txs unshielded">
                                     <Skeleton className="h-4 w-24" />
                                 </Parameter>
@@ -78,9 +72,6 @@ const ChainContainer: FC<Props> = props => (
                             className="bg-transparent p-0 sm:col-2 lg:col-auto!"
                             title="Total"
                         >
-                            <Parameter name="Volume total">
-                                <Skeleton className="h-4 w-24" />
-                            </Parameter>
                             <Parameter name="Txs total">
                                 <Skeleton className="h-4 w-24" />
                             </Parameter>
