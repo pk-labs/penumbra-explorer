@@ -1,17 +1,17 @@
-'use client'
-
 import { Clock4Icon, TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
-import { IbcStatsQuery } from '@/lib/graphql/generated/types'
+import { IbcStatsQuery, TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import { Pill } from '../../pill'
+import TimePeriodSelector from '../../timePeriodSelector'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
     stats: IbcStatsQuery['ibcStats']
+    timePeriod?: TimePeriod
 }
 
 const IbcTable: FC<Props> = props => {
@@ -37,19 +37,7 @@ const IbcTable: FC<Props> = props => {
     return (
         <Table
             className={props.className}
-            // header={
-            //     <Density compact>
-            //         <SegmentedControl
-            //             className="self-start"
-            //             onChange={settimePeriod}
-            //             value={timePeriod}
-            //         >
-            //             <SegmentedControl.Item style="filled" value="24h" />
-            //             <SegmentedControl.Item style="filled" value="30d" />
-            //             <SegmentedControl.Item style="filled" value="All" />
-            //         </SegmentedControl>
-            //     </Density>
-            // }
+            header={<TimePeriodSelector timePeriod={props.timePeriod} />}
         >
             <thead>
                 <TableRow>

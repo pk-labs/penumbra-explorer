@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { IbcStatus } from '@/lib/graphql/generated/types'
+import { ucFirst } from '@/lib/utils'
 import { Pill, PillProps } from '../pill'
 
 interface Props {
@@ -32,7 +33,7 @@ const TransactionStatusPill: FC<Props> = props => {
             context={context}
             priority="secondary"
         >
-            {status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()}
+            {ucFirst(status)}
         </Pill>
     )
 }

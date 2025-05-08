@@ -88,7 +88,7 @@ export function useIbcChannelPairsQuery(options: Omit<Urql.UseQueryArgs<Types.Ib
   return Urql.useQuery<Types.IbcChannelPairsQuery, Types.IbcChannelPairsQueryVariables>({ query: Types.IbcChannelPairsDocument, ...options });
 };
 export const IbcStatsDocument = gql`
-    query IbcStats($clientId: String, $timePeriod: String) {
+    query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
     clientId
     shieldedVolume

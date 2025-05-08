@@ -1,15 +1,23 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Skeleton, Table, TableCell, TableRow } from '@/components'
+import {
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
+    TimePeriodSelector,
+} from '@/components'
 import ibc from '@/lib/ibc'
-import IbcLoader, { Props as IbcLoaderProps } from './ibcLoader'
-
-type Props = Omit<IbcLoaderProps, 'timePeriod'>
+import IbcLoader, { Props } from './ibcLoader'
 
 const IbcContainer: FC<Props> = props => (
     <Suspense
+        key={props.timePeriod}
         fallback={
-            <Table className={props.className}>
+            <Table
+                className={props.className}
+                header={<TimePeriodSelector timePeriod={props.timePeriod} />}
+            >
                 <thead>
                     <TableRow>
                         <TableCell header>

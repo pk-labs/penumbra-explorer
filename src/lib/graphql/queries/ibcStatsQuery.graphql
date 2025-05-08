@@ -1,4 +1,4 @@
-query IbcStats($clientId: String, $timePeriod: String) {
+query IbcStats($clientId: String, $timePeriod: TimePeriod) {
     ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
         clientId
         shieldedVolume

@@ -41,6 +41,7 @@ export interface TransformedPartialTransactionFragment
     timestamp: number
 }
 
+// TODO: Refactor value names to pascal case
 export enum ActionType {
     communityPoolDeposit = 'Community pool deposit',
     communityPoolOutput = 'Community pool output',
@@ -77,11 +78,6 @@ export enum ActionType {
 export interface UmPriceData {
     change: number
     price: number
-}
-
-export enum TimePeriod {
-    day = '24h',
-    month = '30d',
 }
 
 export interface IbcChannelPair {
