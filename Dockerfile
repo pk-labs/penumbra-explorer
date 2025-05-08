@@ -1,8 +1,9 @@
 # Stage 1: Build app
 FROM node:20-slim AS builder
 
+ARG _ENV_NAME
+ENV _ENV_NAME=$_ENV_NAME
 ENV NODE_ENV=production
-ENV _ENV_NAME=$_ENV_NAME_ARG
 
 WORKDIR /app
 
@@ -18,8 +19,9 @@ RUN npm prune --production
 # Stage 2: Build production image
 FROM node:20-slim AS production
 
+ARG _ENV_NAME
+ENV _ENV_NAME=$_ENV_NAME
 ENV NODE_ENV=production
-ENV _ENV_NAME=$_ENV_NAME_ARG
 
 WORKDIR /app
 

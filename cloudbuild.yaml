@@ -9,21 +9,21 @@ steps:
     args:
       - build
       - -t
-      - ${_IMAGE_NAME}:${SHORT_SHA}
+      - ${_IMAGE_NAME}:${_SHORT_SHA}
       - --build-arg
       - _ENV_NAME_ARG=${_ENV_NAME}
       - .
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - ${_IMAGE_NAME}:${SHORT_SHA}
+      - ${_IMAGE_NAME}:${_SHORT_SHA}
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
     args:
       - run
       - deploy
       - penumbra-explorer-${_ENV_NAME}
-      - --image=${_IMAGE_NAME}:${SHORT_SHA}
+      - --image=${_IMAGE_NAME}:${_SHORT_SHA}
       - --region=${_REGION}
       - --allow-unauthenticated
       - --memory=2Gi

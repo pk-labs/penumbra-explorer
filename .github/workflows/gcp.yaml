@@ -93,6 +93,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get short SHA
+        id: get_short_sha
+        run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -106,7 +110,7 @@ jobs:
       - name: Deploy to Google Cloud
         run: |
           gcloud config set compute/region ${{ inputs.gcp_region }}
-          gcloud builds submit --config cloudbuild.yaml --substitutions=_REGION=${{ inputs.gcp_region }},_ENV_NAME=${{ inputs.env_name }}
+          gcloud builds submit --config cloudbuild.yaml --substitutions=_REGION=${{ inputs.gcp_region }},_ENV_NAME=${{ inputs.env_name }},_SHORT_SHA=${{ steps.get_short_sha.outputs.sha }}
 
       - uses: chrnorm/deployment-status@v2
         with:
