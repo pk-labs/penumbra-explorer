@@ -12,6 +12,7 @@ const environments = {
     },
     prod: {
         BASE_URL: 'https://explorer.penumbra.zone',
+        NEXT_PUBLIC_ENV_NAME: 'prod',
         NEXT_PUBLIC_FATHOM_ID: 'YHKFXWRT',
         NEXT_PUBLIC_GRAPHQL_HOST: 'api.explorer.penumbra.zone',
     },
