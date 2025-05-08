@@ -85,10 +85,15 @@ const IbcTable: FC<Props> = props => {
                             <TableCell className="h-20">
                                 <Pill
                                     className="capitalize"
-                                    context="technical-success"
+                                    context={
+                                        connection.status?.toLowerCase() ===
+                                        'active'
+                                            ? 'technical-success'
+                                            : 'technical-default'
+                                    }
                                     priority="secondary"
                                 >
-                                    Active
+                                    {connection.status}
                                 </Pill>
                             </TableCell>
                             <TableCell className="h-20">
