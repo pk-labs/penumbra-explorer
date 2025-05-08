@@ -1,17 +1,4 @@
 steps:
-  # Debugging step
-  - name: gcr.io/cloud-builders/gcloud
-    env:
-      - _ENV_NAME=${_ENV_NAME}
-      - _REGION=${_REGION}
-    script: |
-      #!/usr/bin/env bash
-      echo "--- Cloud Build Step Environment Variables ---"
-      echo "_ENV_NAME: $_ENV_NAME"
-      echo "_REGION: $_REGION"
-      echo "--- All environment variables for this step: ---"
-      env
-      echo "---------------------------------------------"
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
     # Cloud Build environment variables

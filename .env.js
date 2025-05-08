@@ -24,6 +24,12 @@ const environments = {
     },
 }
 
+console.log({
+    ...environments[envName],
+    NEXT_PUBLIC_APP_VERSION: packageJson.version,
+    NEXT_TELEMETRY_DISABLED: 1,
+})
+
 module.exports = {
     ...environments[envName],
     NEXT_PUBLIC_APP_VERSION: packageJson.version,
