@@ -4,6 +4,9 @@ steps:
     # Cloud Build environment variables
     env:
       - _ENV_NAME=${_ENV_NAME}
+    script: |
+      #!/usr/bin/env bash
+      env
     args:
       # Deploy from source
       - run
@@ -22,4 +25,4 @@ steps:
       - --platform=managed
       # Cloud Run environment variables
       - --set-env-vars
-      - _BRANCH_NAME=${_BRANCH_NAME},_COMMIT_SHA=${_COMMIT_SHA},_ENV_NAME=${_ENV_NAME}
+      - _ENV_NAME=${_ENV_NAME}

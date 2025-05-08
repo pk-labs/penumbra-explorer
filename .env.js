@@ -27,4 +27,5 @@ const environments = {
 module.exports = {
     ...environments[envName],
     NEXT_PUBLIC_APP_VERSION: packageJson.version,
+    NEXT_TELEMETRY_DISABLED: 1,
 }
