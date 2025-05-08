@@ -60,23 +60,13 @@ const IbcTable: FC<Props> = props => {
                         Client status
                     </TableCell>
                     <TableCell className="align-baseline" header>
-                        Volume shielded
-                        <br />
-                        <span className="text-xs font-normal">
-                            Txs shielded
-                        </span>
+                        Txs shielded
                     </TableCell>
                     <TableCell className="align-baseline" header>
-                        Volume unshielded
-                        <br />
-                        <span className="text-xs font-normal">
-                            Txs unshielded
-                        </span>
+                        Txs unshielded
                     </TableCell>
                     <TableCell className="align-baseline" header>
-                        Volume total
-                        <br />
-                        <span className="text-xs font-normal">Txs total</span>
+                        Txs total
                     </TableCell>
                     <TableCell className="align-baseline" header>
                         Txs pending
@@ -116,12 +106,6 @@ const IbcTable: FC<Props> = props => {
                             <TableCell className="h-20">
                                 <div className="flex flex-col gap-2">
                                     <span className="text-base font-normal">
-                                        $
-                                        {formatNumber(
-                                            Number(connection.shieldedVolume)
-                                        )}
-                                    </span>
-                                    <span className="text-text-secondary">
                                         {formatNumber(
                                             connection.shieldedTxCount
                                         )}
@@ -131,12 +115,6 @@ const IbcTable: FC<Props> = props => {
                             <TableCell className="h-20">
                                 <div className="flex flex-col gap-2">
                                     <span className="text-base font-normal">
-                                        $
-                                        {formatNumber(
-                                            Number(connection.unshieldedVolume)
-                                        )}
-                                    </span>
-                                    <span className="text-text-secondary">
                                         {formatNumber(
                                             connection.unshieldedTxCount
                                         )}
@@ -146,15 +124,6 @@ const IbcTable: FC<Props> = props => {
                             <TableCell className="h-20">
                                 <div className="flex flex-col gap-2">
                                     <span className="text-base font-normal">
-                                        $
-                                        {formatNumber(
-                                            Number(connection.shieldedVolume) +
-                                                Number(
-                                                    connection.unshieldedVolume
-                                                )
-                                        )}
-                                    </span>
-                                    <span className="text-text-secondary">
                                         {formatNumber(
                                             connection.shieldedTxCount +
                                                 connection.unshieldedTxCount
