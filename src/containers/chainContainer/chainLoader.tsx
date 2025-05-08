@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { IbcChannels, Parameter, Parameters } from '@/components'
-import { getIbcChannelPairs, getIbcStats } from '@/lib/data'
+import { getIbcStats } from '@/lib/data'
 import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
@@ -16,12 +16,9 @@ export interface Props {
 }
 
 const ChainLoader: FC<Props> = async props => {
-    const [stats, pairs] = await Promise.all([
-        getIbcStats({ clientId: props.clientId }),
-        getIbcChannelPairs(props.clientId),
-    ])
+    const stats = await getIbcStats({ clientId: props.clientId })
 
-    if (stats?.length !== 1 || !pairs?.length) {
+    if (stats?.length !== 1) {
         notFound()
     }
 
@@ -105,8 +102,11 @@ const ChainLoader: FC<Props> = async props => {
             <IbcChannels
                 chainImage={props.image}
                 chainName={props.name}
+                channelId={connection.channelId as string}
                 className={props.statsClassName}
-                pairs={pairs}
+                counterpartyChannelId={
+                    connection.counterpartyChannelId as string
+                }
             />
         </>
     )

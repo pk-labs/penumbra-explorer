@@ -2,25 +2,18 @@ import { getByAltText, getByText, render } from '@testing-library/react'
 import IbcChannels from './ibcChannels'
 
 describe('IbcChannels', () => {
-    test('renders channel pairs', async () => {
+    test('renders channels', async () => {
         const { container } = render(
             <IbcChannels
                 chainImage="bar.jpg"
                 chainName="bar"
-                pairs={[
-                    { channelId: 'foo1', counterpartyChannelId: 'bar1' },
-                    {
-                        channelId: 'foo2',
-                        counterpartyChannelId: 'bar2',
-                    },
-                ]}
+                channelId="foo-123"
+                counterpartyChannelId="bar-456"
             />
         )
 
-        getByText(container, 'foo1')
-        getByText(container, 'bar1')
-        getByText(container, 'foo2')
-        getByText(container, 'bar2')
+        getByText(container, 'foo-123')
+        getByText(container, 'bar-456')
     })
 
     test('renders chain image', async () => {
@@ -28,7 +21,8 @@ describe('IbcChannels', () => {
             <IbcChannels
                 chainImage="bar.jpg"
                 chainName="bar"
-                pairs={[{ channelId: 'foo', counterpartyChannelId: 'bar' }]}
+                channelId="foo"
+                counterpartyChannelId="bar"
             />
         )
 
@@ -40,8 +34,9 @@ describe('IbcChannels', () => {
             <IbcChannels
                 chainImage="bar.jpg"
                 chainName="bar"
+                channelId="foo"
                 className="foo bar"
-                pairs={[{ channelId: 'foo', counterpartyChannelId: 'bar' }]}
+                counterpartyChannelId="bar"
             />
         )
 

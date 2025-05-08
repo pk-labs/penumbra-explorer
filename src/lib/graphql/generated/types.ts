@@ -466,20 +466,13 @@ export type BlocksQueryVariables = Exact<{
 
 export type BlocksQuery = { __typename?: 'QueryRoot', blocksCollection: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
 
-export type IbcChannelPairsQueryVariables = Exact<{
-  clientId: Scalars['String']['input'];
-}>;
-
-
-export type IbcChannelPairsQuery = { __typename?: 'QueryRoot', ibcChannelPairsByClientId: Array<{ __typename?: 'ChannelPair', channelId: string, counterpartyChannelId?: string | null }> };
-
 export type IbcStatsQueryVariables = Exact<{
   clientId?: InputMaybe<Scalars['String']['input']>;
   timePeriod?: InputMaybe<TimePeriod>;
 }>;
 
 
-export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', clientId: string, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, pendingTxCount: number, expiredTxCount: number }> };
+export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', clientId: string, status?: string | null, channelId?: string | null, counterpartyChannelId?: string | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, pendingTxCount: number, expiredTxCount: number }> };
 
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -601,18 +594,13 @@ export const BlocksDocument = gql`
   }
 }
     ${PartialBlockFragmentDoc}`;
-export const IbcChannelPairsDocument = gql`
-    query IbcChannelPairs($clientId: String!) {
-  ibcChannelPairsByClientId(clientId: $clientId) {
-    channelId
-    counterpartyChannelId
-  }
-}
-    `;
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
     clientId
+    status
+    channelId
+    counterpartyChannelId
     shieldedVolume
     shieldedTxCount
     unshieldedVolume

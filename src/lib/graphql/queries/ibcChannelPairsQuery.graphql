@@ -1,6 +1,0 @@
-query IbcChannelPairs($clientId: String!) {
-    ibcChannelPairsByClientId(clientId: $clientId) {
-        channelId
-        counterpartyChannelId
-    }
-}

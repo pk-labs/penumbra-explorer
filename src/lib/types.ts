@@ -79,8 +79,3 @@ export interface UmPriceData {
     change: number
     price: number
 }
-
-export interface IbcChannelPair {
-    channelId: string
-    counterpartyChannelId: string
-}
