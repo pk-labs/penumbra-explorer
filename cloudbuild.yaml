@@ -1,10 +1,14 @@
 substitutions:
-  _IMAGE_NAME: 'gcr.io/${PROJECT_ID}/penumbra-explorer'
+  _IMAGE_NAME: gcr.io/${PROJECT_ID}/penumbra-explorer
 
 options:
   automapSubstitutions: true
 
 steps:
+  - name: ubuntu
+    script: |
+      #!/usr/bin/env bash
+      echo "Your project ID is $PROJECT_ID
   - name: gcr.io/cloud-builders/docker
     args:
       - build
