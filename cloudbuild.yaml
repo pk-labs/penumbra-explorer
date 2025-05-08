@@ -1,37 +1,35 @@
+substitutions:
+  _IMAGE_NAME: gcr.io/${PROJECT_ID}/penumbra-explorer
+
 options:
   automapSubstitutions: true
 
 steps:
-  - name: node:20
-    entrypoint: npm
+  - name: gcr.io/cloud-builders/docker
     args:
-      - ci
-  - name: node:20
-    entrypoint: npm
-    args:
-      - run
       - build
+      - -t
+      - ${_IMAGE_NAME}:${SHORT_SHA}
+      - --build-arg
+      - _ENV_NAME_ARG=${_ENV_NAME}
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_IMAGE_NAME}:${SHORT_SHA}
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
-    env:
-      # Skip running install and build npm scripts again
-      - GOOGLE_NODE_RUN_SCRIPTS=
     args:
-      # Deploy from source
       - run
       - deploy
       - penumbra-explorer-${_ENV_NAME}
-      - --source
-      - .
-      - --region
-      - ${_REGION}
+      - --image=${_IMAGE_NAME}:${SHORT_SHA}
+      - --region=${_REGION}
       - --allow-unauthenticated
-      # Settings recommended by AI for this Next.js setup
       - --memory=2Gi
       - --cpu=2
       - --min-instances=1
       - --concurrency=20
       - --platform=managed
-      # Runtime environment variables
       - --set-env-vars
       - _ENV_NAME=${_ENV_NAME}
