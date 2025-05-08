@@ -2,6 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
+        "baseUrl": "./src",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "incremental": true,
@@ -18,13 +19,13 @@
         "noUnusedParameters": true,
         "paths": {
             "@/components": [
-                "./src/components"
+                "./components"
             ],
             "@/containers": [
-                "./src/containers"
+                "./containers"
             ],
             "@/lib/*": [
-                "./src/lib/*"
+                "./lib/*"
             ]
         },
         "plugins": [
