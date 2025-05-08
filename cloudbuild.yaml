@@ -8,7 +8,7 @@ steps:
   - name: ubuntu
     script: |
       #!/usr/bin/env bash
-      echo "Your project ID is $PROJECT_ID
+      echo "Your project ID is $PROJECT_ID"
   - name: gcr.io/cloud-builders/docker
     args:
       - build
