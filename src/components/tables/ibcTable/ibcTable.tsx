@@ -63,8 +63,21 @@ const IbcTable: FC<Props> = props => {
                                     src={connection.image}
                                     width={32}
                                 />
-                                <span className="font-default text-lg font-normal">
-                                    {connection.name}
+                                <span className="inline-flex flex-col">
+                                    <span
+                                        className={classNames(
+                                            'font-default text-lg font-normal'
+                                        )}
+                                    >
+                                        {connection.name}
+                                    </span>
+                                    <span
+                                        className={classNames(
+                                            'text-text-secondary text-xs font-medium'
+                                        )}
+                                    >
+                                        {connection.clientId}
+                                    </span>
                                 </span>
                             </TableCell>
                             <TableCell className="h-20">
