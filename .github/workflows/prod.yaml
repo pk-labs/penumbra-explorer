@@ -3,6 +3,7 @@ name: Deploy to production
 on:
   workflow_dispatch:
 
+# TOOD: Copy .env.prod to .env
 jobs:
   trigger_gcp_workflow:
     uses: ./.github/workflows/gcp.yaml

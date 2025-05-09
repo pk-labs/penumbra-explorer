@@ -5,6 +5,7 @@ on:
     branches:
       - staging
 
+# TOOD: Copy .env.staging to .env
 jobs:
   trigger_gcp_workflow:
     uses: ./.github/workflows/gcp.yaml
