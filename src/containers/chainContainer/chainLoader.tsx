@@ -99,15 +99,15 @@ const ChainLoader: FC<Props> = async props => {
                     </Parameters>
                 </div>
             </div>
-            <IbcChannels
-                chainImage={props.image}
-                chainName={props.name}
-                channelId={connection.channelId as string}
-                className={props.statsClassName}
-                counterpartyChannelId={
-                    connection.counterpartyChannelId as string
-                }
-            />
+            {connection.channelId && connection.counterpartyChannelId && (
+                <IbcChannels
+                    chainImage={props.image}
+                    chainName={props.name}
+                    channelId={connection.channelId}
+                    className={props.statsClassName}
+                    counterpartyChannelId={connection.counterpartyChannelId}
+                />
+            )}
         </>
     )
 }
