@@ -1,12 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import {
-    Skeleton,
-    Table,
-    TableCell,
-    TableRow,
-    TimePeriodSelector,
-} from '@/components'
+import { Skeleton, Table, TableCell, TableRow } from '@/components'
 import ibc from '@/lib/ibc'
 import IbcLoader, { Props } from './ibcLoader'
 
