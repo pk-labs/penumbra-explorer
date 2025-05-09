@@ -15,32 +15,12 @@ jobs:
       - name: Copy .env.staging to .env
         run: cp .env.staging .env
 
-      - name: Verify .env creation and content (using absolute path)
-        run: |
-          ABSOLUTE_ENV_PATH="${{ github.workspace }}/.env"
-          echo "Verifying file at: $ABSOLUTE_ENV_PATH"
-          if [ -f "$ABSOLUTE_ENV_PATH" ]; then
-            echo "File FOUND by [ -f '$ABSOLUTE_ENV_PATH' ]."
-            echo "Output of 'ls -la $ABSOLUTE_ENV_PATH':"
-            ls -la "$ABSOLUTE_ENV_PATH"
-            echo "Contents of '$ABSOLUTE_ENV_PATH' (first 5 lines):"
-            head -n 5 "$ABSOLUTE_ENV_PATH"
-          else
-            echo "File NOT FOUND by [ -f '$ABSOLUTE_ENV_PATH' ]. This is the problem."
-            # Further debugging for .env.staging if .env is not found
-            if [ -f "${{ github.workspace }}/.env.staging" ]; then
-                echo ".env.staging exists at ${{ github.workspace }}/.env.staging"
-            else
-                echo ".env.staging does NOT exist at ${{ github.workspace }}/.env.staging"
-            fi
-            exit 1
-          fi
-
       - name: Upload .env artifact
         uses: actions/upload-artifact@v4
         with:
           name: env-file
-          path: ${{ github.workspace }}/.env
+          path: .env
+          include-hidden-files: true
           retention-days: 1
           if-no-files-found: error
 
