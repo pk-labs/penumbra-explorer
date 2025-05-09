@@ -15,6 +15,24 @@ jobs:
       - name: Copy .env.staging to .env
         run: cp .env.staging .env
 
+      - name: Verify .env creation and content # DEBUGGING STEP
+        run: |
+          echo "Checking for .env file..."
+          if [ -f ".env" ]; then
+            echo ".env file FOUND."
+            echo "Contents of .env:"
+            cat .env
+          else
+            echo ".env file NOT FOUND."
+            echo "Checking if .env.staging exists (for troubleshooting):"
+            if [ -f ".env.staging" ]; then
+              echo ".env.staging FOUND."
+            else
+              echo ".env.staging also NOT FOUND at root. Please check its actual path in your repository."
+            fi
+            exit 1 # Force the job to fail here if .env wasn't created
+          fi
+
       - name: Upload .env artifact
         uses: actions/upload-artifact@v4
         with:
