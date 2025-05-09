@@ -21,6 +21,7 @@ jobs:
           retention-days: 1
 
   trigger_gcp_workflow:
+    needs: env_setup
     uses: ./.github/workflows/gcp.yaml
     with:
       env_name: prod
