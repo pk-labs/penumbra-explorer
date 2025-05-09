@@ -39,6 +39,7 @@ const IbcTable: FC<Props> = props => {
                               chainId: connection.clientId,
                               image: defaultChainImage,
                               name: connection.clientId,
+                              slug: connection.clientId,
                           }
                 }),
         [props.stats]
@@ -64,7 +65,7 @@ const IbcTable: FC<Props> = props => {
                     connections.map(connection => (
                         <TableRow
                             key={connection.chainId}
-                            href={`/ibc/${connection.chainId}`}
+                            href={`/ibc/${connection.slug}`}
                         >
                             <TableCell className="h-20">
                                 <Image
