@@ -7,7 +7,26 @@ on:
 
 # TOOD: Copy .env.staging to .env
 jobs:
+  env_setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy .env.staging to .env
+        run: cp .env.staging .env
+
+      - name: Upload .env artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: env-file
+          path: .env
+          include-hidden-files: true
+          retention-days: 1
+          if-no-files-found: error
+
   trigger_gcp_workflow:
+    needs: env_setup
     uses: ./.github/workflows/gcp.yaml
     with:
       env_name: staging

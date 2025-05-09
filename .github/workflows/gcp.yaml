@@ -25,6 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download .env artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: env-file
+
       - uses: chrnorm/deployment-action@v2
         id: deployment
         with:
@@ -92,6 +97,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download .env artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: env-file
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
