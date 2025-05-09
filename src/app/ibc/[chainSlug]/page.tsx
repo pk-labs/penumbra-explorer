@@ -8,25 +8,25 @@ import ibc from '@/lib/ibc'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
 interface Props {
-    params: Promise<{ slug: string }>
+    params: Promise<{ chainSlug: string }>
     searchParams: Promise<{ page?: string }>
 }
 
 export const generateMetadata = async (props: Props) => {
-    const { slug } = await props.params
+    const { chainSlug } = await props.params
 
     return generatePageMetadata(
-        `Chain ${slug}`,
+        `Chain ${chainSlug}`,
         'TODO: Description',
-        `/ibc/${slug}`
+        `/ibc/${chainSlug}`
     )
 }
 
 const ChainPage: FC<Props> = async props => {
     const params = await props.params
-    const connection = ibc.find(c => c.slug === params.slug)
-    const clientId = connection?.clientId ?? params.slug
-    const name = connection?.name ?? params.slug
+    const connection = ibc.find(c => c.slug === params.chainSlug)
+    const clientId = connection?.clientId ?? params.chainSlug
+    const name = connection?.name ?? params.chainSlug
     const image = connection?.image ?? defaultChainImage
 
     const searchParams = await props.searchParams
@@ -52,7 +52,7 @@ const ChainPage: FC<Props> = async props => {
                 )}
             >
                 <ChainContainer
-                    chainId={params.slug}
+                    chainId={connection?.chainId}
                     channelsClassName="lg:col-1 lg:row-span-2"
                     clientId={clientId}
                     image={image}
@@ -74,7 +74,7 @@ const ChainPage: FC<Props> = async props => {
                     }
                     length={length}
                     offset={offset}
-                    pathname={`/ibc/${params.slug}`}
+                    pathname={`/ibc/${params.chainSlug}`}
                     amount
                     blockHeight
                     status

@@ -7,7 +7,7 @@ import { getIbcStats } from '@/lib/data'
 import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
-    chainId: string
+    chainId?: string
     channelsClassName?: string
     clientId: string
     image: string
