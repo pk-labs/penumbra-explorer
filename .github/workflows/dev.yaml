@@ -17,7 +17,9 @@ jobs:
         with:
           name: env-file
           path: .env
+          include-hidden-files: true
           retention-days: 1
+          if-no-files-found: error
 
   trigger_gcp_workflow:
     needs: env_setup
