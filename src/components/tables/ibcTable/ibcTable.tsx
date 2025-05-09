@@ -6,7 +6,6 @@ import ibc from '@/lib/ibc'
 import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import { Pill } from '../../pill'
-import TimePeriodSelector from '../../timePeriodSelector'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -37,7 +36,7 @@ const IbcTable: FC<Props> = props => {
     return (
         <Table
             className={props.className}
-            header={<TimePeriodSelector timePeriod={props.timePeriod} />}
+            // header={<TimePeriodSelector timePeriod={props.timePeriod} />}
         >
             <thead>
                 <TableRow>

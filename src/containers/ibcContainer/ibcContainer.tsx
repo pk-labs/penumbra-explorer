@@ -16,7 +16,7 @@ const IbcContainer: FC<Props> = props => (
         fallback={
             <Table
                 className={props.className}
-                header={<TimePeriodSelector timePeriod={props.timePeriod} />}
+                // header={<TimePeriodSelector timePeriod={props.timePeriod} />}
             >
                 <thead>
                     <TableRow>
