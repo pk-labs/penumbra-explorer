@@ -37,17 +37,16 @@ const TransactionTableRow: FC<Props> = props => {
             return
         }
 
-        const decoded = decodeTransaction(props.transaction.raw)
+        const transaction = decodeTransaction(props.transaction.raw)
 
-        const ics20Withdrawal = decoded.body?.actions.find(
-            ({ action }) => action.case === 'ics20Withdrawal'
+        const match = transaction.body?.actions.find(
+            ({ action }) =>
+                action.case === 'ics20Withdrawal' ||
+                action.case === 'ibcRelayAction'
         )
 
-        if (ics20Withdrawal?.action.value) {
-            return valueToView(
-                ics20Withdrawal.action.value as Value,
-                getMetadata
-            )
+        if (match?.action.value) {
+            return valueToView(match.action.value as Value, getMetadata)
         }
     }, [getMetadata, props.amount, props.transaction.raw])
 
