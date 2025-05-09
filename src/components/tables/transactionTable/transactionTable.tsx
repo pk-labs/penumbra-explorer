@@ -67,6 +67,8 @@ const TransactionTable: FC<Props> = props => {
                             colSpan={
                                 2 +
                                 (props.blockHeight ? 1 : 0) +
+                                (props.amount ? 1 : 0) +
+                                (props.status ? 1 : 0) +
                                 (props.time ? 1 : 0)
                             }
                         >
