@@ -1,6 +1,7 @@
 import { TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
+import { defaultChainImage } from '@/lib/constants'
 import { IbcStatsQuery, TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { classNames, formatNumber } from '@/lib/utils'
@@ -14,24 +15,34 @@ export interface Props extends Omit<TableProps, 'children'> {
 }
 
 const IbcTable: FC<Props> = props => {
-    const connections = useMemo(() => {
-        const matches = []
+    const connections = useMemo(
+        () =>
+            props.stats
+                .toSorted(
+                    (a, b) =>
+                        b.shieldedTxCount +
+                        b.unshieldedTxCount -
+                        (a.shieldedTxCount + a.unshieldedTxCount)
+                )
+                .map(connection => {
+                    const chain = ibc.find(
+                        c => c.clientId === connection.clientId
+                    )
 
-        for (const connection of ibc) {
-            const stats = props.stats.find(
-                s => s.clientId === connection.clientId
-            )
-
-            if (stats) {
-                matches.push({
-                    ...connection,
-                    ...stats,
-                })
-            }
-        }
-
-        return matches
-    }, [props.stats])
+                    return chain
+                        ? {
+                              ...connection,
+                              ...chain,
+                          }
+                        : {
+                              ...connection,
+                              chainId: connection.clientId,
+                              image: defaultChainImage,
+                              name: connection.clientId,
+                          }
+                }),
+        [props.stats]
+    )
 
     return (
         <Table

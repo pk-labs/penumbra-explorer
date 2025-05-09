@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import { ChainContainer, PaginatedTransactionsContainer } from '@/containers'
+import { defaultChainImage } from '@/lib/constants'
 import ibc from '@/lib/ibc'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -24,10 +25,9 @@ export const generateMetadata = async (props: Props) => {
 const ChainPage: FC<Props> = async props => {
     const params = await props.params
     const connection = ibc.find(c => c.chainId === params.chainId)
-
-    if (!connection) {
-        notFound()
-    }
+    const clientId = connection?.clientId ?? params.chainId
+    const name = connection?.name ?? params.chainId
+    const image = connection?.image ?? defaultChainImage
 
     const searchParams = await props.searchParams
     const page = searchParams.page ? Number(searchParams.page) - 1 : 0
@@ -52,13 +52,16 @@ const ChainPage: FC<Props> = async props => {
                 )}
             >
                 <ChainContainer
-                    {...connection}
+                    chainId={params.chainId}
                     channelsClassName="lg:col-1 lg:row-span-2"
+                    clientId={clientId}
+                    image={image}
+                    name={name}
                     statsClassName="lg:col-2 lg:row-1"
                 />
                 <PaginatedTransactionsContainer
                     className="min-w-0"
-                    clientId={connection.clientId}
+                    clientId={clientId}
                     header={
                         <h2
                             className={classNames(
