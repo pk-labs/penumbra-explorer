@@ -18,8 +18,14 @@
         "noEmit": true,
         "noUnusedParameters": true,
         "paths": {
-            "@/*": [
-                "./*"
+            "@/components": [
+                "./components"
+            ],
+            "@/containers": [
+                "./containers"
+            ],
+            "@/lib/*": [
+                "./lib/*"
             ]
         },
         "plugins": [

@@ -6,6 +6,22 @@ on:
       - staging
 
 jobs:
+  env_setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy .env.staging to .env
+        run: cp .env.staging .env
+
+      - name: Upload .env artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: env-file
+          path: .env
+          retention-days: 1
+
   trigger_gcp_workflow:
     uses: ./.github/workflows/gcp.yaml
     with:

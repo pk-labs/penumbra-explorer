@@ -1,35 +1,18 @@
-substitutions:
-  _IMAGE_NAME: gcr.io/affable-skill-382607/penumbra-explorer
-
-options:
-  automapSubstitutions: true
-
 steps:
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - build
-      - -t
-      - ${_IMAGE_NAME}:${_SHORT_SHA}
-      - --build-arg
-      - _ENV_NAME_ARG=${_ENV_NAME}
-      - .
-  - name: gcr.io/cloud-builders/docker
-    args:
-      - push
-      - ${_IMAGE_NAME}:${_SHORT_SHA}
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: gcloud
     args:
       - run
       - deploy
       - penumbra-explorer-${_ENV_NAME}
-      - --image=${_IMAGE_NAME}:${_SHORT_SHA}
-      - --region=${_REGION}
+      - --source
+      - .
+      - --region
+      - ${_REGION}
       - --allow-unauthenticated
+      # Settings recommended by AI for this Next.js setup
       - --memory=2Gi
       - --cpu=2
       - --min-instances=1
       - --concurrency=20
       - --platform=managed
-      - --set-env-vars
-      - _ENV_NAME=${_ENV_NAME}
