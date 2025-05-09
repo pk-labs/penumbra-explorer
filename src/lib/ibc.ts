@@ -56,4 +56,11 @@ export default [
         name: 'Stride',
         slug: 'stride',
     },
+    {
+        chainId: 'injective-1',
+        clientId: '07-tendermint-20',
+        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.svg',
+        name: 'Injective Finance',
+        slug: 'injective',
+    },
 ]
