@@ -1,4 +1,4 @@
-import { Clock4Icon, TimerOffIcon } from 'lucide-react'
+import { TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
 import { IbcStatsQuery, TimePeriod } from '@/lib/graphql/generated/types'
@@ -40,26 +40,12 @@ const IbcTable: FC<Props> = props => {
         >
             <thead>
                 <TableRow>
-                    <TableCell className="align-baseline" header>
-                        Name
-                    </TableCell>
-                    <TableCell className="align-baseline" header>
-                        Client status
-                    </TableCell>
-                    <TableCell className="align-baseline" header>
-                        Txs shielded
-                    </TableCell>
-                    <TableCell className="align-baseline" header>
-                        Txs unshielded
-                    </TableCell>
-                    <TableCell className="align-baseline" header>
-                        Txs total
-                    </TableCell>
-                    <TableCell className="align-baseline" header>
-                        Txs pending
-                        <br />
-                        <span className="text-xs font-normal">Txs expired</span>
-                    </TableCell>
+                    <TableCell header>Name</TableCell>
+                    <TableCell header>Client status</TableCell>
+                    <TableCell header>Txs shielded</TableCell>
+                    <TableCell header>Txs unshielded</TableCell>
+                    <TableCell header>Txs total</TableCell>
+                    <TableCell header>Txs expired</TableCell>
                 </TableRow>
             </thead>
             <tbody>
@@ -127,22 +113,9 @@ const IbcTable: FC<Props> = props => {
                                 <div className="flex flex-col gap-2">
                                     <span
                                         className={classNames(
-                                            'flex items-center gap-1 text-base',
+                                            'text-text-secondary flex',
+                                            'items-center gap-1 text-base',
                                             'font-normal'
-                                        )}
-                                    >
-                                        <Clock4Icon
-                                            className="text-caution-light"
-                                            size={12}
-                                        />
-                                        {formatNumber(
-                                            connection.pendingTxCount
-                                        )}
-                                    </span>
-                                    <span
-                                        className={classNames(
-                                            'text-text-secondary flex items-center',
-                                            'gap-1'
                                         )}
                                     >
                                         <TimerOffIcon
