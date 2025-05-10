@@ -127,10 +127,7 @@ const IbcTable: FC<Props> = props => {
                             <TableCell className="h-20">
                                 <div className="flex flex-col gap-2">
                                     <span className="text-base font-normal">
-                                        {formatNumber(
-                                            connection.shieldedTxCount +
-                                                connection.unshieldedTxCount
-                                        )}
+                                        {formatNumber(connection.totalTxCount)}
                                     </span>
                                 </div>
                             </TableCell>

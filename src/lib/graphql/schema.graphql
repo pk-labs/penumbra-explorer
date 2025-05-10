@@ -92,7 +92,8 @@ type IbcStats {
     pendingTxCount: Int!
     shieldedTxCount: Int!
     shieldedVolume: String!
-    status: String
+    status: ClientStatus!
+    totalTxCount: Int!
     unshieldedTxCount: Int!
     unshieldedVolume: String!
 }
@@ -228,6 +229,13 @@ type TransactionUpdate {
     hash: String!
     id: Int!
     raw: String!
+}
+
+enum ClientStatus {
+    active
+    expired
+    frozen
+    unknown
 }
 
 enum IbcStatus {

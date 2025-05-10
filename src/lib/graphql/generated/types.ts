@@ -75,6 +75,13 @@ export type ChannelPair = {
   pendingTxCount: Scalars['Int']['output'];
 };
 
+export enum ClientStatus {
+  Active = 'active',
+  Expired = 'expired',
+  Frozen = 'frozen',
+  Unknown = 'unknown'
+}
+
 export type CollectionLimit = {
   length?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -133,7 +140,8 @@ export type IbcStats = {
   pendingTxCount: Scalars['Int']['output'];
   shieldedTxCount: Scalars['Int']['output'];
   shieldedVolume: Scalars['String']['output'];
-  status?: Maybe<Scalars['String']['output']>;
+  status: ClientStatus;
+  totalTxCount: Scalars['Int']['output'];
   unshieldedTxCount: Scalars['Int']['output'];
   unshieldedVolume: Scalars['String']['output'];
 };
@@ -472,7 +480,7 @@ export type IbcStatsQueryVariables = Exact<{
 }>;
 
 
-export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', clientId: string, status?: string | null, channelId?: string | null, counterpartyChannelId?: string | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, pendingTxCount: number, expiredTxCount: number }> };
+export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', clientId: string, status: ClientStatus, channelId?: string | null, counterpartyChannelId?: string | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, totalTxCount: number, pendingTxCount: number, expiredTxCount: number }> };
 
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -605,6 +613,7 @@ export const IbcStatsDocument = gql`
     shieldedTxCount
     unshieldedVolume
     unshieldedTxCount
+    totalTxCount
     pendingTxCount
     expiredTxCount
   }

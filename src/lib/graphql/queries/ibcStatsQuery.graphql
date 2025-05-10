@@ -8,6 +8,7 @@ query IbcStats($clientId: String, $timePeriod: TimePeriod) {
         shieldedTxCount
         unshieldedVolume
         unshieldedTxCount
+        totalTxCount
         pendingTxCount
         expiredTxCount
     }

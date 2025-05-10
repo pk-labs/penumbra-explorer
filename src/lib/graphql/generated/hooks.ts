@@ -86,6 +86,7 @@ export const IbcStatsDocument = gql`
     shieldedTxCount
     unshieldedVolume
     unshieldedTxCount
+    totalTxCount
     pendingTxCount
     expiredTxCount
   }
