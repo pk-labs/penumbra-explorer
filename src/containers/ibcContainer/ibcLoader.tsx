@@ -13,8 +13,6 @@ const IbcLoader: FC<Props> = async props => {
         notFound()
     }
 
-    await new Promise(resolve => setTimeout(resolve, 3000))
-
     return <IbcTable stats={stats} {...props} />
 }
 
