@@ -85,10 +85,7 @@ const ChainLoader: FC<Props> = async props => {
                         title="Total"
                     >
                         <Parameter name="Txs total">
-                            {formatNumber(
-                                connection.shieldedTxCount +
-                                    connection.unshieldedTxCount
-                            )}
+                            {formatNumber(connection.totalTxCount)}
                         </Parameter>
                         <Parameter name="Txs pending">
                             {formatNumber(connection.pendingTxCount)}
