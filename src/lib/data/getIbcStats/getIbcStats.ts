@@ -22,7 +22,9 @@ const getIbcStats = async (args?: {
         throw result.error
     }
 
-    return result.data?.ibcStats
+    return result.data?.ibcStats.toSorted(
+        (a, b) => b.totalTxCount - a.totalTxCount
+    )
 }
 
 export default getIbcStats

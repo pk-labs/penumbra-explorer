@@ -17,31 +17,22 @@ export interface Props extends Omit<TableProps, 'children'> {
 const IbcTable: FC<Props> = props => {
     const connections = useMemo(
         () =>
-            props.stats
-                .toSorted(
-                    (a, b) =>
-                        b.shieldedTxCount +
-                        b.unshieldedTxCount -
-                        (a.shieldedTxCount + a.unshieldedTxCount)
-                )
-                .map(connection => {
-                    const chain = ibc.find(
-                        c => c.clientId === connection.clientId
-                    )
+            props.stats.map(connection => {
+                const chain = ibc.find(c => c.clientId === connection.clientId)
 
-                    return chain
-                        ? {
-                              ...connection,
-                              ...chain,
-                          }
-                        : {
-                              ...connection,
-                              chainId: connection.clientId,
-                              image: defaultChainImage,
-                              name: connection.clientId,
-                              slug: connection.clientId,
-                          }
-                }),
+                return chain
+                    ? {
+                          ...connection,
+                          ...chain,
+                      }
+                    : {
+                          ...connection,
+                          chainId: connection.clientId,
+                          image: defaultChainImage,
+                          name: connection.clientId,
+                          slug: connection.clientId,
+                      }
+            }),
         [props.stats]
     )
 
