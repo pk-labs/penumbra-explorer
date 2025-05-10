@@ -8,7 +8,7 @@ describe('TransactionStatusPill', () => {
         getByText(container, 'Unknown')
     })
 
-    test('renders pending status', async () => {
+    test('renders completed status', async () => {
         const { container } = render(
             <TransactionStatusPill status={IbcStatus.Completed} />
         )

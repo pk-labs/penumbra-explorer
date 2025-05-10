@@ -5,8 +5,8 @@ import { defaultChainImage } from '@/lib/constants'
 import { IbcStatsQuery, TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { classNames, formatNumber } from '@/lib/utils'
+import ClientStatusPill from '../../clientStatusPill'
 import EmptyState from '../../emptyState'
-import { Pill } from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -93,18 +93,7 @@ const IbcTable: FC<Props> = props => {
                                 </span>
                             </TableCell>
                             <TableCell className="h-20">
-                                <Pill
-                                    className="capitalize"
-                                    context={
-                                        connection.status?.toLowerCase() ===
-                                        'active'
-                                            ? 'technical-success'
-                                            : 'technical-default'
-                                    }
-                                    priority="secondary"
-                                >
-                                    {connection.status}
-                                </Pill>
+                                <ClientStatusPill status={connection.status} />
                             </TableCell>
                             <TableCell className="h-20">
                                 <div className="flex flex-col gap-2">
