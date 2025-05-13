@@ -42,40 +42,52 @@ const ClientContainer: FC<Props> = props => (
                             <span>{props.id}</span>
                         </div>
                     </div>
-                    <div className="grid gap-4">
-                        <div className="flex flex-col gap-4">
-                            <Parameters
-                                className="bg-transparent p-0"
-                                title="Shielded"
-                            >
-                                <Parameter name="Txs shielded">
-                                    <Skeleton className="h-4 w-24" />
-                                </Parameter>
-                            </Parameters>
-                            <Parameters
-                                className="bg-transparent p-0"
-                                title="Unshielded"
-                            >
-                                <Parameter name="Txs unshielded">
-                                    <Skeleton className="h-4 w-24" />
-                                </Parameter>
-                            </Parameters>
-                        </div>
-                        <Parameters
-                            className="bg-transparent p-0 sm:col-2 lg:col-auto!"
-                            title="Total"
-                        >
+                    <div className="flex flex-col gap-4">
+                        <Parameters className="bg-transparent p-0">
+                            <Parameter name="Last tx time">
+                                <Skeleton className="h-4 w-14" />
+                            </Parameter>
+                        </Parameters>
+                        <Parameters className="bg-transparent p-0">
                             <Parameter name="Txs total">
-                                <Skeleton className="h-4 w-24" />
-                            </Parameter>
-                            <Parameter name="Txs pending">
-                                <Skeleton className="h-4 w-24" />
-                            </Parameter>
-                            <Parameter name="Txs expired">
-                                <Skeleton className="h-4 w-24" />
+                                <Skeleton className="h-4 w-14" />
                             </Parameter>
                         </Parameters>
                     </div>
+                    {/*<div className="grid gap-4">*/}
+                    {/*<div className="flex flex-col gap-4">*/}
+                    {/*    <Parameters*/}
+                    {/*        className="bg-transparent p-0"*/}
+                    {/*        title="Shielded"*/}
+                    {/*    >*/}
+                    {/*        <Parameter name="Txs shielded">*/}
+                    {/*            <Skeleton className="h-4 w-24" />*/}
+                    {/*        </Parameter>*/}
+                    {/*    </Parameters>*/}
+                    {/*    <Parameters*/}
+                    {/*        className="bg-transparent p-0"*/}
+                    {/*        title="Unshielded"*/}
+                    {/*    >*/}
+                    {/*        <Parameter name="Txs unshielded">*/}
+                    {/*            <Skeleton className="h-4 w-24" />*/}
+                    {/*        </Parameter>*/}
+                    {/*    </Parameters>*/}
+                    {/*</div>*/}
+                    {/*<Parameters*/}
+                    {/*    className="bg-transparent p-0 sm:col-2 lg:col-auto!"*/}
+                    {/*    title="Total"*/}
+                    {/*>*/}
+                    {/*    <Parameter name="Txs total">*/}
+                    {/*        <Skeleton className="h-4 w-24" />*/}
+                    {/*    </Parameter>*/}
+                    {/*    <Parameter name="Txs pending">*/}
+                    {/*        <Skeleton className="h-4 w-24" />*/}
+                    {/*    </Parameter>*/}
+                    {/*    <Parameter name="Txs expired">*/}
+                    {/*        <Skeleton className="h-4 w-24" />*/}
+                    {/*    </Parameter>*/}
+                    {/*</Parameters>*/}
+                    {/*</div>*/}
                 </div>
                 <div
                     className={classNames(
