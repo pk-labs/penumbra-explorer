@@ -11,11 +11,27 @@ describe('TimeAgo', () => {
         getByText(container, '1s ago')
     })
 
-    test('updates time every second', async () => {
+    test('does not update when flag not set', async () => {
         const timestamp = dayjs().subtract(1, 'second').valueOf()
 
         const { container } = render(
             <TimeAgo initialTimeAgo="1s ago" timestamp={timestamp} />
+        )
+
+        getByText(container, '1s ago')
+
+        act(() => jest.advanceTimersByTime(1000))
+        getByText(container, '1s ago')
+
+        act(() => jest.advanceTimersByTime(1000))
+        getByText(container, '1s ago')
+    })
+
+    test('updates every second when flag set', async () => {
+        const timestamp = dayjs().subtract(1, 'second').valueOf()
+
+        const { container } = render(
+            <TimeAgo initialTimeAgo="1s ago" timestamp={timestamp} update />
         )
 
         getByText(container, '1s ago')

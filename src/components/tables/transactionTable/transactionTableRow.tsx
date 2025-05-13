@@ -27,6 +27,7 @@ export interface Props {
     status?: boolean
     time?: boolean
     transaction: TransformedPartialTransactionFragment
+    updateTimeAgo?: boolean
 }
 
 const TransactionTableRow: FC<Props> = props => {
@@ -107,6 +108,7 @@ const TransactionTableRow: FC<Props> = props => {
                     <TimeAgo
                         initialTimeAgo={props.transaction.initialTimeAgo}
                         timestamp={props.transaction.timestamp}
+                        update={props.updateTimeAgo}
                     />
                 </TableCell>
             )}
