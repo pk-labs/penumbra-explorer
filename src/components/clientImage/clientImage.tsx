@@ -13,7 +13,10 @@ const ClientImage: FC<Props> = props =>
     props.src ? (
         <Image
             alt={props.alt ?? ''}
-            className={classNames('inline h-8 w-8', props.className)}
+            className={classNames(
+                'inline h-8 w-8 rounded-full',
+                props.className
+            )}
             src={props.src}
         />
     ) : (
