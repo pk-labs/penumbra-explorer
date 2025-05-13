@@ -23,7 +23,6 @@ const TransactionView: FC<Props> = props => (
             'to-[rgba(193,166,204,0.03)]!',
             props.className
         )}
-        subtitle={props.transaction.hash}
         title="Transaction view"
     >
         <Parameters>
@@ -62,9 +61,7 @@ const TransactionView: FC<Props> = props => (
         <Subsection title="Parameters">
             <Parameters>
                 <Parameter name="Transaction fee">
-                    <span className="text-destructive-light">
-                        {props.transaction.fee / 1000000} UM
-                    </span>
+                    {props.transaction.fee / 1000000} UM
                 </Parameter>
                 <Parameter name="Chain ID">
                     {props.transaction.chainId}
