@@ -33,7 +33,7 @@ const BlocksPage: FC<Props> = async props => {
     return (
         <Container>
             <Breadcrumbs>
-                <Breadcrumb href="/">Explorer</Breadcrumb>
+                <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Blocks</Breadcrumb>
             </Breadcrumbs>
             <PaginatedBlocksContainer

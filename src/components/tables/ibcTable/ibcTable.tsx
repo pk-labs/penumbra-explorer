@@ -43,7 +43,7 @@ const IbcTable: FC<Props> = props => {
         >
             <thead>
                 <TableRow>
-                    <TableCell header>Client</TableCell>
+                    <TableCell header>Name</TableCell>
                     <TableCell header>Client status</TableCell>
                     <TableCell header>Client ID</TableCell>
                     <TableCell header>Channel ID</TableCell>

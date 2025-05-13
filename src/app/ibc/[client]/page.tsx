@@ -40,8 +40,8 @@ const ClientPage: FC<Props> = async props => {
     return (
         <Container>
             <Breadcrumbs>
-                <Breadcrumb href="/">Explorer</Breadcrumb>
-                <Breadcrumb href="/ibc">IBC Clients</Breadcrumb>
+                <Breadcrumb href="/">Explore</Breadcrumb>
+                <Breadcrumb href="/ibc">IBC Chains</Breadcrumb>
             </Breadcrumbs>
             <div
                 className={classNames(

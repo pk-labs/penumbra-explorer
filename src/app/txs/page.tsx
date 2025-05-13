@@ -31,7 +31,7 @@ const TransactionsPage: FC<Props> = async props => {
     return (
         <Container>
             <Breadcrumbs>
-                <Breadcrumb href="/">Explorer</Breadcrumb>
+                <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
             <PaginatedTransactionsContainer
