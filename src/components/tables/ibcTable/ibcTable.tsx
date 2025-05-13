@@ -72,13 +72,16 @@ const IbcTable: FC<Props> = props => {
                                     >
                                         {client.name}
                                     </span>
-                                    <span
-                                        className={classNames(
-                                            'text-text-secondary text-xs font-medium'
-                                        )}
-                                    >
-                                        {client.id}
-                                    </span>
+                                    {client.id !== client.name && (
+                                        <span
+                                            className={classNames(
+                                                'text-text-secondary text-xs',
+                                                'font-medium'
+                                            )}
+                                        >
+                                            {client.id}
+                                        </span>
+                                    )}
                                 </span>
                             </TableCell>
                             <TableCell className="h-20">
