@@ -34,7 +34,7 @@ const IbcPage: FC<Props> = async props => {
         <Container>
             <Breadcrumbs>
                 <Breadcrumb href="/">Explorer</Breadcrumb>
-                <Breadcrumb>IBC Chains</Breadcrumb>
+                <Breadcrumb>IBC Clients</Breadcrumb>
             </Breadcrumbs>
             <IbcContainer timePeriod={timePeriod} />
         </Container>

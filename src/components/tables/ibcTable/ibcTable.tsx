@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
-import { defaultChainImage } from '@/lib/constants'
+import { defaultClientImage } from '@/lib/constants'
 import { TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { TransformedIbcStats } from '@/lib/types'
@@ -16,22 +16,22 @@ export interface Props extends Omit<TableProps, 'children'> {
 }
 
 const IbcTable: FC<Props> = props => {
-    const connections = useMemo(
+    const clients = useMemo(
         () =>
-            props.stats.map(connection => {
-                const chain = ibc.find(c => c.clientId === connection.clientId)
+            props.stats.map(stats => {
+                const client = ibc.find(c => c.id === stats.id)
 
-                return chain
+                return client
                     ? {
-                          ...connection,
-                          ...chain,
+                          ...stats,
+                          ...client,
                       }
                     : {
-                          ...connection,
-                          chainId: connection.clientId,
-                          image: defaultChainImage,
-                          name: connection.clientId,
-                          slug: connection.clientId,
+                          ...stats,
+                          id: stats.id,
+                          image: defaultClientImage,
+                          name: stats.id,
+                          slug: stats.id,
                       }
             }),
         [props.stats]
@@ -44,7 +44,7 @@ const IbcTable: FC<Props> = props => {
         >
             <thead>
                 <TableRow>
-                    <TableCell header>Name</TableCell>
+                    <TableCell header>Client</TableCell>
                     <TableCell header>Client status</TableCell>
                     <TableCell header>Client ID</TableCell>
                     <TableCell header>Channel ID</TableCell>
@@ -57,18 +57,15 @@ const IbcTable: FC<Props> = props => {
                 </TableRow>
             </thead>
             <tbody>
-                {connections.length ? (
-                    connections.map(connection => (
-                        <TableRow
-                            key={connection.chainId}
-                            href={`/ibc/${connection.slug}`}
-                        >
+                {clients.length ? (
+                    clients.map(client => (
+                        <TableRow key={client.id} href={`/ibc/${client.slug}`}>
                             <TableCell className="h-20">
                                 <Image
-                                    alt={connection.name}
+                                    alt={client.name}
                                     className="inline"
                                     height={32}
-                                    src={connection.image}
+                                    src={client.image}
                                     width={32}
                                 />
                                 <span className="inline-flex flex-col">
@@ -77,45 +74,43 @@ const IbcTable: FC<Props> = props => {
                                             'font-default text-lg font-normal'
                                         )}
                                     >
-                                        {connection.name}
+                                        {client.name}
                                     </span>
                                     <span
                                         className={classNames(
                                             'text-text-secondary text-xs font-medium'
                                         )}
                                     >
-                                        {connection.clientId}
+                                        {client.id}
                                     </span>
                                 </span>
                             </TableCell>
                             <TableCell className="h-20">
-                                <ClientStatusPill status={connection.status} />
+                                <ClientStatusPill status={client.status} />
                             </TableCell>
                             <TableCell className="h-20">
                                 <span className="text-base font-normal">
-                                    {connection.clientId}
+                                    {client.id}
                                 </span>
                             </TableCell>
                             <TableCell className="h-20">
-                                {connection.channelId && (
+                                {client.channelId && (
                                     <span className="text-base font-normal">
-                                        {connection.channelId}
+                                        {client.channelId}
                                     </span>
                                 )}
                             </TableCell>
                             <TableCell className="h-20">
                                 <span className="text-base font-normal">
                                     <TimeAgo
-                                        initialTimeAgo={
-                                            connection.initialTimeAgo
-                                        }
-                                        timestamp={connection.timestamp}
+                                        initialTimeAgo={client.initialTimeAgo}
+                                        timestamp={client.timestamp}
                                     />
                                 </span>
                             </TableCell>
                             <TableCell className="h-20">
                                 <span className="text-base font-normal">
-                                    {formatNumber(connection.totalTxCount)}
+                                    {formatNumber(client.totalTxCount)}
                                 </span>
                             </TableCell>
                             {/*<TableCell className="h-20">*/}
@@ -167,7 +162,7 @@ const IbcTable: FC<Props> = props => {
                 ) : (
                     <TableRow>
                         <TableCell className="h-20" colSpan={6}>
-                            <EmptyState>No chains configured</EmptyState>
+                            <EmptyState>No clients configured</EmptyState>
                         </TableCell>
                     </TableRow>
                 )}

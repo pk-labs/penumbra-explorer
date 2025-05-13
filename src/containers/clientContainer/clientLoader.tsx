@@ -9,20 +9,20 @@ import { classNames, formatNumber } from '@/lib/utils'
 export interface Props {
     chainId?: string
     channelsClassName?: string
-    clientId: string
+    id: string
     image: string
     name: string
     statsClassName?: string
 }
 
-const ChainLoader: FC<Props> = async props => {
-    const stats = await getIbcStats({ clientId: props.clientId })
+const ClientLoader: FC<Props> = async props => {
+    const stats = await getIbcStats({ clientId: props.id })
 
     if (stats?.length !== 1) {
         notFound()
     }
 
-    const [connection] = stats
+    const [client] = stats
 
     return (
         <>
@@ -58,7 +58,7 @@ const ChainLoader: FC<Props> = async props => {
                     </div>
                     <div>
                         <span className="text-text-secondary">client-id </span>
-                        <span>{props.clientId}</span>
+                        <span>{props.id}</span>
                     </div>
                 </div>
                 <div className="grid gap-4">
@@ -68,7 +68,7 @@ const ChainLoader: FC<Props> = async props => {
                             title="Shielded"
                         >
                             <Parameter name="Txs shielded">
-                                {formatNumber(connection.shieldedTxCount)}
+                                {formatNumber(client.shieldedTxCount)}
                             </Parameter>
                         </Parameters>
                         <Parameters
@@ -76,7 +76,7 @@ const ChainLoader: FC<Props> = async props => {
                             title="Unshielded"
                         >
                             <Parameter name="Txs unshielded">
-                                {formatNumber(connection.unshieldedTxCount)}
+                                {formatNumber(client.unshieldedTxCount)}
                             </Parameter>
                         </Parameters>
                     </div>
@@ -85,28 +85,28 @@ const ChainLoader: FC<Props> = async props => {
                         title="Total"
                     >
                         <Parameter name="Txs total">
-                            {formatNumber(connection.totalTxCount)}
+                            {formatNumber(client.totalTxCount)}
                         </Parameter>
                         <Parameter name="Txs pending">
-                            {formatNumber(connection.pendingTxCount)}
+                            {formatNumber(client.pendingTxCount)}
                         </Parameter>
                         <Parameter name="Txs expired">
-                            {formatNumber(connection.expiredTxCount)}
+                            {formatNumber(client.expiredTxCount)}
                         </Parameter>
                     </Parameters>
                 </div>
             </div>
-            {connection.channelId && connection.counterpartyChannelId && (
+            {client.channelId && client.counterpartyChannelId && (
                 <IbcChannels
                     chainImage={props.image}
                     chainName={props.name}
-                    channelId={connection.channelId}
+                    channelId={client.channelId}
                     className={props.statsClassName}
-                    counterpartyChannelId={connection.counterpartyChannelId}
+                    counterpartyChannelId={client.counterpartyChannelId}
                 />
             )}
         </>
     )
 }
 
-export default ChainLoader
+export default ClientLoader

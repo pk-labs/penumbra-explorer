@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { FC, Suspense } from 'react'
 import { Parameter, Parameters, Skeleton } from '@/components'
 import { classNames } from '@/lib/utils'
-import ChainLoader, { Props } from './chainLoader'
+import ClientLoader, { Props } from './clientLoader'
 
-const ChainContainer: FC<Props> = props => (
+const ClientContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <>
@@ -46,7 +46,7 @@ const ChainContainer: FC<Props> = props => (
                             <span className="text-text-secondary">
                                 client-id{' '}
                             </span>
-                            <span>{props.clientId}</span>
+                            <span>{props.id}</span>
                         </div>
                     </div>
                     <div className="grid gap-4">
@@ -95,8 +95,8 @@ const ChainContainer: FC<Props> = props => (
             </>
         }
     >
-        <ChainLoader {...props} />
+        <ClientLoader {...props} />
     </Suspense>
 )
 
-export default ChainContainer
+export default ClientContainer

@@ -480,7 +480,7 @@ export type IbcStatsQueryVariables = Exact<{
 }>;
 
 
-export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', clientId: string, status: ClientStatus, channelId?: string | null, counterpartyChannelId?: string | null, lastUpdated?: any | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, totalTxCount: number, pendingTxCount: number, expiredTxCount: number }> };
+export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', status: ClientStatus, channelId?: string | null, counterpartyChannelId?: string | null, lastUpdated?: any | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, totalTxCount: number, pendingTxCount: number, expiredTxCount: number, id: string }> };
 
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -605,7 +605,7 @@ export const BlocksDocument = gql`
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
-    clientId
+    id: clientId
     status
     channelId
     counterpartyChannelId

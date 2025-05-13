@@ -45,8 +45,9 @@ export interface TransformedPartialTransactionFragment
 export interface TransformedIbcStats
     extends Omit<
         NonNullable<IbcStatsQuery['ibcStats']>[number],
-        'lastUpdated'
+        'clientId' | 'lastUpdated'
     > {
+    id: string
     initialTimeAgo: string
     timestamp: number
 }

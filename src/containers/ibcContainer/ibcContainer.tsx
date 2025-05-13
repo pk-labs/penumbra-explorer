@@ -20,8 +20,8 @@ const IbcContainer: FC<Props> = props => (
                     </TableRow>
                 </thead>
                 <tbody>
-                    {ibc.map(connection => (
-                        <TableRow key={connection.chainId}>
+                    {ibc.map(client => (
+                        <TableRow key={client.id}>
                             <TableCell className="h-20">
                                 <Skeleton className="h-13" />
                             </TableCell>

@@ -2,32 +2,32 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
-import { ChainContainer, PaginatedTransactionsContainer } from '@/containers'
-import { defaultChainImage } from '@/lib/constants'
+import { ClientContainer, PaginatedTransactionsContainer } from '@/containers'
+import { defaultClientImage } from '@/lib/constants'
 import ibc from '@/lib/ibc'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
 interface Props {
-    params: Promise<{ chainSlug: string }>
+    params: Promise<{ client: string }>
     searchParams: Promise<{ page?: string }>
 }
 
 export const generateMetadata = async (props: Props) => {
-    const { chainSlug } = await props.params
+    const { client } = await props.params
 
     return generatePageMetadata(
-        `Chain ${chainSlug}`,
+        `IBC client ${client}`,
         'TODO: Description',
-        `/ibc/${chainSlug}`
+        `/ibc/${client}`
     )
 }
 
-const ChainPage: FC<Props> = async props => {
+const ClientPage: FC<Props> = async props => {
     const params = await props.params
-    const connection = ibc.find(c => c.slug === params.chainSlug)
-    const clientId = connection?.clientId ?? params.chainSlug
-    const name = connection?.name ?? params.chainSlug
-    const image = connection?.image ?? defaultChainImage
+    const client = ibc.find(c => c.slug === params.client)
+    const id = client?.id ?? params.client
+    const name = client?.name ?? params.client
+    const image = client?.image ?? defaultClientImage
 
     const searchParams = await props.searchParams
     const page = searchParams.page ? Number(searchParams.page) - 1 : 0
@@ -43,7 +43,7 @@ const ChainPage: FC<Props> = async props => {
         <Container>
             <Breadcrumbs>
                 <Breadcrumb href="/">Explorer</Breadcrumb>
-                <Breadcrumb href="/ibc">IBC Chains</Breadcrumb>
+                <Breadcrumb href="/ibc">IBC Clients</Breadcrumb>
             </Breadcrumbs>
             <div
                 className={classNames(
@@ -51,17 +51,17 @@ const ChainPage: FC<Props> = async props => {
                     'xl:grid-cols-[380px_1fr]'
                 )}
             >
-                <ChainContainer
-                    chainId={connection?.chainId}
+                <ClientContainer
+                    chainId={client?.chainId}
                     channelsClassName="lg:col-1 lg:row-span-2"
-                    clientId={clientId}
+                    id={id}
                     image={image}
                     name={name}
                     statsClassName="lg:col-2 lg:row-1"
                 />
                 <PaginatedTransactionsContainer
                     className="min-w-0"
-                    clientId={clientId}
+                    clientId={id}
                     header={
                         <h2
                             className={classNames(
@@ -74,7 +74,7 @@ const ChainPage: FC<Props> = async props => {
                     }
                     length={length}
                     offset={offset}
-                    pathname={`/ibc/${params.chainSlug}`}
+                    pathname={`/ibc/${params.client}`}
                     amount
                     blockHeight
                     status
@@ -85,4 +85,4 @@ const ChainPage: FC<Props> = async props => {
     )
 }
 
-export default ChainPage
+export default ClientPage

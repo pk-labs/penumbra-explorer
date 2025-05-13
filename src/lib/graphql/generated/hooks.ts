@@ -78,7 +78,7 @@ export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQuery
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
-    clientId
+    id: clientId
     status
     channelId
     counterpartyChannelId

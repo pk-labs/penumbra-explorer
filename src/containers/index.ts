@@ -1,5 +1,5 @@
 export { default as BlockViewContainer } from './blockViewContainer'
-export { default as ChainContainer } from './chainContainer'
+export { default as ClientContainer } from './clientContainer'
 export { default as IbcContainer } from './ibcContainer'
 export { default as LatestBlocksContainer } from './latestBlocksContainer'
 export { default as LatestTransactionsContainer } from './latestTransactionsContainer'
