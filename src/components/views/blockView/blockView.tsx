@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import { TransformedBlockFragment } from '@/lib/types'
-import { classNames, formatNumber } from '@/lib/utils'
+import { classNames } from '@/lib/utils'
 import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
 import { Parameter, Parameters } from '../../parameters'
 import { View, ViewProps } from '../view'
