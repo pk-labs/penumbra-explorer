@@ -82,6 +82,7 @@ export const IbcStatsDocument = gql`
     status
     channelId
     counterpartyChannelId
+    lastUpdated
     shieldedVolume
     shieldedTxCount
     unshieldedVolume

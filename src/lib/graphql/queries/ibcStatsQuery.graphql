@@ -4,6 +4,7 @@ query IbcStats($clientId: String, $timePeriod: TimePeriod) {
         status
         channelId
         counterpartyChannelId
+        lastUpdated
         shieldedVolume
         shieldedTxCount
         unshieldedVolume

@@ -1,7 +1,7 @@
-import { TimerOffIcon } from 'lucide-react'
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
 import { defaultChainImage } from '@/lib/constants'
+import dayjs from '@/lib/dayjs'
 import { IbcStatsQuery, TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { classNames, formatNumber } from '@/lib/utils'
@@ -45,10 +45,14 @@ const IbcTable: FC<Props> = props => {
                 <TableRow>
                     <TableCell header>Name</TableCell>
                     <TableCell header>Client status</TableCell>
-                    <TableCell header>Txs shielded</TableCell>
-                    <TableCell header>Txs unshielded</TableCell>
-                    <TableCell header>Txs total</TableCell>
-                    <TableCell header>Txs expired</TableCell>
+                    <TableCell header>Client ID</TableCell>
+                    <TableCell header>Channel ID</TableCell>
+                    <TableCell header>Last tx time</TableCell>
+                    <TableCell header>Total tx count</TableCell>
+                    {/*<TableCell header>Txs shielded</TableCell>*/}
+                    {/*<TableCell header>Txs unshielded</TableCell>*/}
+                    {/*<TableCell header>Txs total</TableCell>*/}
+                    {/*<TableCell header>Txs expired</TableCell>*/}
                 </TableRow>
             </thead>
             <tbody>
@@ -87,49 +91,71 @@ const IbcTable: FC<Props> = props => {
                                 <ClientStatusPill status={connection.status} />
                             </TableCell>
                             <TableCell className="h-20">
-                                <div className="flex flex-col gap-2">
-                                    <span className="text-base font-normal">
-                                        {formatNumber(
-                                            connection.shieldedTxCount
-                                        )}
-                                    </span>
-                                </div>
+                                <span className="text-base font-normal">
+                                    {connection.clientId}
+                                </span>
                             </TableCell>
                             <TableCell className="h-20">
-                                <div className="flex flex-col gap-2">
+                                {connection.channelId && (
                                     <span className="text-base font-normal">
-                                        {formatNumber(
-                                            connection.unshieldedTxCount
-                                        )}
+                                        {connection.channelId}
                                     </span>
-                                </div>
+                                )}
                             </TableCell>
                             <TableCell className="h-20">
-                                <div className="flex flex-col gap-2">
-                                    <span className="text-base font-normal">
-                                        {formatNumber(connection.totalTxCount)}
-                                    </span>
-                                </div>
+                                {dayjs(connection.lastUpdated).format(
+                                    'YYYY-MM-DD HH:mm:ss z'
+                                )}
                             </TableCell>
                             <TableCell className="h-20">
-                                <div className="flex flex-col gap-2">
-                                    <span
-                                        className={classNames(
-                                            'text-text-secondary flex',
-                                            'items-center gap-1 text-base',
-                                            'font-normal'
-                                        )}
-                                    >
-                                        <TimerOffIcon
-                                            className="text-text-secondary"
-                                            size={12}
-                                        />
-                                        {formatNumber(
-                                            connection.expiredTxCount
-                                        )}
-                                    </span>
-                                </div>
+                                <span className="text-base font-normal">
+                                    {formatNumber(connection.totalTxCount)}
+                                </span>
                             </TableCell>
+                            {/*<TableCell className="h-20">*/}
+                            {/*    <div className="flex flex-col gap-2">*/}
+                            {/*        <span className="text-base font-normal">*/}
+                            {/*            {formatNumber(*/}
+                            {/*                connection.shieldedTxCount*/}
+                            {/*            )}*/}
+                            {/*        </span>*/}
+                            {/*    </div>*/}
+                            {/*</TableCell>*/}
+                            {/*<TableCell className="h-20">*/}
+                            {/*    <div className="flex flex-col gap-2">*/}
+                            {/*        <span className="text-base font-normal">*/}
+                            {/*            {formatNumber(*/}
+                            {/*                connection.unshieldedTxCount*/}
+                            {/*            )}*/}
+                            {/*        </span>*/}
+                            {/*    </div>*/}
+                            {/*</TableCell>*/}
+                            {/*<TableCell className="h-20">*/}
+                            {/*    <div className="flex flex-col gap-2">*/}
+                            {/*        <span className="text-base font-normal">*/}
+                            {/*            {formatNumber(connection.totalTxCount)}*/}
+                            {/*        </span>*/}
+                            {/*    </div>*/}
+                            {/*</TableCell>*/}
+                            {/*<TableCell className="h-20">*/}
+                            {/*    <div className="flex flex-col gap-2">*/}
+                            {/*        <span*/}
+                            {/*            className={classNames(*/}
+                            {/*                'text-text-secondary flex',*/}
+                            {/*                'items-center gap-1 text-base',*/}
+                            {/*                'font-normal'*/}
+                            {/*            )}*/}
+                            {/*        >*/}
+                            {/*            <TimerOffIcon*/}
+                            {/*                className="text-text-secondary"*/}
+                            {/*                size={12}*/}
+                            {/*            />*/}
+                            {/*            {formatNumber(*/}
+                            {/*                connection.expiredTxCount*/}
+                            {/*            )}*/}
+                            {/*        </span>*/}
+                            {/*    </div>*/}
+                            {/*</TableCell>*/}
                         </TableRow>
                     ))
                 ) : (
