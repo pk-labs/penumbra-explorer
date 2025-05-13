@@ -1,16 +1,17 @@
 import Image from 'next/image'
 import { FC, useMemo } from 'react'
 import { defaultChainImage } from '@/lib/constants'
-import dayjs from '@/lib/dayjs'
-import { IbcStatsQuery, TimePeriod } from '@/lib/graphql/generated/types'
+import { TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
+import { TransformedIbcStats } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import ClientStatusPill from '../../clientStatusPill'
 import EmptyState from '../../emptyState'
+import TimeAgo from '../../timeAgo'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
-    stats: IbcStatsQuery['ibcStats']
+    stats: TransformedIbcStats[]
     timePeriod?: TimePeriod
 }
 
@@ -103,9 +104,14 @@ const IbcTable: FC<Props> = props => {
                                 )}
                             </TableCell>
                             <TableCell className="h-20">
-                                {dayjs(connection.lastUpdated).format(
-                                    'YYYY-MM-DD HH:mm:ss z'
-                                )}
+                                <span className="text-base font-normal">
+                                    <TimeAgo
+                                        initialTimeAgo={
+                                            connection.initialTimeAgo
+                                        }
+                                        timestamp={connection.timestamp}
+                                    />
+                                </span>
                             </TableCell>
                             <TableCell className="h-20">
                                 <span className="text-base font-normal">

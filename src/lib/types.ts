@@ -1,5 +1,6 @@
 import {
     BlockFragment,
+    IbcStatsQuery,
     IbcStatus,
     PartialBlockFragment,
     PartialTransactionFragment,
@@ -38,6 +39,15 @@ export interface TransformedPartialTransactionFragment
     initialTimeAgo: string
     primaryAction?: ActionType
     status: IbcStatus
+    timestamp: number
+}
+
+export interface TransformedIbcStats
+    extends Omit<
+        NonNullable<IbcStatsQuery['ibcStats']>[number],
+        'lastUpdated'
+    > {
+    initialTimeAgo: string
     timestamp: number
 }
 

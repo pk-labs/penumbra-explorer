@@ -1,3 +1,4 @@
+import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import getIbcStats from './getIbcStats'
 
@@ -5,24 +6,27 @@ jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
 describe('getIbcStats', () => {
-    test('returns data sorted by total transaction count', async () => {
+    test('returns transformed data', async () => {
+        const lastUpdated = dayjs().subtract(1, 'second')
+
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
                         data: {
                             ibcStats: [
-                                { totalTxCount: 0 },
-                                { totalTxCount: 99 },
+                                { lastUpdated: lastUpdated.toISOString() },
                             ],
                         },
                     }),
             }),
         })
 
-        await expect(getIbcStats()).resolves.toEqual([
-            { totalTxCount: 99 },
-            { totalTxCount: 0 },
+        await expect(getIbcStats()).resolves.toMatchObject([
+            {
+                initialTimeAgo: '1s ago',
+                timestamp: lastUpdated.valueOf(),
+            },
         ])
     })
 
