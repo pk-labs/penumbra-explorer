@@ -12,7 +12,7 @@ const ClientContainer: FC<Props> = props => (
                     className={classNames(
                         'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg',
                         'p-6 backdrop-blur-lg',
-                        props.channelsClassName
+                        props.statsClassName
                     )}
                 >
                     <h1
@@ -26,8 +26,7 @@ const ClientContainer: FC<Props> = props => (
                     </h1>
                     <div
                         className={classNames(
-                            'flex flex-col gap-1 font-mono text-sm font-medium',
-                            props.statsClassName
+                            'flex flex-col gap-1 font-mono text-sm font-medium'
                         )}
                     >
                         <div>
@@ -81,7 +80,7 @@ const ClientContainer: FC<Props> = props => (
                 <div
                     className={classNames(
                         'bg-other-tonalFill5 rounded-lg p-6 backdrop-blur-lg',
-                        props.statsClassName
+                        props.channelsClassName
                     )}
                 >
                     <Skeleton className="h-10 w-full" />

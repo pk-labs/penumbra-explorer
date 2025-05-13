@@ -51,11 +51,11 @@ const ClientPage: FC<Props> = async props => {
             >
                 <ClientContainer
                     chainId={client?.chainId}
-                    channelsClassName="lg:col-1 lg:row-span-2"
+                    channelsClassName="lg:col-2 lg:row-1"
                     id={id}
                     image={client?.image}
                     name={name}
-                    statsClassName="lg:col-2 lg:row-1"
+                    statsClassName="lg:col-1 lg:row-span-2"
                 />
                 <PaginatedTransactionsContainer
                     className="min-w-0"

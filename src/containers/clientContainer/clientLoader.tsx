@@ -1,7 +1,13 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { ClientImage, IbcChannels, Parameter, Parameters } from '@/components'
+import {
+    ClientImage,
+    IbcChannels,
+    Parameter,
+    Parameters,
+    TimeAgo,
+} from '@/components'
 import { getIbcStats } from '@/lib/data'
 import { classNames, formatNumber } from '@/lib/utils'
 
@@ -29,7 +35,7 @@ const ClientLoader: FC<Props> = async props => {
                 className={classNames(
                     'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg',
                     'p-6 backdrop-blur-lg',
-                    props.channelsClassName
+                    props.statsClassName
                 )}
             >
                 <h1
@@ -55,45 +61,60 @@ const ClientLoader: FC<Props> = async props => {
                         <span>{props.id}</span>
                     </div>
                 </div>
-                <div className="grid gap-4">
-                    <div className="flex flex-col gap-4">
-                        <Parameters
-                            className="bg-transparent p-0"
-                            title="Shielded"
-                        >
-                            <Parameter name="Txs shielded">
-                                {formatNumber(client.shieldedTxCount)}
-                            </Parameter>
-                        </Parameters>
-                        <Parameters
-                            className="bg-transparent p-0"
-                            title="Unshielded"
-                        >
-                            <Parameter name="Txs unshielded">
-                                {formatNumber(client.unshieldedTxCount)}
-                            </Parameter>
-                        </Parameters>
-                    </div>
-                    <Parameters
-                        className="bg-transparent p-0 sm:col-2 lg:col-auto!"
-                        title="Total"
-                    >
+                <div className="flex flex-col gap-4">
+                    <Parameters className="bg-transparent p-0">
+                        <Parameter name="Last tx time">
+                            <TimeAgo
+                                initialTimeAgo={client.initialTimeAgo}
+                                timestamp={client.timestamp}
+                            />
+                        </Parameter>
+                    </Parameters>
+                    <Parameters className="bg-transparent p-0">
                         <Parameter name="Txs total">
                             {formatNumber(client.totalTxCount)}
                         </Parameter>
-                        <Parameter name="Txs pending">
-                            {formatNumber(client.pendingTxCount)}
-                        </Parameter>
-                        <Parameter name="Txs expired">
-                            {formatNumber(client.expiredTxCount)}
-                        </Parameter>
                     </Parameters>
                 </div>
+                {/*<div className="grid gap-4">*/}
+                {/*<div className="flex flex-col gap-4">*/}
+                {/*    <Parameters*/}
+                {/*        className="bg-transparent p-0"*/}
+                {/*        title="Shielded"*/}
+                {/*    >*/}
+                {/*        <Parameter name="Txs shielded">*/}
+                {/*            {formatNumber(client.shieldedTxCount)}*/}
+                {/*        </Parameter>*/}
+                {/*    </Parameters>*/}
+                {/*    <Parameters*/}
+                {/*        className="bg-transparent p-0"*/}
+                {/*        title="Unshielded"*/}
+                {/*    >*/}
+                {/*        <Parameter name="Txs unshielded">*/}
+                {/*            {formatNumber(client.unshieldedTxCount)}*/}
+                {/*        </Parameter>*/}
+                {/*    </Parameters>*/}
+                {/*</div>*/}
+                {/*<Parameters*/}
+                {/*    className="bg-transparent p-0 sm:col-2 lg:col-auto!"*/}
+                {/*    // title="Total"*/}
+                {/*>*/}
+                {/*    <Parameter name="Txs total">*/}
+                {/*        {formatNumber(client.totalTxCount)}*/}
+                {/*    </Parameter>*/}
+                {/*    <Parameter name="Txs pending">*/}
+                {/*        {formatNumber(client.pendingTxCount)}*/}
+                {/*    </Parameter>*/}
+                {/*    <Parameter name="Txs expired">*/}
+                {/*        {formatNumber(client.expiredTxCount)}*/}
+                {/*    </Parameter>*/}
+                {/*</Parameters>*/}
+                {/*</div>*/}
             </div>
             {client.channelId && client.counterpartyChannelId && (
                 <IbcChannels
                     channelId={client.channelId}
-                    className={props.statsClassName}
+                    className={props.channelsClassName}
                     counterpartyChannelId={client.counterpartyChannelId}
                     counterpartyImage={props.image}
                     counterpartyName={props.name}
