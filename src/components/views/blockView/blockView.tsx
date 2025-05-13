@@ -17,7 +17,6 @@ const BlockView: FC<Props> = props => (
             'to-[rgba(83,174,168,0.03)]!',
             props.className
         )}
-        subtitle={formatNumber(props.block.height)}
         title="Block view"
     >
         <Parameters>
