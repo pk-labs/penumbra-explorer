@@ -8,13 +8,6 @@ export default [
         slug: 'cosmoshub',
     },
     {
-        chainId: 'dxdy-mainnet-1',
-        id: '07-tendermint-1',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.svg',
-        name: 'dYdX Protocol',
-        slug: 'dydx',
-    },
-    {
         chainId: 'noble-1',
         id: '07-tendermint-2',
         image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/stake.svg',
@@ -36,25 +29,25 @@ export default [
         slug: 'osmosis',
     },
     {
-        chainId: 'neutron-1',
-        id: '07-tendermint-5',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/neutron.svg',
-        name: 'Neutron',
-        slug: 'neutron',
-    },
-    {
         chainId: 'axelar-dojo-1',
-        id: '07-tendermint-7',
+        id: '07-tendermint-11',
         image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.svg',
         name: 'Axelar',
         slug: 'axelar',
     },
     {
         chainId: 'stride-1',
-        id: '07-tendermint-8',
+        id: '07-tendermint-12',
         image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/strd.svg',
         name: 'Stride',
         slug: 'stride',
+    },
+    {
+        chainId: 'neutron-1',
+        id: '07-tendermint-14',
+        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/neutron.svg',
+        name: 'Neutron',
+        slug: 'neutron',
     },
     {
         chainId: 'injective-1',
@@ -62,5 +55,12 @@ export default [
         image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.svg',
         name: 'Injective Finance',
         slug: 'injective',
+    },
+    {
+        chainId: 'dxdy-mainnet-1',
+        id: '07-tendermint-22',
+        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.svg',
+        name: 'dYdX Protocol',
+        slug: 'dydx',
     },
 ]
