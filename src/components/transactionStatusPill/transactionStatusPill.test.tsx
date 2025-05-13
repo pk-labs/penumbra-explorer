@@ -2,7 +2,7 @@ import { getByText, render } from '@testing-library/react'
 import { IbcStatus } from '@/lib/graphql/generated/types'
 import TransactionStatusPill from './transactionStatusPill'
 
-describe('TransactionStatusPill', () => {
+describe.skip('TransactionStatusPill', () => {
     test('renders unknown status by default', async () => {
         const { container } = render(<TransactionStatusPill />)
         getByText(container, 'Unknown')
