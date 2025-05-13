@@ -8,12 +8,12 @@ const Memo: FC = () => (
     <Subsection title="Memo">
         <div
             className={classNames(
-                'bg-other-tonalFill5 flex items-center gap-2 rounded-sm px-3',
-                'text-text-secondary py-2 text-sm font-normal'
+                'bg-other-tonalFill5 flex items-center gap-1 rounded-sm px-3',
+                'text-text-secondary py-2'
             )}
         >
             <Encrypted />
-            <span>Memo</span>
+            <span className="font-mono text-sm font-medium">Memo</span>
         </div>
     </Subsection>
 )
