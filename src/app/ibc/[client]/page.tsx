@@ -15,7 +15,7 @@ export const generateMetadata = async (props: Props) => {
     const { client } = await props.params
 
     return generatePageMetadata(
-        `IBC client ${client}`,
+        `IBC ${client}`,
         'TODO: Description',
         `/ibc/${client}`
     )
