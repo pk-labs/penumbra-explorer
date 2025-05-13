@@ -13,10 +13,8 @@ const ClientImage: FC<Props> = props =>
     props.src ? (
         <Image
             alt={props.alt ?? ''}
-            className={classNames('inline', props.className)}
-            height={32}
+            className={classNames('inline h-8 w-8', props.className)}
             src={props.src}
-            width={32}
         />
     ) : (
         <span

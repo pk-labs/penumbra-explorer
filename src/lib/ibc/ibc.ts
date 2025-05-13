@@ -1,65 +1,75 @@
 // istanbul ignore file
+import axelar from './axelar.svg'
+import celestia from './celestia.svg'
+import cosmoshub from './cosmoshub.svg'
+import dydx from './dydx.svg'
+import injective from './injective.svg'
+import neutron from './neutron.svg'
+import noble from './noble.svg'
+import osmosis from './osmosis.svg'
+import stride from './stride.svg'
+
 export default [
     {
         chainId: 'cosmoshub-4',
         id: '07-tendermint-0',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.svg',
+        image: cosmoshub,
         name: 'Cosmos Hub',
         slug: 'cosmoshub',
     },
     {
         chainId: 'noble-1',
         id: '07-tendermint-2',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/stake.svg',
+        image: noble,
         name: 'Noble',
         slug: 'noble',
     },
     {
         chainId: 'celestia',
         id: '07-tendermint-3',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/celestia/images/celestia.svg',
+        image: celestia,
         name: 'Celestia',
         slug: 'celestia',
     },
     {
         chainId: 'osmosis-1',
         id: '07-tendermint-4',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg',
+        image: osmosis,
         name: 'Osmosis',
         slug: 'osmosis',
     },
     {
         chainId: 'axelar-dojo-1',
         id: '07-tendermint-11',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/axl.svg',
+        image: axelar,
         name: 'Axelar',
         slug: 'axelar',
     },
     {
         chainId: 'stride-1',
         id: '07-tendermint-12',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/strd.svg',
+        image: stride,
         name: 'Stride',
         slug: 'stride',
     },
     {
         chainId: 'neutron-1',
         id: '07-tendermint-14',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/neutron.svg',
+        image: neutron,
         name: 'Neutron',
         slug: 'neutron',
     },
     {
         chainId: 'injective-1',
         id: '07-tendermint-20',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.svg',
+        image: injective,
         name: 'Injective Finance',
         slug: 'injective',
     },
     {
         chainId: 'dxdy-mainnet-1',
         id: '07-tendermint-22',
-        image: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/dydx/images/dydx.svg',
+        image: dydx,
         name: 'dYdX Protocol',
         slug: 'dydx',
     },
