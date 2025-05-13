@@ -1,7 +1,6 @@
 // istanbul ignore file
-import Image from 'next/image'
 import { FC, Suspense } from 'react'
-import { Parameter, Parameters, Skeleton } from '@/components'
+import { ClientImage, Parameter, Parameters, Skeleton } from '@/components'
 import { classNames } from '@/lib/utils'
 import ClientLoader, { Props } from './clientLoader'
 
@@ -22,12 +21,7 @@ const ClientContainer: FC<Props> = props => (
                             'font-medium'
                         )}
                     >
-                        <Image
-                            alt={props.name}
-                            height={32}
-                            src={props.image}
-                            width={32}
-                        />
+                        <ClientImage alt={props.name} src={props.image} />
                         <span className="truncate">{props.name}</span>
                     </h1>
                     <div

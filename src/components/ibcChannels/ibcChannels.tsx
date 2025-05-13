@@ -1,15 +1,15 @@
 import { CheckIcon } from 'lucide-react'
-import Image from 'next/image'
 import { FC } from 'react'
 import { penumbra } from '@/lib/images'
 import { classNames } from '@/lib/utils'
+import ClientImage from '../clientImage'
 
 interface Props {
-    chainImage: string
-    chainName: string
     channelId: string
     className?: string
     counterpartyChannelId: string
+    counterpartyImage?: string
+    counterpartyName: string
 }
 
 const IbcChannels: FC<Props> = props => (
@@ -32,13 +32,7 @@ const IbcChannels: FC<Props> = props => (
                     'before:border-3'
                 )}
             >
-                <Image
-                    alt="Penumbra"
-                    className="rounded-full"
-                    height={32}
-                    src={penumbra}
-                    width={32}
-                />
+                <ClientImage alt="Penumbra" src={penumbra} />
             </div>
             <div
                 className={classNames(
@@ -100,12 +94,9 @@ const IbcChannels: FC<Props> = props => (
                     'before:border-3'
                 )}
             >
-                <Image
-                    alt={props.chainName}
-                    className="rounded-full"
-                    height={32}
-                    src={props.chainImage}
-                    width={32}
+                <ClientImage
+                    alt={props.counterpartyName}
+                    src={props.counterpartyImage}
                 />
             </div>
         </div>

@@ -1,10 +1,9 @@
-import Image from 'next/image'
 import { FC, useMemo } from 'react'
-import { defaultClientImage } from '@/lib/constants'
 import { TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { TransformedIbcStats } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
+import ClientImage from '../../clientImage'
 import ClientStatusPill from '../../clientStatusPill'
 import EmptyState from '../../emptyState'
 import TimeAgo from '../../timeAgo'
@@ -61,22 +60,10 @@ const IbcTable: FC<Props> = props => {
                     clients.map(client => (
                         <TableRow key={client.id} href={`/ibc/${client.slug}`}>
                             <TableCell className="h-20">
-                                {client.image ? (
-                                    <Image
-                                        alt={client.name}
-                                        className="inline"
-                                        height={32}
-                                        src={client.image}
-                                        width={32}
-                                    />
-                                ) : (
-                                    <span
-                                        className={classNames(
-                                            'inline-block h-8 w-8 rounded-full',
-                                            'bg-neutral-700'
-                                        )}
-                                    />
-                                )}
+                                <ClientImage
+                                    alt={client.name}
+                                    src={client.image}
+                                />
                                 <span className="inline-flex flex-col">
                                     <span
                                         className={classNames(

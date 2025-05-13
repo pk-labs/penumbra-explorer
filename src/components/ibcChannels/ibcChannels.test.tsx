@@ -5,10 +5,10 @@ describe('IbcChannels', () => {
     test('renders channels', async () => {
         const { container } = render(
             <IbcChannels
-                chainImage="bar.jpg"
-                chainName="bar"
                 channelId="foo-123"
                 counterpartyChannelId="bar-456"
+                counterpartyImage="bar.jpg"
+                counterpartyName="bar"
             />
         )
 
@@ -19,10 +19,10 @@ describe('IbcChannels', () => {
     test('renders chain image', async () => {
         const { container } = render(
             <IbcChannels
-                chainImage="bar.jpg"
-                chainName="bar"
                 channelId="foo"
                 counterpartyChannelId="bar"
+                counterpartyImage="bar.jpg"
+                counterpartyName="bar"
             />
         )
 
@@ -32,11 +32,11 @@ describe('IbcChannels', () => {
     test('applies CSS classes', async () => {
         const { container } = render(
             <IbcChannels
-                chainImage="bar.jpg"
-                chainName="bar"
                 channelId="foo"
                 className="foo bar"
                 counterpartyChannelId="bar"
+                counterpartyImage="bar.jpg"
+                counterpartyName="bar"
             />
         )
 

@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import { ClientContainer, PaginatedTransactionsContainer } from '@/containers'
-import { defaultClientImage } from '@/lib/constants'
 import ibc from '@/lib/ibc'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -27,7 +26,6 @@ const ClientPage: FC<Props> = async props => {
     const client = ibc.find(c => c.slug === params.client)
     const id = client?.id ?? params.client
     const name = client?.name ?? params.client
-    const image = client?.image ?? defaultClientImage
 
     const searchParams = await props.searchParams
     const page = searchParams.page ? Number(searchParams.page) - 1 : 0
@@ -55,7 +53,7 @@ const ClientPage: FC<Props> = async props => {
                     chainId={client?.chainId}
                     channelsClassName="lg:col-1 lg:row-span-2"
                     id={id}
-                    image={image}
+                    image={client?.image}
                     name={name}
                     statsClassName="lg:col-2 lg:row-1"
                 />

@@ -1,8 +1,7 @@
 // istanbul ignore file
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { IbcChannels, Parameter, Parameters } from '@/components'
+import { ClientImage, IbcChannels, Parameter, Parameters } from '@/components'
 import { getIbcStats } from '@/lib/data'
 import { classNames, formatNumber } from '@/lib/utils'
 
@@ -10,7 +9,7 @@ export interface Props {
     chainId?: string
     channelsClassName?: string
     id: string
-    image: string
+    image?: string
     name: string
     statsClassName?: string
 }
@@ -39,12 +38,7 @@ const ClientLoader: FC<Props> = async props => {
                         'font-medium'
                     )}
                 >
-                    <Image
-                        alt={props.name}
-                        height={32}
-                        src={props.image}
-                        width={32}
-                    />
+                    <ClientImage alt={props.name} src={props.image} />
                     <span className="truncate">{props.name}</span>
                 </h1>
                 <div
@@ -98,11 +92,11 @@ const ClientLoader: FC<Props> = async props => {
             </div>
             {client.channelId && client.counterpartyChannelId && (
                 <IbcChannels
-                    chainImage={props.image}
-                    chainName={props.name}
                     channelId={client.channelId}
                     className={props.statsClassName}
                     counterpartyChannelId={client.counterpartyChannelId}
+                    counterpartyImage={props.image}
+                    counterpartyName={props.name}
                 />
             )}
         </>
