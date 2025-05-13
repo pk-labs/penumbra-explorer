@@ -29,7 +29,7 @@ const IbcTable: FC<Props> = props => {
                     : {
                           ...stats,
                           id: stats.id,
-                          image: defaultClientImage,
+                          image: undefined,
                           name: stats.id,
                           slug: stats.id,
                       }
@@ -61,13 +61,22 @@ const IbcTable: FC<Props> = props => {
                     clients.map(client => (
                         <TableRow key={client.id} href={`/ibc/${client.slug}`}>
                             <TableCell className="h-20">
-                                <Image
-                                    alt={client.name}
-                                    className="inline"
-                                    height={32}
-                                    src={client.image}
-                                    width={32}
-                                />
+                                {client.image ? (
+                                    <Image
+                                        alt={client.name}
+                                        className="inline"
+                                        height={32}
+                                        src={client.image}
+                                        width={32}
+                                    />
+                                ) : (
+                                    <span
+                                        className={classNames(
+                                            'inline-block h-8 w-8 rounded-full',
+                                            'bg-neutral-700'
+                                        )}
+                                    />
+                                )}
                                 <span className="inline-flex flex-col">
                                     <span
                                         className={classNames(
