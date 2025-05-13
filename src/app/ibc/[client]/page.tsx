@@ -73,9 +73,9 @@ const ClientPage: FC<Props> = async props => {
                     length={length}
                     offset={offset}
                     pathname={`/ibc/${params.client}`}
-                    amount
+                    // amount
                     blockHeight
-                    status
+                    // status
                     time
                 />
             </div>
