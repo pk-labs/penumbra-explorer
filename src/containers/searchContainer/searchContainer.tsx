@@ -19,6 +19,8 @@ import {
 } from '@/lib/graphql/generated/types'
 import { searchQuery } from '@/lib/graphql/queries'
 import { useDebounce, useLocalStorage } from '@/lib/hooks'
+import { searchIbc } from '@/lib/ibc'
+import { StoredSearchResult } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 
 interface Props {
@@ -34,12 +36,21 @@ const SearchContainer: FC<Props> = props => {
     const inputRef = useRef<HTMLInputElement>(null)
     const [focused, setFocused] = useState(false)
     const [inputQuery, setInputQuery] = useState('')
-    const [searchResult, setSearchResult] = useState<number | string>()
+    const [searchResult, setSearchResult] = useState<StoredSearchResult>()
     const [queryExecuted, setQueryExecuted] = useState(false)
 
     const [executeSearchQuery, cancelSearchQuery] = useDebounce<
-        (query: string) => Promise<number | string | undefined>
+        (query: string) => Promise<StoredSearchResult | undefined>
     >(async (query: string) => {
+        const client = searchIbc(query)
+
+        if (client) {
+            return {
+                id: client.id,
+                type: 'client',
+            }
+        }
+
         const result = await graphqlClient
             .query<
                 SearchQuery,
@@ -49,15 +60,21 @@ const SearchContainer: FC<Props> = props => {
 
         if (result.error || !result.data?.search) {
             return
+        } else if (result.data.search.__typename === 'Block') {
+            return {
+                height: result.data.search.height,
+                type: 'block',
+            }
+        } else {
+            return {
+                hash: result.data.search.hash.toLowerCase(),
+                type: 'transaction',
+            }
         }
-
-        return result.data.search.__typename === 'Block'
-            ? result.data.search.height
-            : result.data.search.hash.toLowerCase()
     }, 300)
 
     const [recentSearchResults, setRecentSearchResults] =
-        useLocalStorage<Array<number | string>>('search')
+        useLocalStorage<Array<StoredSearchResult>>('search')
 
     useEffect(() => {
         if (!searchResult) {
@@ -122,9 +139,11 @@ const SearchContainer: FC<Props> = props => {
             searchResults = (
                 <SearchResultOverlay
                     title={
-                        typeof searchResult === 'number'
+                        searchResult.type === 'block'
                             ? 'Block'
-                            : 'Transaction'
+                            : searchResult.type === 'transaction'
+                              ? 'Transaction'
+                              : 'IBC chain'
                     }
                 >
                     <ul
@@ -133,7 +152,7 @@ const SearchContainer: FC<Props> = props => {
                             'font-medium'
                         )}
                     >
-                        <SearchResult heightOrHash={searchResult} />
+                        <SearchResult searchResult={searchResult} />
                     </ul>
                 </SearchResultOverlay>
             )
@@ -163,7 +182,7 @@ const SearchContainer: FC<Props> = props => {
                     )}
                 >
                     {recentSearchResults.map((searchResult, i) => (
-                        <SearchResult key={i} heightOrHash={searchResult} />
+                        <SearchResult key={i} searchResult={searchResult} />
                     ))}
                 </ul>
             </SearchResultOverlay>
@@ -199,7 +218,7 @@ const SearchContainer: FC<Props> = props => {
                 onBlur={onInputBlur}
                 onChange={onInputChange}
                 onFocus={onInputFocus}
-                placeholder="Search by block height or transaction hash"
+                placeholder="Search by block height, transaction hash or chain name"
                 type="text"
                 value={inputQuery}
             />

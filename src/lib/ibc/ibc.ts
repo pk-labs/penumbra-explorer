@@ -1,4 +1,3 @@
-// istanbul ignore file
 import axelar from './axelar.svg'
 import celestia from './celestia.svg'
 import cosmoshub from './cosmoshub.svg'
@@ -9,7 +8,7 @@ import noble from './noble.svg'
 import osmosis from './osmosis.svg'
 import stride from './stride.svg'
 
-export default [
+export const ibc = [
     {
         chainId: 'cosmoshub-4',
         id: '07-tendermint-0',
@@ -74,3 +73,15 @@ export default [
         slug: 'dydx',
     },
 ]
+
+export const searchIbc = (query: string) => {
+    if (query.length < 2) {
+        return
+    }
+
+    const transformedQuery = query.toLowerCase()
+
+    return ibc.find(client =>
+        client.name.toLowerCase().startsWith(transformedQuery)
+    )
+}

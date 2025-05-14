@@ -90,3 +90,8 @@ export interface UmPriceData {
     change: number
     price: number
 }
+
+export type StoredSearchResult =
+    | { hash: string; type: 'transaction' }
+    | { height: number; type: 'block' }
+    | { id: string; type: 'client' }

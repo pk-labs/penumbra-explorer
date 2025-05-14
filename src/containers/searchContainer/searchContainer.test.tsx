@@ -34,7 +34,7 @@ jest.mock(
 
 jest.mock(
     '../../components/search/searchResult/searchResult',
-    () => (props: SearchResultProps) => <div>{props.heightOrHash}</div>
+    () => (props: SearchResultProps) => <div>{props.searchResult.type}</div>
 )
 
 describe('SearchContainer', () => {
@@ -44,7 +44,7 @@ describe('SearchContainer', () => {
         expect(
             getByPlaceholderText(
                 container,
-                'Search by block height or transaction hash'
+                'Search by block height, transaction hash or chain name'
             )
         ).not.toHaveFocus()
     })
@@ -55,7 +55,7 @@ describe('SearchContainer', () => {
         expect(
             getByPlaceholderText(
                 container,
-                'Search by block height or transaction hash'
+                'Search by block height, transaction hash or chain name'
             )
         ).toHaveFocus()
     })
@@ -66,7 +66,7 @@ describe('SearchContainer', () => {
         fireEvent.focus(
             getByPlaceholderText(
                 container,
-                'Search by block height or transaction hash'
+                'Search by block height, transaction hash or chain name'
             )
         )
 
@@ -80,7 +80,7 @@ describe('SearchContainer', () => {
         fireEvent.blur(
             getByPlaceholderText(
                 container,
-                'Search by block height or transaction hash'
+                'Search by block height, transaction hash or chain name'
             )
         )
 
@@ -88,20 +88,28 @@ describe('SearchContainer', () => {
     })
 
     test('renders recent search results', async () => {
-        window.localStorage.setItem('search', JSON.stringify([123, 'foo']))
+        window.localStorage.setItem(
+            'search',
+            JSON.stringify([
+                { type: 'block' },
+                { type: 'transaction' },
+                { type: 'client' },
+            ])
+        )
 
         const { container } = render(<SearchContainer />)
 
         fireEvent.focus(
             getByPlaceholderText(
                 container,
-                'Search by block height or transaction hash'
+                'Search by block height, transaction hash or chain name'
             )
         )
 
         getByText(container, 'SearchResultOverlay')
-        getByText(container, 123)
-        getByText(container, 'foo')
+        getByText(container, 'block')
+        getByText(container, 'transaction')
+        getByText(container, 'client')
     })
 
     test.skip('executes debounced search query on input change', async () => {
@@ -110,7 +118,7 @@ describe('SearchContainer', () => {
         fireEvent.change(
             getByPlaceholderText(
                 container,
-                'Search by block height or transaction hash'
+                'Search by block height, transaction hash or chain name'
             ),
             { currentTarget: { value: 'foo' } }
         )

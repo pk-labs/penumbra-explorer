@@ -1,1 +1,1 @@
-export { default } from './ibc'
+export { ibc as default, searchIbc } from './ibc'
