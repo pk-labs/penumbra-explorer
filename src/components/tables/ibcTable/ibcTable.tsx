@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { FC, useMemo } from 'react'
 import { TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
@@ -66,13 +67,14 @@ const IbcTable: FC<Props> = props => {
                                     src={client.image}
                                 />
                                 <span className="inline-flex flex-col">
-                                    <span
+                                    <Link
                                         className={classNames(
                                             'font-default text-lg font-normal'
                                         )}
+                                        href={`/ibc/${client.slug}`}
                                     >
                                         {client.name}
-                                    </span>
+                                    </Link>
                                     {client.chainId !== client.id && (
                                         <span
                                             className={classNames(
