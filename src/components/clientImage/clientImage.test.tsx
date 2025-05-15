@@ -7,9 +7,9 @@ describe('ClientImage', () => {
         expect(getByAltText(container, 'Foo')).toHaveAttribute('src', 'foo.jpg')
     })
 
-    test('renders placeholder when no image', async () => {
-        const { container } = render(<ClientImage />)
-        expect(container.firstChild).toHaveClass('bg-neutral-700')
+    test('renders fallback image', async () => {
+        const { container } = render(<ClientImage alt="Foo" />)
+        getByAltText(container, 'Foo')
     })
 
     test('applies CSS classes', async () => {

@@ -30,7 +30,7 @@ const IbcTable: FC<Props> = props => {
                           chainId: stats.id,
                           id: stats.id,
                           image: undefined,
-                          name: stats.id,
+                          name: 'Unknown',
                           slug: stats.id,
                       }
             }),
