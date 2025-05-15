@@ -25,7 +25,7 @@ const ClientPage: FC<Props> = async props => {
     const params = await props.params
     const client = ibc.find(c => c.slug === params.client)
     const id = client?.id ?? params.client
-    const name = client?.name ?? params.client
+    const name = client?.name ?? 'Unknown'
 
     const searchParams = await props.searchParams
     const page = searchParams.page ? Number(searchParams.page) - 1 : 0

@@ -29,12 +29,14 @@ const ClientContainer: FC<Props> = props => (
                             'flex flex-col gap-1 font-mono text-sm font-medium'
                         )}
                     >
-                        <div>
-                            <span className="text-text-secondary">
-                                chain-id{' '}
-                            </span>
-                            <span>{props.chainId}</span>
-                        </div>
+                        {props.chainId && (
+                            <div>
+                                <span className="text-text-secondary">
+                                    chain-id{' '}
+                                </span>
+                                <span>{props.chainId}</span>
+                            </div>
+                        )}
                         <div>
                             <span className="text-text-secondary">
                                 client-id{' '}
