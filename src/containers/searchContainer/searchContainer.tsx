@@ -29,8 +29,6 @@ interface Props {
     onBlur?: () => void
 }
 
-// TODO: Refactor to server component and wrap client logic in client component
-// TODO: Refactor UM price container to server component to circumvent API CORS
 const SearchContainer: FC<Props> = props => {
     const graphqlClient = useClient()
     const inputRef = useRef<HTMLInputElement>(null)
@@ -89,9 +87,26 @@ const SearchContainer: FC<Props> = props => {
             setRecentSearchResults(
                 [
                     searchResult,
-                    ...recentSearchResults.filter(
-                        result => result !== searchResult
-                    ),
+                    ...recentSearchResults.filter(result => {
+                        if (
+                            result.type === 'block' &&
+                            result.type === searchResult.type
+                        ) {
+                            return result.height !== searchResult.height
+                        } else if (
+                            result.type === 'transaction' &&
+                            result.type === searchResult.type
+                        ) {
+                            return result.hash !== searchResult.hash
+                        } else if (
+                            result.type === 'client' &&
+                            result.type === searchResult.type
+                        ) {
+                            return result.id !== searchResult.id
+                        }
+
+                        return true
+                    }),
                 ].slice(0, 5)
             )
         } else {

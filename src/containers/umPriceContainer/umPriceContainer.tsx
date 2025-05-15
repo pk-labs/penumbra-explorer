@@ -11,6 +11,7 @@ interface Props {
     className?: string
 }
 
+// TODO: Refactor UM price container to server component to circumvent API CORS?
 const UmPriceContainer: FC<Props> = props => {
     const [umPrice, setUmPrice] = useState<UmPriceData>()
 
