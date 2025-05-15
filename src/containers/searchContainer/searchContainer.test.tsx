@@ -42,10 +42,7 @@ describe('SearchContainer', () => {
         const { container } = render(<SearchContainer />)
 
         expect(
-            getByPlaceholderText(
-                container,
-                'Search by block height, transaction hash or chain name'
-            )
+            getByPlaceholderText(container, 'Search the blockchain')
         ).not.toHaveFocus()
     })
 
@@ -53,10 +50,7 @@ describe('SearchContainer', () => {
         const { container } = render(<SearchContainer autoFocus />)
 
         expect(
-            getByPlaceholderText(
-                container,
-                'Search by block height, transaction hash or chain name'
-            )
+            getByPlaceholderText(container, 'Search the blockchain')
         ).toHaveFocus()
     })
 
@@ -64,10 +58,7 @@ describe('SearchContainer', () => {
         const { container } = render(<SearchContainer />)
 
         fireEvent.focus(
-            getByPlaceholderText(
-                container,
-                'Search by block height, transaction hash or chain name'
-            )
+            getByPlaceholderText(container, 'Search the blockchain')
         )
 
         queryByText(container, 'SearchResultOverlay')
@@ -77,12 +68,7 @@ describe('SearchContainer', () => {
         const onBlur = jest.fn()
         const { container } = render(<SearchContainer onBlur={onBlur} />)
 
-        fireEvent.blur(
-            getByPlaceholderText(
-                container,
-                'Search by block height, transaction hash or chain name'
-            )
-        )
+        fireEvent.blur(getByPlaceholderText(container, 'Search the blockchain'))
 
         expect(onBlur).toHaveBeenCalled()
     })
@@ -100,10 +86,7 @@ describe('SearchContainer', () => {
         const { container } = render(<SearchContainer />)
 
         fireEvent.focus(
-            getByPlaceholderText(
-                container,
-                'Search by block height, transaction hash or chain name'
-            )
+            getByPlaceholderText(container, 'Search the blockchain')
         )
 
         getByText(container, 'SearchResultOverlay')
@@ -116,10 +99,7 @@ describe('SearchContainer', () => {
         const { container } = render(<SearchContainer />)
 
         fireEvent.change(
-            getByPlaceholderText(
-                container,
-                'Search by block height, transaction hash or chain name'
-            ),
+            getByPlaceholderText(container, 'Search the blockchain'),
             { currentTarget: { value: 'foo' } }
         )
 

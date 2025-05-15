@@ -174,15 +174,8 @@ const SearchContainer: FC<Props> = props => {
         } else {
             searchResults = (
                 <SearchResultOverlay>
-                    <p className="font-default px-2 pt-1 text-sm font-normal">
-                        <span className="text-text-primary">
-                            We couldn’t find any matching results.
-                        </span>
-                        <br />
-                        <span className="text-text-secondary">
-                            Please check the transaction hash or block height
-                            and try again.
-                        </span>
+                    <p className="font-default px-2 py-1 text-sm font-normal">
+                        We couldn’t find any results matching your search.
                     </p>
                 </SearchResultOverlay>
             )
@@ -233,7 +226,7 @@ const SearchContainer: FC<Props> = props => {
                 onBlur={onInputBlur}
                 onChange={onInputChange}
                 onFocus={onInputFocus}
-                placeholder="Search by block height, transaction hash or chain name"
+                placeholder="Search the blockchain"
                 type="text"
                 value={inputQuery}
             />
