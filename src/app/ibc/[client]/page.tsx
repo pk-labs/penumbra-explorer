@@ -18,9 +18,9 @@ export const generateMetadata = async (props: Props) => {
 
     return generatePageMetadata(
         `${name} IBC connection`,
-        `Explore ${name} IBC connection with Penumbra blockchain. View ` +
-            'client ID, channel ID, and transaction information on Noctis - ' +
-            'a fast, secure, and privacy-focused explorer built for Penumbra ' +
+        `Explore the ${name} IBC connection to the Penumbra blockchain. View ` +
+            'client ID, channel ID and transaction information on Noctis - ' +
+            'a fast, secure and privacy-focused explorer built for Penumbra ' +
             'blockchain.',
         `/ibc/${client}`
     )
