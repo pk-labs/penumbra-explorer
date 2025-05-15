@@ -27,6 +27,7 @@ const IbcTable: FC<Props> = props => {
                       }
                     : {
                           ...stats,
+                          chainId: stats.id,
                           id: stats.id,
                           image: undefined,
                           name: stats.id,
@@ -72,14 +73,14 @@ const IbcTable: FC<Props> = props => {
                                     >
                                         {client.name}
                                     </span>
-                                    {client.id !== client.name && (
+                                    {client.chainId !== client.id && (
                                         <span
                                             className={classNames(
                                                 'text-text-secondary text-xs',
                                                 'font-medium'
                                             )}
                                         >
-                                            {client.id}
+                                            {client.chainId}
                                         </span>
                                     )}
                                 </span>
