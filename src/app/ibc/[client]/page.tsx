@@ -12,11 +12,16 @@ interface Props {
 }
 
 export const generateMetadata = async (props: Props) => {
-    const { client } = await props.params
+    const params = await props.params
+    const client = ibc.find(c => c.id === params.client)
+    const name = client?.name ?? params.client
 
     return generatePageMetadata(
-        `IBC ${client}`,
-        'TODO: Description',
+        `${name} IBC connection`,
+        `Explore ${name} IBC connection with Penumbra blockchain. View ` +
+            'client ID, channel ID, and transaction information on Noctis - ' +
+            'a fast, secure, and privacy-focused explorer built for Penumbra ' +
+            'blockchain.',
         `/ibc/${client}`
     )
 }
