@@ -58,6 +58,7 @@ const LatestBlocksUpdater: FC<Props> = props => {
                 blocks={blocks}
                 className={props.blockTableClassName}
                 header={props.header}
+                updateTimeAgo={props.updateTimeAgo}
             />
         </>
     )
