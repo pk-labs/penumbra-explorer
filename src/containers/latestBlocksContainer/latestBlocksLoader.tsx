@@ -5,8 +5,7 @@ import { getBlocks } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import LatestBlocksUpdater from './latestBlocksUpdater'
 
-export interface Props
-    extends Pick<BlockTableProps, 'header' | 'updateTimeAgo'> {
+export interface Props extends Pick<BlockTableProps, 'header' | 'ticker'> {
     blockPanelClassName?: string
     blockTableClassName?: string
     limit: number

@@ -2,28 +2,23 @@
 
 import { FC, useEffect, useState } from 'react'
 import dayjs from '@/lib/dayjs'
+import { useTicker } from '@/lib/hooks'
 
 interface Props {
     initialTimeAgo: string
+    ticker?: boolean
     timestamp: number
-    update?: boolean
 }
 
 const TimeAgo: FC<Props> = props => {
+    const lastTick = useTicker(props.ticker ?? false)
     const [timeAgo, setTimeAgo] = useState(props.initialTimeAgo)
 
     useEffect(() => {
-        if (!props.update) {
-            return
+        if (props.ticker) {
+            setTimeAgo(dayjs(lastTick).to(props.timestamp))
         }
-
-        const interval = setInterval(
-            () => setTimeAgo(dayjs().to(props.timestamp)),
-            1000
-        )
-
-        return () => clearInterval(interval)
-    }, [props.timestamp, props.update])
+    }, [lastTick, props.ticker, props.timestamp])
 
     return timeAgo
 }

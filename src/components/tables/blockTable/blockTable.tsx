@@ -11,7 +11,7 @@ import { Table, TableCell, TableProps, TableRow } from '../table'
 export interface Props extends Omit<TableProps, 'children'> {
     blocks?: TransformedPartialBlockFragment[]
     proposer?: boolean
-    updateTimeAgo?: boolean
+    ticker?: boolean
 }
 
 const BlockTable: FC<Props> = props => {
@@ -64,8 +64,8 @@ const BlockTable: FC<Props> = props => {
                             <TableCell>
                                 <TimeAgo
                                     initialTimeAgo={block.initialTimeAgo}
+                                    ticker={props.ticker}
                                     timestamp={block.timestamp}
-                                    update={props.updateTimeAgo}
                                 />
                             </TableCell>
                             {props.proposer && <TableCell>-</TableCell>}

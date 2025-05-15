@@ -37,7 +37,7 @@ const HomePage: FC = async () => (
                     'col-span-6 col-start-1 row-4 lg:col-span-3 lg:row-2'
                 )}
                 limit={10}
-                updateTimeAgo
+                ticker
             />
             <TransactionPanelContainer
                 className={classNames(

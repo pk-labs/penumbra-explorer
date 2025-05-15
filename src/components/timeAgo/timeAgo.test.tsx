@@ -31,7 +31,7 @@ describe('TimeAgo', () => {
         const timestamp = dayjs().subtract(1, 'second').valueOf()
 
         const { container } = render(
-            <TimeAgo initialTimeAgo="1s ago" timestamp={timestamp} update />
+            <TimeAgo initialTimeAgo="1s ago" timestamp={timestamp} ticker />
         )
 
         getByText(container, '1s ago')
