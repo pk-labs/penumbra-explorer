@@ -4,11 +4,8 @@
     fill="none"
 >
     <rect
-        x="1"
-        y="1"
-        width="181"
-        height="181"
-        rx="37"
+        width="183"
+        height="183"
         fill="url(#paint0_linear)"
     />
     <path
@@ -23,15 +20,7 @@
         d="M117.411 142L94.4737 109.737L105.268 94.2679L139 142H117.411Z"
         fill="url(#paint2_linear)"
     />
-    <rect
-        x="1"
-        y="1"
-        width="181"
-        height="181"
-        rx="37"
-        stroke="#2d2d3d"
-        stroke-width="2"
-    />
+
     <defs>
         <linearGradient
             id="paint0_linear"
