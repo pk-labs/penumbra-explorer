@@ -13,7 +13,7 @@ interface Props {
 
 export const generateMetadata = async (props: Props) => {
     const params = await props.params
-    const client = ibc.find(c => c.id === params.client)
+    const client = ibc.find(c => c.slug === params.client)
     const name = client?.name ?? params.client
 
     return generatePageMetadata(
