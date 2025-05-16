@@ -10,26 +10,7 @@ jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
 }))
 
 describe('getTransactions', () => {
-    test('returns transformed hash', async () => {
-        createGraphqlClientMock.mockReturnValue({
-            query: () => ({
-                toPromise: () =>
-                    Promise.resolve({
-                        data: {
-                            transactionsCollection: {
-                                items: [{ block: {}, hash: 'FoO' }],
-                            },
-                        },
-                    }),
-            }),
-        })
-
-        await expect(getTransactions({ length: 1 })).resolves.toMatchObject({
-            transactions: [{ hash: 'foo' }],
-        })
-    })
-
-    test('returns timestamp and initial time ago', async () => {
+    test('returns transformed data', async () => {
         const createdAt = dayjs().subtract(1, 'second')
 
         createGraphqlClientMock.mockReturnValue({
@@ -43,7 +24,7 @@ describe('getTransactions', () => {
                                         block: {
                                             createdAt: createdAt.toISOString(),
                                         },
-                                        hash: 'foo',
+                                        hash: 'FoO',
                                     },
                                 ],
                             },
@@ -55,32 +36,11 @@ describe('getTransactions', () => {
         await expect(getTransactions({ length: 1 })).resolves.toMatchObject({
             transactions: [
                 {
+                    hash: 'foo',
                     initialTimeAgo: '1s ago',
                     timestamp: createdAt.valueOf(),
                 },
             ],
-        })
-    })
-
-    test('returns sorted by descending block height', async () => {
-        createGraphqlClientMock.mockReturnValue({
-            query: () => ({
-                toPromise: () =>
-                    Promise.resolve({
-                        data: {
-                            transactionsCollection: {
-                                items: [
-                                    { block: { height: 123 }, hash: 'older' },
-                                    { block: { height: 456 }, hash: 'newer' },
-                                ],
-                            },
-                        },
-                    }),
-            }),
-        })
-
-        await expect(getTransactions({ length: 2 })).resolves.toMatchObject({
-            transactions: [{ hash: 'newer' }, { hash: 'older' }],
         })
     })
 

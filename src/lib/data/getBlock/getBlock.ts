@@ -26,7 +26,18 @@ const getBlock = async (
 
     return {
         height: result.data.block.height,
-        rawJson: result.data.block.rawJson,
+        /* eslint-disable perfectionist/sort-objects */
+        rawJson: {
+            height: result.data.block.rawJson.height,
+            chain_id: result.data.block.rawJson.chain_id,
+            timestamp: result.data.block.rawJson.timestamp,
+            transactions: result.data.block.rawJson.transactions,
+            events: result.data.block.rawJson.events.map((event: any) => ({
+                type: event.type,
+                attributes: event.attributes,
+            })),
+        },
+        /* eslint-enable perfectionist/sort-objects */
         timestamp: date.valueOf(),
         transactions: result.data.block.transactions.map(transaction => {
             date = dayjs(transaction.block.createdAt)

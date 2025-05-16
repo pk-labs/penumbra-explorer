@@ -9,7 +9,7 @@ jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
 }))
 
 describe('getTransaction', () => {
-    test('transforms hash', async () => {
+    test('returns transformed data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
@@ -17,11 +17,12 @@ describe('getTransaction', () => {
                         data: {
                             transaction: {
                                 block: {},
-                                body: {
-                                    parameters: { fee: {} },
-                                },
+                                body: { parameters: { fee: {} } },
                                 hash: 'FoO',
-                                rawJson: 'null',
+                                rawJson: {
+                                    events: [],
+                                    transaction_view: { body: {} },
+                                },
                             },
                         },
                     }),

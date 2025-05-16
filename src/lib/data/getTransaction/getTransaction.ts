@@ -51,7 +51,38 @@ const getTransaction = async (
         memo: memo ?? false,
         primaryAction,
         raw: result.data.transaction.raw,
-        rawJson: result.data.transaction.rawJson,
+        /* eslint-disable perfectionist/sort-objects */
+        rawJson: {
+            hash: result.data.transaction.rawJson.hash,
+            block_height: result.data.transaction.rawJson.block_height,
+            index: result.data.transaction.rawJson.index,
+            timestamp: result.data.transaction.rawJson.timestamp,
+            transaction_view: {
+                body: {
+                    actions:
+                        result.data.transaction.rawJson.transaction_view.body
+                            .actions,
+                    transactionParameters:
+                        result.data.transaction.rawJson.transaction_view.body
+                            .transactionParameters,
+                    detectionData:
+                        result.data.transaction.rawJson.transaction_view.body
+                            .detectionData,
+                    memo: result.data.transaction.rawJson.transaction_view.body
+                        .memo,
+                },
+                bindingSig:
+                    result.data.transaction.rawJson.transaction_view.bindingSig,
+                anchor: result.data.transaction.rawJson.transaction_view.anchor,
+            },
+            events: result.data.transaction.rawJson.events.map(
+                (event: any) => ({
+                    type: event.type,
+                    attributes: event.attributes,
+                })
+            ),
+        },
+        /* eslint-enable perfectionist/sort-objects */
         timestamp: dayjs(result.data.transaction.block.createdAt).valueOf(),
     }
 }

@@ -35,8 +35,8 @@ const getTransactions = async (
         return { total: 0, transactions: [] }
     }
 
-    const transactions = result.data.transactionsCollection.items
-        .map(transaction => {
+    const transactions = result.data.transactionsCollection.items.map(
+        transaction => {
             const date = dayjs(transaction.block.createdAt)
             let primaryAction
             let actionCount
@@ -60,8 +60,8 @@ const getTransactions = async (
                 status: transaction.ibcStatus,
                 timestamp: date.valueOf(),
             }
-        })
-        .toSorted((a, b) => b.blockHeight - a.blockHeight)
+        }
+    )
 
     return { total: result.data.transactionsCollection.total, transactions }
 }

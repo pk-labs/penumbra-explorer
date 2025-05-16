@@ -28,18 +28,16 @@ const getBlocks = async (
         return { blocks: [], total: 0 }
     }
 
-    const blocks = result.data.blocksCollection.items
-        .map(block => {
-            const date = dayjs(block.createdAt)
+    const blocks = result.data.blocksCollection.items.map(block => {
+        const date = dayjs(block.createdAt)
 
-            return {
-                height: block.height,
-                initialTimeAgo: dayjs().to(date),
-                timestamp: date.valueOf(),
-                transactionsCount: block.transactionsCount,
-            }
-        })
-        .toSorted((a, b) => b.height - a.height)
+        return {
+            height: block.height,
+            initialTimeAgo: dayjs().to(date),
+            timestamp: date.valueOf(),
+            transactionsCount: block.transactionsCount,
+        }
+    })
 
     return { blocks, total: result.data.blocksCollection.total }
 }
