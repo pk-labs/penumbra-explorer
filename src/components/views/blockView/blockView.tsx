@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import { TransformedBlockFragment } from '@/lib/types'
-import { classNames } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
 import { Parameter, Parameters } from '../../parameters'
 import { View, ViewProps } from '../view'
@@ -21,7 +21,7 @@ const BlockView: FC<Props> = props => (
     >
         <Parameters>
             <Parameter name="Block height">
-                {props.block.height}
+                {formatNumber(props.block.height)}
                 <CopyToClipboard
                     className="text-text-primary -mr-0.5"
                     text={props.block.height.toString()}
