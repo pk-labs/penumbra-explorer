@@ -21,7 +21,7 @@ const TableCell: FC<Props> = props => {
     return (
         <Element
             className={classNames(
-                'h-12 truncate px-3 text-left text-sm font-medium',
+                'h-12 px-3 text-left text-sm font-medium whitespace-nowrap',
                 props.header
                     ? 'border-other-tonalFill10 text-text-secondary border-b ' +
                           'align-middle'
