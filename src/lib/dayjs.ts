@@ -9,7 +9,34 @@ import utc from 'dayjs/plugin/utc'
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(advancedFormat)
-dayjs.extend(relativeTime)
+
+dayjs.extend(relativeTime, {
+    thresholds: [
+        // 1s - 59s
+        { d: 'second', l: 's', r: 59 },
+        // 1min: 60s - 119s
+        { d: 'second', l: 'm', r: 119 },
+        // 2min - 59min
+        { d: 'minute', l: 'mm', r: 59 },
+        // 1hr: 60min - 119min
+        { d: 'minute', l: 'h', r: 119 },
+        // 2hr - 23hr
+        { d: 'hour', l: 'hh', r: 23 },
+        // 1d: 24hr - 47hr
+        { d: 'hour', l: 'd', r: 47 },
+        // 2d - 29d
+        { d: 'day', l: 'dd', r: 29 },
+        // 1mo: 30d - 59d
+        { d: 'day', l: 'M', r: 59 },
+        // 2mo - 11mo
+        { d: 'month', l: 'MM', r: 11 },
+        // 1yr: 12mo - 23mo
+        { d: 'month', l: 'y', r: 23 },
+        // 2+yr
+        { d: 'year', l: 'yy' },
+    ],
+})
+
 dayjs.extend(updateLocale)
 
 dayjs.updateLocale('en', {
