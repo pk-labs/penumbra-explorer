@@ -26,7 +26,7 @@ const Parameters: FC<Props> = props => (
         {props.title && <h4 className="text-sm">{props.title}</h4>}
         <ul
             className={classNames(
-                'text-text-secondary flex flex-col gap-1 font-mono text-xs',
+                'text-text-secondary flex flex-col gap-1 font-mono text-sm',
                 'font-medium'
             )}
         >
