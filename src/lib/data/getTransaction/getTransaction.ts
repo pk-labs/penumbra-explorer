@@ -51,7 +51,7 @@ const getTransaction = async (
         memo: memo ?? false,
         primaryAction,
         raw: result.data.transaction.raw,
-        rawJson: JSON.parse(result.data.transaction.rawJson),
+        rawJson: result.data.transaction.rawJson,
         timestamp: dayjs(result.data.transaction.block.createdAt).valueOf(),
     }
 }

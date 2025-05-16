@@ -33,7 +33,7 @@ export type Block = {
   createdAt: Scalars['DateTime']['output'];
   height: Scalars['Int']['output'];
   rawEvents: Array<Event>;
-  rawJson?: Maybe<Scalars['String']['output']>;
+  rawJson: Scalars['JSON']['output'];
   transactions: Array<Transaction>;
   transactionsCount: Scalars['Int']['output'];
 };
@@ -108,7 +108,7 @@ export type DbRawTransaction = {
   feeAmount?: Maybe<Scalars['String']['output']>;
   ibcStatus: Scalars['String']['output'];
   rawDataHex?: Maybe<Scalars['String']['output']>;
-  rawJson?: Maybe<Scalars['JSON']['output']>;
+  rawJson: Scalars['JSON']['output'];
   timestamp: Scalars['DateTime']['output'];
   txHashHex: Scalars['String']['output'];
 };
@@ -396,7 +396,7 @@ export type Transaction = {
   index: Scalars['Int']['output'];
   raw: Scalars['String']['output'];
   rawEvents: Array<Event>;
-  rawJson: Scalars['String']['output'];
+  rawJson: Scalars['JSON']['output'];
 };
 
 export type TransactionBody = {
@@ -451,20 +451,20 @@ export type TransactionsSelector = {
   range?: InputMaybe<TransactionRange>;
 };
 
-export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson?: string | null, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
+export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson: any, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
 
 export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
 
-export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
+export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
 
 export type BlockQueryVariables = Exact<{
   height: Scalars['Int']['input'];
 }>;
 
 
-export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, rawJson?: string | null, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } | null };
+export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, rawJson: any, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
   limit: CollectionLimit;
@@ -504,7 +504,7 @@ export type TransactionQueryVariables = Exact<{
 }>;
 
 
-export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, raw: string, rawJson: string, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } } | null };
+export type TransactionQuery = { __typename?: 'QueryRoot', transaction?: { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } } | null };
 
 export type TransactionsQueryVariables = Exact<{
   limit: CollectionLimit;

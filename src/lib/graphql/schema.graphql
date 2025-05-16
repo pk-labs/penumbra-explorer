@@ -20,7 +20,7 @@ type Block {
     createdAt: DateTime!
     height: Int!
     rawEvents: [Event!]!
-    rawJson: String
+    rawJson: JSON!
     transactions: [Transaction!]!
     transactionsCount: Int!
 }
@@ -64,7 +64,7 @@ type DbRawTransaction {
     feeAmount: String
     ibcStatus: String!
     rawDataHex: String
-    rawJson: JSON
+    rawJson: JSON!
     timestamp: DateTime!
     txHashHex: String!
 }
@@ -198,7 +198,7 @@ type Transaction {
     index: Int!
     raw: String!
     rawEvents: [Event!]!
-    rawJson: String!
+    rawJson: JSON!
 }
 
 type TransactionBody {

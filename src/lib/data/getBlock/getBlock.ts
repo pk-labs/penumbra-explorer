@@ -26,8 +26,7 @@ const getBlock = async (
 
     return {
         height: result.data.block.height,
-        rawJson:
-            result.data.block.rawJson && JSON.parse(result.data.block.rawJson),
+        rawJson: result.data.block.rawJson,
         timestamp: date.valueOf(),
         transactions: result.data.block.transactions.map(transaction => {
             date = dayjs(transaction.block.createdAt)
