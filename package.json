@@ -20,9 +20,9 @@
     "dependencies": {
         "@microlink/react-json-view": "^1.26.1",
         "@penumbra-labs/registry": "^12.5.0",
-        "@penumbra-zone/perspective": "^57.0.0",
+        "@penumbra-zone/perspective": "^59.0.0",
         "@penumbra-zone/protobuf": "^10.1.0",
-        "@penumbra-zone/types": "^34.0.0",
+        "@penumbra-zone/types": "^34.2.0",
         "@penumbra-zone/ui": "^14.0.0",
         "clsx": "^2.1.1",
         "dayjs": "^1.11.13",
