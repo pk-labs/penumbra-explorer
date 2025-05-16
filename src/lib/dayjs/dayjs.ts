@@ -1,4 +1,3 @@
-// istanbul ignore file
 import dayjs from 'dayjs'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -24,9 +23,9 @@ dayjs.extend(relativeTime, {
         { d: 'hour', l: 'hh', r: 23 },
         // 1d: 24hr - 47hr
         { d: 'hour', l: 'd', r: 47 },
-        // 2d - 29d
-        { d: 'day', l: 'dd', r: 29 },
-        // 1mo: 30d - 59d
+        // 2d - 27d (7d - 27d: 1wk - 3wk)
+        { d: 'day', l: 'dd', r: 27 },
+        // 1mo: 28d - 59d
         { d: 'day', l: 'M', r: 59 },
         // 2mo - 11mo
         { d: 'month', l: 'MM', r: 11 },
@@ -43,7 +42,7 @@ dayjs.updateLocale('en', {
     relativeTime: {
         d: '1d',
         dd: (days: number) =>
-            days >= 7 ? `${Math.round(days / 7)}wk` : `${days}d`,
+            days >= 7 ? `${Math.floor(days / 7)}wk` : `${days}d`,
         future: '0s ago',
         h: '1hr',
         hh: '%dhr',
