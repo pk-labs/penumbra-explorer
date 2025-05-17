@@ -31,7 +31,7 @@
         "graphql": "^16.10.0",
         "graphql-tag": "^2.12.6",
         "graphql-ws": "^6.0.4",
-        "lucide-react": "^0.510.0",
+        "lucide-react": "^0.511.0",
         "motion": "^12.4.10",
         "next": "^15.1.6",
         "react": "^19.0.0",
