@@ -5,7 +5,7 @@ import {
     render,
 } from '@testing-library/react'
 import { usePathname } from '@/lib/__tests__/__mocks__'
-import NavigationBar from './navigationBar'
+import HeaderContainer from './headerContainer'
 
 jest.mock('motion/react', () => ({
     AnimatePresence: (props: any) => <div>{props.children}</div>,
@@ -14,29 +14,29 @@ jest.mock('motion/react', () => ({
     },
 }))
 
-jest.mock('../tabs/tabs', () => () => <div>Tabs</div>)
+jest.mock('../../components/tabs/tabs', () => () => <div>Tabs</div>)
 
-jest.mock('../../containers/searchContainer/searchContainer')
+jest.mock('../searchContainer/searchContainer')
 
-jest.mock('../menu/menu', () => () => <div>Menu</div>)
+jest.mock('../../components/menu/menu', () => () => <div>Menu</div>)
 
-jest.mock('../../containers/umPriceContainer/umPriceContainer')
+jest.mock('../umPriceContainer/umPriceContainer')
 
-describe('NavigationBar', () => {
+describe('HeaderContainer', () => {
     test('hides search on home page', async () => {
-        const { container } = render(<NavigationBar />)
+        const { container } = render(<HeaderContainer />)
         expect(queryByText(container, 'Search')).toBeNull()
     })
 
     describe('search button', () => {
         test('is not rendered on home page', async () => {
-            const { container } = render(<NavigationBar />)
+            const { container } = render(<HeaderContainer />)
             expect(queryByText(container, 'Search')).toBeNull()
         })
 
         test('opens search modal', async () => {
             usePathname.mockReturnValue('/foo')
-            const { container } = render(<NavigationBar />)
+            const { container } = render(<HeaderContainer />)
 
             expect(queryByText(container, 'Search modal')).toBeNull()
 
@@ -46,7 +46,7 @@ describe('NavigationBar', () => {
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<NavigationBar className="foo bar" />)
+        const { container } = render(<HeaderContainer className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

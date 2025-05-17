@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ErrorPage: FC<Props> = props => (
-    <Container className="flex flex-col items-center">
+    <Container className="mt-20! flex flex-col items-center">
         <div className="relative">
             <h2
                 className={classNames(

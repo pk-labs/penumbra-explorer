@@ -7,7 +7,6 @@ import { fastOutSlowIn } from '@/lib/constants'
 import { classNames } from '@/lib/utils'
 import Button from '../button'
 
-// TODO: Implement as prop for custom element type
 interface Props {
     children?: ReactNode
     className?: string

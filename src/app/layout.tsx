@@ -3,8 +3,8 @@ import '@/lib/css'
 import '@/lib/fonts'
 import { Metadata, Viewport } from 'next'
 import { FC, ReactNode } from 'react'
-import { Footer, NavigationBar } from '@/components'
-import { PageViewTracker } from '@/containers'
+import { Footer } from '@/components'
+import { HeaderContainer, PageViewTracker } from '@/containers'
 import { background } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 
@@ -52,7 +52,7 @@ const RootLayout: FC<Props> = props => (
             )}
         >
             <PageViewTracker fathomId={process.env.NEXT_PUBLIC_FATHOM_ID} />
-            <NavigationBar />
+            <HeaderContainer />
             {props.children}
             <Footer />
             <div

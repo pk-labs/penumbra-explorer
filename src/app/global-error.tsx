@@ -3,7 +3,7 @@
 
 import '@/lib/css'
 import { FC } from 'react'
-import { ErrorPage, NavigationBar } from '@/components'
+import { ErrorPage } from '@/components'
 import { background } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 
@@ -12,10 +12,9 @@ const NotFoundPage: FC = () => (
         <body
             className={classNames(
                 'relative flex flex-col justify-start gap-10',
-                'overflow-x-hidden pb-4 md:pb-8'
+                'overflow-x-hidden py-4 md:py-8'
             )}
         >
-            <NavigationBar />
             <ErrorPage message="Internal server error" statusCode={500} />
             <div
                 className={classNames(

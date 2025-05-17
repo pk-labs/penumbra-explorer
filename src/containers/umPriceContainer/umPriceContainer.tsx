@@ -1,31 +1,19 @@
 // istanbul ignore file
-'use client'
-
-import { FC, useEffect, useState } from 'react'
-import { Skeleton, UmPrice } from '@/components'
-import { getUmPrice } from '@/lib/data'
-import { UmPriceData } from '@/lib/types'
+import { FC, Suspense } from 'react'
+import { Skeleton } from '@/components'
 import { classNames } from '@/lib/utils'
+import UmPriceLoader, { Props } from './umPriceLoader'
 
-interface Props {
-    className?: string
-}
-
-// TODO: Refactor UM price container to server component to circumvent API CORS?
-const UmPriceContainer: FC<Props> = props => {
-    const [umPrice, setUmPrice] = useState<UmPriceData>()
-
-    useEffect(() => {
-        getUmPrice().then(setUmPrice)
-    }, [])
-
-    return umPrice ? (
-        <UmPrice className={props.className} {...umPrice} />
-    ) : (
-        <Skeleton
-            className={classNames('h-8 w-48 rounded-full', props.className)}
-        />
-    )
-}
+const UmPriceContainer: FC<Props> = props => (
+    <Suspense
+        fallback={
+            <Skeleton
+                className={classNames('h-8 w-49 rounded-full', props.className)}
+            />
+        }
+    >
+        <UmPriceLoader {...props} />
+    </Suspense>
+)
 
 export default UmPriceContainer
