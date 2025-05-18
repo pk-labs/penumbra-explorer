@@ -77,6 +77,7 @@ const getTransaction = async (
             },
             events: result.data.transaction.rawJson.events.map(
                 (event: any) => ({
+                    event_id: event.event_id,
                     type: event.type,
                     attributes: event.attributes,
                 })

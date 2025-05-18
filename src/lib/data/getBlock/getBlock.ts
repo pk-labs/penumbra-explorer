@@ -33,6 +33,7 @@ const getBlock = async (
             timestamp: result.data.block.rawJson.timestamp,
             transactions: result.data.block.rawJson.transactions,
             events: result.data.block.rawJson.events.map((event: any) => ({
+                event_id: event.event_id,
                 type: event.type,
                 attributes: event.attributes,
             })),
