@@ -20,7 +20,7 @@ describe('getTransaction', () => {
                                 body: { parameters: { fee: {} } },
                                 hash: 'FoO',
                                 rawJson: {
-                                    events: [],
+                                    events: [{ event_id: 2 }, { event_id: 1 }],
                                     transaction_view: { body: {} },
                                 },
                             },
@@ -31,6 +31,7 @@ describe('getTransaction', () => {
 
         await expect(getTransaction('1')).resolves.toMatchObject({
             hash: 'foo',
+            rawJson: { events: [{ event_id: 1 }, { event_id: 2 }] },
         })
     })
 

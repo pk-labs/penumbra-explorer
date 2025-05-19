@@ -32,11 +32,13 @@ const getBlock = async (
             chain_id: result.data.block.rawJson.chain_id,
             timestamp: result.data.block.rawJson.timestamp,
             transactions: result.data.block.rawJson.transactions,
-            events: result.data.block.rawJson.events.map((event: any) => ({
-                event_id: event.event_id,
-                type: event.type,
-                attributes: event.attributes,
-            })),
+            events: result.data.block.rawJson.events
+                .map((event: any) => ({
+                    event_id: event.event_id,
+                    type: event.type,
+                    attributes: event.attributes,
+                }))
+                .toSorted((a: any, b: any) => a.event_id - b.event_id),
         },
         /* eslint-enable perfectionist/sort-objects */
         timestamp: date.valueOf(),

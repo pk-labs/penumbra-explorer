@@ -75,13 +75,13 @@ const getTransaction = async (
                     result.data.transaction.rawJson.transaction_view.bindingSig,
                 anchor: result.data.transaction.rawJson.transaction_view.anchor,
             },
-            events: result.data.transaction.rawJson.events.map(
-                (event: any) => ({
+            events: result.data.transaction.rawJson.events
+                .map((event: any) => ({
                     event_id: event.event_id,
                     type: event.type,
                     attributes: event.attributes,
-                })
-            ),
+                }))
+                .toSorted((a: any, b: any) => a.event_id - b.event_id),
         },
         /* eslint-enable perfectionist/sort-objects */
         timestamp: dayjs(result.data.transaction.block.createdAt).valueOf(),

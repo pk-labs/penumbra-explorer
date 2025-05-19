@@ -16,7 +16,9 @@ describe('getBlock', () => {
                     Promise.resolve({
                         data: {
                             block: {
-                                rawJson: { events: [] },
+                                rawJson: {
+                                    events: [{ event_id: 2 }, { event_id: 1 }],
+                                },
                                 transactions: [{ block: {}, hash: 'FoO' }],
                             },
                         },
@@ -25,6 +27,7 @@ describe('getBlock', () => {
         })
 
         await expect(getBlock(1)).resolves.toMatchObject({
+            rawJson: { events: [{ event_id: 1 }, { event_id: 2 }] },
             transactions: [{ hash: 'foo' }],
         })
     })
