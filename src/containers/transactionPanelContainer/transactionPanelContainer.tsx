@@ -1,17 +1,10 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Skeleton, TransactionPanel } from '@/components'
+import { TransactionPanel } from '@/components'
 import TransactionPanelLoader, { Props } from './transactionPanelLoader'
 
 const TransactionPanelContainer: FC<Props> = props => (
-    <Suspense
-        fallback={
-            <TransactionPanel
-                className={props.className}
-                number={<Skeleton className="my-1 h-8 w-30 sm:w-34" />}
-            />
-        }
-    >
+    <Suspense fallback={<TransactionPanel className={props.className} />}>
         <TransactionPanelLoader {...props} />
     </Suspense>
 )

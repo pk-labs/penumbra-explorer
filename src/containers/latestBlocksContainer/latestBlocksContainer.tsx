@@ -31,7 +31,6 @@ const LatestBlocksContainer: FC<Props> = props => {
                 <>
                     <BlockPanel
                         className={props.blockPanelClassName}
-                        number={<Skeleton className="my-1 h-8 w-30 sm:w-34" />}
                         fallback
                     />
                     <Table

@@ -37,12 +37,9 @@ describe('Panel', () => {
         getByText(container, '99 UM')
     })
 
-    test('renders any node as number', async () => {
-        const { container } = render(
-            <Panel number="Bar" numberSuffix="$" title="Foo" />
-        )
-
-        getByText(container, 'Bar')
+    test('renders 0 when number undefined', async () => {
+        const { container } = render(<Panel title="Foo" />)
+        getByText(container, '0')
     })
 
     test('applies CSS classes', async () => {

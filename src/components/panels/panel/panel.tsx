@@ -8,7 +8,7 @@ export interface Props {
     children?: ReactNode
     className?: string
     headerClassName?: string
-    number?: number | ReactNode // TODO: Refactor to number only and show 0 instead of loading skeleton
+    number?: number
     numberPrefix?: string
     numberSuffix?: string
     title: ReactNode
@@ -17,8 +17,8 @@ export interface Props {
 const Panel: FC<Props> = props => (
     <section
         className={classNames(
-            'bg-other-tonalFill5 flex flex-col justify-between gap-4 rounded-lg p-6 backdrop-blur-lg',
-            'sm:flex-row',
+            'bg-other-tonalFill5 flex flex-col justify-between gap-4',
+            'rounded-lg p-6 backdrop-blur-lg sm:flex-row',
             props.className
         )}
     >
@@ -40,7 +40,7 @@ const Panel: FC<Props> = props => (
                     suffix={props.numberSuffix}
                 />
             ) : (
-                props.number
+                <span className="font-mono text-3xl font-medium">0</span>
             )}
         </header>
         {props.children && <div className="sm:self-end">{props.children}</div>}
