@@ -9,6 +9,7 @@ export interface Props {
     className?: string
     headerClassName?: string
     number?: number
+    numberClassName?: string
     numberPrefix?: ReactNode
     numberSuffix?: ReactNode
     title: ReactNode
@@ -35,6 +36,7 @@ const Panel: FC<Props> = props => (
             </h3>
             {typeof props.number === 'number' ? (
                 <NumberCountup
+                    className={props.numberClassName}
                     number={props.number}
                     prefix={props.numberPrefix}
                     suffix={props.numberSuffix}
@@ -42,8 +44,9 @@ const Panel: FC<Props> = props => (
             ) : (
                 <span
                     className={classNames(
-                        'inline-flex items-center gap-2 font-mono text-3xl',
-                        'font-medium'
+                        'inline-flex items-center font-mono text-3xl',
+                        'font-medium',
+                        props.numberClassName
                     )}
                 >
                     {props.numberPrefix}

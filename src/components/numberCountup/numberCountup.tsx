@@ -37,7 +37,7 @@ const NumberCountup: FC<Props> = props => {
     return (
         <span
             className={classNames(
-                'inline-flex items-center gap-2 font-mono text-3xl font-medium',
+                'inline-flex items-center font-mono text-3xl font-medium',
                 props.className
             )}
         >

@@ -5,7 +5,7 @@ import Panel from './panel'
 jest.mock(
     '../../numberCountup/numberCountup',
     () => (props: NumberCountupProps) => (
-        <span>
+        <span className={props.className}>
             {props.prefix}
             {props.number}
             {props.suffix}
@@ -48,6 +48,7 @@ describe('Panel', () => {
                 className="foo bar"
                 headerClassName="header"
                 number={99}
+                numberClassName="number"
                 title="Foo"
                 titleClassName="title"
             />
@@ -56,5 +57,6 @@ describe('Panel', () => {
         expect(container.firstChild).toHaveClass('foo', 'bar')
         expect(getByText(container, 'Foo')).toHaveClass('title')
         expect(getByText(container, 'Foo').parentNode).toHaveClass('header')
+        expect(getByText(container, 99)).toHaveClass('number')
     })
 })

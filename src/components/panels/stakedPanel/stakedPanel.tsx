@@ -12,6 +12,7 @@ const StakedPanel: FC<Props> = props => (
     <Panel
         className={props.className}
         number={props.number}
+        numberClassName="gap-2"
         numberPrefix={<Image alt="UM" height={32} src={penumbra} width={32} />}
         numberSuffix="UM"
         title="Total staked"
