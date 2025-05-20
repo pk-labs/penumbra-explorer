@@ -4,13 +4,12 @@ describe('getUmPrice', () => {
     test('returns transformed data', async () => {
         global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
-                json: () => ({
-                    change: {
-                        percent: '9.99',
-                        sign: 'negative',
+                json: () => [
+                    {
+                        current_price: 9999,
+                        price_change_percentage_24h: -9.99,
                     },
-                    price: '9999',
-                }),
+                ],
             })
         )
 
@@ -18,6 +17,16 @@ describe('getUmPrice', () => {
             change: -9.99,
             price: 9999,
         })
+    })
+
+    test('returns nothing when invalid data', async () => {
+        global.fetch = jest.fn().mockImplementation(() =>
+            Promise.resolve({
+                json: () => ({ foo: 'bar' }),
+            })
+        )
+
+        await expect(getUmPrice()).resolves.toBeUndefined()
     })
 
     test('logs error', async () => {

@@ -1,31 +1,30 @@
 import { UmPriceData } from '@/lib/types'
 
 const searchParams = new URLSearchParams({
-    baseAsset: 'UM',
-    durationWindow: '1d',
-    quoteAsset: 'USDC',
+    ids: 'penumbra',
+    vs_currency: 'usd',
 })
 
-const url = `https://dex.penumbra.zone/api/summary?${searchParams.toString()}`
+const url = `https://api.coingecko.com/api/v3/coins/markets?${searchParams}`
 
 interface Data {
-    change: {
-        percent: string
-        sign: 'negative' | 'positive'
-    }
-    price: string
+    current_price: number
+    price_change_percentage_24h: number
 }
 
 const getUmPrice = async (): Promise<UmPriceData | undefined> => {
     try {
-        const data: Data = await fetch(url).then(res => res.json())
+        const response: Data[] = await fetch(url).then(res => res.json())
+
+        if (!response.length) {
+            return
+        }
+
+        const [data] = response
 
         return {
-            change:
-                data.change.sign === 'negative'
-                    ? -1 * Number(data.change.percent)
-                    : Number(data.change.percent),
-            price: Number(data.price),
+            change: data.price_change_percentage_24h,
+            price: data.current_price,
         }
     } catch (e) {
         console.error(e)
