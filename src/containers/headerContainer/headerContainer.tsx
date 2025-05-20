@@ -34,6 +34,9 @@ const HeaderContainer: FC<Props> = props => (
             <Tab href="/ibc" paths={['/ibc']}>
                 IBC
             </Tab>
+            <Tab href="/validators" paths={['/validators']}>
+                Validators
+            </Tab>
         </Tabs>
         <div className="flex items-center gap-2 justify-self-end">
             <SearchButton />
