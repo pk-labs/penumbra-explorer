@@ -2,14 +2,14 @@
 'use client'
 
 import { FC, useState } from 'react'
-import { ValidatorsPanel } from '@/components'
-import { Props as ValidatorsPanelLoaderProps } from './validatorsPanelLoader'
+import { UnbondingPanel } from '@/components'
+import { Props as UnbondingPanelLoaderProps } from './unbondingPanelLoader'
 
-interface Props extends ValidatorsPanelLoaderProps {
+interface Props extends UnbondingPanelLoaderProps {
     initialNumber?: number
 }
 
-const ValidatorsPanelUpdater: FC<Props> = props => {
+const UnbondingPanelUpdater: FC<Props> = props => {
     const [number] = useState(props.initialNumber)
 
     // const [transactionCountUpdateSubscription] =
@@ -23,7 +23,7 @@ const ValidatorsPanelUpdater: FC<Props> = props => {
     //     }
     // }, [transactionCountUpdateSubscription.data?.transactionCount])
 
-    return <ValidatorsPanel number={number} {...props} />
+    return <UnbondingPanel number={number} {...props} />
 }
 
-export default ValidatorsPanelUpdater
+export default UnbondingPanelUpdater
