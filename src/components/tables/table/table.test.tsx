@@ -16,23 +16,14 @@ describe('Table', () => {
         getByText(container, 'Foo')
     })
 
-    test('renders title', async () => {
-        const { container } = render(<Table title="Foo" />)
-        getByText(container, 'Foo')
-    })
-
-    test('renders actions', async () => {
-        const { container } = render(<Table actions="Foo" />)
+    test('renders header', async () => {
+        const { container } = render(<Table header="Foo" />)
         getByText(container, 'Foo')
     })
 
     test('renders footer', async () => {
-        const { container } = render(
-            <Table footer="Foo" footerClassName="foo" />
-        )
-
+        const { container } = render(<Table footer="Foo" />)
         getByText(container, 'Foo')
-        expect(container.firstChild?.lastChild).toHaveClass('foo')
     })
 
     test('applies CSS classes', async () => {

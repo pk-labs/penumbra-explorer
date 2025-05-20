@@ -25,7 +25,7 @@ const SearchResultOverlay: FC<Props> = props => (
         className={classNames(
             'border-other-tonalStroke bg-other-dialogBackground absolute',
             'top-16 z-10 flex w-full flex-col gap-2 rounded-sm border px-2',
-            'py-3 backdrop-blur-[32px]'
+            'py-3 backdrop-blur-lg'
         )}
         exit={{
             opacity: 0,

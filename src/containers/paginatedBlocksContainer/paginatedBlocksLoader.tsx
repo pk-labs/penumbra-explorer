@@ -1,5 +1,5 @@
 // istanbul ignore file
-import { redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { BlockTable, BlockTableProps, Pagination } from '@/components'
 import { getBlocks } from '@/lib/data'
@@ -19,7 +19,7 @@ const PaginatedBlocksLoader: FC<Props> = async ({
     const { blocks, total } = await getBlocks({ length, offset })
 
     if (!blocks?.length) {
-        redirect(pathname)
+        notFound()
     }
 
     const page = offset / length + 1

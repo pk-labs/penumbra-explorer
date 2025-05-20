@@ -103,6 +103,7 @@ triggered manually in the GitHub Actions web interface with
 
 ## Misc
 
+- https://zustand.docs.pmnd.rs/ for client-side state management
 - https://day.js.org/ for date manipulation and formatting
 - https://motion.dev/ for animations such as dashboard number count-up
 - https://github.com/lukeed/clsx for conditional `className` construction

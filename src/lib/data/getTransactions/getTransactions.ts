@@ -8,11 +8,7 @@ import {
 } from '@/lib/graphql/generated/types'
 import { transactionsQuery } from '@/lib/graphql/queries'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import {
-    decodeTransaction,
-    findPrimaryAction,
-    transactionToJson,
-} from '@/lib/utils'
+import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 
 const getTransactions = async (
     limit: CollectionLimit,
@@ -39,17 +35,14 @@ const getTransactions = async (
         return { total: 0, transactions: [] }
     }
 
-    const now = dayjs()
-
-    const transactions = result.data.transactionsCollection.items
-        .map(transaction => {
-            let json
+    const transactions = result.data.transactionsCollection.items.map(
+        transaction => {
+            const date = dayjs(transaction.block.createdAt)
             let primaryAction
             let actionCount
 
             try {
                 const decoded = decodeTransaction(transaction.raw)
-                json = transactionToJson(decoded)
                 primaryAction = findPrimaryAction(decoded)
                 actionCount = decoded.body?.actions.length
             } catch (e) {
@@ -58,17 +51,17 @@ const getTransactions = async (
             }
 
             return {
-                ...transaction,
                 actionCount: actionCount ?? 0,
+                blockHeight: transaction.block.height,
                 hash: transaction.hash.toLowerCase(),
-                json,
+                initialTimeAgo: dayjs().to(date),
                 primaryAction,
-                timeAgo: transaction.block.createdAt
-                    ? now.to(transaction.block.createdAt)
-                    : undefined,
+                raw: transaction.raw,
+                status: transaction.ibcStatus,
+                timestamp: date.valueOf(),
             }
-        })
-        .toSorted((a, b) => b.block.height - a.block.height)
+        }
+    )
 
     return { total: result.data.transactionsCollection.total, transactions }
 }

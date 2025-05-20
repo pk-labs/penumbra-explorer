@@ -1,31 +1,30 @@
 import { UmPriceData } from '@/lib/types'
 
 const searchParams = new URLSearchParams({
-    community_data: 'false',
-    developer_data: 'false',
-    localization: 'false',
-    sparkline: 'false',
-    tickers: 'false',
+    ids: 'penumbra',
+    vs_currency: 'usd',
 })
 
-const url = `https://api.coingecko.com/api/v3/coins/penumbra?${searchParams}`
+const url = `https://api.coingecko.com/api/v3/coins/markets?${searchParams}`
 
 interface Data {
-    market_data: {
-        current_price: {
-            usd: number
-        }
-        price_change_percentage_24h: number
-    }
+    current_price: number
+    price_change_percentage_24h: number
 }
 
 const getUmPrice = async (): Promise<UmPriceData | undefined> => {
     try {
-        const data: Data = await fetch(url).then(res => res.json())
+        const response: Data[] = await fetch(url).then(res => res.json())
+
+        if (!response.length) {
+            return
+        }
+
+        const [data] = response
 
         return {
-            change: data.market_data.price_change_percentage_24h,
-            price: data.market_data.current_price.usd,
+            change: data.price_change_percentage_24h,
+            price: data.current_price,
         }
     } catch (e) {
         console.error(e)

@@ -1,32 +1,18 @@
 'use client'
 
-import { BoxIcon, CheckCheckIcon } from 'lucide-react'
-import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
-import {
-    TransformedPartialTransactionFragment,
-    TransformedTransactionUpdate,
-} from '@/lib/types'
-import {
-    classNames,
-    formatAction,
-    formatNumber,
-    shortenHash,
-} from '@/lib/utils'
-import CopyToClipboard from '../../copyToClipboard'
+import { TransformedPartialTransactionFragment } from '@/lib/types'
 import EmptyState from '../../emptyState'
-import Pill from '../../pill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
+import TransactionTableRow, {
+    Props as TransationTableRowProps,
+} from './transactionTableRow'
 
 export interface Props
-    extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
-    className?: string
-    embedded?: boolean
+    extends Omit<TableProps, 'children'>,
+        Omit<TransationTableRowProps, 'new' | 'transaction'> {
     emptyStateMessage?: string
-    time?: boolean
-    transactions?: Array<
-        TransformedPartialTransactionFragment | TransformedTransactionUpdate
-    >
+    transactions?: TransformedPartialTransactionFragment[]
 }
 
 const TransactionTable: FC<Props> = props => {
@@ -38,20 +24,18 @@ const TransactionTable: FC<Props> = props => {
 
     return (
         <Table
-            actions={props.actions}
-            className={classNames(
-                props.embedded && 'rounded-sm p-0 backdrop-blur-none',
-                props.className
-            )}
+            className={props.className}
             footer={props.footer}
-            title={props.title}
+            header={props.header}
         >
             <thead>
                 <TableRow>
                     <TableCell header>Tx hash</TableCell>
-                    {!props.embedded && (
+                    {props.blockHeight && (
                         <TableCell header>Block height</TableCell>
                     )}
+                    {props.amount && <TableCell header>Amount</TableCell>}
+                    {props.status && <TableCell header>Tx status</TableCell>}
                     <TableCell header>Actions</TableCell>
                     {props.time && <TableCell header>Time</TableCell>}
                 </TableRow>
@@ -59,9 +43,11 @@ const TransactionTable: FC<Props> = props => {
             <tbody>
                 {props.transactions?.length ? (
                     props.transactions.map(transaction => (
-                        <TableRow
+                        <TransactionTableRow
                             key={transaction.hash}
-                            className={
+                            amount={props.amount}
+                            blockHeight={props.blockHeight}
+                            new={
                                 typeof prevTransactionsRef.current !==
                                     'undefined' &&
                                 !prevTransactionsRef.current.some(
@@ -69,60 +55,22 @@ const TransactionTable: FC<Props> = props => {
                                         prevTransaction.hash ===
                                         transaction.hash
                                 )
-                                    ? 'animate-new-data-bg'
-                                    : undefined
                             }
-                            href={`/tx/${transaction.hash}`}
-                        >
-                            <TableCell>
-                                <CheckCheckIcon
-                                    className="text-secondary-light"
-                                    size={14}
-                                />
-                                <Link href={`/tx/${transaction.hash}`}>
-                                    {shortenHash(transaction.hash)}
-                                </Link>
-                                <CopyToClipboard text={transaction.hash} />
-                            </TableCell>
-                            {!props.embedded && (
-                                <TableCell>
-                                    <BoxIcon
-                                        color="var(--color-text-secondary)"
-                                        size={16}
-                                    />
-                                    <Link
-                                        href={`/block/${transaction.block.height}`}
-                                    >
-                                        {formatNumber(transaction.block.height)}
-                                    </Link>
-                                </TableCell>
-                            )}
-                            <TableCell>
-                                {transaction.primaryAction && (
-                                    <Pill context="technical-default">
-                                        {formatAction(
-                                            transaction.primaryAction
-                                        )}
-                                    </Pill>
-                                )}
-                                {transaction.actionCount > 1 && (
-                                    <span className="text-text-secondary">
-                                        +{transaction.actionCount - 1}
-                                    </span>
-                                )}
-                            </TableCell>
-                            {props.time && (
-                                <TableCell>{transaction.timeAgo}</TableCell>
-                            )}
-                        </TableRow>
+                            status={props.status}
+                            ticker={props.ticker}
+                            time={props.time}
+                            transaction={transaction}
+                        />
                     ))
                 ) : (
                     <TableRow>
                         <TableCell
                             colSpan={
-                                4 -
-                                (props.time ? 0 : 1) -
-                                (props.embedded ? 1 : 0)
+                                2 +
+                                (props.blockHeight ? 1 : 0) +
+                                (props.amount ? 1 : 0) +
+                                (props.status ? 1 : 0) +
+                                (props.time ? 1 : 0)
                             }
                         >
                             <EmptyState>{props.emptyStateMessage}</EmptyState>

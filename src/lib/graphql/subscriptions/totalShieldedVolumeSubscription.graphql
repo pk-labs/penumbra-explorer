@@ -1,0 +1,5 @@
+subscription TotalShieldedVolumeUpdate {
+    totalShieldedVolume {
+        value
+    }
+}

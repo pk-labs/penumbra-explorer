@@ -12,64 +12,90 @@ jest.mock('./menuItem/menuItem', () => (props: MenuItemProps) => (
 ))
 
 describe('Menu', () => {
-    test('does not render menu items when closed', async () => {
-        const { container } = render(
-            <Menu onClose={jest.fn()} onOpen={jest.fn()} open={false}>
-                <MenuItem href="/foo">Foo</MenuItem>
-                <MenuItem href="/bar">Bar</MenuItem>
-            </Menu>
-        )
+    describe('when closed', () => {
+        test('does not render menu items', async () => {
+            const { container } = render(
+                <Menu onClose={jest.fn()} onOpen={jest.fn()} open={false}>
+                    <MenuItem href="/foo">Foo</MenuItem>
+                    <MenuItem href="/bar">Bar</MenuItem>
+                </Menu>
+            )
 
-        expect(queryByText(container, 'Foo')).toBeNull()
-        expect(queryByText(container, 'Bar')).toBeNull()
+            expect(queryByText(container, 'Foo')).toBeNull()
+            expect(queryByText(container, 'Bar')).toBeNull()
+        })
+
+        describe('button', () => {
+            test('has menu icon', async () => {
+                const { container } = render(
+                    <Menu onClose={jest.fn()} onOpen={jest.fn()} open={false} />
+                )
+
+                const icon = container.firstChild?.firstChild?.firstChild
+                expect(icon).toHaveClass('lucide-menu')
+            })
+
+            test('invokes open callback', async () => {
+                const onOpen = jest.fn()
+
+                const { container } = render(
+                    <Menu onClose={jest.fn()} onOpen={onOpen} open={false} />
+                )
+
+                const button = container.firstChild?.firstChild
+
+                if (!button) {
+                    throw Error('Missing element')
+                }
+
+                fireEvent.click(button)
+
+                expect(onOpen).toHaveBeenCalled()
+            })
+        })
     })
 
-    test('renders menu items when open', async () => {
-        const { container } = render(
-            <Menu onClose={jest.fn()} onOpen={jest.fn()} open>
-                <MenuItem href="/foo">Foo</MenuItem>
-                <MenuItem href="/bar">Bar</MenuItem>
-            </Menu>
-        )
+    describe('when closed', () => {
+        test('renders menu items', async () => {
+            const { container } = render(
+                <Menu onClose={jest.fn()} onOpen={jest.fn()} open>
+                    <MenuItem href="/foo">Foo</MenuItem>
+                    <MenuItem href="/bar">Bar</MenuItem>
+                </Menu>
+            )
 
-        getByText(container, 'Foo')
-        getByText(container, 'Bar')
-    })
+            getByText(container, 'Foo')
+            getByText(container, 'Bar')
+        })
 
-    test('invokes open callback', async () => {
-        const onOpen = jest.fn()
+        describe('button', () => {
+            test('has close icon', async () => {
+                const { container } = render(
+                    <Menu onClose={jest.fn()} onOpen={jest.fn()} open />
+                )
 
-        const { container } = render(
-            <Menu onClose={jest.fn()} onOpen={onOpen} open={false} />
-        )
+                const icon = container.firstChild?.firstChild?.firstChild
+                expect(icon).toHaveClass('lucide-x')
+            })
 
-        const button = container.firstChild?.firstChild
+            test('invokes close callback', async () => {
+                const onClose = jest.fn()
 
-        if (!button) {
-            throw Error('Missing element')
-        }
+                const { container } = render(
+                    <Menu onClose={onClose} onOpen={jest.fn()} open />
+                )
 
-        fireEvent.click(button)
+                const button = container.firstChild?.firstChild
 
-        expect(onOpen).toHaveBeenCalled()
-    })
+                if (!button) {
+                    throw Error('Missing element')
+                }
 
-    test('invokes close callback', async () => {
-        const onClose = jest.fn()
+                fireEvent.click(button)
 
-        const { container } = render(
-            <Menu onClose={onClose} onOpen={jest.fn()} open />
-        )
-
-        const button = container.firstChild?.firstChild
-
-        if (!button) {
-            throw Error('Missing element')
-        }
-
-        fireEvent.click(button)
-
-        expect(onClose).toHaveBeenCalled()
+                expect(onClose).toHaveBeenCalled()
+            })
+        })
     })
 
     test('applies CSS classes', async () => {

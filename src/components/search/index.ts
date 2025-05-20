@@ -1,1 +1,2 @@
-export { default } from './search'
+export * from './searchResult'
+export * from './searchResultOverlay'

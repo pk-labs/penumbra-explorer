@@ -12,7 +12,7 @@ const config: Config = {
     ],
     coverageReporters: ['text', 'text-summary', 'lcov'],
     roots: ['<rootDir>/src/'],
-    setupFilesAfterEnv: ['<rootDir>/src/lib/__tests__/setup.ts'],
+    setupFilesAfterEnv: ['<rootDir>/src/lib/__tests__/setup.tsx'],
     testEnvironment: 'jsdom',
     testRegex: '.+\\.test\\.tsx?$',
     transform: {

@@ -6,14 +6,22 @@ jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
 describe('getBlocks', () => {
-    test('returns sorted by descending height', async () => {
+    test('returns transformed data', async () => {
+        const createdAt = dayjs().subtract(1, 'second')
+
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
                         data: {
                             blocksCollection: {
-                                items: [{ height: 123 }, { height: 456 }],
+                                items: [
+                                    {
+                                        createdAt: createdAt.toISOString(),
+                                        height: 456,
+                                    },
+                                    { height: 123 },
+                                ],
                             },
                         },
                     }),
@@ -21,26 +29,14 @@ describe('getBlocks', () => {
         })
 
         await expect(getBlocks({ length: 2 })).resolves.toMatchObject({
-            blocks: [{ height: 456 }, { height: 123 }],
-        })
-    })
-
-    test('returns transformed creation date', async () => {
-        const createdAt = dayjs().subtract(1, 'second').toISOString()
-
-        createGraphqlClientMock.mockReturnValue({
-            query: () => ({
-                toPromise: () =>
-                    Promise.resolve({
-                        data: {
-                            blocksCollection: { items: [{ createdAt }] },
-                        },
-                    }),
-            }),
-        })
-
-        await expect(getBlocks({ length: 1 })).resolves.toMatchObject({
-            blocks: [{ timeAgo: '1s ago' }],
+            blocks: [
+                {
+                    height: 456,
+                    initialTimeAgo: '1s ago',
+                    timestamp: createdAt.valueOf(),
+                },
+                { height: 123 },
+            ],
         })
     })
 

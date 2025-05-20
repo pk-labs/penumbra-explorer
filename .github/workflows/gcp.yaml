@@ -25,12 +25,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download .env artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: env-file
+
       - uses: chrnorm/deployment-action@v2
         id: deployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: ${{ inputs.env_name_label }}
-          #environment-url: https://pe-frontend-564694434950.europe-west6.run.app/
           initial-status: in_progress
 
       - name: Set up Node.js
@@ -94,6 +98,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download .env artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: env-file
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -107,7 +116,7 @@ jobs:
       - name: Deploy to Google Cloud
         run: |
           gcloud config set compute/region ${{ inputs.gcp_region }}
-          gcloud builds submit --config cloudbuild.yaml --substitutions=_BRANCH_NAME=${{ github.ref_name }},_COMMIT_SHA=${{ github.sha }},_REGION=${{ inputs.gcp_region }},_ENV_NAME=${{ inputs.env_name }}
+          gcloud builds submit --config cloudbuild.yaml --substitutions=_REGION=${{ inputs.gcp_region }},_ENV_NAME=${{ inputs.env_name }}
 
       - uses: chrnorm/deployment-status@v2
         with:

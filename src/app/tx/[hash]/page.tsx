@@ -31,7 +31,7 @@ const TransactionViewPage: FC<Props> = async props => {
     return (
         <Container narrow>
             <Breadcrumbs>
-                <Breadcrumb href="/">Explorer</Breadcrumb>
+                <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb href="/txs">Transactions</Breadcrumb>
             </Breadcrumbs>
             <TransactionViewContainer transactionHash={params.hash} />

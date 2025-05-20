@@ -1,7 +1,6 @@
 // istanbul ignore file
-import Image from 'next/image'
 import { FC } from 'react'
-import { encrypted } from '@/lib/images'
+import { Encrypted } from '@/components'
 import { classNames } from '@/lib/utils'
 import Subsection from '../subsection'
 
@@ -9,12 +8,12 @@ const Memo: FC = () => (
     <Subsection title="Memo">
         <div
             className={classNames(
-                'bg-other-tonalFill5 flex items-center gap-2 rounded-sm px-3',
-                'text-text-secondary py-2 text-sm font-normal'
+                'bg-other-tonalFill5 flex items-center gap-1 rounded-sm px-3',
+                'text-text-secondary py-2'
             )}
         >
-            <Image alt="Memo" src={encrypted} />
-            <span>Memo</span>
+            <Encrypted />
+            <span className="font-mono text-sm font-medium">Memo</span>
         </div>
     </Subsection>
 )

@@ -3,6 +3,34 @@ import * as Types from './types';
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export const PartialTransactionFragmentDoc = gql`
+    fragment PartialTransaction on Transaction {
+  hash
+  block {
+    height
+    createdAt
+  }
+  ibcStatus
+  raw
+}
+    `;
+export const BlockFragmentDoc = gql`
+    fragment Block on Block {
+  height
+  createdAt
+  transactions {
+    ...PartialTransaction
+  }
+  rawJson
+}
+    ${PartialTransactionFragmentDoc}`;
+export const PartialBlockFragmentDoc = gql`
+    fragment PartialBlock on Block {
+  height
+  createdAt
+  transactionsCount
+}
+    `;
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
   hash
@@ -20,33 +48,6 @@ export const TransactionFragmentDoc = gql`
   }
   raw
   rawJson
-}
-    `;
-export const BlockFragmentDoc = gql`
-    fragment Block on Block {
-  height
-  createdAt
-  transactions {
-    ...Transaction
-  }
-  rawJson
-}
-    ${TransactionFragmentDoc}`;
-export const PartialBlockFragmentDoc = gql`
-    fragment PartialBlock on Block {
-  height
-  createdAt
-  transactionsCount
-}
-    `;
-export const PartialTransactionFragmentDoc = gql`
-    fragment PartialTransaction on Transaction {
-  hash
-  block {
-    height
-    createdAt
-  }
-  raw
 }
     `;
 export const BlockDocument = gql`
@@ -73,6 +74,28 @@ export const BlocksDocument = gql`
 
 export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });
+};
+export const IbcStatsDocument = gql`
+    query IbcStats($clientId: String, $timePeriod: TimePeriod) {
+  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
+    id: clientId
+    status
+    channelId
+    counterpartyChannelId
+    lastUpdated
+    shieldedVolume
+    shieldedTxCount
+    unshieldedVolume
+    unshieldedTxCount
+    totalTxCount
+    pendingTxCount
+    expiredTxCount
+  }
+}
+    `;
+
+export function useIbcStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.IbcStatsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.IbcStatsQuery, Types.IbcStatsQueryVariables>({ query: Types.IbcStatsDocument, ...options });
 };
 export const SearchDocument = gql`
     query Search($slug: String!) {
@@ -101,6 +124,17 @@ export const StatsDocument = gql`
 
 export function useStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.StatsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.StatsQuery, Types.StatsQueryVariables>({ query: Types.StatsDocument, ...options });
+};
+export const TotalShieldedVolumeDocument = gql`
+    query TotalShieldedVolume {
+  ibcTotalShieldedVolume {
+    value
+  }
+}
+    `;
+
+export function useTotalShieldedVolumeQuery(options?: Omit<Urql.UseQueryArgs<Types.TotalShieldedVolumeQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.TotalShieldedVolumeQuery, Types.TotalShieldedVolumeQueryVariables>({ query: Types.TotalShieldedVolumeDocument, ...options });
 };
 export const TransactionDocument = gql`
     query Transaction($hash: String!) {
@@ -139,6 +173,17 @@ export const BlockUpdateDocument = gql`
 
 export function useBlockUpdateSubscription<TData = Types.BlockUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.BlockUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.BlockUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.BlockUpdateSubscription, TData, Types.BlockUpdateSubscriptionVariables>({ query: Types.BlockUpdateDocument, ...options }, handler);
+};
+export const TotalShieldedVolumeUpdateDocument = gql`
+    subscription TotalShieldedVolumeUpdate {
+  totalShieldedVolume {
+    value
+  }
+}
+    `;
+
+export function useTotalShieldedVolumeUpdateSubscription<TData = Types.TotalShieldedVolumeUpdateSubscription>(options?: Omit<Urql.UseSubscriptionArgs<Types.TotalShieldedVolumeUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.TotalShieldedVolumeUpdateSubscription, TData>) {
+  return Urql.useSubscription<Types.TotalShieldedVolumeUpdateSubscription, TData, Types.TotalShieldedVolumeUpdateSubscriptionVariables>({ query: Types.TotalShieldedVolumeUpdateDocument, ...options }, handler);
 };
 export const TransactionCountUpdateDocument = gql`
     subscription TransactionCountUpdate {

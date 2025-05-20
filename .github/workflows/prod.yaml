@@ -3,8 +3,28 @@ name: Deploy to production
 on:
   workflow_dispatch:
 
+# TOOD: Copy .env.prod to .env
 jobs:
+  env_setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy .env.prod to .env
+        run: cp .env.prod .env
+
+      - name: Upload .env artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: env-file
+          path: .env
+          include-hidden-files: true
+          retention-days: 1
+          if-no-files-found: error
+
   trigger_gcp_workflow:
+    needs: env_setup
     uses: ./.github/workflows/gcp.yaml
     with:
       env_name: prod

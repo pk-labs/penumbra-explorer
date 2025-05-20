@@ -22,10 +22,7 @@ const UmPriceContainer: FC<Props> = props => {
         <UmPrice className={props.className} {...umPrice} />
     ) : (
         <Skeleton
-            className={classNames(
-                'h-8 w-43 rounded-full sm:w-49 md:w-33 lg:w-49!',
-                props.className
-            )}
+            className={classNames('h-8 w-49 rounded-full', props.className)}
         />
     )
 }

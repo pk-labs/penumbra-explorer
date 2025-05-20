@@ -1,85 +1,97 @@
 import {
     BlockFragment,
-    BlockUpdate,
+    IbcStatsQuery,
+    IbcStatus,
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
-    TransactionUpdate,
 } from '@/lib/graphql/generated/types'
 
 export interface TransformedBlockFragment
-    extends Omit<BlockFragment, 'rawJson' | 'transactions'> {
-    rawJson: object
+    extends Pick<BlockFragment, 'height'> {
+    rawJson?: object
+    timestamp: number
     transactions: TransformedPartialTransactionFragment[]
 }
 
-export interface TransformedPartialBlockFragment extends PartialBlockFragment {
-    timeAgo?: string
-}
-
-export interface TransformedBlockUpdate extends BlockUpdate {
-    timeAgo?: string
+export interface TransformedPartialBlockFragment
+    extends Pick<PartialBlockFragment, 'height' | 'transactionsCount'> {
+    initialTimeAgo: string
+    timestamp: number
 }
 
 export interface TransformedTransactionFragment
-    extends Omit<TransactionFragment, 'rawJson'> {
+    extends Pick<TransactionFragment, 'hash' | 'raw'> {
     actionCount: number
+    blockHeight: number
+    chainId: string
+    fee: number
     memo: boolean
     primaryAction?: ActionType
     rawJson: object
+    timestamp: number
 }
 
 export interface TransformedPartialTransactionFragment
-    extends PartialTransactionFragment {
+    extends Pick<PartialTransactionFragment, 'hash' | 'raw'> {
     actionCount: number
+    blockHeight: number
+    initialTimeAgo: string
     primaryAction?: ActionType
-    timeAgo?: string
+    status: IbcStatus
+    timestamp: number
 }
 
-export interface TransformedTransactionUpdate
-    extends Omit<TransactionUpdate, 'id'> {
-    actionCount: number
-    block: {
-        height: number
-    }
-    primaryAction?: ActionType
-    timeAgo?: string
+export interface TransformedIbcStats
+    extends Omit<
+        NonNullable<IbcStatsQuery['ibcStats']>[number],
+        'clientId' | 'lastUpdated'
+    > {
+    id: string
+    initialTimeAgo: string
+    timestamp: number
 }
 
+// TODO: Refactor value names to pascal case
 export enum ActionType {
-    communityPoolDeposit = 'Community Pool Deposit',
-    communityPoolOutput = 'Community Pool Output',
-    communityPoolSpend = 'Community Pool Spend',
+    communityPoolDeposit = 'Community pool deposit',
+    communityPoolOutput = 'Community pool output',
+    communityPoolSpend = 'Community pool spend',
     delegate = 'Delegate',
-    delegatorVote = 'Delegator Vote',
-    dutchAuctionEnd = 'Dutch Auction End',
-    dutchAuctionSchedule = 'Dutch Auction Schedule',
-    dutchAuctionWithdraw = 'Dutch Auction Withdraw',
-    ibcRelayAction = 'IBC Relay Action',
-    ics20Withdrawal = 'Ics20 Withdrawal',
-    internalTransfer = 'Internal Transfer',
+    delegatorVote = 'Delegator vote',
+    dutchAuctionEnd = 'Dutch auction end',
+    dutchAuctionSchedule = 'Dutch auction schedule',
+    dutchAuctionWithdraw = 'Dutch auction withdraw',
+    ibcRelayAction = 'IBC relay',
+    ics20Withdrawal = 'ICS 20 withdrawal',
+    internalTransfer = 'Internal transfer',
     output = 'Output',
-    positionClose = 'Position Close',
-    positionOpen = 'Position Open',
-    positionRewardClaim = 'Position Reward Claim',
-    positionWithdraw = 'Position Withdraw',
-    proposalDepositClaim = 'Proposal Deposit Claim',
-    proposalSubmit = 'Proposal Submit',
-    proposalWithdraw = 'Proposal Withdraw',
+    positionClose = 'Position close',
+    positionOpen = 'Position open',
+    positionRewardClaim = 'Position reward claim',
+    positionWithdraw = 'Position withdraw',
+    proposalDepositClaim = 'Proposal deposit claim',
+    proposalSubmit = 'Proposal submit',
+    proposalWithdraw = 'Proposal withdraw',
     receive = 'Receive',
     send = 'Send',
     spend = 'Spend',
     swap = 'Swap',
-    swapClaim = 'Swap Claim',
+    swapClaim = 'Swap claim',
     undelegate = 'Undelegate',
-    undelegateClaim = 'Undelegate Claim',
+    undelegateClaim = 'Undelegate claim',
     unknown = 'Unknown',
-    unknownInternal = 'Unknown (Internal)',
-    validatorDefinition = 'Validator Definition',
-    validatorVote = 'Validator Vote',
+    unknownInternal = 'Unknown (internal)',
+    validatorDefinition = 'Validator definition',
+    validatorVote = 'Validator vote',
 }
 
 export interface UmPriceData {
     change: number
     price: number
 }
+
+export type StoredSearchResult =
+    | { hash: string; type: 'transaction' }
+    | { height: number; type: 'block' }
+    | { id: string; type: 'client' }

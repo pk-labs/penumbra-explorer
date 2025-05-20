@@ -12,15 +12,16 @@ import LatestBlocksLoader, {
     Props as LatestBlocksLoaderProps,
 } from './latestBlocksLoader'
 
-type Props = Omit<LatestBlocksLoaderProps, 'actions' | 'title'>
+type Props = Omit<LatestBlocksLoaderProps, 'header'>
 
 const LatestBlocksContainer: FC<Props> = props => {
-    const title = 'Latest blocks'
-
-    const actions = (
-        <Button density="compact" href="/blocks">
-            View All
-        </Button>
+    const header = (
+        <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-medium">Latest blocks</h2>
+            <Button density="compact" href="/blocks">
+                View all
+            </Button>
+        </div>
     )
 
     return (
@@ -34,9 +35,8 @@ const LatestBlocksContainer: FC<Props> = props => {
                         fallback
                     />
                     <Table
-                        actions={actions}
                         className={props.blockTableClassName}
-                        title={title}
+                        header={header}
                     >
                         <thead>
                             <TableRow>
@@ -58,7 +58,7 @@ const LatestBlocksContainer: FC<Props> = props => {
                 </>
             }
         >
-            <LatestBlocksLoader actions={actions} title={title} {...props} />
+            <LatestBlocksLoader header={header} {...props} />
         </Suspense>
     )
 }

@@ -1,6 +1,5 @@
 import { fireEvent, getByText, render } from '@testing-library/react'
 import { router } from '@/lib/__tests__/__mocks__'
-import dayjs from '@/lib/dayjs'
 import { TableProps } from '../table'
 import BlockTable from './blockTable'
 
@@ -26,19 +25,19 @@ describe('BlockTable', () => {
     })
 
     test('renders blocks', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
-
         const { container } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
                         height: 456,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 99,
                     },
                     {
-                        createdAt,
                         height: 123,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 98,
                     },
                 ]}
@@ -50,19 +49,19 @@ describe('BlockTable', () => {
     })
 
     test('highlights new blocks', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
-
         const { container, rerender } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
                         height: 2,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 0,
                     },
                     {
-                        createdAt,
                         height: 1,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 0,
                     },
                 ]}
@@ -81,18 +80,21 @@ describe('BlockTable', () => {
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
                         height: 3,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 0,
                     },
                     {
-                        createdAt,
                         height: 2,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 0,
                     },
                     {
-                        createdAt,
                         height: 1,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 0,
                     },
                 ]}
@@ -113,14 +115,13 @@ describe('BlockTable', () => {
     })
 
     test('renders proposer', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
-
         const { container } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
                         height: 123,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 0,
                     },
                 ]}
@@ -132,14 +133,13 @@ describe('BlockTable', () => {
     })
 
     test('navigates to block on row click', async () => {
-        const createdAt = dayjs('2025-01-01').toISOString()
-
         const { container } = render(
             <BlockTable
                 blocks={[
                     {
-                        createdAt,
                         height: 123,
+                        initialTimeAgo: '',
+                        timestamp: 0,
                         transactionsCount: 0,
                     },
                 ]}

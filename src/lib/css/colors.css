@@ -49,9 +49,9 @@
 
     /* Text */
     --color-text-primary: var(--color-neutral-50);
-    --color-text-secondary: #a3a3a3;
+    --color-text-secondary: var(--color-neutral-light);
     --color-text-muted: var(--color-neutral-700);
-    --color-text-special: #f49c43;
+    --color-text-special: var(--color-primary-light);
 
     /* Action */
     --color-action-hoverOverlay: rgb(from #53aea8 r g b / 0.15);

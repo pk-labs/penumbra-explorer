@@ -4,5 +4,6 @@ fragment PartialTransaction on Transaction {
         height
         createdAt
     }
+    ibcStatus
     raw
 }

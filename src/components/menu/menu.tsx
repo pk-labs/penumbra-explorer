@@ -1,20 +1,11 @@
 'use client'
 
-import { FC, ReactElement, useCallback } from 'react'
+import { FC, ReactNode, useCallback } from 'react'
 import Button from '../button'
 import Modal from '../modal'
-import { MenuItemProps } from './menuItem'
 
 interface Props {
-    children?:
-        | Array<
-              | Array<ReactElement<MenuItemProps>>
-              | false
-              | null
-              | ReactElement<MenuItemProps>
-              | undefined
-          >
-        | ReactElement<MenuItemProps>
+    children?: ReactNode
     className?: string
     onClose: () => void
     onOpen: () => void
@@ -35,7 +26,7 @@ const Menu: FC<Props> = props => {
             <Button
                 className={props.className}
                 density="compact"
-                icon="Menu"
+                icon={props.open ? 'X' : 'Menu'}
                 onClick={toggle}
                 iconOnly
             >

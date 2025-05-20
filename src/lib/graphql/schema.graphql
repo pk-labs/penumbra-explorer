@@ -16,10 +16,11 @@ type AssetId {
 }
 
 type Block {
+    chainId: String
     createdAt: DateTime!
     height: Int!
     rawEvents: [Event!]!
-    rawJson: JSON
+    rawJson: JSON!
     transactions: [Transaction!]!
     transactionsCount: Int!
 }
@@ -33,6 +34,15 @@ type BlockUpdate {
     createdAt: DateTime!
     height: Int!
     transactionsCount: Int!
+}
+
+type ChannelPair {
+    channelId: String!
+    clientId: String!
+    completedTxCount: Int!
+    connectionId: String
+    counterpartyChannelId: String
+    pendingTxCount: Int!
 }
 
 type DbBlock {
@@ -50,9 +60,11 @@ type DbBlock {
 type DbRawTransaction {
     blockHeight: Int!
     chainId: String
+    clientId: String
     feeAmount: String
+    ibcStatus: String!
     rawDataHex: String
-    rawJson: JSON
+    rawJson: JSON!
     timestamp: DateTime!
     txHashHex: String!
 }
@@ -69,6 +81,31 @@ type Fee {
 
 type IbcRelay {
     rawAction: String!
+}
+
+type IbcStats {
+    channelId: String
+    clientId: String!
+    counterpartyChannelId: String
+    expiredTxCount: Int!
+    lastUpdated: DateTime
+    pendingTxCount: Int!
+    shieldedTxCount: Int!
+    shieldedVolume: String!
+    status: ClientStatus!
+    totalTxCount: Int!
+    unshieldedTxCount: Int!
+    unshieldedVolume: String!
+}
+
+type IbcTransactionUpdate {
+    blockHeight: Int!
+    clientId: String!
+    isStatusUpdate: Boolean!
+    raw: String!
+    status: String!
+    timestamp: DateTime!
+    txHash: String!
 }
 
 type NotYetSupportedAction {
@@ -94,42 +131,33 @@ type OutputBody {
 }
 
 type QueryRoot {
-    "Get a block by height"
     block(height: Int!): Block
-    "Get blocks by selector"
     blocks(selector: BlocksSelector!): [Block!]!
-    "Get blocks with pagination and optional filtering"
     blocksCollection(filter: BlockFilter, limit: CollectionLimit!): BlockCollection!
-    """
-
-    --- Direct database queries ---
-    Get a block directly from the database by height
-    """
     dbBlock(height: Int!): DbBlock
-    "Get a list of blocks directly from the database"
     dbBlocks(limit: Int, offset: Int): [DbBlock!]!
-    "Get the latest block directly from the database"
     dbLatestBlock: DbBlock
-    "Get raw transaction data directly from the database by hash"
     dbRawTransaction(txHashHex: String!): DbRawTransaction
-    "Get raw transaction data directly from the database"
     dbRawTransactions(limit: Int, offset: Int): [DbRawTransaction!]!
-    "Search for blocks or transactions"
+    ibcChannelPairs(clientId: String, limit: Int, offset: Int): [ChannelPair!]!
+    ibcChannelPairsByClientId(clientId: String!): [ChannelPair!]!
+    ibcStats(clientId: String, limit: Int, offset: Int, timePeriod: TimePeriod): [IbcStats!]!
+    ibcStatsByClientId(clientId: String!, timePeriod: TimePeriod): IbcStats
+    ibcTotalShieldedVolume: TotalShieldedVolume!
     search(slug: String!): SearchResult
-    "Get blockchain statistics"
     stats: Stats!
-    "Get a transaction by hash"
     transaction(hash: String!): Transaction
-    "Get transactions by selector"
     transactions(selector: TransactionsSelector!): [Transaction!]!
-    "Get transactions with pagination and optional filtering"
     transactionsCollection(filter: TransactionFilter, limit: CollectionLimit!): TransactionCollection!
 }
 
 type Root {
     blocks: BlockUpdate!
+    ibcTransactions(clientId: String, limit: Int, offset: Int): IbcTransactionUpdate!
     latestBlocks(limit: Int): BlockUpdate!
+    latestIbcTransactions(clientId: String, limit: Int): IbcTransactionUpdate!
     latestTransactions(limit: Int): TransactionUpdate!
+    totalShieldedVolume: TotalShieldedVolumeUpdate!
     transactionCount: TransactionCountUpdate!
     transactions: TransactionUpdate!
 }
@@ -150,12 +178,23 @@ type Stats {
     totalTransactionsCount: Int!
 }
 
+type TotalShieldedVolume {
+    "Total shielded volume across all IBC clients"
+    value: String!
+}
+
+type TotalShieldedVolumeUpdate {
+    value: String!
+}
+
 type Transaction {
     anchor: String!
     bindingSig: String!
     block: Block!
     body: TransactionBody!
+    clientId: String
     hash: String!
+    ibcStatus: IbcStatus!
     index: Int!
     raw: String!
     rawEvents: [Event!]!
@@ -192,9 +231,30 @@ type TransactionUpdate {
     raw: String!
 }
 
+enum ClientStatus {
+    active
+    expired
+    frozen
+    unknown
+}
+
+enum IbcStatus {
+    COMPLETED
+    ERROR
+    EXPIRED
+    PENDING
+    UNKNOWN
+}
+
 enum RangeDirection {
     NEXT
     PREVIOUS
+}
+
+enum TimePeriod {
+    ALL
+    DAY
+    MONTH
 }
 
 scalar DateTime
@@ -230,6 +290,7 @@ input LatestTransactions {
 }
 
 input TransactionFilter {
+    clientId: String
     hash: String
 }
 
@@ -240,6 +301,7 @@ input TransactionRange {
 }
 
 input TransactionsSelector {
+    clientId: String
     latest: LatestTransactions
     range: TransactionRange
 }

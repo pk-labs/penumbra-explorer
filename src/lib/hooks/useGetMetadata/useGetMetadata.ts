@@ -1,19 +1,42 @@
 // istanbul ignore file
-import { ChainRegistryClient, Registry } from '@penumbra-labs/registry'
+import { ChainRegistryClient } from '@penumbra-labs/registry'
 import { ActionViewProps } from '@penumbra-zone/ui/ActionView'
-import { useEffect, useState } from 'react'
+import { create } from 'zustand/react'
 
-type GetMetadata = ActionViewProps['getMetadata']
+let initializationAttempted = false
 
-const useGetMetadata = (chainId: string): GetMetadata | undefined => {
-    const [registry, setRegistry] = useState<Registry>()
-
-    useEffect(() => {
-        const client = new ChainRegistryClient()
-        client.remote.get(chainId).then(setRegistry).catch(console.error)
-    }, [chainId])
-
-    return registry?.tryGetMetadata.bind(registry)
+type State = {
+    getMetadata?: ActionViewProps['getMetadata']
 }
+
+const useStore = create<State>(set => {
+    const state = {
+        getMetadata: undefined,
+    }
+
+    const initialize = async () => {
+        if (initializationAttempted) {
+            return
+        }
+
+        initializationAttempted = true
+
+        try {
+            const client = new ChainRegistryClient()
+            const registry = await client.remote.get('penumbra-1')
+            const getMetadata = registry?.tryGetMetadata.bind(registry)
+
+            set({ getMetadata })
+        } catch (e) {
+            throw e
+        }
+    }
+
+    initialize().catch(console.error)
+
+    return state
+})
+
+const useGetMetadata = () => useStore(state => state.getMetadata)
 
 export default useGetMetadata

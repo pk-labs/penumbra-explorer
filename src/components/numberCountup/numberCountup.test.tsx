@@ -7,18 +7,20 @@ describe('Container', () => {
         getByText(container, '0')
     })
 
+    test('renders prefix', async () => {
+        const { container } = render(<NumberCountup number={99} prefix="$" />)
+        getByText(container, '$0')
+    })
+
     test('renders suffix', async () => {
-        const { container } = render(<NumberCountup number={99} suffix="$" />)
-        getByText(container, '0$')
+        const { container } = render(<NumberCountup number={99} suffix=" UM" />)
+        getByText(container, '0 UM')
     })
 
     test.skip('renders final number at animation end', async () => {
         const { container } = render(<NumberCountup number={99} />)
 
-        act(() => {
-            jest.advanceTimersByTime(1000)
-        })
-
+        act(() => jest.advanceTimersByTime(1000))
         getByText(container, '99')
     })
 

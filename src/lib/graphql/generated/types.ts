@@ -29,10 +29,11 @@ export type AssetId = {
 
 export type Block = {
   __typename?: 'Block';
+  chainId?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   height: Scalars['Int']['output'];
   rawEvents: Array<Event>;
-  rawJson?: Maybe<Scalars['JSON']['output']>;
+  rawJson: Scalars['JSON']['output'];
   transactions: Array<Transaction>;
   transactionsCount: Scalars['Int']['output'];
 };
@@ -64,6 +65,23 @@ export type BlocksSelector = {
   range?: InputMaybe<BlockHeightRange>;
 };
 
+export type ChannelPair = {
+  __typename?: 'ChannelPair';
+  channelId: Scalars['String']['output'];
+  clientId: Scalars['String']['output'];
+  completedTxCount: Scalars['Int']['output'];
+  connectionId?: Maybe<Scalars['String']['output']>;
+  counterpartyChannelId?: Maybe<Scalars['String']['output']>;
+  pendingTxCount: Scalars['Int']['output'];
+};
+
+export enum ClientStatus {
+  Active = 'active',
+  Expired = 'expired',
+  Frozen = 'frozen',
+  Unknown = 'unknown'
+}
+
 export type CollectionLimit = {
   length?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -86,9 +104,11 @@ export type DbRawTransaction = {
   __typename?: 'DbRawTransaction';
   blockHeight: Scalars['Int']['output'];
   chainId?: Maybe<Scalars['String']['output']>;
+  clientId?: Maybe<Scalars['String']['output']>;
   feeAmount?: Maybe<Scalars['String']['output']>;
+  ibcStatus: Scalars['String']['output'];
   rawDataHex?: Maybe<Scalars['String']['output']>;
-  rawJson?: Maybe<Scalars['JSON']['output']>;
+  rawJson: Scalars['JSON']['output'];
   timestamp: Scalars['DateTime']['output'];
   txHashHex: Scalars['String']['output'];
 };
@@ -108,6 +128,41 @@ export type Fee = {
 export type IbcRelay = {
   __typename?: 'IbcRelay';
   rawAction: Scalars['String']['output'];
+};
+
+export type IbcStats = {
+  __typename?: 'IbcStats';
+  channelId?: Maybe<Scalars['String']['output']>;
+  clientId: Scalars['String']['output'];
+  counterpartyChannelId?: Maybe<Scalars['String']['output']>;
+  expiredTxCount: Scalars['Int']['output'];
+  lastUpdated?: Maybe<Scalars['DateTime']['output']>;
+  pendingTxCount: Scalars['Int']['output'];
+  shieldedTxCount: Scalars['Int']['output'];
+  shieldedVolume: Scalars['String']['output'];
+  status: ClientStatus;
+  totalTxCount: Scalars['Int']['output'];
+  unshieldedTxCount: Scalars['Int']['output'];
+  unshieldedVolume: Scalars['String']['output'];
+};
+
+export enum IbcStatus {
+  Completed = 'COMPLETED',
+  Error = 'ERROR',
+  Expired = 'EXPIRED',
+  Pending = 'PENDING',
+  Unknown = 'UNKNOWN'
+}
+
+export type IbcTransactionUpdate = {
+  __typename?: 'IbcTransactionUpdate';
+  blockHeight: Scalars['Int']['output'];
+  clientId: Scalars['String']['output'];
+  isStatusUpdate: Scalars['Boolean']['output'];
+  raw: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+  timestamp: Scalars['DateTime']['output'];
+  txHash: Scalars['String']['output'];
 };
 
 export type LatestBlock = {
@@ -146,34 +201,23 @@ export type OutputBody = {
 
 export type QueryRoot = {
   __typename?: 'QueryRoot';
-  /** Get a block by height */
   block?: Maybe<Block>;
-  /** Get blocks by selector */
   blocks: Array<Block>;
-  /** Get blocks with pagination and optional filtering */
   blocksCollection: BlockCollection;
-  /**
-   * --- Direct database queries ---
-   * Get a block directly from the database by height
-   */
   dbBlock?: Maybe<DbBlock>;
-  /** Get a list of blocks directly from the database */
   dbBlocks: Array<DbBlock>;
-  /** Get the latest block directly from the database */
   dbLatestBlock?: Maybe<DbBlock>;
-  /** Get raw transaction data directly from the database by hash */
   dbRawTransaction?: Maybe<DbRawTransaction>;
-  /** Get raw transaction data directly from the database */
   dbRawTransactions: Array<DbRawTransaction>;
-  /** Search for blocks or transactions */
+  ibcChannelPairs: Array<ChannelPair>;
+  ibcChannelPairsByClientId: Array<ChannelPair>;
+  ibcStats: Array<IbcStats>;
+  ibcStatsByClientId?: Maybe<IbcStats>;
+  ibcTotalShieldedVolume: TotalShieldedVolume;
   search?: Maybe<SearchResult>;
-  /** Get blockchain statistics */
   stats: Stats;
-  /** Get a transaction by hash */
   transaction?: Maybe<Transaction>;
-  /** Get transactions by selector */
   transactions: Array<Transaction>;
-  /** Get transactions with pagination and optional filtering */
   transactionsCollection: TransactionCollection;
 };
 
@@ -216,6 +260,32 @@ export type QueryRootDbRawTransactionsArgs = {
 };
 
 
+export type QueryRootIbcChannelPairsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryRootIbcChannelPairsByClientIdArgs = {
+  clientId: Scalars['String']['input'];
+};
+
+
+export type QueryRootIbcStatsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  timePeriod?: InputMaybe<TimePeriod>;
+};
+
+
+export type QueryRootIbcStatsByClientIdArgs = {
+  clientId: Scalars['String']['input'];
+  timePeriod?: InputMaybe<TimePeriod>;
+};
+
+
 export type QueryRootSearchArgs = {
   slug: Scalars['String']['input'];
 };
@@ -244,14 +314,30 @@ export enum RangeDirection {
 export type Root = {
   __typename?: 'Root';
   blocks: BlockUpdate;
+  ibcTransactions: IbcTransactionUpdate;
   latestBlocks: BlockUpdate;
+  latestIbcTransactions: IbcTransactionUpdate;
   latestTransactions: TransactionUpdate;
+  totalShieldedVolume: TotalShieldedVolumeUpdate;
   transactionCount: TransactionCountUpdate;
   transactions: TransactionUpdate;
 };
 
 
+export type RootIbcTransactionsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
 export type RootLatestBlocksArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type RootLatestIbcTransactionsArgs = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -281,13 +367,32 @@ export type Stats = {
   totalTransactionsCount: Scalars['Int']['output'];
 };
 
+export enum TimePeriod {
+  All = 'ALL',
+  Day = 'DAY',
+  Month = 'MONTH'
+}
+
+export type TotalShieldedVolume = {
+  __typename?: 'TotalShieldedVolume';
+  /** Total shielded volume across all IBC clients */
+  value: Scalars['String']['output'];
+};
+
+export type TotalShieldedVolumeUpdate = {
+  __typename?: 'TotalShieldedVolumeUpdate';
+  value: Scalars['String']['output'];
+};
+
 export type Transaction = {
   __typename?: 'Transaction';
   anchor: Scalars['String']['output'];
   bindingSig: Scalars['String']['output'];
   block: Block;
   body: TransactionBody;
+  clientId?: Maybe<Scalars['String']['output']>;
   hash: Scalars['String']['output'];
+  ibcStatus: IbcStatus;
   index: Scalars['Int']['output'];
   raw: Scalars['String']['output'];
   rawEvents: Array<Event>;
@@ -316,6 +421,7 @@ export type TransactionCountUpdate = {
 };
 
 export type TransactionFilter = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -340,15 +446,16 @@ export type TransactionUpdate = {
 };
 
 export type TransactionsSelector = {
+  clientId?: InputMaybe<Scalars['String']['input']>;
   latest?: InputMaybe<LatestTransactions>;
   range?: InputMaybe<TransactionRange>;
 };
 
-export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson?: any | null, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } }> };
+export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson: any, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
 
-export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
+export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
 
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
 
@@ -357,7 +464,7 @@ export type BlockQueryVariables = Exact<{
 }>;
 
 
-export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, rawJson?: any | null, transactions: Array<{ __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } }> } | null };
+export type BlockQuery = { __typename?: 'QueryRoot', block?: { __typename?: 'Block', height: number, createdAt: any, rawJson: any, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } | null };
 
 export type BlocksQueryVariables = Exact<{
   limit: CollectionLimit;
@@ -366,6 +473,14 @@ export type BlocksQueryVariables = Exact<{
 
 
 export type BlocksQuery = { __typename?: 'QueryRoot', blocksCollection: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
+
+export type IbcStatsQueryVariables = Exact<{
+  clientId?: InputMaybe<Scalars['String']['input']>;
+  timePeriod?: InputMaybe<TimePeriod>;
+}>;
+
+
+export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', status: ClientStatus, channelId?: string | null, counterpartyChannelId?: string | null, lastUpdated?: any | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, totalTxCount: number, pendingTxCount: number, expiredTxCount: number, id: string }> };
 
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -378,6 +493,11 @@ export type StatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type StatsQuery = { __typename?: 'QueryRoot', stats: { __typename?: 'Stats', totalTransactionsCount: number } };
+
+export type TotalShieldedVolumeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TotalShieldedVolumeQuery = { __typename?: 'QueryRoot', ibcTotalShieldedVolume: { __typename?: 'TotalShieldedVolume', value: string } };
 
 export type TransactionQueryVariables = Exact<{
   hash: Scalars['String']['input'];
@@ -392,7 +512,7 @@ export type TransactionsQueryVariables = Exact<{
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'QueryRoot', transactionsCollection: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
+export type TransactionsQuery = { __typename?: 'QueryRoot', transactionsCollection: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -400,6 +520,11 @@ export type BlockUpdateSubscriptionVariables = Exact<{
 
 
 export type BlockUpdateSubscription = { __typename?: 'Root', latestBlocks: { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number } };
+
+export type TotalShieldedVolumeUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TotalShieldedVolumeUpdateSubscription = { __typename?: 'Root', totalShieldedVolume: { __typename?: 'TotalShieldedVolumeUpdate', value: string } };
 
 export type TransactionCountUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -413,6 +538,34 @@ export type TransactionUpdateSubscriptionVariables = Exact<{
 
 export type TransactionUpdateSubscription = { __typename?: 'Root', latestTransactions: { __typename?: 'TransactionUpdate', hash: string, id: number, raw: string } };
 
+export const PartialTransactionFragmentDoc = gql`
+    fragment PartialTransaction on Transaction {
+  hash
+  block {
+    height
+    createdAt
+  }
+  ibcStatus
+  raw
+}
+    `;
+export const BlockFragmentDoc = gql`
+    fragment Block on Block {
+  height
+  createdAt
+  transactions {
+    ...PartialTransaction
+  }
+  rawJson
+}
+    ${PartialTransactionFragmentDoc}`;
+export const PartialBlockFragmentDoc = gql`
+    fragment PartialBlock on Block {
+  height
+  createdAt
+  transactionsCount
+}
+    `;
 export const TransactionFragmentDoc = gql`
     fragment Transaction on Transaction {
   hash
@@ -432,33 +585,6 @@ export const TransactionFragmentDoc = gql`
   rawJson
 }
     `;
-export const BlockFragmentDoc = gql`
-    fragment Block on Block {
-  height
-  createdAt
-  transactions {
-    ...Transaction
-  }
-  rawJson
-}
-    ${TransactionFragmentDoc}`;
-export const PartialBlockFragmentDoc = gql`
-    fragment PartialBlock on Block {
-  height
-  createdAt
-  transactionsCount
-}
-    `;
-export const PartialTransactionFragmentDoc = gql`
-    fragment PartialTransaction on Transaction {
-  hash
-  block {
-    height
-    createdAt
-  }
-  raw
-}
-    `;
 export const BlockDocument = gql`
     query Block($height: Int!) {
   block(height: $height) {
@@ -476,6 +602,24 @@ export const BlocksDocument = gql`
   }
 }
     ${PartialBlockFragmentDoc}`;
+export const IbcStatsDocument = gql`
+    query IbcStats($clientId: String, $timePeriod: TimePeriod) {
+  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
+    id: clientId
+    status
+    channelId
+    counterpartyChannelId
+    lastUpdated
+    shieldedVolume
+    shieldedTxCount
+    unshieldedVolume
+    unshieldedTxCount
+    totalTxCount
+    pendingTxCount
+    expiredTxCount
+  }
+}
+    `;
 export const SearchDocument = gql`
     query Search($slug: String!) {
   search(slug: $slug) {
@@ -493,6 +637,13 @@ export const StatsDocument = gql`
     query Stats {
   stats {
     totalTransactionsCount
+  }
+}
+    `;
+export const TotalShieldedVolumeDocument = gql`
+    query TotalShieldedVolume {
+  ibcTotalShieldedVolume {
+    value
   }
 }
     `;
@@ -519,6 +670,13 @@ export const BlockUpdateDocument = gql`
     height
     createdAt
     transactionsCount
+  }
+}
+    `;
+export const TotalShieldedVolumeUpdateDocument = gql`
+    subscription TotalShieldedVolumeUpdate {
+  totalShieldedVolume {
+    value
   }
 }
     `;

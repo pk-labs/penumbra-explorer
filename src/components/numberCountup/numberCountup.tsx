@@ -7,6 +7,7 @@ import { classNames, formatNumber } from '@/lib/utils'
 export interface Props {
     className?: string
     number: number
+    prefix?: string
     suffix?: string
 }
 
@@ -17,9 +18,13 @@ const NumberCountup: FC<Props> = props => {
 
     const transformValue = useCallback(
         (value: number) => {
-            return `${formatNumber(Math.round(value))}${props.suffix ?? ''}`
+            return (
+                (props.prefix ?? '') +
+                formatNumber(Math.round(value)) +
+                (props.suffix ?? '')
+            )
         },
-        [props.suffix]
+        [props.prefix, props.suffix]
     )
 
     const transformedValue = useTransform(motionValue, transformValue)

@@ -10,7 +10,7 @@ describe.skip('generatePageMetadata', () => {
     test('generates canonical URL', async () => {
         expect(generatePageMetadata('Foo', 'Bar', '/foo')).toMatchObject({
             alternates: {
-                canonical: 'https://dev.explorer.penumbra.pklabs.me/foo',
+                canonical: `${process.env.BASE_URL}/foo`,
             },
         })
     })

@@ -1,4 +1,5 @@
 // istanbul ignore file
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import { PaginatedTransactionsContainer } from '@/containers'
@@ -13,27 +14,31 @@ export const metadata = generatePageMetadata(
 )
 
 interface Props {
-    searchParams: Promise<{
-        page?: string
-    }>
+    searchParams: Promise<{ page?: string }>
 }
 
 const TransactionsPage: FC<Props> = async props => {
     const searchParams = await props.searchParams
     const page = searchParams.page ? Number(searchParams.page) - 1 : 0
+
+    if (Number.isNaN(page) || page < 0) {
+        notFound()
+    }
+
     const length = 20
     const offset = page * length
 
     return (
         <Container>
             <Breadcrumbs>
-                <Breadcrumb href="/">Explorer</Breadcrumb>
+                <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
             <PaginatedTransactionsContainer
                 length={length}
                 offset={offset}
                 pathname="/txs"
+                blockHeight
                 time
             />
         </Container>

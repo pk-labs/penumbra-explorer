@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react'
-import { Parameter } from './parameter'
+import Parameter from './parameter'
 import Parameters from './parameters'
 
 describe('Parameters', () => {
@@ -12,6 +12,16 @@ describe('Parameters', () => {
 
         getByText(container, 'Foo')
         getByText(container, 'Bar')
+    })
+
+    test('renders title', async () => {
+        const { container } = render(
+            <Parameters title="Foo">
+                <Parameter name="Param">Value</Parameter>
+            </Parameters>
+        )
+
+        getByText(container, 'Foo')
     })
 
     test('applies CSS classes', async () => {

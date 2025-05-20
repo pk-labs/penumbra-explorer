@@ -1,13 +1,13 @@
 'use client'
 
 import {
-    CopyToClipboardButton as PenumbraCopyToClipboard,
-    CopyToClipboardButtonProps as PenumbtaCopyToClipboardProps,
+    CopyToClipboardButton,
+    CopyToClipboardButtonProps,
 } from '@penumbra-zone/ui/CopyToClipboardButton'
 import { FC, MouseEvent, useCallback } from 'react'
 import { classNames } from '@/lib/utils'
 
-interface Props extends PenumbtaCopyToClipboardProps {
+interface Props extends CopyToClipboardButtonProps {
     className?: string
     small?: boolean
 }
@@ -26,7 +26,7 @@ const CopyToClipboard: FC<Props> = props => {
             )}
             onClick={onClick}
         >
-            <PenumbraCopyToClipboard text={props.text} />
+            <CopyToClipboardButton text={props.text} />
         </span>
     )
 }

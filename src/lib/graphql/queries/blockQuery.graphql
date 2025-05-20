@@ -1,8 +1,6 @@
 #import "../fragments/blockFragment.graphql"
 
-query Block(
-    $height: Int!
-) {
+query Block($height: Int!) {
     block(height: $height) {
         ...Block
     }

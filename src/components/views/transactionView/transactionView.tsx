@@ -1,9 +1,10 @@
 import { Link2Icon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
+import dayjs from '@/lib/dayjs'
 import { TransformedTransactionFragment } from '@/lib/types'
-import { classNames, shortenHash } from '@/lib/utils'
-import Actions from '../../actions'
+import { classNames, formatNumber, shortenHash } from '@/lib/utils'
+import ActionHistory from '../../actionHistory'
 import CopyToClipboard from '../../copyToClipboard'
 import JsonTree from '../../jsonTree'
 import Memo from '../../memo'
@@ -22,7 +23,6 @@ const TransactionView: FC<Props> = props => (
             'to-[rgba(193,166,204,0.03)]!',
             props.className
         )}
-        subtitle={props.transaction.hash}
         title="Transaction view"
     >
         <Parameters>
@@ -40,34 +40,31 @@ const TransactionView: FC<Props> = props => (
                         'inline-flex items-center gap-1 text-inherit',
                         'hover:text-primary-light'
                     )}
-                    href={`/block/${props.transaction.block.height}`}
+                    href={`/block/${props.transaction.blockHeight}`}
                 >
-                    {props.transaction.block.height}
+                    {formatNumber(props.transaction.blockHeight)}
                     <Link2Icon className="text-text-primary ml-1" size={12} />
                 </Link>
             </Parameter>
             <Parameter name="Time">
-                {props.transaction.block.createdAt}
+                {dayjs(props.transaction.timestamp).format(
+                    'YYYY-MM-DD HH:mm:ss z'
+                )}
             </Parameter>
         </Parameters>
         {props.transaction.memo && <Memo />}
-        <Actions
-            blockHeight={props.transaction.block.height}
-            chainId={props.transaction.body.parameters.chainId}
+        <ActionHistory
+            blockHeight={props.transaction.blockHeight}
             hash={props.transaction.hash}
             rawTransaction={props.transaction.raw}
         />
         <Subsection title="Parameters">
             <Parameters>
                 <Parameter name="Transaction fee">
-                    <span className="text-destructive-light">
-                        {Number(props.transaction.body.parameters.fee.amount) /
-                            1000000}{' '}
-                        UM
-                    </span>
+                    {props.transaction.fee / 1000000} UM
                 </Parameter>
                 <Parameter name="Chain ID">
-                    {props.transaction.body.parameters.chainId}
+                    {props.transaction.chainId}
                 </Parameter>
             </Parameters>
         </Subsection>

@@ -1,5 +1,4 @@
 // istanbul ignore file
-import { redirect } from 'next/navigation'
 import { FC } from 'react'
 import {
     Pagination,
@@ -10,28 +9,30 @@ import { getTransactions } from '@/lib/data'
 
 export interface Props
     extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
+    clientId?: string
     length: number
     offset: number
     pathname: string
 }
 
 const PaginatedTransactionsLoader: FC<Props> = async ({
+    clientId,
     length,
     offset,
     pathname,
     ...props
 }) => {
-    const { total, transactions } = await getTransactions({ length, offset })
-
-    if (!transactions?.length) {
-        redirect(pathname)
-    }
+    const { total, transactions } = await getTransactions(
+        { length, offset },
+        { clientId }
+    )
 
     const page = offset / length + 1
     const totalPages = Math.ceil(total / length)
 
     return (
         <TransactionTable
+            emptyStateMessage="This chain contains no transactions"
             footer={
                 <Pagination
                     page={page}

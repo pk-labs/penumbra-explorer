@@ -1,6 +1,6 @@
 import { fireEvent, getByText, render } from '@testing-library/react'
 import { router } from '@/lib/__tests__/__mocks__'
-import dayjs from '@/lib/dayjs'
+import { IbcStatus } from '@/lib/graphql/generated/types'
 import { ActionType } from '@/lib/types'
 import { TableProps } from '../table'
 import TransactionTable from './transactionTable'
@@ -11,34 +11,52 @@ jest.mock('../table/table', () => (props: TableProps) => (
 
 jest.mock('../../copyToClipboard/copyToClipboard')
 
-describe('BlockTable', () => {
+jest.mock(
+    '../../../lib/utils/decodeTransaction/decodeTransaction',
+    () => () => ({
+        body: {
+            actions: [
+                {
+                    action: {
+                        case: 'ics20Withdrawal',
+                        value: '1,234.56 UM',
+                    },
+                },
+            ],
+        },
+    })
+)
+
+jest.mock(
+    '../../../lib/utils/valueToView/valueToView',
+    () => (value: any) => value
+)
+
+jest.mock('../../assetValue/assetValue', () => (props: any) => (
+    <div>{props.valueView}</div>
+))
+
+describe('TransactionTable', () => {
     test('renders empty table', async () => {
-        const { container, rerender } = render(<TransactionTable time />)
-
-        expect(container.querySelector('tbody tr td')).toHaveAttribute(
-            'colspan',
-            '4'
-        )
-
-        rerender(<TransactionTable embedded time />)
-
-        expect(container.querySelector('tbody tr td')).toHaveAttribute(
-            'colspan',
-            '3'
-        )
-
-        rerender(<TransactionTable />)
-
-        expect(container.querySelector('tbody tr td')).toHaveAttribute(
-            'colspan',
-            '3'
-        )
-
-        rerender(<TransactionTable embedded />)
+        const { container, rerender } = render(<TransactionTable />)
 
         expect(container.querySelector('tbody tr td')).toHaveAttribute(
             'colspan',
             '2'
+        )
+
+        rerender(<TransactionTable blockHeight />)
+
+        expect(container.querySelector('tbody tr td')).toHaveAttribute(
+            'colspan',
+            '3'
+        )
+
+        rerender(<TransactionTable blockHeight time />)
+
+        expect(container.querySelector('tbody tr td')).toHaveAttribute(
+            'colspan',
+            '4'
         )
     })
 
@@ -48,28 +66,113 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         raw: '',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 456,
-                        },
+                        blockHeight: 456,
                         hash: 'tx2',
+                        initialTimeAgo: '',
                         raw: '',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
             />
         )
 
+        getByText(container, 'tx1')
+        getByText(container, 'tx2')
+    })
+
+    test('renders block height', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actionCount: 0,
+                        blockHeight: 123,
+                        hash: 'tx1',
+                        initialTimeAgo: '',
+                        raw: '',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
+                    },
+                ]}
+                blockHeight
+            />
+        )
+
         getByText(container, 123)
-        getByText(container, 456)
+    })
+
+    test('renders amount', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actionCount: 0,
+                        blockHeight: 123,
+                        hash: 'tx1',
+                        initialTimeAgo: '',
+                        raw: '',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
+                    },
+                ]}
+                amount
+            />
+        )
+
+        getByText(container, '1,234.56 UM')
+    })
+
+    test('renders status', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actionCount: 0,
+                        blockHeight: 123,
+                        hash: 'tx1',
+                        initialTimeAgo: '',
+                        raw: '',
+                        status: IbcStatus.Completed,
+                        timestamp: 0,
+                    },
+                ]}
+                status
+            />
+        )
+
+        getByText(container, 'Completed')
+    })
+
+    test('renders actions', async () => {
+        const { container } = render(
+            <TransactionTable
+                transactions={[
+                    {
+                        actionCount: 2,
+                        blockHeight: 123,
+                        hash: 'tx1',
+                        initialTimeAgo: '',
+                        primaryAction: ActionType.receive,
+                        raw: '',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
+                    },
+                ]}
+            />
+        )
+
+        getByText(container, 'Receive')
+        getByText(container, '+1')
     })
 
     test('renders time', async () => {
@@ -78,15 +181,12 @@ describe('BlockTable', () => {
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs()
-                                .subtract(1, 'second')
-                                .toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '1s ago',
                         raw: '',
-                        timeAgo: '1s ago',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
                 time
@@ -96,67 +196,24 @@ describe('BlockTable', () => {
         getByText(container, '1s ago')
     })
 
-    test('renders actions', async () => {
-        const { container } = render(
-            <TransactionTable
-                transactions={[
-                    {
-                        actionCount: 2,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
-                        hash: 'tx1',
-                        primaryAction: ActionType.receive,
-                        raw: '',
-                    },
-                ]}
-            />
-        )
-
-        getByText(container, 'receive')
-        getByText(container, '+1')
-    })
-
-    test('renders embedded', async () => {
-        const { container } = render(
-            <TransactionTable
-                transactions={[
-                    {
-                        actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
-                        hash: 'tx1',
-                        raw: '',
-                    },
-                ]}
-                embedded
-            />
-        )
-
-        expect(container.firstChild).toHaveClass('p-0')
-    })
-
     test('navigates to transaction on row click', async () => {
         const { container } = render(
             <TransactionTable
                 transactions={[
                     {
                         actionCount: 0,
-                        block: {
-                            createdAt: dayjs().toISOString(),
-                            height: 123,
-                        },
+                        blockHeight: 123,
                         hash: 'tx1',
+                        initialTimeAgo: '',
                         raw: '',
+                        status: IbcStatus.Unknown,
+                        timestamp: 0,
                     },
                 ]}
             />
         )
 
-        const row = getByText(container, 123).parentElement
+        const row = getByText(container, 'tx1').parentElement
 
         if (!row) {
             throw Error('Missing element')

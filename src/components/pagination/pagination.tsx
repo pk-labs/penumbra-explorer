@@ -34,7 +34,8 @@ const Pagination: FC<Props> = props => (
             <Skeleton className="h-8 w-24" />
         ) : (
             <span className="text-sm">
-                {formatNumber(props.page)} of {formatNumber(props.totalPages)}
+                {formatNumber(props.page)} of{' '}
+                {formatNumber(props.totalPages || 1)}
             </span>
         )}
         <Button

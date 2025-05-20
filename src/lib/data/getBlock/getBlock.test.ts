@@ -9,15 +9,17 @@ jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
 }))
 
 describe('getBlock', () => {
-    test('returns transformed hash', async () => {
+    test('returns transformed data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
                         data: {
                             block: {
-                                rawJson: { block: {} },
-                                transactions: [{ hash: 'FoO' }],
+                                rawJson: {
+                                    events: [{ event_id: 2 }, { event_id: 1 }],
+                                },
+                                transactions: [{ block: {}, hash: 'FoO' }],
                             },
                         },
                     }),
@@ -25,6 +27,7 @@ describe('getBlock', () => {
         })
 
         await expect(getBlock(1)).resolves.toMatchObject({
+            rawJson: { events: [{ event_id: 1 }, { event_id: 2 }] },
             transactions: [{ hash: 'foo' }],
         })
     })

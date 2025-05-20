@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react'
 import { classNames } from '@/lib/utils'
-import { ParameterProps } from './parameter'
+import { Props as ParameterProps } from './parameter'
 
 interface Props {
     children?:
@@ -13,18 +13,26 @@ interface Props {
           >
         | ReactElement<ParameterProps>
     className?: string
+    title?: string
 }
 
 const Parameters: FC<Props> = props => (
-    <ul
+    <div
         className={classNames(
             'bg-other-tonalFill5 flex flex-col gap-1 rounded-sm p-3',
-            'text-text-secondary font-mono text-xs font-medium',
             props.className
         )}
     >
-        {props.children}
-    </ul>
+        {props.title && <h4 className="text-sm">{props.title}</h4>}
+        <ul
+            className={classNames(
+                'text-text-secondary flex flex-col gap-1 font-mono text-sm',
+                'font-medium'
+            )}
+        >
+            {props.children}
+        </ul>
+    </div>
 )
 
 export default Parameters

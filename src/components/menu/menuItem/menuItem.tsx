@@ -27,8 +27,9 @@ const MenuItem: FC<Props> = props => {
         <Link
             className={classNames(
                 'ease-fast-out-slow-in flex h-8 items-center gap-2 px-7',
-                'text-md transition-[color,background] duration-200',
+                'text-lg transition-[color,background] duration-200',
                 'hover:text-text-primary hover:bg-other-tonalFill5',
+                'sm:text-base',
                 active ? 'text-text-primary' : 'text-text-secondary'
             )}
             href={props.href}

@@ -3,18 +3,15 @@
 import { BoxIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC, useEffect, useRef } from 'react'
-import {
-    TransformedBlockUpdate,
-    TransformedPartialBlockFragment,
-} from '@/lib/types'
+import { TransformedPartialBlockFragment } from '@/lib/types'
 import { formatNumber } from '@/lib/utils'
+import TimeAgo from '../../timeAgo'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
-export interface Props
-    extends Pick<TableProps, 'actions' | 'footer' | 'title'> {
-    blocks?: Array<TransformedBlockUpdate | TransformedPartialBlockFragment>
-    className?: string
+export interface Props extends Omit<TableProps, 'children'> {
+    blocks?: TransformedPartialBlockFragment[]
     proposer?: boolean
+    ticker?: boolean
 }
 
 const BlockTable: FC<Props> = props => {
@@ -26,10 +23,9 @@ const BlockTable: FC<Props> = props => {
 
     return (
         <Table
-            actions={props.actions}
             className={props.className}
             footer={props.footer}
-            title={props.title}
+            header={props.header}
         >
             <thead>
                 <TableRow>
@@ -57,6 +53,7 @@ const BlockTable: FC<Props> = props => {
                         >
                             <TableCell>
                                 <BoxIcon
+                                    className="inline"
                                     color="var(--color-text-secondary)"
                                     size={16}
                                 />
@@ -64,7 +61,13 @@ const BlockTable: FC<Props> = props => {
                                     {formatNumber(block.height)}
                                 </Link>
                             </TableCell>
-                            <TableCell>{block.timeAgo}</TableCell>
+                            <TableCell>
+                                <TimeAgo
+                                    initialTimeAgo={block.initialTimeAgo}
+                                    ticker={props.ticker}
+                                    timestamp={block.timestamp}
+                                />
+                            </TableCell>
                             {props.proposer && <TableCell>-</TableCell>}
                             <TableCell>{block.transactionsCount}</TableCell>
                         </TableRow>
