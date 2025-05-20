@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react'
-import TransactionPanel from './transactionPanel'
+import StakedPanel from './stakedPanel'
 
 jest.mock('../panel/panel', () => (props: any) => (
     <div className={props.className} />
 ))
 
-describe('TransactionPanel', () => {
+describe('StakedPanel', () => {
     test('applies CSS classes', async () => {
-        const { container } = render(<TransactionPanel className="foo bar" />)
+        const { container } = render(<StakedPanel className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

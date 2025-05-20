@@ -9,9 +9,10 @@ export interface Props {
     className?: string
     headerClassName?: string
     number?: number
-    numberPrefix?: string
-    numberSuffix?: string
+    numberPrefix?: ReactNode
+    numberSuffix?: ReactNode
     title: ReactNode
+    titleClassName?: string
 }
 
 const Panel: FC<Props> = props => (
@@ -28,7 +29,8 @@ const Panel: FC<Props> = props => (
             <h3
                 className={classNames(
                     'flex items-center gap-2 text-base font-medium',
-                    'text-text-secondary whitespace-nowrap'
+                    'text-text-secondary whitespace-nowrap',
+                    props.titleClassName
                 )}
             >
                 {props.title}
@@ -40,7 +42,16 @@ const Panel: FC<Props> = props => (
                     suffix={props.numberSuffix}
                 />
             ) : (
-                <span className="font-mono text-3xl font-medium">0</span>
+                <span
+                    className={classNames(
+                        'inline-flex items-center gap-2 font-mono text-3xl',
+                        'font-medium'
+                    )}
+                >
+                    {props.numberPrefix}
+                    <span>0</span>
+                    {props.numberSuffix}
+                </span>
             )}
         </header>
         {props.children && <div className="sm:self-end">{props.children}</div>}

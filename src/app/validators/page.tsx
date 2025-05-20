@@ -1,6 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import { StakedPanelContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
@@ -15,6 +16,7 @@ const ValidatorsPage: FC = () => (
             <Breadcrumb href="/">Explore</Breadcrumb>
             <Breadcrumb>Validators</Breadcrumb>
         </Breadcrumbs>
+        <StakedPanelContainer />
     </Container>
 )
 

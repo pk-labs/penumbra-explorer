@@ -1,4 +1,5 @@
-export * from './blockPanel'
+export { default as BlockPanel } from './blockPanel'
 export { default as BurnPanel } from './burnPanel'
-export * from './shieldedPanel'
-export * from './transactionPanel'
+export { default as ShieldedPanel } from './shieldedPanel'
+export { default as StakedPanel } from './stakedPanel'
+export { default as TransactionPanel } from './transactionPanel'

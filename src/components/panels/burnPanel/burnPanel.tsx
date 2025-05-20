@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
-import { Panel } from '../panel'
+import Panel from '../panel'
 import icon from './burnPanelIcon.png'
 
-export interface Props {
+interface Props {
     className?: string
+    number?: number
 }
 
 const BurnPanel: FC<Props> = props => (
@@ -16,8 +17,8 @@ const BurnPanel: FC<Props> = props => (
             'to-100%',
             props.className
         )}
-        number={86990}
-        numberSuffix=" UM"
+        number={props.number}
+        numberSuffix="UM"
         title={
             <>
                 <Image alt="Burn panel" height={24} src={icon} />

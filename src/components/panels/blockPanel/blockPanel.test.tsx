@@ -1,12 +1,8 @@
 import { getByText, render } from '@testing-library/react'
-import { PanelProps } from '../panel'
 import BlockPanel from './blockPanel'
 
-jest.mock('../panel/panel', () => (props: PanelProps) => (
-    <>
-        <div>{props.className}</div>
-        <div>{props.number}</div>
-    </>
+jest.mock('../panel/panel', () => (props: any) => (
+    <div className={props.className}>{props.number}</div>
 ))
 
 describe('BlockPanel', () => {
@@ -17,6 +13,6 @@ describe('BlockPanel', () => {
 
     test('applies CSS classes', async () => {
         const { container } = render(<BlockPanel className="foo bar" />)
-        getByText(container, 'foo bar', { exact: false })
+        expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

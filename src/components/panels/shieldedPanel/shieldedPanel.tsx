@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import { Panel, PanelProps } from '../panel'
+import Panel from '../panel'
 import shieldedPanelIcon from './shieldedPanelIcon.svg'
 
-export type Props = Pick<PanelProps, 'className' | 'number'>
+interface Props {
+    className?: string
+    number?: number
+}
 
 const ShieldedPanel: FC<Props> = props => (
     <Panel

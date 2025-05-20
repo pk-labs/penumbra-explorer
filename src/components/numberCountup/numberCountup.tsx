@@ -1,14 +1,14 @@
 'use client'
 
 import { motion, useAnimate, useMotionValue, useTransform } from 'motion/react'
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC, ReactNode, useCallback, useEffect, useState } from 'react'
 import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
     className?: string
     number: number
-    prefix?: string
-    suffix?: string
+    prefix?: ReactNode
+    suffix?: ReactNode
 }
 
 const NumberCountup: FC<Props> = props => {
@@ -17,14 +17,8 @@ const NumberCountup: FC<Props> = props => {
     const motionValue = useMotionValue(0)
 
     const transformValue = useCallback(
-        (value: number) => {
-            return (
-                (props.prefix ?? '') +
-                formatNumber(Math.round(value)) +
-                (props.suffix ?? '')
-            )
-        },
-        [props.prefix, props.suffix]
+        (value: number) => formatNumber(Math.round(value)),
+        []
     )
 
     const transformedValue = useTransform(motionValue, transformValue)
@@ -40,24 +34,20 @@ const NumberCountup: FC<Props> = props => {
         return () => animation.stop()
     }, [animate, motionValue, props.number])
 
-    return animated ? (
-        <motion.span
-            ref={scope}
-            className={classNames(
-                'font-mono text-3xl font-medium',
-                props.className
-            )}
-        >
-            {transformedValue}
-        </motion.span>
-    ) : (
+    return (
         <span
             className={classNames(
-                'font-mono text-3xl font-medium',
+                'inline-flex items-center gap-2 font-mono text-3xl font-medium',
                 props.className
             )}
         >
-            {transformValue(props.number)}
+            {props.prefix}
+            {animated ? (
+                <motion.span ref={scope}>{transformedValue}</motion.span>
+            ) : (
+                <span>{transformValue(props.number)}</span>
+            )}
+            {props.suffix}
         </span>
     )
 }

@@ -1,12 +1,14 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
-import { Panel, PanelProps } from '../panel'
+import Panel from '../panel'
 import BlockPanelChart from './blockPanelChart'
 import blockPanelIcon from './blockPanelIcon.svg'
 
-export interface Props extends Pick<PanelProps, 'className' | 'number'> {
+interface Props {
+    className?: string
     fallback?: boolean
+    number?: number
 }
 
 const BlockPanel: FC<Props> = props => (

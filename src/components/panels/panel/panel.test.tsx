@@ -49,10 +49,12 @@ describe('Panel', () => {
                 headerClassName="header"
                 number={99}
                 title="Foo"
+                titleClassName="title"
             />
         )
 
         expect(container.firstChild).toHaveClass('foo', 'bar')
+        expect(getByText(container, 'Foo')).toHaveClass('title')
         expect(getByText(container, 'Foo').parentNode).toHaveClass('header')
     })
 })

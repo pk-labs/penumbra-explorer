@@ -9,12 +9,12 @@ describe('Container', () => {
 
     test('renders prefix', async () => {
         const { container } = render(<NumberCountup number={99} prefix="$" />)
-        getByText(container, '$0')
+        expect(container.firstChild).toHaveTextContent('$0')
     })
 
     test('renders suffix', async () => {
         const { container } = render(<NumberCountup number={99} suffix=" UM" />)
-        getByText(container, '0 UM')
+        expect(container.firstChild).toHaveTextContent('0 UM')
     })
 
     test.skip('renders final number at animation end', async () => {

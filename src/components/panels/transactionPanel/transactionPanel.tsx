@@ -1,10 +1,13 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
-import { Panel, PanelProps } from '../panel'
+import Panel from '../panel'
 import transactionPanelIcon from './transactionPanelIcon.svg'
 
-export type Props = Pick<PanelProps, 'className' | 'number'>
+interface Props {
+    className?: string
+    number?: number
+}
 
 const TransactionPanel: FC<Props> = props => (
     <Panel
