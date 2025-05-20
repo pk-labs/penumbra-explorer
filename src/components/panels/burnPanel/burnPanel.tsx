@@ -11,15 +11,16 @@ export interface Props {
 const BurnPanel: FC<Props> = props => (
     <Panel
         className={classNames(
-            'from-[rgba(193,166,204,0.25)] to-[rgba(193,166,204,0.03)]',
+            'bg-transparent bg-radial-[100%_100%_at_0%_0%]',
+            'from-[rgba(193,166,204,0.25)] from-0% to-[rgba(193,166,204,0.03)]',
+            'to-100%',
             props.className
         )}
-        footer="Average"
         number={86990}
         numberSuffix=" UM"
         title={
             <>
-                <Image alt="Total burn" height={24} src={icon} />
+                <Image alt="Burn panel" height={24} src={icon} />
                 <span>Total burn</span>
             </>
         }

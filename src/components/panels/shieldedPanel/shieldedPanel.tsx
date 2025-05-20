@@ -1,6 +1,7 @@
+import Image from 'next/image'
 import { FC } from 'react'
 import { Panel, PanelProps } from '../panel'
-import ShieldedPanelIcon from './shieldedPanelIcon'
+import shieldedPanelIcon from './shieldedPanelIcon.svg'
 
 export type Props = Pick<PanelProps, 'className' | 'number'>
 
@@ -11,7 +12,7 @@ const ShieldedPanel: FC<Props> = props => (
         numberPrefix="$"
         title={
             <>
-                <ShieldedPanelIcon />
+                <Image alt="Shielded panel" src={shieldedPanelIcon} />
                 <span>Total value shielded</span>
             </>
         }

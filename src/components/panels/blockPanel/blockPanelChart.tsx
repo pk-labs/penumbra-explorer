@@ -95,7 +95,14 @@ const BlockPanelChart: FC<Props> = props => {
                         />
                     ))}
                 </div>
-                Receiving new blocks ...
+                <div
+                    className={classNames(
+                        'text-text-secondary self-end font-mono text-xs',
+                        'font-medium'
+                    )}
+                >
+                    Receiving new blocks ...
+                </div>
             </div>
         </div>
     )

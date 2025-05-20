@@ -7,8 +7,8 @@ import { NumberCountup } from '../../numberCountup'
 export interface Props {
     children?: ReactNode
     className?: string
-    footer?: ReactNode
-    number?: number | ReactNode
+    headerClassName?: string
+    number?: number | ReactNode // TODO: Refactor to number only and show 0 instead of loading skeleton
     numberPrefix?: string
     numberSuffix?: string
     title: ReactNode
@@ -17,22 +17,22 @@ export interface Props {
 const Panel: FC<Props> = props => (
     <section
         className={classNames(
-            'grid auto-rows-auto grid-cols-1 gap-4 rounded-lg',
-            'bg-radial-[100%_100%_at_0%_0%] from-[rgba(250,250,250,0.18)]',
-            'from-0% to-[rgba(250,250,250,0.03)] to-100% p-6',
-            'backdrop-blur-lg sm:grid-cols-2 sm:grid-rows-1 sm:gap-0',
+            'bg-other-tonalFill5 flex flex-col justify-between gap-4 rounded-lg p-6 backdrop-blur-lg',
+            'sm:flex-row',
             props.className
         )}
     >
-        <header className="flex flex-col gap-2">
-            <h2
+        <header
+            className={classNames('flex flex-col gap-2', props.headerClassName)}
+        >
+            <h3
                 className={classNames(
                     'flex items-center gap-2 text-base font-medium',
                     'text-text-secondary whitespace-nowrap'
                 )}
             >
                 {props.title}
-            </h2>
+            </h3>
             {typeof props.number === 'number' ? (
                 <NumberCountup
                     number={props.number}
@@ -43,26 +43,7 @@ const Panel: FC<Props> = props => (
                 props.number
             )}
         </header>
-        {props.children && (
-            <div
-                className={classNames(
-                    "[grid-area:'span 2 / 2'] text-text-secondary font-mono",
-                    'text-xs font-medium sm:self-end sm:justify-self-end'
-                )}
-            >
-                {props.children}
-            </div>
-        )}
-        {props.footer && (
-            <footer
-                className={classNames(
-                    "[grid-area:'2 / 1'] self-end font-mono text-xs",
-                    'text-text-secondary font-medium'
-                )}
-            >
-                {props.footer}
-            </footer>
-        )}
+        {props.children && <div className="sm:self-end">{props.children}</div>}
     </section>
 )
 

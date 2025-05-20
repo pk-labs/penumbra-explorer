@@ -47,9 +47,15 @@ describe('Panel', () => {
 
     test('applies CSS classes', async () => {
         const { container } = render(
-            <Panel className="foo bar" number={99} title="Foo" />
+            <Panel
+                className="foo bar"
+                headerClassName="header"
+                number={99}
+                title="Foo"
+            />
         )
 
         expect(container.firstChild).toHaveClass('foo', 'bar')
+        expect(getByText(container, 'Foo').parentNode).toHaveClass('header')
     })
 })
