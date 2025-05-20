@@ -17,6 +17,7 @@ const BurnPanel: FC<Props> = props => (
             'to-100%',
             props.className
         )}
+        headerClassName="gap-2"
         number={props.number}
         numberSuffix="UM"
         title={
@@ -25,6 +26,7 @@ const BurnPanel: FC<Props> = props => (
                 <span>Total burn</span>
             </>
         }
+        titleClassName="text-base font-medium"
     />
 )
 

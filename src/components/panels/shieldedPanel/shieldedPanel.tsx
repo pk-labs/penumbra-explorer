@@ -11,6 +11,7 @@ interface Props {
 const ShieldedPanel: FC<Props> = props => (
     <Panel
         className={props.className}
+        headerClassName="gap-2"
         number={props.number}
         numberPrefix="$"
         title={
@@ -19,6 +20,7 @@ const ShieldedPanel: FC<Props> = props => (
                 <span>Total value shielded</span>
             </>
         }
+        titleClassName="text-base font-medium"
     />
 )
 

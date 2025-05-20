@@ -19,6 +19,7 @@ const BlockPanel: FC<Props> = props => (
             'to-100%',
             props.className
         )}
+        headerClassName="gap-2"
         number={props.number}
         title={
             <>
@@ -26,6 +27,7 @@ const BlockPanel: FC<Props> = props => (
                 <span>Current block</span>
             </>
         }
+        titleClassName="text-base font-medium"
     >
         <BlockPanelChart animate={!props.fallback} />
     </Panel>

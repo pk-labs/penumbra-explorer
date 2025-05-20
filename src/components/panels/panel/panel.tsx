@@ -23,13 +23,11 @@ const Panel: FC<Props> = props => (
             props.className
         )}
     >
-        <header
-            className={classNames('flex flex-col gap-2', props.headerClassName)}
-        >
+        <header className={classNames('flex flex-col', props.headerClassName)}>
             <h3
                 className={classNames(
-                    'flex items-center gap-2 text-base font-medium',
-                    'text-text-secondary whitespace-nowrap',
+                    'text-text-secondary flex items-center gap-2 text-xs',
+                    'whitespace-nowrap',
                     props.titleClassName
                 )}
             >

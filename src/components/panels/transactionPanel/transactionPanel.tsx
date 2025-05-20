@@ -17,6 +17,7 @@ const TransactionPanel: FC<Props> = props => (
             'to-100%',
             props.className
         )}
+        headerClassName="gap-2"
         number={props.number}
         title={
             <>
@@ -24,6 +25,7 @@ const TransactionPanel: FC<Props> = props => (
                 <span>Total transactions</span>
             </>
         }
+        titleClassName="text-base font-medium"
     />
 )
 
