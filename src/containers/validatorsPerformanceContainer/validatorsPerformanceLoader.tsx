@@ -31,7 +31,15 @@ const ValidatorsPerformanceLoader: FC<Props> = async props => {
                             commission: faker.number.int({ max: 10, min: 2 }),
                             hash: faker.finance.bitcoinAddress(),
                             initialTimeAgo: dayjs().to(date),
-                            status: 'Active',
+                            status: faker.helpers.arrayElement([
+                                'Active',
+                                'Defined',
+                                'Disabled',
+                                'Inactive',
+                                'Jailed',
+                                'Tombstoned',
+                                'Unspecified',
+                            ]),
                             timestamp: date.valueOf(),
                             uptime: faker.datatype.boolean({ probability: 0.7 })
                                 ? 100
@@ -42,7 +50,7 @@ const ValidatorsPerformanceLoader: FC<Props> = async props => {
                                     })
                                   : faker.number.float({
                                         max: 95,
-                                        min: 5,
+                                        min: 0,
                                     }),
                             votingPower: faker.number.int({
                                 max: 999999,

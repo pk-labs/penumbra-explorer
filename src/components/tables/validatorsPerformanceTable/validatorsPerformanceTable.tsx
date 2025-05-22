@@ -67,7 +67,9 @@ const ValidatorsPerformanceTable: FC<Props> = ({ validators, ...props }) => (
                                 className={classNames(
                                     validator.uptime === 100
                                         ? 'text-success-light'
-                                        : 'text-caution-light'
+                                        : validator.uptime > 5
+                                          ? 'text-caution-light'
+                                          : 'text-destructive-light'
                                 )}
                             >
                                 {validator.uptime.toFixed(2)}%
