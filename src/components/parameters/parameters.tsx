@@ -16,6 +16,7 @@ interface Props {
     title?: string
 }
 
+// TODO: Make more flexible to allow different configurations (see validators)
 const Parameters: FC<Props> = props => (
     <div
         className={classNames(
