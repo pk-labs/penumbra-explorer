@@ -34,7 +34,7 @@ const ValidatorsPerformanceTable: FC<Props> = ({ validators, ...props }) => (
                                 src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
                                 width={32}
                             />
-                            <span>{shortenHash(validator.hash)}</span>
+                            <span>{shortenHash(validator.hash, 'end')}</span>
                         </TableCell>
                         <TableCell className="h-15">
                             <span className="inline-flex flex-col gap-1">
