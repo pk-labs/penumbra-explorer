@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import { Breadcrumb, Breadcrumbs, Button, Container } from '@/components'
 import {
     StakedPanelContainer,
     UnbondingPanelContainer,
@@ -45,9 +45,27 @@ const ValidatorsPage: FC = () => (
                     'col-span-12 lg:col-span-9 lg:col-start-1 lg:row-start-2'
                 )}
                 header={
-                    <h2 className="text-2xl font-medium">
-                        Validators performance
-                    </h2>
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-medium">
+                            Validators performance
+                        </h2>
+                        <div className="flex gap-2">
+                            <Button
+                                density="compact"
+                                href="https://app.penumbra.zone/#/staking"
+                            >
+                                Delegate to a validator
+                            </Button>
+                            <Button
+                                density="compact"
+                                href="https://guide.penumbra.zone/node/pd/validator"
+                                icon="ExternalLink"
+                                priority="secondary"
+                            >
+                                Become a validator
+                            </Button>
+                        </div>
+                    </div>
                 }
             />
         </div>
