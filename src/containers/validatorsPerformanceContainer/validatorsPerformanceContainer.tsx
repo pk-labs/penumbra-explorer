@@ -19,8 +19,8 @@ const ValidatorsPerformanceContainer: FC<Props> = props => (
                 <tbody>
                     {Array.from({ length: 56 }).map((_, i) => (
                         <TableRow key={i}>
-                            <TableCell className="h-12">
-                                <Skeleton className="h-8" />
+                            <TableCell className="h-15">
+                                <Skeleton className="h-9" />
                             </TableCell>
                         </TableRow>
                     ))}
