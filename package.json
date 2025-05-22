@@ -18,6 +18,7 @@
         "typecheck": "tsc"
     },
     "dependencies": {
+        "@faker-js/faker": "^9.8.0",
         "@microlink/react-json-view": "^1.26.1",
         "@penumbra-labs/registry": "^12.5.0",
         "@penumbra-zone/perspective": "^59.0.0",
