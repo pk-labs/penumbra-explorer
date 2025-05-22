@@ -164,7 +164,7 @@ const IbcTable: FC<Props> = props => {
                 ) : (
                     <TableRow>
                         <TableCell className="h-20" colSpan={6}>
-                            <EmptyState>No clients configured</EmptyState>
+                            <EmptyState>No clients found</EmptyState>
                         </TableCell>
                     </TableRow>
                 )}

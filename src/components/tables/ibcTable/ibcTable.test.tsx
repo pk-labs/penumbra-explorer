@@ -9,6 +9,6 @@ jest.mock('../table/table', () => (props: TableProps) => (
 describe('IbcTable', () => {
     test('renders empty state when no clients', async () => {
         const { container } = render(<IbcTable stats={[]} />)
-        getByText(container, 'No clients configured')
+        getByText(container, 'No clients found')
     })
 })
