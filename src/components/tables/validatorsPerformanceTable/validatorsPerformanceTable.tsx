@@ -4,6 +4,7 @@ import { penumbra } from '@/lib/images'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import TimeAgo from '../../timeAgo'
+import ValidatorStatusBonding from '../../validatorStatusBonding'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -37,14 +38,10 @@ const ValidatorsPerformanceTable: FC<Props> = ({ validators, ...props }) => (
                             <span>{shortenHash(validator.hash, 'end')}</span>
                         </TableCell>
                         <TableCell className="h-15">
-                            <span className="inline-flex flex-col gap-1">
-                                <span className="text-success-light">
-                                    Active
-                                </span>
-                                <span className="text-xs">
-                                    {validator.bonding}
-                                </span>
-                            </span>
+                            <ValidatorStatusBonding
+                                bonding={validator.bonding}
+                                status={validator.status}
+                            />
                         </TableCell>
                         <TableCell className="h-15">
                             <span className="inline-flex flex-col gap-1">

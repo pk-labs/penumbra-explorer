@@ -25,12 +25,13 @@ const ValidatorsPerformanceLoader: FC<Props> = async props => {
                         return {
                             bonding: faker.helpers.arrayElement([
                                 'Bonded',
-                                'Bonding',
+                                'Unbonding',
                                 'Unbonded',
                             ]),
                             commission: faker.number.int({ max: 10, min: 2 }),
                             hash: faker.finance.bitcoinAddress(),
                             initialTimeAgo: dayjs().to(date),
+                            status: 'Active',
                             timestamp: date.valueOf(),
                             uptime: faker.datatype.boolean({ probability: 0.7 })
                                 ? 100
