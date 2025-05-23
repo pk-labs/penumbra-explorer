@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
-import { Parameter } from '@/components'
+import { Parameter, Parameters } from '@/components'
 import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
@@ -32,12 +32,7 @@ const ValidatorParametersLoader: FC<Props> = async props => {
             )}
         >
             <h3 className="text-sm">Validator parameters</h3>
-            <ul
-                className={classNames(
-                    'text-text-secondary flex flex-col gap-2 font-mono text-sm',
-                    'font-medium'
-                )}
-            >
+            <Parameters className="gap-2">
                 <Parameter name="Uptime blocks window">
                     {formatNumber(parameters.uptimeBlocksWindow)}
                 </Parameter>
@@ -53,7 +48,7 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                 <Parameter name="Min validator stake">
                     {formatNumber(parameters.minValidatorStake)} UM
                 </Parameter>
-            </ul>
+            </Parameters>
         </section>
     )
 }
