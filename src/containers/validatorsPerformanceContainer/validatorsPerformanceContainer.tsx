@@ -7,6 +7,7 @@ import ValidatorsPerformanceLoader, {
 
 const ValidatorsPerformanceContainer: FC<Props> = props => (
     <Suspense
+        key={props.filter}
         fallback={
             <Table {...props}>
                 <thead>
