@@ -14,7 +14,7 @@ const ValidatorParametersContainer: FC<Props> = props => (
                     props.className
                 )}
             >
-                <h3 className="text-sm">Validator parameters</h3>
+                <h2 className="text-sm">Validator parameters</h2>
                 <ul
                     className={classNames(
                         'text-text-secondary flex flex-col gap-2 font-mono',

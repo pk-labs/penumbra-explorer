@@ -69,9 +69,9 @@ const ValidatorsPage: FC<Props> = async props => {
                                     'md:items-center md:justify-between'
                                 )}
                             >
-                                <h2 className="text-2xl font-medium">
+                                <h1 className="text-2xl font-medium">
                                     Validators performance
-                                </h2>
+                                </h1>
                                 <div className="flex flex-wrap gap-2">
                                     <Button
                                         density="compact"

@@ -35,8 +35,15 @@ interface Props {
 }
 
 const ValidatorStatusBonding: FC<Props> = props => (
-    <span className={classNames('inline-flex flex-col gap-1', props.className)}>
-        <span className={statusColors[props.status]}>{props.status}</span>
+    <span
+        className={classNames(
+            'inline-flex flex-col gap-1 font-mono',
+            props.className
+        )}
+    >
+        <span className={classNames('text-sm', statusColors[props.status])}>
+            {props.status}
+        </span>
         <span className={classNames('text-xs', bondingColors[props.bonding])}>
             {props.bonding}
         </span>
