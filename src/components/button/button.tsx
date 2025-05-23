@@ -12,16 +12,27 @@ import { classNames } from '@/lib/utils'
 
 interface Props extends Omit<PenumbraButtonProps, 'icon'> {
     className?: string
+    externalLink?: boolean
     href?: string
     icon?: keyof typeof icons
 }
 
-const Button: FC<Props> = ({ className, href, icon, ...props }) =>
+const Button: FC<Props> = ({
+    className,
+    externalLink,
+    href,
+    icon,
+    ...props
+}) =>
     href ? (
-        <Link className={classNames('outline-none', className)} href={href}>
+        <Link
+            className={classNames('outline-none', className)}
+            href={href}
+            target={externalLink ? '_blank' : undefined}
+        >
             <PenumbraButton
                 // @ts-ignore
-                icon={icon && icons[icon]}
+                icon={externalLink ? icons['ExternalLink'] : icons[icon]}
                 {...props}
             />
         </Link>

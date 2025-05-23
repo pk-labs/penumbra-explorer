@@ -59,8 +59,8 @@ const ValidatorsPage: FC = () => (
                             <Button
                                 density="compact"
                                 href="https://guide.penumbra.zone/node/pd/validator"
-                                icon="ExternalLink"
                                 priority="secondary"
+                                externalLink
                             >
                                 Become a validator
                             </Button>
