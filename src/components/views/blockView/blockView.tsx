@@ -19,7 +19,7 @@ const BlockView: FC<Props> = props => (
         )}
         title="Block view"
     >
-        <Parameters>
+        <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
             <Parameter name="Block height">
                 {formatNumber(props.block.height)}
                 <CopyToClipboard

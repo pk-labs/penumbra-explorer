@@ -45,12 +45,12 @@ const ClientContainer: FC<Props> = props => (
                         </div>
                     </div>
                     <div className="flex flex-col gap-4">
-                        <Parameters className="bg-transparent p-0">
+                        <Parameters>
                             <Parameter name="Last tx time">
                                 <Skeleton className="h-4 w-14" />
                             </Parameter>
                         </Parameters>
-                        <Parameters className="bg-transparent p-0">
+                        <Parameters>
                             <Parameter name="Txs total">
                                 <Skeleton className="h-4 w-14" />
                             </Parameter>

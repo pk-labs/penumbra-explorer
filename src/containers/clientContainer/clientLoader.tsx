@@ -66,7 +66,7 @@ const ClientLoader: FC<Props> = async props => {
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">
-                    <Parameters className="bg-transparent p-0">
+                    <Parameters>
                         <Parameter name="Last tx time">
                             <TimeAgo
                                 initialTimeAgo={client.initialTimeAgo}
@@ -74,7 +74,7 @@ const ClientLoader: FC<Props> = async props => {
                             />
                         </Parameter>
                     </Parameters>
-                    <Parameters className="bg-transparent p-0">
+                    <Parameters>
                         <Parameter name="Txs total">
                             {formatNumber(client.totalTxCount)}
                         </Parameter>

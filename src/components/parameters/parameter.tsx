@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-export interface Props {
+interface Props {
     children?: ReactNode
     name: string
 }

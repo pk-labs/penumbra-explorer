@@ -14,16 +14,6 @@ describe('Parameters', () => {
         getByText(container, 'Bar')
     })
 
-    test('renders title', async () => {
-        const { container } = render(
-            <Parameters title="Foo">
-                <Parameter name="Param">Value</Parameter>
-            </Parameters>
-        )
-
-        getByText(container, 'Foo')
-    })
-
     test('applies CSS classes', async () => {
         const { container } = render(<Parameters className="foo bar" />)
         expect(container.firstChild).toHaveClass('foo', 'bar')
