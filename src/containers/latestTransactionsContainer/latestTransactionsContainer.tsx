@@ -7,6 +7,8 @@ import LatestTransactionsLoader, {
 
 type Props = Omit<LatestTrasactionsLoaderProps, 'header'>
 
+// TODO: Refactor into generic transactionTableContainer with configurable
+// header, pagination, query variables and real-time updates.
 const LatestTransactionsContainer: FC<Props> = props => {
     const header = (
         <div className="flex items-center justify-between">

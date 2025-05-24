@@ -3,6 +3,8 @@ import { FC, Suspense } from 'react'
 import { Pagination, Skeleton, Table, TableCell, TableRow } from '@/components'
 import PaginatedBlocksLoader, { Props } from './paginatedBlocksLoader'
 
+// TODO: Refactor into generic blockTableContainer with configurable
+// header, pagination, query variables and real-time updates.
 const PaginatedBlocksContainer: FC<Props> = props => (
     <Suspense
         key={JSON.stringify({

@@ -5,6 +5,8 @@ import PaginatedTransactionsLoader, {
     Props,
 } from './paginatedTransactionsLoader'
 
+// TODO: Refactor into generic transactionTableContainer with configurable
+// header, pagination, query variables and real-time updates.
 const PaginatedTransactionsContainer: FC<Props> = props => (
     <Suspense
         key={JSON.stringify({

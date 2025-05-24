@@ -45,14 +45,16 @@ const ValidatorLoader: FC<Props> = async props => {
             )}
         >
             <header className="flex items-center gap-2">
-                <img
-                    alt={validator.hash}
-                    className="rounded-full"
-                    height={40}
-                    src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
-                    width={40}
-                />
-                <h1 className="flex-1 truncate text-2xl">{validator.hash}</h1>
+                <span className="flex items-center gap-2 overflow-hidden">
+                    <img
+                        alt={validator.hash}
+                        className="rounded-full"
+                        height={40}
+                        src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
+                        width={40}
+                    />
+                    <h1 className="truncate text-2xl">{validator.hash}</h1>
+                </span>
                 <ValidatorStatusBonding
                     bonding={validator.bonding}
                     className="text-right"

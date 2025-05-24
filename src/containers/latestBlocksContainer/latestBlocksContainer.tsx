@@ -14,6 +14,8 @@ import LatestBlocksLoader, {
 
 type Props = Omit<LatestBlocksLoaderProps, 'header'>
 
+// TODO: Refactor into generic blockTableContainer with configurable
+// header, pagination, query variables and real-time updates.
 const LatestBlocksContainer: FC<Props> = props => {
     const header = (
         <div className="flex items-center justify-between">
