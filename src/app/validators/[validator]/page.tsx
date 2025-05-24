@@ -29,7 +29,7 @@ const ValidatorPage: FC<Props> = async props => {
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4">
                 <ValidatorContainer
-                    className="col-span-4"
+                    className="col-span-4 self-start"
                     validator={validator}
                 />
                 <LatestTransactionsContainer

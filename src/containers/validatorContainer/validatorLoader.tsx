@@ -1,9 +1,14 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
+import { InfoIcon } from 'lucide-react'
 import { FC } from 'react'
-import { CopyToClipboard, Parameter, Parameters } from '@/components'
-import { classNames, formatNumber } from '@/lib/utils'
-import ValidatorStatusBonding from '../../components/validatorStatusBonding'
+import {
+    CopyToClipboard,
+    Parameter,
+    Parameters,
+    ValidatorStatusBonding,
+} from '@/components'
+import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 
 export interface Props {
     className?: string
@@ -30,6 +35,8 @@ const ValidatorLoader: FC<Props> = async props => {
                         'Unbonding',
                         'Unbonded',
                     ]),
+                    commission: faker.number.int({ max: 10, min: 2 }),
+                    commissionAddress: faker.finance.bitcoinAddress(),
                     description: faker.lorem.paragraph(5),
                     hash: props.validator,
                     missed: uptimeBlocksWindow - signed,
@@ -119,6 +126,39 @@ const ValidatorLoader: FC<Props> = async props => {
                     </Parameter>
                 </Parameters>
             </div>
+            <div className="flex flex-col gap-1">
+                <h3 className="text-base font-medium">
+                    Commission {validator.commission.toFixed(2)}%
+                </h3>
+                <Parameters>
+                    <Parameter
+                        name={`${(validator.commission / 2).toFixed(2)}% to`}
+                    >
+                        {shortenHash(validator.commissionAddress, 'end')}
+                        <CopyToClipboard
+                            className="text-text-primary"
+                            text={validator.commissionAddress}
+                            small
+                        />
+                    </Parameter>
+                    <Parameter
+                        name={`${(validator.commission / 2).toFixed(2)}% to`}
+                    >
+                        Cummunity pool
+                    </Parameter>
+                </Parameters>
+            </div>
+            <footer className="text-text-secondary flex gap-1 text-xs">
+                <InfoIcon className="-mt-1" />
+                <span>
+                    To report inaccurate information or update a logo, email us
+                    at{' '}
+                    <a href="mailto:penumbra@pklabs.me" target="_blank">
+                        penumbra@pklabs.me
+                    </a>
+                    .
+                </span>
+            </footer>
         </section>
     )
 }
