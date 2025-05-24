@@ -2,12 +2,8 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { Props } from './stakedPanelContainer'
 import StakedPanelUpdater from './stakedPanelUpdater'
-
-export interface Props {
-    className?: string
-    number?: number
-}
 
 const StakedPanelLoader: FC<Props> = async props => {
     const initialNumber = await new Promise<number>(resolve =>

@@ -1,11 +1,13 @@
 // istanbul ignore file
 'use client'
 
+import Image from 'next/image'
 import { FC, useState } from 'react'
-import { StakedPanel } from '@/components'
-import { Props as StakedPanelLoaderProps } from './stakedPanelLoader'
+import { NumberPanel } from '@/components'
+import { penumbra } from '@/lib/images'
+import { Props as StakedPanelContainerProps } from './stakedPanelContainer'
 
-interface Props extends StakedPanelLoaderProps {
+interface Props extends StakedPanelContainerProps {
     initialNumber?: number
 }
 
@@ -23,7 +25,18 @@ const StakedPanelUpdater: FC<Props> = props => {
     //     }
     // }, [transactionCountUpdateSubscription.data?.transactionCount])
 
-    return <StakedPanel number={number} {...props} />
+    return (
+        <NumberPanel
+            number={number}
+            numberClassName="gap-2"
+            numberPrefix={
+                <Image alt="UM" height={32} src={penumbra} width={32} />
+            }
+            numberSuffix="UM"
+            title="Total staked"
+            {...props}
+        />
+    )
 }
 
 export default StakedPanelUpdater
