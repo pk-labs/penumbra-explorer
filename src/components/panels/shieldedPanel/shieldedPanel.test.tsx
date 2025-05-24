@@ -12,7 +12,10 @@ describe('ShieldedPanel', () => {
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<ShieldedPanel className="foo bar" />)
+        const { container } = render(
+            <ShieldedPanel className="foo bar" number={0} />
+        )
+
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

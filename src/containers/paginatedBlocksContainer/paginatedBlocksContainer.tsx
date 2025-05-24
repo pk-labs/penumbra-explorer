@@ -1,7 +1,20 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Pagination, Skeleton, Table, TableCell, TableRow } from '@/components'
-import PaginatedBlocksLoader, { Props } from './paginatedBlocksLoader'
+import {
+    BlockTableProps,
+    Pagination,
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
+} from '@/components'
+import PaginatedBlocksLoader from './paginatedBlocksLoader'
+
+export interface Props extends Omit<BlockTableProps, 'blocks' | 'footer'> {
+    length: number
+    offset: number
+    pathname: string
+}
 
 // TODO: Refactor into generic blockTableContainer with configurable
 // header, pagination, query variables and real-time updates.
@@ -14,7 +27,6 @@ const PaginatedBlocksContainer: FC<Props> = props => (
         })}
         fallback={
             <Table
-                className={props.className}
                 footer={
                     <Pagination
                         page={0}
@@ -22,7 +34,7 @@ const PaginatedBlocksContainer: FC<Props> = props => (
                         totalPages={0}
                     />
                 }
-                header={props.header}
+                {...props}
             >
                 <thead>
                     <TableRow>

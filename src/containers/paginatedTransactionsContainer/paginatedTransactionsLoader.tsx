@@ -1,19 +1,8 @@
 // istanbul ignore file
 import { FC } from 'react'
-import {
-    Pagination,
-    TransactionTable,
-    TransactionTableProps,
-} from '@/components'
+import { Pagination, TransactionTable } from '@/components'
 import { getTransactions } from '@/lib/data'
-
-export interface Props
-    extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
-    clientId?: string
-    length: number
-    offset: number
-    pathname: string
-}
+import { Props } from './paginatedTransactionsContainer'
 
 const PaginatedTransactionsLoader: FC<Props> = async ({
     clientId,

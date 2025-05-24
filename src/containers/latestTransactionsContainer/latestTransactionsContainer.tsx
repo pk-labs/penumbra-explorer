@@ -1,11 +1,19 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Button, Skeleton, Table, TableCell, TableRow } from '@/components'
-import LatestTransactionsLoader, {
-    Props as LatestTrasactionsLoaderProps,
-} from './latestTransactionsLoader'
+import {
+    Button,
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
+    TransactionTableProps,
+} from '@/components'
+import LatestTransactionsLoader from './latestTransactionsLoader'
 
-type Props = Omit<LatestTrasactionsLoaderProps, 'header'>
+export interface Props
+    extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
+    limit: number
+}
 
 // TODO: Refactor into generic transactionTableContainer with configurable
 // header, pagination, query variables and real-time updates.
@@ -23,7 +31,7 @@ const LatestTransactionsContainer: FC<Props> = props => {
         <Suspense
             key={props.limit}
             fallback={
-                <Table className={props.className} header={header}>
+                <Table header={header} {...props}>
                     <thead>
                         <TableRow>
                             <TableCell header>

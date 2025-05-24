@@ -3,10 +3,7 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { Parameter, Parameters } from '@/components'
 import { classNames, formatNumber } from '@/lib/utils'
-
-export interface Props {
-    className?: string
-}
+import { Props } from './validatorParametersContainer'
 
 const ValidatorParametersLoader: FC<Props> = async props => {
     const parameters = await new Promise<any>(resolve =>

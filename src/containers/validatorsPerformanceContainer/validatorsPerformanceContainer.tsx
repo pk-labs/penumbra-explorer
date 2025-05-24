@@ -1,9 +1,18 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Skeleton, Table, TableCell, TableRow } from '@/components'
-import ValidatorsPerformanceLoader, {
-    Props,
-} from './validatorsPerformanceLoader'
+import {
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
+    ValidatorsPerformanceTableProps,
+} from '@/components'
+import ValidatorsPerformanceLoader from './validatorsPerformanceLoader'
+
+export interface Props
+    extends Omit<ValidatorsPerformanceTableProps, 'validators'> {
+    filter?: string
+}
 
 const ValidatorsPerformanceContainer: FC<Props> = props => (
     <Suspense

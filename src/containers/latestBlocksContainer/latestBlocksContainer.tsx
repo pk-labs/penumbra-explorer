@@ -2,17 +2,20 @@
 import { FC, Suspense } from 'react'
 import {
     BlockPanel,
+    BlockTableProps,
     Button,
     Skeleton,
     Table,
     TableCell,
     TableRow,
 } from '@/components'
-import LatestBlocksLoader, {
-    Props as LatestBlocksLoaderProps,
-} from './latestBlocksLoader'
+import LatestBlocksLoader from './latestBlocksLoader'
 
-type Props = Omit<LatestBlocksLoaderProps, 'header'>
+export interface Props extends Pick<BlockTableProps, 'header' | 'ticker'> {
+    blockPanelClassName?: string
+    blockTableClassName?: string
+    limit: number
+}
 
 // TODO: Refactor into generic blockTableContainer with configurable
 // header, pagination, query variables and real-time updates.
@@ -33,6 +36,7 @@ const LatestBlocksContainer: FC<Props> = props => {
                 <>
                     <BlockPanel
                         className={props.blockPanelClassName}
+                        number={0}
                         fallback
                     />
                     <Table

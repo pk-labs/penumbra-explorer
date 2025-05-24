@@ -1,8 +1,12 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Skeleton, View } from '@/components'
+import { BlockViewProps, Skeleton, View } from '@/components'
 import { classNames } from '@/lib/utils'
-import BlockViewLoader, { Props } from './blockViewLoader'
+import BlockViewLoader from './blockViewLoader'
+
+export interface Props extends Omit<BlockViewProps, 'block'> {
+    blockHeight: number
+}
 
 const BlockViewContainer: FC<Props> = props => (
     <Suspense

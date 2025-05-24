@@ -6,7 +6,7 @@ import transactionPanelIcon from './transactionPanelIcon.svg'
 
 interface Props {
     className?: string
-    number?: number
+    number: number
 }
 
 const TransactionPanel: FC<Props> = props => (

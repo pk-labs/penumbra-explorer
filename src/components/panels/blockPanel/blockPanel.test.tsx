@@ -12,7 +12,9 @@ describe('BlockPanel', () => {
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<BlockPanel className="foo bar" />)
+        const { container } = render(
+            <BlockPanel className="foo bar" number={0} />
+        )
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

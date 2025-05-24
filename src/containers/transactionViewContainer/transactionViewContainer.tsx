@@ -1,8 +1,12 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Skeleton, View } from '@/components'
+import { Skeleton, TransactionViewProps, View } from '@/components'
 import { classNames } from '@/lib/utils'
-import TransactionViewLoader, { Props } from './transactionViewLoader'
+import TransactionViewLoader from './transactionViewLoader'
+
+export interface Props extends Omit<TransactionViewProps, 'transaction'> {
+    transactionHash: string
+}
 
 const TransactionViewContainer: FC<Props> = props => (
     <Suspense

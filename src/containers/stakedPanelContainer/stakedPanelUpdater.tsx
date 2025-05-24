@@ -8,7 +8,7 @@ import { penumbra } from '@/lib/images'
 import { Props as StakedPanelContainerProps } from './stakedPanelContainer'
 
 interface Props extends StakedPanelContainerProps {
-    initialNumber?: number
+    initialNumber: number
 }
 
 const StakedPanelUpdater: FC<Props> = props => {

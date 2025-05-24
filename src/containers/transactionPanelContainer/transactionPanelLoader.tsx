@@ -2,12 +2,8 @@
 import { FC } from 'react'
 import { getStats } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { Props } from './transactionPanelContainer'
 import TransactionPanelUpdater from './transactionPanelUpdater'
-
-export interface Props {
-    className?: string
-    number?: number
-}
 
 const TransactionPanelLoader: FC<Props> = async props => {
     const stats = await getStats()
@@ -15,7 +11,7 @@ const TransactionPanelLoader: FC<Props> = async props => {
     return (
         <GraphqlClientProvider>
             <TransactionPanelUpdater
-                initialNumber={stats?.totalTransactionsCount}
+                initialNumber={stats?.totalTransactionsCount ?? 0}
                 {...props}
             />
         </GraphqlClientProvider>

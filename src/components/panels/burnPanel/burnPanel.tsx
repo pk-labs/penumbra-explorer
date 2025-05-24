@@ -6,7 +6,7 @@ import icon from './burnPanelIcon.png'
 
 interface Props {
     className?: string
-    number?: number
+    number: number
 }
 
 const BurnPanel: FC<Props> = props => (

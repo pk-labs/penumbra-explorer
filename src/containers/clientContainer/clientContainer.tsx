@@ -2,7 +2,16 @@
 import { FC, Suspense } from 'react'
 import { ClientImage, Parameter, Parameters, Skeleton } from '@/components'
 import { classNames } from '@/lib/utils'
-import ClientLoader, { Props } from './clientLoader'
+import ClientLoader from './clientLoader'
+
+export interface Props {
+    chainId?: string
+    channelsClassName?: string
+    id: string
+    image?: string
+    name: string
+    statsClassName?: string
+}
 
 const ClientContainer: FC<Props> = props => (
     <Suspense

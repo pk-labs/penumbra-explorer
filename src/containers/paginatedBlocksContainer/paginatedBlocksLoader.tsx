@@ -1,14 +1,9 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { BlockTable, BlockTableProps, Pagination } from '@/components'
+import { BlockTable, Pagination } from '@/components'
 import { getBlocks } from '@/lib/data'
-
-export interface Props extends Omit<BlockTableProps, 'blocks' | 'footer'> {
-    length: number
-    offset: number
-    pathname: string
-}
+import { Props } from './paginatedBlocksContainer'
 
 const PaginatedBlocksLoader: FC<Props> = async ({
     length,

@@ -1,14 +1,9 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { TransactionTableProps } from '@/components'
 import { getTransactions } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { Props } from './latestTransactionsContainer'
 import LatestTransactionsUpdater from './latestTransactionsUpdater'
-
-export interface Props
-    extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
-    limit: number
-}
 
 const LatestTransactionsLoader: FC<Props> = async props => {
     const { transactions } = await getTransactions({

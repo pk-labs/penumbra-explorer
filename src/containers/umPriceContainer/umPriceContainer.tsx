@@ -7,7 +7,7 @@ import { getUmPrice } from '@/lib/data'
 import { UmPriceData } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 
-interface Props {
+export interface Props {
     className?: string
 }
 

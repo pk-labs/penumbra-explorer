@@ -5,7 +5,7 @@ import shieldedPanelIcon from './shieldedPanelIcon.svg'
 
 interface Props {
     className?: string
-    number?: number
+    number: number
 }
 
 const ShieldedPanel: FC<Props> = props => (

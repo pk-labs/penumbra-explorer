@@ -8,7 +8,7 @@ import blockPanelIcon from './blockPanelIcon.svg'
 interface Props {
     className?: string
     fallback?: boolean
-    number?: number
+    number: number
 }
 
 const BlockPanel: FC<Props> = props => (

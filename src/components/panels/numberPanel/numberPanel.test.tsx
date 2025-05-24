@@ -30,16 +30,11 @@ describe('NumberPanel', () => {
         getByText(container, '99 UM')
     })
 
-    test('renders 0 when number undefined', async () => {
-        const { container } = render(<NumberPanel title="Foo" />)
-        getByText(container, '0')
-    })
-
     test('applies CSS classes', async () => {
         const { container } = render(
-            <NumberPanel number={99} numberClassName="number" title="Foo" />
+            <NumberPanel number={0} numberClassName="number" title="Foo" />
         )
 
-        expect(getByText(container, 99)).toHaveClass('number')
+        expect(getByText(container, 0).parentNode).toHaveClass('number')
     })
 })

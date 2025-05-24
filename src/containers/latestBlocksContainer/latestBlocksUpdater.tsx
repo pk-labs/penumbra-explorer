@@ -6,9 +6,9 @@ import { BlockPanel, BlockTable } from '@/components'
 import dayjs from '@/lib/dayjs'
 import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { TransformedPartialBlockFragment } from '@/lib/types'
-import { Props as LatestBlocksLoaderProps } from './latestBlocksLoader'
+import { Props as LatestBlocksContainerProps } from './latestBlocksContainer'
 
-interface Props extends LatestBlocksLoaderProps {
+interface Props extends LatestBlocksContainerProps {
     initialBlocks?: TransformedPartialBlockFragment[]
 }
 
@@ -46,7 +46,7 @@ const LatestBlocksUpdater: FC<Props> = props => {
         }
     }, [blockUpdateSubscription.data?.latestBlocks])
 
-    const latestBlockHeight = blocks?.length ? blocks[0].height : undefined
+    const latestBlockHeight = blocks?.length ? blocks[0].height : 0
 
     return (
         <>

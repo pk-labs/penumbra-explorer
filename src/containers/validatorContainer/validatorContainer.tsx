@@ -2,7 +2,12 @@
 import { FC, Suspense } from 'react'
 import { Skeleton } from '@/components'
 import { classNames } from '@/lib/utils'
-import ValidatorLoader, { Props } from './validatorLoader'
+import ValidatorLoader from './validatorLoader'
+
+export interface Props {
+    className?: string
+    validator: string
+}
 
 const ValidatorContainer: FC<Props> = props => (
     <Suspense

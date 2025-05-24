@@ -1,9 +1,22 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Pagination, Skeleton, Table, TableCell, TableRow } from '@/components'
-import PaginatedTransactionsLoader, {
-    Props,
-} from './paginatedTransactionsLoader'
+import {
+    Pagination,
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
+    TransactionTableProps,
+} from '@/components'
+import PaginatedTransactionsLoader from './paginatedTransactionsLoader'
+
+export interface Props
+    extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
+    clientId?: string
+    length: number
+    offset: number
+    pathname: string
+}
 
 // TODO: Refactor into generic transactionTableContainer with configurable
 // header, pagination, query variables and real-time updates.
@@ -16,7 +29,6 @@ const PaginatedTransactionsContainer: FC<Props> = props => (
         })}
         fallback={
             <Table
-                className={props.className}
                 footer={
                     <Pagination
                         page={0}
@@ -24,7 +36,7 @@ const PaginatedTransactionsContainer: FC<Props> = props => (
                         totalPages={0}
                     />
                 }
-                header={props.header}
+                {...props}
             >
                 <thead>
                     <TableRow>

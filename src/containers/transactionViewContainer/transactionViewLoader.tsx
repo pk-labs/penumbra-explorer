@@ -1,12 +1,9 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { TransactionView, TransactionViewProps } from '@/components'
+import { TransactionView } from '@/components'
 import { getTransaction } from '@/lib/data'
-
-export interface Props extends Omit<TransactionViewProps, 'transaction'> {
-    transactionHash: string
-}
+import { Props } from './transactionViewContainer'
 
 const TransactionViewLoader: FC<Props> = async ({
     transactionHash,

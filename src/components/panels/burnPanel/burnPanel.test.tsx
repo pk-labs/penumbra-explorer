@@ -12,7 +12,10 @@ describe('BurnPanel', () => {
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<BurnPanel className="foo bar" />)
+        const { container } = render(
+            <BurnPanel className="foo bar" number={0} />
+        )
+
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

@@ -12,7 +12,10 @@ describe('TransactionPanel', () => {
     })
 
     test('applies CSS classes', async () => {
-        const { container } = render(<TransactionPanel className="foo bar" />)
+        const { container } = render(
+            <TransactionPanel className="foo bar" number={0} />
+        )
+
         expect(container.firstChild).toHaveClass('foo', 'bar')
     })
 })

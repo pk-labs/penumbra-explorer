@@ -9,11 +9,7 @@ import {
     ValidatorStatusBonding,
 } from '@/components'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
-
-export interface Props {
-    className?: string
-    validator: string
-}
+import { Props } from './validatorContainer'
 
 const ValidatorLoader: FC<Props> = async props => {
     const validator = await new Promise<any>(resolve =>

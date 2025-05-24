@@ -4,10 +4,10 @@
 import { FC, useEffect, useState } from 'react'
 import { TransactionPanel } from '@/components'
 import { useTransactionCountUpdateSubscription } from '@/lib/graphql/generated/hooks'
-import { Props as TransactionPanelLoaderProps } from './transactionPanelLoader'
+import { Props as TransactionPanelContainerProps } from './transactionPanelContainer'
 
-interface Props extends TransactionPanelLoaderProps {
-    initialNumber?: number
+interface Props extends TransactionPanelContainerProps {
+    initialNumber: number
 }
 
 const TransactionPanelUpdater: FC<Props> = props => {

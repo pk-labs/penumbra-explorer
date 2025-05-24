@@ -4,10 +4,10 @@
 import { FC, useEffect, useState } from 'react'
 import { ShieldedPanel } from '@/components'
 import { useTotalShieldedVolumeUpdateSubscription } from '@/lib/graphql/generated/hooks'
-import { Props as ShieldedPanelLoaderProps } from './shieldedPanelLoader'
+import { Props as ShieldedPanelContainerProps } from './shieldedPanelContainer'
 
-interface Props extends ShieldedPanelLoaderProps {
-    initialNumber?: number
+interface Props extends ShieldedPanelContainerProps {
+    initialNumber: number
 }
 
 const ShieldedPanelUpdater: FC<Props> = props => {

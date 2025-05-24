@@ -6,7 +6,7 @@ import { NumberPanel } from '@/components'
 import { Props as ValidatorsPanelContainerProps } from './validatorsPanelContainer'
 
 interface Props extends ValidatorsPanelContainerProps {
-    initialNumber?: number
+    initialNumber: number
 }
 
 const ValidatorsPanelUpdater: FC<Props> = props => {

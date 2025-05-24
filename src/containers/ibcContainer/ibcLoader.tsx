@@ -1,10 +1,9 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { IbcTable, IbcTableProps } from '@/components'
+import { IbcTable } from '@/components'
 import { getIbcStats } from '@/lib/data'
-
-export type Props = Omit<IbcTableProps, 'stats'>
+import { Props } from './ibcContainer'
 
 const IbcLoader: FC<Props> = async props => {
     const stats = await getIbcStats({ timePeriod: props.timePeriod })

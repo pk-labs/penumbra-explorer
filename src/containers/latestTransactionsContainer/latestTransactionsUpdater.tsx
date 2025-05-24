@@ -7,9 +7,9 @@ import { useTransactionUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { IbcStatus } from '@/lib/graphql/generated/types'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
-import { Props as LatestTransactionsLoaderProps } from './latestTransactionsLoader'
+import { Props as LatestTransactionsContainerProps } from './latestTransactionsContainer'
 
-interface Props extends LatestTransactionsLoaderProps {
+interface Props extends LatestTransactionsContainerProps {
     initialTransactions?: TransformedPartialTransactionFragment[]
 }
 

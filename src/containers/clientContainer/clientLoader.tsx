@@ -10,15 +10,7 @@ import {
 } from '@/components'
 import { getIbcStats } from '@/lib/data'
 import { classNames, formatNumber } from '@/lib/utils'
-
-export interface Props {
-    chainId?: string
-    channelsClassName?: string
-    id: string
-    image?: string
-    name: string
-    statsClassName?: string
-}
+import { Props } from './clientContainer'
 
 const ClientLoader: FC<Props> = async props => {
     const stats = await getIbcStats({ clientId: props.id })

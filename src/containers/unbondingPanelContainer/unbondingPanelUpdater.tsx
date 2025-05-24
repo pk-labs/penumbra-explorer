@@ -6,7 +6,7 @@ import { NumberPanel } from '@/components'
 import { Props as UnbondingPanelContainerProps } from './unbondingPanelContainer'
 
 interface Props extends UnbondingPanelContainerProps {
-    initialNumber?: number
+    initialNumber: number
 }
 
 const UnbondingPanelUpdater: FC<Props> = ({ initialNumber, ...props }) => {

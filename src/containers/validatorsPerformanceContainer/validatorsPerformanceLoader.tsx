@@ -2,16 +2,9 @@
 import { faker } from '@faker-js/faker'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import {
-    ValidatorsPerformanceTable,
-    ValidatorsPerformanceTableProps,
-} from '@/components'
+import { ValidatorsPerformanceTable } from '@/components'
 import dayjs from '@/lib/dayjs'
-
-export interface Props
-    extends Omit<ValidatorsPerformanceTableProps, 'validators'> {
-    filter?: string
-}
+import { Props } from './validatorsPerformanceContainer'
 
 const ValidatorsPerformanceLoader: FC<Props> = async ({ filter, ...props }) => {
     const mockActiveValidators = (count: number) =>

@@ -6,7 +6,7 @@ import { NumberCountup } from '../../numberCountup'
 import { Panel, PanelProps } from '../panel'
 
 export interface Props extends Omit<PanelProps, 'header'> {
-    number?: number
+    number: number
     numberClassName?: string
     numberPrefix?: ReactNode
     numberSuffix?: ReactNode
@@ -21,7 +21,7 @@ const NumberPanel: FC<Props> = ({
 }) => (
     <Panel
         header={
-            typeof number === 'number' ? (
+            number > 0 ? (
                 <NumberCountup
                     className={numberClassName}
                     number={number}
