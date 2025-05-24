@@ -6,7 +6,6 @@ import ValidatorsPanelUpdater from './validatorsPanelUpdater'
 
 export interface Props {
     className?: string
-    number?: number
 }
 
 const ValidatorsPanelLoader: FC<Props> = async props => {

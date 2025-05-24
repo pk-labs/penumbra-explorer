@@ -2,7 +2,7 @@
 'use client'
 
 import { FC, useState } from 'react'
-import { ValidatorsPanel } from '@/components'
+import { NumberPanel } from '@/components'
 import { Props as ValidatorsPanelLoaderProps } from './validatorsPanelLoader'
 
 interface Props extends ValidatorsPanelLoaderProps {
@@ -23,7 +23,16 @@ const ValidatorsPanelUpdater: FC<Props> = props => {
     //     }
     // }, [transactionCountUpdateSubscription.data?.transactionCount])
 
-    return <ValidatorsPanel number={number} {...props} />
+    return (
+        <NumberPanel
+            className={props.className}
+            number={number}
+            numberSuffix={
+                <span className="text-text-secondary text-2xl">/100</span>
+            }
+            title="Active validators / Validators limit"
+        />
+    )
 }
 
 export default ValidatorsPanelUpdater
