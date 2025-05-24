@@ -62,7 +62,7 @@ const ValidatorLoader: FC<Props> = async props => {
                 props.className
             )}
         >
-            <header className="flex items-center gap-4">
+            <header className="flex items-center justify-between gap-4">
                 <span className="flex items-center gap-2 overflow-hidden">
                     <img
                         alt={validator.hash}
