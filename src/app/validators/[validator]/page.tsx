@@ -4,6 +4,7 @@ import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
     LatestTransactionsContainer,
     ValidatorContainer,
+    VotingPowerPercentagePanelContainer,
     VotingPowerUmPanelContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
@@ -31,20 +32,25 @@ const ValidatorPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb href="/validators">Validators</Breadcrumb>
             </Breadcrumbs>
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-12 items-start gap-4">
                 <ValidatorContainer
                     className={classNames(
-                        'col-span-12 self-start md:col-span-5 lg:col-span-4'
+                        'col-span-12 md:col-span-5 md:row-span-3 lg:col-span-4! lg:row-span-2'
                     )}
                     validator={validator}
                 />
                 <VotingPowerUmPanelContainer
                     className={classNames(
-                        'col-span-12 md:col-span-7 lg:col-span-3'
+                        'col-span-12 md:col-span-7 md:col-start-6 lg:col-span-3! lg:col-start-5!'
+                    )}
+                />
+                <VotingPowerPercentagePanelContainer
+                    className={classNames(
+                        'col-span-12 md:col-span-4 md:col-start-6 lg:col-span-3! lg:col-start-8!'
                     )}
                 />
                 <LatestTransactionsContainer
-                    className="col-span-12 md:col-span-7 lg:col-span-8"
+                    className="col-span-12 md:col-span-7 md:col-start-6 lg:col-span-8! lg:col-start-5!"
                     limit={10}
                     blockHeight
                     time
