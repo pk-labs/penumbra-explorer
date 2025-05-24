@@ -140,7 +140,7 @@ const ValidatorLoader: FC<Props> = async props => {
                     <Parameter
                         name={`${(validator.commission / 2).toFixed(2)}% to`}
                     >
-                        Cummunity pool
+                        Community pool
                     </Parameter>
                 </Parameters>
             </div>
