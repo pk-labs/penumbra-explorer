@@ -16,7 +16,8 @@ const ValidatorContainer: FC<Props> = props => (
             >
                 <Skeleton className="h-10" />
                 <Skeleton className="h-25" />
-                <Skeleton className="h-25" />
+                <Skeleton className="h-20" />
+                <Skeleton className="h-24" />
             </section>
         }
     >
