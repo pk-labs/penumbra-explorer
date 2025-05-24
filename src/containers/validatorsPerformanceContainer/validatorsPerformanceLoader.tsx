@@ -92,7 +92,7 @@ const ValidatorsPerformanceLoader: FC<Props> = async ({ filter, ...props }) => {
                         ? mockInactiveValidators(34)
                         : mockActiveValidators(56)
                 ),
-            faker.number.int({ max: 500, min: 300 })
+            faker.number.int({ max: 500, min: 200 })
         )
     )
 
