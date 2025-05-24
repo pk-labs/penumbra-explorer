@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
-import Panel from '../panel'
+import NumberPanel from '../numberPanel'
 import BlockPanelChart from './blockPanelChart'
 import blockPanelIcon from './blockPanelIcon.svg'
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const BlockPanel: FC<Props> = props => (
-    <Panel
+    <NumberPanel
         className={classNames(
             'bg-transparent bg-radial-[100%_100%_at_0%_0%]',
             'from-[rgba(83,174,168,0.25)] from-0% to-[rgba(83,174,168,0.03)]',
@@ -30,7 +30,7 @@ const BlockPanel: FC<Props> = props => (
         titleClassName="text-base font-medium"
     >
         <BlockPanelChart animate={!props.fallback} />
-    </Panel>
+    </NumberPanel>
 )
 
 export default BlockPanel

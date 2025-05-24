@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import Panel from '../panel'
+import NumberPanel from '../numberPanel'
 import shieldedPanelIcon from './shieldedPanelIcon.svg'
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ShieldedPanel: FC<Props> = props => (
-    <Panel
+    <NumberPanel
         className={props.className}
         headerClassName="gap-2"
         number={props.number}

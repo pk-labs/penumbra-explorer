@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { penumbra } from '@/lib/images'
-import Panel from '../panel'
+import NumberPanel from '../numberPanel'
 
 interface Props {
     className?: string
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const StakedPanel: FC<Props> = props => (
-    <Panel
+    <NumberPanel
         className={props.className}
         number={props.number}
         numberClassName="gap-2"

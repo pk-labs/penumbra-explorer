@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
-import Panel from '../panel'
+import NumberPanel from '../numberPanel'
 import transactionPanelIcon from './transactionPanelIcon.svg'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const TransactionPanel: FC<Props> = props => (
-    <Panel
+    <NumberPanel
         className={classNames(
             'bg-transparent bg-radial-[100%_100%_at_0%_0%]',
             'from-[rgba(244,156,67,0.25)] from-0% to-[rgba(244,156,67,0.025)]',

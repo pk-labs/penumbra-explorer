@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Panel from '../panel'
+import NumberPanel from '../numberPanel'
 
 interface Props {
     className?: string
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const UnbondingPanel: FC<Props> = props => (
-    <Panel
+    <NumberPanel
         className={props.className}
         number={props.number}
         numberPrefix="~"

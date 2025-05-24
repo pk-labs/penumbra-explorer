@@ -1,7 +1,7 @@
 import { getByText, render } from '@testing-library/react'
 import BlockPanel from './blockPanel'
 
-jest.mock('../panel/panel', () => (props: any) => (
+jest.mock('../numberPanel/numberPanel', () => (props: any) => (
     <div className={props.className}>{props.number}</div>
 ))
 
