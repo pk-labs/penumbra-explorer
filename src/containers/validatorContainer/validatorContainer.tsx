@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import { Skeleton } from '@/components'
-import { classNames, shortenHash } from '@/lib/utils'
+import { classNames } from '@/lib/utils'
 import ValidatorLoader, { Props } from './validatorLoader'
 
 const ValidatorContainer: FC<Props> = props => (
@@ -22,8 +22,8 @@ const ValidatorContainer: FC<Props> = props => (
                         src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
                         width={40}
                     />
-                    <h1 className="flex-1 text-2xl">
-                        {shortenHash(props.validator, 'end')}
+                    <h1 className="flex-1 truncate text-2xl">
+                        {props.validator}
                     </h1>
                 </header>
                 <Skeleton className="h-25" />

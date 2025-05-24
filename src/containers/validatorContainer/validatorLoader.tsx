@@ -2,7 +2,7 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { CopyToClipboard } from '@/components'
-import { classNames, shortenHash } from '@/lib/utils'
+import { classNames } from '@/lib/utils'
 import ValidatorStatusBonding from '../../components/validatorStatusBonding'
 
 export interface Props {
@@ -52,9 +52,7 @@ const ValidatorLoader: FC<Props> = async props => {
                     src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
                     width={40}
                 />
-                <h1 className="flex-1 text-2xl">
-                    {shortenHash(validator.hash, 'end')}
-                </h1>
+                <h1 className="flex-1 truncate text-2xl">{validator.hash}</h1>
                 <ValidatorStatusBonding
                     bonding={validator.bonding}
                     className="text-right"
