@@ -3,13 +3,13 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as VotingPowerPercentagePanelContainerProps } from './votingPowerPercentagePanelContainer'
+import { Props as ValidatorActivityPanelContainerProps } from './validatorActivityPanelContainer'
 
-interface Props extends VotingPowerPercentagePanelContainerProps {
+interface Props extends ValidatorActivityPanelContainerProps {
     initialNumber: number
 }
 
-const VotingPowerPercentagePanelUpdater: FC<Props> = props => {
+const ValidatorActivityPanelUpdater: FC<Props> = props => {
     const [number] = useState(props.initialNumber)
 
     // const [transactionCountUpdateSubscription] =
@@ -26,11 +26,11 @@ const VotingPowerPercentagePanelUpdater: FC<Props> = props => {
     return (
         <NumberPanel
             number={number}
-            numberSuffix="%"
-            title="Voting power %"
+            numberSuffix={<span className="ml-2">days</span>}
+            title="Active since"
             {...props}
         />
     )
 }
 
-export default VotingPowerPercentagePanelUpdater
+export default ValidatorActivityPanelUpdater
