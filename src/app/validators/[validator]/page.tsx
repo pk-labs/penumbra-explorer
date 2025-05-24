@@ -1,8 +1,12 @@
 // istanbul ignore file
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
-import { LatestTransactionsContainer, ValidatorContainer } from '@/containers'
-import { generatePageMetadata } from '@/lib/utils'
+import {
+    LatestTransactionsContainer,
+    ValidatorContainer,
+    VotingPowerUmPanelContainer,
+} from '@/containers'
+import { classNames, generatePageMetadata } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ validator: string }>
@@ -29,8 +33,15 @@ const ValidatorPage: FC<Props> = async props => {
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4">
                 <ValidatorContainer
-                    className="col-span-12 self-start md:col-span-5 lg:col-span-4"
+                    className={classNames(
+                        'col-span-12 self-start md:col-span-5 lg:col-span-4'
+                    )}
                     validator={validator}
+                />
+                <VotingPowerUmPanelContainer
+                    className={classNames(
+                        'col-span-12 md:col-span-7 lg:col-span-3'
+                    )}
                 />
                 <LatestTransactionsContainer
                     className="col-span-12 md:col-span-7 lg:col-span-8"

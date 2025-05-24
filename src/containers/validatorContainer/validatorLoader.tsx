@@ -50,7 +50,7 @@ const ValidatorLoader: FC<Props> = async props => {
                     uptimeBlocksWindow,
                 })
             },
-            faker.number.int({ max: 2000, min: 1000 })
+            faker.number.int({ max: 500, min: 200 })
         )
     )
 
