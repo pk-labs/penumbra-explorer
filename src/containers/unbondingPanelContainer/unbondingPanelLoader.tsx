@@ -6,7 +6,6 @@ import UnbondingPanelUpdater from './unbondingPanelUpdater'
 
 export interface Props {
     className?: string
-    number?: number
 }
 
 const UnbondingPanelLoader: FC<Props> = async props => {

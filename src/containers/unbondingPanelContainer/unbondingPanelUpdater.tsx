@@ -2,15 +2,15 @@
 'use client'
 
 import { FC, useState } from 'react'
-import { UnbondingPanel } from '@/components'
+import { NumberPanel } from '@/components'
 import { Props as UnbondingPanelLoaderProps } from './unbondingPanelLoader'
 
 interface Props extends UnbondingPanelLoaderProps {
     initialNumber?: number
 }
 
-const UnbondingPanelUpdater: FC<Props> = props => {
-    const [number] = useState(props.initialNumber)
+const UnbondingPanelUpdater: FC<Props> = ({ initialNumber, ...props }) => {
+    const [number] = useState(initialNumber)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()
@@ -23,7 +23,15 @@ const UnbondingPanelUpdater: FC<Props> = props => {
     //     }
     // }, [transactionCountUpdateSubscription.data?.transactionCount])
 
-    return <UnbondingPanel number={number} {...props} />
+    return (
+        <NumberPanel
+            number={number}
+            numberPrefix="~"
+            numberSuffix={<span className="ml-2">days</span>}
+            title="Unbonding delay"
+            {...props}
+        />
+    )
 }
 
 export default UnbondingPanelUpdater
