@@ -3,9 +3,9 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as UnbondingPanelLoaderProps } from './unbondingPanelLoader'
+import { Props as UnbondingPanelContainerProps } from './unbondingPanelContainer'
 
-interface Props extends UnbondingPanelLoaderProps {
+interface Props extends UnbondingPanelContainerProps {
     initialNumber?: number
 }
 

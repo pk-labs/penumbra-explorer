@@ -2,11 +2,8 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { Props } from './validatorsPanelContainer'
 import ValidatorsPanelUpdater from './validatorsPanelUpdater'
-
-export interface Props {
-    className?: string
-}
 
 const ValidatorsPanelLoader: FC<Props> = async props => {
     const initialNumber = await new Promise<number>(resolve =>

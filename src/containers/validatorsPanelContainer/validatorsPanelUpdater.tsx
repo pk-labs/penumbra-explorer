@@ -3,9 +3,9 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as ValidatorsPanelLoaderProps } from './validatorsPanelLoader'
+import { Props as ValidatorsPanelContainerProps } from './validatorsPanelContainer'
 
-interface Props extends ValidatorsPanelLoaderProps {
+interface Props extends ValidatorsPanelContainerProps {
     initialNumber?: number
 }
 

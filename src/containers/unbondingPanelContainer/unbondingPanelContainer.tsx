@@ -1,7 +1,11 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import { NumberPanel } from '@/components'
-import UnbondingPanelLoader, { Props } from './unbondingPanelLoader'
+import UnbondingPanelLoader from './unbondingPanelLoader'
+
+export interface Props {
+    className?: string
+}
 
 const UnbondingPanelContainer: FC<Props> = props => (
     <Suspense

@@ -2,11 +2,8 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { Props } from './unbondingPanelContainer'
 import UnbondingPanelUpdater from './unbondingPanelUpdater'
-
-export interface Props {
-    className?: string
-}
 
 const UnbondingPanelLoader: FC<Props> = async props => {
     const initialNumber = await new Promise<number>(resolve =>
