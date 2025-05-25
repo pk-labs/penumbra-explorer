@@ -26,14 +26,14 @@ const FilterSelector: FC<Props> = props => {
 
             const params = new URLSearchParams(searchParams)
 
-            // TODO: Implement helper for search params routing
             if (value === props.filters.at(0)) {
                 params.delete('filter')
-                router.push(`${pathname}${params.size ? `?${params}` : ''}`)
             } else {
                 params.set('filter', value)
-                router.push(`${pathname}?${params}`)
             }
+
+            const queryString = params.toString()
+            router.push(`${pathname}${queryString ? `?${queryString}` : ''}`)
         },
         [pathname, props.filters, router, searchParams, selectedFilter]
     )
