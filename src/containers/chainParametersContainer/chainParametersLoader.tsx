@@ -24,7 +24,7 @@ const ChainParametersLoader: FC<Props> = async props => {
                     nextEpochHours: faker.number.int({ max: 23, min: 1 }),
                     uptimeBlocksWindow: 10000,
                 }),
-            faker.number.int({ max: 3000, min: 2000 })
+            faker.number.int({ max: 500, min: 200 })
         )
     )
 
