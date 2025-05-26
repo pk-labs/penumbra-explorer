@@ -8,6 +8,7 @@ import {
     FilterSelector,
 } from '@/components'
 import {
+    ChainParametersContainer,
     StakedPanelContainer,
     UnbondingPanelContainer,
     ValidatorParametersContainer,
@@ -37,28 +38,34 @@ const ValidatorsPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Validators</Breadcrumb>
             </Breadcrumbs>
-            <div className="grid grid-cols-12 gap-4">
-                <StakedPanelContainer className="col-span-12 md:col-span-4" />
+            <div className="grid grid-cols-12 gap-4 lg:items-start">
+                <StakedPanelContainer className="col-span-full md:col-span-4" />
                 <ValidatorsPanelContainer
                     className={classNames(
-                        'col-span-12 sm:col-span-6 md:col-span-4'
+                        'col-span-full sm:col-span-6 md:col-span-4'
                     )}
                 />
                 <UnbondingPanelContainer
                     className={classNames(
-                        'col-span-12 sm:col-span-6 md:col-span-4'
+                        'col-span-full sm:col-span-6 md:col-span-4'
+                    )}
+                />
+                <ChainParametersContainer
+                    className={classNames(
+                        'col-span-full sm:col-span-6 lg:col-span-3!',
+                        'lg:col-start-10! lg:row-start-2!'
                     )}
                 />
                 <ValidatorParametersContainer
                     className={classNames(
-                        'col-span-12 lg:col-span-3 lg:col-start-10 lg:row-start-2',
-                        'lg:self-start'
+                        'col-span-full sm:col-span-6 lg:col-span-3!',
+                        'lg:col-start-10! lg:row-start-3!'
                     )}
                 />
                 <ValidatorsPerformanceContainer
                     className={classNames(
-                        'col-span-12 lg:col-span-9 lg:col-start-1',
-                        'lg:row-start-2'
+                        'col-span-full lg:col-span-9 lg:col-start-1',
+                        'lg:row-span-3 lg:row-start-2'
                     )}
                     filter={searchParams.filter}
                     header={

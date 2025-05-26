@@ -1,4 +1,5 @@
 export { default as BlockViewContainer } from './blockViewContainer'
+export { default as ChainParametersContainer } from './chainParametersContainer'
 export { default as ClientContainer } from './clientContainer'
 export { default as HeaderContainer } from './headerContainer'
 export { default as IbcContainer } from './ibcContainer'
