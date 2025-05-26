@@ -18,27 +18,30 @@ const ChainParametersContainer: FC<Props> = props => (
                     props.className
                 )}
             >
-                <h2 className="text-sm">Validator parameters</h2>
+                <h2 className="text-sm">Chain parameters</h2>
                 <ul
                     className={classNames(
                         'text-text-secondary flex flex-col gap-2 font-mono',
                         'text-sm font-medium'
                     )}
                 >
-                    <Parameter name="Uptime blocks window">
-                        <Skeleton className="h-4 w-12" />
+                    <Parameter name="Chain ID">
+                        <Skeleton className="h-4 w-20" />
                     </Parameter>
-                    <Parameter name="Required uptime">
-                        <Skeleton className="h-4 w-12" />
+                    <Parameter name="Block time">
+                        <Skeleton className="h-4 w-40" />
                     </Parameter>
-                    <Parameter name="Downtime penalty">
-                        <Skeleton className="h-4 w-12" />
+                    <Parameter name="Block height">
+                        <Skeleton className="h-4 w-20" />
                     </Parameter>
-                    <Parameter name="Misbehavior penalty">
-                        <Skeleton className="h-4 w-12" />
+                    <Parameter name="Current epoch">
+                        <Skeleton className="h-4 w-8" />
                     </Parameter>
-                    <Parameter name="Min validator stake">
-                        <Skeleton className="h-4 w-12" />
+                    <Parameter name="Epoch duration">
+                        <Skeleton className="h-4 w-40" />
+                    </Parameter>
+                    <Parameter name="Next epoch in">
+                        <Skeleton className="h-4 w-40" />
                     </Parameter>
                 </ul>
             </section>
