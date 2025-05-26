@@ -5,6 +5,7 @@ import {
     CheckCheckIcon,
     HomeIcon,
     SatelliteDishIcon,
+    SquareCheckBigIcon,
 } from 'lucide-react'
 import { FC, ReactNode, useCallback, useState } from 'react'
 import { Menu, MenuItem } from '@/components'
@@ -47,6 +48,13 @@ const MobileMenu: FC<Props> = props => {
             <MenuItem href="/ibc" paths={['/ibc']}>
                 <SatelliteDishIcon className="stroke-primary-light" size={16} />
                 IBC
+            </MenuItem>
+            <MenuItem href="/validators" paths={['/validators']}>
+                <SquareCheckBigIcon
+                    className="stroke-primary-light"
+                    size={16}
+                />
+                Validators
             </MenuItem>
         </Menu>
     )
