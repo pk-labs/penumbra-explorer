@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
-import { InfoIcon } from 'lucide-react'
+import { ExternalLinkIcon, InfoIcon } from 'lucide-react'
 import { FC } from 'react'
 import {
     CopyToClipboard,
@@ -48,6 +48,7 @@ const ValidatorLoader: FC<Props> = async props => {
                     ]),
                     uptime,
                     uptimeBlocksWindow,
+                    url: 'https://en.wikipedia.org/wiki/Pepe_the_Frog',
                 })
             },
             faker.number.int({ max: 500, min: 200 })
@@ -71,7 +72,19 @@ const ValidatorLoader: FC<Props> = async props => {
                         src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
                         width={40}
                     />
-                    <h1 className="truncate text-2xl">{validator.hash}</h1>
+                    <span className="inline-flex flex-col gap-1 overflow-hidden">
+                        <h1 className="truncate text-2xl">{validator.hash}</h1>
+                        <span className="text-text-secondary inline-flex items-center gap-2 text-xs">
+                            <a
+                                className="text-text-secondary hover:text-text-special"
+                                href={validator.url}
+                                target="_blank"
+                            >
+                                pepethefrog.net
+                            </a>
+                            <ExternalLinkIcon size={14} />
+                        </span>
+                    </span>
                 </span>
                 <ValidatorStatusBonding
                     bonding={validator.bonding}
