@@ -19,7 +19,12 @@ const ValidatorStatusContainer: FC<Props> = props => (
                 )}
             >
                 <header>
-                    <h2 className="text-2xl font-medium">Validator status</h2>
+                    <h2 className="inline text-2xl font-medium">
+                        Validator status
+                    </h2>{' '}
+                    <span className="text-text-secondary text-xs">
+                        (Last 300 blocks)
+                    </span>
                 </header>
                 <Skeleton className="h-53" />
             </section>
