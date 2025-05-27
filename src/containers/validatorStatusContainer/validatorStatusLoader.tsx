@@ -10,17 +10,34 @@ const ValidatorStatusLoader: FC<Props> = async props => {
         setTimeout(
             () => {
                 const start = faker.number.int({ max: 5000000, min: 4000000 })
+                const total = 300
 
-                const blocks = Array.from({ length: 300 }, (_, i) => start + i)
+                const blocks = Array.from(
+                    { length: total },
+                    (_, i) => start + i
+                )
 
-                const missedBlocks = faker.helpers.arrayElements(blocks, {
-                    max: 50,
-                    min: 0,
-                })
+                const missedBlocks = new Set(
+                    faker.helpers.arrayElements(blocks, {
+                        max: 50,
+                        min: 0,
+                    })
+                )
+
+                const signedBlocks = new Set(
+                    faker.helpers.arrayElements(
+                        blocks.filter(block => !missedBlocks.has(block)),
+                        {
+                            max: total - missedBlocks.size - 50,
+                            min: 150,
+                        }
+                    )
+                )
 
                 resolve({
                     blocks,
                     missedBlocks,
+                    signedBlocks,
                 })
             },
             faker.number.int({ max: 500, min: 200 })
@@ -32,6 +49,7 @@ const ValidatorStatusLoader: FC<Props> = async props => {
             <ValidatorStatusUpdater
                 blocks={data.blocks}
                 missedBlocks={data.missedBlocks}
+                signedBlocks={data.signedBlocks}
                 {...props}
             />
         </GraphqlClientProvider>

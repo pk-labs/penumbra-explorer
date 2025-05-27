@@ -3,17 +3,20 @@
 
 import { FC, useState } from 'react'
 import { classNames } from '@/lib/utils'
+import ValidatorStatusBlocks from './validatorStatusBlocks'
 import { Props as ValidatorStatusContainerProps } from './validatorStatusContainer'
 import ValidatorStatusLegend from './validatorStatusLegend'
 
 interface Props extends ValidatorStatusContainerProps {
     blocks: number[]
-    missedBlocks: number[]
+    missedBlocks: Set<number>
+    signedBlocks: Set<number>
 }
 
 const ValidatorStatusUpdater: FC<Props> = props => {
     const [blocks] = useState(props.blocks)
-    const [_missedBlocks] = useState(props.missedBlocks)
+    const [missedBlocks] = useState(props.missedBlocks)
+    const [signedBlocks] = useState(props.signedBlocks)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()
@@ -44,6 +47,11 @@ const ValidatorStatusUpdater: FC<Props> = props => {
             </header>
             <div className="flex flex-col gap-2">
                 <ValidatorStatusLegend lastSignedBlock={blocks[0]} />
+                <ValidatorStatusBlocks
+                    blocks={blocks}
+                    missedBlocks={missedBlocks}
+                    signedBlocks={signedBlocks}
+                />
             </div>
         </section>
     )
