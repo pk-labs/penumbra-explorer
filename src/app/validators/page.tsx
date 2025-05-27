@@ -52,19 +52,19 @@ const ValidatorsPage: FC<Props> = async props => {
                 />
                 <ChainParametersContainer
                     className={classNames(
-                        'col-span-full sm:col-span-6 lg:col-span-3!',
-                        'lg:col-start-10! lg:row-start-2!'
+                        'col-span-full md:col-span-6 lg:col-span-4!',
+                        'lg:col-start-9! lg:row-start-2!'
                     )}
                 />
                 <ValidatorParametersContainer
                     className={classNames(
-                        'col-span-full sm:col-span-6 lg:col-span-3!',
-                        'lg:col-start-10! lg:row-start-3!'
+                        'col-span-full md:col-span-6 lg:col-span-4!',
+                        'lg:col-start-9! lg:row-start-3!'
                     )}
                 />
                 <ValidatorsPerformanceContainer
                     className={classNames(
-                        'col-span-full lg:col-span-9 lg:col-start-1',
+                        'col-span-full lg:col-span-8 lg:col-start-1',
                         'lg:row-span-3 lg:row-start-2'
                     )}
                     filter={searchParams.filter}
