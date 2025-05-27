@@ -5,6 +5,7 @@ import {
     LatestTransactionsContainer,
     ValidatorActivityPanelContainer,
     ValidatorContainer,
+    ValidatorStatusContainer,
     VotingPowerPercentagePanelContainer,
     VotingPowerUmPanelContainer,
 } from '@/containers'
@@ -36,27 +37,42 @@ const ValidatorPage: FC<Props> = async props => {
             <div className="grid grid-cols-12 items-start gap-4">
                 <ValidatorContainer
                     className={classNames(
-                        'col-span-12 md:col-span-5 md:row-span-3 lg:col-span-4! lg:row-span-2'
+                        'col-span-12 md:col-span-5 md:row-span-4',
+                        'lg:col-span-4! lg:row-span-3'
                     )}
                     validator={validator}
                 />
                 <VotingPowerUmPanelContainer
                     className={classNames(
-                        'col-span-12 md:col-span-7 md:col-start-6 md:row-start-1 lg:col-span-3! lg:col-start-5!'
+                        'col-span-12 md:col-span-7 md:col-start-6',
+                        'md:row-start-1 lg:col-span-3! lg:col-start-5!'
                     )}
                 />
                 <VotingPowerPercentagePanelContainer
                     className={classNames(
-                        'col-span-12 md:col-span-3 md:col-start-6 md:row-start-2 lg:col-span-2! lg:col-start-8! lg:row-start-1!'
+                        'col-span-12 md:col-span-3 md:col-start-6',
+                        'md:row-start-2 lg:col-span-2! lg:col-start-8!',
+                        'lg:row-start-1!'
                     )}
                 />
                 <ValidatorActivityPanelContainer
                     className={classNames(
-                        'col-span-12 md:col-span-4 md:col-start-9 md:row-start-2 lg:col-span-3! lg:col-start-10! lg:row-start-1!'
+                        'col-span-12 md:col-span-4 md:col-start-9',
+                        'md:row-start-2 lg:col-span-3! lg:col-start-10!',
+                        'lg:row-start-1!'
+                    )}
+                />
+                <ValidatorStatusContainer
+                    className={classNames(
+                        'col-span-12 md:col-span-7 md:col-start-6',
+                        'lg:col-span-8! lg:col-start-5!'
                     )}
                 />
                 <LatestTransactionsContainer
-                    className="col-span-12 md:col-span-7 md:col-start-6 lg:col-span-8! lg:col-start-5!"
+                    className={classNames(
+                        'col-span-12 md:col-span-7 md:col-start-6',
+                        'lg:col-span-8! lg:col-start-5!'
+                    )}
                     limit={10}
                     blockHeight
                     time
