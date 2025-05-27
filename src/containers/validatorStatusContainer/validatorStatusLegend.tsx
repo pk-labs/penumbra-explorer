@@ -9,8 +9,8 @@ interface Props {
 const ValidatorStatusLegend: FC<Props> = props => (
     <div
         className={classNames(
-            'text-text-secondary flex items-center justify-between font-mono',
-            'text-sm'
+            'text-text-secondary flex flex-col-reverse justify-between gap-4',
+            'font-mono text-sm lg:flex-row lg:items-center lg:gap-0'
         )}
     >
         <span className="inline-flex items-center gap-1">
@@ -20,7 +20,12 @@ const ValidatorStatusLegend: FC<Props> = props => (
                 {formatNumber(props.lastSignedBlock)}
             </span>
         </span>
-        <span className="inline-flex items-center gap-4">
+        <span
+            className={classNames(
+                'inline-flex items-center justify-between gap-4',
+                'sm:justify-start'
+            )}
+        >
             <span className="inline-flex items-center gap-2">
                 <span
                     className={classNames(
