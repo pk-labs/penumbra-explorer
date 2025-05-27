@@ -1,0 +1,15 @@
+@reference "../../lib/css/global.css";
+
+.block {
+    @apply bg-neutral-main inline-block rounded-xs;
+    width: 15px;
+    height: 15px;
+
+    &.signed {
+        @apply bg-success-light;
+    }
+
+    &.missed {
+        @apply bg-destructive-light;
+    }
+}

@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
+import styles from './validatorStatusContainer.module.css'
 
 interface Props {
     blocks: number[]
@@ -13,10 +14,9 @@ const ValidatorStatusBlocks: FC<Props> = props => (
             <span
                 key={block}
                 className={classNames(
-                    'bg-neutral-main inline-block h-[15px] w-[15px]',
-                    'rounded-xs',
-                    props.missedBlocks.has(block) && 'bg-destructive-light',
-                    props.signedBlocks.has(block) && 'bg-success-light'
+                    styles.block,
+                    props.signedBlocks.has(block) && styles.signed,
+                    props.missedBlocks.has(block) && styles.missed
                 )}
             />
         ))}

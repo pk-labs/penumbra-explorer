@@ -1,6 +1,7 @@
 import { ArrowDownIcon } from 'lucide-react'
 import { FC } from 'react'
 import { classNames, formatNumber } from '@/lib/utils'
+import styles from './validatorStatusContainer.module.css'
 
 interface Props {
     lastSignedBlock: number
@@ -27,30 +28,15 @@ const ValidatorStatusLegend: FC<Props> = props => (
             )}
         >
             <span className="inline-flex items-center gap-2">
-                <span
-                    className={classNames(
-                        'bg-success-light inline-block h-[15px] w-[15px]',
-                        'rounded-xs'
-                    )}
-                />
+                <span className={classNames(styles.block, styles.signed)} />
                 Signed
             </span>
             <span className="inline-flex items-center gap-2">
-                <span
-                    className={classNames(
-                        'bg-destructive-light inline-block h-[15px] w-[15px]',
-                        'rounded-xs'
-                    )}
-                />
+                <span className={classNames(styles.block, styles.missed)} />
                 Missed
             </span>
             <span className="inline-flex items-center gap-2">
-                <span
-                    className={classNames(
-                        'bg-neutral-main inline-block h-[15px] w-[15px]',
-                        'rounded-xs'
-                    )}
-                />
+                <span className={styles.block} />
                 Unavailable
             </span>
         </span>
