@@ -26,7 +26,7 @@ const ValidatorStatusContainer: FC<Props> = props => (
                         (Last 300 blocks)
                     </span>
                 </header>
-                <Skeleton className="h-53" />
+                <Skeleton className="h-95 sm:h-72 md:h-100 lg:h-60! xl:h-51!" />
             </section>
         }
     >
