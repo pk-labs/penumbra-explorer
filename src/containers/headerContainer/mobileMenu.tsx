@@ -1,11 +1,11 @@
 'use client'
 
 import {
+    AlignHorizontalDistributeCenterIcon,
     BoxIcon,
     CheckCheckIcon,
     HomeIcon,
     SatelliteDishIcon,
-    SquareCheckBigIcon,
 } from 'lucide-react'
 import { FC, ReactNode, useCallback, useState } from 'react'
 import { Menu, MenuItem } from '@/components'
@@ -50,7 +50,7 @@ const MobileMenu: FC<Props> = props => {
                 IBC
             </MenuItem>
             <MenuItem href="/validators" paths={['/validators']}>
-                <SquareCheckBigIcon
+                <AlignHorizontalDistributeCenterIcon
                     className="stroke-primary-light"
                     size={16}
                 />
