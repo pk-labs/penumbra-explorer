@@ -35,35 +35,33 @@ const getTransactions = async (
         return { total: 0, transactions: [] }
     }
 
-    const transactions = result.data.transactionsCollection.items.map(
-        transaction => {
-            const date = dayjs(transaction.block.createdAt)
-            let primaryAction
-            let actionCount
+    const transactions = result.data.transactions.items.map(transaction => {
+        const date = dayjs(transaction.block.createdAt)
+        let primaryAction
+        let actionCount
 
-            try {
-                const decoded = decodeTransaction(transaction.raw)
-                primaryAction = findPrimaryAction(decoded)
-                actionCount = decoded.body?.actions.length
-            } catch (e) {
-                // istanbul ignore next
-                console.error(e)
-            }
-
-            return {
-                actionCount: actionCount ?? 0,
-                blockHeight: transaction.block.height,
-                hash: transaction.hash.toLowerCase(),
-                initialTimeAgo: dayjs().to(date),
-                primaryAction,
-                raw: transaction.raw,
-                status: transaction.ibcStatus,
-                timestamp: date.valueOf(),
-            }
+        try {
+            const decoded = decodeTransaction(transaction.raw)
+            primaryAction = findPrimaryAction(decoded)
+            actionCount = decoded.body?.actions.length
+        } catch (e) {
+            // istanbul ignore next
+            console.error(e)
         }
-    )
 
-    return { total: result.data.transactionsCollection.total, transactions }
+        return {
+            actionCount: actionCount ?? 0,
+            blockHeight: transaction.block.height,
+            hash: transaction.hash.toLowerCase(),
+            initialTimeAgo: dayjs().to(date),
+            primaryAction,
+            raw: transaction.raw,
+            status: transaction.ibcStatus,
+            timestamp: date.valueOf(),
+        }
+    })
+
+    return { total: result.data.transactions.total, transactions }
 }
 
 export default getTransactions

@@ -14,7 +14,7 @@ describe('getBlocks', () => {
                 toPromise: () =>
                     Promise.resolve({
                         data: {
-                            blocksCollection: {
+                            blocks: {
                                 items: [
                                     {
                                         createdAt: createdAt.toISOString(),

@@ -63,7 +63,7 @@ const SearchContainer: FC<Props> = props => {
                 height: result.data.search.height,
                 type: 'block',
             }
-        } else {
+        } else if (result.data.search.__typename === 'Transaction') {
             return {
                 hash: result.data.search.hash.toLowerCase(),
                 type: 'transaction',

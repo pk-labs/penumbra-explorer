@@ -18,7 +18,7 @@ describe('getTransactions', () => {
                 toPromise: () =>
                     Promise.resolve({
                         data: {
-                            transactionsCollection: {
+                            transactions: {
                                 items: [
                                     {
                                         block: {

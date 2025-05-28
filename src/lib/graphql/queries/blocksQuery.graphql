@@ -1,7 +1,7 @@
 #import "../fragments/partialBlockFragment.graphql"
 
 query Blocks($limit: CollectionLimit!, $filter: BlockFilter) {
-    blocksCollection(limit: $limit, filter: $filter) {
+    blocks(limit: $limit, filter: $filter) {
         items {
             ...PartialBlock
         }

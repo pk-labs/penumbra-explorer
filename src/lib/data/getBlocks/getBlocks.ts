@@ -28,7 +28,7 @@ const getBlocks = async (
         return { blocks: [], total: 0 }
     }
 
-    const blocks = result.data.blocksCollection.items.map(block => {
+    const blocks = result.data.blocks.items.map(block => {
         const date = dayjs(block.createdAt)
 
         return {
@@ -39,7 +39,7 @@ const getBlocks = async (
         }
     })
 
-    return { blocks, total: result.data.blocksCollection.total }
+    return { blocks, total: result.data.blocks.total }
 }
 
 export default getBlocks

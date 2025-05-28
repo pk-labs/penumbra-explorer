@@ -63,7 +63,7 @@ export function useBlockQuery(options: Omit<Urql.UseQueryArgs<Types.BlockQueryVa
 };
 export const BlocksDocument = gql`
     query Blocks($limit: CollectionLimit!, $filter: BlockFilter) {
-  blocksCollection(limit: $limit, filter: $filter) {
+  blocks(limit: $limit, filter: $filter) {
     items {
       ...PartialBlock
     }
@@ -149,7 +149,7 @@ export function useTransactionQuery(options: Omit<Urql.UseQueryArgs<Types.Transa
 };
 export const TransactionsDocument = gql`
     query Transactions($limit: CollectionLimit!, $filter: TransactionFilter) {
-  transactionsCollection(limit: $limit, filter: $filter) {
+  transactions(limit: $limit, filter: $filter) {
     items {
       ...PartialTransaction
     }

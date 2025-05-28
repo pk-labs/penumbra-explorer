@@ -7,7 +7,7 @@ schema {
 
 union Action = IbcRelay | NotYetSupportedAction | Output | Spend
 
-union SearchResult = Block | Transaction
+union SearchResult = Block | Transaction | ValidatorSearchResult
 
 type AssetId {
     altBaseDenom: String!
@@ -30,19 +30,21 @@ type BlockCollection {
     total: Int!
 }
 
+type BlockParticipation {
+    height: Int!
+    signed: Boolean!
+}
+
 type BlockUpdate {
     createdAt: DateTime!
     height: Int!
     transactionsCount: Int!
 }
 
-type ChannelPair {
-    channelId: String!
-    clientId: String!
-    completedTxCount: Int!
-    connectionId: String
-    counterpartyChannelId: String
-    pendingTxCount: Int!
+type CommissionInfo {
+    rateBps: Int!
+    recipientAddress: String
+    streamType: String!
 }
 
 type DbBlock {
@@ -132,23 +134,20 @@ type OutputBody {
 
 type QueryRoot {
     block(height: Int!): Block
-    blocks(selector: BlocksSelector!): [Block!]!
-    blocksCollection(filter: BlockFilter, limit: CollectionLimit!): BlockCollection!
+    blocks(filter: BlockFilter, limit: CollectionLimit!): BlockCollection!
     dbBlock(height: Int!): DbBlock
     dbBlocks(limit: Int, offset: Int): [DbBlock!]!
     dbLatestBlock: DbBlock
     dbRawTransaction(txHashHex: String!): DbRawTransaction
     dbRawTransactions(limit: Int, offset: Int): [DbRawTransaction!]!
-    ibcChannelPairs(clientId: String, limit: Int, offset: Int): [ChannelPair!]!
-    ibcChannelPairsByClientId(clientId: String!): [ChannelPair!]!
     ibcStats(clientId: String, limit: Int, offset: Int, timePeriod: TimePeriod): [IbcStats!]!
-    ibcStatsByClientId(clientId: String!, timePeriod: TimePeriod): IbcStats
     ibcTotalShieldedVolume: TotalShieldedVolume!
     search(slug: String!): SearchResult
     stats: Stats!
     transaction(hash: String!): Transaction
-    transactions(selector: TransactionsSelector!): [Transaction!]!
-    transactionsCollection(filter: TransactionFilter, limit: CollectionLimit!): TransactionCollection!
+    transactions(filter: TransactionFilter, limit: CollectionLimit!): TransactionCollection!
+    validatorDetails(decodedAddress: String!): ValidatorDetails
+    validatorsHomepage(filter: ValidatorFilter): ValidatorHomepageData!
 }
 
 type Root {
@@ -172,6 +171,18 @@ type SpendBody {
     balanceCommitment: String!
     nullifier: String!
     rk: String!
+}
+
+type StakingParameters {
+    activeValidatorCount: Int!
+    activeValidatorLimit: Int!
+    minValidatorStake: String!
+    slashingPenaltyDowntime: String!
+    slashingPenaltyMisbehavior: String!
+    totalStaked: String!
+    unbondingDelay: String!
+    uptimeBlocksWindow: Int!
+    uptimeMinRequired: String!
 }
 
 type Stats {
@@ -231,6 +242,50 @@ type TransactionUpdate {
     raw: String!
 }
 
+type Validator {
+    bondingState: String
+    commission: Float!
+    decodedAddress: String
+    firstSeenTime: DateTime
+    identityKey: String!
+    name: String
+    state: String!
+    uptime: Float
+    votingPower: Int!
+    votingPowerActivePercentage: Float!
+}
+
+type ValidatorDetails {
+    activeSince: DateTime
+    bondingState: String
+    commissionPercentage: Float!
+    commissionStreams: [CommissionInfo!]!
+    description: String
+    id: String!
+    identityKey: String!
+    last300Blocks: [BlockParticipation!]!
+    missedBlocks: Int!
+    name: String
+    signedBlocks: Int!
+    state: String!
+    totalUptime: Float
+    uptimeBlockWindow: Int!
+    votingPower: Int!
+    votingPowerActivePercentage: Float!
+    website: String
+}
+
+type ValidatorHomepageData {
+    stakingParameters: StakingParameters!
+    validators: [Validator!]!
+}
+
+type ValidatorSearchResult {
+    decodedAddress: String!
+    displayName: String!
+    identityKey: String!
+}
+
 enum ClientStatus {
     active
     expired
@@ -246,15 +301,16 @@ enum IbcStatus {
     UNKNOWN
 }
 
-enum RangeDirection {
-    NEXT
-    PREVIOUS
-}
-
 enum TimePeriod {
     ALL
     DAY
     MONTH
+}
+
+enum ValidatorStateFilter {
+    ACTIVE
+    ALL
+    INACTIVE
 }
 
 scalar DateTime
@@ -266,42 +322,17 @@ input BlockFilter {
     height: Int
 }
 
-input BlockHeightRange {
-    from: Int!
-    to: Int!
-}
-
-input BlocksSelector {
-    latest: LatestBlock
-    range: BlockHeightRange
-}
-
 input CollectionLimit {
     length: Int
     offset: Int
 }
 
-input LatestBlock {
-    limit: Int!
-}
-
-input LatestTransactions {
-    limit: Int!
-}
-
 input TransactionFilter {
     clientId: String
     hash: String
+    validatorDecodedAddress: String
 }
 
-input TransactionRange {
-    direction: RangeDirection!
-    fromTxHash: String!
-    limit: Int!
-}
-
-input TransactionsSelector {
-    clientId: String
-    latest: LatestTransactions
-    range: TransactionRange
+input ValidatorFilter {
+    state: ValidatorStateFilter
 }

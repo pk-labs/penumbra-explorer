@@ -48,9 +48,10 @@ export type BlockFilter = {
   height?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type BlockHeightRange = {
-  from: Scalars['Int']['input'];
-  to: Scalars['Int']['input'];
+export type BlockParticipation = {
+  __typename?: 'BlockParticipation';
+  height: Scalars['Int']['output'];
+  signed: Scalars['Boolean']['output'];
 };
 
 export type BlockUpdate = {
@@ -58,21 +59,6 @@ export type BlockUpdate = {
   createdAt: Scalars['DateTime']['output'];
   height: Scalars['Int']['output'];
   transactionsCount: Scalars['Int']['output'];
-};
-
-export type BlocksSelector = {
-  latest?: InputMaybe<LatestBlock>;
-  range?: InputMaybe<BlockHeightRange>;
-};
-
-export type ChannelPair = {
-  __typename?: 'ChannelPair';
-  channelId: Scalars['String']['output'];
-  clientId: Scalars['String']['output'];
-  completedTxCount: Scalars['Int']['output'];
-  connectionId?: Maybe<Scalars['String']['output']>;
-  counterpartyChannelId?: Maybe<Scalars['String']['output']>;
-  pendingTxCount: Scalars['Int']['output'];
 };
 
 export enum ClientStatus {
@@ -85,6 +71,13 @@ export enum ClientStatus {
 export type CollectionLimit = {
   length?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type CommissionInfo = {
+  __typename?: 'CommissionInfo';
+  rateBps: Scalars['Int']['output'];
+  recipientAddress?: Maybe<Scalars['String']['output']>;
+  streamType: Scalars['String']['output'];
 };
 
 export type DbBlock = {
@@ -165,14 +158,6 @@ export type IbcTransactionUpdate = {
   txHash: Scalars['String']['output'];
 };
 
-export type LatestBlock = {
-  limit: Scalars['Int']['input'];
-};
-
-export type LatestTransactions = {
-  limit: Scalars['Int']['input'];
-};
-
 export type NotYetSupportedAction = {
   __typename?: 'NotYetSupportedAction';
   debug: Scalars['String']['output'];
@@ -202,23 +187,20 @@ export type OutputBody = {
 export type QueryRoot = {
   __typename?: 'QueryRoot';
   block?: Maybe<Block>;
-  blocks: Array<Block>;
-  blocksCollection: BlockCollection;
+  blocks: BlockCollection;
   dbBlock?: Maybe<DbBlock>;
   dbBlocks: Array<DbBlock>;
   dbLatestBlock?: Maybe<DbBlock>;
   dbRawTransaction?: Maybe<DbRawTransaction>;
   dbRawTransactions: Array<DbRawTransaction>;
-  ibcChannelPairs: Array<ChannelPair>;
-  ibcChannelPairsByClientId: Array<ChannelPair>;
   ibcStats: Array<IbcStats>;
-  ibcStatsByClientId?: Maybe<IbcStats>;
   ibcTotalShieldedVolume: TotalShieldedVolume;
   search?: Maybe<SearchResult>;
   stats: Stats;
   transaction?: Maybe<Transaction>;
-  transactions: Array<Transaction>;
-  transactionsCollection: TransactionCollection;
+  transactions: TransactionCollection;
+  validatorDetails?: Maybe<ValidatorDetails>;
+  validatorsHomepage: ValidatorHomepageData;
 };
 
 
@@ -228,11 +210,6 @@ export type QueryRootBlockArgs = {
 
 
 export type QueryRootBlocksArgs = {
-  selector: BlocksSelector;
-};
-
-
-export type QueryRootBlocksCollectionArgs = {
   filter?: InputMaybe<BlockFilter>;
   limit: CollectionLimit;
 };
@@ -260,28 +237,10 @@ export type QueryRootDbRawTransactionsArgs = {
 };
 
 
-export type QueryRootIbcChannelPairsArgs = {
-  clientId?: InputMaybe<Scalars['String']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryRootIbcChannelPairsByClientIdArgs = {
-  clientId: Scalars['String']['input'];
-};
-
-
 export type QueryRootIbcStatsArgs = {
   clientId?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  timePeriod?: InputMaybe<TimePeriod>;
-};
-
-
-export type QueryRootIbcStatsByClientIdArgs = {
-  clientId: Scalars['String']['input'];
   timePeriod?: InputMaybe<TimePeriod>;
 };
 
@@ -297,19 +256,19 @@ export type QueryRootTransactionArgs = {
 
 
 export type QueryRootTransactionsArgs = {
-  selector: TransactionsSelector;
-};
-
-
-export type QueryRootTransactionsCollectionArgs = {
   filter?: InputMaybe<TransactionFilter>;
   limit: CollectionLimit;
 };
 
-export enum RangeDirection {
-  Next = 'NEXT',
-  Previous = 'PREVIOUS'
-}
+
+export type QueryRootValidatorDetailsArgs = {
+  decodedAddress: Scalars['String']['input'];
+};
+
+
+export type QueryRootValidatorsHomepageArgs = {
+  filter?: InputMaybe<ValidatorFilter>;
+};
 
 export type Root = {
   __typename?: 'Root';
@@ -346,7 +305,7 @@ export type RootLatestTransactionsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type SearchResult = Block | Transaction;
+export type SearchResult = Block | Transaction | ValidatorSearchResult;
 
 export type Spend = {
   __typename?: 'Spend';
@@ -360,6 +319,19 @@ export type SpendBody = {
   balanceCommitment: Scalars['String']['output'];
   nullifier: Scalars['String']['output'];
   rk: Scalars['String']['output'];
+};
+
+export type StakingParameters = {
+  __typename?: 'StakingParameters';
+  activeValidatorCount: Scalars['Int']['output'];
+  activeValidatorLimit: Scalars['Int']['output'];
+  minValidatorStake: Scalars['String']['output'];
+  slashingPenaltyDowntime: Scalars['String']['output'];
+  slashingPenaltyMisbehavior: Scalars['String']['output'];
+  totalStaked: Scalars['String']['output'];
+  unbondingDelay: Scalars['String']['output'];
+  uptimeBlocksWindow: Scalars['Int']['output'];
+  uptimeMinRequired: Scalars['String']['output'];
 };
 
 export type Stats = {
@@ -423,6 +395,7 @@ export type TransactionCountUpdate = {
 export type TransactionFilter = {
   clientId?: InputMaybe<Scalars['String']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
+  validatorDecodedAddress?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TransactionParameters = {
@@ -432,12 +405,6 @@ export type TransactionParameters = {
   fee: Fee;
 };
 
-export type TransactionRange = {
-  direction: RangeDirection;
-  fromTxHash: Scalars['String']['input'];
-  limit: Scalars['Int']['input'];
-};
-
 export type TransactionUpdate = {
   __typename?: 'TransactionUpdate';
   hash: Scalars['String']['output'];
@@ -445,11 +412,63 @@ export type TransactionUpdate = {
   raw: Scalars['String']['output'];
 };
 
-export type TransactionsSelector = {
-  clientId?: InputMaybe<Scalars['String']['input']>;
-  latest?: InputMaybe<LatestTransactions>;
-  range?: InputMaybe<TransactionRange>;
+export type Validator = {
+  __typename?: 'Validator';
+  bondingState?: Maybe<Scalars['String']['output']>;
+  commission: Scalars['Float']['output'];
+  decodedAddress?: Maybe<Scalars['String']['output']>;
+  firstSeenTime?: Maybe<Scalars['DateTime']['output']>;
+  identityKey: Scalars['String']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  state: Scalars['String']['output'];
+  uptime?: Maybe<Scalars['Float']['output']>;
+  votingPower: Scalars['Int']['output'];
+  votingPowerActivePercentage: Scalars['Float']['output'];
 };
+
+export type ValidatorDetails = {
+  __typename?: 'ValidatorDetails';
+  activeSince?: Maybe<Scalars['DateTime']['output']>;
+  bondingState?: Maybe<Scalars['String']['output']>;
+  commissionPercentage: Scalars['Float']['output'];
+  commissionStreams: Array<CommissionInfo>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  identityKey: Scalars['String']['output'];
+  last300Blocks: Array<BlockParticipation>;
+  missedBlocks: Scalars['Int']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  signedBlocks: Scalars['Int']['output'];
+  state: Scalars['String']['output'];
+  totalUptime?: Maybe<Scalars['Float']['output']>;
+  uptimeBlockWindow: Scalars['Int']['output'];
+  votingPower: Scalars['Int']['output'];
+  votingPowerActivePercentage: Scalars['Float']['output'];
+  website?: Maybe<Scalars['String']['output']>;
+};
+
+export type ValidatorFilter = {
+  state?: InputMaybe<ValidatorStateFilter>;
+};
+
+export type ValidatorHomepageData = {
+  __typename?: 'ValidatorHomepageData';
+  stakingParameters: StakingParameters;
+  validators: Array<Validator>;
+};
+
+export type ValidatorSearchResult = {
+  __typename?: 'ValidatorSearchResult';
+  decodedAddress: Scalars['String']['output'];
+  displayName: Scalars['String']['output'];
+  identityKey: Scalars['String']['output'];
+};
+
+export enum ValidatorStateFilter {
+  Active = 'ACTIVE',
+  All = 'ALL',
+  Inactive = 'INACTIVE'
+}
 
 export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson: any, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
 
@@ -472,7 +491,7 @@ export type BlocksQueryVariables = Exact<{
 }>;
 
 
-export type BlocksQuery = { __typename?: 'QueryRoot', blocksCollection: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
+export type BlocksQuery = { __typename?: 'QueryRoot', blocks: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
 
 export type IbcStatsQueryVariables = Exact<{
   clientId?: InputMaybe<Scalars['String']['input']>;
@@ -487,7 +506,7 @@ export type SearchQueryVariables = Exact<{
 }>;
 
 
-export type SearchQuery = { __typename?: 'QueryRoot', search?: { __typename: 'Block', height: number } | { __typename: 'Transaction', hash: string } | null };
+export type SearchQuery = { __typename?: 'QueryRoot', search?: { __typename: 'Block', height: number } | { __typename: 'Transaction', hash: string } | { __typename: 'ValidatorSearchResult' } | null };
 
 export type StatsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -512,7 +531,7 @@ export type TransactionsQueryVariables = Exact<{
 }>;
 
 
-export type TransactionsQuery = { __typename?: 'QueryRoot', transactionsCollection: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
+export type TransactionsQuery = { __typename?: 'QueryRoot', transactions: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -594,7 +613,7 @@ export const BlockDocument = gql`
     ${BlockFragmentDoc}`;
 export const BlocksDocument = gql`
     query Blocks($limit: CollectionLimit!, $filter: BlockFilter) {
-  blocksCollection(limit: $limit, filter: $filter) {
+  blocks(limit: $limit, filter: $filter) {
     items {
       ...PartialBlock
     }
@@ -656,7 +675,7 @@ export const TransactionDocument = gql`
     ${TransactionFragmentDoc}`;
 export const TransactionsDocument = gql`
     query Transactions($limit: CollectionLimit!, $filter: TransactionFilter) {
-  transactionsCollection(limit: $limit, filter: $filter) {
+  transactions(limit: $limit, filter: $filter) {
     items {
       ...PartialTransaction
     }
