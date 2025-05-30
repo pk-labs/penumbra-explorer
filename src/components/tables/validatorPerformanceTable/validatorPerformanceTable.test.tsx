@@ -1,15 +1,15 @@
 import { getByText, render } from '@testing-library/react'
 import { TableProps } from '../table'
-import ValidatorsPerformanceTable from './validatorsPerformanceTable'
+import ValidatorPerformanceTable from './validatorPerformanceTable'
 
 jest.mock('../table/table', () => (props: TableProps) => (
     <table>{props.children}</table>
 ))
 
-describe('ValidatorsPerformanceTable', () => {
+describe('ValidatorPerformanceTable', () => {
     test('renders empty state when no validators', async () => {
         const { container } = render(
-            <ValidatorsPerformanceTable validators={[]} />
+            <ValidatorPerformanceTable validators={[]} />
         )
 
         getByText(container, 'No validators found')

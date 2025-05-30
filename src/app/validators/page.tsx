@@ -12,8 +12,8 @@ import {
     TotalVotingPowerPanelContainer,
     UnbondingPanelContainer,
     ValidatorParametersContainer,
+    ValidatorPerformanceContainer,
     ValidatorsPanelContainer,
-    ValidatorsPerformanceContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -62,7 +62,7 @@ const ValidatorsPage: FC<Props> = async props => {
                         'lg:col-start-10! lg:row-start-3!'
                     )}
                 />
-                <ValidatorsPerformanceContainer
+                <ValidatorPerformanceContainer
                     className={classNames(
                         'col-span-full lg:col-span-9 lg:col-start-1',
                         'lg:row-span-3 lg:row-start-2'
@@ -77,7 +77,7 @@ const ValidatorsPage: FC<Props> = async props => {
                                 )}
                             >
                                 <h1 className="text-2xl font-medium">
-                                    Validators performance
+                                    Validator performance
                                 </h1>
                                 <div className="flex flex-wrap gap-2">
                                     <Button

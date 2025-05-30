@@ -5,16 +5,16 @@ import {
     Table,
     TableCell,
     TableRow,
-    ValidatorsPerformanceTableProps,
+    ValidatorPerformanceTableProps,
 } from '@/components'
-import ValidatorsPerformanceLoader from './validatorsPerformanceLoader'
+import ValidatorPerformanceLoader from './validatorPerformanceLoader'
 
 export interface Props
-    extends Omit<ValidatorsPerformanceTableProps, 'validators'> {
+    extends Omit<ValidatorPerformanceTableProps, 'validators'> {
     filter?: string
 }
 
-const ValidatorsPerformanceContainer: FC<Props> = props => (
+const ValidatorPerformanceContainer: FC<Props> = props => (
     <Suspense
         key={props.filter}
         fallback={
@@ -38,8 +38,8 @@ const ValidatorsPerformanceContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <ValidatorsPerformanceLoader {...props} />
+        <ValidatorPerformanceLoader {...props} />
     </Suspense>
 )
 
-export default ValidatorsPerformanceContainer
+export default ValidatorPerformanceContainer

@@ -11,7 +11,7 @@ export interface Props extends Omit<TableProps, 'children'> {
     validators: any[]
 }
 
-const ValidatorsPerformanceTable: FC<Props> = ({ validators, ...props }) => (
+const ValidatorPerformanceTable: FC<Props> = ({ validators, ...props }) => (
     <Table {...props}>
         <thead>
             <TableRow>
@@ -97,4 +97,4 @@ const ValidatorsPerformanceTable: FC<Props> = ({ validators, ...props }) => (
     </Table>
 )
 
-export default ValidatorsPerformanceTable
+export default ValidatorPerformanceTable

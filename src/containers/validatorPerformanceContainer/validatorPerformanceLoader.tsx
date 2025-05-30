@@ -2,11 +2,11 @@
 import { faker } from '@faker-js/faker'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { ValidatorsPerformanceTable } from '@/components'
+import { ValidatorPerformanceTable } from '@/components'
 import dayjs from '@/lib/dayjs'
-import { Props } from './validatorsPerformanceContainer'
+import { Props } from './validatorPerformanceContainer'
 
-const ValidatorsPerformanceLoader: FC<Props> = async ({ filter, ...props }) => {
+const ValidatorPerformanceLoader: FC<Props> = async ({ filter, ...props }) => {
     const mockActiveValidators = (count: number) =>
         Array.from({ length: count }).map(() => {
             const date = faker.date
@@ -100,7 +100,7 @@ const ValidatorsPerformanceLoader: FC<Props> = async ({ filter, ...props }) => {
         notFound()
     }
 
-    return <ValidatorsPerformanceTable validators={validators} {...props} />
+    return <ValidatorPerformanceTable validators={validators} {...props} />
 }
 
-export default ValidatorsPerformanceLoader
+export default ValidatorPerformanceLoader
