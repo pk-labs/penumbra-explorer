@@ -1,0 +1,34 @@
+query Validators($filter: ValidatorFilter) {
+    validatorsHomepage(filter: $filter) {
+        validators {
+            id
+            name
+            state
+            bondingState
+            votingPower
+            votingPowerActivePercentage
+            uptime
+            firstSeenTime
+            commission
+        }
+        chainParameters {
+            chainId
+            currentBlockTime
+            currentBlockHeight
+            currentEpoch
+            epochDuration
+            nextEpochIn
+        }
+        stakingParameters {
+            totalStaked
+            activeValidatorCount
+            activeValidatorLimit
+            minValidatorStake
+            uptimeBlocksWindow
+            uptimeMinRequired
+            slashingPenaltyDowntime
+            slashingPenaltyMisbehavior
+            unbondingDelay
+        }
+    }
+}

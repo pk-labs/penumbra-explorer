@@ -1,0 +1,12 @@
+query ChainParameters {
+    validatorsHomepage {
+        chainParameters {
+            chainId
+            currentBlockTime
+            currentBlockHeight
+            currentEpoch
+            epochDuration
+            nextEpochIn
+        }
+    }
+}

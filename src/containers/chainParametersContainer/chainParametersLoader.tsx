@@ -1,32 +1,18 @@
 // istanbul ignore file
-import { faker } from '@faker-js/faker'
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Parameter, Parameters } from '@/components'
+import { getChainParameters } from '@/lib/data'
 import dayjs from '@/lib/dayjs/dayjs'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './chainParametersContainer'
 
 const ChainParametersLoader: FC<Props> = async props => {
-    const parameters = await new Promise<any>(resolve =>
-        setTimeout(
-            () =>
-                resolve({
-                    blockHeight: faker.number.int({
-                        max: 5000000,
-                        min: 4000000,
-                    }),
-                    blockTimestamp: dayjs().subtract(5, 'seconds').valueOf(),
-                    chainId: 'penumbra-1',
-                    epoch: faker.number.int({ max: 250, min: 150 }),
-                    epochBlocks: faker.number.int({ max: 40000, min: 30000 }),
-                    epochDays: faker.number.int({ max: 3, min: 1 }),
-                    nextEpochBlocks: faker.number.int({ max: 2000, min: 1000 }),
-                    nextEpochHours: faker.number.int({ max: 23, min: 1 }),
-                    uptimeBlocksWindow: 10000,
-                }),
-            faker.number.int({ max: 500, min: 200 })
-        )
-    )
+    const parameters = await getChainParameters()
+
+    if (!parameters) {
+        notFound()
+    }
 
     return (
         <section
@@ -46,12 +32,12 @@ const ChainParametersLoader: FC<Props> = async props => {
                 <h3 className="text-base">Latest block</h3>
                 <Parameters>
                     <Parameter name="Time">
-                        {dayjs(parameters.blockTimestamp).format(
+                        {dayjs(parameters.currentBlockTime).format(
                             'YYYY-MM-DD HH:mm:ss z'
                         )}
                     </Parameter>
                     <Parameter name="Height">
-                        {formatNumber(parameters.blockHeight)}
+                        {formatNumber(parameters.currentBlockHeight)}
                     </Parameter>
                 </Parameters>
             </div>
@@ -59,15 +45,13 @@ const ChainParametersLoader: FC<Props> = async props => {
                 <h3 className="text-base">Epoch</h3>
                 <Parameters>
                     <Parameter name="Current">
-                        {formatNumber(parameters.epoch)}
+                        {formatNumber(parameters.currentEpoch)}
                     </Parameter>
                     <Parameter name="Duration">
-                        {formatNumber(parameters.epochBlocks)} blocks ~
-                        {parameters.epochDays}d
+                        {formatNumber(parameters.epochDuration)} blocks ~?d
                     </Parameter>
                     <Parameter name="Next in">
-                        {formatNumber(parameters.nextEpochBlocks)} blocks ~
-                        {parameters.nextEpochHours}hr
+                        {formatNumber(parameters.nextEpochIn)} blocks ~?hr
                     </Parameter>
                 </Parameters>
             </div>

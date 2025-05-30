@@ -502,6 +502,11 @@ export type BlocksQueryVariables = Exact<{
 
 export type BlocksQuery = { __typename?: 'QueryRoot', blocks: { __typename?: 'BlockCollection', total: number, items: Array<{ __typename?: 'Block', height: number, createdAt: any, transactionsCount: number }> } };
 
+export type ChainParametersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ChainParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', chainParameters?: { __typename?: 'ChainParameters', chainId: string, currentBlockTime: any, currentBlockHeight: number, currentEpoch: number, epochDuration: number, nextEpochIn: number } | null } };
+
 export type IbcStatsQueryVariables = Exact<{
   clientId?: InputMaybe<Scalars['String']['input']>;
   timePeriod?: InputMaybe<TimePeriod>;
@@ -541,6 +546,13 @@ export type TransactionsQueryVariables = Exact<{
 
 
 export type TransactionsQuery = { __typename?: 'QueryRoot', transactions: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
+
+export type ValidatorsQueryVariables = Exact<{
+  filter?: InputMaybe<ValidatorFilter>;
+}>;
+
+
+export type ValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', validators: Array<{ __typename?: 'Validator', id?: string | null, name?: string | null, state: string, bondingState?: string | null, votingPower: number, votingPowerActivePercentage: number, uptime?: number | null, firstSeenTime?: any | null, commission: number }>, chainParameters?: { __typename?: 'ChainParameters', chainId: string, currentBlockTime: any, currentBlockHeight: number, currentEpoch: number, epochDuration: number, nextEpochIn: number } | null, stakingParameters: { __typename?: 'StakingParameters', totalStaked: string, activeValidatorCount: number, activeValidatorLimit: number, minValidatorStake: string, uptimeBlocksWindow: number, uptimeMinRequired: string, slashingPenaltyDowntime: string, slashingPenaltyMisbehavior: string, unbondingDelay: string } } };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -630,6 +642,20 @@ export const BlocksDocument = gql`
   }
 }
     ${PartialBlockFragmentDoc}`;
+export const ChainParametersDocument = gql`
+    query ChainParameters {
+  validatorsHomepage {
+    chainParameters {
+      chainId
+      currentBlockTime
+      currentBlockHeight
+      currentEpoch
+      epochDuration
+      nextEpochIn
+    }
+  }
+}
+    `;
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
@@ -692,6 +718,42 @@ export const TransactionsDocument = gql`
   }
 }
     ${PartialTransactionFragmentDoc}`;
+export const ValidatorsDocument = gql`
+    query Validators($filter: ValidatorFilter) {
+  validatorsHomepage(filter: $filter) {
+    validators {
+      id
+      name
+      state
+      bondingState
+      votingPower
+      votingPowerActivePercentage
+      uptime
+      firstSeenTime
+      commission
+    }
+    chainParameters {
+      chainId
+      currentBlockTime
+      currentBlockHeight
+      currentEpoch
+      epochDuration
+      nextEpochIn
+    }
+    stakingParameters {
+      totalStaked
+      activeValidatorCount
+      activeValidatorLimit
+      minValidatorStake
+      uptimeBlocksWindow
+      uptimeMinRequired
+      slashingPenaltyDowntime
+      slashingPenaltyMisbehavior
+      unbondingDelay
+    }
+  }
+}
+    `;
 export const BlockUpdateDocument = gql`
     subscription BlockUpdate($limit: Int!) {
   latestBlocks(limit: $limit) {

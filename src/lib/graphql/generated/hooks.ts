@@ -75,6 +75,24 @@ export const BlocksDocument = gql`
 export function useBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.BlocksQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.BlocksQuery, Types.BlocksQueryVariables>({ query: Types.BlocksDocument, ...options });
 };
+export const ChainParametersDocument = gql`
+    query ChainParameters {
+  validatorsHomepage {
+    chainParameters {
+      chainId
+      currentBlockTime
+      currentBlockHeight
+      currentEpoch
+      epochDuration
+      nextEpochIn
+    }
+  }
+}
+    `;
+
+export function useChainParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.ChainParametersQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ChainParametersQuery, Types.ChainParametersQueryVariables>({ query: Types.ChainParametersDocument, ...options });
+};
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
@@ -160,6 +178,46 @@ export const TransactionsDocument = gql`
 
 export function useTransactionsQuery(options: Omit<Urql.UseQueryArgs<Types.TransactionsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.TransactionsQuery, Types.TransactionsQueryVariables>({ query: Types.TransactionsDocument, ...options });
+};
+export const ValidatorsDocument = gql`
+    query Validators($filter: ValidatorFilter) {
+  validatorsHomepage(filter: $filter) {
+    validators {
+      id
+      name
+      state
+      bondingState
+      votingPower
+      votingPowerActivePercentage
+      uptime
+      firstSeenTime
+      commission
+    }
+    chainParameters {
+      chainId
+      currentBlockTime
+      currentBlockHeight
+      currentEpoch
+      epochDuration
+      nextEpochIn
+    }
+    stakingParameters {
+      totalStaked
+      activeValidatorCount
+      activeValidatorLimit
+      minValidatorStake
+      uptimeBlocksWindow
+      uptimeMinRequired
+      slashingPenaltyDowntime
+      slashingPenaltyMisbehavior
+      unbondingDelay
+    }
+  }
+}
+    `;
+
+export function useValidatorsQuery(options?: Omit<Urql.UseQueryArgs<Types.ValidatorsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ValidatorsQuery, Types.ValidatorsQueryVariables>({ query: Types.ValidatorsDocument, ...options });
 };
 export const BlockUpdateDocument = gql`
     subscription BlockUpdate($limit: Int!) {
