@@ -61,6 +61,17 @@ export type BlockUpdate = {
   transactionsCount: Scalars['Int']['output'];
 };
 
+export type ChainParameters = {
+  __typename?: 'ChainParameters';
+  chainId: Scalars['String']['output'];
+  currentBlockHeight: Scalars['Int']['output'];
+  currentBlockTime: Scalars['DateTime']['output'];
+  currentEpoch: Scalars['Int']['output'];
+  epochDuration: Scalars['Int']['output'];
+  lastUpdated: Scalars['DateTime']['output'];
+  nextEpochIn: Scalars['Int']['output'];
+};
+
 export enum ClientStatus {
   Active = 'active',
   Expired = 'expired',
@@ -262,7 +273,7 @@ export type QueryRootTransactionsArgs = {
 
 
 export type QueryRootValidatorDetailsArgs = {
-  decodedAddress: Scalars['String']['input'];
+  id: Scalars['String']['input'];
 };
 
 
@@ -395,7 +406,7 @@ export type TransactionCountUpdate = {
 export type TransactionFilter = {
   clientId?: InputMaybe<Scalars['String']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
-  validatorDecodedAddress?: InputMaybe<Scalars['String']['input']>;
+  validator?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TransactionParameters = {
@@ -416,9 +427,8 @@ export type Validator = {
   __typename?: 'Validator';
   bondingState?: Maybe<Scalars['String']['output']>;
   commission: Scalars['Float']['output'];
-  decodedAddress?: Maybe<Scalars['String']['output']>;
   firstSeenTime?: Maybe<Scalars['DateTime']['output']>;
-  identityKey: Scalars['String']['output'];
+  id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   state: Scalars['String']['output'];
   uptime?: Maybe<Scalars['Float']['output']>;
@@ -434,7 +444,6 @@ export type ValidatorDetails = {
   commissionStreams: Array<CommissionInfo>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
-  identityKey: Scalars['String']['output'];
   last300Blocks: Array<BlockParticipation>;
   missedBlocks: Scalars['Int']['output'];
   name?: Maybe<Scalars['String']['output']>;
@@ -453,15 +462,15 @@ export type ValidatorFilter = {
 
 export type ValidatorHomepageData = {
   __typename?: 'ValidatorHomepageData';
+  chainParameters?: Maybe<ChainParameters>;
   stakingParameters: StakingParameters;
   validators: Array<Validator>;
 };
 
 export type ValidatorSearchResult = {
   __typename?: 'ValidatorSearchResult';
-  decodedAddress: Scalars['String']['output'];
   displayName: Scalars['String']['output'];
-  identityKey: Scalars['String']['output'];
+  id: Scalars['String']['output'];
 };
 
 export enum ValidatorStateFilter {

@@ -41,6 +41,16 @@ type BlockUpdate {
     transactionsCount: Int!
 }
 
+type ChainParameters {
+    chainId: String!
+    currentBlockHeight: Int!
+    currentBlockTime: DateTime!
+    currentEpoch: Int!
+    epochDuration: Int!
+    lastUpdated: DateTime!
+    nextEpochIn: Int!
+}
+
 type CommissionInfo {
     rateBps: Int!
     recipientAddress: String
@@ -146,7 +156,7 @@ type QueryRoot {
     stats: Stats!
     transaction(hash: String!): Transaction
     transactions(filter: TransactionFilter, limit: CollectionLimit!): TransactionCollection!
-    validatorDetails(decodedAddress: String!): ValidatorDetails
+    validatorDetails(id: String!): ValidatorDetails
     validatorsHomepage(filter: ValidatorFilter): ValidatorHomepageData!
 }
 
@@ -245,9 +255,8 @@ type TransactionUpdate {
 type Validator {
     bondingState: String
     commission: Float!
-    decodedAddress: String
     firstSeenTime: DateTime
-    identityKey: String!
+    id: String
     name: String
     state: String!
     uptime: Float
@@ -262,7 +271,6 @@ type ValidatorDetails {
     commissionStreams: [CommissionInfo!]!
     description: String
     id: String!
-    identityKey: String!
     last300Blocks: [BlockParticipation!]!
     missedBlocks: Int!
     name: String
@@ -276,14 +284,14 @@ type ValidatorDetails {
 }
 
 type ValidatorHomepageData {
+    chainParameters: ChainParameters
     stakingParameters: StakingParameters!
     validators: [Validator!]!
 }
 
 type ValidatorSearchResult {
-    decodedAddress: String!
     displayName: String!
-    identityKey: String!
+    id: String!
 }
 
 enum ClientStatus {
@@ -330,7 +338,7 @@ input CollectionLimit {
 input TransactionFilter {
     clientId: String
     hash: String
-    validatorDecodedAddress: String
+    validator: String
 }
 
 input ValidatorFilter {
