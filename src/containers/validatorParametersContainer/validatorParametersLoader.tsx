@@ -46,7 +46,7 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                     {parameters.misbehaviorPenalty}%
                 </Parameter>
                 <Parameter name="Unbonding delay">
-                    {formatNumber(parameters.unbondingDelay)} days
+                    ~{formatNumber(parameters.unbondingDelay)} days
                 </Parameter>
             </Parameters>
         </section>
