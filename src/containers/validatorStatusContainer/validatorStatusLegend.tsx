@@ -37,7 +37,7 @@ const ValidatorStatusLegend: FC<Props> = props => (
             </span>
             <span className="inline-flex items-center gap-2">
                 <span className={styles.block} />
-                Unavailable
+                Inactive
             </span>
         </span>
     </div>
