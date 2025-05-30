@@ -1,17 +1,17 @@
 // istanbul ignore file
-import { faker } from '@faker-js/faker'
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
+import { getMinValidatorStake } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { Props } from './minValidatorStakePanelContainer'
 import MinValidatorStakePanelUpdater from './minValidatorStakePanelUpdater'
 
 const MinValidatorStakePanelLoader: FC<Props> = async props => {
-    const number = await new Promise<number>(resolve =>
-        setTimeout(
-            () => resolve(faker.number.int({ max: 100, min: 10 })),
-            faker.number.int({ max: 500, min: 200 })
-        )
-    )
+    const number = await getMinValidatorStake()
+
+    if (typeof number === 'undefined') {
+        notFound()
+    }
 
     return (
         <GraphqlClientProvider>

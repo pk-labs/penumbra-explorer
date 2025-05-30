@@ -115,6 +115,19 @@ export const IbcStatsDocument = gql`
 export function useIbcStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.IbcStatsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.IbcStatsQuery, Types.IbcStatsQueryVariables>({ query: Types.IbcStatsDocument, ...options });
 };
+export const MinValidatorStakeDocument = gql`
+    query MinValidatorStake {
+  validatorsHomepage {
+    stakingParameters {
+      minValidatorStake
+    }
+  }
+}
+    `;
+
+export function useMinValidatorStakeQuery(options?: Omit<Urql.UseQueryArgs<Types.MinValidatorStakeQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.MinValidatorStakeQuery, Types.MinValidatorStakeQueryVariables>({ query: Types.MinValidatorStakeDocument, ...options });
+};
 export const SearchDocument = gql`
     query Search($slug: String!) {
   search(slug: $slug) {
