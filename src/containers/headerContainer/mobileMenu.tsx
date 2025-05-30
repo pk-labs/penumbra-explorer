@@ -49,7 +49,7 @@ const MobileMenu: FC<Props> = props => {
                 <SatelliteDishIcon className="stroke-primary-light" size={16} />
                 IBC
             </MenuItem>
-            <MenuItem href="/validators" paths={['/validators']}>
+            <MenuItem href="/validators" paths={['/validator']}>
                 <AlignHorizontalDistributeCenterIcon
                     className="stroke-primary-light"
                     size={16}

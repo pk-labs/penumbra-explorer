@@ -26,7 +26,7 @@ const ValidatorPerformanceTable: FC<Props> = ({ validators, ...props }) => (
         <tbody>
             {validators.length ? (
                 validators.map((validator, i) => (
-                    <TableRow key={i} href={`/validators/${validator.hash}`}>
+                    <TableRow key={i} href={`/validator/${validator.hash}`}>
                         <TableCell className="h-15">
                             <img
                                 alt="Validator avatar"

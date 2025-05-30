@@ -34,7 +34,7 @@ const HeaderContainer: FC<Props> = props => (
             <Tab href="/ibc" paths={['/ibc']}>
                 IBC
             </Tab>
-            <Tab href="/validators" paths={['/validators']}>
+            <Tab href="/validators" paths={['/validator']}>
                 Validators
             </Tab>
         </Tabs>

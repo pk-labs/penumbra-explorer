@@ -21,7 +21,7 @@ export const generateMetadata = async (props: Props) => {
     return generatePageMetadata(
         `Validator ${validator}`,
         'TODO: Description',
-        `/validators/${validator}`
+        `/validator/${validator}`
     )
 }
 
