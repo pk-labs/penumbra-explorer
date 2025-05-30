@@ -1,0 +1,7 @@
+query ActiveVotingPower {
+    validatorsHomepage {
+        stakingParameters {
+            totalStaked
+        }
+    }
+}

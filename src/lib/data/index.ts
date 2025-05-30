@@ -1,3 +1,4 @@
+export { default as getActiveVotingPower } from './getActiveVotingPower'
 export { default as getBlock } from './getBlock'
 export { default as getBlocks } from './getBlocks'
 export { default as getChainParameters } from './getChainParameters'

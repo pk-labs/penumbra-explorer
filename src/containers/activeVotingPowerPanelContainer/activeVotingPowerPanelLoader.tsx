@@ -1,17 +1,17 @@
 // istanbul ignore file
-import { faker } from '@faker-js/faker'
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
+import { getActiveVotingPower } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { Props } from './activeVotingPowerPanelContainer'
 import ActiveVotingPowerPanelUpdater from './activeVotingPowerPanelUpdater'
 
 const ActiveVotingPowerPanelLoader: FC<Props> = async props => {
-    const number = await new Promise<number>(resolve =>
-        setTimeout(
-            () => resolve(faker.number.int({ max: 2500000, min: 1500000 })),
-            faker.number.int({ max: 500, min: 200 })
-        )
-    )
+    const number = await getActiveVotingPower()
+
+    if (typeof number === 'undefined') {
+        notFound()
+    }
 
     return (
         <GraphqlClientProvider>

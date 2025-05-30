@@ -50,6 +50,19 @@ export const TransactionFragmentDoc = gql`
   rawJson
 }
     `;
+export const ActiveVotingPowerDocument = gql`
+    query ActiveVotingPower {
+  validatorsHomepage {
+    stakingParameters {
+      totalStaked
+    }
+  }
+}
+    `;
+
+export function useActiveVotingPowerQuery(options?: Omit<Urql.UseQueryArgs<Types.ActiveVotingPowerQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ActiveVotingPowerQuery, Types.ActiveVotingPowerQueryVariables>({ query: Types.ActiveVotingPowerDocument, ...options });
+};
 export const BlockDocument = gql`
     query Block($height: Int!) {
   block(height: $height) {

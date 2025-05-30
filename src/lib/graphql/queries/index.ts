@@ -1,3 +1,4 @@
+export { default as activeVotingPowerQuery } from './activeVotingPowerQuery.graphql'
 export { default as blockQuery } from './blockQuery.graphql'
 export { default as blocksQuery } from './blocksQuery.graphql'
 export { default as chainParametersQuery } from './chainParametersQuery.graphql'
