@@ -19,7 +19,7 @@ const ValidatorPerformanceTable: FC<Props> = ({ validators, ...props }) => (
                 <TableCell header>Status</TableCell>
                 <TableCell header>Voting power</TableCell>
                 <TableCell header>Uptime %</TableCell>
-                <TableCell header>Active since</TableCell>
+                <TableCell header>Defined</TableCell>
                 <TableCell header>Commission</TableCell>
             </TableRow>
         </thead>
