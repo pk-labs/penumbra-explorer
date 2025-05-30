@@ -11,9 +11,12 @@ const ValidatorParametersLoader: FC<Props> = async props => {
             () =>
                 resolve({
                     downtimePenalty: 0.1,
-                    minValidatorStake: 100,
                     misbehaviorPenalty: 10,
                     requiredUptime: 5,
+                    unbondingDelay: faker.number.int({
+                        max: 20,
+                        min: 1,
+                    }),
                     uptimeBlocksWindow: 10000,
                 }),
             faker.number.int({ max: 500, min: 200 })
@@ -42,8 +45,8 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                 <Parameter name="Misbehavior penalty">
                     {parameters.misbehaviorPenalty}%
                 </Parameter>
-                <Parameter name="Min validator stake">
-                    {formatNumber(parameters.minValidatorStake)} UM
+                <Parameter name="Unbonding delay">
+                    {formatNumber(parameters.unbondingDelay)} days
                 </Parameter>
             </Parameters>
         </section>

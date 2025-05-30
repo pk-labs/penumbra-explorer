@@ -37,7 +37,7 @@ const ValidatorParametersContainer: FC<Props> = props => (
                     <Parameter name="Misbehavior penalty">
                         <Skeleton className="h-4 w-12" />
                     </Parameter>
-                    <Parameter name="Min validator stake">
+                    <Parameter name="Unbonding delay">
                         <Skeleton className="h-4 w-12" />
                     </Parameter>
                 </ul>
