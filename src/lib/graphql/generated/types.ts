@@ -547,6 +547,11 @@ export type TransactionsQueryVariables = Exact<{
 
 export type TransactionsQuery = { __typename?: 'QueryRoot', transactions: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
 
+export type ValidatorParametersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ValidatorParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', uptimeBlocksWindow: number, uptimeMinRequired: string, slashingPenaltyDowntime: string, slashingPenaltyMisbehavior: string, unbondingDelay: string } } };
+
 export type ValidatorsQueryVariables = Exact<{
   filter?: InputMaybe<ValidatorFilter>;
 }>;
@@ -718,6 +723,19 @@ export const TransactionsDocument = gql`
   }
 }
     ${PartialTransactionFragmentDoc}`;
+export const ValidatorParametersDocument = gql`
+    query ValidatorParameters {
+  validatorsHomepage {
+    stakingParameters {
+      uptimeBlocksWindow
+      uptimeMinRequired
+      slashingPenaltyDowntime
+      slashingPenaltyMisbehavior
+      unbondingDelay
+    }
+  }
+}
+    `;
 export const ValidatorsDocument = gql`
     query Validators($filter: ValidatorFilter) {
   validatorsHomepage(filter: $filter) {

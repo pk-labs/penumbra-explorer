@@ -179,6 +179,23 @@ export const TransactionsDocument = gql`
 export function useTransactionsQuery(options: Omit<Urql.UseQueryArgs<Types.TransactionsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.TransactionsQuery, Types.TransactionsQueryVariables>({ query: Types.TransactionsDocument, ...options });
 };
+export const ValidatorParametersDocument = gql`
+    query ValidatorParameters {
+  validatorsHomepage {
+    stakingParameters {
+      uptimeBlocksWindow
+      uptimeMinRequired
+      slashingPenaltyDowntime
+      slashingPenaltyMisbehavior
+      unbondingDelay
+    }
+  }
+}
+    `;
+
+export function useValidatorParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.ValidatorParametersQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ValidatorParametersQuery, Types.ValidatorParametersQueryVariables>({ query: Types.ValidatorParametersDocument, ...options });
+};
 export const ValidatorsDocument = gql`
     query Validators($filter: ValidatorFilter) {
   validatorsHomepage(filter: $filter) {

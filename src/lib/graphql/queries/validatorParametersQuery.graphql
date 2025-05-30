@@ -1,0 +1,11 @@
+query ValidatorParameters {
+    validatorsHomepage {
+        stakingParameters {
+            uptimeBlocksWindow
+            uptimeMinRequired
+            slashingPenaltyDowntime
+            slashingPenaltyMisbehavior
+            unbondingDelay
+        }
+    }
+}

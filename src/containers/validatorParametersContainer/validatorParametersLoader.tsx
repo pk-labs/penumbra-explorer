@@ -1,24 +1,17 @@
 // istanbul ignore file
-import { faker } from '@faker-js/faker'
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Parameter, Parameters } from '@/components'
+import { getValidatorParameters } from '@/lib/data'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './validatorParametersContainer'
 
 const ValidatorParametersLoader: FC<Props> = async props => {
-    const parameters = await new Promise<any>(resolve =>
-        setTimeout(
-            () =>
-                resolve({
-                    downtimePenalty: 0.1,
-                    misbehaviorPenalty: 10,
-                    requiredUptime: 5,
-                    unbondingDelay: faker.number.int({ max: 20, min: 1 }),
-                    uptimeBlocksWindow: 10000,
-                }),
-            faker.number.int({ max: 500, min: 200 })
-        )
-    )
+    const parameters = await getValidatorParameters()
+
+    if (!parameters) {
+        notFound()
+    }
 
     return (
         <section
@@ -34,16 +27,16 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                     {formatNumber(parameters.uptimeBlocksWindow)}
                 </Parameter>
                 <Parameter name="Required uptime">
-                    {parameters.requiredUptime}%
+                    {parameters.uptimeMinRequired}
                 </Parameter>
                 <Parameter name="Downtime penalty">
-                    {parameters.downtimePenalty}%
+                    {parameters.slashingPenaltyDowntime}
                 </Parameter>
                 <Parameter name="Misbehavior penalty">
-                    {parameters.misbehaviorPenalty}%
+                    {parameters.slashingPenaltyMisbehavior}
                 </Parameter>
                 <Parameter name="Unbonding delay">
-                    ~{formatNumber(parameters.unbondingDelay)}d
+                    {parameters.unbondingDelay}
                 </Parameter>
             </Parameters>
         </section>
