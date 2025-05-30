@@ -3,14 +3,14 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as UnbondingPanelContainerProps } from './unbondingPanelContainer'
+import { Props as MinValidatorStakePanelContainerProps } from './minValidatorStakePanelContainer'
 
-interface Props extends UnbondingPanelContainerProps {
-    initialNumber: number
+interface Props extends MinValidatorStakePanelContainerProps {
+    number: number
 }
 
-const UnbondingPanelUpdater: FC<Props> = ({ initialNumber, ...props }) => {
-    const [number] = useState(initialNumber)
+const MinValidatorStakePanelUpdater: FC<Props> = props => {
+    const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()
@@ -25,13 +25,13 @@ const UnbondingPanelUpdater: FC<Props> = ({ initialNumber, ...props }) => {
 
     return (
         <NumberPanel
-            number={number}
-            numberPrefix="~"
-            numberSuffix={<span className="ml-2">days</span>}
-            title="Unbonding delay"
             {...props}
+            number={number}
+            numberClassName="gap-2"
+            numberSuffix="UM"
+            title="Min validator stake"
         />
     )
 }
 
-export default UnbondingPanelUpdater
+export default MinValidatorStakePanelUpdater

@@ -9,8 +9,8 @@ import {
 } from '@/components'
 import {
     ChainParametersContainer,
+    MinValidatorStakePanelContainer,
     TotalVotingPowerPanelContainer,
-    UnbondingPanelContainer,
     ValidatorParametersContainer,
     ValidatorPerformanceContainer,
     ValidatorsPanelContainer,
@@ -45,7 +45,7 @@ const ValidatorsPage: FC<Props> = async props => {
                         'col-span-full sm:col-span-6 md:col-span-4'
                     )}
                 />
-                <UnbondingPanelContainer
+                <MinValidatorStakePanelContainer
                     className={classNames(
                         'col-span-full sm:col-span-6 md:col-span-4'
                     )}
