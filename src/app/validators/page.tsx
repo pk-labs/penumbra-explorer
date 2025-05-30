@@ -83,6 +83,7 @@ const ValidatorsPage: FC<Props> = async props => {
                                     <Button
                                         density="compact"
                                         href="https://app.penumbra.zone/#/staking"
+                                        externalLink
                                     >
                                         Delegate to a validator
                                     </Button>
