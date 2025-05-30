@@ -5,13 +5,13 @@ import Image from 'next/image'
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
 import { penumbra } from '@/lib/images'
-import { Props as TotalVotingPowerPanelContainerProps } from './totalVotingPowerPanelContainer'
+import { Props as ActiveVotingPowerPanelContainerProps } from './activeVotingPowerPanelContainer'
 
-interface Props extends TotalVotingPowerPanelContainerProps {
+interface Props extends ActiveVotingPowerPanelContainerProps {
     number: number
 }
 
-const TotalVotingPowerPanelUpdater: FC<Props> = props => {
+const ActiveVotingPowerPanelUpdater: FC<Props> = props => {
     const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
@@ -34,9 +34,9 @@ const TotalVotingPowerPanelUpdater: FC<Props> = props => {
                 <Image alt="UM" height={32} src={penumbra} width={32} />
             }
             numberSuffix="UM"
-            title="Total voting power"
+            title="Active voting power"
         />
     )
 }
 
-export default TotalVotingPowerPanelUpdater
+export default ActiveVotingPowerPanelUpdater

@@ -2,10 +2,10 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { Props } from './totalVotingPowerPanelContainer'
-import TotalVotingPowerPanelUpdater from './totalVotingPowerPanelUpdater'
+import { Props } from './activeVotingPowerPanelContainer'
+import ActiveVotingPowerPanelUpdater from './activeVotingPowerPanelUpdater'
 
-const TotalVotingPowerPanelLoader: FC<Props> = async props => {
+const ActiveVotingPowerPanelLoader: FC<Props> = async props => {
     const number = await new Promise<number>(resolve =>
         setTimeout(
             () => resolve(faker.number.int({ max: 2500000, min: 1500000 })),
@@ -15,9 +15,9 @@ const TotalVotingPowerPanelLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <TotalVotingPowerPanelUpdater number={number} {...props} />
+            <ActiveVotingPowerPanelUpdater number={number} {...props} />
         </GraphqlClientProvider>
     )
 }
 
-export default TotalVotingPowerPanelLoader
+export default ActiveVotingPowerPanelLoader

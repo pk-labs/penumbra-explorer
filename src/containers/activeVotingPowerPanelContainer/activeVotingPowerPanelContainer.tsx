@@ -1,15 +1,15 @@
 // istanbul ignore file
 import Image from 'next/image'
 import { FC, Suspense } from 'react'
+import { NumberPanel } from '@/components'
 import { penumbra } from '@/lib/images'
-import NumberPanel from '../../components/panels/numberPanel'
-import TotalVotingPowerPanelLoader from './totalVotingPowerPanelLoader'
+import ActiveVotingPowerPanelLoader from './activeVotingPowerPanelLoader'
 
 export interface Props {
     className?: string
 }
 
-const TotalVotingPowerPanelContainer: FC<Props> = props => (
+const ActiveVotingPowerPanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <NumberPanel
@@ -19,13 +19,13 @@ const TotalVotingPowerPanelContainer: FC<Props> = props => (
                     <Image alt="UM" height={32} src={penumbra} width={32} />
                 }
                 numberSuffix="UM"
-                title="Total voting power"
+                title="Active voting power"
                 {...props}
             />
         }
     >
-        <TotalVotingPowerPanelLoader {...props} />
+        <ActiveVotingPowerPanelLoader {...props} />
     </Suspense>
 )
 
-export default TotalVotingPowerPanelContainer
+export default ActiveVotingPowerPanelContainer
