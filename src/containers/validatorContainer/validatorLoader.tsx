@@ -74,16 +74,14 @@ const ValidatorLoader: FC<Props> = async props => {
                     />
                     <span className="inline-flex flex-col gap-1 overflow-hidden">
                         <h1 className="truncate text-2xl">{validator.hash}</h1>
-                        <span className="text-text-secondary inline-flex items-center gap-2 text-xs">
-                            <a
-                                className="text-text-secondary hover:text-text-special"
-                                href={validator.url}
-                                target="_blank"
-                            >
-                                pepethefrog.net
-                            </a>
+                        <a
+                            className="text-text-secondary hover:text-text-special inline-flex items-center gap-2 text-xs"
+                            href={validator.url}
+                            target="_blank"
+                        >
+                            pepethefrog.net
                             <ExternalLinkIcon size={14} />
-                        </span>
+                        </a>
                     </span>
                 </span>
                 <ValidatorStatusBonding
