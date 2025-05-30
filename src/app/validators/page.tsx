@@ -8,12 +8,12 @@ import {
     FilterSelector,
 } from '@/components'
 import {
+    ActiveValidatorsPanelContainer,
     ActiveVotingPowerPanelContainer,
     ChainParametersContainer,
     MinValidatorStakePanelContainer,
     ValidatorParametersContainer,
     ValidatorPerformanceContainer,
-    ValidatorsPanelContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -43,7 +43,7 @@ const ValidatorsPage: FC<Props> = async props => {
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4 lg:items-start">
                 <ActiveVotingPowerPanelContainer className="col-span-full md:col-span-4" />
-                <ValidatorsPanelContainer
+                <ActiveValidatorsPanelContainer
                     className={classNames(
                         'col-span-full sm:col-span-6 md:col-span-4'
                     )}

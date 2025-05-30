@@ -50,6 +50,20 @@ export const TransactionFragmentDoc = gql`
   rawJson
 }
     `;
+export const ActiveValidatorsDocument = gql`
+    query ActiveValidators {
+  validatorsHomepage {
+    stakingParameters {
+      activeValidatorCount
+      activeValidatorLimit
+    }
+  }
+}
+    `;
+
+export function useActiveValidatorsQuery(options?: Omit<Urql.UseQueryArgs<Types.ActiveValidatorsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ActiveValidatorsQuery, Types.ActiveValidatorsQueryVariables>({ query: Types.ActiveValidatorsDocument, ...options });
+};
 export const ActiveVotingPowerDocument = gql`
     query ActiveVotingPower {
   validatorsHomepage {

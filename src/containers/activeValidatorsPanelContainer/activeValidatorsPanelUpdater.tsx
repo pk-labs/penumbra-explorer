@@ -3,13 +3,14 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as ValidatorsPanelContainerProps } from './validatorsPanelContainer'
+import { Props as ActiveValidatorsPanelContainerProps } from './activeValidatorsPanelContainer'
 
-interface Props extends ValidatorsPanelContainerProps {
+interface Props extends ActiveValidatorsPanelContainerProps {
+    limit: number
     number: number
 }
 
-const ValidatorsPanelUpdater: FC<Props> = props => {
+const ActiveValidatorsPanelUpdater: FC<Props> = props => {
     const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
@@ -28,11 +29,13 @@ const ValidatorsPanelUpdater: FC<Props> = props => {
             className={props.className}
             number={number}
             numberSuffix={
-                <span className="text-text-secondary text-2xl">/100</span>
+                <span className="text-text-secondary text-2xl">
+                    /{props.limit}
+                </span>
             }
             title="Active validators / Validators limit"
         />
     )
 }
 
-export default ValidatorsPanelUpdater
+export default ActiveValidatorsPanelUpdater

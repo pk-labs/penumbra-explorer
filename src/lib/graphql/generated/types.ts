@@ -487,6 +487,11 @@ export type PartialTransactionFragment = { __typename?: 'Transaction', hash: str
 
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
 
+export type ActiveValidatorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ActiveValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', activeValidatorCount: number, activeValidatorLimit: number } } };
+
 export type ActiveVotingPowerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -638,6 +643,16 @@ export const TransactionFragmentDoc = gql`
   }
   raw
   rawJson
+}
+    `;
+export const ActiveValidatorsDocument = gql`
+    query ActiveValidators {
+  validatorsHomepage {
+    stakingParameters {
+      activeValidatorCount
+      activeValidatorLimit
+    }
+  }
 }
     `;
 export const ActiveVotingPowerDocument = gql`

@@ -1,10 +1,10 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import getActiveVotingPower from './getActiveVotingPower'
+import getActiveValidators from './getActiveValidators'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
-describe('getActiveVotingPower', () => {
+describe('getActiveValidators', () => {
     test('returns data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
@@ -12,16 +12,14 @@ describe('getActiveVotingPower', () => {
                     Promise.resolve({
                         data: {
                             validatorsHomepage: {
-                                stakingParameters: {
-                                    totalStaked: '99 UM',
-                                },
+                                stakingParameters: true,
                             },
                         },
                     }),
             }),
         })
 
-        await expect(getActiveVotingPower()).resolves.toBe(99)
+        await expect(getActiveValidators()).resolves.toBe(true)
     })
 
     test('throws error', async () => {
@@ -31,6 +29,6 @@ describe('getActiveVotingPower', () => {
             }),
         })
 
-        await expect(getActiveVotingPower()).rejects.toBe('foo')
+        await expect(getActiveValidators()).rejects.toBe('foo')
     })
 })

@@ -1,0 +1,8 @@
+query ActiveValidators {
+    validatorsHomepage {
+        stakingParameters {
+            activeValidatorCount
+            activeValidatorLimit
+        }
+    }
+}
