@@ -1,15 +1,15 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { penumbra } from '@/lib/images'
+import { TransformedValidator } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import EmptyState from '../../emptyState'
-import TimeAgo from '../../timeAgo'
 import ValidatorStatusBonding from '../../validatorStatusBonding'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
     inactive?: boolean
-    validators: any[]
+    validators: TransformedValidator[]
 }
 
 const ValidatorPerformanceTable: FC<Props> = ({
@@ -33,7 +33,7 @@ const ValidatorPerformanceTable: FC<Props> = ({
         <tbody>
             {validators.length ? (
                 validators.map((validator, i) => (
-                    <TableRow key={i} href={`/validator/${validator.hash}`}>
+                    <TableRow key={i} href={`/validator/${validator.id}`}>
                         <TableCell className="h-15">
                             <img
                                 alt="Validator avatar"
@@ -42,7 +42,10 @@ const ValidatorPerformanceTable: FC<Props> = ({
                                 src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
                                 width={32}
                             />
-                            <span>{shortenHash(validator.hash, 'end')}</span>
+                            <span>
+                                {validator.name ??
+                                    shortenHash(validator.id, 'end')}
+                            </span>
                         </TableCell>
                         <TableCell className="h-15">
                             <ValidatorStatusBonding
@@ -59,10 +62,7 @@ const ValidatorPerformanceTable: FC<Props> = ({
                                         src={penumbra}
                                         width={24}
                                     />
-                                    <span>
-                                        {formatNumber(validator.stakedTokens)}{' '}
-                                        UM
-                                    </span>
+                                    <span>??? UM</span>
                                 </span>
                             ) : (
                                 <>
@@ -82,7 +82,7 @@ const ValidatorPerformanceTable: FC<Props> = ({
                                             </span>
                                         </span>
                                         <span className="text-text-secondary ml-7 text-xs">
-                                            {validator.votingPowerPercentage.toFixed(
+                                            {validator.votingPowerActivePercentage.toFixed(
                                                 2
                                             )}
                                             %
@@ -92,23 +92,25 @@ const ValidatorPerformanceTable: FC<Props> = ({
                             )}
                         </TableCell>
                         <TableCell className="h-15">
-                            <span
-                                className={classNames(
-                                    validator.uptime === 100
-                                        ? 'text-success-light'
-                                        : validator.uptime > 5
-                                          ? 'text-caution-light'
-                                          : 'text-destructive-light'
-                                )}
-                            >
-                                {validator.uptime.toFixed(2)}%
-                            </span>
+                            {typeof validator.uptime === 'number' ? (
+                                <span
+                                    className={classNames(
+                                        validator.uptime === 100
+                                            ? 'text-success-light'
+                                            : validator.uptime > 5
+                                              ? 'text-caution-light'
+                                              : 'text-destructive-light'
+                                    )}
+                                >
+                                    {validator.uptime.toFixed(2)}%
+                                </span>
+                            ) : undefined}
                         </TableCell>
                         <TableCell className="h-15">
-                            <TimeAgo
-                                initialTimeAgo={validator.initialTimeAgo}
-                                timestamp={validator.timestamp}
-                            />
+                            {/*<TimeAgo*/}
+                            {/*    initialTimeAgo={validator.initialTimeAgo}*/}
+                            {/*    timestamp={validator.timestamp}*/}
+                            {/*/>*/}
                         </TableCell>
                         <TableCell className="h-15">
                             {validator.commission}%

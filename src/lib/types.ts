@@ -5,6 +5,7 @@ import {
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
+    ValidatorsQuery,
 } from '@/lib/graphql/generated/types'
 
 export interface TransformedBlockFragment
@@ -51,6 +52,29 @@ export interface TransformedIbcStats
     initialTimeAgo: string
     timestamp: number
 }
+
+export interface TransformedValidator
+    extends Omit<
+        NonNullable<
+            ValidatorsQuery['validatorsHomepage']['validators']
+        >[number],
+        'bondingState' | 'id' | 'state'
+    > {
+    bonding: ValidatorBonding
+    id: string
+    status: ValidatorStatus
+}
+
+export type ValidatorBonding = 'Bonded' | 'Unbonded' | 'Unbonding'
+
+export type ValidatorStatus =
+    | 'Active'
+    | 'Defined'
+    | 'Disabled'
+    | 'Inactive'
+    | 'Jailed'
+    | 'Tombstoned'
+    | 'Unspecified'
 
 // TODO: Refactor value names to pascal case
 export enum ActionType {

@@ -572,7 +572,7 @@ export type ValidatorsQueryVariables = Exact<{
 }>;
 
 
-export type ValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', validators: Array<{ __typename?: 'Validator', id?: string | null, name?: string | null, state: string, bondingState?: string | null, votingPower: number, votingPowerActivePercentage: number, uptime?: number | null, firstSeenTime?: any | null, commission: number }>, chainParameters?: { __typename?: 'ChainParameters', chainId: string, currentBlockTime: any, currentBlockHeight: number, currentEpoch: number, epochDuration: number, nextEpochIn: number } | null, stakingParameters: { __typename?: 'StakingParameters', totalStaked: string, activeValidatorCount: number, activeValidatorLimit: number, minValidatorStake: string, uptimeBlocksWindow: number, uptimeMinRequired: string, slashingPenaltyDowntime: string, slashingPenaltyMisbehavior: string, unbondingDelay: string } } };
+export type ValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', validators: Array<{ __typename?: 'Validator', id?: string | null, name?: string | null, state: string, bondingState?: string | null, votingPower: number, votingPowerActivePercentage: number, uptime?: number | null, firstSeenTime?: any | null, commission: number }> } };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -792,25 +792,6 @@ export const ValidatorsDocument = gql`
       uptime
       firstSeenTime
       commission
-    }
-    chainParameters {
-      chainId
-      currentBlockTime
-      currentBlockHeight
-      currentEpoch
-      epochDuration
-      nextEpochIn
-    }
-    stakingParameters {
-      totalStaked
-      activeValidatorCount
-      activeValidatorLimit
-      minValidatorStake
-      uptimeBlocksWindow
-      uptimeMinRequired
-      slashingPenaltyDowntime
-      slashingPenaltyMisbehavior
-      unbondingDelay
     }
   }
 }

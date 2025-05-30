@@ -250,25 +250,6 @@ export const ValidatorsDocument = gql`
       firstSeenTime
       commission
     }
-    chainParameters {
-      chainId
-      currentBlockTime
-      currentBlockHeight
-      currentEpoch
-      epochDuration
-      nextEpochIn
-    }
-    stakingParameters {
-      totalStaked
-      activeValidatorCount
-      activeValidatorLimit
-      minValidatorStake
-      uptimeBlocksWindow
-      uptimeMinRequired
-      slashingPenaltyDowntime
-      slashingPenaltyMisbehavior
-      unbondingDelay
-    }
   }
 }
     `;

@@ -11,9 +11,9 @@ import ValidatorPerformanceLoader from './validatorPerformanceLoader'
 
 export type Props = Omit<ValidatorPerformanceTableProps, 'validators'>
 
-const ValidatorPerformanceContainer: FC<Props> = props => (
+const ValidatorPerformanceContainer: FC<Props> = ({ inactive, ...props }) => (
     <Suspense
-        key={String(props.inactive)}
+        key={String(inactive)}
         fallback={
             <Table {...props}>
                 <thead>
@@ -35,7 +35,7 @@ const ValidatorPerformanceContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <ValidatorPerformanceLoader {...props} />
+        <ValidatorPerformanceLoader {...props} inactive={inactive} />
     </Suspense>
 )
 

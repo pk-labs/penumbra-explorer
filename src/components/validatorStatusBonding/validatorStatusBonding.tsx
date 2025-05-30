@@ -1,14 +1,6 @@
 import { FC } from 'react'
+import { ValidatorBonding, ValidatorStatus } from '@/lib/types'
 import { classNames } from '@/lib/utils'
-
-type Status =
-    | 'Active'
-    | 'Defined'
-    | 'Disabled'
-    | 'Inactive'
-    | 'Jailed'
-    | 'Tombstoned'
-    | 'Unspecified'
 
 const statusColors = {
     Active: 'text-success-light',
@@ -20,8 +12,6 @@ const statusColors = {
     Unspecified: 'text-text-secondary',
 }
 
-type Bonding = 'Bonded' | 'Unbonded' | 'Unbonding'
-
 const bondingColors = {
     Bonded: 'text-text-primary',
     Unbonded: 'text-text-muted',
@@ -29,9 +19,9 @@ const bondingColors = {
 }
 
 interface Props {
-    bonding: Bonding
+    bonding: ValidatorBonding
     className?: string
-    status: Status
+    status: ValidatorStatus
 }
 
 const ValidatorStatusBonding: FC<Props> = props => (

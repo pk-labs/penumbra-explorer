@@ -10,12 +10,12 @@ describe('getValidators', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { validatorsHomepage: true },
+                        data: { validatorsHomepage: { validators: [] } },
                     }),
             }),
         })
 
-        await expect(getValidators()).resolves.toBe(true)
+        await expect(getValidators()).resolves.toEqual([])
     })
 
     test('throws error', async () => {
