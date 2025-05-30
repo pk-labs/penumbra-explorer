@@ -5,14 +5,14 @@ import Image from 'next/image'
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
 import { penumbra } from '@/lib/images'
-import { Props as StakedPanelContainerProps } from './stakedPanelContainer'
+import { Props as TotalVotingPowerPanelContainerProps } from './totalVotingPowerPanelContainer'
 
-interface Props extends StakedPanelContainerProps {
-    initialNumber: number
+interface Props extends TotalVotingPowerPanelContainerProps {
+    number: number
 }
 
-const StakedPanelUpdater: FC<Props> = props => {
-    const [number] = useState(props.initialNumber)
+const TotalVotingPowerPanelUpdater: FC<Props> = props => {
+    const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()
@@ -27,16 +27,16 @@ const StakedPanelUpdater: FC<Props> = props => {
 
     return (
         <NumberPanel
+            {...props}
             number={number}
             numberClassName="gap-2"
             numberPrefix={
                 <Image alt="UM" height={32} src={penumbra} width={32} />
             }
             numberSuffix="UM"
-            title="Total staked"
-            {...props}
+            title="Total voting power"
         />
     )
 }
 
-export default StakedPanelUpdater
+export default TotalVotingPowerPanelUpdater

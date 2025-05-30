@@ -9,7 +9,7 @@ import {
 } from '@/components'
 import {
     ChainParametersContainer,
-    StakedPanelContainer,
+    TotalVotingPowerPanelContainer,
     UnbondingPanelContainer,
     ValidatorParametersContainer,
     ValidatorsPanelContainer,
@@ -39,7 +39,7 @@ const ValidatorsPage: FC<Props> = async props => {
                 <Breadcrumb>Validators</Breadcrumb>
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4 lg:items-start">
-                <StakedPanelContainer className="col-span-full md:col-span-4" />
+                <TotalVotingPowerPanelContainer className="col-span-full md:col-span-4" />
                 <ValidatorsPanelContainer
                     className={classNames(
                         'col-span-full sm:col-span-6 md:col-span-4'

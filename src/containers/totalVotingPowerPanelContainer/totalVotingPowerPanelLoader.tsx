@@ -2,11 +2,11 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { Props } from './stakedPanelContainer'
-import StakedPanelUpdater from './stakedPanelUpdater'
+import { Props } from './totalVotingPowerPanelContainer'
+import TotalVotingPowerPanelUpdater from './totalVotingPowerPanelUpdater'
 
-const StakedPanelLoader: FC<Props> = async props => {
-    const initialNumber = await new Promise<number>(resolve =>
+const TotalVotingPowerPanelLoader: FC<Props> = async props => {
+    const number = await new Promise<number>(resolve =>
         setTimeout(
             () => resolve(faker.number.int({ max: 2500000, min: 1500000 })),
             faker.number.int({ max: 500, min: 200 })
@@ -15,9 +15,9 @@ const StakedPanelLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <StakedPanelUpdater initialNumber={initialNumber} {...props} />
+            <TotalVotingPowerPanelUpdater number={number} {...props} />
         </GraphqlClientProvider>
     )
 }
 
-export default StakedPanelLoader
+export default TotalVotingPowerPanelLoader

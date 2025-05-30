@@ -3,13 +3,13 @@ import Image from 'next/image'
 import { FC, Suspense } from 'react'
 import { penumbra } from '@/lib/images'
 import NumberPanel from '../../components/panels/numberPanel'
-import StakedPanelLoader from './stakedPanelLoader'
+import TotalVotingPowerPanelLoader from './totalVotingPowerPanelLoader'
 
 export interface Props {
     className?: string
 }
 
-const StakedPanelContainer: FC<Props> = props => (
+const TotalVotingPowerPanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <NumberPanel
@@ -19,13 +19,13 @@ const StakedPanelContainer: FC<Props> = props => (
                     <Image alt="UM" height={32} src={penumbra} width={32} />
                 }
                 numberSuffix="UM"
-                title="Total staked"
+                title="Total voting power"
                 {...props}
             />
         }
     >
-        <StakedPanelLoader {...props} />
+        <TotalVotingPowerPanelLoader {...props} />
     </Suspense>
 )
 
-export default StakedPanelContainer
+export default TotalVotingPowerPanelContainer
