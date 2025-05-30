@@ -19,7 +19,10 @@ import { classNames, generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
     'Validators',
-    'TODO: Description',
+    'Discover active Penumbra Validators and track key metrics like Status, ' +
+        'Voting power, Uptime, and Commission. Find the best Validator on ' +
+        'Noctis - a fast, secure, and privacy-focused explorer built for ' +
+        'Penumbra blockchain.',
     '/validators'
 )
 

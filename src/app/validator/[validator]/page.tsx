@@ -20,7 +20,10 @@ export const generateMetadata = async (props: Props) => {
 
     return generatePageMetadata(
         `Validator ${validator}`,
-        'TODO: Description',
+        'Explore Penumbra Validator {Name|ID} and track key metrics like ' +
+            'Status, Voting power, Uptime, and Commission on Noctis - a ' +
+            'fast, secure, and privacy-focused explorer built for Penumbra ' +
+            'blockchain.',
         `/validator/${validator}`
     )
 }
