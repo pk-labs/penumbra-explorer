@@ -3,14 +3,14 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as ValidatorActivityPanelContainerProps } from './validatorActivityPanelContainer'
+import { Props as ValidatorDefinedPanelContainerProps } from './validatorDefinedPanelContainer'
 
-interface Props extends ValidatorActivityPanelContainerProps {
-    initialNumber: number
+interface Props extends ValidatorDefinedPanelContainerProps {
+    number: number
 }
 
-const ValidatorActivityPanelUpdater: FC<Props> = props => {
-    const [number] = useState(props.initialNumber)
+const ValidatorDefinedPanelUpdater: FC<Props> = props => {
+    const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()
@@ -25,12 +25,12 @@ const ValidatorActivityPanelUpdater: FC<Props> = props => {
 
     return (
         <NumberPanel
+            {...props}
             number={number}
             numberSuffix={<span className="ml-2">days</span>}
-            title="Active since"
-            {...props}
+            title="Defined"
         />
     )
 }
 
-export default ValidatorActivityPanelUpdater
+export default ValidatorDefinedPanelUpdater
