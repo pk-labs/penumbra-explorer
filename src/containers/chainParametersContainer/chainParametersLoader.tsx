@@ -36,29 +36,41 @@ const ChainParametersLoader: FC<Props> = async props => {
                 props.className
             )}
         >
-            <h3 className="text-sm">Chain parameters</h3>
-            <Parameters className="gap-2">
-                <Parameter name="Chain ID">{parameters.chainId}</Parameter>
-                <Parameter name="Block time">
-                    {dayjs(parameters.blockTimestamp).format(
-                        'YYYY-MM-DD HH:mm:ss z'
-                    )}
-                </Parameter>
-                <Parameter name="Block height">
-                    {formatNumber(parameters.blockHeight)}
-                </Parameter>
-                <Parameter name="Current epoch">
-                    {formatNumber(parameters.epoch)}
-                </Parameter>
-                <Parameter name="Epoch duration">
-                    {formatNumber(parameters.epochBlocks)} blocks (~
-                    {parameters.epochDays} days)
-                </Parameter>
-                <Parameter name="Next epoch in">
-                    {formatNumber(parameters.nextEpochBlocks)} blocks (~
-                    {parameters.nextEpochHours} hours)
-                </Parameter>
-            </Parameters>
+            <div className="flex flex-col gap-1">
+                <h2 className="text-lg">Chain parameters</h2>
+                <Parameters>
+                    <Parameter name="Chain ID">{parameters.chainId}</Parameter>
+                </Parameters>
+            </div>
+            <div className="flex flex-col gap-1">
+                <h3 className="text-base">Latest block</h3>
+                <Parameters>
+                    <Parameter name="Time">
+                        {dayjs(parameters.blockTimestamp).format(
+                            'YYYY-MM-DD HH:mm:ss z'
+                        )}
+                    </Parameter>
+                    <Parameter name="Height">
+                        {formatNumber(parameters.blockHeight)}
+                    </Parameter>
+                </Parameters>
+            </div>
+            <div className="flex flex-col gap-1">
+                <h3 className="text-base">Epoch</h3>
+                <Parameters>
+                    <Parameter name="Current">
+                        {formatNumber(parameters.epoch)}
+                    </Parameter>
+                    <Parameter name="Duration">
+                        {formatNumber(parameters.epochBlocks)} blocks ~
+                        {parameters.epochDays}d
+                    </Parameter>
+                    <Parameter name="Next in">
+                        {formatNumber(parameters.nextEpochBlocks)} blocks ~
+                        {parameters.nextEpochHours}hr
+                    </Parameter>
+                </Parameters>
+            </div>
         </section>
     )
 }

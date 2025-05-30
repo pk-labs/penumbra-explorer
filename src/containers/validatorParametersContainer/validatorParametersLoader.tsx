@@ -26,13 +26,13 @@ const ValidatorParametersLoader: FC<Props> = async props => {
     return (
         <section
             className={classNames(
-                'bg-other-tonalFill5 flex flex-col gap-2 rounded-lg p-6',
+                'bg-other-tonalFill5 flex flex-col gap-1 rounded-lg p-6',
                 'backdrop-blur-lg',
                 props.className
             )}
         >
-            <h3 className="text-sm">Validator parameters</h3>
-            <Parameters className="gap-2">
+            <h3 className="text-lg">Validator parameters</h3>
+            <Parameters>
                 <Parameter name="Uptime blocks window">
                     {formatNumber(parameters.uptimeBlocksWindow)}
                 </Parameter>
@@ -46,7 +46,7 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                     {parameters.misbehaviorPenalty}%
                 </Parameter>
                 <Parameter name="Unbonding delay">
-                    ~{formatNumber(parameters.unbondingDelay)} days
+                    ~{formatNumber(parameters.unbondingDelay)}d
                 </Parameter>
             </Parameters>
         </section>
