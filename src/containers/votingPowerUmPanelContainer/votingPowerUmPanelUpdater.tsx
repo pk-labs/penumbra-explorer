@@ -8,11 +8,11 @@ import { penumbra } from '@/lib/images'
 import { Props as VotingPowerUmPanelContainerProps } from './votingPowerUmPanelContainer'
 
 interface Props extends VotingPowerUmPanelContainerProps {
-    initialNumber: number
+    number: number
 }
 
 const VotingPowerUmPanelUpdater: FC<Props> = props => {
-    const [number] = useState(props.initialNumber)
+    const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()
@@ -27,6 +27,7 @@ const VotingPowerUmPanelUpdater: FC<Props> = props => {
 
     return (
         <NumberPanel
+            {...props}
             number={number}
             numberClassName="gap-2"
             numberPrefix={
@@ -34,7 +35,6 @@ const VotingPowerUmPanelUpdater: FC<Props> = props => {
             }
             numberSuffix="UM"
             title="Voting power UM"
-            {...props}
         />
     )
 }

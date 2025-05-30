@@ -7,11 +7,11 @@ import { useTransactionCountUpdateSubscription } from '@/lib/graphql/generated/h
 import { Props as TransactionPanelContainerProps } from './transactionPanelContainer'
 
 interface Props extends TransactionPanelContainerProps {
-    initialNumber: number
+    number: number
 }
 
 const TransactionPanelUpdater: FC<Props> = props => {
-    const [number, setNumber] = useState(props.initialNumber)
+    const [number, setNumber] = useState(props.number)
 
     const [transactionCountUpdateSubscription] =
         useTransactionCountUpdateSubscription()
@@ -24,7 +24,7 @@ const TransactionPanelUpdater: FC<Props> = props => {
         }
     }, [transactionCountUpdateSubscription.data?.transactionCount])
 
-    return <TransactionPanel number={number} {...props} />
+    return <TransactionPanel {...props} number={number} />
 }
 
 export default TransactionPanelUpdater

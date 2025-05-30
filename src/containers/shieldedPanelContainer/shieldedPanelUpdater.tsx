@@ -7,11 +7,11 @@ import { useTotalShieldedVolumeUpdateSubscription } from '@/lib/graphql/generate
 import { Props as ShieldedPanelContainerProps } from './shieldedPanelContainer'
 
 interface Props extends ShieldedPanelContainerProps {
-    initialNumber: number
+    number: number
 }
 
 const ShieldedPanelUpdater: FC<Props> = props => {
-    const [number, setNumber] = useState(props.initialNumber)
+    const [number, setNumber] = useState(props.number)
 
     const [totalShieldedVolumeUpdateSubscription] =
         useTotalShieldedVolumeUpdateSubscription()
@@ -30,7 +30,7 @@ const ShieldedPanelUpdater: FC<Props> = props => {
         }
     }, [totalShieldedVolumeUpdateSubscription.data?.totalShieldedVolume.value])
 
-    return <ShieldedPanel number={number} {...props} />
+    return <ShieldedPanel {...props} number={number} />
 }
 
 export default ShieldedPanelUpdater

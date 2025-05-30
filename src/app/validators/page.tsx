@@ -70,7 +70,6 @@ const ValidatorsPage: FC<Props> = async props => {
                         'col-span-full lg:col-span-9 lg:col-start-1',
                         'lg:row-span-3 lg:row-start-2'
                     )}
-                    filter={searchParams.filter}
                     header={
                         <div className="flex flex-col gap-6">
                             <div
@@ -106,6 +105,7 @@ const ValidatorsPage: FC<Props> = async props => {
                             />
                         </div>
                     }
+                    inactive={searchParams.filter === 'inactive'}
                 />
             </div>
         </Container>

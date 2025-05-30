@@ -10,7 +10,7 @@ const ShieldedPanelLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <ShieldedPanelUpdater initialNumber={volume ?? 0} {...props} />
+            <ShieldedPanelUpdater number={volume ?? 0} {...props} />
         </GraphqlClientProvider>
     )
 }

@@ -6,13 +6,13 @@ import { Props } from './validatorsPanelContainer'
 import ValidatorsPanelUpdater from './validatorsPanelUpdater'
 
 const ValidatorsPanelLoader: FC<Props> = async props => {
-    const initialNumber = await new Promise<number>(resolve =>
+    const number = await new Promise<number>(resolve =>
         setTimeout(() => resolve(56), faker.number.int({ max: 500, min: 200 }))
     )
 
     return (
         <GraphqlClientProvider>
-            <ValidatorsPanelUpdater initialNumber={initialNumber} {...props} />
+            <ValidatorsPanelUpdater number={number} {...props} />
         </GraphqlClientProvider>
     )
 }

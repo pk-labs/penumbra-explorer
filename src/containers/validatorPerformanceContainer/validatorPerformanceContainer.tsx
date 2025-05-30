@@ -9,14 +9,11 @@ import {
 } from '@/components'
 import ValidatorPerformanceLoader from './validatorPerformanceLoader'
 
-export interface Props
-    extends Omit<ValidatorPerformanceTableProps, 'validators'> {
-    filter?: string
-}
+export type Props = Omit<ValidatorPerformanceTableProps, 'validators'>
 
 const ValidatorPerformanceContainer: FC<Props> = props => (
     <Suspense
-        key={props.filter}
+        key={String(props.inactive)}
         fallback={
             <Table {...props}>
                 <thead>

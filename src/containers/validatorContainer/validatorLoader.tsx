@@ -17,10 +17,7 @@ const ValidatorLoader: FC<Props> = async props => {
             () => {
                 const uptime = faker.datatype.boolean()
                     ? 100
-                    : faker.number.float({
-                          max: 100,
-                          min: 0,
-                      })
+                    : faker.number.float({ max: 100, min: 0 })
 
                 const uptimeBlocksWindow = 10000
                 const signed = Math.round((uptime / 100) * uptimeBlocksWindow)

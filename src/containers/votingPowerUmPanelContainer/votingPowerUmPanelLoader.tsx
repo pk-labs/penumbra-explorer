@@ -6,7 +6,7 @@ import { Props } from './votingPowerUmPanelContainer'
 import VotingPowerUmPanelUpdater from './votingPowerUmPanelUpdater'
 
 const VotingPowerUmPanelLoader: FC<Props> = async props => {
-    const initialNumber = await new Promise<number>(resolve =>
+    const number = await new Promise<number>(resolve =>
         setTimeout(
             () => resolve(faker.number.int({ max: 999999, min: 0 })),
             faker.number.int({ max: 500, min: 200 })
@@ -15,10 +15,7 @@ const VotingPowerUmPanelLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <VotingPowerUmPanelUpdater
-                initialNumber={initialNumber}
-                {...props}
-            />
+            <VotingPowerUmPanelUpdater number={number} {...props} />
         </GraphqlClientProvider>
     )
 }

@@ -11,7 +11,7 @@ const TransactionPanelLoader: FC<Props> = async props => {
     return (
         <GraphqlClientProvider>
             <TransactionPanelUpdater
-                initialNumber={stats?.totalTransactionsCount ?? 0}
+                number={stats?.totalTransactionsCount ?? 0}
                 {...props}
             />
         </GraphqlClientProvider>

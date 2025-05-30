@@ -9,11 +9,11 @@ import { TransformedPartialBlockFragment } from '@/lib/types'
 import { Props as LatestBlocksContainerProps } from './latestBlocksContainer'
 
 interface Props extends LatestBlocksContainerProps {
-    initialBlocks?: TransformedPartialBlockFragment[]
+    blocks?: TransformedPartialBlockFragment[]
 }
 
 const LatestBlocksUpdater: FC<Props> = props => {
-    const [blocks, setBlocks] = useState(props.initialBlocks)
+    const [blocks, setBlocks] = useState(props.blocks)
 
     const [blockUpdateSubscription] = useBlockUpdateSubscription({
         variables: { limit: props.limit },

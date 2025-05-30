@@ -13,10 +13,7 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                     downtimePenalty: 0.1,
                     misbehaviorPenalty: 10,
                     requiredUptime: 5,
-                    unbondingDelay: faker.number.int({
-                        max: 20,
-                        min: 1,
-                    }),
+                    unbondingDelay: faker.number.int({ max: 20, min: 1 }),
                     uptimeBlocksWindow: 10000,
                 }),
             faker.number.int({ max: 500, min: 200 })

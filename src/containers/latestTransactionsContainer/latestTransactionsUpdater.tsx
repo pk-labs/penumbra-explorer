@@ -10,13 +10,13 @@ import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import { Props as LatestTransactionsContainerProps } from './latestTransactionsContainer'
 
 interface Props extends LatestTransactionsContainerProps {
-    initialTransactions?: TransformedPartialTransactionFragment[]
+    transactions?: TransformedPartialTransactionFragment[]
 }
 
 const LatestTransactionsUpdater: FC<Props> = props => {
     const [transactions, setTransactions] = useState<
         TransformedPartialTransactionFragment[] | undefined
-    >(props.initialTransactions)
+    >(props.transactions)
 
     const [transactionUpdateSubscription] = useTransactionUpdateSubscription({
         variables: { limit: props.limit },

@@ -6,11 +6,11 @@ import { NumberPanel } from '@/components'
 import { Props as ValidatorsPanelContainerProps } from './validatorsPanelContainer'
 
 interface Props extends ValidatorsPanelContainerProps {
-    initialNumber: number
+    number: number
 }
 
 const ValidatorsPanelUpdater: FC<Props> = props => {
-    const [number] = useState(props.initialNumber)
+    const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()

@@ -6,11 +6,11 @@ import { NumberPanel } from '@/components'
 import { Props as VotingPowerPercentagePanelContainerProps } from './votingPowerPercentagePanelContainer'
 
 interface Props extends VotingPowerPercentagePanelContainerProps {
-    initialNumber: number
+    number: number
 }
 
 const VotingPowerPercentagePanelUpdater: FC<Props> = props => {
-    const [number] = useState(props.initialNumber)
+    const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
     //     useTransactionCountUpdateSubscription()
@@ -25,10 +25,10 @@ const VotingPowerPercentagePanelUpdater: FC<Props> = props => {
 
     return (
         <NumberPanel
+            {...props}
             number={number}
             numberSuffix="%"
             title="Voting power %"
-            {...props}
         />
     )
 }

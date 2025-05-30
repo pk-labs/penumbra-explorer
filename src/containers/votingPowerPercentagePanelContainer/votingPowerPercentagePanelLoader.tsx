@@ -6,7 +6,7 @@ import { Props } from './votingPowerPercentagePanelContainer'
 import VotingPowerPercentagePanelUpdater from './votingPowerPercentagePanelUpdater'
 
 const VotingPowerPercentagePanelLoader: FC<Props> = async props => {
-    const initialNumber = await new Promise<number>(resolve =>
+    const number = await new Promise<number>(resolve =>
         setTimeout(
             () => resolve(faker.number.float({ max: 10, min: 1 })),
             faker.number.int({ max: 500, min: 200 })
@@ -15,10 +15,7 @@ const VotingPowerPercentagePanelLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <VotingPowerPercentagePanelUpdater
-                initialNumber={initialNumber}
-                {...props}
-            />
+            <VotingPowerPercentagePanelUpdater number={number} {...props} />
         </GraphqlClientProvider>
     )
 }

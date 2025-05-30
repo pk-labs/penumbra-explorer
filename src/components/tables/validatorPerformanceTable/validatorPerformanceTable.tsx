@@ -8,16 +8,23 @@ import ValidatorStatusBonding from '../../validatorStatusBonding'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
+    inactive?: boolean
     validators: any[]
 }
 
-const ValidatorPerformanceTable: FC<Props> = ({ validators, ...props }) => (
+const ValidatorPerformanceTable: FC<Props> = ({
+    inactive,
+    validators,
+    ...props
+}) => (
     <Table {...props}>
         <thead>
             <TableRow>
                 <TableCell header>Name</TableCell>
                 <TableCell header>Status</TableCell>
-                <TableCell header>Voting power</TableCell>
+                <TableCell header>
+                    {inactive ? 'Staked tokens' : 'Voting power'}
+                </TableCell>
                 <TableCell header>Uptime %</TableCell>
                 <TableCell header>Defined</TableCell>
                 <TableCell header>Commission</TableCell>
@@ -44,7 +51,7 @@ const ValidatorPerformanceTable: FC<Props> = ({ validators, ...props }) => (
                             />
                         </TableCell>
                         <TableCell className="h-15">
-                            <span className="inline-flex flex-col gap-1">
+                            {inactive ? (
                                 <span className="inline-flex items-center gap-1">
                                     <Image
                                         alt="UM"
@@ -53,14 +60,36 @@ const ValidatorPerformanceTable: FC<Props> = ({ validators, ...props }) => (
                                         width={24}
                                     />
                                     <span>
-                                        {formatNumber(validator.votingPower)} UM
+                                        {formatNumber(validator.stakedTokens)}{' '}
+                                        UM
                                     </span>
                                 </span>
-                                <span className="text-text-secondary ml-7 text-xs">
-                                    {validator.votingPowerPercentage.toFixed(2)}
-                                    %
-                                </span>
-                            </span>
+                            ) : (
+                                <>
+                                    <span className="inline-flex flex-col gap-1">
+                                        <span className="inline-flex items-center gap-1">
+                                            <Image
+                                                alt="UM"
+                                                height={24}
+                                                src={penumbra}
+                                                width={24}
+                                            />
+                                            <span>
+                                                {formatNumber(
+                                                    validator.votingPower
+                                                )}{' '}
+                                                UM
+                                            </span>
+                                        </span>
+                                        <span className="text-text-secondary ml-7 text-xs">
+                                            {validator.votingPowerPercentage.toFixed(
+                                                2
+                                            )}
+                                            %
+                                        </span>
+                                    </span>
+                                </>
+                            )}
                         </TableCell>
                         <TableCell className="h-15">
                             <span

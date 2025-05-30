@@ -12,10 +12,7 @@ const LatestTransactionsLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <LatestTransactionsUpdater
-                initialTransactions={transactions}
-                {...props}
-            />
+            <LatestTransactionsUpdater transactions={transactions} {...props} />
         </GraphqlClientProvider>
     )
 }

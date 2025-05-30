@@ -18,10 +18,7 @@ const ValidatorStatusLoader: FC<Props> = async props => {
                 )
 
                 const missedBlocks = new Set(
-                    faker.helpers.arrayElements(blocks, {
-                        max: 50,
-                        min: 0,
-                    })
+                    faker.helpers.arrayElements(blocks, { max: 50, min: 0 })
                 )
 
                 const signedBlocks = new Set(

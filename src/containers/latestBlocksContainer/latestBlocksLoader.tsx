@@ -10,7 +10,7 @@ const LatestBlocksLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <LatestBlocksUpdater initialBlocks={blocks} {...props} />
+            <LatestBlocksUpdater blocks={blocks} {...props} />
         </GraphqlClientProvider>
     )
 }
