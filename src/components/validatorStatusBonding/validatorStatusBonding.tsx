@@ -16,7 +16,7 @@ const statusColors = {
     Disabled: 'text-text-secondary',
     Inactive: 'text-caution-light',
     Jailed: 'text-destructive-light',
-    Tombstoned: 'text-text-muted',
+    Tombstoned: 'text-destructive-light',
     Unspecified: 'text-text-secondary',
 }
 
