@@ -12,11 +12,7 @@ export interface Props extends Omit<TableProps, 'children'> {
     validators: TransformedPartialValidator[]
 }
 
-const ValidatorPerformanceTable: FC<Props> = ({
-    inactive,
-    validators,
-    ...props
-}) => (
+const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
     <Table {...props}>
         <thead>
             <TableRow>
@@ -127,4 +123,4 @@ const ValidatorPerformanceTable: FC<Props> = ({
     </Table>
 )
 
-export default ValidatorPerformanceTable
+export default ValidatorTable

@@ -5,13 +5,13 @@ import {
     Table,
     TableCell,
     TableRow,
-    ValidatorPerformanceTableProps,
+    ValidatorTableProps,
 } from '@/components'
-import ValidatorPerformanceLoader from './validatorPerformanceLoader'
+import ValidatorTableLoader from './validatorTableLoader'
 
-export type Props = Omit<ValidatorPerformanceTableProps, 'validators'>
+export type Props = Omit<ValidatorTableProps, 'validators'>
 
-const ValidatorPerformanceContainer: FC<Props> = ({ inactive, ...props }) => (
+const ValidatorTableContainer: FC<Props> = ({ inactive, ...props }) => (
     <Suspense
         key={String(inactive)}
         fallback={
@@ -35,8 +35,8 @@ const ValidatorPerformanceContainer: FC<Props> = ({ inactive, ...props }) => (
             </Table>
         }
     >
-        <ValidatorPerformanceLoader {...props} inactive={inactive} />
+        <ValidatorTableLoader {...props} inactive={inactive} />
     </Suspense>
 )
 
-export default ValidatorPerformanceContainer
+export default ValidatorTableContainer

@@ -10,6 +10,8 @@ interface Props {
     timestamp: number
 }
 
+// TODO: Refactor to TimeAgoTicker and only use for live updates. Render regular
+// time ago to string without using this component.
 const TimeAgo: FC<Props> = props => {
     const lastTick = useTicker(props.ticker ?? false)
     const [timeAgo, setTimeAgo] = useState(props.initialTimeAgo)

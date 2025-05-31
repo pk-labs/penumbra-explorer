@@ -13,7 +13,7 @@ import {
     ChainParametersContainer,
     MinValidatorStakePanelContainer,
     ValidatorParametersContainer,
-    ValidatorPerformanceContainer,
+    ValidatorTableContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -65,7 +65,7 @@ const ValidatorsPage: FC<Props> = async props => {
                         'lg:col-start-10! lg:row-start-3!'
                     )}
                 />
-                <ValidatorPerformanceContainer
+                <ValidatorTableContainer
                     className={classNames(
                         'col-span-full lg:col-span-9 lg:col-start-1',
                         'lg:row-span-3 lg:row-start-2'

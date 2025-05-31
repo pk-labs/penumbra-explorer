@@ -1,12 +1,12 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { ValidatorPerformanceTable } from '@/components'
+import { ValidatorTable } from '@/components'
 import { getValidators } from '@/lib/data'
 import { ValidatorStateFilter } from '@/lib/graphql/generated/types'
-import { Props } from './validatorPerformanceContainer'
+import { Props } from './validatorTableContainer'
 
-const ValidatorPerformanceLoader: FC<Props> = async props => {
+const ValidatorTableLoader: FC<Props> = async props => {
     const validators = await getValidators({
         state: props.inactive
             ? ValidatorStateFilter.Inactive
@@ -17,7 +17,7 @@ const ValidatorPerformanceLoader: FC<Props> = async props => {
         notFound()
     }
 
-    return <ValidatorPerformanceTable {...props} validators={validators} />
+    return <ValidatorTable {...props} validators={validators} />
 }
 
-export default ValidatorPerformanceLoader
+export default ValidatorTableLoader
