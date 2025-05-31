@@ -1,0 +1,5 @@
+query ValidatorActiveSince($id: String!) {
+    validatorDetails(id: $id) {
+       activeSince
+    }
+}

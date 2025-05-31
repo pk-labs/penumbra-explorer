@@ -13,6 +13,7 @@ const ActiveVotingPowerPanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <NumberPanel
+                className={props.className}
                 number={0}
                 numberClassName="gap-2"
                 numberPrefix={
@@ -20,7 +21,6 @@ const ActiveVotingPowerPanelContainer: FC<Props> = props => (
                 }
                 numberSuffix="UM"
                 title="Active voting power"
-                {...props}
             />
         }
     >

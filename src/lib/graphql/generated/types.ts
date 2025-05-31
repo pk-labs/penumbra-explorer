@@ -562,6 +562,13 @@ export type TransactionsQueryVariables = Exact<{
 
 export type TransactionsQuery = { __typename?: 'QueryRoot', transactions: { __typename?: 'TransactionCollection', total: number, items: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> } };
 
+export type ValidatorActiveSinceQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type ValidatorActiveSinceQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', activeSince?: any | null } | null };
+
 export type ValidatorParametersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -787,6 +794,13 @@ export const TransactionsDocument = gql`
   }
 }
     ${PartialTransactionFragmentDoc}`;
+export const ValidatorActiveSinceDocument = gql`
+    query ValidatorActiveSince($id: String!) {
+  validatorDetails(id: $id) {
+    activeSince
+  }
+}
+    `;
 export const ValidatorParametersDocument = gql`
     query ValidatorParameters {
   validatorsHomepage {

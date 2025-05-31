@@ -1,25 +1,26 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import NumberPanel from '../../components/panels/numberPanel'
-import ValidatorDefinedPanelLoader from './validatorDefinedPanelLoader'
+import ValidatorActiveSincePanelLoader from './validatorActiveSincePanelLoader'
 
 export interface Props {
     className?: string
+    validatorId: string
 }
 
-const ValidatorDefinedPanelContainer: FC<Props> = props => (
+const ValidatorActiveSincePanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <NumberPanel
-                {...props}
+                className={props.className}
                 number={0}
                 numberSuffix={<span className="ml-2">days</span>}
                 title="Defined"
             />
         }
     >
-        <ValidatorDefinedPanelLoader {...props} />
+        <ValidatorActiveSincePanelLoader {...props} />
     </Suspense>
 )
 
-export default ValidatorDefinedPanelContainer
+export default ValidatorActiveSincePanelContainer

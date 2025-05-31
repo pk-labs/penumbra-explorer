@@ -219,6 +219,17 @@ export const TransactionsDocument = gql`
 export function useTransactionsQuery(options: Omit<Urql.UseQueryArgs<Types.TransactionsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.TransactionsQuery, Types.TransactionsQueryVariables>({ query: Types.TransactionsDocument, ...options });
 };
+export const ValidatorActiveSinceDocument = gql`
+    query ValidatorActiveSince($id: String!) {
+  validatorDetails(id: $id) {
+    activeSince
+  }
+}
+    `;
+
+export function useValidatorActiveSinceQuery(options: Omit<Urql.UseQueryArgs<Types.ValidatorActiveSinceQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ValidatorActiveSinceQuery, Types.ValidatorActiveSinceQueryVariables>({ query: Types.ValidatorActiveSinceDocument, ...options });
+};
 export const ValidatorParametersDocument = gql`
     query ValidatorParameters {
   validatorsHomepage {

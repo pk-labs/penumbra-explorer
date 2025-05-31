@@ -3,8 +3,8 @@ import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
     LatestTransactionsContainer,
+    ValidatorActiveSincePanelContainer,
     ValidatorContainer,
-    ValidatorDefinedPanelContainer,
     ValidatorStatusContainer,
     ValidatorVotingPercentagePanelContainer,
     ValidatorVotingPowerPanelContainer,
@@ -60,12 +60,13 @@ const ValidatorPage: FC<Props> = async props => {
                     )}
                     validatorId={id}
                 />
-                <ValidatorDefinedPanelContainer
+                <ValidatorActiveSincePanelContainer
                     className={classNames(
                         'col-span-12 md:col-span-4 md:col-start-9',
                         'md:row-start-2 lg:col-span-3! lg:col-start-10!',
                         'lg:row-start-1!'
                     )}
+                    validatorId={id}
                 />
                 <ValidatorStatusContainer
                     className={classNames(
