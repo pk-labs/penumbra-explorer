@@ -5,6 +5,7 @@ import {
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
+    ValidatorQuery,
     ValidatorsQuery,
 } from '@/lib/graphql/generated/types'
 
@@ -54,6 +55,16 @@ export interface TransformedIbcStats
 }
 
 export interface TransformedValidator
+    extends Omit<
+        NonNullable<ValidatorQuery['validatorDetails']>,
+        'bondingState' | 'id' | 'state'
+    > {
+    bonding: ValidatorBonding
+    id: string
+    status: ValidatorStatus
+}
+
+export interface TransformedPartialValidator
     extends Omit<
         NonNullable<
             ValidatorsQuery['validatorsHomepage']['validators']

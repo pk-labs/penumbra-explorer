@@ -16,9 +16,7 @@ const getBlock = async (
 
     if (result.error) {
         throw result.error
-    }
-
-    if (!result.data?.block) {
+    } else if (!result.data?.block) {
         return
     }
 

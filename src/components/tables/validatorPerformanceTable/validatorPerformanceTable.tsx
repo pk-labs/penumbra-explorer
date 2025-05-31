@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { penumbra } from '@/lib/images'
-import { TransformedValidator } from '@/lib/types'
+import { TransformedPartialValidator } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import ValidatorStatusBonding from '../../validatorStatusBonding'
@@ -9,7 +9,7 @@ import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
     inactive?: boolean
-    validators: TransformedValidator[]
+    validators: TransformedPartialValidator[]
 }
 
 const ValidatorPerformanceTable: FC<Props> = ({
@@ -104,7 +104,7 @@ const ValidatorPerformanceTable: FC<Props> = ({
                                 >
                                     {validator.uptime.toFixed(2)}%
                                 </span>
-                            ) : undefined}
+                            ) : null}
                         </TableCell>
                         <TableCell className="h-15">
                             {/*<TimeAgo*/}

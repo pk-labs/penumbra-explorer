@@ -236,6 +236,32 @@ export const ValidatorParametersDocument = gql`
 export function useValidatorParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.ValidatorParametersQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ValidatorParametersQuery, Types.ValidatorParametersQueryVariables>({ query: Types.ValidatorParametersDocument, ...options });
 };
+export const ValidatorDocument = gql`
+    query Validator($id: String!) {
+  validatorDetails(id: $id) {
+    id
+    name
+    state
+    bondingState
+    website
+    description
+    totalUptime
+    uptimeBlockWindow
+    signedBlocks
+    missedBlocks
+    commissionPercentage
+    commissionStreams {
+      recipientAddress
+      streamType
+      rateBps
+    }
+  }
+}
+    `;
+
+export function useValidatorQuery(options: Omit<Urql.UseQueryArgs<Types.ValidatorQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ValidatorQuery, Types.ValidatorQueryVariables>({ query: Types.ValidatorDocument, ...options });
+};
 export const ValidatorsDocument = gql`
     query Validators($filter: ValidatorFilter) {
   validatorsHomepage(filter: $filter) {

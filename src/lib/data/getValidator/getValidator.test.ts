@@ -1,21 +1,31 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import getValidators from './getValidators'
+import getValidator from './getValidator'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
 describe('getValidator', () => {
-    test('returns data', async () => {
+    test('returns transformed data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { validatorsHomepage: { validators: [] } },
+                        data: {
+                            validatorDetails: {
+                                bondingState: 'BONDING_STATE_ENUM_BONDED',
+                                id: 'foo',
+                                state: 'VALIDATOR_STATE_ENUM_ACTIVE',
+                            },
+                        },
                     }),
             }),
         })
 
-        await expect(getValidators()).resolves.toEqual([])
+        await expect(getValidator('foo')).resolves.toEqual({
+            bonding: 'Bonded',
+            id: 'foo',
+            status: 'Active',
+        })
     })
 
     test('throws error', async () => {
@@ -25,6 +35,6 @@ describe('getValidator', () => {
             }),
         })
 
-        await expect(getValidators()).rejects.toBe('foo')
+        await expect(getValidator('foo')).rejects.toBe('foo')
     })
 })

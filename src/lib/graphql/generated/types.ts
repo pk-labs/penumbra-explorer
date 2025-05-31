@@ -567,6 +567,13 @@ export type ValidatorParametersQueryVariables = Exact<{ [key: string]: never; }>
 
 export type ValidatorParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', uptimeBlocksWindow: number, uptimeMinRequired: string, slashingPenaltyDowntime: string, slashingPenaltyMisbehavior: string, unbondingDelay: string } } };
 
+export type ValidatorQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type ValidatorQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', id: string, name?: string | null, state: string, bondingState?: string | null, website?: string | null, description?: string | null, totalUptime?: number | null, uptimeBlockWindow: number, signedBlocks: number, missedBlocks: number, commissionPercentage: number, commissionStreams: Array<{ __typename?: 'CommissionInfo', recipientAddress?: string | null, streamType: string, rateBps: number }> } | null };
+
 export type ValidatorsQueryVariables = Exact<{
   filter?: InputMaybe<ValidatorFilter>;
 }>;
@@ -775,6 +782,28 @@ export const ValidatorParametersDocument = gql`
       slashingPenaltyDowntime
       slashingPenaltyMisbehavior
       unbondingDelay
+    }
+  }
+}
+    `;
+export const ValidatorDocument = gql`
+    query Validator($id: String!) {
+  validatorDetails(id: $id) {
+    id
+    name
+    state
+    bondingState
+    website
+    description
+    totalUptime
+    uptimeBlockWindow
+    signedBlocks
+    missedBlocks
+    commissionPercentage
+    commissionStreams {
+      recipientAddress
+      streamType
+      rateBps
     }
   }
 }

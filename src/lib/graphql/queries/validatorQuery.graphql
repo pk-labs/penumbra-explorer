@@ -1,0 +1,20 @@
+query Validator($id: String!) {
+    validatorDetails(id: $id) {
+        id
+        name
+        state
+        bondingState
+        website
+        description
+        totalUptime
+        uptimeBlockWindow
+        signedBlocks
+        missedBlocks
+        commissionPercentage
+        commissionStreams {
+            recipientAddress
+            streamType
+            rateBps
+        }
+    }
+}

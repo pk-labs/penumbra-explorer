@@ -6,7 +6,7 @@ import {
     ValidatorsQueryVariables,
 } from '@/lib/graphql/generated/types'
 import { validatorsQuery } from '@/lib/graphql/queries'
-import { TransformedValidator } from '@/lib/types'
+import { TransformedPartialValidator } from '@/lib/types'
 
 const validatorStatusTransformer = {
     VALIDATOR_STATE_ENUM_ACTIVE: 'Active',
@@ -26,7 +26,7 @@ const validatorBondingTransformer = {
 
 const getValidators = async (
     filter?: ValidatorFilter
-): Promise<TransformedValidator[] | undefined> => {
+): Promise<TransformedPartialValidator[] | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -40,23 +40,20 @@ const getValidators = async (
     }
 
     // FIXME: Workaround for certain fields typed as undefined/null
-    return result.data?.validatorsHomepage.validators.map(validator => ({
-        bonding: validator.bondingState
-            ? // @ts-ignore
-              validatorBondingTransformer[validator.bondingState]
-            : 'Unbonded',
-        commission: validator.commission,
-        firstSeenTime: validator.firstSeenTime,
-        id: `${validator.id}`,
-        name: validator.name ?? undefined,
-        status: validator.state
-            ? // @ts-ignore
-              validatorStatusTransformer[validator.state]
-            : 'Unspecified',
-        uptime: validator.uptime,
-        votingPower: validator.votingPower,
-        votingPowerActivePercentage: validator.votingPowerActivePercentage,
-    }))
+    return result.data?.validatorsHomepage.validators.map(rawValidator => {
+        const { bondingState, state, ...validator } = rawValidator
+
+        return {
+            ...validator,
+            bonding: bondingState
+                ? // @ts-ignore
+                  validatorBondingTransformer[bondingState]
+                : 'Unbonded',
+            id: `${validator.id}`,
+            // @ts-ignore
+            status: state ? validatorStatusTransformer[state] : 'Unspecified',
+        }
+    })
 }
 
 export default getValidators

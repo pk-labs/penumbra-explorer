@@ -22,9 +22,7 @@ const getTransaction = async (
 
     if (result.error) {
         throw result.error
-    }
-
-    if (!result.data?.transaction) {
+    } else if (!result.data?.transaction) {
         return
     }
 
