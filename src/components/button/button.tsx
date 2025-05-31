@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 
 import {
@@ -30,17 +29,24 @@ const Button: FC<Props> = ({
             href={href}
             target={externalLink ? '_blank' : undefined}
         >
+            {/* @ts-expect-error iconOnly typing */}
             <PenumbraButton
-                // @ts-ignore
-                icon={externalLink ? icons['ExternalLink'] : icons[icon]}
+                icon={
+                    icon
+                        ? externalLink
+                            ? icons['ExternalLink']
+                            : icons[icon]
+                        : undefined
+                }
                 {...props}
             />
         </Link>
     ) : (
         <span className={classNames('outline-none', className)}>
+            {/* @ts-expect-error iconOnly typing */}
             <PenumbraButton
-                // @ts-ignore
                 icon={icon && icons[icon]}
+                iconOnly={Boolean(props.iconOnly)}
                 {...props}
             />
         </span>
