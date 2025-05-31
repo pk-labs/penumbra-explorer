@@ -1,0 +1,8 @@
+query ValidatorBlocks($id: String!) {
+    validatorDetails(id: $id) {
+        last300Blocks {
+            height
+            signed
+        }
+    }
+}

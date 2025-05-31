@@ -11,6 +11,7 @@ export { default as totalShieldedVolumeQuery } from './totalShieldedVolumeQuery.
 export { default as transactionQuery } from './transactionQuery.graphql'
 export { default as transactionsQuery } from './transactionsQuery.graphql'
 export { default as validatorActiveSinceQuery } from './validatorActiveSinceQuery.graphql'
+export { default as validatorBlocksQuery } from './validatorBlocksQuery.graphql'
 export { default as validatorParametersQuery } from './validatorParametersQuery.graphql'
 export { default as validatorQuery } from './validatorQuery.graphql'
 export { default as validatorsQuery } from './validatorsQuery.graphql'

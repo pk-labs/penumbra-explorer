@@ -5,6 +5,7 @@ import {
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
+    ValidatorBlocksQuery,
     ValidatorQuery,
     ValidatorsQuery,
 } from '@/lib/graphql/generated/types'
@@ -87,6 +88,10 @@ export type ValidatorStatus =
     | 'Jailed'
     | 'Tombstoned'
     | 'Unspecified'
+
+export type ValidatorBlocks = NonNullable<
+    ValidatorBlocksQuery['validatorDetails']
+>['last300Blocks']
 
 // TODO: Refactor value names to pascal case
 export enum ActionType {

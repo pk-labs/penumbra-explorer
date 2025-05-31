@@ -3,6 +3,7 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { fastOutSlowIn } from '@/lib/constants'
+import { ValidatorBlocks } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import styles from './validatorStatusContainer.module.css'
 
@@ -29,9 +30,7 @@ const blockVariants = {
 }
 
 interface Props {
-    blocks: number[]
-    missedBlocks: Set<number>
-    signedBlocks: Set<number>
+    blocks: ValidatorBlocks
 }
 
 const ValidatorStatusBlocks: FC<Props> = props => (
@@ -43,11 +42,11 @@ const ValidatorStatusBlocks: FC<Props> = props => (
     >
         {props.blocks.map(block => (
             <motion.span
-                key={block}
+                key={block.height}
                 className={classNames(
                     styles.block,
-                    props.signedBlocks.has(block) && styles.signed,
-                    props.missedBlocks.has(block) && styles.missed
+                    block.signed && styles.signed
+                    // props.missedBlocks.has(block) && styles.missed
                 )}
                 variants={blockVariants}
             />

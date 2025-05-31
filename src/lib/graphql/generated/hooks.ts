@@ -230,6 +230,20 @@ export const ValidatorActiveSinceDocument = gql`
 export function useValidatorActiveSinceQuery(options: Omit<Urql.UseQueryArgs<Types.ValidatorActiveSinceQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ValidatorActiveSinceQuery, Types.ValidatorActiveSinceQueryVariables>({ query: Types.ValidatorActiveSinceDocument, ...options });
 };
+export const ValidatorBlocksDocument = gql`
+    query ValidatorBlocks($id: String!) {
+  validatorDetails(id: $id) {
+    last300Blocks {
+      height
+      signed
+    }
+  }
+}
+    `;
+
+export function useValidatorBlocksQuery(options: Omit<Urql.UseQueryArgs<Types.ValidatorBlocksQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ValidatorBlocksQuery, Types.ValidatorBlocksQueryVariables>({ query: Types.ValidatorBlocksDocument, ...options });
+};
 export const ValidatorParametersDocument = gql`
     query ValidatorParameters {
   validatorsHomepage {
