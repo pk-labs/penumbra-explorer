@@ -3,13 +3,13 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as VotingPowerPercentagePanelContainerProps } from './votingPowerPercentagePanelContainer'
+import { Props as ValidatorVotingPercentagePanelContainerProps } from './validatorVotingPercentagePanelContainer'
 
-interface Props extends VotingPowerPercentagePanelContainerProps {
+interface Props extends ValidatorVotingPercentagePanelContainerProps {
     number: number
 }
 
-const VotingPowerPercentagePanelUpdater: FC<Props> = props => {
+const ValidatorVotingPercentagePanelUpdater: FC<Props> = props => {
     const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
@@ -25,7 +25,7 @@ const VotingPowerPercentagePanelUpdater: FC<Props> = props => {
 
     return (
         <NumberPanel
-            {...props}
+            className={props.className}
             number={number}
             numberSuffix="%"
             title="Voting power %"
@@ -33,4 +33,4 @@ const VotingPowerPercentagePanelUpdater: FC<Props> = props => {
     )
 }
 
-export default VotingPowerPercentagePanelUpdater
+export default ValidatorVotingPercentagePanelUpdater

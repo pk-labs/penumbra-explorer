@@ -1,0 +1,5 @@
+query ValidatorVotingPercentage($id: String!) {
+    validatorDetails(id: $id) {
+       votingPowerActivePercentage
+    }
+}

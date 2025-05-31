@@ -19,5 +19,5 @@ export { default as ValidatorDefinedPanelContainer } from './validatorDefinedPan
 export { default as ValidatorParametersContainer } from './validatorParametersContainer'
 export { default as ValidatorPerformanceContainer } from './validatorPerformanceContainer'
 export { default as ValidatorStatusContainer } from './validatorStatusContainer'
+export { default as ValidatorVotingPercentagePanelContainer } from './validatorVotingPercentagePanelContainer'
 export { default as ValidatorVotingPowerPanelContainer } from './validatorVotingPowerPanelContainer'
-export { default as VotingPowerPercentagePanelContainer } from './votingPowerPercentagePanelContainer'

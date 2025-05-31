@@ -1,25 +1,26 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import NumberPanel from '../../components/panels/numberPanel'
-import VotingPowerPercentagePanelLoader from './votingPowerPercentagePanelLoader'
+import ValidatorVotingPercentagePanelLoader from './validatorVotingPercentagePanelLoader'
 
 export interface Props {
     className?: string
+    validatorId: string
 }
 
-const VotingPowerPercentagePanelContainer: FC<Props> = props => (
+const ValidatorVotingPercentagePanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <NumberPanel
+                className={props.className}
                 number={0}
                 numberSuffix="%"
                 title="Voting power %"
-                {...props}
             />
         }
     >
-        <VotingPowerPercentagePanelLoader {...props} />
+        <ValidatorVotingPercentagePanelLoader {...props} />
     </Suspense>
 )
 
-export default VotingPowerPercentagePanelContainer
+export default ValidatorVotingPercentagePanelContainer

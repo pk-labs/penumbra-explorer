@@ -6,8 +6,8 @@ import {
     ValidatorContainer,
     ValidatorDefinedPanelContainer,
     ValidatorStatusContainer,
+    ValidatorVotingPercentagePanelContainer,
     ValidatorVotingPowerPanelContainer,
-    VotingPowerPercentagePanelContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -52,12 +52,13 @@ const ValidatorPage: FC<Props> = async props => {
                     )}
                     validatorId={id}
                 />
-                <VotingPowerPercentagePanelContainer
+                <ValidatorVotingPercentagePanelContainer
                     className={classNames(
                         'col-span-12 md:col-span-3 md:col-start-6',
                         'md:row-start-2 lg:col-span-2! lg:col-start-8!',
                         'lg:row-start-1!'
                     )}
+                    validatorId={id}
                 />
                 <ValidatorDefinedPanelContainer
                     className={classNames(
