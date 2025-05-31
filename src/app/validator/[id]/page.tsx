@@ -12,24 +12,24 @@ import {
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
 interface Props {
-    params: Promise<{ validator: string }>
+    params: Promise<{ id: string }>
 }
 
 export const generateMetadata = async (props: Props) => {
-    const { validator } = await props.params
+    const { id } = await props.params
 
     return generatePageMetadata(
-        `Validator ${validator}`,
-        'Explore Penumbra Validator {Name|ID} and track key metrics like ' +
+        `Validator ${id}`,
+        `Explore Penumbra Validator ${id} and track key metrics like ` +
             'Status, Voting power, Uptime, and Commission on Noctis - a ' +
             'fast, secure, and privacy-focused explorer built for Penumbra ' +
             'blockchain.',
-        `/validator/${validator}`
+        `/validator/${id}`
     )
 }
 
 const ValidatorPage: FC<Props> = async props => {
-    const { validator } = await props.params
+    const { id } = await props.params
 
     return (
         <Container>
@@ -43,7 +43,7 @@ const ValidatorPage: FC<Props> = async props => {
                         'col-span-12 md:col-span-5 md:row-span-4',
                         'lg:col-span-4! lg:row-span-3'
                     )}
-                    validator={validator}
+                    validatorId={id}
                 />
                 <VotingPowerUmPanelContainer
                     className={classNames(

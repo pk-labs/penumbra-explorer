@@ -6,7 +6,7 @@ import ValidatorLoader from './validatorLoader'
 
 export interface Props {
     className?: string
-    validator: string
+    validatorId: string
 }
 
 const ValidatorContainer: FC<Props> = props => (

@@ -31,7 +31,7 @@ const ValidatorLoader: FC<Props> = async props => {
                     commission: faker.number.int({ max: 10, min: 2 }),
                     commissionAddress: faker.finance.bitcoinAddress(),
                     description: faker.lorem.paragraph(5),
-                    hash: props.validator,
+                    hash: props.validatorId,
                     missed: uptimeBlocksWindow - signed,
                     signed,
                     status: faker.helpers.arrayElement([
