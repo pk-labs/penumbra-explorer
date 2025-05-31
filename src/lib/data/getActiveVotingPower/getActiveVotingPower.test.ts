@@ -13,7 +13,7 @@ describe('getActiveVotingPower', () => {
                         data: {
                             validatorsHomepage: {
                                 stakingParameters: {
-                                    totalStaked: '99 UM',
+                                    totalStaked: 99,
                                 },
                             },
                         },

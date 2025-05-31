@@ -13,7 +13,7 @@ describe('getMinValidatorStake', () => {
                         data: {
                             validatorsHomepage: {
                                 stakingParameters: {
-                                    minValidatorStake: '99 UM',
+                                    minValidatorStake: 99,
                                 },
                             },
                         },

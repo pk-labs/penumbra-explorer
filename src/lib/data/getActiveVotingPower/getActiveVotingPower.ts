@@ -19,11 +19,7 @@ const getActiveVotingPower = async (): Promise<number | undefined> => {
         throw result.error
     }
 
-    // TODO: Remove parsing once receiving raw number
-    const preformatted =
-        result.data?.validatorsHomepage.stakingParameters.totalStaked
-
-    return preformatted ? Number(preformatted.split(' ')[0]) : undefined
+    return result.data?.validatorsHomepage.stakingParameters.totalStaked
 }
 
 export default getActiveVotingPower

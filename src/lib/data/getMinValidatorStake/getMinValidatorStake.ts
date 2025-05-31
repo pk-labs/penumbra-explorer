@@ -19,11 +19,7 @@ const getMinValidatorStake = async (): Promise<number | undefined> => {
         throw result.error
     }
 
-    // TODO: Remove parsing once receiving raw number
-    const preformatted =
-        result.data?.validatorsHomepage.stakingParameters.minValidatorStake
-
-    return preformatted ? Number(preformatted.split(' ')[0]) : undefined
+    return result.data?.validatorsHomepage.stakingParameters.minValidatorStake
 }
 
 export default getMinValidatorStake

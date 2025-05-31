@@ -336,13 +336,13 @@ export type StakingParameters = {
   __typename?: 'StakingParameters';
   activeValidatorCount: Scalars['Int']['output'];
   activeValidatorLimit: Scalars['Int']['output'];
-  minValidatorStake: Scalars['String']['output'];
-  slashingPenaltyDowntime: Scalars['String']['output'];
-  slashingPenaltyMisbehavior: Scalars['String']['output'];
-  totalStaked: Scalars['String']['output'];
-  unbondingDelay: Scalars['String']['output'];
+  minValidatorStake: Scalars['Int']['output'];
+  slashingPenaltyDowntime: Scalars['Float']['output'];
+  slashingPenaltyMisbehavior: Scalars['Float']['output'];
+  totalStaked: Scalars['Int']['output'];
+  unbondingDelay: Scalars['Int']['output'];
   uptimeBlocksWindow: Scalars['Int']['output'];
-  uptimeMinRequired: Scalars['String']['output'];
+  uptimeMinRequired: Scalars['Float']['output'];
 };
 
 export type Stats = {
@@ -495,7 +495,7 @@ export type ActiveValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepa
 export type ActiveVotingPowerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ActiveVotingPowerQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', totalStaked: string } } };
+export type ActiveVotingPowerQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', totalStaked: number } } };
 
 export type BlockQueryVariables = Exact<{
   height: Scalars['Int']['input'];
@@ -528,7 +528,7 @@ export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __type
 export type MinValidatorStakeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MinValidatorStakeQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', minValidatorStake: string } } };
+export type MinValidatorStakeQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', minValidatorStake: number } } };
 
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -572,7 +572,7 @@ export type ValidatorActiveSinceQuery = { __typename?: 'QueryRoot', validatorDet
 export type ValidatorParametersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ValidatorParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', uptimeBlocksWindow: number, uptimeMinRequired: string, slashingPenaltyDowntime: string, slashingPenaltyMisbehavior: string, unbondingDelay: string } } };
+export type ValidatorParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', uptimeBlocksWindow: number, uptimeMinRequired: number, slashingPenaltyDowntime: number, slashingPenaltyMisbehavior: number, unbondingDelay: number } } };
 
 export type ValidatorQueryVariables = Exact<{
   id: Scalars['String']['input'];

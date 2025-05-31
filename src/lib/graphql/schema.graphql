@@ -186,13 +186,13 @@ type SpendBody {
 type StakingParameters {
     activeValidatorCount: Int!
     activeValidatorLimit: Int!
-    minValidatorStake: String!
-    slashingPenaltyDowntime: String!
-    slashingPenaltyMisbehavior: String!
-    totalStaked: String!
-    unbondingDelay: String!
+    minValidatorStake: Int!
+    slashingPenaltyDowntime: Float!
+    slashingPenaltyMisbehavior: Float!
+    totalStaked: Int!
+    unbondingDelay: Int!
     uptimeBlocksWindow: Int!
-    uptimeMinRequired: String!
+    uptimeMinRequired: Float!
 }
 
 type Stats {
