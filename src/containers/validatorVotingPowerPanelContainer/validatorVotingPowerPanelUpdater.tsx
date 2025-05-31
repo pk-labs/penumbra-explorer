@@ -5,13 +5,13 @@ import Image from 'next/image'
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
 import { penumbra } from '@/lib/images'
-import { Props as VotingPowerUmPanelContainerProps } from './votingPowerUmPanelContainer'
+import { Props as ValidatorVotingPowerPanelContainerProps } from './validatorVotingPowerPanelContainer'
 
-interface Props extends VotingPowerUmPanelContainerProps {
+interface Props extends ValidatorVotingPowerPanelContainerProps {
     number: number
 }
 
-const VotingPowerUmPanelUpdater: FC<Props> = props => {
+const ValidatorVotingPowerPanelUpdater: FC<Props> = props => {
     const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
@@ -27,7 +27,7 @@ const VotingPowerUmPanelUpdater: FC<Props> = props => {
 
     return (
         <NumberPanel
-            {...props}
+            className={props.className}
             number={number}
             numberClassName="gap-2"
             numberPrefix={
@@ -39,4 +39,4 @@ const VotingPowerUmPanelUpdater: FC<Props> = props => {
     )
 }
 
-export default VotingPowerUmPanelUpdater
+export default ValidatorVotingPowerPanelUpdater

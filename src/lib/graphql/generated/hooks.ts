@@ -262,6 +262,17 @@ export const ValidatorDocument = gql`
 export function useValidatorQuery(options: Omit<Urql.UseQueryArgs<Types.ValidatorQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ValidatorQuery, Types.ValidatorQueryVariables>({ query: Types.ValidatorDocument, ...options });
 };
+export const ValidatorVotingPowerDocument = gql`
+    query ValidatorVotingPower($id: String!) {
+  validatorDetails(id: $id) {
+    votingPower
+  }
+}
+    `;
+
+export function useValidatorVotingPowerQuery(options: Omit<Urql.UseQueryArgs<Types.ValidatorVotingPowerQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ValidatorVotingPowerQuery, Types.ValidatorVotingPowerQueryVariables>({ query: Types.ValidatorVotingPowerDocument, ...options });
+};
 export const ValidatorsDocument = gql`
     query Validators($filter: ValidatorFilter) {
   validatorsHomepage(filter: $filter) {

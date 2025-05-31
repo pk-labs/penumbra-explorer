@@ -1,0 +1,5 @@
+query ValidatorVotingPower($id: String!) {
+    validatorDetails(id: $id) {
+       votingPower
+    }
+}

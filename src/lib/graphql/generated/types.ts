@@ -574,6 +574,13 @@ export type ValidatorQueryVariables = Exact<{
 
 export type ValidatorQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', id: string, name?: string | null, state: string, bondingState?: string | null, website?: string | null, description?: string | null, totalUptime?: number | null, uptimeBlockWindow: number, signedBlocks: number, missedBlocks: number, commissionPercentage: number, commissionStreams: Array<{ __typename?: 'CommissionInfo', recipientAddress?: string | null, streamType: string, rateBps: number }> } | null };
 
+export type ValidatorVotingPowerQueryVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type ValidatorVotingPowerQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', votingPower: number } | null };
+
 export type ValidatorsQueryVariables = Exact<{
   filter?: InputMaybe<ValidatorFilter>;
 }>;
@@ -805,6 +812,13 @@ export const ValidatorDocument = gql`
       streamType
       rateBps
     }
+  }
+}
+    `;
+export const ValidatorVotingPowerDocument = gql`
+    query ValidatorVotingPower($id: String!) {
+  validatorDetails(id: $id) {
+    votingPower
   }
 }
     `;
