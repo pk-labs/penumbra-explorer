@@ -22,6 +22,7 @@ describe('Button', () => {
             </Button>
         )
 
+        console.log(container.innerHTML)
         const button = getByText(container, 'Foo')
 
         expect(button.parentNode).toHaveAttribute('href', '/foo')

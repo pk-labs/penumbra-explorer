@@ -32,11 +32,11 @@ const Button: FC<Props> = ({
             {/* @ts-expect-error iconOnly typing */}
             <PenumbraButton
                 icon={
-                    icon
-                        ? externalLink
-                            ? icons['ExternalLink']
-                            : icons[icon]
-                        : undefined
+                    externalLink
+                        ? icons['ExternalLink']
+                        : icon
+                          ? icons[icon]
+                          : undefined
                 }
                 {...props}
             />
