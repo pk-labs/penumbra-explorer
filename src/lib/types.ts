@@ -69,8 +69,9 @@ export interface TransformedPartialValidator
         NonNullable<
             ValidatorsQuery['validatorsHomepage']['validators']
         >[number],
-        'bondingState' | 'id' | 'state'
+        'bondingState' | 'firstSeenTime' | 'id' | 'state'
     > {
+    activeSince?: string
     bonding: ValidatorBonding
     id: string
     status: ValidatorStatus

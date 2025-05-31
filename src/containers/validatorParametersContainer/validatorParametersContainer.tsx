@@ -27,13 +27,13 @@ const ValidatorParametersContainer: FC<Props> = props => (
                         <Skeleton className="h-4 w-8" />
                     </Parameter>
                     <Parameter name="Downtime penalty">
-                        <Skeleton className="h-4 w-8" />
+                        <Skeleton className="h-4 w-18" />
                     </Parameter>
                     <Parameter name="Misbehavior penalty">
                         <Skeleton className="h-4 w-8" />
                     </Parameter>
                     <Parameter name="Unbonding delay">
-                        <Skeleton className="h-4 w-8" />
+                        <Skeleton className="h-4 w-20" />
                     </Parameter>
                 </Parameters>
             </section>

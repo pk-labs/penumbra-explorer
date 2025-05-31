@@ -48,10 +48,10 @@ const ChainParametersLoader: FC<Props> = async props => {
                         {formatNumber(parameters.currentEpoch)}
                     </Parameter>
                     <Parameter name="Duration">
-                        {formatNumber(parameters.epochDuration)} blocks ~?d
+                        {formatNumber(parameters.epochDuration)} blocks ??? days
                     </Parameter>
                     <Parameter name="Next in">
-                        {formatNumber(parameters.nextEpochIn)} blocks ~?hr
+                        {formatNumber(parameters.nextEpochIn)} blocks ??? hours
                     </Parameter>
                 </Parameters>
             </div>

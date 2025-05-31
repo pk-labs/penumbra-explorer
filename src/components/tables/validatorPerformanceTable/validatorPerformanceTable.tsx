@@ -62,7 +62,9 @@ const ValidatorPerformanceTable: FC<Props> = ({
                                         src={penumbra}
                                         width={24}
                                     />
-                                    <span>??? UM</span>
+                                    <span>
+                                        {formatNumber(validator.votingPower)} UM
+                                    </span>
                                 </span>
                             ) : (
                                 <>
@@ -107,10 +109,7 @@ const ValidatorPerformanceTable: FC<Props> = ({
                             ) : null}
                         </TableCell>
                         <TableCell className="h-15">
-                            {/*<TimeAgo*/}
-                            {/*    initialTimeAgo={validator.initialTimeAgo}*/}
-                            {/*    timestamp={validator.timestamp}*/}
-                            {/*/>*/}
+                            {validator.activeSince}
                         </TableCell>
                         <TableCell className="h-15">
                             {validator.commission}%

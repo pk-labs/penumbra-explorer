@@ -8,6 +8,7 @@ import { Props } from './validatorParametersContainer'
 
 const ValidatorParametersLoader: FC<Props> = async props => {
     const parameters = await getValidatorParameters()
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     if (!parameters) {
         notFound()
@@ -27,16 +28,16 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                     {formatNumber(parameters.uptimeBlocksWindow)}
                 </Parameter>
                 <Parameter name="Required uptime">
-                    {parameters.uptimeMinRequired}
+                    {parameters.uptimeMinRequired}%
                 </Parameter>
                 <Parameter name="Downtime penalty">
-                    {parameters.slashingPenaltyDowntime}
+                    {parameters.slashingPenaltyDowntime}%
                 </Parameter>
                 <Parameter name="Misbehavior penalty">
-                    {parameters.slashingPenaltyMisbehavior}
+                    {parameters.slashingPenaltyMisbehavior}%
                 </Parameter>
                 <Parameter name="Unbonding delay">
-                    {parameters.unbondingDelay}
+                    {parameters.unbondingDelay} ??? days
                 </Parameter>
             </Parameters>
         </section>

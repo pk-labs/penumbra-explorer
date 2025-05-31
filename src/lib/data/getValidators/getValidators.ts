@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
     ValidatorFilter,
@@ -41,10 +42,15 @@ const getValidators = async (
 
     // FIXME: Workaround for certain fields typed as undefined/null
     return result.data?.validatorsHomepage.validators.map(rawValidator => {
-        const { bondingState, state, ...validator } = rawValidator
+        const { bondingState, firstSeenTime, state, ...validator } =
+            rawValidator
 
         return {
             ...validator,
+            activeSince:
+                typeof firstSeenTime === 'string'
+                    ? dayjs().to(firstSeenTime)
+                    : undefined,
             bonding: bondingState
                 ? // @ts-ignore
                   validatorBondingTransformer[bondingState]
