@@ -3,7 +3,7 @@
 import { motion } from 'motion/react'
 import { FC } from 'react'
 import { fastOutSlowIn } from '@/lib/constants'
-import { ValidatorBlocks } from '@/lib/types'
+import { TransformedPartialBlockFragment, ValidatorBlocks } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import styles from './validatorStatusContainer.module.css'
 
@@ -30,7 +30,8 @@ const blockVariants = {
 }
 
 interface Props {
-    blocks: ValidatorBlocks
+    latestBlocks: TransformedPartialBlockFragment[]
+    validatorBlocks?: ValidatorBlocks
 }
 
 const ValidatorStatusBlocks: FC<Props> = props => (
@@ -40,17 +41,25 @@ const ValidatorStatusBlocks: FC<Props> = props => (
         initial="hidden"
         variants={containerVariants}
     >
-        {props.blocks.map(block => (
-            <motion.span
-                key={block.height}
-                className={classNames(
-                    styles.block,
-                    block.signed && styles.signed
-                    // props.missedBlocks.has(block) && styles.missed
-                )}
-                variants={blockVariants}
-            />
-        ))}
+        {props.latestBlocks.map(latestBlock => {
+            const validatorBlock = props.validatorBlocks?.find(
+                block => block.height === latestBlock.height
+            )
+
+            return (
+                <motion.span
+                    key={latestBlock.height}
+                    className={classNames(
+                        styles.block,
+                        validatorBlock?.signed && styles.signed,
+                        validatorBlock &&
+                            !validatorBlock.signed &&
+                            styles.missed
+                    )}
+                    variants={blockVariants}
+                />
+            )
+        })}
     </motion.div>
 )
 

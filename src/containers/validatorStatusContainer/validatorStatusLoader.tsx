@@ -1,16 +1,21 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { getValidatorBlocks } from '@/lib/data'
+import { getBlocks, getValidatorBlocks } from '@/lib/data'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { Props } from './validatorStatusContainer'
 import ValidatorStatusUpdater from './validatorStatusUpdater'
 
 const ValidatorStatusLoader: FC<Props> = async props => {
-    const blocks = await getValidatorBlocks(props.validatorId)
+    const latestBlocks = await getBlocks({ length: 300 })
+    const validatorBlocks = await getValidatorBlocks(props.validatorId)
 
     return (
         <GraphqlClientProvider>
-            <ValidatorStatusUpdater blocks={blocks} {...props} />
+            <ValidatorStatusUpdater
+                latestBlocks={latestBlocks.blocks}
+                validatorBlocks={validatorBlocks}
+                {...props}
+            />
         </GraphqlClientProvider>
     )
 }
