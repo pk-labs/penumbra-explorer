@@ -4,7 +4,7 @@
 import '@/lib/css'
 import { FC } from 'react'
 import { ErrorPage } from '@/components'
-import { background } from '@/lib/images'
+import { backgroundImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 
 const NotFoundPage: FC = () => (
@@ -22,7 +22,7 @@ const NotFoundPage: FC = () => (
                     'left-[calc(50%-900px)] -z-1 h-[1858.5px] w-[1800px]',
                     'bg-cover'
                 )}
-                style={{ backgroundImage: `url(${background.src})` }}
+                style={{ backgroundImage: `url(${backgroundImage.src})` }}
             />
         </body>
     </html>

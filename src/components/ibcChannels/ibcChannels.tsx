@@ -1,6 +1,6 @@
 import { CheckIcon } from 'lucide-react'
 import { FC } from 'react'
-import { penumbra } from '@/lib/images'
+import { penumbraImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import ClientImage from '../clientImage'
 
@@ -32,7 +32,7 @@ const IbcChannels: FC<Props> = props => (
                     'before:border-3'
                 )}
             >
-                <ClientImage alt="Penumbra" src={penumbra} />
+                <ClientImage alt="Penumbra" src={penumbraImage} />
             </div>
             <div
                 className={classNames(

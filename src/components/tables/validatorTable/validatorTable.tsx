@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import { penumbra } from '@/lib/images'
+import { penumbraImage } from '@/lib/images'
 import { TransformedPartialValidator } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import EmptyState from '../../emptyState'
@@ -55,7 +55,7 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                                     <Image
                                         alt="UM"
                                         height={24}
-                                        src={penumbra}
+                                        src={penumbraImage}
                                         width={24}
                                     />
                                     <span>
@@ -69,7 +69,7 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                                             <Image
                                                 alt="UM"
                                                 height={24}
-                                                src={penumbra}
+                                                src={penumbraImage}
                                                 width={24}
                                             />
                                             <span>

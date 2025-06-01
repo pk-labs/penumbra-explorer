@@ -1,7 +1,7 @@
 // istanbul ignore file
 import Image from 'next/image'
 import { FC, Suspense } from 'react'
-import { penumbra } from '@/lib/images'
+import { penumbraImage } from '@/lib/images'
 import NumberPanel from '../../components/panels/numberPanel'
 import ValidatorVotingPowerPanelLoader from './validatorVotingPowerPanelLoader'
 
@@ -18,7 +18,12 @@ const ValidatorVotingPowerPanelContainer: FC<Props> = props => (
                 number={0}
                 numberClassName="gap-2"
                 numberPrefix={
-                    <Image alt="UM" height={32} src={penumbra} width={32} />
+                    <Image
+                        alt="UM"
+                        height={32}
+                        src={penumbraImage}
+                        width={32}
+                    />
                 }
                 numberSuffix="UM"
                 title="Voting power UM"
