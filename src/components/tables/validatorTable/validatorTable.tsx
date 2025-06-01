@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import { penumbraImage } from '@/lib/images'
+import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { TransformedPartialValidator } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
+import Avatar from '../../avatar'
 import EmptyState from '../../emptyState'
 import ValidatorStatusBonding from '../../validatorStatusBonding'
 import { Table, TableCell, TableProps, TableRow } from '../table'
@@ -31,12 +32,10 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                 validators.map((validator, i) => (
                     <TableRow key={i} href={`/validator/${validator.id}`}>
                         <TableCell className="h-15">
-                            <img
-                                alt="Validator avatar"
-                                className="inline rounded-full"
-                                height={32}
-                                src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
-                                width={32}
+                            <Avatar
+                                alt={validator.name ?? validator.id ?? 'LOL'}
+                                fallback={placeholderAvatarImage}
+                                fallbackLetter
                             />
                             <span>
                                 {validator.name ??

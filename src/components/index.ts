@@ -1,7 +1,7 @@
 export { default as ActionHistory } from './actionHistory'
+export { default as Avatar } from './avatar'
 export * from './breadcrumbs'
 export { default as Button } from './button'
-export { default as ClientImage } from './clientImage'
 export { default as Container } from './container'
 export { default as CopyToClipboard } from './copyToClipboard'
 export { default as ErrorPage } from './errorPage'

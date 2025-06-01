@@ -2,7 +2,7 @@ import { CheckIcon } from 'lucide-react'
 import { FC } from 'react'
 import { penumbraImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
-import ClientImage from '../clientImage'
+import Avatar from '../avatar'
 
 interface Props {
     channelId: string
@@ -32,7 +32,7 @@ const IbcChannels: FC<Props> = props => (
                     'before:border-3'
                 )}
             >
-                <ClientImage alt="Penumbra" src={penumbraImage} />
+                <Avatar alt="Penumbra" src={penumbraImage} />
             </div>
             <div
                 className={classNames(
@@ -94,8 +94,9 @@ const IbcChannels: FC<Props> = props => (
                     'before:border-3'
                 )}
             >
-                <ClientImage
+                <Avatar
                     alt={props.counterpartyName}
+                    fallback={penumbraImage}
                     src={props.counterpartyImage}
                 />
             </div>

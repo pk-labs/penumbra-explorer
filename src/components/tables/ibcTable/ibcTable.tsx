@@ -2,9 +2,10 @@ import Link from 'next/link'
 import { FC, useMemo } from 'react'
 import { TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
+import { penumbraImage } from '@/lib/images'
 import { TransformedIbcStats } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
-import ClientImage from '../../clientImage'
+import Avatar from '../../avatar'
 import ClientStatusPill from '../../clientStatusPill'
 import EmptyState from '../../emptyState'
 import TimeAgo from '../../timeAgo'
@@ -62,8 +63,9 @@ const IbcTable: FC<Props> = props => {
                     clients.map(client => (
                         <TableRow key={client.id} href={`/ibc/${client.slug}`}>
                             <TableCell className="h-20">
-                                <ClientImage
+                                <Avatar
                                     alt={client.name}
+                                    fallback={penumbraImage}
                                     src={client.image}
                                 />
                                 <span className="inline-flex flex-col">

@@ -2,13 +2,14 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import {
-    ClientImage,
+    Avatar,
     IbcChannels,
     Parameter,
     Parameters,
     TimeAgo,
 } from '@/components'
 import { getIbcStats } from '@/lib/data'
+import { penumbraImage } from '@/lib/images'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './clientContainer'
 
@@ -36,7 +37,11 @@ const ClientLoader: FC<Props> = async props => {
                         'font-medium'
                     )}
                 >
-                    <ClientImage alt={props.name} src={props.image} />
+                    <Avatar
+                        alt={props.name}
+                        fallback={penumbraImage}
+                        src={props.image}
+                    />
                     <span className="truncate">{props.name}</span>
                 </h1>
                 <div

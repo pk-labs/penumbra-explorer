@@ -1,6 +1,7 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { ClientImage, Parameter, Parameters, Skeleton } from '@/components'
+import { Avatar, Parameter, Parameters, Skeleton } from '@/components'
+import { penumbraImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import ClientLoader from './clientLoader'
 
@@ -30,7 +31,11 @@ const ClientContainer: FC<Props> = props => (
                             'font-medium'
                         )}
                     >
-                        <ClientImage alt={props.name} src={props.image} />
+                        <Avatar
+                            alt={props.name}
+                            fallback={penumbraImage}
+                            src={props.image}
+                        />
                         <span className="truncate">{props.name}</span>
                     </h1>
                     <div

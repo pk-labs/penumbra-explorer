@@ -4,9 +4,10 @@ import { BoxIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 import ibc from '@/lib/ibc'
+import { penumbraImage } from '@/lib/images'
 import { StoredSearchResult } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
-import ClientImage from '../../clientImage'
+import Avatar from '../../avatar'
 
 export interface Props {
     searchResult: StoredSearchResult
@@ -53,9 +54,10 @@ const SearchResult: FC<Props> = props => {
 
             link = (
                 <Link className={linkClassName} href={`/ibc/${client.slug}`}>
-                    <ClientImage
+                    <Avatar
                         alt={client.name}
                         className="-mt-0.5 h-6 w-6 p-1"
+                        fallback={penumbraImage}
                         src={client.image}
                     />
                     {client.name}

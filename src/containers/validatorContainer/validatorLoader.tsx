@@ -3,12 +3,14 @@ import { ExternalLinkIcon, InfoIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import {
+    Avatar,
     CopyToClipboard,
     Parameter,
     Parameters,
     ValidatorStatusBonding,
 } from '@/components'
 import { getValidator } from '@/lib/data'
+import { placeholderAvatarImage } from '@/lib/images'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import { Props } from './validatorContainer'
 
@@ -29,12 +31,11 @@ const ValidatorLoader: FC<Props> = async props => {
         >
             <header className="flex items-center justify-between gap-4">
                 <span className="flex items-center gap-2 overflow-hidden">
-                    <img
+                    <Avatar
                         alt={validator.name ?? validator.id}
-                        className="rounded-full"
-                        height={40}
-                        src="https://image-cdn.solana.fm/images/?imageUrl=https://bafkreihcgrvcp4ze7jjcgblux56idqnqbapmnqm2yc7ky5j6fpaonqtbdu.ipfs.nftstorage.link"
-                        width={40}
+                        className="h-10 w-10 text-base"
+                        fallback={placeholderAvatarImage}
+                        fallbackLetter
                     />
                     <span className="inline-flex flex-col gap-1 overflow-hidden">
                         <h1 className="truncate text-2xl">
@@ -42,7 +43,11 @@ const ValidatorLoader: FC<Props> = async props => {
                         </h1>
                         {validator.website && (
                             <a
-                                className="text-text-secondary hover:text-text-special inline-flex items-center gap-2 text-xs"
+                                className={classNames(
+                                    'text-text-secondary',
+                                    'hover:text-text-special inline-flex',
+                                    'items-center gap-2 text-xs'
+                                )}
                                 href={validator.website}
                                 target="_blank"
                             >
