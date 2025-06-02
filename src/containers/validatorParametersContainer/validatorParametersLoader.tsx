@@ -8,7 +8,6 @@ import { Props } from './validatorParametersContainer'
 
 const ValidatorParametersLoader: FC<Props> = async props => {
     const parameters = await getValidatorParameters()
-    await new Promise(resolve => setTimeout(resolve, 2000))
 
     if (!parameters) {
         notFound()
