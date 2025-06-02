@@ -33,12 +33,12 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                     <TableRow key={i} href={`/validator/${validator.id}`}>
                         <TableCell className="h-15">
                             <Avatar
-                                alt={validator.name ?? validator.id ?? 'LOL'}
+                                alt={validator.name || validator.id}
                                 fallback={placeholderAvatarImage}
                                 fallbackLetter
                             />
                             <span>
-                                {validator.name ??
+                                {validator.name ||
                                     shortenHash(validator.id, 'end')}
                             </span>
                         </TableCell>
