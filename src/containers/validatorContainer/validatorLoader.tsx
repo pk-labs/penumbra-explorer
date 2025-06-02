@@ -33,7 +33,7 @@ const ValidatorLoader: FC<Props> = async props => {
                 <span className="flex items-center gap-2 overflow-hidden">
                     <Avatar
                         alt={validator.name ?? validator.id}
-                        className="h-10 w-10 text-base"
+                        className="h-10 w-10 shrink-0 text-base"
                         fallback={placeholderAvatarImage}
                         fallbackLetter
                     />
