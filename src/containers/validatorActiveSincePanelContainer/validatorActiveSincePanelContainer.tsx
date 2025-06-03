@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import NumberPanel from '../../components/panels/numberPanel'
+import { Panel, Skeleton } from '@/components'
 import ValidatorActiveSincePanelLoader from './validatorActiveSincePanelLoader'
 
 export interface Props {
@@ -11,10 +11,9 @@ export interface Props {
 const ValidatorActiveSincePanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
-            <NumberPanel
+            <Panel
                 className={props.className}
-                number={0}
-                numberSuffix={<span className="ml-2">days</span>}
+                header={<Skeleton className="mt-1 h-9 w-34" />}
                 title="Defined"
             />
         }

@@ -13,14 +13,14 @@ describe('getValidatorActiveSince', () => {
                     Promise.resolve({
                         data: {
                             validatorDetails: {
-                                activeSince: dayjs().subtract(99, 'days'),
+                                activeSince: dayjs().subtract(5, 'days'),
                             },
                         },
                     }),
             }),
         })
 
-        await expect(getValidatorActiveSince('foo')).resolves.toBe(99)
+        await expect(getValidatorActiveSince('foo')).resolves.toBe('5d ago')
     })
 
     test('throws error', async () => {

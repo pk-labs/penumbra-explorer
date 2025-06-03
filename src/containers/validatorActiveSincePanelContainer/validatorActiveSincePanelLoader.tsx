@@ -1,17 +1,23 @@
 // istanbul ignore file
 import { FC } from 'react'
+import { Panel } from '@/components'
 import { getValidatorActiveSince } from '@/lib/data'
-import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { classNames } from '@/lib/utils'
 import { Props } from './validatorActiveSincePanelContainer'
-import ValidatorActiveSincePanelUpdater from './validatorActiveSincePanelUpdater'
 
 const ValidatorActiveSincePanelLoader: FC<Props> = async props => {
-    const number = await getValidatorActiveSince(props.validatorId)
+    const activeSince = await getValidatorActiveSince(props.validatorId)
+    await new Promise(resolve => setTimeout(resolve, 3000))
 
     return (
-        <GraphqlClientProvider>
-            <ValidatorActiveSincePanelUpdater number={number ?? 0} {...props} />
-        </GraphqlClientProvider>
+        <Panel
+            className={classNames(
+                'inline-flex items-center font-mono text-3xl font-medium',
+                props.className
+            )}
+            header={activeSince}
+            title="Defined"
+        />
     )
 }
 

@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
     ValidatorActiveSinceQuery,
@@ -8,7 +8,7 @@ import { validatorActiveSinceQuery } from '@/lib/graphql/queries'
 
 const getValidatorActiveSince = async (
     id: string
-): Promise<number | undefined> => {
+): Promise<string | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -24,7 +24,7 @@ const getValidatorActiveSince = async (
         return
     }
 
-    return dayjs().diff(result.data.validatorDetails.activeSince, 'days')
+    return dayjs().to(result.data.validatorDetails.activeSince)
 }
 
 export default getValidatorActiveSince
