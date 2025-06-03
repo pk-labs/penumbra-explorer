@@ -7,5 +7,11 @@ query Search($slug: String!) {
         ... on Transaction {
             hash
         }
+        ... on ValidatorSearchResults {
+            items {
+                id
+                displayName
+            }
+        }
     }
 }

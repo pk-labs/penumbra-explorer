@@ -165,6 +165,12 @@ export const SearchDocument = gql`
     ... on Transaction {
       hash
     }
+    ... on ValidatorSearchResults {
+      items {
+        id
+        displayName
+      }
+    }
   }
 }
     `;

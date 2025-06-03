@@ -135,4 +135,5 @@ export interface UmPriceData {
 export type StoredSearchResult =
     | { hash: string; type: 'transaction' }
     | { height: number; type: 'block' }
+    | { id: string; name?: string; type: 'validator' }
     | { id: string; type: 'client' }

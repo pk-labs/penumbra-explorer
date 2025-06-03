@@ -7,7 +7,7 @@ schema {
 
 union Action = IbcRelay | NotYetSupportedAction | Output | Spend
 
-union SearchResult = Block | Transaction | ValidatorSearchResult
+union SearchResult = Block | Transaction | ValidatorSearchResults
 
 type AssetId {
     altBaseDenom: String!
@@ -169,6 +169,7 @@ type Root {
     totalShieldedVolume: TotalShieldedVolumeUpdate!
     transactionCount: TransactionCountUpdate!
     transactions: TransactionUpdate!
+    validatorBlocks(validatorId: String!): ValidatorBlockUpdate!
 }
 
 type Spend {
@@ -253,20 +254,26 @@ type TransactionUpdate {
 }
 
 type Validator {
-    bondingState: String
+    bondingState: BondingState!
     commission: Float!
     firstSeenTime: DateTime
-    id: String
+    id: String!
     name: String
-    state: String!
+    state: ValidatorState!
     uptime: Float
     votingPower: Int!
     votingPowerActivePercentage: Float!
 }
 
+type ValidatorBlockUpdate {
+    blockHeight: Int!
+    signed: Boolean!
+    validatorId: String!
+}
+
 type ValidatorDetails {
     activeSince: DateTime
-    bondingState: String
+    bondingState: BondingState!
     commissionPercentage: Float!
     commissionStreams: [CommissionInfo!]!
     description: String
@@ -275,7 +282,7 @@ type ValidatorDetails {
     missedBlocks: Int!
     name: String
     signedBlocks: Int!
-    state: String!
+    state: ValidatorState!
     totalUptime: Float
     uptimeBlockWindow: Int!
     votingPower: Int!
@@ -292,6 +299,18 @@ type ValidatorHomepageData {
 type ValidatorSearchResult {
     displayName: String!
     id: String!
+}
+
+type ValidatorSearchResults {
+    items: [ValidatorSearchResult!]!
+    total: Int!
+}
+
+enum BondingState {
+    BONDING_STATE_ENUM_BONDED
+    BONDING_STATE_ENUM_UNBONDED
+    BONDING_STATE_ENUM_UNBONDING
+    BONDING_STATE_ENUM_UNSPECIFIED
 }
 
 enum ClientStatus {
@@ -313,6 +332,16 @@ enum TimePeriod {
     ALL
     DAY
     MONTH
+}
+
+enum ValidatorState {
+    VALIDATOR_STATE_ENUM_ACTIVE
+    VALIDATOR_STATE_ENUM_DEFINED
+    VALIDATOR_STATE_ENUM_DISABLED
+    VALIDATOR_STATE_ENUM_INACTIVE
+    VALIDATOR_STATE_ENUM_JAILED
+    VALIDATOR_STATE_ENUM_TOMBSTONED
+    VALIDATOR_STATE_ENUM_UNSPECIFIED
 }
 
 enum ValidatorStateFilter {

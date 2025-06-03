@@ -4,9 +4,10 @@ import { BoxIcon, CheckCheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 import ibc from '@/lib/ibc'
-import { penumbraImage } from '@/lib/images'
+import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { StoredSearchResult } from '@/lib/types'
-import { classNames, formatNumber } from '@/lib/utils'
+import { classNames, formatNumber, shortenHash } from '@/lib/utils'
+import { validatorImages } from '@/lib/validators'
 import Avatar from '../../avatar'
 
 export interface Props {
@@ -61,6 +62,24 @@ const SearchResult: FC<Props> = props => {
                         src={client.image}
                     />
                     {client.name}
+                </Link>
+            )
+            break
+        case 'validator':
+            link = (
+                <Link
+                    className={linkClassName}
+                    href={`/validator/${props.searchResult.id}`}
+                >
+                    <Avatar
+                        alt={props.searchResult.name ?? props.searchResult.id}
+                        className="-mt-0.5 h-6 w-6 p-1"
+                        fallback={placeholderAvatarImage}
+                        src={validatorImages[props.searchResult.id]}
+                        fallbackLetter
+                    />
+                    {props.searchResult.name ??
+                        shortenHash(props.searchResult.id)}
                 </Link>
             )
             break

@@ -68,6 +68,12 @@ const SearchContainer: FC<Props> = props => {
                 hash: result.data.search.hash.toLowerCase(),
                 type: 'transaction',
             }
+        } else if (result.data.search.__typename === 'ValidatorSearchResults') {
+            return {
+                id: result.data.search.items[0].id,
+                name: result.data.search.items[0].displayName,
+                type: 'validator',
+            }
         }
     }, 300)
 
@@ -100,6 +106,11 @@ const SearchContainer: FC<Props> = props => {
                             return result.hash !== searchResult.hash
                         } else if (
                             result.type === 'client' &&
+                            result.type === searchResult.type
+                        ) {
+                            return result.id !== searchResult.id
+                        } else if (
+                            result.type === 'validator' &&
                             result.type === searchResult.type
                         ) {
                             return result.id !== searchResult.id
@@ -151,16 +162,15 @@ const SearchContainer: FC<Props> = props => {
 
     if (inputQuery && queryExecuted) {
         if (searchResult) {
+            const titles = {
+                block: 'Block',
+                client: 'IBC chain',
+                transaction: 'Transaction',
+                validator: 'Validator',
+            }
+
             searchResults = (
-                <SearchResultOverlay
-                    title={
-                        searchResult.type === 'block'
-                            ? 'Block'
-                            : searchResult.type === 'transaction'
-                              ? 'Transaction'
-                              : 'IBC chain'
-                    }
-                >
+                <SearchResultOverlay title={titles[searchResult.type]}>
                     <ul
                         className={classNames(
                             'flex flex-col gap-2 font-mono text-sm',

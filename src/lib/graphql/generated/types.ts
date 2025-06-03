@@ -61,6 +61,13 @@ export type BlockUpdate = {
   transactionsCount: Scalars['Int']['output'];
 };
 
+export enum BondingState {
+  BondingStateEnumBonded = 'BONDING_STATE_ENUM_BONDED',
+  BondingStateEnumUnbonded = 'BONDING_STATE_ENUM_UNBONDED',
+  BondingStateEnumUnbonding = 'BONDING_STATE_ENUM_UNBONDING',
+  BondingStateEnumUnspecified = 'BONDING_STATE_ENUM_UNSPECIFIED'
+}
+
 export type ChainParameters = {
   __typename?: 'ChainParameters';
   chainId: Scalars['String']['output'];
@@ -291,6 +298,7 @@ export type Root = {
   totalShieldedVolume: TotalShieldedVolumeUpdate;
   transactionCount: TransactionCountUpdate;
   transactions: TransactionUpdate;
+  validatorBlocks: ValidatorBlockUpdate;
 };
 
 
@@ -316,7 +324,12 @@ export type RootLatestTransactionsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type SearchResult = Block | Transaction | ValidatorSearchResult;
+
+export type RootValidatorBlocksArgs = {
+  validatorId: Scalars['String']['input'];
+};
+
+export type SearchResult = Block | Transaction | ValidatorSearchResults;
 
 export type Spend = {
   __typename?: 'Spend';
@@ -425,21 +438,28 @@ export type TransactionUpdate = {
 
 export type Validator = {
   __typename?: 'Validator';
-  bondingState?: Maybe<Scalars['String']['output']>;
+  bondingState: BondingState;
   commission: Scalars['Float']['output'];
   firstSeenTime?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
   name?: Maybe<Scalars['String']['output']>;
-  state: Scalars['String']['output'];
+  state: ValidatorState;
   uptime?: Maybe<Scalars['Float']['output']>;
   votingPower: Scalars['Int']['output'];
   votingPowerActivePercentage: Scalars['Float']['output'];
 };
 
+export type ValidatorBlockUpdate = {
+  __typename?: 'ValidatorBlockUpdate';
+  blockHeight: Scalars['Int']['output'];
+  signed: Scalars['Boolean']['output'];
+  validatorId: Scalars['String']['output'];
+};
+
 export type ValidatorDetails = {
   __typename?: 'ValidatorDetails';
   activeSince?: Maybe<Scalars['DateTime']['output']>;
-  bondingState?: Maybe<Scalars['String']['output']>;
+  bondingState: BondingState;
   commissionPercentage: Scalars['Float']['output'];
   commissionStreams: Array<CommissionInfo>;
   description?: Maybe<Scalars['String']['output']>;
@@ -448,7 +468,7 @@ export type ValidatorDetails = {
   missedBlocks: Scalars['Int']['output'];
   name?: Maybe<Scalars['String']['output']>;
   signedBlocks: Scalars['Int']['output'];
-  state: Scalars['String']['output'];
+  state: ValidatorState;
   totalUptime?: Maybe<Scalars['Float']['output']>;
   uptimeBlockWindow: Scalars['Int']['output'];
   votingPower: Scalars['Int']['output'];
@@ -472,6 +492,22 @@ export type ValidatorSearchResult = {
   displayName: Scalars['String']['output'];
   id: Scalars['String']['output'];
 };
+
+export type ValidatorSearchResults = {
+  __typename?: 'ValidatorSearchResults';
+  items: Array<ValidatorSearchResult>;
+  total: Scalars['Int']['output'];
+};
+
+export enum ValidatorState {
+  ValidatorStateEnumActive = 'VALIDATOR_STATE_ENUM_ACTIVE',
+  ValidatorStateEnumDefined = 'VALIDATOR_STATE_ENUM_DEFINED',
+  ValidatorStateEnumDisabled = 'VALIDATOR_STATE_ENUM_DISABLED',
+  ValidatorStateEnumInactive = 'VALIDATOR_STATE_ENUM_INACTIVE',
+  ValidatorStateEnumJailed = 'VALIDATOR_STATE_ENUM_JAILED',
+  ValidatorStateEnumTombstoned = 'VALIDATOR_STATE_ENUM_TOMBSTONED',
+  ValidatorStateEnumUnspecified = 'VALIDATOR_STATE_ENUM_UNSPECIFIED'
+}
 
 export enum ValidatorStateFilter {
   Active = 'ACTIVE',
@@ -535,7 +571,7 @@ export type SearchQueryVariables = Exact<{
 }>;
 
 
-export type SearchQuery = { __typename?: 'QueryRoot', search?: { __typename: 'Block', height: number } | { __typename: 'Transaction', hash: string } | { __typename: 'ValidatorSearchResult' } | null };
+export type SearchQuery = { __typename?: 'QueryRoot', search?: { __typename: 'Block', height: number } | { __typename: 'Transaction', hash: string } | { __typename: 'ValidatorSearchResults', items: Array<{ __typename?: 'ValidatorSearchResult', id: string, displayName: string }> } | null };
 
 export type StatsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -586,7 +622,7 @@ export type ValidatorQueryVariables = Exact<{
 }>;
 
 
-export type ValidatorQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', id: string, name?: string | null, state: string, bondingState?: string | null, website?: string | null, description?: string | null, totalUptime?: number | null, uptimeBlockWindow: number, signedBlocks: number, missedBlocks: number, commissionPercentage: number, commissionStreams: Array<{ __typename?: 'CommissionInfo', recipientAddress?: string | null, streamType: string, rateBps: number }> } | null };
+export type ValidatorQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', id: string, name?: string | null, state: ValidatorState, bondingState: BondingState, website?: string | null, description?: string | null, totalUptime?: number | null, uptimeBlockWindow: number, signedBlocks: number, missedBlocks: number, commissionPercentage: number, commissionStreams: Array<{ __typename?: 'CommissionInfo', recipientAddress?: string | null, streamType: string, rateBps: number }> } | null };
 
 export type ValidatorVotingPercentageQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -607,7 +643,7 @@ export type ValidatorsQueryVariables = Exact<{
 }>;
 
 
-export type ValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', validators: Array<{ __typename?: 'Validator', id?: string | null, name?: string | null, state: string, bondingState?: string | null, votingPower: number, votingPowerActivePercentage: number, uptime?: number | null, firstSeenTime?: any | null, commission: number }> } };
+export type ValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', validators: Array<{ __typename?: 'Validator', id: string, name?: string | null, state: ValidatorState, bondingState: BondingState, votingPower: number, votingPowerActivePercentage: number, uptime?: number | null, firstSeenTime?: any | null, commission: number }> } };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -766,6 +802,12 @@ export const SearchDocument = gql`
     }
     ... on Transaction {
       hash
+    }
+    ... on ValidatorSearchResults {
+      items {
+        id
+        displayName
+      }
     }
   }
 }
