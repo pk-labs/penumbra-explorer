@@ -1,0 +1,9 @@
+@reference "../../lib/css/global.css";
+
+.root {
+    &.override {
+        @apply bg-other-dialogBackground text-text-primary;
+        @apply border-other-tonalStroke rounded-sm;
+        @apply border-1 p-2 font-mono text-xs font-medium backdrop-blur-lg;
+    }
+}

@@ -1,10 +1,12 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { FC } from 'react'
+import Link from 'next/link'
+import { FC, Fragment } from 'react'
+import { Tooltip } from '@/components'
 import { fastOutSlowIn } from '@/lib/constants'
 import { TransformedPartialBlockFragment, ValidatorBlocks } from '@/lib/types'
-import { classNames } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 import styles from './validatorStatusContainer.module.css'
 
 const containerVariants = {
@@ -47,17 +49,30 @@ const ValidatorStatusBlocks: FC<Props> = props => (
             )
 
             return (
-                <motion.span
-                    key={latestBlock.height}
-                    className={classNames(
-                        styles.block,
-                        validatorBlock?.signed && styles.signed,
-                        validatorBlock &&
-                            !validatorBlock.signed &&
-                            styles.missed
-                    )}
-                    variants={blockVariants}
-                />
+                <Fragment key={latestBlock.height}>
+                    <motion.span
+                        className={classNames(
+                            styles.block,
+                            validatorBlock?.signed && styles.signed,
+                            validatorBlock &&
+                                !validatorBlock.signed &&
+                                styles.missed
+                        )}
+                        id={`block-${latestBlock.height}`}
+                        variants={blockVariants}
+                    />
+                    <Tooltip anchorSelect={`#block-${latestBlock.height}`}>
+                        <Link
+                            className="hover:text-text-primary flex flex-col"
+                            href={`/block/${latestBlock.height}`}
+                        >
+                            Block height
+                            <span className="text-sm">
+                                {formatNumber(latestBlock.height)}
+                            </span>
+                        </Link>
+                    </Tooltip>
+                </Fragment>
             )
         })}
     </motion.div>

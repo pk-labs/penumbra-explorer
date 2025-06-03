@@ -1,15 +1,16 @@
 @reference "../../lib/css/global.css";
 
 .block {
-    @apply bg-neutral-main inline-block rounded-xs;
+    @apply bg-neutral-main ease-fast-out-slow-in hover:bg-neutral-800;
+    @apply inline-block rounded-xs transition-[background] duration-200;
     width: 15px;
     height: 15px;
 
     &.signed {
-        @apply bg-success-light;
+        @apply bg-success-light hover:bg-success-main;
     }
 
     &.missed {
-        @apply bg-destructive-light;
+        @apply bg-destructive-light hover:bg-destructive-main;
     }
 }
