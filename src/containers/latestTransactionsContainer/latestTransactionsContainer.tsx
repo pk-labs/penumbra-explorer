@@ -12,6 +12,8 @@ import LatestTransactionsLoader from './latestTransactionsLoader'
 export interface Props
     extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
     limit: number
+    // TODO: This is temporary until refactoring done
+    validatorId?: string
 }
 
 // TODO: Refactor into generic transactionTableContainer with configurable

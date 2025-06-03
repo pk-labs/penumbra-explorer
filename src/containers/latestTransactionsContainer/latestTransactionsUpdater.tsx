@@ -13,12 +13,14 @@ interface Props extends LatestTransactionsContainerProps {
     transactions?: TransformedPartialTransactionFragment[]
 }
 
-const LatestTransactionsUpdater: FC<Props> = props => {
+const LatestTransactionsUpdater: FC<Props> = ({ validatorId, ...props }) => {
     const [transactions, setTransactions] = useState<
         TransformedPartialTransactionFragment[] | undefined
     >(props.transactions)
 
     const [transactionUpdateSubscription] = useTransactionUpdateSubscription({
+        // TODO: This is temporary until refactoring done
+        pause: Boolean(validatorId),
         variables: { limit: props.limit },
     })
 

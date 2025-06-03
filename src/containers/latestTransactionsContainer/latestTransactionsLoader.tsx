@@ -6,9 +6,12 @@ import { Props } from './latestTransactionsContainer'
 import LatestTransactionsUpdater from './latestTransactionsUpdater'
 
 const LatestTransactionsLoader: FC<Props> = async props => {
-    const { transactions } = await getTransactions({
-        length: props.limit,
-    })
+    const { transactions } = await getTransactions(
+        {
+            length: props.limit,
+        },
+        { validator: props.validatorId }
+    )
 
     return (
         <GraphqlClientProvider>

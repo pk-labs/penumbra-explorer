@@ -86,6 +86,7 @@ const ValidatorPage: FC<Props> = async props => {
                         </h2>
                     }
                     limit={10}
+                    validatorId={id}
                     blockHeight
                     time
                 />
