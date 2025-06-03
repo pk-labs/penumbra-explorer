@@ -29,6 +29,7 @@ const ValidatorVotingPercentagePanelUpdater: FC<Props> = props => {
             number={number}
             numberSuffix="%"
             title="Voting power %"
+            toFixed={2}
         />
     )
 }

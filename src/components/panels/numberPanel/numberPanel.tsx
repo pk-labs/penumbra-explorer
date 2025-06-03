@@ -10,6 +10,7 @@ export interface Props extends Omit<PanelProps, 'header'> {
     numberClassName?: string
     numberPrefix?: ReactNode
     numberSuffix?: ReactNode
+    toFixed?: number
 }
 
 const NumberPanel: FC<Props> = ({
@@ -27,6 +28,7 @@ const NumberPanel: FC<Props> = ({
                     number={number}
                     prefix={numberPrefix}
                     suffix={numberSuffix}
+                    toFixed={props.toFixed}
                 />
             ) : (
                 <span

@@ -10,6 +10,7 @@ export interface Props {
     number: number
     prefix?: ReactNode
     suffix?: ReactNode
+    toFixed?: number
 }
 
 const NumberCountup: FC<Props> = props => {
@@ -18,8 +19,13 @@ const NumberCountup: FC<Props> = props => {
     const motionValue = useMotionValue(0)
 
     const transformValue = useCallback(
-        (value: number) => formatNumber(Math.round(value)),
-        []
+        (value: number) =>
+            formatNumber(
+                props.toFixed
+                    ? Number(value.toFixed(props.toFixed))
+                    : Math.round(value)
+            ),
+        [props.toFixed]
     )
 
     const transformedValue = useTransform(motionValue, transformValue)
