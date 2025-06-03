@@ -51,6 +51,7 @@ const ValidatorLoader: FC<Props> = async props => {
                                     'items-center gap-2 text-xs'
                                 )}
                                 href={validator.website}
+                                rel="nofollow"
                                 target="_blank"
                             >
                                 {validator.website}
