@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC } from 'react'
-import { Container } from '@/components'
+import { Button, Container } from '@/components'
 import {
     LatestBlocksContainer,
     LatestTransactionsContainer,
@@ -56,6 +56,16 @@ const HomePage: FC = async () => (
                     'col-span-6 col-start-1 row-5 lg:col-span-3',
                     'lg:col-start-4 lg:row-2'
                 )}
+                header={
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-medium">
+                            Latest transactions
+                        </h2>
+                        <Button density="compact" href="/txs">
+                            View all
+                        </Button>
+                    </div>
+                }
                 limit={10}
                 blockHeight
             />

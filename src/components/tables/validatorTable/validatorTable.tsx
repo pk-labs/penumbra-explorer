@@ -62,30 +62,28 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                                     </span>
                                 </span>
                             ) : (
-                                <>
-                                    <span className="inline-flex flex-col gap-1">
-                                        <span className="inline-flex items-center gap-1">
-                                            <Image
-                                                alt="UM"
-                                                height={24}
-                                                src={penumbraImage}
-                                                width={24}
-                                            />
-                                            <span>
-                                                {formatNumber(
-                                                    validator.votingPower
-                                                )}{' '}
-                                                UM
-                                            </span>
-                                        </span>
-                                        <span className="text-text-secondary ml-7 text-xs">
-                                            {validator.votingPowerActivePercentage.toFixed(
-                                                2
-                                            )}
-                                            %
+                                <span className="inline-flex flex-col gap-1">
+                                    <span className="inline-flex items-center gap-1">
+                                        <Image
+                                            alt="UM"
+                                            height={24}
+                                            src={penumbraImage}
+                                            width={24}
+                                        />
+                                        <span>
+                                            {formatNumber(
+                                                validator.votingPower
+                                            )}{' '}
+                                            UM
                                         </span>
                                     </span>
-                                </>
+                                    <span className="text-text-secondary ml-7 text-xs">
+                                        {validator.votingPowerActivePercentage.toFixed(
+                                            2
+                                        )}
+                                        %
+                                    </span>
+                                </span>
                             )}
                         </TableCell>
                         <TableCell className="h-15">
