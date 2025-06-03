@@ -41,7 +41,7 @@ const ValidatorLoader: FC<Props> = async props => {
                     />
                     <span className="inline-flex flex-col gap-1">
                         <h1 className="text-2xl">
-                            {validator.name || validator.id}
+                            {validator.name || shortenHash(validator.id, 'end')}
                         </h1>
                         {validator.website && (
                             <a
