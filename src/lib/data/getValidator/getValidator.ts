@@ -38,6 +38,7 @@ const getValidator = async (
         return
     }
 
+    // TODO: Use enums from GraphQL
     const { bondingState, state, ...validator } = result.data.validatorDetails
 
     return {
@@ -46,7 +47,6 @@ const getValidator = async (
             ? // @ts-ignore
               validatorBondingTransformer[bondingState]
             : 'Unbonded',
-        id: `${validator.id}`,
         // @ts-ignore
         status: state ? validatorStatusTransformer[state] : 'Unspecified',
     }

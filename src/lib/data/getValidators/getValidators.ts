@@ -40,7 +40,8 @@ const getValidators = async (
         throw result.error
     }
 
-    // FIXME: Workaround for certain fields typed as undefined/null
+    // TODO: Use enums from GraphQL
+    // @ts-ignore
     return result.data?.validatorsHomepage.validators.map(rawValidator => {
         const { bondingState, firstSeenTime, state, ...validator } =
             rawValidator
@@ -55,8 +56,6 @@ const getValidators = async (
                 ? // @ts-ignore
                   validatorBondingTransformer[bondingState]
                 : 'Unbonded',
-            id: `${validator.id}`,
-            // @ts-ignore
             status: state ? validatorStatusTransformer[state] : 'Unspecified',
         }
     })

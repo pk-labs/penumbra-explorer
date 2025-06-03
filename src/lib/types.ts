@@ -58,10 +58,9 @@ export interface TransformedIbcStats
 export interface TransformedValidator
     extends Omit<
         NonNullable<ValidatorQuery['validatorDetails']>,
-        'bondingState' | 'id' | 'state'
+        'bondingState' | 'state'
     > {
     bonding: ValidatorBonding
-    id: string
     status: ValidatorStatus
 }
 
@@ -70,11 +69,10 @@ export interface TransformedPartialValidator
         NonNullable<
             ValidatorsQuery['validatorsHomepage']['validators']
         >[number],
-        'bondingState' | 'firstSeenTime' | 'id' | 'state'
+        'bondingState' | 'firstSeenTime' | 'state'
     > {
     activeSince?: string
     bonding: ValidatorBonding
-    id: string
     status: ValidatorStatus
 }
 
