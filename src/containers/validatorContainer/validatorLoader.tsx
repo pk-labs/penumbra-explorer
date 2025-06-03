@@ -126,10 +126,12 @@ const ValidatorLoader: FC<Props> = async props => {
                             >
                                 {stream.recipientAddress ? (
                                     <>
-                                        {shortenHash(
-                                            stream.recipientAddress,
-                                            'end'
-                                        )}
+                                        <span className="text-text-primary">
+                                            {shortenHash(
+                                                stream.recipientAddress,
+                                                'end'
+                                            )}
+                                        </span>
                                         <CopyToClipboard
                                             className="text-text-primary"
                                             text={stream.recipientAddress}
@@ -137,7 +139,7 @@ const ValidatorLoader: FC<Props> = async props => {
                                         />
                                     </>
                                 ) : (
-                                    'Unknown'
+                                    'Community pool'
                                 )}
                             </Parameter>
                         ))}
