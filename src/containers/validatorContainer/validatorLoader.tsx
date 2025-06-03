@@ -89,7 +89,7 @@ const ValidatorLoader: FC<Props> = async props => {
                         Total uptime{' '}
                         <span
                             className={classNames(
-                                validator.totalUptime === 100
+                                validator.totalUptime >= 80
                                     ? 'text-success-light'
                                     : validator.totalUptime > 5
                                       ? 'text-caution-light'

@@ -92,7 +92,7 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                             {typeof validator.uptime === 'number' ? (
                                 <span
                                     className={classNames(
-                                        validator.uptime === 100
+                                        validator.uptime >= 80
                                             ? 'text-success-light'
                                             : validator.uptime > 5
                                               ? 'text-caution-light'
