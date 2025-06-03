@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { TransformedPartialValidator } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
+import { validatorImages } from '@/lib/validators'
 import Avatar from '../../avatar'
 import EmptyState from '../../emptyState'
 import ValidatorStatusBonding from '../../validatorStatusBonding'
@@ -35,6 +36,7 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                             <Avatar
                                 alt={validator.name || validator.id}
                                 fallback={placeholderAvatarImage}
+                                src={validatorImages[validator.id]}
                                 fallbackLetter
                             />
                             <span>

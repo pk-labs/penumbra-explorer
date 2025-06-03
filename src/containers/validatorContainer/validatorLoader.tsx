@@ -12,6 +12,7 @@ import {
 import { getValidator } from '@/lib/data'
 import { placeholderAvatarImage } from '@/lib/images'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
+import { validatorImages } from '@/lib/validators'
 import { Props } from './validatorContainer'
 
 const ValidatorLoader: FC<Props> = async props => {
@@ -35,6 +36,7 @@ const ValidatorLoader: FC<Props> = async props => {
                         alt={validator.name || validator.id}
                         className="h-10 w-10 shrink-0 text-base"
                         fallback={placeholderAvatarImage}
+                        src={validatorImages[validator.id]}
                         fallbackLetter
                     />
                     <span className="inline-flex flex-col gap-1 overflow-hidden">
