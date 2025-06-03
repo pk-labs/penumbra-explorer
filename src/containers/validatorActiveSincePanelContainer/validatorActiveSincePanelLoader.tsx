@@ -7,7 +7,6 @@ import { Props } from './validatorActiveSincePanelContainer'
 
 const ValidatorActiveSincePanelLoader: FC<Props> = async props => {
     const activeSince = await getValidatorActiveSince(props.validatorId)
-    await new Promise(resolve => setTimeout(resolve, 3000))
 
     return (
         <Panel
