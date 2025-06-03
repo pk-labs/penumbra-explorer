@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC } from 'react'
 import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { TransformedPartialValidator } from '@/lib/types'
@@ -39,10 +40,10 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                                 src={validatorImages[validator.id]}
                                 fallbackLetter
                             />
-                            <span>
+                            <Link href={`/validator/${validator.id}`}>
                                 {validator.name ||
                                     shortenHash(validator.id, 'end')}
-                            </span>
+                            </Link>
                         </TableCell>
                         <TableCell className="h-15">
                             <ValidatorStatusBonding
