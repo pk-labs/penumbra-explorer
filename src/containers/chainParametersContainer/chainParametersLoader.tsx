@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { Parameter, Parameters } from '@/components'
 import { getChainParameters } from '@/lib/data'
 import dayjs from '@/lib/dayjs/dayjs'
-import { classNames, formatNumber } from '@/lib/utils'
+import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
 import { Props } from './chainParametersContainer'
 
 const ChainParametersLoader: FC<Props> = async props => {
@@ -48,10 +48,12 @@ const ChainParametersLoader: FC<Props> = async props => {
                         {formatNumber(parameters.currentEpoch)}
                     </Parameter>
                     <Parameter name="Duration">
-                        {formatNumber(parameters.epochDuration)} blocks ??? days
+                        {formatNumber(parameters.epochDuration)} blocks{' '}
+                        {blocksToTime(parameters.epochDuration)}
                     </Parameter>
                     <Parameter name="Next in">
-                        {formatNumber(parameters.nextEpochIn)} blocks ??? hours
+                        {formatNumber(parameters.nextEpochIn)} blocks{' '}
+                        {blocksToTime(parameters.nextEpochIn)}
                     </Parameter>
                 </Parameters>
             </div>

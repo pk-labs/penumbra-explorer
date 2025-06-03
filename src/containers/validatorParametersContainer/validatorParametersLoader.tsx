@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Parameter, Parameters } from '@/components'
 import { getValidatorParameters } from '@/lib/data'
-import { classNames, formatNumber } from '@/lib/utils'
+import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
 import { Props } from './validatorParametersContainer'
 
 const ValidatorParametersLoader: FC<Props> = async props => {
@@ -36,7 +36,8 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                     {parameters.slashingPenaltyMisbehavior}%
                 </Parameter>
                 <Parameter name="Unbonding delay">
-                    {parameters.unbondingDelay} ??? days
+                    {parameters.unbondingDelay}{' '}
+                    {blocksToTime(parameters.unbondingDelay)}
                 </Parameter>
             </Parameters>
         </section>
