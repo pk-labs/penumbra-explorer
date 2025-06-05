@@ -40,15 +40,6 @@ const SearchContainer: FC<Props> = props => {
     const [executeSearchQuery, cancelSearchQuery] = useDebounce<
         (query: string) => Promise<StoredSearchResult | undefined>
     >(async (query: string) => {
-        const client = searchIbc(query)
-
-        if (client) {
-            return {
-                id: client.id,
-                type: 'client',
-            }
-        }
-
         const result = await graphqlClient
             .query<
                 SearchQuery,
@@ -57,7 +48,14 @@ const SearchContainer: FC<Props> = props => {
             .toPromise()
 
         if (result.error || !result.data?.search) {
-            return
+            const client = searchIbc(query)
+
+            if (client) {
+                return {
+                    id: client.id,
+                    type: 'client',
+                }
+            }
         } else if (result.data.search.__typename === 'Block') {
             return {
                 height: result.data.search.height,
