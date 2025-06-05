@@ -2,7 +2,6 @@
 import { FC } from 'react'
 import { Panel } from '@/components'
 import { getValidatorActiveSince } from '@/lib/data'
-import { classNames } from '@/lib/utils'
 import { Props } from './validatorActiveSincePanelContainer'
 
 const ValidatorActiveSincePanelLoader: FC<Props> = async props => {
@@ -10,11 +9,12 @@ const ValidatorActiveSincePanelLoader: FC<Props> = async props => {
 
     return (
         <Panel
-            className={classNames(
-                'inline-flex items-center font-mono text-3xl font-medium',
-                props.className
-            )}
-            header={activeSince}
+            className={props.className}
+            header={
+                <span className="font-medium' font-mono text-3xl">
+                    {activeSince}
+                </span>
+            }
             title="Defined"
         />
     )
