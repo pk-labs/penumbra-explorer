@@ -7,7 +7,7 @@ import { validatorVotingPowerQuery } from '@/lib/graphql/queries'
 
 const getValidatorVotingPower = async (
     id: string
-): Promise<number | undefined> => {
+): Promise<undefined | ValidatorVotingPowerQuery['validatorDetails']> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -21,7 +21,7 @@ const getValidatorVotingPower = async (
         throw result.error
     }
 
-    return result.data?.validatorDetails?.votingPower
+    return result.data?.validatorDetails
 }
 
 export default getValidatorVotingPower

@@ -8,6 +8,7 @@ import { penumbraImage } from '@/lib/images'
 import { Props as ValidatorVotingPowerPanelContainerProps } from './validatorVotingPowerPanelContainer'
 
 interface Props extends ValidatorVotingPowerPanelContainerProps {
+    active?: boolean
     number: number
 }
 
@@ -34,7 +35,7 @@ const ValidatorVotingPowerPanelUpdater: FC<Props> = props => {
                 <Image alt="UM" height={32} src={penumbraImage} width={32} />
             }
             numberSuffix="UM"
-            title="Voting power UM"
+            title={props.active ? 'Voting power UM' : 'Staked tokens'}
         />
     )
 }

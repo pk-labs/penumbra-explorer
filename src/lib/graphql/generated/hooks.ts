@@ -307,6 +307,7 @@ export function useValidatorVotingPercentageQuery(options: Omit<Urql.UseQueryArg
 export const ValidatorVotingPowerDocument = gql`
     query ValidatorVotingPower($id: String!) {
   validatorDetails(id: $id) {
+    state
     votingPower
   }
 }
