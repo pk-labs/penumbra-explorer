@@ -50,27 +50,30 @@ const ValidatorStatusBlocks: FC<Props> = props => (
 
             return (
                 <Fragment key={latestBlock.height}>
-                    <motion.span
-                        className={classNames(
-                            styles.block,
-                            validatorBlock?.signed && styles.signed,
-                            validatorBlock &&
-                                !validatorBlock.signed &&
-                                styles.missed
-                        )}
+                    <Link
+                        className={styles.link}
+                        href={`/block/${latestBlock.height}`}
                         id={`block-${latestBlock.height}`}
-                        variants={blockVariants}
-                    />
-                    <Tooltip anchorSelect={`#block-${latestBlock.height}`}>
-                        <Link
-                            className="hover:text-text-primary flex flex-col"
-                            href={`/block/${latestBlock.height}`}
-                        >
-                            Block height
-                            <span className="text-sm">
-                                {formatNumber(latestBlock.height)}
-                            </span>
-                        </Link>
+                    >
+                        <motion.span
+                            className={classNames(
+                                styles.block,
+                                validatorBlock?.signed && styles.signed,
+                                validatorBlock &&
+                                    !validatorBlock.signed &&
+                                    styles.missed
+                            )}
+                            variants={blockVariants}
+                        />
+                    </Link>
+                    <Tooltip
+                        anchorSelect={`#block-${latestBlock.height}`}
+                        className="flex flex-col items-center"
+                    >
+                        Block height
+                        <span className="text-sm">
+                            {formatNumber(latestBlock.height)}
+                        </span>
                     </Tooltip>
                 </Fragment>
             )
