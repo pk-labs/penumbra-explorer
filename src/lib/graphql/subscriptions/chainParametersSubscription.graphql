@@ -1,0 +1,10 @@
+subscription ChainParametersUpdate {
+    chainParameters {
+        chainId
+        currentBlockTime
+        currentBlockHeight
+        currentEpoch
+        epochDuration
+        nextEpochIn
+    }
+}

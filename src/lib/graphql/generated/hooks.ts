@@ -350,6 +350,22 @@ export const BlockUpdateDocument = gql`
 export function useBlockUpdateSubscription<TData = Types.BlockUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.BlockUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.BlockUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.BlockUpdateSubscription, TData, Types.BlockUpdateSubscriptionVariables>({ query: Types.BlockUpdateDocument, ...options }, handler);
 };
+export const ChainParametersUpdateDocument = gql`
+    subscription ChainParametersUpdate {
+  chainParameters {
+    chainId
+    currentBlockTime
+    currentBlockHeight
+    currentEpoch
+    epochDuration
+    nextEpochIn
+  }
+}
+    `;
+
+export function useChainParametersUpdateSubscription<TData = Types.ChainParametersUpdateSubscription>(options?: Omit<Urql.UseSubscriptionArgs<Types.ChainParametersUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.ChainParametersUpdateSubscription, TData>) {
+  return Urql.useSubscription<Types.ChainParametersUpdateSubscription, TData, Types.ChainParametersUpdateSubscriptionVariables>({ query: Types.ChainParametersUpdateDocument, ...options }, handler);
+};
 export const TotalShieldedVolumeUpdateDocument = gql`
     subscription TotalShieldedVolumeUpdate {
   totalShieldedVolume {

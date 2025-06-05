@@ -1,11 +1,10 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Parameter, Parameters } from '@/components'
 import { getChainParameters } from '@/lib/data'
-import dayjs from '@/lib/dayjs/dayjs'
-import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
+import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { Props } from './chainParametersContainer'
+import ChainParametersUpdater from './chainParametersUpdater'
 
 const ChainParametersLoader: FC<Props> = async props => {
     const parameters = await getChainParameters()
@@ -15,49 +14,9 @@ const ChainParametersLoader: FC<Props> = async props => {
     }
 
     return (
-        <section
-            className={classNames(
-                'bg-other-tonalFill5 flex flex-col gap-2 rounded-lg p-6',
-                'backdrop-blur-lg',
-                props.className
-            )}
-        >
-            <div className="flex flex-col gap-1">
-                <h2 className="text-lg">Chain parameters</h2>
-                <Parameters>
-                    <Parameter name="Chain ID">{parameters.chainId}</Parameter>
-                </Parameters>
-            </div>
-            <div className="flex flex-col gap-1">
-                <h3 className="text-base">Latest block</h3>
-                <Parameters>
-                    <Parameter name="Time">
-                        {dayjs(parameters.currentBlockTime).format(
-                            'YYYY-MM-DD HH:mm:ss z'
-                        )}
-                    </Parameter>
-                    <Parameter name="Height">
-                        {formatNumber(parameters.currentBlockHeight)}
-                    </Parameter>
-                </Parameters>
-            </div>
-            <div className="flex flex-col gap-1">
-                <h3 className="text-base">Epoch</h3>
-                <Parameters>
-                    <Parameter name="Current">
-                        {formatNumber(parameters.currentEpoch)}
-                    </Parameter>
-                    <Parameter name="Duration">
-                        {formatNumber(parameters.epochDuration)} blocks{' '}
-                        {blocksToTime(parameters.epochDuration)}
-                    </Parameter>
-                    <Parameter name="Next in">
-                        {formatNumber(parameters.nextEpochIn)} blocks{' '}
-                        {blocksToTime(parameters.nextEpochIn)}
-                    </Parameter>
-                </Parameters>
-            </div>
-        </section>
+        <GraphqlClientProvider>
+            <ChainParametersUpdater {...props} parameters={parameters} />
+        </GraphqlClientProvider>
     )
 }
 
