@@ -3,20 +3,18 @@ import blocksToTime from './blocksToTime'
 
 describe('blocksToTime', () => {
     test('returns days', async () => {
-        expect(blocksToTime((60 * 60 * 24 * 3.5) / secondsPerBlock)).toBe(
-            '~3 days'
-        )
+        expect(blocksToTime((60 * 60 * 24 * 3.5) / secondsPerBlock)).toBe('~3d')
     })
 
     test('returns hours', async () => {
-        expect(blocksToTime((60 * 60 * 5) / secondsPerBlock)).toBe('~5 hours')
+        expect(blocksToTime((60 * 60 * 5) / secondsPerBlock)).toBe('~5hr')
     })
 
     test('returns minutes', async () => {
-        expect(blocksToTime((60 * 7) / secondsPerBlock)).toBe('~7 minutes')
+        expect(blocksToTime((60 * 7) / secondsPerBlock)).toBe('~7m')
     })
 
     test('returns seconds', async () => {
-        expect(blocksToTime(43 / secondsPerBlock)).toBe('~43 seconds')
+        expect(blocksToTime(43 / secondsPerBlock)).toBe('~43s')
     })
 })
