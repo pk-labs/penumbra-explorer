@@ -80,6 +80,7 @@ const ValidatorPage: FC<Props> = async props => {
                         'col-span-12 md:col-span-7 md:col-start-6',
                         'lg:col-span-8! lg:col-start-5!'
                     )}
+                    emptyStateMessage="No transactions"
                     header={
                         <h2 className="text-2xl font-medium">
                             Latest transactions
