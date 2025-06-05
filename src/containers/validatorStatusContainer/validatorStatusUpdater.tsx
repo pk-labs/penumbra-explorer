@@ -61,7 +61,12 @@ const ValidatorStatusUpdater: FC<Props> = props => {
                     )}
                 </div>
             ) : (
-                <div className="flex h-25 items-center justify-center text-sm">
+                <div
+                    className={classNames(
+                        'text-text-secondary flex h-25 items-center',
+                        'justify-center text-sm'
+                    )}
+                >
                     No signing activity
                 </div>
             )}
