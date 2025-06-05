@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { FC, useMemo } from 'react'
 import { TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
-import { penumbraImage } from '@/lib/images'
+import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { TransformedIbcStats } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import Avatar from '../../avatar'
@@ -65,7 +65,7 @@ const IbcTable: FC<Props> = props => {
                             <TableCell className="h-20">
                                 <Avatar
                                     alt={client.name}
-                                    fallback={penumbraImage}
+                                    fallback={placeholderAvatarImage}
                                     src={client.image}
                                 />
                                 <span className="inline-flex flex-col">

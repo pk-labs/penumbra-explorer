@@ -58,7 +58,7 @@ const SearchResult: FC<Props> = props => {
                     <Avatar
                         alt={client.name}
                         className="-mt-0.5 h-6 w-6 p-1"
-                        fallback={penumbraImage}
+                        fallback={placeholderAvatarImage}
                         src={client.image}
                     />
                     {client.name}
