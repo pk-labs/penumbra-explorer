@@ -1,32 +1,34 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useState } from 'react'
-import { TransformedPartialBlockFragment, ValidatorBlocks } from '@/lib/types'
+import { FC, useEffect, useState } from 'react'
+import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
+import { ValidatorBlocks } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import ValidatorStatusBlocks from './validatorStatusBlocks'
 import { Props as ValidatorStatusContainerProps } from './validatorStatusContainer'
 import ValidatorStatusLegend from './validatorStatusLegend'
 
 interface Props extends ValidatorStatusContainerProps {
-    latestBlocks?: TransformedPartialBlockFragment[]
+    latestBlocks?: number[]
     validatorBlocks?: ValidatorBlocks
 }
 
 const ValidatorStatusUpdater: FC<Props> = props => {
-    const [latestBlocks] = useState(props.latestBlocks)
+    const [latestBlocks, setLatestBlocks] = useState(props.latestBlocks)
     const [validatorBlocks] = useState(props.validatorBlocks)
+    const [blockSubscription] = useBlockUpdateSubscription({
+        variables: { limit: 1 },
+    })
+    const blockUpdate = blockSubscription.data?.latestBlocks
 
-    // const [transactionCountUpdateSubscription] =
-    //     useTransactionCountUpdateSubscription()
-    //
-    // useEffect(() => {
-    //     if (transactionCountUpdateSubscription.data?.transactionCount) {
-    //         setNumber(
-    //             transactionCountUpdateSubscription.data.transactionCount.count
-    //         )
-    //     }
-    // }, [transactionCountUpdateSubscription.data?.transactionCount])
+    useEffect(() => {
+        if (blockUpdate) {
+            setLatestBlocks(
+                prev => prev && [blockUpdate.height, ...prev.slice(1)]
+            )
+        }
+    }, [blockUpdate])
 
     return (
         <section
@@ -51,9 +53,7 @@ const ValidatorStatusUpdater: FC<Props> = props => {
                 <div className="flex flex-col gap-2">
                     <ValidatorStatusLegend
                         lastBlock={
-                            latestBlocks?.length
-                                ? latestBlocks[0].height
-                                : undefined
+                            latestBlocks?.length ? latestBlocks[0] : undefined
                         }
                     />
                     {latestBlocks && (

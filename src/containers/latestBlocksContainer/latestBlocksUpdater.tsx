@@ -14,15 +14,13 @@ interface Props extends LatestBlocksContainerProps {
 
 const LatestBlocksUpdater: FC<Props> = props => {
     const [blocks, setBlocks] = useState(props.blocks)
-
-    const [blockUpdateSubscription] = useBlockUpdateSubscription({
+    const [blockSubscription] = useBlockUpdateSubscription({
         variables: { limit: props.limit },
     })
+    const blockUpdate = blockSubscription.data?.latestBlocks
 
     useEffect(() => {
-        if (blockUpdateSubscription.data?.latestBlocks) {
-            const blockUpdate = blockUpdateSubscription.data.latestBlocks
-
+        if (blockUpdate) {
             setBlocks(prev => {
                 if (
                     !prev ||
@@ -44,7 +42,7 @@ const LatestBlocksUpdater: FC<Props> = props => {
                 ]
             })
         }
-    }, [blockUpdateSubscription.data?.latestBlocks])
+    }, [blockUpdate])
 
     const latestBlockHeight = blocks?.length ? blocks[0].height : 0
 
