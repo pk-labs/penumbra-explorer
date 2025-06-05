@@ -10,16 +10,12 @@ describe('getValidatorVotingPower', () => {
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: {
-                            validatorDetails: {
-                                votingPower: 99,
-                            },
-                        },
+                        data: { validatorDetails: true },
                     }),
             }),
         })
 
-        await expect(getValidatorVotingPower('foo')).resolves.toBe(99)
+        await expect(getValidatorVotingPower('foo')).resolves.toBe(true)
     })
 
     test('throws error', async () => {

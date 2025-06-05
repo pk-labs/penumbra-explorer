@@ -79,6 +79,17 @@ export type ChainParameters = {
   nextEpochIn: Scalars['Int']['output'];
 };
 
+export type ChainParametersUpdate = {
+  __typename?: 'ChainParametersUpdate';
+  chainId: Scalars['String']['output'];
+  currentBlockHeight: Scalars['Int']['output'];
+  currentBlockTime: Scalars['DateTime']['output'];
+  currentEpoch: Scalars['Int']['output'];
+  epochDuration: Scalars['Int']['output'];
+  lastUpdated: Scalars['DateTime']['output'];
+  nextEpochIn: Scalars['Int']['output'];
+};
+
 export enum ClientStatus {
   Active = 'active',
   Expired = 'expired',
@@ -291,6 +302,7 @@ export type QueryRootValidatorsHomepageArgs = {
 export type Root = {
   __typename?: 'Root';
   blocks: BlockUpdate;
+  chainParameters: ChainParametersUpdate;
   ibcTransactions: IbcTransactionUpdate;
   latestBlocks: BlockUpdate;
   latestIbcTransactions: IbcTransactionUpdate;
@@ -636,7 +648,7 @@ export type ValidatorVotingPowerQueryVariables = Exact<{
 }>;
 
 
-export type ValidatorVotingPowerQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', votingPower: number } | null };
+export type ValidatorVotingPowerQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', state: ValidatorState, votingPower: number } | null };
 
 export type ValidatorsQueryVariables = Exact<{
   filter?: InputMaybe<ValidatorFilter>;
@@ -905,6 +917,7 @@ export const ValidatorVotingPercentageDocument = gql`
 export const ValidatorVotingPowerDocument = gql`
     query ValidatorVotingPower($id: String!) {
   validatorDetails(id: $id) {
+    state
     votingPower
   }
 }
