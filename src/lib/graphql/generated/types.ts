@@ -664,6 +664,11 @@ export type BlockUpdateSubscriptionVariables = Exact<{
 
 export type BlockUpdateSubscription = { __typename?: 'Root', latestBlocks: { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number } };
 
+export type ChainParametersUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ChainParametersUpdateSubscription = { __typename?: 'Root', chainParameters: { __typename?: 'ChainParametersUpdate', chainId: string, currentBlockTime: any, currentBlockHeight: number, currentEpoch: number, epochDuration: number, nextEpochIn: number } };
+
 export type TotalShieldedVolumeUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -945,6 +950,18 @@ export const BlockUpdateDocument = gql`
     height
     createdAt
     transactionsCount
+  }
+}
+    `;
+export const ChainParametersUpdateDocument = gql`
+    subscription ChainParametersUpdate {
+  chainParameters {
+    chainId
+    currentBlockTime
+    currentBlockHeight
+    currentEpoch
+    epochDuration
+    nextEpochIn
   }
 }
     `;

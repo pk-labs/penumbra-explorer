@@ -51,6 +51,16 @@ type ChainParameters {
     nextEpochIn: Int!
 }
 
+type ChainParametersUpdate {
+    chainId: String!
+    currentBlockHeight: Int!
+    currentBlockTime: DateTime!
+    currentEpoch: Int!
+    epochDuration: Int!
+    lastUpdated: DateTime!
+    nextEpochIn: Int!
+}
+
 type CommissionInfo {
     rateBps: Int!
     recipientAddress: String
@@ -162,6 +172,7 @@ type QueryRoot {
 
 type Root {
     blocks: BlockUpdate!
+    chainParameters: ChainParametersUpdate!
     ibcTransactions(clientId: String, limit: Int, offset: Int): IbcTransactionUpdate!
     latestBlocks(limit: Int): BlockUpdate!
     latestIbcTransactions(clientId: String, limit: Int): IbcTransactionUpdate!
