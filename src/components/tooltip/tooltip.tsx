@@ -10,7 +10,6 @@ interface Props {
     anchorSelect: string
     children?: ReactNode
     className?: string
-    open?: boolean
 }
 
 // FIXME: Backdrop blur filter not working
@@ -19,7 +18,6 @@ const Tooltip: FC<Props> = props => (
         anchorSelect={props.anchorSelect}
         className={classNames(styles.root, styles.override, props.className)}
         delayShow={200}
-        isOpen={props.open}
         opacity={1}
         clickable
         noArrow
