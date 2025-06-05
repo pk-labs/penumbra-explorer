@@ -12,7 +12,7 @@ const ValidatorStatusLoader: FC<Props> = async props => {
     return (
         <GraphqlClientProvider>
             <ValidatorStatusUpdater
-                latestBlocks={latestBlocks.blocks}
+                latestBlocks={latestBlocks.blocks.map(block => block.height)}
                 validatorBlocks={validatorBlocks}
                 {...props}
             />

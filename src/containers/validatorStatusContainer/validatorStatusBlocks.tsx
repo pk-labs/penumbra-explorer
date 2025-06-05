@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { FC, Fragment } from 'react'
 import { Tooltip } from '@/components'
 import { fastOutSlowIn } from '@/lib/constants'
-import { TransformedPartialBlockFragment, ValidatorBlocks } from '@/lib/types'
+import { ValidatorBlocks } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import styles from './validatorStatusContainer.module.css'
 
@@ -32,7 +32,7 @@ const blockVariants = {
 }
 
 interface Props {
-    latestBlocks: TransformedPartialBlockFragment[]
+    latestBlocks: number[]
     validatorBlocks: ValidatorBlocks
 }
 
@@ -45,15 +45,15 @@ const ValidatorStatusBlocks: FC<Props> = props => (
     >
         {props.latestBlocks.map(latestBlock => {
             const validatorBlock = props.validatorBlocks.find(
-                block => block.height === latestBlock.height
+                block => block.height === latestBlock
             )
 
             return (
-                <Fragment key={latestBlock.height}>
+                <Fragment key={latestBlock}>
                     <Link
                         className={styles.link}
-                        href={`/block/${latestBlock.height}`}
-                        id={`block-${latestBlock.height}`}
+                        href={`/block/${latestBlock}`}
+                        id={`block-${latestBlock}`}
                     >
                         <motion.span
                             className={classNames(
@@ -67,12 +67,12 @@ const ValidatorStatusBlocks: FC<Props> = props => (
                         />
                     </Link>
                     <Tooltip
-                        anchorSelect={`#block-${latestBlock.height}`}
+                        anchorSelect={`#block-${latestBlock}`}
                         className="flex flex-col items-center"
                     >
                         Block height
                         <span className="text-sm">
-                            {formatNumber(latestBlock.height)}
+                            {formatNumber(latestBlock)}
                         </span>
                     </Tooltip>
                 </Fragment>
