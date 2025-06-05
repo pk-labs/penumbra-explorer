@@ -9,7 +9,7 @@ import {
     TimeAgo,
 } from '@/components'
 import { getIbcStats } from '@/lib/data'
-import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
+import { placeholderAvatarImage } from '@/lib/images'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './clientContainer'
 

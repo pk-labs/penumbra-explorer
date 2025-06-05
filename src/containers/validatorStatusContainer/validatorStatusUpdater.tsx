@@ -44,21 +44,27 @@ const ValidatorStatusUpdater: FC<Props> = props => {
                     (Last 300 blocks)
                 </span>
             </header>
-            <div className="flex flex-col gap-2">
-                <ValidatorStatusLegend
-                    lastBlock={
-                        validatorBlocks?.length
-                            ? validatorBlocks[0].height
-                            : undefined
-                    }
-                />
-                {latestBlocks && (
-                    <ValidatorStatusBlocks
-                        latestBlocks={latestBlocks}
-                        validatorBlocks={validatorBlocks}
+            {validatorBlocks?.length ? (
+                <div className="flex flex-col gap-2">
+                    <ValidatorStatusLegend
+                        lastBlock={
+                            latestBlocks?.length
+                                ? latestBlocks[0].height
+                                : undefined
+                        }
                     />
-                )}
-            </div>
+                    {latestBlocks && (
+                        <ValidatorStatusBlocks
+                            latestBlocks={latestBlocks}
+                            validatorBlocks={validatorBlocks}
+                        />
+                    )}
+                </div>
+            ) : (
+                <div className="flex h-25 items-center justify-center text-sm">
+                    No signing activity
+                </div>
+            )}
         </section>
     )
 }
