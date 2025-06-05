@@ -1,6 +1,6 @@
 import { CheckIcon } from 'lucide-react'
 import { FC } from 'react'
-import { penumbraImage } from '@/lib/images'
+import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import Avatar from '../avatar'
 
@@ -96,7 +96,7 @@ const IbcChannels: FC<Props> = props => (
             >
                 <Avatar
                     alt={props.counterpartyName}
-                    fallback={penumbraImage}
+                    fallback={placeholderAvatarImage}
                     src={props.counterpartyImage}
                 />
             </div>

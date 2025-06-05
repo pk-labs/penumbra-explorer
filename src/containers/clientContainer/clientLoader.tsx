@@ -9,7 +9,7 @@ import {
     TimeAgo,
 } from '@/components'
 import { getIbcStats } from '@/lib/data'
-import { penumbraImage } from '@/lib/images'
+import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './clientContainer'
 
@@ -39,7 +39,7 @@ const ClientLoader: FC<Props> = async props => {
                 >
                     <Avatar
                         alt={props.name}
-                        fallback={penumbraImage}
+                        fallback={placeholderAvatarImage}
                         src={props.image}
                     />
                     <span className="truncate">{props.name}</span>
