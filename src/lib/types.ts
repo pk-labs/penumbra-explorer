@@ -6,8 +6,6 @@ import {
     PartialTransactionFragment,
     TransactionFragment,
     ValidatorBlocksQuery,
-    ValidatorQuery,
-    ValidatorsQuery,
 } from '@/lib/graphql/generated/types'
 
 export interface TransformedBlockFragment
@@ -54,38 +52,6 @@ export interface TransformedIbcStats
     initialTimeAgo: string
     timestamp: number
 }
-
-export interface TransformedValidator
-    extends Omit<
-        NonNullable<ValidatorQuery['validatorDetails']>,
-        'bondingState' | 'state'
-    > {
-    bonding: ValidatorBonding
-    status: ValidatorStatus
-}
-
-export interface TransformedPartialValidator
-    extends Omit<
-        NonNullable<
-            ValidatorsQuery['validatorsHomepage']['validators']
-        >[number],
-        'bondingState' | 'firstSeenTime' | 'state'
-    > {
-    activeSince?: string
-    bonding: ValidatorBonding
-    status: ValidatorStatus
-}
-
-export type ValidatorBonding = 'Bonded' | 'Unbonded' | 'Unbonding'
-
-export type ValidatorStatus =
-    | 'Active'
-    | 'Defined'
-    | 'Disabled'
-    | 'Inactive'
-    | 'Jailed'
-    | 'Tombstoned'
-    | 'Unspecified'
 
 export type ValidatorBlocks = NonNullable<
     ValidatorBlocksQuery['validatorDetails']

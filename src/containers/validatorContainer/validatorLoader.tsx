@@ -7,7 +7,7 @@ import {
     CopyToClipboard,
     Parameter,
     Parameters,
-    ValidatorStatusBonding,
+    ValidatorStateBonding,
 } from '@/components'
 import { getValidator } from '@/lib/data'
 import { placeholderAvatarImage } from '@/lib/images'
@@ -60,10 +60,10 @@ const ValidatorLoader: FC<Props> = async props => {
                         )}
                     </span>
                 </span>
-                <ValidatorStatusBonding
-                    bonding={validator.bonding}
+                <ValidatorStateBonding
+                    bondingState={validator.bondingState}
                     className="text-right"
-                    status={validator.status}
+                    state={validator.state}
                 />
             </header>
             {validator.description && (
