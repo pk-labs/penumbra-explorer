@@ -33,7 +33,7 @@ const blockVariants = {
 
 interface Props {
     latestBlocks: TransformedPartialBlockFragment[]
-    validatorBlocks?: ValidatorBlocks
+    validatorBlocks: ValidatorBlocks
 }
 
 const ValidatorStatusBlocks: FC<Props> = props => (
@@ -44,7 +44,7 @@ const ValidatorStatusBlocks: FC<Props> = props => (
         variants={containerVariants}
     >
         {props.latestBlocks.map(latestBlock => {
-            const validatorBlock = props.validatorBlocks?.find(
+            const validatorBlock = props.validatorBlocks.find(
                 block => block.height === latestBlock.height
             )
 
