@@ -7,13 +7,13 @@ const blocksToTime = (blocks: number) => {
     const days = hours / 24
 
     if (days >= 1) {
-        return `~${Math.floor(days)} days`
+        return `~${Math.floor(days)}d`
     } else if (hours >= 1) {
-        return `~${Math.floor(hours)} hours`
+        return `~${Math.floor(hours)}hr`
     } else if (minutes >= 1) {
-        return `~${Math.floor(minutes)} minutes`
+        return `~${Math.floor(minutes)}m`
     } else {
-        return `~${seconds} seconds`
+        return `~${seconds}s`
     }
 }
 
