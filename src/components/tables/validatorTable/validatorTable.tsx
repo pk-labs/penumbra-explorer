@@ -1,18 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
+import { ValidatorsQuery } from '@/lib/graphql/generated/types'
 import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
-import { TransformedPartialValidator } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import { validatorImages } from '@/lib/validators'
 import Avatar from '../../avatar'
 import EmptyState from '../../emptyState'
-import ValidatorStatusBonding from '../../validatorStatusBonding'
+import ValidatorStateBonding from '../../validatorStateBonding'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
     inactive?: boolean
-    validators: TransformedPartialValidator[]
+    validators: ValidatorsQuery['validatorsHomepage']['validators']
 }
 
 const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
@@ -46,9 +46,9 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                             </Link>
                         </TableCell>
                         <TableCell className="h-15">
-                            <ValidatorStatusBonding
-                                bonding={validator.bonding}
-                                status={validator.status}
+                            <ValidatorStateBonding
+                                bondingState={validator.bondingState}
+                                state={validator.state}
                             />
                         </TableCell>
                         <TableCell className="h-15">
@@ -105,7 +105,7 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                             ) : null}
                         </TableCell>
                         <TableCell className="h-15">
-                            {validator.activeSince}
+                            {validator.firstSeenTime}
                         </TableCell>
                         <TableCell className="h-15">
                             {validator.commission}%
