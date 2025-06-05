@@ -4,7 +4,7 @@ import { classNames, formatNumber } from '@/lib/utils'
 import styles from './validatorStatusContainer.module.css'
 
 interface Props {
-    lastSignedBlock?: number
+    lastBlock?: number
 }
 
 const ValidatorStatusLegend: FC<Props> = props => (
@@ -16,12 +16,12 @@ const ValidatorStatusLegend: FC<Props> = props => (
     >
         <span className="inline-flex items-center gap-1">
             <ArrowDownIcon className="inline" size={16} />
-            <span>Last block signed</span>
-            <span className="text-text-primary ml-1">
-                {typeof props.lastSignedBlock === 'number'
-                    ? formatNumber(props.lastSignedBlock)
-                    : 'None'}
-            </span>
+            <span>Last block</span>
+            {typeof props.lastBlock === 'number' && (
+                <span className="text-text-primary ml-1">
+                    {formatNumber(props.lastBlock)}
+                </span>
+            )}
         </span>
         <span
             className={classNames(

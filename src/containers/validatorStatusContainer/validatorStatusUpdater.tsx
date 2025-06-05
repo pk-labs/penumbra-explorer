@@ -46,7 +46,7 @@ const ValidatorStatusUpdater: FC<Props> = props => {
             </header>
             <div className="flex flex-col gap-2">
                 <ValidatorStatusLegend
-                    lastSignedBlock={
+                    lastBlock={
                         validatorBlocks?.length
                             ? validatorBlocks[0].height
                             : undefined
