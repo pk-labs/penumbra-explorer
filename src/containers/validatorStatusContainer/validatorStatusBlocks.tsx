@@ -43,10 +43,12 @@ const ValidatorStatusBlocks: FC<Props> = props => (
         initial="hidden"
         variants={containerVariants}
     >
-        {props.latestBlocks.map(latestBlock => {
+        {props.latestBlocks.map((latestBlock, i) => {
             const validatorBlock = props.validatorBlocks.find(
                 block => block.height === latestBlock.height
             )
+
+            const lastBlock = i === props.latestBlocks.length - 1
 
             return (
                 <Fragment key={latestBlock.height}>
@@ -69,6 +71,7 @@ const ValidatorStatusBlocks: FC<Props> = props => (
                     <Tooltip
                         anchorSelect={`#block-${latestBlock.height}`}
                         className="flex flex-col items-center"
+                        open={lastBlock}
                     >
                         Block height
                         <span className="text-sm">

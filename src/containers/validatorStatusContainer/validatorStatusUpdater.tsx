@@ -30,9 +30,12 @@ const ValidatorStatusUpdater: FC<Props> = props => {
 
     return (
         <section
+            // TODO: Maybe extract this nested backdrop-filter workaround to a
+            // "Surface" component
             className={classNames(
-                'bg-other-tonalFill5 flex flex-col gap-6 rounded-lg p-6',
-                'backdrop-blur-lg',
+                'before:bg-other-tonalFill5 relative z-1 flex flex-col gap-6',
+                'p-6 before:absolute before:inset-0 before:-z-1',
+                'before:rounded-lg before:backdrop-blur-lg',
                 props.className
             )}
         >
