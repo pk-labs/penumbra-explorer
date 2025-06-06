@@ -24,8 +24,13 @@ const ValidatorStatusUpdater: FC<Props> = props => {
 
     useEffect(() => {
         if (blockUpdate) {
-            setLatestBlocks(
-                prev => prev && [blockUpdate.height, ...prev.slice(1)]
+            setLatestBlocks(prev =>
+                prev
+                    ? Array.from(new Set([blockUpdate.height, ...prev])).slice(
+                          0,
+                          300
+                      )
+                    : [blockUpdate.height]
             )
         }
     }, [blockUpdate])
