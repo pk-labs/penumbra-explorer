@@ -47,9 +47,9 @@ const TransactionView: FC<Props> = props => (
                 </Link>
             </Parameter>
             <Parameter name="Time">
-                {dayjs(props.transaction.timestamp).format(
-                    'YYYY-MM-DD HH:mm:ss z'
-                )}
+                {dayjs(props.transaction.timestamp)
+                    .tz('UTC')
+                    .format('YYYY-MM-DD HH:mm:ss z')}
             </Parameter>
         </Parameters>
         {props.transaction.memo && <Memo />}
