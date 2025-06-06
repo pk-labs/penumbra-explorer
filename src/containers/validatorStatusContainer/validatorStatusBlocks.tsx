@@ -32,7 +32,6 @@ const blockVariants = {
 }
 
 interface Props {
-    latestBlocks: number[]
     validatorBlocks: ValidatorBlock[]
 }
 
@@ -47,41 +46,33 @@ const ValidatorStatusBlocks: FC<Props> = props => {
             onContextMenu={onContextMenu}
             variants={containerVariants}
         >
-            {props.latestBlocks.map(latestBlock => {
-                const validatorBlock = props.validatorBlocks.find(
-                    block => block.height === latestBlock
-                )
-
-                return (
-                    <Fragment key={latestBlock}>
-                        <Link
-                            className={styles.link}
-                            href={`/block/${latestBlock}`}
-                            id={`block-${latestBlock}`}
-                        >
-                            <motion.span
-                                className={classNames(
-                                    styles.block,
-                                    validatorBlock?.signed && styles.signed,
-                                    validatorBlock &&
-                                        !validatorBlock.signed &&
-                                        styles.missed
-                                )}
-                                variants={blockVariants}
-                            />
-                        </Link>
-                        <Tooltip
-                            anchorSelect={`#block-${latestBlock}`}
-                            className="flex flex-col items-center"
-                        >
-                            Block height
-                            <span className="text-sm">
-                                {formatNumber(latestBlock)}
-                            </span>
-                        </Tooltip>
-                    </Fragment>
-                )
-            })}
+            {props.validatorBlocks.map(block => (
+                <Fragment key={block.height}>
+                    <Link
+                        className={styles.link}
+                        href={`/block/${block.height}`}
+                        id={`block-${block.height}`}
+                    >
+                        <motion.span
+                            className={classNames(
+                                styles.block,
+                                block.signed === true && styles.signed,
+                                block.signed === false && styles.missed
+                            )}
+                            variants={blockVariants}
+                        />
+                    </Link>
+                    <Tooltip
+                        anchorSelect={`#block-${block.height}`}
+                        className="flex flex-col items-center"
+                    >
+                        Block height
+                        <span className="text-sm">
+                            {formatNumber(block.height)}
+                        </span>
+                    </Tooltip>
+                </Fragment>
+            ))}
         </motion.div>
     )
 }

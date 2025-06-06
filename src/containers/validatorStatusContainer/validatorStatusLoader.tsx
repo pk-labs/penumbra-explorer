@@ -7,12 +7,16 @@ import ValidatorStatusUpdater from './validatorStatusUpdater'
 
 const ValidatorStatusLoader: FC<Props> = async props => {
     const latestBlocks = await getBlocks({ length: 300 })
-    const validatorBlocks = await getValidatorBlocks(props.validatorId)
+    let validatorBlocks = await getValidatorBlocks(props.validatorId)
+
+    validatorBlocks = latestBlocks.blocks.map(block => ({
+        height: block.height,
+        signed: validatorBlocks?.find(vb => vb.height === block.height)?.signed,
+    }))
 
     return (
         <GraphqlClientProvider>
             <ValidatorStatusUpdater
-                latestBlocks={latestBlocks.blocks.map(block => block.height)}
                 validatorBlocks={validatorBlocks ?? []}
                 {...props}
             />
