@@ -30,7 +30,7 @@ const ChainParametersContainer: FC<Props> = props => (
                     <h3 className="text-base">Latest block</h3>
                     <Parameters>
                         <Parameter name="Time">
-                            <Skeleton className="h-4 w-50" />
+                            <Skeleton className="h-4 w-40" />
                         </Parameter>
                         <Parameter name="Height">
                             <Skeleton className="h-4 w-20" />
