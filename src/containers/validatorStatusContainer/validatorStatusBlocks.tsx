@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react'
 import Link from 'next/link'
-import { FC, Fragment } from 'react'
+import { FC, Fragment, MouseEvent, useCallback } from 'react'
 import { Tooltip } from '@/components'
 import { fastOutSlowIn } from '@/lib/constants'
 import { ValidatorBlocks } from '@/lib/types'
@@ -36,49 +36,56 @@ interface Props {
     validatorBlocks: ValidatorBlocks
 }
 
-const ValidatorStatusBlocks: FC<Props> = props => (
-    <motion.div
-        animate="show"
-        className="flex flex-wrap gap-2 select-none"
-        initial="hidden"
-        variants={containerVariants}
-    >
-        {props.latestBlocks.map(latestBlock => {
-            const validatorBlock = props.validatorBlocks.find(
-                block => block.height === latestBlock
-            )
+const ValidatorStatusBlocks: FC<Props> = props => {
+    const onContextMenu = useCallback((e: MouseEvent) => {
+        e.preventDefault()
+    }, [])
 
-            return (
-                <Fragment key={latestBlock}>
-                    <Link
-                        className={styles.link}
-                        href={`/block/${latestBlock}`}
-                        id={`block-${latestBlock}`}
-                    >
-                        <motion.span
-                            className={classNames(
-                                styles.block,
-                                validatorBlock?.signed && styles.signed,
-                                validatorBlock &&
-                                    !validatorBlock.signed &&
-                                    styles.missed
-                            )}
-                            variants={blockVariants}
-                        />
-                    </Link>
-                    <Tooltip
-                        anchorSelect={`#block-${latestBlock}`}
-                        className="flex flex-col items-center"
-                    >
-                        Block height
-                        <span className="text-sm">
-                            {formatNumber(latestBlock)}
-                        </span>
-                    </Tooltip>
-                </Fragment>
-            )
-        })}
-    </motion.div>
-)
+    return (
+        <motion.div
+            animate="show"
+            className="flex flex-wrap gap-2 select-none"
+            initial="hidden"
+            onContextMenu={onContextMenu}
+            variants={containerVariants}
+        >
+            {props.latestBlocks.map(latestBlock => {
+                const validatorBlock = props.validatorBlocks.find(
+                    block => block.height === latestBlock
+                )
+
+                return (
+                    <Fragment key={latestBlock}>
+                        <Link
+                            className={styles.link}
+                            href={`/block/${latestBlock}`}
+                            id={`block-${latestBlock}`}
+                        >
+                            <motion.span
+                                className={classNames(
+                                    styles.block,
+                                    validatorBlock?.signed && styles.signed,
+                                    validatorBlock &&
+                                        !validatorBlock.signed &&
+                                        styles.missed
+                                )}
+                                variants={blockVariants}
+                            />
+                        </Link>
+                        <Tooltip
+                            anchorSelect={`#block-${latestBlock}`}
+                            className="flex flex-col items-center"
+                        >
+                            Block height
+                            <span className="text-sm">
+                                {formatNumber(latestBlock)}
+                            </span>
+                        </Tooltip>
+                    </Fragment>
+                )
+            })}
+        </motion.div>
+    )
+}
 
 export default ValidatorStatusBlocks
