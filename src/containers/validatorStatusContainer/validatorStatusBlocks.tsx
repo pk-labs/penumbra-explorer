@@ -39,7 +39,7 @@ interface Props {
 const ValidatorStatusBlocks: FC<Props> = props => (
     <motion.div
         animate="show"
-        className="flex flex-wrap gap-2"
+        className="flex flex-wrap gap-2 select-none"
         initial="hidden"
         variants={containerVariants}
     >
