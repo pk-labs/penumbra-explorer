@@ -2,38 +2,59 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
-import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
-import { ValidatorBlocks } from '@/lib/types'
+import {
+    useBlockUpdateSubscription,
+    useValidatorBlockUpdateSubscription,
+} from '@/lib/graphql/generated/hooks'
+import { ValidatorBlock } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import ValidatorStatusBlocks from './validatorStatusBlocks'
 import { Props as ValidatorStatusContainerProps } from './validatorStatusContainer'
 import ValidatorStatusLegend from './validatorStatusLegend'
 
 interface Props extends ValidatorStatusContainerProps {
-    latestBlocks?: number[]
-    validatorBlocks?: ValidatorBlocks
+    latestBlocks: number[]
+    validatorBlocks: ValidatorBlock[]
 }
 
 const ValidatorStatusUpdater: FC<Props> = props => {
     const [latestBlocks, setLatestBlocks] = useState(props.latestBlocks)
-    const [validatorBlocks] = useState(props.validatorBlocks)
+    const [validatorBlocks, setValidatorBlocks] = useState(
+        props.validatorBlocks
+    )
+
     const [blockSubscription] = useBlockUpdateSubscription({
         variables: { limit: 1 },
     })
+    const [validatorBlockSubscription] = useValidatorBlockUpdateSubscription({
+        variables: { id: props.validatorId },
+    })
+
     const blockUpdate = blockSubscription.data?.latestBlocks
+    const validatorBlockUpdate =
+        validatorBlockSubscription.data?.validatorBlocks
 
     useEffect(() => {
         if (blockUpdate) {
             setLatestBlocks(prev =>
-                prev
-                    ? Array.from(new Set([blockUpdate.height, ...prev])).slice(
-                          0,
-                          300
-                      )
-                    : [blockUpdate.height]
+                Array.from(new Set([blockUpdate.height, ...prev])).slice(0, 300)
             )
         }
     }, [blockUpdate])
+
+    useEffect(() => {
+        if (validatorBlockUpdate) {
+            setValidatorBlocks(prev =>
+                [
+                    {
+                        height: validatorBlockUpdate.blockHeight,
+                        signed: validatorBlockUpdate.signed,
+                    },
+                    ...prev,
+                ].slice(0, 300)
+            )
+        }
+    }, [validatorBlockUpdate])
 
     return (
         <section

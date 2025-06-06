@@ -5,7 +5,6 @@ import {
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
-    ValidatorBlocksQuery,
 } from '@/lib/graphql/generated/types'
 
 export interface TransformedBlockFragment
@@ -53,9 +52,10 @@ export interface TransformedIbcStats
     timestamp: number
 }
 
-export type ValidatorBlocks = NonNullable<
-    ValidatorBlocksQuery['validatorDetails']
->['last300Blocks']
+export interface ValidatorBlock {
+    height: number
+    signed: boolean
+}
 
 // TODO: Refactor value names to pascal case
 export enum ActionType {

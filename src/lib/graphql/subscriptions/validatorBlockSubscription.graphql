@@ -1,0 +1,6 @@
+subscription ValidatorBlockUpdate($id: String!) {
+    validatorBlocks(validatorId: $id) {
+        blockHeight
+        signed
+    }
+}

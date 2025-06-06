@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { FC, Fragment, MouseEvent, useCallback } from 'react'
 import { Tooltip } from '@/components'
 import { fastOutSlowIn } from '@/lib/constants'
-import { ValidatorBlocks } from '@/lib/types'
+import { ValidatorBlock } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import styles from './validatorStatusContainer.module.css'
 
@@ -33,7 +33,7 @@ const blockVariants = {
 
 interface Props {
     latestBlocks: number[]
-    validatorBlocks: ValidatorBlocks
+    validatorBlocks: ValidatorBlock[]
 }
 
 const ValidatorStatusBlocks: FC<Props> = props => {

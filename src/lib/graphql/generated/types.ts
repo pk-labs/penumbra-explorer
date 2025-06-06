@@ -686,6 +686,13 @@ export type TransactionUpdateSubscriptionVariables = Exact<{
 
 export type TransactionUpdateSubscription = { __typename?: 'Root', latestTransactions: { __typename?: 'TransactionUpdate', hash: string, id: number, raw: string } };
 
+export type ValidatorBlockUpdateSubscriptionVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type ValidatorBlockUpdateSubscription = { __typename?: 'Root', validatorBlocks: { __typename?: 'ValidatorBlockUpdate', blockHeight: number, signed: boolean } };
+
 export const PartialTransactionFragmentDoc = gql`
     fragment PartialTransaction on Transaction {
   hash
@@ -985,6 +992,14 @@ export const TransactionUpdateDocument = gql`
     hash
     id
     raw
+  }
+}
+    `;
+export const ValidatorBlockUpdateDocument = gql`
+    subscription ValidatorBlockUpdate($id: String!) {
+  validatorBlocks(validatorId: $id) {
+    blockHeight
+    signed
   }
 }
     `;
