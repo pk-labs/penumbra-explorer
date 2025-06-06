@@ -29,7 +29,9 @@ const BlockView: FC<Props> = props => (
                 />
             </Parameter>
             <Parameter name="Time">
-                {dayjs(props.block.timestamp).format('YYYY-MM-DD HH:mm:ss z')}
+                {dayjs(props.block.timestamp)
+                    .tz('UTC')
+                    .format('YYYY-MM-DD HH:mm:ss z')}
             </Parameter>
             {/*<Parameter name="Proposer">-</Parameter>*/}
             <Parameter name="Txs">{props.block.transactions.length}</Parameter>

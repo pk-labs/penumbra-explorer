@@ -51,9 +51,9 @@ const ChainParametersUpdater: FC<Props> = props => {
                 <h3 className="text-base">Latest block</h3>
                 <Parameters>
                     <Parameter name="Time">
-                        {dayjs(parameters.currentBlockTime).format(
-                            'YYYY-MM-DD HH:mm:ss z'
-                        )}
+                        {dayjs(parameters.currentBlockTime)
+                            .tz('UTC')
+                            .format('YYYY-MM-DD HH:mm:ss z')}
                     </Parameter>
                     <Parameter name="Height">
                         {formatNumber(parameters.currentBlockHeight)}
