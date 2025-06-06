@@ -51,7 +51,10 @@ const ValidatorStatusUpdater: FC<Props> = props => {
                         signed: validatorBlockUpdate.signed,
                     },
                     ...prev,
-                ].slice(0, 300)
+                ]
+                    // Keep 100 extra validator blocks to avoid grey blocks at
+                    // the end when updates happen quicker than regular blocks
+                    .slice(0, 400)
             )
         }
     }, [validatorBlockUpdate])
