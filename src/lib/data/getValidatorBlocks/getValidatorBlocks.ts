@@ -4,11 +4,11 @@ import {
     ValidatorBlocksQueryVariables,
 } from '@/lib/graphql/generated/types'
 import { validatorBlocksQuery } from '@/lib/graphql/queries'
-import { ValidatorBlocks } from '@/lib/types'
+import { ValidatorBlock } from '@/lib/types'
 
 const getValidatorBlocks = async (
     id: string
-): Promise<undefined | ValidatorBlocks> => {
+): Promise<undefined | ValidatorBlock[]> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient

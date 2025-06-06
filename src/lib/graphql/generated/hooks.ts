@@ -401,3 +401,15 @@ export const TransactionUpdateDocument = gql`
 export function useTransactionUpdateSubscription<TData = Types.TransactionUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.TransactionUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.TransactionUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.TransactionUpdateSubscription, TData, Types.TransactionUpdateSubscriptionVariables>({ query: Types.TransactionUpdateDocument, ...options }, handler);
 };
+export const ValidatorBlockUpdateDocument = gql`
+    subscription ValidatorBlockUpdate($id: String!) {
+  validatorBlocks(validatorId: $id) {
+    blockHeight
+    signed
+  }
+}
+    `;
+
+export function useValidatorBlockUpdateSubscription<TData = Types.ValidatorBlockUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.ValidatorBlockUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.ValidatorBlockUpdateSubscription, TData>) {
+  return Urql.useSubscription<Types.ValidatorBlockUpdateSubscription, TData, Types.ValidatorBlockUpdateSubscriptionVariables>({ query: Types.ValidatorBlockUpdateDocument, ...options }, handler);
+};
