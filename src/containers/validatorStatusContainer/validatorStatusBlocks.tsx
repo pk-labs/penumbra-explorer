@@ -37,9 +37,7 @@ interface Props {
 }
 
 const ValidatorStatusBlocks: FC<Props> = props => {
-    const onContextMenu = useCallback((e: MouseEvent) => {
-        e.preventDefault()
-    }, [])
+    const onContextMenu = useCallback((e: MouseEvent) => e.preventDefault(), [])
 
     return (
         <motion.div
