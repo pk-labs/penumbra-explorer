@@ -4,6 +4,7 @@
     width: 15px;
     height: 15px;
     line-height: 1;
+    -webkit-touch-callout: none;
 }
 
 .block {
