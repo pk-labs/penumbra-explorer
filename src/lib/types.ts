@@ -54,7 +54,7 @@ export interface TransformedIbcStats
 
 export interface ValidatorBlock {
     height: number
-    signed: boolean
+    signed?: boolean
 }
 
 // TODO: Refactor value names to pascal case
