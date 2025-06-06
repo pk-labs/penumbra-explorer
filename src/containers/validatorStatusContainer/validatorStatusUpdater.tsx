@@ -27,15 +27,22 @@ const ValidatorStatusUpdater: FC<Props> = props => {
 
     useEffect(() => {
         if (validatorBlockUpdate) {
-            setValidatorBlocks(prev =>
-                [
+            setValidatorBlocks(prev => {
+                if (
+                    prev.length &&
+                    validatorBlockUpdate.blockHeight <= prev[0].height
+                ) {
+                    return prev
+                }
+
+                return [
                     {
                         height: validatorBlockUpdate.blockHeight,
                         signed: validatorBlockUpdate.signed,
                     },
                     ...prev,
                 ].slice(0, 300)
-            )
+            })
         }
     }, [validatorBlockUpdate])
 
