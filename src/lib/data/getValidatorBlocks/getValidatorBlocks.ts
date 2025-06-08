@@ -4,11 +4,10 @@ import {
     ValidatorBlocksQueryVariables,
 } from '@/lib/graphql/generated/types'
 import { validatorBlocksQuery } from '@/lib/graphql/queries'
-import { ValidatorBlock } from '@/lib/types'
 
 const getValidatorBlocks = async (
     id: string
-): Promise<undefined | ValidatorBlock[]> => {
+): Promise<ValidatorBlocksQuery['validatorDetails']> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -22,7 +21,7 @@ const getValidatorBlocks = async (
         throw result.error
     }
 
-    return result.data?.validatorDetails?.last300Blocks
+    return result.data?.validatorDetails
 }
 
 export default getValidatorBlocks

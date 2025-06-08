@@ -11,9 +11,7 @@ describe('getValidatorBlocks', () => {
                 toPromise: () =>
                     Promise.resolve({
                         data: {
-                            validatorDetails: {
-                                last300Blocks: true,
-                            },
+                            validatorDetails: true,
                         },
                     }),
             }),
