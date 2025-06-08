@@ -8,12 +8,12 @@
 
     &:first-child {
         .block.signed {
-            animation: first-block-signed-animation 500ms ease infinite
+            animation: first-block-signed-animation 500ms ease-out infinite
                 alternate;
         }
 
         .block.missed {
-            animation: first-block-missed-animation 500ms ease infinite
+            animation: first-block-missed-animation 500ms ease-out infinite
                 alternate;
         }
     }
