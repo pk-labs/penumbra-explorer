@@ -5,6 +5,18 @@
     height: 15px;
     line-height: 1;
     -webkit-touch-callout: none;
+
+    &:first-child {
+        .block.signed {
+            animation: first-block-signed-animation 500ms ease infinite
+                alternate;
+        }
+
+        .block.missed {
+            animation: first-block-missed-animation 500ms ease infinite
+                alternate;
+        }
+    }
 }
 
 .block {
@@ -19,5 +31,41 @@
 
     &.missed {
         @apply bg-destructive-light hover:bg-destructive-main;
+    }
+}
+
+@keyframes first-block-signed-animation {
+    0% {
+        background-color: var(--color-success-light);
+    }
+
+    20% {
+        background-color: var(--color-success-light);
+    }
+
+    80% {
+        background-color: var(--color-success-main);
+    }
+
+    100% {
+        background-color: var(--color-success-main);
+    }
+}
+
+@keyframes first-block-missed-animation {
+    0% {
+        background-color: var(--color-destructive-light);
+    }
+
+    20% {
+        background-color: var(--color-destructive-light);
+    }
+
+    80% {
+        background-color: var(--color-destructive-main);
+    }
+
+    100% {
+        background-color: var(--color-destructive-main);
     }
 }
