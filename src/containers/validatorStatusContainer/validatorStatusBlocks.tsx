@@ -4,7 +4,6 @@ import { motion } from 'motion/react'
 import Link from 'next/link'
 import { FC, Fragment, MouseEvent, useCallback } from 'react'
 import { Tooltip } from '@/components'
-import { fastOutSlowIn } from '@/lib/constants'
 import { ValidatorBlock } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import styles from './validatorStatusContainer.module.css'
@@ -25,7 +24,7 @@ const blockVariants = {
         scale: [0, 1.2, 1],
         transition: {
             duration: 0.2,
-            ease: fastOutSlowIn,
+            ease: 'easeOut',
             times: [0, 0.7, 1],
         },
     },

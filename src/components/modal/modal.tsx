@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import { FC, ReactNode, useEffect, useRef } from 'react'
-import { fastOutSlowIn } from '@/lib/constants'
 import { classNames } from '@/lib/utils'
 import Button from '../button'
 
@@ -56,7 +55,7 @@ const Modal: FC<Props> = props => {
                     exit={{ opacity: 0 }}
                     initial={{ opacity: 0 }}
                     onClick={props.onClose}
-                    transition={{ duration: 0.3, ease: fastOutSlowIn }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                     {props.closeButton && props.onClose && (
                         <Button
