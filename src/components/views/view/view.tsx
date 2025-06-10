@@ -4,7 +4,6 @@ import { classNames } from '@/lib/utils'
 export interface Props {
     children?: ReactNode
     className?: string
-    subtitle?: ReactNode | string
     title: string
 }
 
@@ -19,14 +18,7 @@ const View: FC<Props> = props => (
         )}
     >
         <header className="flex flex-col gap-1">
-            <h2 className="text-base font-medium">{props.title}</h2>
-            {typeof props.subtitle === 'string' ? (
-                <div className="font-mono text-base break-all">
-                    {props.subtitle}
-                </div>
-            ) : (
-                props.subtitle
-            )}
+            <h1 className="text-base font-medium">{props.title}</h1>
         </header>
         {props.children}
     </article>
