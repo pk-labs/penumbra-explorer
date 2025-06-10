@@ -11,7 +11,7 @@ export interface Props {
 const ViewNavigation: FC<Props> = props => (
     <nav
         className={classNames(
-            'flex items-center justify-end gap-1',
+            'flex items-center justify-end gap-2',
             props.className
         )}
     >

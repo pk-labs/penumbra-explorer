@@ -20,12 +20,10 @@ const View: FC<Props> = props => (
     >
         <header className="flex items-center justify-between">
             <h1 className="text-base font-medium">{props.title}</h1>
-            {Boolean(props.prevHref || props.nextHref) && (
-                <ViewNavigation
-                    nextHref={props.nextHref}
-                    prevHref={props.prevHref}
-                />
-            )}
+            <ViewNavigation
+                nextHref={props.nextHref}
+                prevHref={props.prevHref}
+            />
         </header>
         {props.children}
     </article>
