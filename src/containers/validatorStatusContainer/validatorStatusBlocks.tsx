@@ -19,6 +19,15 @@ const containerVariants = {
 }
 
 const blockVariants = {
+    exit: {
+        opacity: 0,
+        scale: 0.8,
+        transition: {
+            duration: 0.4,
+            ease: 'easeIn',
+        },
+        y: 44,
+    },
     hidden: { scale: 0 },
     show: {
         scale: [0, 1.2, 1],
@@ -41,13 +50,14 @@ const ValidatorStatusBlocks: FC<Props> = props => {
         <motion.div
             animate="show"
             className="flex flex-wrap gap-2 select-none"
+            exit="hide"
             initial="hidden"
             onContextMenu={onContextMenu}
             variants={containerVariants}
         >
-            {props.validatorBlocks.map(block => (
-                <Fragment key={block.height}>
-                    <AnimatePresence>
+            <AnimatePresence>
+                {props.validatorBlocks.map(block => (
+                    <Fragment key={block.height}>
                         <Link
                             className={styles.link}
                             href={`/block/${block.height}`}
@@ -59,22 +69,23 @@ const ValidatorStatusBlocks: FC<Props> = props => {
                                     block.signed === true && styles.signed,
                                     block.signed === false && styles.missed
                                 )}
+                                exit="exit"
                                 variants={blockVariants}
                                 layout
                             />
                         </Link>
-                    </AnimatePresence>
-                    <Tooltip
-                        anchorSelect={`#block-${block.height}`}
-                        className="flex flex-col items-center"
-                    >
-                        Block height
-                        <span className="text-sm">
-                            {formatNumber(block.height)}
-                        </span>
-                    </Tooltip>
-                </Fragment>
-            ))}
+                        <Tooltip
+                            anchorSelect={`#block-${block.height}`}
+                            className="flex flex-col items-center"
+                        >
+                            Block height
+                            <span className="text-sm">
+                                {formatNumber(block.height)}
+                            </span>
+                        </Tooltip>
+                    </Fragment>
+                ))}
+            </AnimatePresence>
         </motion.div>
     )
 }
