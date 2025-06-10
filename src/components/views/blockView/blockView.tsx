@@ -4,6 +4,7 @@ import { TransformedBlockFragment } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
 import { Parameter, Parameters } from '../../parameters'
+import Subsection from '../../subsection'
 import { View, ViewProps } from '../view'
 
 export interface Props extends Pick<ViewProps, 'className'> {
@@ -41,6 +42,9 @@ const BlockView: FC<Props> = props => (
             emptyStateMessage="This block contains no transactions"
             transactions={props.block.transactions}
         />
+        <Subsection title="Executions">
+            <div className="bg-other-tonalFill5 h-25 rounded-lg p-6" />
+        </Subsection>
         {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
     </View>
 )
