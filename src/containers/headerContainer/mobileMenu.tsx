@@ -1,6 +1,7 @@
 'use client'
 
 import {
+    AlignHorizontalDistributeCenterIcon,
     BlocksIcon,
     BoxIcon,
     CheckCheckIcon,
@@ -52,6 +53,13 @@ const MobileMenu: FC<Props> = props => {
             <MenuItem href="/validators" paths={['/validator']}>
                 <BlocksIcon className="stroke-primary-light" size={16} />
                 Validators
+            </MenuItem>
+            <MenuItem href="/dex">
+                <AlignHorizontalDistributeCenterIcon
+                    className="stroke-primary-light"
+                    size={16}
+                />
+                DEX
             </MenuItem>
         </Menu>
     )
