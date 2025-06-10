@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container, NumberPanel } from '@/components'
-import { generatePageMetadata } from '@/lib/utils'
+import { classNames, generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
     'Validators',
@@ -42,6 +42,25 @@ const DexPage: FC<Props> = async props => {
                     number={450}
                     title="Total open positions"
                 />
+                <section
+                    className={classNames(
+                        'bg-other-tonalFill5 col-span-full flex flex-col',
+                        'gap-4 rounded-lg p-6 backdrop-blur-lg lg:col-span-6 xl:col-span-4'
+                    )}
+                >
+                    <h2 className="text-2xl font-medium">Latest executions</h2>
+                </section>
+                <section
+                    className={classNames(
+                        'bg-other-tonalFill5 col-span-full flex flex-col',
+                        'gap-4 rounded-lg p-6 backdrop-blur-lg lg:col-span-6',
+                        'xl:col-span-8'
+                    )}
+                >
+                    <h2 className="text-2xl font-medium">
+                        Liquidity positions
+                    </h2>
+                </section>
             </div>
         </Container>
     )
