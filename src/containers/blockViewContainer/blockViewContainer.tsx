@@ -20,9 +20,10 @@ const BlockViewContainer: FC<Props> = props => (
                 )}
                 title="Block view"
             >
-                <Skeleton className="h-22 rounded-sm" />
+                <Skeleton className="h-24 rounded-sm" />
                 <Skeleton className="h-33 rounded-sm" />
-                <Skeleton className="h-17 rounded-sm" />
+                <Skeleton className="h-32 rounded-sm" />
+                <Skeleton className="h-18.5 rounded-sm" />
             </View>
         }
     >
