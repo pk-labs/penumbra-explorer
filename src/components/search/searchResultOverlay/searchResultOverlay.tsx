@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react'
 import { FC, ReactElement } from 'react'
-import { fastOutSlowIn } from '@/lib/constants'
 import { classNames } from '@/lib/utils'
 import { SearchResultProps } from '../searchResult'
 
@@ -29,7 +28,7 @@ const SearchResultOverlay: FC<Props> = props => (
         )}
         exit={{
             opacity: 0,
-            transition: { duration: 0.2, ease: fastOutSlowIn },
+            transition: { duration: 0.2, ease: 'easeOut' },
         }}
         initial={{ opacity: 0 }}
     >

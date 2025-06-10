@@ -93,7 +93,7 @@ const SearchResult: FC<Props> = props => {
         <li
             className={classNames(
                 'transition-background rounded-sm duration-200',
-                'hover:bg-action-hoverOverlay ease-fast-out-slow-in'
+                'hover:bg-action-hoverOverlay ease-out'
             )}
         >
             {link}

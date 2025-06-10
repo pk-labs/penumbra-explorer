@@ -10,6 +10,7 @@ import { Props as ValidatorStatusContainerProps } from './validatorStatusContain
 import ValidatorStatusLegend from './validatorStatusLegend'
 
 interface Props extends ValidatorStatusContainerProps {
+    active?: boolean
     validatorBlocks: ValidatorBlock[]
 }
 
@@ -65,20 +66,12 @@ const ValidatorStatusUpdater: FC<Props> = props => {
                     (Last 300 blocks)
                 </span>
             </header>
-            {validatorBlocks?.length ? (
+            {props.active && validatorBlocks.length ? (
                 <div className="flex flex-col gap-2">
                     <ValidatorStatusLegend
-                        lastBlock={
-                            validatorBlocks.length
-                                ? validatorBlocks[0].height
-                                : undefined
-                        }
+                        lastBlock={validatorBlocks[0].height}
                     />
-                    {validatorBlocks.length && (
-                        <ValidatorStatusBlocks
-                            validatorBlocks={validatorBlocks}
-                        />
-                    )}
+                    <ValidatorStatusBlocks validatorBlocks={validatorBlocks} />
                 </div>
             ) : (
                 <div

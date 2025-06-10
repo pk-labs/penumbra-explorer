@@ -1,7 +1,7 @@
-import { secondsPerBlock } from '@/lib/constants'
+import { blockSeconds } from '@/lib/constants'
 
 const blocksToTime = (blocks: number) => {
-    const seconds = blocks * secondsPerBlock
+    const seconds = blocks * blockSeconds
     const minutes = seconds / 60
     const hours = minutes / 60
     const days = hours / 24

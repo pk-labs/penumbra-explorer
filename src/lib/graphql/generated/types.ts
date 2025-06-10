@@ -622,7 +622,7 @@ export type ValidatorBlocksQueryVariables = Exact<{
 }>;
 
 
-export type ValidatorBlocksQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', last300Blocks: Array<{ __typename?: 'BlockParticipation', height: number, signed: boolean }> } | null };
+export type ValidatorBlocksQuery = { __typename?: 'QueryRoot', validatorDetails?: { __typename?: 'ValidatorDetails', state: ValidatorState, last300Blocks: Array<{ __typename?: 'BlockParticipation', height: number, signed: boolean }> } | null };
 
 export type ValidatorParametersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -877,6 +877,7 @@ export const ValidatorActiveSinceDocument = gql`
 export const ValidatorBlocksDocument = gql`
     query ValidatorBlocks($id: String!) {
   validatorDetails(id: $id) {
+    state
     last300Blocks {
       height
       signed

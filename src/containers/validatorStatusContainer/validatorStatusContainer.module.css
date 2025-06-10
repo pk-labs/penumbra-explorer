@@ -5,10 +5,22 @@
     height: 15px;
     line-height: 1;
     -webkit-touch-callout: none;
+
+    &:first-child {
+        .block.signed {
+            animation: first-block-signed-animation 500ms ease-out infinite
+                alternate;
+        }
+
+        .block.missed {
+            animation: first-block-missed-animation 500ms ease-out infinite
+                alternate;
+        }
+    }
 }
 
 .block {
-    @apply bg-neutral-main ease-fast-out-slow-in inline-block rounded-xs;
+    @apply bg-neutral-main inline-block rounded-xs ease-out;
     @apply transition-[background] duration-200 hover:bg-neutral-800;
     width: 15px;
     height: 15px;
@@ -19,5 +31,41 @@
 
     &.missed {
         @apply bg-destructive-light hover:bg-destructive-main;
+    }
+}
+
+@keyframes first-block-signed-animation {
+    0% {
+        background-color: var(--color-success-light);
+    }
+
+    20% {
+        background-color: var(--color-success-light);
+    }
+
+    80% {
+        background-color: var(--color-success-main);
+    }
+
+    100% {
+        background-color: var(--color-success-main);
+    }
+}
+
+@keyframes first-block-missed-animation {
+    0% {
+        background-color: var(--color-destructive-light);
+    }
+
+    20% {
+        background-color: var(--color-destructive-light);
+    }
+
+    80% {
+        background-color: var(--color-destructive-main);
+    }
+
+    100% {
+        background-color: var(--color-destructive-main);
     }
 }

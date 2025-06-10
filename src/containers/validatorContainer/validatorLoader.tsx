@@ -40,7 +40,7 @@ const ValidatorLoader: FC<Props> = async props => {
                         fallbackLetter
                     />
                     <span className="inline-flex flex-col gap-1">
-                        <h1 className="text-2xl">
+                        <h1 className="text-2xl break-all">
                             {validator.name || shortenHash(validator.id, 'end')}
                         </h1>
                         {validator.website && (

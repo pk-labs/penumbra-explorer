@@ -239,6 +239,7 @@ export function useValidatorActiveSinceQuery(options: Omit<Urql.UseQueryArgs<Typ
 export const ValidatorBlocksDocument = gql`
     query ValidatorBlocks($id: String!) {
   validatorDetails(id: $id) {
+    state
     last300Blocks {
       height
       signed

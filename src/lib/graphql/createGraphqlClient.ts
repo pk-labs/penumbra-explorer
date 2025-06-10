@@ -28,11 +28,8 @@ const createGraphqlClient = () => {
 
                     return {
                         subscribe(sink) {
-                            const dispose = wsClient.subscribe(input, sink)
-
-                            return {
-                                unsubscribe: dispose,
-                            }
+                            const unsubscribe = wsClient.subscribe(input, sink)
+                            return { unsubscribe }
                         },
                     }
                 },

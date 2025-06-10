@@ -5,6 +5,7 @@ import { classNames } from '@/lib/utils'
 import ValidatorStatusLoader from './validatorStatusLoader'
 
 export interface Props {
+    active?: boolean
     className?: string
     validatorId: string
 }

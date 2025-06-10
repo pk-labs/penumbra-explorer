@@ -2,7 +2,6 @@
 
 import { motion, useAnimate, useMotionValue, useTransform } from 'motion/react'
 import { FC, ReactNode, useCallback, useEffect, useState } from 'react'
-import { fastOutSlowIn } from '@/lib/constants'
 import { classNames, formatNumber } from '@/lib/utils'
 
 export interface Props {
@@ -31,10 +30,9 @@ const NumberCountup: FC<Props> = props => {
     const transformedValue = useTransform(motionValue, transformValue)
 
     useEffect(() => {
-        // @ts-expect-error FIXME
         const animation = animate(motionValue, props.number, {
             duration: 0.5,
-            ease: fastOutSlowIn,
+            ease: 'easeOut',
         })
 
         animation.finished.then(() => setAnimated(false))
