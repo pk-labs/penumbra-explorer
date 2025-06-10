@@ -1,7 +1,8 @@
 import { FC, ReactNode } from 'react'
 import { classNames } from '@/lib/utils'
+import { ViewNavigation, ViewNavigationProps } from '../viewNavigation'
 
-export interface Props {
+export interface Props extends ViewNavigationProps {
     children?: ReactNode
     className?: string
     title: string
@@ -17,8 +18,14 @@ const View: FC<Props> = props => (
             props.className
         )}
     >
-        <header className="flex flex-col gap-1">
+        <header className="flex items-center justify-between">
             <h1 className="text-base font-medium">{props.title}</h1>
+            {Boolean(props.prevHref || props.nextHref) && (
+                <ViewNavigation
+                    nextHref={props.nextHref}
+                    prevHref={props.prevHref}
+                />
+            )}
         </header>
         {props.children}
     </article>

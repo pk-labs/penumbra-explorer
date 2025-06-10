@@ -18,6 +18,12 @@ const BlockView: FC<Props> = props => (
             'to-[rgba(83,174,168,0.03)]!',
             props.className
         )}
+        nextHref={
+            props.block.height > 1
+                ? `/block/${props.block.height - 1}`
+                : undefined
+        }
+        prevHref={`/block/${props.block.height + 1}`}
         title="Block view"
     >
         <Parameters className="bg-other-tonalFill5 rounded-sm p-3">

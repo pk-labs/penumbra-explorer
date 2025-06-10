@@ -29,7 +29,7 @@ const Button: FC<Props> = ({
             href={href}
             target={externalLink ? '_blank' : undefined}
         >
-            {/* @ts-expect-error iconOnly typing */}
+            {/* @ts-expect-error icon typing */}
             <PenumbraButton
                 icon={
                     externalLink
@@ -43,12 +43,8 @@ const Button: FC<Props> = ({
         </Link>
     ) : (
         <span className={classNames('outline-none', className)}>
-            {/* @ts-expect-error iconOnly typing */}
-            <PenumbraButton
-                icon={icon && icons[icon]}
-                iconOnly={Boolean(props.iconOnly)}
-                {...props}
-            />
+            {/* @ts-expect-error icon typing */}
+            <PenumbraButton icon={icon && icons[icon]} {...props} />
         </span>
     )
 

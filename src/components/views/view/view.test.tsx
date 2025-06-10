@@ -9,6 +9,11 @@ describe('View', () => {
         getByText(container, 'Bar')
     })
 
+    test('renders navigation', async () => {
+        const { container } = render(<View nextHref="/bar" title="Foo" />)
+        expect(container.querySelector('a')).toHaveAttribute('href', '/bar')
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(
             <View className="foo bar" title="Foo">
