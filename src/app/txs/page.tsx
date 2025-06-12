@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
-import { PaginatedTransactionsContainer } from '@/containers'
+import { TransactionTableContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
@@ -34,10 +34,11 @@ const TransactionsPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
-            <PaginatedTransactionsContainer
-                length={length}
-                offset={offset}
+            <TransactionTableContainer
+                emptyStateMessage="No transactions"
+                limit={{ length, offset }}
                 blockHeight
+                pagination
                 time
             />
         </Container>

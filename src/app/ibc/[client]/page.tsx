@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
-import { ClientContainer, PaginatedTransactionsContainer } from '@/containers'
+import { ClientContainer, TransactionTableContainer } from '@/containers'
 import ibc from '@/lib/ibc'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -62,9 +62,9 @@ const ClientPage: FC<Props> = async props => {
                     name={name}
                     statsClassName="lg:col-1 lg:row-span-2"
                 />
-                <PaginatedTransactionsContainer
+                <TransactionTableContainer
                     className="min-w-0"
-                    clientId={id}
+                    filter={{ clientId: id }}
                     header={
                         <h2
                             className={classNames(
@@ -75,10 +75,10 @@ const ClientPage: FC<Props> = async props => {
                             Transactions
                         </h2>
                     }
-                    length={length}
-                    offset={offset}
+                    limit={{ length, offset }}
                     // amount
                     blockHeight
+                    pagination
                     // status
                     time
                 />
