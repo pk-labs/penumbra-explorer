@@ -26,12 +26,10 @@ const getIbcStats = async (args?: {
 
     return result.data?.ibcStats.map(stats => {
         const { lastUpdated, ...props } = stats
-        const date = dayjs(lastUpdated)
 
         return {
             ...props,
-            initialTimeAgo: dayjs().to(date),
-            timestamp: date.valueOf(),
+            timestamp: dayjs(lastUpdated).valueOf(),
         }
     })
 }

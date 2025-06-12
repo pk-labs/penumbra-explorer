@@ -16,7 +16,6 @@ export interface TransformedBlockFragment
 
 export interface TransformedPartialBlockFragment
     extends Pick<PartialBlockFragment, 'height' | 'transactionsCount'> {
-    initialTimeAgo: string
     timestamp: number
 }
 
@@ -36,7 +35,6 @@ export interface TransformedPartialTransactionFragment
     extends Pick<PartialTransactionFragment, 'hash' | 'raw'> {
     actionCount: number
     blockHeight: number
-    initialTimeAgo: string
     primaryAction?: ActionType
     status: IbcStatus
     timestamp: number
@@ -48,7 +46,6 @@ export interface TransformedIbcStats
         'clientId' | 'lastUpdated'
     > {
     id: string
-    initialTimeAgo: string
     timestamp: number
 }
 

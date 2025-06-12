@@ -30,13 +30,11 @@ describe('BlockTable', () => {
                 blocks={[
                     {
                         height: 456,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 99,
                     },
                     {
                         height: 123,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 98,
                     },
@@ -54,13 +52,11 @@ describe('BlockTable', () => {
                 blocks={[
                     {
                         height: 2,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 0,
                     },
                     {
                         height: 1,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 0,
                     },
@@ -81,19 +77,16 @@ describe('BlockTable', () => {
                 blocks={[
                     {
                         height: 3,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 0,
                     },
                     {
                         height: 2,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 0,
                     },
                     {
                         height: 1,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 0,
                     },
@@ -120,7 +113,6 @@ describe('BlockTable', () => {
                 blocks={[
                     {
                         height: 123,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 0,
                     },
@@ -138,7 +130,6 @@ describe('BlockTable', () => {
                 blocks={[
                     {
                         height: 123,
-                        initialTimeAgo: '',
                         timestamp: 0,
                         transactionsCount: 0,
                     },

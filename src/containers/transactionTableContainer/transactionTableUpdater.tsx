@@ -59,7 +59,6 @@ const TransactionTableUpdater: FC<Props> = ({
                         actionCount: actionCount ?? 0,
                         blockHeight: transactionUpdate.id,
                         hash: transactionUpdate.hash.toLowerCase(),
-                        initialTimeAgo: '',
                         primaryAction,
                         raw: transactionUpdate.raw,
                         status: IbcStatus.Completed, // FIXME: Query ibcStatus

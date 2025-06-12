@@ -61,10 +61,7 @@ const BlockTable: FC<Props> = props => {
                                 </Link>
                             </TableCell>
                             <TableCell>
-                                <TimeAgo
-                                    initialTimeAgo={block.initialTimeAgo}
-                                    timestamp={block.timestamp}
-                                />
+                                <TimeAgo timestamp={block.timestamp} />
                             </TableCell>
                             {props.proposer && <TableCell>-</TableCell>}
                             <TableCell>{block.transactionsCount}</TableCell>

@@ -38,13 +38,10 @@ const BlockTableUpdater: FC<Props> = ({
                     return prev
                 }
 
-                const date = dayjs(blockUpdate.createdAt)
-
                 return [
                     {
                         height: blockUpdate.height,
-                        initialTimeAgo: dayjs().to(date),
-                        timestamp: date.valueOf(),
+                        timestamp: dayjs(blockUpdate.createdAt).valueOf(),
                         transactionsCount: blockUpdate.transactionsCount,
                     },
                     ...prev.slice(0, -1),

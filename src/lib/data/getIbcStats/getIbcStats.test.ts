@@ -24,7 +24,6 @@ describe('getIbcStats', () => {
 
         await expect(getIbcStats()).resolves.toMatchObject([
             {
-                initialTimeAgo: '1s ago',
                 timestamp: lastUpdated.valueOf(),
             },
         ])

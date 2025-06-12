@@ -37,7 +37,6 @@ describe('getTransactions', () => {
             transactions: [
                 {
                     hash: 'foo',
-                    initialTimeAgo: '1s ago',
                     timestamp: createdAt.valueOf(),
                 },
             ],

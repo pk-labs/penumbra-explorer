@@ -104,10 +104,7 @@ const TransactionTableRow: FC<Props> = props => {
             </TableCell>
             {props.time && (
                 <TableCell>
-                    <TimeAgo
-                        initialTimeAgo={props.transaction.initialTimeAgo}
-                        timestamp={props.transaction.timestamp}
-                    />
+                    <TimeAgo timestamp={props.transaction.timestamp} />
                 </TableCell>
             )}
         </TableRow>

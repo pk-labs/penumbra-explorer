@@ -58,7 +58,6 @@ const getBlock = async (
                 actionCount: actionCount ?? 0,
                 blockHeight: height,
                 hash: transaction.hash.toLowerCase(),
-                initialTimeAgo: dayjs().to(date),
                 primaryAction,
                 raw: transaction.raw,
                 status: transaction.ibcStatus,
