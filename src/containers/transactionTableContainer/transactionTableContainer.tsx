@@ -1,28 +1,42 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import {
+    Pagination,
     Skeleton,
     Table,
     TableCell,
     TableRow,
     TransactionTableProps,
 } from '@/components'
-import LatestTransactionsLoader from './latestTransactionsLoader'
+import { TransactionFilter } from '@/lib/graphql/generated/types'
+import TransactionTableLoader from './transactionTableLoader'
 
 export interface Props
     extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
-    limit: number
-    // TODO: This is temporary until refactoring done
-    validatorId?: string
+    filter?: TransactionFilter
+    limit: {
+        length: number
+        offset: number
+    }
+    pagination?: boolean
+    subscription?: boolean
 }
 
-// TODO: Refactor into generic transactionTableContainer with configurable
-// header, pagination, query variables and real-time updates.
-const LatestTransactionsContainer: FC<Props> = props => (
+const TransactionTableContainer: FC<Props> = props => (
     <Suspense
-        key={props.limit}
+        key={JSON.stringify({
+            filter: props.filter,
+            limit: props.limit,
+        })}
         fallback={
-            <Table {...props}>
+            <Table
+                footer={
+                    props.pagination ? (
+                        <Pagination page={0} totalPages={0} />
+                    ) : undefined
+                }
+                {...props}
+            >
                 <thead>
                     <TableRow>
                         <TableCell header>
@@ -31,7 +45,7 @@ const LatestTransactionsContainer: FC<Props> = props => (
                     </TableRow>
                 </thead>
                 <tbody>
-                    {Array.from({ length: props.limit }).map((_, i) => (
+                    {Array.from({ length: props.limit.length }).map((_, i) => (
                         <TableRow key={i}>
                             <TableCell>
                                 <Skeleton className="h-6" />
@@ -42,8 +56,8 @@ const LatestTransactionsContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <LatestTransactionsLoader {...props} />
+        <TransactionTableLoader {...props} />
     </Suspense>
 )
 
-export default LatestTransactionsContainer
+export default TransactionTableContainer

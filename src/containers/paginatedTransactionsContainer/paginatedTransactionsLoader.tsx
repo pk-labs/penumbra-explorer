@@ -8,7 +8,6 @@ const PaginatedTransactionsLoader: FC<Props> = async ({
     clientId,
     length,
     offset,
-    pathname,
     ...props
 }) => {
     const { total, transactions } = await getTransactions(
@@ -22,13 +21,7 @@ const PaginatedTransactionsLoader: FC<Props> = async ({
     return (
         <TransactionTable
             emptyStateMessage="This chain contains no transactions"
-            footer={
-                <Pagination
-                    page={page}
-                    pathname={pathname}
-                    totalPages={totalPages}
-                />
-            }
+            footer={<Pagination page={page} totalPages={totalPages} />}
             transactions={transactions}
             {...props}
         />

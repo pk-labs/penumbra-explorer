@@ -2,26 +2,33 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
-import { TransactionTable } from '@/components'
+import { Pagination, TransactionTable } from '@/components'
 import { useTransactionUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { IbcStatus } from '@/lib/graphql/generated/types'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
-import { Props as LatestTransactionsContainerProps } from './latestTransactionsContainer'
+import { Props as TransactionTableContainerProps } from './transactionTableContainer'
 
-interface Props extends LatestTransactionsContainerProps {
+interface Props extends TransactionTableContainerProps {
+    total: number
     transactions?: TransformedPartialTransactionFragment[]
 }
 
-const LatestTransactionsUpdater: FC<Props> = ({ validatorId, ...props }) => {
+const TransactionTableUpdater: FC<Props> = ({
+    filter,
+    limit,
+    pagination,
+    subscription,
+    total,
+    ...props
+}) => {
     const [transactions, setTransactions] = useState<
         TransformedPartialTransactionFragment[] | undefined
     >(props.transactions)
 
     const [transactionUpdateSubscription] = useTransactionUpdateSubscription({
-        // TODO: This is temporary until refactoring done
-        pause: Boolean(validatorId),
-        variables: { limit: props.limit },
+        pause: !subscription,
+        variables: { limit: limit.length },
     })
 
     useEffect(() => {
@@ -68,7 +75,20 @@ const LatestTransactionsUpdater: FC<Props> = ({ validatorId, ...props }) => {
         }
     }, [transactionUpdateSubscription.data?.latestTransactions])
 
-    return <TransactionTable transactions={transactions} {...props} />
+    return (
+        <TransactionTable
+            {...props}
+            footer={
+                pagination ? (
+                    <Pagination
+                        page={limit.offset / limit.length + 1}
+                        totalPages={Math.ceil(total / limit.length)}
+                    />
+                ) : undefined
+            }
+            transactions={transactions}
+        />
+    )
 }
 
-export default LatestTransactionsUpdater
+export default TransactionTableUpdater

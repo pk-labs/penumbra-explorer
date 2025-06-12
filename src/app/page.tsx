@@ -3,9 +3,9 @@ import { FC } from 'react'
 import { Button, Container } from '@/components'
 import {
     LatestBlocksContainer,
-    LatestTransactionsContainer,
     SearchContainer,
     TransactionPanelContainer,
+    TransactionTableContainer,
 } from '@/containers'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { classNames, generatePageMetadata } from '@/lib/utils'
@@ -51,11 +51,12 @@ const HomePage: FC = async () => (
             {/*        'lg:col-start-5 lg:row-1'*/}
             {/*    )}*/}
             {/*/>*/}
-            <LatestTransactionsContainer
+            <TransactionTableContainer
                 className={classNames(
                     'col-span-6 col-start-1 row-5 lg:col-span-3',
                     'lg:col-start-4 lg:row-2'
                 )}
+                emptyStateMessage="No transactions"
                 header={
                     <div className="flex items-center justify-between">
                         <h2 className="text-2xl font-medium">
@@ -66,8 +67,9 @@ const HomePage: FC = async () => (
                         </Button>
                     </div>
                 }
-                limit={10}
+                limit={{ length: 10, offset: 0 }}
                 blockHeight
+                subscription
             />
         </Container>
     </>

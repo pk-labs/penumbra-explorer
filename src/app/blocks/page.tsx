@@ -36,11 +36,7 @@ const BlocksPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Blocks</Breadcrumb>
             </Breadcrumbs>
-            <PaginatedBlocksContainer
-                length={length}
-                offset={offset}
-                pathname="/blocks"
-            />
+            <PaginatedBlocksContainer length={length} offset={offset} />
         </Container>
     )
 }

@@ -15,7 +15,6 @@ export interface Props
     clientId?: string
     length: number
     offset: number
-    pathname: string
 }
 
 // TODO: Refactor into generic transactionTableContainer with configurable
@@ -25,19 +24,9 @@ const PaginatedTransactionsContainer: FC<Props> = props => (
         key={JSON.stringify({
             length: props.length,
             offset: props.offset,
-            pathname: props.pathname,
         })}
         fallback={
-            <Table
-                footer={
-                    <Pagination
-                        page={0}
-                        pathname={props.pathname}
-                        totalPages={0}
-                    />
-                }
-                {...props}
-            >
+            <Table footer={<Pagination page={0} totalPages={0} />} {...props}>
                 <thead>
                     <TableRow>
                         <TableCell header>

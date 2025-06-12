@@ -8,7 +8,6 @@ import { Props } from './paginatedBlocksContainer'
 const PaginatedBlocksLoader: FC<Props> = async ({
     length,
     offset,
-    pathname,
     ...props
 }) => {
     const { blocks, total } = await getBlocks({ length, offset })
@@ -23,13 +22,7 @@ const PaginatedBlocksLoader: FC<Props> = async ({
     return (
         <BlockTable
             blocks={blocks}
-            footer={
-                <Pagination
-                    page={page}
-                    pathname={pathname}
-                    totalPages={totalPages}
-                />
-            }
+            footer={<Pagination page={page} totalPages={totalPages} />}
             {...props}
         />
     )

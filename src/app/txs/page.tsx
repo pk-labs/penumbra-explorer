@@ -37,7 +37,6 @@ const TransactionsPage: FC<Props> = async props => {
             <PaginatedTransactionsContainer
                 length={length}
                 offset={offset}
-                pathname="/txs"
                 blockHeight
                 time
             />
