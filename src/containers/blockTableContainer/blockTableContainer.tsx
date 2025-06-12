@@ -16,7 +16,7 @@ export interface Props
     filter?: BlockFilter
     limit: {
         length: number
-        offset: number
+        offset?: number
     }
     pagination?: boolean
     subscription?: boolean

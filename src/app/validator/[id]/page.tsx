@@ -87,7 +87,7 @@ const ValidatorPage: FC<Props> = async props => {
                             Latest transactions
                         </h2>
                     }
-                    limit={{ length: 10, offset: 0 }}
+                    limit={{ length: 10 }}
                     blockHeight
                     time
                 />

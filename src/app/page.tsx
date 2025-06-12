@@ -47,7 +47,7 @@ const HomePage: FC = async () => (
                         </Button>
                     </div>
                 }
-                limit={{ length: 10, offset: 0 }}
+                limit={{ length: 10 }}
                 subscription
             />
             <TransactionPanelContainer
@@ -79,7 +79,7 @@ const HomePage: FC = async () => (
                         </Button>
                     </div>
                 }
-                limit={{ length: 10, offset: 0 }}
+                limit={{ length: 10 }}
                 blockHeight
                 subscription
             />
