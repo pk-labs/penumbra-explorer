@@ -1,19 +1,19 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import {
+    BlockTableProps,
     Pagination,
     Skeleton,
     Table,
     TableCell,
     TableRow,
-    TransactionTableProps,
 } from '@/components'
-import { TransactionFilter } from '@/lib/graphql/generated/types'
-import TransactionTableLoader from './transactionTableLoader'
+import { BlockFilter } from '@/lib/graphql/generated/types'
+import BlockTableLoader from './blockTableLoader'
 
 export interface Props
-    extends Omit<TransactionTableProps, 'footer' | 'transactions'> {
-    filter?: TransactionFilter
+    extends Omit<BlockTableProps, 'blocks' | 'footer' | 'ticker'> {
+    filter?: BlockFilter
     limit: {
         length: number
         offset: number
@@ -22,7 +22,7 @@ export interface Props
     subscription?: boolean
 }
 
-const TransactionTableContainer: FC<Props> = props => (
+const BlockTableContainer: FC<Props> = props => (
     <Suspense
         key={JSON.stringify({
             filter: props.filter,
@@ -57,8 +57,8 @@ const TransactionTableContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <TransactionTableLoader {...props} />
+        <BlockTableLoader {...props} />
     </Suspense>
 )
 
-export default TransactionTableContainer
+export default BlockTableContainer

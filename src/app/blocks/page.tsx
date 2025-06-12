@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
-import { PaginatedBlocksContainer } from '@/containers'
+import { BlockTableContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
@@ -36,7 +36,7 @@ const BlocksPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Blocks</Breadcrumb>
             </Breadcrumbs>
-            <PaginatedBlocksContainer length={length} offset={offset} />
+            <BlockTableContainer limit={{ length, offset }} pagination />
         </Container>
     )
 }

@@ -22,20 +22,16 @@ const TransactionTableUpdater: FC<Props> = ({
     total,
     ...props
 }) => {
-    const [transactions, setTransactions] = useState<
-        TransformedPartialTransactionFragment[] | undefined
-    >(props.transactions)
-
+    const [transactions, setTransactions] = useState(props.transactions)
     const [transactionUpdateSubscription] = useTransactionUpdateSubscription({
         pause: !subscription,
         variables: { limit: limit.length },
     })
+    const transactionUpdate =
+        transactionUpdateSubscription.data?.latestTransactions
 
     useEffect(() => {
-        if (transactionUpdateSubscription.data?.latestTransactions) {
-            const transactionUpdate =
-                transactionUpdateSubscription.data.latestTransactions
-
+        if (transactionUpdate) {
             setTransactions(prev => {
                 if (
                     !prev ||
@@ -73,7 +69,7 @@ const TransactionTableUpdater: FC<Props> = ({
                 ]
             })
         }
-    }, [transactionUpdateSubscription.data?.latestTransactions])
+    }, [transactionUpdate])
 
     return (
         <TransactionTable
