@@ -2,7 +2,8 @@
 import { FC } from 'react'
 import { Button, Container } from '@/components'
 import {
-    LatestBlocksContainer,
+    BlockPanelContainer,
+    BlockTableContainer,
     SearchContainer,
     TransactionPanelContainer,
     TransactionTableContainer,
@@ -29,15 +30,25 @@ const HomePage: FC = async () => (
             </GraphqlClientProvider>
         </Container>
         <Container className="grid grid-cols-6 gap-4">
-            <LatestBlocksContainer
-                blockPanelClassName={classNames(
+            <BlockPanelContainer
+                className={classNames(
                     'col-span-6 col-start-1 row-1 md:col-span-3 md:col-start-1'
                 )}
-                blockTableClassName={classNames(
+            />
+            <BlockTableContainer
+                className={classNames(
                     'col-span-6 col-start-1 row-4 lg:col-span-3 lg:row-2'
                 )}
-                limit={10}
-                ticker
+                header={
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-medium">Latest blocks</h2>
+                        <Button density="compact" href="/blocks">
+                            View all
+                        </Button>
+                    </div>
+                }
+                limit={{ length: 10, offset: 0 }}
+                subscription
             />
             <TransactionPanelContainer
                 className={classNames(
@@ -56,6 +67,7 @@ const HomePage: FC = async () => (
                     'col-span-6 col-start-1 row-5 lg:col-span-3',
                     'lg:col-start-4 lg:row-2'
                 )}
+                // TODO: Just hardcode it to this message and remove the prop
                 emptyStateMessage="No transactions"
                 header={
                     <div className="flex items-center justify-between">
