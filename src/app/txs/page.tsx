@@ -35,7 +35,6 @@ const TransactionsPage: FC<Props> = async props => {
                 <Breadcrumb>Transactions</Breadcrumb>
             </Breadcrumbs>
             <TransactionTableContainer
-                emptyStateMessage="No transactions"
                 limit={{ length, offset }}
                 blockHeight
                 pagination

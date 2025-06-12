@@ -67,8 +67,6 @@ const HomePage: FC = async () => (
                     'col-span-6 col-start-1 row-5 lg:col-span-3',
                     'lg:col-start-4 lg:row-2'
                 )}
-                // TODO: Just hardcode it to this message and remove the prop
-                emptyStateMessage="No transactions"
                 header={
                     <div className="flex items-center justify-between">
                         <h2 className="text-2xl font-medium">

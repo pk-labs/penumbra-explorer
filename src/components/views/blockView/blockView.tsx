@@ -45,7 +45,6 @@ const BlockView: FC<Props> = props => (
         </Parameters>
         <TransactionTable
             className="rounded-sm p-0 backdrop-blur-none"
-            emptyStateMessage="This block contains no transactions"
             transactions={props.block.transactions}
         />
         <Subsection title="Executions">

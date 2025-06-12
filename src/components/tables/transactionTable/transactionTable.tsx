@@ -11,7 +11,6 @@ import TransactionTableRow, {
 export interface Props
     extends Omit<TableProps, 'children'>,
         Omit<TransationTableRowProps, 'new' | 'transaction'> {
-    emptyStateMessage?: string
     transactions?: TransformedPartialTransactionFragment[]
 }
 
@@ -72,7 +71,7 @@ const TransactionTable: FC<Props> = props => {
                                 (props.time ? 1 : 0)
                             }
                         >
-                            <EmptyState>{props.emptyStateMessage}</EmptyState>
+                            <EmptyState>No transactions</EmptyState>
                         </TableCell>
                     </TableRow>
                 )}
