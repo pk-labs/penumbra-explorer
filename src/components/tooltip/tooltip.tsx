@@ -12,7 +12,6 @@ interface Props {
     className?: string
 }
 
-// FIXME: Backdrop blur filter not working
 const Tooltip: FC<Props> = props => (
     <ReactTooltip
         anchorSelect={props.anchorSelect}
