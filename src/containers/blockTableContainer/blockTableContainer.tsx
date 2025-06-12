@@ -11,8 +11,7 @@ import {
 import { BlockFilter } from '@/lib/graphql/generated/types'
 import BlockTableLoader from './blockTableLoader'
 
-export interface Props
-    extends Omit<BlockTableProps, 'blocks' | 'footer' | 'ticker'> {
+export interface Props extends Omit<BlockTableProps, 'blocks' | 'footer'> {
     filter?: BlockFilter
     limit: {
         length: number

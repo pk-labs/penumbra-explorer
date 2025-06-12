@@ -65,7 +65,6 @@ const BlockTableUpdater: FC<Props> = ({
                     />
                 ) : undefined
             }
-            ticker={subscription}
         />
     )
 }

@@ -57,7 +57,6 @@ const TransactionTable: FC<Props> = props => {
                                 )
                             }
                             status={props.status}
-                            ticker={props.ticker}
                             time={props.time}
                             transaction={transaction}
                         />

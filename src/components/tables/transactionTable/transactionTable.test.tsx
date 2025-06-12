@@ -1,5 +1,6 @@
 import { fireEvent, getByText, render } from '@testing-library/react'
 import { router } from '@/lib/__tests__/__mocks__'
+import dayjs from '@/lib/dayjs'
 import { IbcStatus } from '@/lib/graphql/generated/types'
 import { ActionType } from '@/lib/types'
 import { TableProps } from '../table'
@@ -186,7 +187,7 @@ describe('TransactionTable', () => {
                         initialTimeAgo: '1s ago',
                         raw: '',
                         status: IbcStatus.Unknown,
-                        timestamp: 0,
+                        timestamp: dayjs().subtract(1, 'second').valueOf(),
                     },
                 ]}
                 time
