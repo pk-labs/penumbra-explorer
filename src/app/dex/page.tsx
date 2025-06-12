@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container, NumberPanel } from '@/components'
+import { DexTableContainer } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
@@ -50,17 +51,15 @@ const DexPage: FC<Props> = async props => {
                 >
                     <h2 className="text-2xl font-medium">Latest executions</h2>
                 </section>
-                <section
-                    className={classNames(
-                        'bg-other-tonalFill5 col-span-full flex flex-col',
-                        'gap-4 rounded-lg p-6 backdrop-blur-lg lg:col-span-6',
-                        'xl:col-span-8'
-                    )}
-                >
-                    <h2 className="text-2xl font-medium">
-                        Liquidity positions
-                    </h2>
-                </section>
+                <DexTableContainer
+                    className="col-span-full lg:col-span-6 xl:col-span-8"
+                    header={
+                        <h1 className="text-2xl font-medium">
+                            Liquidity positions
+                        </h1>
+                    }
+                    limit={{ length: 13 }}
+                />
             </div>
         </Container>
     )

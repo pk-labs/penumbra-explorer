@@ -12,6 +12,7 @@ import IbcLoader from './ibcLoader'
 
 export type Props = Omit<IbcTableProps, 'stats'>
 
+// TODO: Rename to IBC table container
 const IbcContainer: FC<Props> = props => (
     <Suspense
         key={props.timePeriod}

@@ -6,7 +6,7 @@ jest.mock('../table/table', () => (props: TableProps) => (
     <table>{props.children}</table>
 ))
 
-describe('ValidatorPerformanceTable', () => {
+describe('ValidatorTable', () => {
     test('renders empty state when no validators', async () => {
         const { container } = render(<ValidatorTable validators={[]} />)
 
