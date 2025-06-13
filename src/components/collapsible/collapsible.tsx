@@ -28,7 +28,7 @@ const Collapsible: FC<Props> = props => {
                 className={classNames(
                     'hover:bg-other-tonalFill10 relative transition-colors',
                     'flex cursor-pointer items-center justify-between p-4',
-                    'pl-10 duration-200 ease-out'
+                    'pl-10 duration-200 ease-out select-none'
                 )}
                 onClick={toggle}
             >
