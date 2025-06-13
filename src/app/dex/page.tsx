@@ -2,7 +2,7 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container, NumberPanel } from '@/components'
-import { DexTableContainer } from '@/containers'
+import { DexExecutionsPanelContainer, DexTableContainer } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
@@ -33,11 +33,7 @@ const DexPage: FC<Props> = async props => {
                 <Breadcrumb>DEX</Breadcrumb>
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4">
-                <NumberPanel
-                    className="col-span-full sm:col-span-6"
-                    number={43123}
-                    title="Number of executions"
-                />
+                <DexExecutionsPanelContainer className="col-span-full sm:col-span-6" />
                 <NumberPanel
                     className="col-span-full sm:col-span-6"
                     number={450}
