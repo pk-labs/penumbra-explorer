@@ -10,7 +10,7 @@ import {
     TableRow,
     TimeAgo,
 } from '@/components'
-import { classNames, shortenHash } from '@/lib/utils'
+import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import EmptyState from '../../components/emptyState'
 import { Props as DexTableContainerProps } from './dexTableContainer'
 
@@ -68,11 +68,11 @@ const DexTableUpdater: FC<Props> = props => {
                                 {position.pair.left}/{position.pair.right}
                             </TableCell>
                             <TableCell className="h-20">
-                                <div className="flex flex-col">
+                                <div className="flex flex-col gap-1">
                                     {position.reserves.map(
                                         (reserve: any, i: number) => (
                                             <span key={i}>
-                                                {reserve.amount}{' '}
+                                                {formatNumber(reserve.amount)}{' '}
                                                 {reserve.symbol}
                                             </span>
                                         )
