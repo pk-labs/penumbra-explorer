@@ -22,4 +22,16 @@
             background-color: transparent;
         }
     }
+
+    --animate-shimmer: shimmer-animation 2s infinite;
+
+    @keyframes shimmer-animation {
+        from {
+            left: -50%;
+        }
+
+        to {
+            left: 150%;
+        }
+    }
 }
