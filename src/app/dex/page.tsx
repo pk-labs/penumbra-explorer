@@ -1,18 +1,15 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container, NumberPanel } from '@/components'
-import { DexExecutionsPanelContainer, DexTableContainer } from '@/containers'
+import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import {
+    DexExecutionsPanelContainer,
+    DexPositionsPanelContainer,
+    DexTableContainer,
+} from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
-export const metadata = generatePageMetadata(
-    'Validators',
-    'Discover active Penumbra Validators and track key metrics like Status, ' +
-        'Voting power, Uptime, and Commission. Find the best Validator on ' +
-        'Noctis - a fast, secure, and privacy-focused explorer built for ' +
-        'Penumbra blockchain.',
-    '/validators'
-)
+export const metadata = generatePageMetadata('Dex', 'TODO: Description', '/dex')
 
 interface Props {
     searchParams: Promise<{ page?: string }>
@@ -34,11 +31,7 @@ const DexPage: FC<Props> = async props => {
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4">
                 <DexExecutionsPanelContainer className="col-span-full sm:col-span-6" />
-                <NumberPanel
-                    className="col-span-full sm:col-span-6"
-                    number={450}
-                    title="Total open positions"
-                />
+                <DexPositionsPanelContainer className="col-span-full sm:col-span-6" />
                 <section
                     className={classNames(
                         'bg-other-tonalFill5 col-span-full flex flex-col',
