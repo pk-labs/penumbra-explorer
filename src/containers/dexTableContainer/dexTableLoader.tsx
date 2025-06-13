@@ -13,6 +13,7 @@ const DexTableLoader: FC<Props> = async props => {
                 resolve(
                     Array.from({ length: props.limit.length })
                         .map(() => ({
+                            fee: faker.number.float({ max: 0.9, min: 0.1 }),
                             id: faker.finance.bitcoinAddress(),
                             pair: {
                                 left: faker.helpers.arrayElement([
@@ -32,7 +33,6 @@ const DexTableLoader: FC<Props> = async props => {
                                     'USDC',
                                 ]),
                             },
-                            percentage: faker.number.float({ max: 1, min: -1 }),
                             reserves: Array.from({
                                 length: faker.number.int({ max: 2, min: 1 }),
                             }).map(() => ({
@@ -49,10 +49,10 @@ const DexTableLoader: FC<Props> = async props => {
                                 ]),
                             })),
                             state: faker.helpers.arrayElement([
-                                'Open',
-                                'Closed',
-                                'Executing',
-                                'Withdrawn',
+                                'open',
+                                'executing',
+                                'withdrawn',
+                                'closed',
                             ]),
                             timestamp: dayjs()
                                 .add(

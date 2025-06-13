@@ -3,7 +3,13 @@
 
 import { ExternalLinkIcon } from 'lucide-react'
 import { FC, useState } from 'react'
-import { Pill, Table, TableCell, TableRow, TimeAgo } from '@/components'
+import {
+    DexPositionStatePill,
+    Table,
+    TableCell,
+    TableRow,
+    TimeAgo,
+} from '@/components'
 import { classNames, shortenHash } from '@/lib/utils'
 import EmptyState from '../../components/emptyState'
 import { Props as DexTableContainerProps } from './dexTableContainer'
@@ -49,7 +55,7 @@ const DexTableUpdater: FC<Props> = props => {
                     <TableCell header>Pair</TableCell>
                     <TableCell header>Reserves</TableCell>
                     <TableCell header>State</TableCell>
-                    <TableCell header>Free tier</TableCell>
+                    <TableCell header>Fee tier</TableCell>
                     <TableCell header>Updated</TableCell>
                     <TableCell header>Position ID</TableCell>
                 </TableRow>
@@ -74,12 +80,10 @@ const DexTableUpdater: FC<Props> = props => {
                                 </div>
                             </TableCell>
                             <TableCell className="h-20">
-                                <Pill priority="secondary">
-                                    {position.state}
-                                </Pill>
+                                <DexPositionStatePill state={position.state} />
                             </TableCell>
                             <TableCell className="h-20">
-                                {position.percentage.toFixed(2)}%
+                                {position.fee.toFixed(2)}%
                             </TableCell>
                             <TableCell className="h-20">
                                 <TimeAgo timestamp={position.timestamp} />
