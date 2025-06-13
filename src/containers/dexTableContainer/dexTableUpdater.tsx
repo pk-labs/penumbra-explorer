@@ -1,9 +1,10 @@
 // istanbul ignore file
 'use client'
 
+import { ExternalLinkIcon } from 'lucide-react'
 import { FC, useState } from 'react'
 import { Pill, Table, TableCell, TableRow, TimeAgo } from '@/components'
-import { shortenHash } from '@/lib/utils'
+import { classNames, shortenHash } from '@/lib/utils'
 import EmptyState from '../../components/emptyState'
 import { Props as DexTableContainerProps } from './dexTableContainer'
 
@@ -84,7 +85,18 @@ const DexTableUpdater: FC<Props> = props => {
                                 <TimeAgo timestamp={position.timestamp} />
                             </TableCell>
                             <TableCell className="h-20">
-                                {shortenHash(position.id, 19, 'end')}
+                                <a
+                                    className={classNames(
+                                        'hover:text-text-special inline-flex',
+                                        'items-center gap-1'
+                                    )}
+                                    href={`https://dex.penumbra.zone/inspect/lp/${position.id}`}
+                                    rel="nofollow"
+                                    target="_blank"
+                                >
+                                    {shortenHash(position.id, 9, 'end')}
+                                    <ExternalLinkIcon size={16} />
+                                </a>
                             </TableCell>
                         </TableRow>
                     ))
