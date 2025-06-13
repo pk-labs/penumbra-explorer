@@ -84,7 +84,7 @@ const DexTableUpdater: FC<Props> = props => {
                                 <TimeAgo timestamp={position.timestamp} />
                             </TableCell>
                             <TableCell className="h-20">
-                                {shortenHash(position.id, 'end')}
+                                {shortenHash(position.id, 19, 'end')}
                             </TableCell>
                         </TableRow>
                     ))

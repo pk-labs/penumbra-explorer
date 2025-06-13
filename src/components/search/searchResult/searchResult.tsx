@@ -79,7 +79,7 @@ const SearchResult: FC<Props> = props => {
                         fallbackLetter
                     />
                     {props.searchResult.name ??
-                        shortenHash(props.searchResult.id)}
+                        shortenHash(props.searchResult.id, 16)}
                 </Link>
             )
             break

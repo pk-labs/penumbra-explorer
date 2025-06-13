@@ -41,7 +41,8 @@ const ValidatorLoader: FC<Props> = async props => {
                     />
                     <span className="inline-flex flex-col gap-1">
                         <h1 className="text-2xl break-all">
-                            {validator.name || shortenHash(validator.id, 'end')}
+                            {validator.name ||
+                                shortenHash(validator.id, 19, 'end')}
                         </h1>
                         {validator.website && (
                             <a
@@ -129,6 +130,7 @@ const ValidatorLoader: FC<Props> = async props => {
                                         <span className="text-text-primary">
                                             {shortenHash(
                                                 stream.recipientAddress,
+                                                19,
                                                 'end'
                                             )}
                                         </span>

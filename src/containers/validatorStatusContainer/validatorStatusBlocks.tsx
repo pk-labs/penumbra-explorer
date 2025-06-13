@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, easeOut, motion } from 'motion/react'
 import Link from 'next/link'
 import { FC, Fragment, MouseEvent, useCallback } from 'react'
 import { Tooltip } from '@/components'
@@ -24,7 +24,7 @@ const blockVariants = {
         scale: [0, 1.2, 1],
         transition: {
             duration: 0.2,
-            ease: 'easeOut',
+            ease: easeOut,
             times: [0, 0.7, 1],
         },
     },

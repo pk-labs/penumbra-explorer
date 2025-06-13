@@ -58,7 +58,7 @@ const TransactionTableRow: FC<Props> = props => {
             <TableCell>
                 <TransactionStatusIcon status={props.transaction.status} />
                 <Link href={`/tx/${props.transaction.hash}`}>
-                    {shortenHash(props.transaction.hash)}
+                    {shortenHash(props.transaction.hash, 16)}
                 </Link>
                 <CopyToClipboard text={props.transaction.hash} />
             </TableCell>

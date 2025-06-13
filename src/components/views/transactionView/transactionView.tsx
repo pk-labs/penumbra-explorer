@@ -27,7 +27,7 @@ const TransactionView: FC<Props> = props => (
     >
         <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
             <Parameter name="Transaction hash">
-                {shortenHash(props.transaction.hash)}
+                {shortenHash(props.transaction.hash, 16)}
                 <CopyToClipboard
                     className="text-text-primary -mr-[5px]"
                     text={props.transaction.hash}
