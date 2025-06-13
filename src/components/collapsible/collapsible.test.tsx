@@ -1,7 +1,40 @@
-import { render } from '@testing-library/react'
+import {
+    fireEvent,
+    getByText,
+    queryByText,
+    render,
+    waitFor,
+} from '@testing-library/react'
 import Collapsible from './collapsible'
 
 describe('Collapsible', () => {
+    test('renders collapsed by default', async () => {
+        const { container } = render(
+            <Collapsible header="Foo">Bar</Collapsible>
+        )
+
+        getByText(container, 'Foo')
+        expect(queryByText(container, 'Bar')).toBeNull()
+    })
+
+    test('toggles content on header click', async () => {
+        const { container } = render(
+            <Collapsible header="Foo">Bar</Collapsible>
+        )
+
+        fireEvent.click(getByText(container, 'Foo'))
+
+        await waitFor(() => {
+            getByText(container, 'Bar')
+        })
+
+        fireEvent.click(getByText(container, 'Foo'))
+
+        await waitFor(() => {
+            expect(queryByText(container, 'Bar')).toBeNull()
+        })
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(
             <Collapsible className="foo bar" header="Foo" />
