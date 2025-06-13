@@ -21,7 +21,7 @@
 
 .block {
     @apply bg-neutral-main inline-block rounded-xs ease-out;
-    @apply transition-[background] duration-200 hover:bg-neutral-800;
+    @apply transition-colors duration-200 hover:bg-neutral-800;
     width: 15px;
     height: 15px;
 

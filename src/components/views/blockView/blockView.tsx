@@ -1,7 +1,9 @@
+import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import { TransformedBlockFragment } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
+import Collapsible from '../../collapsible'
 import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
 import { Parameter, Parameters } from '../../parameters'
 import Subsection from '../../subsection'
@@ -48,7 +50,16 @@ const BlockView: FC<Props> = props => (
             transactions={props.block.transactions}
         />
         <Subsection title="Executions">
-            <div className="bg-other-tonalFill5 h-25 rounded-lg p-6" />
+            <Collapsible
+                header={
+                    <>
+                        <span>{faker.lorem.words({ max: 3, min: 1 })}</span>
+                        <span>{faker.lorem.word()}</span>
+                    </>
+                }
+            >
+                {faker.lorem.paragraphs({ max: 3, min: 1 })}
+            </Collapsible>
         </Subsection>
         {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
     </View>

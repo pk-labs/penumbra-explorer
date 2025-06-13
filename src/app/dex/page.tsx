@@ -1,4 +1,5 @@
 // istanbul ignore file
+import { faker } from '@faker-js/faker'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
@@ -8,6 +9,7 @@ import {
     DexTableContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
+import Collapsible from '../../components/collapsible'
 
 export const metadata = generatePageMetadata('Dex', 'TODO: Description', '/dex')
 
@@ -35,10 +37,86 @@ const DexPage: FC<Props> = async props => {
                 <section
                     className={classNames(
                         'bg-other-tonalFill5 col-span-full flex flex-col',
-                        'gap-4 rounded-lg p-6 backdrop-blur-lg lg:col-span-6 xl:col-span-4'
+                        'gap-10 rounded-lg p-6 backdrop-blur-lg lg:col-span-6',
+                        'xl:col-span-4'
                     )}
                 >
                     <h2 className="text-2xl font-medium">Latest executions</h2>
+                    <Collapsible
+                        header={
+                            <>
+                                <span>
+                                    {faker.lorem.words({
+                                        max: 3,
+                                        min: 1,
+                                    })}
+                                </span>
+                                <span>{faker.lorem.word()}</span>
+                            </>
+                        }
+                    >
+                        {faker.lorem.paragraphs({ max: 3, min: 1 })}
+                    </Collapsible>
+                    <Collapsible
+                        header={
+                            <>
+                                <span>
+                                    {faker.lorem.words({
+                                        max: 3,
+                                        min: 1,
+                                    })}
+                                </span>
+                                <span>{faker.lorem.word()}</span>
+                            </>
+                        }
+                    >
+                        {faker.lorem.paragraphs({ max: 3, min: 1 })}
+                    </Collapsible>
+                    <Collapsible
+                        header={
+                            <>
+                                <span>
+                                    {faker.lorem.words({
+                                        max: 3,
+                                        min: 1,
+                                    })}
+                                </span>
+                                <span>{faker.lorem.word()}</span>
+                            </>
+                        }
+                    >
+                        {faker.lorem.paragraphs({ max: 3, min: 1 })}
+                    </Collapsible>
+                    <Collapsible
+                        header={
+                            <>
+                                <span>
+                                    {faker.lorem.words({
+                                        max: 3,
+                                        min: 1,
+                                    })}
+                                </span>
+                                <span>{faker.lorem.word()}</span>
+                            </>
+                        }
+                    >
+                        {faker.lorem.paragraphs({ max: 3, min: 1 })}
+                    </Collapsible>
+                    <Collapsible
+                        header={
+                            <>
+                                <span>
+                                    {faker.lorem.words({
+                                        max: 3,
+                                        min: 1,
+                                    })}
+                                </span>
+                                <span>{faker.lorem.word()}</span>
+                            </>
+                        }
+                    >
+                        {faker.lorem.paragraphs({ max: 3, min: 1 })}
+                    </Collapsible>
                 </section>
                 <DexTableContainer
                     className="col-span-full lg:col-span-6 xl:col-span-8"
