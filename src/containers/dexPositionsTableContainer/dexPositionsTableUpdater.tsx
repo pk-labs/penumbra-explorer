@@ -12,13 +12,13 @@ import {
 } from '@/components'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import EmptyState from '../../components/emptyState'
-import { Props as DexTableContainerProps } from './dexTableContainer'
+import { Props as DexPositionsTableContainerProps } from './dexPositionsTableContainer'
 
-interface Props extends DexTableContainerProps {
+interface Props extends DexPositionsTableContainerProps {
     positions?: any[]
 }
 
-const DexTableUpdater: FC<Props> = props => {
+const DexPositionsTableUpdater: FC<Props> = props => {
     const [positions] = useState(props.positions)
     // const [blockSubscription] = useBlockUpdateSubscription({
     //     pause: !subscription,
@@ -116,4 +116,4 @@ const DexTableUpdater: FC<Props> = props => {
     )
 }
 
-export default DexTableUpdater
+export default DexPositionsTableUpdater

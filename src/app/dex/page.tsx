@@ -6,7 +6,7 @@ import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
     DexExecutionsPanelContainer,
     DexPositionsPanelContainer,
-    DexTableContainer,
+    DexPositionsTableContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 import Collapsible from '../../components/collapsible'
@@ -118,7 +118,7 @@ const DexPage: FC<Props> = async props => {
                         {faker.lorem.paragraphs({ max: 3, min: 1 })}
                     </Collapsible>
                 </section>
-                <DexTableContainer
+                <DexPositionsTableContainer
                     className="col-span-full lg:col-span-6 xl:col-span-8"
                     header={
                         <h1 className="text-2xl font-medium">

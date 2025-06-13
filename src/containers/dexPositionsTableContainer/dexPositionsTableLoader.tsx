@@ -3,10 +3,10 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { Props } from './dexTableContainer'
-import DexTableUpdater from './dexTableUpdater'
+import { Props } from './dexPositionsTableContainer'
+import DexPositionsTableUpdater from './dexPositionsTableUpdater'
 
-const DexTableLoader: FC<Props> = async props => {
+const DexPositionsTableLoader: FC<Props> = async props => {
     const positions = await new Promise<any[]>(resolve =>
         setTimeout(
             () =>
@@ -69,9 +69,9 @@ const DexTableLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <DexTableUpdater positions={positions} {...props} />
+            <DexPositionsTableUpdater positions={positions} {...props} />
         </GraphqlClientProvider>
     )
 }
 
-export default DexTableLoader
+export default DexPositionsTableLoader
