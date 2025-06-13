@@ -11,52 +11,57 @@ const DexTableLoader: FC<Props> = async props => {
         setTimeout(
             () =>
                 resolve(
-                    Array.from({ length: props.limit.length }).map(() => ({
-                        id: faker.finance.bitcoinAddress(),
-                        pair: {
-                            left: faker.helpers.arrayElement([
-                                'ATOM',
-                                'CDT',
-                                'OSMO',
-                                'TIA',
-                                'UM',
-                                'USDC',
+                    Array.from({ length: props.limit.length })
+                        .map(() => ({
+                            id: faker.finance.bitcoinAddress(),
+                            pair: {
+                                left: faker.helpers.arrayElement([
+                                    'ATOM',
+                                    'CDT',
+                                    'OSMO',
+                                    'TIA',
+                                    'UM',
+                                    'USDC',
+                                ]),
+                                right: faker.helpers.arrayElement([
+                                    'ATOM',
+                                    'CDT',
+                                    'OSMO',
+                                    'TIA',
+                                    'UM',
+                                    'USDC',
+                                ]),
+                            },
+                            percentage: faker.number.float({ max: 1, min: -1 }),
+                            reserves: Array.from({
+                                length: faker.number.int({ max: 2, min: 1 }),
+                            }).map(() => ({
+                                amount: faker.number.float({
+                                    max: 5000,
+                                    min: 0,
+                                }),
+                                symbol: faker.helpers.arrayElement([
+                                    'ATOM',
+                                    'CDT',
+                                    'OSMO',
+                                    'UM',
+                                    'USDC',
+                                ]),
+                            })),
+                            state: faker.helpers.arrayElement([
+                                'Open',
+                                'Closed',
+                                'Executing',
+                                'Withdrawn',
                             ]),
-                            right: faker.helpers.arrayElement([
-                                'ATOM',
-                                'CDT',
-                                'OSMO',
-                                'TIA',
-                                'UM',
-                                'USDC',
-                            ]),
-                        },
-                        percentage: faker.number.float({ max: 1, min: -1 }),
-                        reserves: Array.from({
-                            length: faker.number.int({ max: 2, min: 1 }),
-                        }).map(() => ({
-                            amount: faker.number.float({ max: 5000, min: 0 }),
-                            symbol: faker.helpers.arrayElement([
-                                'ATOM',
-                                'CDT',
-                                'OSMO',
-                                'UM',
-                                'USDC',
-                            ]),
-                        })),
-                        state: faker.helpers.arrayElement([
-                            'Open',
-                            'Closed',
-                            'Executing',
-                            'Withdrawn',
-                        ]),
-                        timestamp: dayjs()
-                            .add(
-                                faker.number.int({ max: 0, min: -1000 }),
-                                'days'
-                            )
-                            .valueOf(),
-                    }))
+                            timestamp: dayjs()
+                                .add(
+                                    faker.number.int({ max: 0, min: -500 }),
+                                    'seconds'
+                                )
+                                .valueOf(),
+                        }))
+                        .toSorted((a, b) => b.timestamp - a.timestamp)
                 ),
             faker.number.int({ max: 1000, min: 500 })
         )
