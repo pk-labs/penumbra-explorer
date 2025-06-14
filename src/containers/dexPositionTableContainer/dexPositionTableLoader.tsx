@@ -3,62 +3,45 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { DexPositionState } from '@/lib/types'
+import { DexPosition, DexPositionState } from '@/lib/types'
 import { Props } from './dexPositionTableContainer'
 import DexPositionTableUpdater from './dexPositionTableUpdater'
 
+const currencies = ['ATOM', 'CDT', 'OSMO', 'TIA', 'UM', 'USDC']
+
 const DexPositionTableLoader: FC<Props> = async props => {
-    const positions = await new Promise<any[]>(resolve =>
+    const positions = await new Promise<DexPosition[]>(resolve =>
         setTimeout(
             () =>
                 resolve(
                     Array.from({ length: props.limit.length })
-                        .map(() => ({
-                            fee: faker.number.float({ max: 0.9, min: 0.1 }),
-                            id: faker.finance.bitcoinAddress(),
-                            pair: {
-                                left: faker.helpers.arrayElement([
-                                    'ATOM',
-                                    'CDT',
-                                    'OSMO',
-                                    'TIA',
-                                    'UM',
-                                    'USDC',
-                                ]),
-                                right: faker.helpers.arrayElement([
-                                    'ATOM',
-                                    'CDT',
-                                    'OSMO',
-                                    'TIA',
-                                    'UM',
-                                    'USDC',
-                                ]),
-                            },
-                            reserves: Array.from({
-                                length: faker.number.int({ max: 2, min: 1 }),
-                            }).map(() => ({
-                                amount: faker.number.float({
+                        .map(() => {
+                            const base = faker.helpers.arrayElement(currencies)
+
+                            const quote = faker.helpers.arrayElement(
+                                currencies.filter(currency => currency != base)
+                            )
+
+                            return {
+                                base,
+                                fee: faker.number.float({ max: 0.9, min: 0.1 }),
+                                id: faker.finance.bitcoinAddress(),
+                                quote,
+                                reserve: faker.number.float({
                                     max: 5000,
-                                    min: 0,
+                                    min: 0.001,
                                 }),
-                                symbol: faker.helpers.arrayElement([
-                                    'ATOM',
-                                    'CDT',
-                                    'OSMO',
-                                    'UM',
-                                    'USDC',
-                                ]),
-                            })),
-                            state: faker.helpers.arrayElement(
-                                Object.values(DexPositionState)
-                            ),
-                            timestamp: dayjs()
-                                .add(
-                                    faker.number.int({ max: 0, min: -500 }),
-                                    'seconds'
-                                )
-                                .valueOf(),
-                        }))
+                                state: faker.helpers.arrayElement(
+                                    Object.values(DexPositionState)
+                                ),
+                                timestamp: dayjs()
+                                    .add(
+                                        faker.number.int({ max: 0, min: -500 }),
+                                        'seconds'
+                                    )
+                                    .valueOf(),
+                            }
+                        })
                         .toSorted((a, b) => b.timestamp - a.timestamp)
                 ),
             faker.number.int({ max: 1000, min: 500 })

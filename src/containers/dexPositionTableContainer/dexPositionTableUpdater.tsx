@@ -11,11 +11,12 @@ import {
     TableRow,
     TimeAgo,
 } from '@/components'
+import { DexPosition } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import { Props as DexPositionTableContainerProps } from './dexPositionTableContainer'
 
 interface Props extends DexPositionTableContainerProps {
-    positions?: any[]
+    positions?: DexPosition[]
 }
 
 const DexPositionTableUpdater: FC<Props> = props => {
@@ -65,19 +66,11 @@ const DexPositionTableUpdater: FC<Props> = props => {
                     positions.map(position => (
                         <TableRow key={position.id}>
                             <TableCell className="h-20">
-                                {position.pair.left}/{position.pair.right}
+                                {position.base}/{position.quote}
                             </TableCell>
                             <TableCell className="h-20">
-                                <div className="flex flex-col gap-1">
-                                    {position.reserves.map(
-                                        (reserve: any, i: number) => (
-                                            <span key={i}>
-                                                {formatNumber(reserve.amount)}{' '}
-                                                {reserve.symbol}
-                                            </span>
-                                        )
-                                    )}
-                                </div>
+                                {formatNumber(position.reserve)}{' '}
+                                {position.quote}
                             </TableCell>
                             <TableCell className="h-20">
                                 <DexPositionStatePill state={position.state} />

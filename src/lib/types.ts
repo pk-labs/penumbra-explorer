@@ -54,6 +54,16 @@ export interface ValidatorBlock {
     signed?: boolean
 }
 
+export interface DexPosition {
+    base: string
+    fee: number
+    id: string
+    quote: string
+    reserve: number
+    state: DexPositionState
+    timestamp: number
+}
+
 export enum DexPositionState {
     Close = 'Close',
     Executing = 'Executing',
