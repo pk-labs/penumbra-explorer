@@ -1,4 +1,5 @@
 import { getByText, render } from '@testing-library/react'
+import { DexPositionState } from '@/lib/types'
 import DexPositionStatePill from './dexPositionStatePill'
 
 describe('DexPositionStatePill', () => {
@@ -8,28 +9,43 @@ describe('DexPositionStatePill', () => {
     })
 
     test('renders open state', async () => {
-        const { container } = render(<DexPositionStatePill state="open" />)
-        getByText(container, 'Open')
+        const { container } = render(
+            <DexPositionStatePill state={DexPositionState.Open} />
+        )
+
+        getByText(container, DexPositionState.Open)
     })
 
     test('renders executing state', async () => {
-        const { container } = render(<DexPositionStatePill state="executing" />)
-        getByText(container, 'Executing')
+        const { container } = render(
+            <DexPositionStatePill state={DexPositionState.Executing} />
+        )
+
+        getByText(container, DexPositionState.Executing)
     })
 
     test('renders withdrawn state', async () => {
-        const { container } = render(<DexPositionStatePill state="withdrawn" />)
-        getByText(container, 'Withdrawn')
+        const { container } = render(
+            <DexPositionStatePill state={DexPositionState.Withdrawal} />
+        )
+
+        getByText(container, DexPositionState.Withdrawal)
     })
 
     test('renders closed state', async () => {
-        const { container } = render(<DexPositionStatePill state="closed" />)
-        getByText(container, 'Closed')
+        const { container } = render(
+            <DexPositionStatePill state={DexPositionState.Close} />
+        )
+
+        getByText(container, DexPositionState.Close)
     })
 
     test('applies CSS classes', async () => {
         const { container } = render(
-            <DexPositionStatePill className="foo bar" state="closed" />
+            <DexPositionStatePill
+                className="foo bar"
+                state={DexPositionState.Close}
+            />
         )
 
         expect(container.firstChild).toHaveClass('foo', 'bar')

@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { DexPositionState } from '@/lib/types'
 import { Props } from './dexPositionTableContainer'
 import DexPositionTableUpdater from './dexPositionTableUpdater'
 
@@ -48,12 +49,9 @@ const DexPositionTableLoader: FC<Props> = async props => {
                                     'USDC',
                                 ]),
                             })),
-                            state: faker.helpers.arrayElement([
-                                'open',
-                                'executing',
-                                'withdrawn',
-                                'closed',
-                            ]),
+                            state: faker.helpers.arrayElement(
+                                Object.values(DexPositionState)
+                            ),
                             timestamp: dayjs()
                                 .add(
                                     faker.number.int({ max: 0, min: -500 }),

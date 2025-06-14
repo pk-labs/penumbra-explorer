@@ -1,26 +1,26 @@
 import { FC } from 'react'
-import { ucFirst } from '@/lib/utils'
+import { DexPositionState } from '@/lib/types'
 import { Pill, PillProps } from '../pill'
 
 interface Props {
     className?: string
-    state?: 'closed' | 'executing' | 'open' | 'withdrawn'
+    state?: DexPositionState
 }
 
 const DexPositionStatePill: FC<Props> = props => {
     let context: PillProps['context']
 
     switch (props.state) {
-        case 'open':
+        case DexPositionState.Open:
             context = 'technical-success'
             break
-        case 'executing':
+        case DexPositionState.Executing:
             context = 'technical-caution'
             break
-        case 'withdrawn':
+        case DexPositionState.Withdrawal:
             context = 'technical-destructive'
             break
-        case 'closed':
+        case DexPositionState.Close:
             context = 'technical-default'
             break
         default:
@@ -33,7 +33,7 @@ const DexPositionStatePill: FC<Props> = props => {
             context={context}
             priority="secondary"
         >
-            {ucFirst(props.state)}
+            {props.state}
         </Pill>
     )
 }

@@ -54,6 +54,13 @@ export interface ValidatorBlock {
     signed?: boolean
 }
 
+export enum DexPositionState {
+    Close = 'Close',
+    Executing = 'Executing',
+    Open = 'Open',
+    Withdrawal = 'Withdrawal',
+}
+
 // TODO: Refactor value names to pascal case
 export enum ActionType {
     communityPoolDeposit = 'Community pool deposit',
