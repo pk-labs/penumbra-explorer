@@ -6,7 +6,7 @@ import dayjs from '@/lib/dayjs'
 type State = {
     addListener: () => void
     interval?: NodeJS.Timeout
-    lastTick: number
+    lastTick: dayjs.Dayjs
     listeners: number
     removeListener: () => void
 }
@@ -17,7 +17,7 @@ const useStore = create<State>(set => ({
             if (prev.listeners === 0) {
                 return {
                     interval: setInterval(
-                        () => set({ lastTick: dayjs().valueOf() }),
+                        () => set({ lastTick: dayjs() }),
                         1000
                     ),
                     listeners: prev.listeners + 1,
@@ -28,7 +28,7 @@ const useStore = create<State>(set => ({
                 listeners: prev.listeners + 1,
             }
         }),
-    lastTick: dayjs().valueOf(),
+    lastTick: dayjs(),
     listeners: 0,
     removeListener: () =>
         set(prev => {

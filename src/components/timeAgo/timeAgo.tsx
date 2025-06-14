@@ -1,7 +1,6 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
-import dayjs from '@/lib/dayjs'
 import { useTicker } from '@/lib/hooks'
 
 interface Props {
@@ -14,7 +13,7 @@ const TimeAgo: FC<Props> = props => {
     const [timeAgo, setTimeAgo] = useState<string>()
 
     useEffect(() => {
-        setTimeAgo(dayjs(lastTick).to(props.timestamp))
+        setTimeAgo(lastTick.to(props.timestamp))
     }, [lastTick, props.timestamp])
 
     return timeAgo

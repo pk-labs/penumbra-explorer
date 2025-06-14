@@ -1,5 +1,4 @@
 import { act, renderHook } from '@testing-library/react'
-import dayjs from '@/lib/dayjs'
 import useTicker from './useTicker'
 
 describe('useTicker', () => {
@@ -8,10 +7,10 @@ describe('useTicker', () => {
         const initialTick = result.current
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(dayjs(result.current).subtract(initialTick).second()).toBe(1)
+        expect(result.current.second() - initialTick.second()).toBe(1)
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(dayjs(result.current).subtract(initialTick).second()).toBe(2)
+        expect(result.current.second() - initialTick.second()).toBe(2)
     })
 
     test('is disabled when passing false', () => {
@@ -19,10 +18,10 @@ describe('useTicker', () => {
         const initialTick = result.current
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(dayjs(result.current).subtract(initialTick).second()).toBe(0)
+        expect(result.current.second() - initialTick.second()).toBe(0)
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(dayjs(result.current).subtract(initialTick).second()).toBe(0)
+        expect(result.current.second() - initialTick.second()).toBe(0)
     })
 
     test('returns the same timestamp for all listeners', () => {
