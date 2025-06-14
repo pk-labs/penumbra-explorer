@@ -2,13 +2,13 @@
 'use client'
 
 import { FC, useState } from 'react'
-import { EmptyState } from '@/components'
+import { DexExecution, EmptyState } from '@/components'
+import { TransformedDexExecution } from '@/lib/types'
 import { classNames } from '@/lib/utils'
-import Collapsible from '../../components/collapsible'
 import { Props as DexPositionTableContainerProps } from './dexExecutionContainer'
 
 interface Props extends DexPositionTableContainerProps {
-    executions?: any[]
+    executions?: TransformedDexExecution[]
 }
 
 const DexExecutionUpdater: FC<Props> = props => {
@@ -25,20 +25,10 @@ const DexExecutionUpdater: FC<Props> = props => {
             <h2 className="text-2xl font-medium">Latest executions</h2>
             {executions?.length ? (
                 executions.map((execution, i) => (
-                    <Collapsible
-                        key={i}
-                        header={
-                            <>
-                                <span>{execution.headerLeft}</span>
-                                <span>{execution.headerRight}</span>
-                            </>
-                        }
-                    >
-                        {execution.content}
-                    </Collapsible>
+                    <DexExecution key={i} {...execution} />
                 ))
             ) : (
-                <EmptyState title="No executions">Really</EmptyState>
+                <EmptyState title="No executions" />
             )}
         </section>
     )

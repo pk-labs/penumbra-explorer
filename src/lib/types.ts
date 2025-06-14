@@ -54,7 +54,15 @@ export interface ValidatorBlock {
     signed?: boolean
 }
 
-export interface DexPosition {
+export interface TransformedDexExecution {
+    base: string
+    baseAmount: number
+    quote: string
+    quoteAmount: number
+    swaps: number
+}
+
+export interface TransformedDexPosition {
     base: string
     fee: number
     id: string

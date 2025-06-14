@@ -11,12 +11,12 @@ import {
     TableRow,
     TimeAgo,
 } from '@/components'
-import { DexPosition } from '@/lib/types'
+import { TransformedDexPosition } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import { Props as DexPositionTableContainerProps } from './dexPositionTableContainer'
 
 interface Props extends DexPositionTableContainerProps {
-    positions?: DexPosition[]
+    positions?: TransformedDexPosition[]
 }
 
 const DexPositionTableUpdater: FC<Props> = props => {

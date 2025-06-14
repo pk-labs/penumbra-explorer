@@ -3,14 +3,14 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { DexPosition, DexPositionState } from '@/lib/types'
+import { DexPositionState, TransformedDexPosition } from '@/lib/types'
 import { Props } from './dexPositionTableContainer'
 import DexPositionTableUpdater from './dexPositionTableUpdater'
 
 const currencies = ['ATOM', 'CDT', 'OSMO', 'TIA', 'UM', 'USDC']
 
 const DexPositionTableLoader: FC<Props> = async props => {
-    const positions = await new Promise<DexPosition[]>(resolve =>
+    const positions = await new Promise<TransformedDexPosition[]>(resolve =>
         setTimeout(
             () =>
                 resolve(

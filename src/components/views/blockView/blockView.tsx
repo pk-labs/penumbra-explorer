@@ -3,8 +3,8 @@ import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
 import { TransformedBlockFragment } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
-import Collapsible from '../../collapsible'
 import CopyToClipboard from '../../copyToClipboard'
+import DexExecution from '../../dexExecution'
 import JsonTree from '../../jsonTree'
 import { Parameter, Parameters } from '../../parameters'
 import Subsection from '../../subsection'
@@ -52,16 +52,19 @@ const BlockView: FC<Props> = props => (
             transactions={props.block.transactions}
         />
         <Subsection title="Executions">
-            <Collapsible
-                header={
-                    <>
-                        <span>{faker.lorem.words({ max: 3, min: 1 })}</span>
-                        <span>{faker.lorem.word()}</span>
-                    </>
-                }
-            >
-                {faker.lorem.paragraphs({ max: 3, min: 1 })}
-            </Collapsible>
+            <DexExecution
+                base="BTC"
+                baseAmount={faker.number.float({
+                    max: 1,
+                    min: 0.00001,
+                })}
+                quote="USD"
+                quoteAmount={faker.number.float({
+                    max: 110000,
+                    min: 1,
+                })}
+                swaps={faker.number.int({ max: 8, min: 1 })}
+            />
         </Subsection>
         {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
     </View>
