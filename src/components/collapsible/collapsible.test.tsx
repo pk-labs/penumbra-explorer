@@ -37,9 +37,22 @@ describe('Collapsible', () => {
 
     test('applies CSS classes', async () => {
         const { container } = render(
-            <Collapsible className="foo bar" header="Foo" />
+            <Collapsible
+                className="root"
+                contentClassName="bar"
+                header="Foo"
+                headerClassName="foo"
+            >
+                Bar
+            </Collapsible>
         )
 
-        expect(container.firstChild).toHaveClass('foo', 'bar')
+        const header = getByText(container, 'Foo')
+
+        fireEvent.click(header)
+
+        expect(container.firstChild).toHaveClass('root')
+        expect(header).toHaveClass('foo')
+        expect(getByText(container, 'Bar')).toHaveClass('bar')
     })
 })

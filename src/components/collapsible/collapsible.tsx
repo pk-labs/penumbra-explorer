@@ -8,7 +8,9 @@ import { classNames } from '@/lib/utils'
 interface Props {
     children?: ReactNode
     className?: string
+    contentClassName?: string
     header: ReactNode
+    headerClassName?: string
 }
 
 const Collapsible: FC<Props> = props => {
@@ -28,7 +30,8 @@ const Collapsible: FC<Props> = props => {
                 className={classNames(
                     'hover:bg-other-tonalFill10 relative transition-colors',
                     'flex cursor-pointer items-center justify-between p-4',
-                    'pl-10 duration-200 ease-out select-none'
+                    'pl-10 duration-200 ease-out select-none',
+                    props.headerClassName
                 )}
                 onClick={toggle}
             >
@@ -53,7 +56,8 @@ const Collapsible: FC<Props> = props => {
                         <div
                             className={classNames(
                                 'border-t-other-tonalStroke border-t-1 px-10',
-                                'py-6'
+                                'py-6',
+                                props.contentClassName
                             )}
                         >
                             {props.children}
