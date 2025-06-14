@@ -1,24 +1,24 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import { NumberPanel } from '@/components'
-import DexPositionsPanelLoader from './dexPositionsPanelLoader'
+import DexExecutionPanelLoader from './dexExecutionPanelLoader'
 
 export interface Props {
     className?: string
 }
 
-const DexPositionsPanelContainer: FC<Props> = props => (
+const DexExecutionPanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <NumberPanel
                 className={props.className}
                 number={0}
-                title="Total open positions"
+                title="Number of executions"
             />
         }
     >
-        <DexPositionsPanelLoader {...props} />
+        <DexExecutionPanelLoader {...props} />
     </Suspense>
 )
 
-export default DexPositionsPanelContainer
+export default DexExecutionPanelContainer

@@ -2,10 +2,10 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { Props } from './dexExecutionsPanelContainer'
-import DexExecutionsPanelUpdater from './dexExecutionsPanelUpdater'
+import { Props } from './dexExecutionPanelContainer'
+import DexExecutionPanelUpdater from './dexExecutionPanelUpdater'
 
-const DexExecutionsPanelLoader: FC<Props> = async props => {
+const DexExecutionPanelLoader: FC<Props> = async props => {
     const number = await new Promise<number>(resolve =>
         setTimeout(
             () => resolve(faker.number.int({ max: 100000, min: 1000 })),
@@ -15,9 +15,9 @@ const DexExecutionsPanelLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <DexExecutionsPanelUpdater {...props} number={number ?? 0} />
+            <DexExecutionPanelUpdater {...props} number={number ?? 0} />
         </GraphqlClientProvider>
     )
 }
 
-export default DexExecutionsPanelLoader
+export default DexExecutionPanelLoader

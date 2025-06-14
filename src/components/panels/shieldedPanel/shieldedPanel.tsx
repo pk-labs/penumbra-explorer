@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import NumberPanel from '../numberPanel'
+import { NumberPanel } from '../numberPanel'
 import shieldedPanelIcon from './shieldedPanelIcon.svg'
 
 interface Props {

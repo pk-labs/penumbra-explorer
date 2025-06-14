@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
-    DexExecutionsContainer,
-    DexExecutionsPanelContainer,
-    DexPositionsPanelContainer,
-    DexPositionsTableContainer,
+    DexExecutionContainer,
+    DexExecutionPanelContainer,
+    DexPositionPanelContainer,
+    DexPositionTableContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
 
@@ -31,14 +31,14 @@ const DexPage: FC<Props> = async props => {
                 <Breadcrumb>DEX</Breadcrumb>
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4">
-                <DexExecutionsPanelContainer className="col-span-full sm:col-span-6" />
-                <DexPositionsPanelContainer className="col-span-full sm:col-span-6" />
-                <DexExecutionsContainer
+                <DexExecutionPanelContainer className="col-span-full sm:col-span-6" />
+                <DexPositionPanelContainer className="col-span-full sm:col-span-6" />
+                <DexExecutionContainer
                     className={classNames(
                         'col-span-full lg:col-span-6 xl:col-span-4'
                     )}
                 />
-                <DexPositionsTableContainer
+                <DexPositionTableContainer
                     className="col-span-full lg:col-span-6 xl:col-span-8"
                     header={
                         <h1 className="text-2xl font-medium">

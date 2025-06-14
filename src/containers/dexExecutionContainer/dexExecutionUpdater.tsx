@@ -2,16 +2,16 @@
 'use client'
 
 import { FC } from 'react'
+import { EmptyState } from '@/components'
 import { classNames } from '@/lib/utils'
 import Collapsible from '../../components/collapsible'
-import EmptyState from '../../components/emptyState'
-import { Props as DexPositionsTableContainerProps } from './dexExecutionsContainer'
+import { Props as DexPositionTableContainerProps } from './dexExecutionContainer'
 
-interface Props extends DexPositionsTableContainerProps {
+interface Props extends DexPositionTableContainerProps {
     executions?: any[]
 }
 
-const DexExecutionsUpdater: FC<Props> = props => {
+const DexExecutionUpdater: FC<Props> = props => {
     // const [positions] = useState(props.positions)
     // const [blockSubscription] = useBlockUpdateSubscription({
     //     pause: !subscription,
@@ -71,4 +71,4 @@ const DexExecutionsUpdater: FC<Props> = props => {
     )
 }
 
-export default DexExecutionsUpdater
+export default DexExecutionUpdater

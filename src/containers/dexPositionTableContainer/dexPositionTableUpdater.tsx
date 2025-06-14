@@ -5,20 +5,20 @@ import { ExternalLinkIcon } from 'lucide-react'
 import { FC, useState } from 'react'
 import {
     DexPositionStatePill,
+    EmptyState,
     Table,
     TableCell,
     TableRow,
     TimeAgo,
 } from '@/components'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
-import EmptyState from '../../components/emptyState'
-import { Props as DexPositionsTableContainerProps } from './dexPositionsTableContainer'
+import { Props as DexPositionTableContainerProps } from './dexPositionTableContainer'
 
-interface Props extends DexPositionsTableContainerProps {
+interface Props extends DexPositionTableContainerProps {
     positions?: any[]
 }
 
-const DexPositionsTableUpdater: FC<Props> = props => {
+const DexPositionTableUpdater: FC<Props> = props => {
     const [positions] = useState(props.positions)
     // const [blockSubscription] = useBlockUpdateSubscription({
     //     pause: !subscription,
@@ -116,4 +116,4 @@ const DexPositionsTableUpdater: FC<Props> = props => {
     )
 }
 
-export default DexPositionsTableUpdater
+export default DexPositionTableUpdater

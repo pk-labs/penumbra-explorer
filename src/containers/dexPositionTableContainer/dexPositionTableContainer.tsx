@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
 import { Skeleton, Table, TableCell, TableProps, TableRow } from '@/components'
-import DexPositionsTableLoader from './dexPositionsTableLoader'
+import DexPositionTableLoader from './dexPositionTableLoader'
 
 export interface Props extends Omit<TableProps, 'footer'> {
     limit: {
@@ -10,7 +10,7 @@ export interface Props extends Omit<TableProps, 'footer'> {
     }
 }
 
-const DexPositionsTableContainer: FC<Props> = props => (
+const DexPositionTableContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <Table className={props.className} header={props.header}>
@@ -33,8 +33,8 @@ const DexPositionsTableContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <DexPositionsTableLoader {...props} />
+        <DexPositionTableLoader {...props} />
     </Suspense>
 )
 
-export default DexPositionsTableContainer
+export default DexPositionTableContainer

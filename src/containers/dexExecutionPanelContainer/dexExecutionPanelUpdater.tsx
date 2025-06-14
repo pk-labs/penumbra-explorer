@@ -3,13 +3,13 @@
 
 import { FC, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { Props as DexPositionsPanelContainerProps } from './dexPositionsPanelContainer'
+import { Props as DexExecutionPanelContainerProps } from './dexExecutionPanelContainer'
 
-interface Props extends DexPositionsPanelContainerProps {
+interface Props extends DexExecutionPanelContainerProps {
     number: number
 }
 
-const DexPositionsPanelUpdater: FC<Props> = props => {
+const DexExecutionPanelUpdater: FC<Props> = props => {
     const [number] = useState(props.number)
 
     // const [transactionCountUpdateSubscription] =
@@ -27,9 +27,9 @@ const DexPositionsPanelUpdater: FC<Props> = props => {
         <NumberPanel
             className={props.className}
             number={number}
-            title="Total open positions"
+            title="Number of executions"
         />
     )
 }
 
-export default DexPositionsPanelUpdater
+export default DexExecutionPanelUpdater

@@ -2,13 +2,13 @@
 import { FC, Suspense } from 'react'
 import { Skeleton } from '@/components'
 import { classNames } from '@/lib/utils'
-import DexExecutionsLoader from './dexExecutionsLoader'
+import DexExecutionLoader from './dexExecutionLoader'
 
 export interface Props {
     className?: string
 }
 
-const DexExecutionsContainer: FC<Props> = props => (
+const DexExecutionContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <section
@@ -23,8 +23,8 @@ const DexExecutionsContainer: FC<Props> = props => (
             </section>
         }
     >
-        <DexExecutionsLoader {...props} />
+        <DexExecutionLoader {...props} />
     </Suspense>
 )
 
-export default DexExecutionsContainer
+export default DexExecutionContainer

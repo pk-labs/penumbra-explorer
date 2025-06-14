@@ -1,8 +1,8 @@
 // istanbul ignore file
 import Image from 'next/image'
 import { FC, Suspense } from 'react'
+import { NumberPanel } from '@/components'
 import { penumbraImage } from '@/lib/images'
-import NumberPanel from '../../components/panels/numberPanel'
 import ValidatorVotingPowerPanelLoader from './validatorVotingPowerPanelLoader'
 
 export interface Props {

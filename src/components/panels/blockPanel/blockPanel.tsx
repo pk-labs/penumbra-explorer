@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
-import NumberPanel from '../numberPanel'
+import { NumberPanel } from '../numberPanel'
 import BlockPanelChart from './blockPanelChart'
 import blockPanelIcon from './blockPanelIcon.svg'
 

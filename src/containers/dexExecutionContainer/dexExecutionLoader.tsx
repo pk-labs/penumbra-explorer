@@ -2,10 +2,10 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { Props } from './dexExecutionsContainer'
-import DexExecutionsUpdater from './dexExecutionsUpdater'
+import { Props } from './dexExecutionContainer'
+import DexExecutionUpdater from './dexExecutionUpdater'
 
-const DexExecutionsLoader: FC<Props> = async props => {
+const DexExecutionLoader: FC<Props> = async props => {
     const executions = await new Promise<any[]>(resolve =>
         setTimeout(
             () =>
@@ -24,9 +24,9 @@ const DexExecutionsLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <DexExecutionsUpdater executions={executions} {...props} />
+            <DexExecutionUpdater executions={executions} {...props} />
         </GraphqlClientProvider>
     )
 }
 
-export default DexExecutionsLoader
+export default DexExecutionLoader

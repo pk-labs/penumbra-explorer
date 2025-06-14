@@ -4,9 +4,11 @@ import dayjs from '@/lib/dayjs'
 import { TransformedBlockFragment } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import Collapsible from '../../collapsible'
-import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
+import CopyToClipboard from '../../copyToClipboard'
+import JsonTree from '../../jsonTree'
 import { Parameter, Parameters } from '../../parameters'
 import Subsection from '../../subsection'
+import { TransactionTable } from '../../tables'
 import { View, ViewProps } from '../view'
 
 export interface Props extends Pick<ViewProps, 'className'> {
