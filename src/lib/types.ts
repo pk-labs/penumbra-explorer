@@ -57,6 +57,7 @@ export interface ValidatorBlock {
 export interface TransformedDexExecution {
     base: string
     baseAmount: number
+    id: string
     quote: string
     quoteAmount: number
     swaps: number

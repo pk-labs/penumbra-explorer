@@ -15,7 +15,7 @@ const DexPositionPanelUpdater: FC<Props> = props => {
     const [number, setNumber] = useState(props.number)
 
     useEffect(() => {
-        if (lastTick.second() % 5 === 0) {
+        if (lastTick.second() % 9 === 0) {
             setNumber(prev => prev + 1)
         }
     }, [lastTick])

@@ -28,6 +28,7 @@ const DexExecutionLoader: FC<Props> = async props => {
                                 max: 5000,
                                 min: 0.001,
                             }),
+                            id: faker.string.uuid(),
                             quote,
                             quoteAmount: faker.number.float({
                                 max: 5000,
