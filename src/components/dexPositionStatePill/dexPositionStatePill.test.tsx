@@ -26,25 +26,25 @@ describe('DexPositionStatePill', () => {
 
     test('renders withdrawn state', async () => {
         const { container } = render(
-            <DexPositionStatePill state={DexPositionState.Withdrawal} />
+            <DexPositionStatePill state={DexPositionState.Withdrawn} />
         )
 
-        getByText(container, DexPositionState.Withdrawal)
+        getByText(container, DexPositionState.Withdrawn)
     })
 
     test('renders closed state', async () => {
         const { container } = render(
-            <DexPositionStatePill state={DexPositionState.Close} />
+            <DexPositionStatePill state={DexPositionState.Closed} />
         )
 
-        getByText(container, DexPositionState.Close)
+        getByText(container, DexPositionState.Closed)
     })
 
     test('applies CSS classes', async () => {
         const { container } = render(
             <DexPositionStatePill
                 className="foo bar"
-                state={DexPositionState.Close}
+                state={DexPositionState.Closed}
             />
         )
 

@@ -74,10 +74,10 @@ export interface TransformedDexPosition {
 }
 
 export enum DexPositionState {
-    Close = 'Close',
+    Closed = 'Closed',
     Executing = 'Executing',
     Open = 'Open',
-    Withdrawal = 'Withdrawal',
+    Withdrawn = 'Withdrawn',
 }
 
 // TODO: Refactor value names to pascal case

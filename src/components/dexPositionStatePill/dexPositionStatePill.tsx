@@ -17,10 +17,10 @@ const DexPositionStatePill: FC<Props> = props => {
         case DexPositionState.Executing:
             context = 'technical-caution'
             break
-        case DexPositionState.Withdrawal:
+        case DexPositionState.Withdrawn:
             context = 'technical-destructive'
             break
-        case DexPositionState.Close:
+        case DexPositionState.Closed:
             context = 'technical-default'
             break
         default:
