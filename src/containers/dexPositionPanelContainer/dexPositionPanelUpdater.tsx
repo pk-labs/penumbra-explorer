@@ -18,26 +18,6 @@ const DexPositionPanelUpdater: FC<Props> = props => {
         if (lastTick.second() % 5 === 0) {
             setNumber(prev => prev + 1)
         }
-
-        // let timeout: NodeJS.Timeout
-        //
-        // const scheduleNextUpdate = () => {
-        //     timeout = setTimeout(
-        //         () => {
-        //             setNumber(prev => prev + 1)
-        //             scheduleNextUpdate()
-        //         },
-        //         faker.number.int({ max: 5000, min: 2000 })
-        //     )
-        // }
-        //
-        // scheduleNextUpdate()
-        //
-        // return () => {
-        //     if (timeout) {
-        //         clearTimeout(timeout)
-        //     }
-        // }
     }, [lastTick])
 
     return (
