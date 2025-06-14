@@ -7,10 +7,10 @@ describe('useTicker', () => {
         const initialTick = result.current
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(result.current.second() - initialTick.second()).toBe(1)
+        expect(result.current.unix() - initialTick.unix()).toBe(1)
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(result.current.second() - initialTick.second()).toBe(2)
+        expect(result.current.unix() - initialTick.unix()).toBe(2)
     })
 
     test('is disabled when passing false', () => {
@@ -18,10 +18,10 @@ describe('useTicker', () => {
         const initialTick = result.current
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(result.current.second() - initialTick.second()).toBe(0)
+        expect(result.current.unix() - initialTick.unix()).toBe(0)
 
         act(() => jest.advanceTimersByTime(1000))
-        expect(result.current.second() - initialTick.second()).toBe(0)
+        expect(result.current.unix() - initialTick.unix()).toBe(0)
     })
 
     test('returns the same timestamp for all listeners', () => {
