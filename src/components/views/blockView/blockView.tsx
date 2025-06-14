@@ -58,6 +58,7 @@ const BlockView: FC<Props> = props => (
                     max: 1,
                     min: 0.00001,
                 })}
+                id="1"
                 quote="USD"
                 quoteAmount={faker.number.float({
                     max: 110000,

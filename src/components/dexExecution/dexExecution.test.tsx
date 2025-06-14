@@ -7,6 +7,7 @@ describe('DexExecution', () => {
             <DexExecution
                 base="BTC"
                 baseAmount={1234}
+                id="1"
                 quote="USD"
                 quoteAmount={5678}
                 swaps={0}
@@ -22,6 +23,7 @@ describe('DexExecution', () => {
             <DexExecution
                 base="BTC"
                 baseAmount={0}
+                id="1"
                 quote="USD"
                 quoteAmount={0}
                 swaps={1}
@@ -36,6 +38,7 @@ describe('DexExecution', () => {
             <DexExecution
                 base="BTC"
                 baseAmount={0}
+                id="1"
                 quote="USD"
                 quoteAmount={0}
                 swaps={2}
@@ -51,6 +54,7 @@ describe('DexExecution', () => {
                 base="BTC"
                 baseAmount={0}
                 className="foo bar"
+                id="1"
                 quote="USD"
                 quoteAmount={0}
                 swaps={0}
