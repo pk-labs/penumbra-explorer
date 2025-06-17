@@ -20,6 +20,22 @@ const ValidatorStatusLoader: FC<Props> = async props => {
             ?.signed,
     }))
 
+    // Mark all unsigned blocks before signed ones as signed to fix timing
+    // edge case where regular blocks are ahead of validator blocks
+    const firstSignedIndex = validatorBlocks.findIndex(
+        block => block.signed === true
+    )
+
+    if (firstSignedIndex !== -1) {
+        for (let i = 0; i < firstSignedIndex; i++) {
+            const block = validatorBlocks[i]
+
+            if (typeof block.signed === 'undefined') {
+                block.signed = true
+            }
+        }
+    }
+
     return (
         <GraphqlClientProvider>
             <ValidatorStatusUpdater
