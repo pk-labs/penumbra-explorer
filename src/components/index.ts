@@ -1,4 +1,5 @@
 export { default as ActionHistory } from './actionHistory'
+export * from './animated'
 export { default as Avatar } from './avatar'
 export * from './breadcrumbs'
 export { default as Button } from './button'

@@ -2,9 +2,8 @@
 'use client'
 
 import { faker } from '@faker-js/faker'
-import { AnimatePresence, motion } from 'motion/react'
 import { FC, useEffect, useState } from 'react'
-import { DexExecution, EmptyState } from '@/components'
+import { AnimatedList, DexExecution, EmptyState } from '@/components'
 import { useTicker } from '@/lib/hooks'
 import { TransformedDexExecution } from '@/lib/types'
 import { classNames } from '@/lib/utils'
@@ -19,12 +18,9 @@ interface Props extends DexPositionTableContainerProps {
 const DexExecutionUpdater: FC<Props> = props => {
     const lastTick = useTicker()
     const [executions, setExecutions] = useState(props.executions)
-    const [executionUpdate, setExecutionUpdate] = useState(false)
 
     useEffect(() => {
         if (lastTick.second() % 5 === 0) {
-            setExecutionUpdate(true)
-
             setExecutions(prev => {
                 const base = faker.helpers.arrayElement(currencies)
 
@@ -63,31 +59,11 @@ const DexExecutionUpdater: FC<Props> = props => {
         >
             <h2 className="text-2xl font-medium">Latest executions</h2>
             {executions.length ? (
-                <AnimatePresence initial={executionUpdate} mode="popLayout">
+                <AnimatedList className="flex flex-col gap-10">
                     {executions.map(execution => (
-                        <motion.div
-                            key={execution.id}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{
-                                opacity: 0,
-                                scale: 0.8,
-                            }}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            transition={{
-                                layout: {
-                                    damping: 30,
-                                    stiffness: 400,
-                                    type: 'spring',
-                                },
-                                opacity: { duration: 0.3 },
-                                scale: { duration: 0.3 },
-                            }}
-                            layout
-                        >
-                            <DexExecution {...execution} />
-                        </motion.div>
+                        <DexExecution {...execution} key={execution.id} />
                     ))}
-                </AnimatePresence>
+                </AnimatedList>
             ) : (
                 <EmptyState title="No executions" />
             )}
