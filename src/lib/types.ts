@@ -54,6 +54,12 @@ export interface ValidatorBlock {
     signed?: boolean
 }
 
+export interface DexBlockExecution {
+    executions: TransformedDexExecution[]
+    height: number
+    timestamp: number
+}
+
 export interface TransformedDexExecution {
     base: string
     baseAmount: number

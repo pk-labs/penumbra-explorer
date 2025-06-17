@@ -1,50 +1,63 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
+import { blockSeconds } from '@/lib/constants'
+import dayjs from '@/lib/dayjs'
 import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
-import { TransformedDexExecution } from '@/lib/types'
+import { DexBlockExecution } from '@/lib/types'
 import { Props } from './dexExecutionContainer'
 import DexExecutionUpdater from './dexExecutionUpdater'
 
 const currencies = ['ATOM', 'CDT', 'OSMO', 'TIA', 'UM', 'USDC']
 
 const DexExecutionLoader: FC<Props> = async props => {
-    const executions = await new Promise<TransformedDexExecution[]>(resolve =>
+    const blockExecutions = await new Promise<DexBlockExecution[]>(resolve =>
         setTimeout(
-            () =>
-                resolve(
+            () => {
+                const now = dayjs()
+
+                return resolve(
                     Array.from({
                         length: faker.number.int({ max: 10, min: 0 }),
-                    }).map(() => {
-                        const base = faker.helpers.arrayElement(currencies)
+                    }).map((_, i) => ({
+                        executions: Array.from({
+                            length: faker.number.int({ max: 6, min: 1 }),
+                        }).map(() => {
+                            const base = faker.helpers.arrayElement(currencies)
 
-                        const quote = faker.helpers.arrayElement(
-                            currencies.filter(currency => currency != base)
-                        )
+                            const quote = faker.helpers.arrayElement(
+                                currencies.filter(currency => currency != base)
+                            )
 
-                        return {
-                            base,
-                            baseAmount: faker.number.float({
-                                max: 5000,
-                                min: 0.001,
-                            }),
-                            id: faker.string.uuid(),
-                            quote,
-                            quoteAmount: faker.number.float({
-                                max: 5000,
-                                min: 0.001,
-                            }),
-                            swaps: faker.number.int({ max: 8, min: 1 }),
-                        }
-                    })
-                ),
+                            return {
+                                base,
+                                baseAmount: faker.number.float({
+                                    max: 5000,
+                                    min: 0.001,
+                                }),
+                                id: faker.string.uuid(),
+                                quote,
+                                quoteAmount: faker.number.float({
+                                    max: 5000,
+                                    min: 0.001,
+                                }),
+                                swaps: faker.number.int({ max: 8, min: 1 }),
+                            }
+                        }),
+                        height: faker.number.int({ max: 5000, min: 4000 }),
+                        timestamp: now
+                            .subtract(i * blockSeconds, 'seconds')
+                            .valueOf(),
+                    }))
+                )
+            },
             faker.number.int({ max: 1000, min: 500 })
         )
     )
 
     return (
         <GraphqlClientProvider>
-            <DexExecutionUpdater executions={executions} {...props} />
+            <DexExecutionUpdater blockExecutions={blockExecutions} {...props} />
         </GraphqlClientProvider>
     )
 }
