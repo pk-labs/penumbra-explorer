@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker'
 import { FC, useEffect, useState } from 'react'
 import { AnimatedList, DexBlockExecution, EmptyState } from '@/components'
 import dayjs from '@/lib/dayjs/dayjs'
-import { useTicker } from '@/lib/hooks'
+import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { DexBlockExecution as DexBlockExecutionType } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import { Props as DexPositionTableContainerProps } from './dexExecutionContainer'
@@ -17,13 +17,16 @@ interface Props extends DexPositionTableContainerProps {
 }
 
 const DexExecutionUpdater: FC<Props> = props => {
-    const lastTick = useTicker()
     const [blockExecutions, setBlockExecutions] = useState(
         props.blockExecutions
     )
+    const [blockSubscription] = useBlockUpdateSubscription({
+        variables: { limit: 1 },
+    })
+    const blockUpdate = blockSubscription.data?.latestBlocks
 
     useEffect(() => {
-        if (lastTick.second() % 5 === 0) {
+        if (blockUpdate) {
             setBlockExecutions(prev => [
                 {
                     executions: Array.from({
@@ -50,13 +53,13 @@ const DexExecutionUpdater: FC<Props> = props => {
                             swaps: faker.number.int({ max: 8, min: 1 }),
                         }
                     }),
-                    height: faker.number.int({ max: 5000, min: 4000 }),
-                    timestamp: dayjs().valueOf(),
+                    height: blockUpdate.height,
+                    timestamp: dayjs(blockUpdate.createdAt).valueOf(),
                 },
                 ...prev.slice(0, 9),
             ])
         }
-    }, [lastTick])
+    }, [blockUpdate])
 
     return (
         <section

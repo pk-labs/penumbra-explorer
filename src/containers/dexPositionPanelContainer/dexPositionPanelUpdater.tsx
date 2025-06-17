@@ -1,9 +1,9 @@
 // istanbul ignore file
 'use client'
 
+import { faker } from '@faker-js/faker'
 import { FC, useEffect, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { useTicker } from '@/lib/hooks'
 import { Props as DexPositionPanelContainerProps } from './dexPositionPanelContainer'
 
 interface Props extends DexPositionPanelContainerProps {
@@ -11,14 +11,26 @@ interface Props extends DexPositionPanelContainerProps {
 }
 
 const DexPositionPanelUpdater: FC<Props> = props => {
-    const lastTick = useTicker()
     const [number, setNumber] = useState(props.number)
 
     useEffect(() => {
-        if (lastTick.second() % 9 === 0) {
+        let timeout: NodeJS.Timeout
+
+        const incrementNumber = () => {
             setNumber(prev => prev + 1)
+            timeout = setTimeout(
+                incrementNumber,
+                faker.number.int({ max: 8000, min: 4000 })
+            )
         }
-    }, [lastTick])
+
+        timeout = setTimeout(
+            incrementNumber,
+            faker.number.int({ max: 8000, min: 4000 })
+        )
+
+        return () => clearTimeout(timeout)
+    }, [])
 
     return (
         <NumberPanel

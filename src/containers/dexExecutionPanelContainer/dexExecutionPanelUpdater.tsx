@@ -1,9 +1,9 @@
 // istanbul ignore file
 'use client'
 
+import { faker } from '@faker-js/faker'
 import { FC, useEffect, useState } from 'react'
 import { NumberPanel } from '@/components'
-import { useTicker } from '@/lib/hooks'
 import { Props as DexExecutionPanelContainerProps } from './dexExecutionPanelContainer'
 
 interface Props extends DexExecutionPanelContainerProps {
@@ -11,14 +11,26 @@ interface Props extends DexExecutionPanelContainerProps {
 }
 
 const DexExecutionPanelUpdater: FC<Props> = props => {
-    const lastTick = useTicker()
     const [number, setNumber] = useState(props.number)
 
     useEffect(() => {
-        if (lastTick.second() % 5 === 0) {
+        let timeout: NodeJS.Timeout
+
+        const incrementNumber = () => {
             setNumber(prev => prev + 1)
+            timeout = setTimeout(
+                incrementNumber,
+                faker.number.int({ max: 4000, min: 2000 })
+            )
         }
-    }, [lastTick])
+
+        timeout = setTimeout(
+            incrementNumber,
+            faker.number.int({ max: 4000, min: 2000 })
+        )
+
+        return () => clearTimeout(timeout)
+    }, [])
 
     return (
         <NumberPanel
