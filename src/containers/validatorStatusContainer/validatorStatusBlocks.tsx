@@ -29,11 +29,6 @@ const ValidatorStatusBlocks: FC<Props> = props => {
                         id={`block-${block.height}`}
                     >
                         <motion.span
-                            animate={{
-                                opacity: 1,
-                                scale: 1,
-                                transition: { delay: 0.2 + i * 0.0016 },
-                            }}
                             className={classNames(
                                 styles.block,
                                 block.signed === true && styles.signed,
@@ -52,6 +47,12 @@ const ValidatorStatusBlocks: FC<Props> = props => {
                                 layout: {
                                     duration: 0.5,
                                 },
+                            }}
+                            viewport={{ once: true }}
+                            whileInView={{
+                                opacity: 1,
+                                scale: 1,
+                                transition: { delay: 0.2 + i * 0.0016 },
                             }}
                             layout
                         />
