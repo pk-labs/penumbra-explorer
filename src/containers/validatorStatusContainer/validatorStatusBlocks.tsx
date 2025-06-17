@@ -1,11 +1,13 @@
 'use client'
 
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence } from 'motion/react'
 import Link from 'next/link'
 import { FC, MouseEvent, useCallback } from 'react'
 import { Tooltip } from '@/components'
+import { useDocumentVisible } from '@/lib/hooks'
 import { ValidatorBlock } from '@/lib/types'
-import { classNames, formatNumber } from '@/lib/utils'
+import { formatNumber } from '@/lib/utils'
+import AnimatedValidatorBlock from './animatedValidatorBlock'
 import styles from './validatorStatusContainer.module.css'
 
 interface Props {
@@ -13,6 +15,8 @@ interface Props {
 }
 
 const ValidatorStatusBlocks: FC<Props> = props => {
+    const documentVisible = useDocumentVisible()
+
     const onContextMenu = useCallback((e: MouseEvent) => e.preventDefault(), [])
 
     return (
@@ -28,33 +32,11 @@ const ValidatorStatusBlocks: FC<Props> = props => {
                         href={`/block/${block.height}`}
                         id={`block-${block.height}`}
                     >
-                        <motion.span
-                            className={classNames(
-                                styles.block,
-                                block.signed === true && styles.signed,
-                                block.signed === false && styles.missed
-                            )}
-                            exit={{
-                                opacity: 0,
-                                scale: 0.8,
-                            }}
-                            initial={{
-                                opacity: 0,
-                                scale: 0.8,
-                            }}
-                            transition={{
-                                duration: 0.3,
-                                layout: {
-                                    duration: 0.5,
-                                },
-                            }}
-                            viewport={{ once: true }}
-                            whileInView={{
-                                opacity: 1,
-                                scale: 1,
-                                transition: { delay: 0.2 + i * 0.0016 },
-                            }}
-                            layout
+                        <AnimatedValidatorBlock
+                            key={block.height}
+                            block={block}
+                            documentVisible={documentVisible}
+                            index={i}
                         />
                     </Link>
                 ))}
