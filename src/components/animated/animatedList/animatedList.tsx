@@ -27,7 +27,6 @@ const AnimatedList: FC<Props> = props => {
                                 scale: 1,
                             }
                         }
-                        className={props.className}
                         exit={{ opacity: 0, scale: 0.8 }}
                         initial={documentVisible && { opacity: 0, scale: 0.8 }}
                         transition={{

@@ -62,13 +62,17 @@ const DexExecutionUpdater: FC<Props> = props => {
         <section
             className={classNames(
                 'bg-other-tonalFill5 flex flex-col gap-10 rounded-lg p-6',
-                'backdrop-blur-lg',
+                'backdrop-blur-lg lg:overflow-y-hidden',
                 props.className
             )}
         >
             <h2 className="text-2xl font-medium">Latest executions</h2>
             {blockExecutions.length ? (
-                <AnimatedList className="flex flex-col gap-10">
+                <AnimatedList
+                    className={classNames(
+                        'flex flex-col gap-10 lg:h-[1064px] lg:overflow-y-auto'
+                    )}
+                >
                     {blockExecutions.map(blockExecution => (
                         <DexBlockExecution
                             key={blockExecution.height}

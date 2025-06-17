@@ -8,7 +8,7 @@ import {
     DexPositionPanelContainer,
     DexPositionTableContainer,
 } from '@/containers'
-import { classNames, generatePageMetadata } from '@/lib/utils'
+import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata('Dex', 'TODO: Description', '/dex')
 
@@ -33,11 +33,7 @@ const DexPage: FC<Props> = async props => {
             <div className="grid grid-cols-12 gap-4">
                 <DexExecutionPanelContainer className="col-span-full sm:col-span-6" />
                 <DexPositionPanelContainer className="col-span-full sm:col-span-6" />
-                <DexExecutionContainer
-                    className={classNames(
-                        'col-span-full lg:col-span-6 xl:col-span-4'
-                    )}
-                />
+                <DexExecutionContainer className="col-span-full lg:col-span-6 xl:col-span-4" />
                 <DexPositionTableContainer
                     className="col-span-full lg:col-span-6 xl:col-span-8"
                     header={

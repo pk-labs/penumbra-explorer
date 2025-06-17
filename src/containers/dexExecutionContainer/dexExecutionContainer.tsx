@@ -19,7 +19,7 @@ const DexExecutionContainer: FC<Props> = props => (
                 )}
             >
                 <h2 className="text-2xl font-medium">Latest executions</h2>
-                <Skeleton className="h-full rounded-sm" />
+                <Skeleton className="h-44 rounded-sm lg:h-full" />
             </section>
         }
     >
