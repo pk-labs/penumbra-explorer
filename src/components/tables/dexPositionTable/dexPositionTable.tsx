@@ -2,8 +2,9 @@ import { ExternalLinkIcon } from 'lucide-react'
 import { FC } from 'react'
 import { DexPositionStatePill, TimeAgo } from '@/components'
 import { TransformedDexPosition } from '@/lib/types'
-import { classNames, formatNumber, shortenHash } from '@/lib/utils'
+import { classNames, shortenHash } from '@/lib/utils'
 import AssetPair from '../../assetPair'
+import AssetValue from '../../assetValue'
 import EmptyState from '../../emptyState'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
@@ -35,7 +36,13 @@ const DexPositionTable: FC<Props> = ({ positions, ...props }) => (
                             />
                         </TableCell>
                         <TableCell className="h-20">
-                            {formatNumber(position.reserve)} UM
+                            <AssetValue
+                                amount={position.reserve}
+                                assetId={position.quoteAssetId}
+                                context="table"
+                                density="compact"
+                                showIcon={false}
+                            />
                         </TableCell>
                         <TableCell className="h-20">
                             <DexPositionStatePill state={position.state} />

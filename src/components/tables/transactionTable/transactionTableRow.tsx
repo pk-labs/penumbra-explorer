@@ -1,18 +1,10 @@
 'use client'
 
-import { Value } from '@penumbra-zone/protobuf/penumbra/core/asset/v1/asset_pb'
 import { BoxIcon } from 'lucide-react'
 import Link from 'next/link'
-import { FC, useMemo } from 'react'
-import { useGetMetadata } from '@/lib/hooks'
+import { FC } from 'react'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import {
-    decodeTransaction,
-    formatNumber,
-    shortenHash,
-    valueToView,
-} from '@/lib/utils'
-import AssetValue from '../../assetValue'
+import { formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
 import { Pill } from '../../pill'
 import TimeAgo from '../../timeAgo'
@@ -30,25 +22,25 @@ export interface Props {
 }
 
 const TransactionTableRow: FC<Props> = props => {
-    const getMetadata = useGetMetadata()
+    // const getMetadata = useGetMetadata()
 
-    const valueView = useMemo(() => {
-        if (!props.amount) {
-            return
-        }
-
-        const transaction = decodeTransaction(props.transaction.raw)
-
-        const match = transaction.body?.actions.find(
-            ({ action }) =>
-                action.case === 'ics20Withdrawal' ||
-                action.case === 'ibcRelayAction'
-        )
-
-        if (match?.action.value) {
-            return valueToView(match.action.value as Value, getMetadata)
-        }
-    }, [getMetadata, props.amount, props.transaction.raw])
+    // const valueView = useMemo(() => {
+    //     if (!props.amount) {
+    //         return
+    //     }
+    //
+    //     const transaction = decodeTransaction(props.transaction.raw)
+    //
+    //     const match = transaction.body?.actions.find(
+    //         ({ action }) =>
+    //             action.case === 'ics20Withdrawal' ||
+    //             action.case === 'ibcRelayAction'
+    //     )
+    //
+    //     if (match?.action.value) {
+    //         return valueToView(match.action.value as Value, getMetadata)
+    //     }
+    // }, [getMetadata, props.amount, props.transaction.raw])
 
     return (
         <TableRow
@@ -74,17 +66,17 @@ const TransactionTableRow: FC<Props> = props => {
                     </Link>
                 </TableCell>
             )}
-            {props.amount && (
-                <TableCell>
-                    {valueView && (
-                        <AssetValue
-                            context="table"
-                            density="compact"
-                            valueView={valueView}
-                        />
-                    )}
-                </TableCell>
-            )}
+            {/*{props.amount && (*/}
+            {/*    <TableCell>*/}
+            {/*        {valueView && (*/}
+            {/*            <AssetValue*/}
+            {/*                context="table"*/}
+            {/*                density="compact"*/}
+            {/*                valueView={valueView}*/}
+            {/*            />*/}
+            {/*        )}*/}
+            {/*    </TableCell>*/}
+            {/*)}*/}
             {props.status && (
                 <TableCell>
                     <TransactionStatusPill status={props.transaction.status} />

@@ -29,9 +29,9 @@ const DexPositionTableLoader: FC<Props> = async props => {
                             fee: faker.number.float({ max: 0.9, min: 0.1 }),
                             id: faker.finance.bitcoinAddress(),
                             quoteAssetId,
-                            reserve: faker.number.float({
-                                max: 5000,
-                                min: 0.001,
+                            reserve: faker.number.int({
+                                max: 5000000,
+                                min: 1,
                             }),
                             state: faker.helpers.arrayElement(
                                 Object.values(DexPositionState)
