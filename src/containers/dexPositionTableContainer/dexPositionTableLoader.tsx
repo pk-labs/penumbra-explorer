@@ -1,11 +1,19 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
+import { ExternalLinkIcon } from 'lucide-react'
 import { FC } from 'react'
+import {
+    DexPositionStatePill,
+    EmptyState,
+    Table,
+    TableCell,
+    TableRow,
+    TimeAgo,
+} from '@/components'
 import dayjs from '@/lib/dayjs'
-import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { DexPositionState, TransformedDexPosition } from '@/lib/types'
+import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import { Props } from './dexPositionTableContainer'
-import DexPositionTableUpdater from './dexPositionTableUpdater'
 
 const currencies = ['ATOM', 'CDT', 'OSMO', 'TIA', 'UM', 'USDC']
 
@@ -49,9 +57,62 @@ const DexPositionTableLoader: FC<Props> = async props => {
     )
 
     return (
-        <GraphqlClientProvider>
-            <DexPositionTableUpdater positions={positions} {...props} />
-        </GraphqlClientProvider>
+        <Table className={props.className} header={props.header}>
+            <thead>
+                <TableRow>
+                    <TableCell header>Pair</TableCell>
+                    <TableCell header>Reserves</TableCell>
+                    <TableCell header>State</TableCell>
+                    <TableCell header>Fee tier</TableCell>
+                    <TableCell header>Updated</TableCell>
+                    <TableCell header>Position ID</TableCell>
+                </TableRow>
+            </thead>
+            <tbody>
+                {positions?.length ? (
+                    positions.map(position => (
+                        <TableRow key={position.id}>
+                            <TableCell className="h-20">
+                                {position.base}/{position.quote}
+                            </TableCell>
+                            <TableCell className="h-20">
+                                {formatNumber(position.reserve)}{' '}
+                                {position.quote}
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <DexPositionStatePill state={position.state} />
+                            </TableCell>
+                            <TableCell className="h-20">
+                                {position.fee.toFixed(2)}%
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <TimeAgo timestamp={position.timestamp} />
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <a
+                                    className={classNames(
+                                        'hover:text-text-special inline-flex',
+                                        'items-center gap-1'
+                                    )}
+                                    href={`https://dex.penumbra.zone/inspect/lp/${position.id}`}
+                                    rel="nofollow"
+                                    target="_blank"
+                                >
+                                    {shortenHash(position.id, 9, 'end')}
+                                    <ExternalLinkIcon size={16} />
+                                </a>
+                            </TableCell>
+                        </TableRow>
+                    ))
+                ) : (
+                    <TableRow>
+                        <TableCell className="h-20" colSpan={6}>
+                            <EmptyState>No positions found</EmptyState>
+                        </TableCell>
+                    </TableRow>
+                )}
+            </tbody>
+        </Table>
     )
 }
 
