@@ -66,8 +66,13 @@ export interface TransformedDexExecution {
     id: string
     quote: string
     quoteAmount: number
-    swaps: number
+    swaps: DexExecutionRoute[]
 }
+
+type DexExecutionRoute = Array<{
+    amount: number
+    currency: string
+}>
 
 export interface TransformedDexPosition {
     base: string

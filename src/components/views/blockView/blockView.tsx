@@ -11,6 +11,8 @@ import Subsection from '../../subsection'
 import { TransactionTable } from '../../tables'
 import { View, ViewProps } from '../view'
 
+const currencies = ['ATOM', 'CDT', 'OSMO', 'TIA', 'UM', 'USDC']
+
 export interface Props extends Pick<ViewProps, 'className'> {
     block: TransformedBlockFragment
 }
@@ -54,17 +56,23 @@ const BlockView: FC<Props> = props => (
         <Subsection title="Executions">
             <DexExecution
                 base="BTC"
-                baseAmount={faker.number.float({
-                    max: 1,
-                    min: 0.00001,
-                })}
+                baseAmount={faker.number.float({ max: 1, min: 0.00001 })}
                 id="1"
                 quote="USD"
-                quoteAmount={faker.number.float({
-                    max: 110000,
-                    min: 1,
-                })}
-                swaps={faker.number.int({ max: 8, min: 1 })}
+                quoteAmount={faker.number.float({ max: 110000, min: 1 })}
+                swaps={Array.from({
+                    length: faker.number.int({ max: 8, min: 1 }),
+                }).map(() =>
+                    Array.from({
+                        length: faker.number.int({ max: 7, min: 2 }),
+                    }).map(() => ({
+                        amount: faker.number.float({
+                            max: 5000,
+                            min: 0.001,
+                        }),
+                        currency: faker.helpers.arrayElement(currencies),
+                    }))
+                )}
             />
         </Subsection>
         {props.block.rawJson && <JsonTree data={props.block.rawJson} />}

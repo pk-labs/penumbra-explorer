@@ -19,7 +19,8 @@ const DexExecution: FC<Props> = props => (
                     {formatNumber(props.quoteAmount)} {props.quote}
                 </span>
                 <span>
-                    {props.swaps} {props.swaps > 1 ? 'swaps' : 'swap'}
+                    {props.swaps.length}{' '}
+                    {props.swaps.length === 1 ? 'swap' : 'swaps'}
                 </span>
             </>
         }

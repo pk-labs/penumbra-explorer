@@ -39,7 +39,23 @@ const DexExecutionLoader: FC<Props> = async props => {
                                 max: 5000,
                                 min: 0.001,
                             }),
-                            swaps: faker.number.int({ max: 8, min: 1 }),
+                            swaps: Array.from({
+                                length: faker.number.int({ max: 8, min: 1 }),
+                            }).map(() =>
+                                Array.from({
+                                    length: faker.number.int({
+                                        max: 7,
+                                        min: 2,
+                                    }),
+                                }).map(() => ({
+                                    amount: faker.number.float({
+                                        max: 5000,
+                                        min: 0.001,
+                                    }),
+                                    currency:
+                                        faker.helpers.arrayElement(currencies),
+                                }))
+                            ),
                         }
                     }),
                     height: block.height,

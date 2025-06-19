@@ -26,7 +26,7 @@ describe('DexExecution', () => {
                         id: '1',
                         quote: 'USD',
                         quoteAmount: 5678,
-                        swaps: 1,
+                        swaps: [],
                     },
                 ]}
                 height={0}

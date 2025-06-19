@@ -10,7 +10,7 @@ describe('DexExecution', () => {
                 id="1"
                 quote="USD"
                 quoteAmount={5678}
-                swaps={0}
+                swaps={[]}
             />
         )
 
@@ -26,7 +26,7 @@ describe('DexExecution', () => {
                 id="1"
                 quote="USD"
                 quoteAmount={0}
-                swaps={1}
+                swaps={[[]]}
             />
         )
 
@@ -41,7 +41,7 @@ describe('DexExecution', () => {
                 id="1"
                 quote="USD"
                 quoteAmount={0}
-                swaps={2}
+                swaps={[[], []]}
             />
         )
 
@@ -57,7 +57,7 @@ describe('DexExecution', () => {
                 id="1"
                 quote="USD"
                 quoteAmount={0}
-                swaps={0}
+                swaps={[]}
             />
         )
 
