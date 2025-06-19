@@ -77,10 +77,10 @@ export interface DexExecutionHop {
 }
 
 export interface TransformedDexPosition {
-    base: string
+    baseAssetId: string
     fee: number
     id: string
-    quote: string
+    quoteAssetId: string
     reserve: number
     state: DexPositionState
     timestamp: number

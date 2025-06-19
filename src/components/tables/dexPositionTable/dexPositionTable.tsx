@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { DexPositionStatePill, TimeAgo } from '@/components'
 import { TransformedDexPosition } from '@/lib/types'
 import { classNames, formatNumber, shortenHash } from '@/lib/utils'
+import AssetPair from '../../assetPair'
 import EmptyState from '../../emptyState'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
@@ -27,10 +28,14 @@ const DexPositionTable: FC<Props> = ({ positions, ...props }) => (
                 positions.map(position => (
                     <TableRow key={position.id}>
                         <TableCell className="h-20">
-                            {position.base}/{position.quote}
+                            <AssetPair
+                                baseAssetId={position.baseAssetId}
+                                quoteAssetId={position.quoteAssetId}
+                                size="lg"
+                            />
                         </TableCell>
                         <TableCell className="h-20">
-                            {formatNumber(position.reserve)} {position.quote}
+                            {formatNumber(position.reserve)} UM
                         </TableCell>
                         <TableCell className="h-20">
                             <DexPositionStatePill state={position.state} />
