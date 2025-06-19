@@ -1,5 +1,6 @@
 export { default as useDebounce } from './useDebounce'
 export { default as useDocumentVisible } from './useDocumentVisible'
+export { default as useGetAssetById } from './useGetAssetById'
 export { default as useGetMetadata } from './useGetMetadata'
 export { default as useLocalStorage } from './useLocalStorage'
 export { default as useTicker } from './useTicker'
