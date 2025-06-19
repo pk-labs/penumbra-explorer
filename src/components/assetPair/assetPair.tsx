@@ -2,7 +2,7 @@
 
 import { AssetGroup, AssetGroupProps } from '@penumbra-zone/ui/AssetIcon'
 import { FC } from 'react'
-import { useGetAssetById } from '@/lib/hooks'
+import { useAsset } from '@/lib/hooks'
 import { classNames } from '@/lib/utils'
 
 interface Props extends Pick<AssetGroupProps, 'size'> {
@@ -12,8 +12,8 @@ interface Props extends Pick<AssetGroupProps, 'size'> {
 }
 
 const AssetPair: FC<Props> = props => {
-    const baseAsset = useGetAssetById(props.baseAssetId)
-    const quoteAsset = useGetAssetById(props.quoteAssetId)
+    const baseAsset = useAsset(props.baseAssetId)
+    const quoteAsset = useAsset(props.quoteAssetId)
 
     if (!baseAsset || !quoteAsset) {
         return

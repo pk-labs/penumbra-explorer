@@ -7,7 +7,7 @@ import { base64ToUint8Array } from '@penumbra-zone/types/base64'
 import { useEffect, useState } from 'react'
 import useGetMetadata from '../useGetMetadata'
 
-const useGetAssetById = (id: string) => {
+const useAsset = (id: string) => {
     const getMetadata = useGetMetadata()
     const [asset, setAsset] = useState<Metadata>()
 
@@ -22,4 +22,4 @@ const useGetAssetById = (id: string) => {
     return asset
 }
 
-export default useGetAssetById
+export default useAsset
