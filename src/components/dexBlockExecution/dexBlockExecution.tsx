@@ -1,3 +1,5 @@
+import { Link2Icon } from 'lucide-react'
+import Link from 'next/link'
 import { FC } from 'react'
 import { TransformedDexExecution } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
@@ -19,7 +21,13 @@ const DexBlockExecution: FC<Props> = props => (
                 'font-medium'
             )}
         >
-            <span>Block {formatNumber(props.height)}</span>
+            <Link
+                className="inline-flex items-center gap-2"
+                href={`/block/${props.height}`}
+            >
+                Block {formatNumber(props.height)}
+                <Link2Icon size={12} />
+            </Link>
             <TimeAgo timestamp={props.timestamp} />
         </header>
         <div>
