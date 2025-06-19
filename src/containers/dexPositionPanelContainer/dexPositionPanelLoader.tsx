@@ -1,9 +1,8 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
-import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
+import { NumberPanel } from '@/components'
 import { Props } from './dexPositionPanelContainer'
-import DexPositionPanelUpdater from './dexPositionPanelUpdater'
 
 const DexPositionPanelLoader: FC<Props> = async props => {
     const number = await new Promise<number>(resolve =>
@@ -14,9 +13,11 @@ const DexPositionPanelLoader: FC<Props> = async props => {
     )
 
     return (
-        <GraphqlClientProvider>
-            <DexPositionPanelUpdater {...props} number={number ?? 0} />
-        </GraphqlClientProvider>
+        <NumberPanel
+            className={props.className}
+            number={number}
+            title="Total open positions"
+        />
     )
 }
 
