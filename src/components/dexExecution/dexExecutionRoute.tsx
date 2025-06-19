@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { DexExecutionHop } from '@/lib/types'
-import { classNames, formatNumber } from '@/lib/utils'
+import { classNames } from '@/lib/utils'
+import AssetValue from '../assetValue'
 
 interface Props {
     hops: DexExecutionHop[]
@@ -20,14 +21,7 @@ const DexExecutionRoute: FC<Props> = props => {
         return (
             <div className="flex items-center">
                 <span className="flex flex-1 items-center">
-                    <span
-                        className={classNames(
-                            'bg-other-tonalFill10 rounded-full px-2 py-1',
-                            'whitespace-nowrap'
-                        )}
-                    >
-                        {formatNumber(firstHop.amount)} {firstHop.currency}
-                    </span>
+                    <AssetValue {...firstHop} density="slim" />
                     {separator}
                 </span>
                 <span
@@ -40,14 +34,7 @@ const DexExecutionRoute: FC<Props> = props => {
                 </span>
                 <span className="flex flex-1 items-center">
                     {separator}
-                    <span
-                        className={classNames(
-                            'bg-other-tonalFill10 rounded-full px-2 py-1',
-                            'whitespace-nowrap'
-                        )}
-                    >
-                        {formatNumber(lastHop.amount)} {lastHop.currency}
-                    </span>
+                    <AssetValue {...lastHop} density="slim" />
                 </span>
             </div>
         )
@@ -55,23 +42,9 @@ const DexExecutionRoute: FC<Props> = props => {
 
     return (
         <div className="flex items-center">
-            <span
-                className={classNames(
-                    'bg-other-tonalFill10 rounded-full px-2 py-1',
-                    'whitespace-nowrap'
-                )}
-            >
-                {formatNumber(firstHop.amount)} {firstHop.currency}
-            </span>
+            <AssetValue {...firstHop} density="slim" />
             {separator}
-            <span
-                className={classNames(
-                    'bg-other-tonalFill10 rounded-full px-2 py-1',
-                    'whitespace-nowrap'
-                )}
-            >
-                {formatNumber(lastHop.amount)} {lastHop.currency}
-            </span>
+            <AssetValue {...lastHop} density="slim" />
         </div>
     )
 }

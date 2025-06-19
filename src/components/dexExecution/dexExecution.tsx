@@ -1,7 +1,8 @@
 import { ArrowRightIcon } from 'lucide-react'
 import { FC } from 'react'
 import { TransformedDexExecution } from '@/lib/types'
-import { classNames, formatNumber } from '@/lib/utils'
+import { classNames } from '@/lib/utils'
+import AssetValue from '../assetValue'
 import Collapsible from '../collapsible'
 import DexExecutionRoute from './dexExecutionRoute'
 
@@ -16,9 +17,17 @@ const DexExecution: FC<Props> = props => (
         header={
             <>
                 <span className="flex items-center gap-1">
-                    {formatNumber(props.baseAmount)} {props.base}
+                    <AssetValue
+                        amount={props.baseAmount}
+                        assetId={props.baseAssetId}
+                        density="slim"
+                    />
                     <ArrowRightIcon size={12} />
-                    {formatNumber(props.quoteAmount)} {props.quote}
+                    <AssetValue
+                        amount={props.quoteAmount}
+                        assetId={props.quoteAssetId}
+                        density="slim"
+                    />
                 </span>
                 <span>
                     {props.swaps.length}{' '}

@@ -7,7 +7,16 @@ import { DexBlockExecution as DexBlockExecutionType } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import { Props } from './dexExecutionContainer'
 
-const currencies = ['ATOM', 'CDT', 'OSMO', 'TIA', 'UM', 'USDC']
+const baseAssetIds = [
+    'DJlyenhbLm2EYBi/BkFJ7SNSEF1aJj2vm/1zGoz5vAc=',
+    'QU5yP3S9mHwCzLyZdYXtUrGW4v/nWzeTqmjMKZZiaRA=',
+    'qaDFFlDQ00yzmgR0QElCA9WgtA847cyE+R6aaXClQQg=',
+    'LdexCcIS7h5jbSjieMV+MoC2IB1XmuKxzNNeRgq4QAQ=',
+    'WdHeHDmklWKxFf0g86MiYy6Mt6lUQza5g+NfNuK2oAE=',
+    'UxSzPuz9XKLpnAttHgzK/j0t1YHJUtgU+2T99R+FxBE=',
+]
+
+const quoteAssetId = 'KeqcLzNx9qSH5+lcJHBB9KNW+YPrBk5dKzvPMiypahA='
 
 const DexExecutionLoader: FC<Props> = async props => {
     const { blocks } = await getBlocks({
@@ -20,44 +29,27 @@ const DexExecutionLoader: FC<Props> = async props => {
                 blocks.map(block => ({
                     executions: Array.from({
                         length: faker.number.int({ max: 6, min: 1 }),
-                    }).map(() => {
-                        const base = faker.helpers.arrayElement(currencies)
-
-                        const quote = faker.helpers.arrayElement(
-                            currencies.filter(currency => currency != base)
-                        )
-
-                        return {
-                            base,
-                            baseAmount: faker.number.float({
-                                max: 5000,
-                                min: 0.001,
-                            }),
-                            id: faker.string.uuid(),
-                            quote,
-                            quoteAmount: faker.number.float({
-                                max: 5000,
-                                min: 0.001,
-                            }),
-                            swaps: Array.from({
-                                length: faker.number.int({ max: 8, min: 1 }),
-                            }).map(() =>
-                                Array.from({
-                                    length: faker.number.int({
-                                        max: 7,
-                                        min: 2,
-                                    }),
-                                }).map(() => ({
-                                    amount: faker.number.float({
-                                        max: 5000,
-                                        min: 0.001,
-                                    }),
-                                    currency:
-                                        faker.helpers.arrayElement(currencies),
-                                }))
-                            ),
-                        }
-                    }),
+                    }).map(() => ({
+                        baseAmount: faker.number.int({ max: 5000000, min: 1 }),
+                        baseAssetId: faker.helpers.arrayElement(baseAssetIds),
+                        id: faker.string.uuid(),
+                        quoteAmount: faker.number.int({ max: 5000000, min: 1 }),
+                        quoteAssetId,
+                        swaps: Array.from({
+                            length: faker.number.int({ max: 8, min: 1 }),
+                        }).map(() =>
+                            Array.from({
+                                length: faker.number.int({ max: 7, min: 2 }),
+                            }).map(() => ({
+                                amount: faker.number.int({
+                                    max: 5000000,
+                                    min: 1,
+                                }),
+                                assetId:
+                                    faker.helpers.arrayElement(baseAssetIds),
+                            }))
+                        ),
+                    })),
                     height: block.height,
                     timestamp: block.timestamp,
                 }))

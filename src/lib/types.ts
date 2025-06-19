@@ -61,11 +61,11 @@ export interface DexBlockExecution {
 }
 
 export interface TransformedDexExecution {
-    base: string
     baseAmount: number
+    baseAssetId: string
     id: string
-    quote: string
     quoteAmount: number
+    quoteAssetId: string
     swaps: DexExecutionRoute[]
 }
 
@@ -73,7 +73,7 @@ type DexExecutionRoute = DexExecutionHop[]
 
 export interface DexExecutionHop {
     amount: number
-    currency: string
+    assetId: string
 }
 
 export interface TransformedDexPosition {
