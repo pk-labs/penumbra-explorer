@@ -69,10 +69,12 @@ export interface TransformedDexExecution {
     swaps: DexExecutionRoute[]
 }
 
-type DexExecutionRoute = Array<{
+type DexExecutionRoute = DexExecutionHop[]
+
+export interface DexExecutionHop {
     amount: number
     currency: string
-}>
+}
 
 export interface TransformedDexPosition {
     base: string
