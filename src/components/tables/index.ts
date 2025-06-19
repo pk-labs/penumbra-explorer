@@ -1,4 +1,5 @@
 export * from './blockTable'
+export * from './dexPositionTable'
 export * from './ibcTable'
 export * from './table'
 export * from './transactionTable'

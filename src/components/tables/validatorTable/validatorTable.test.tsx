@@ -9,7 +9,6 @@ jest.mock('../table/table', () => (props: TableProps) => (
 describe('ValidatorTable', () => {
     test('renders empty state when no validators', async () => {
         const { container } = render(<ValidatorTable validators={[]} />)
-
         getByText(container, 'No validators found')
     })
 })

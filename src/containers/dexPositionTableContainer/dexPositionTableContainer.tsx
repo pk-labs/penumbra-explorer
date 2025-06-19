@@ -1,9 +1,16 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Skeleton, Table, TableCell, TableProps, TableRow } from '@/components'
+import {
+    DexPositionTableProps,
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
+} from '@/components'
 import DexPositionTableLoader from './dexPositionTableLoader'
 
-export interface Props extends Omit<TableProps, 'footer'> {
+export interface Props
+    extends Omit<DexPositionTableProps, 'footer' | 'positions'> {
     limit: {
         length: number
         offset?: number
