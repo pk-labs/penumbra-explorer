@@ -25,8 +25,8 @@ const DexBlockExecution: FC<Props> = props => (
                 className="inline-flex items-center gap-2"
                 href={`/block/${props.height}`}
             >
-                Block {formatNumber(props.height)}
                 <Link2Icon size={12} />
+                Block {formatNumber(props.height)}
             </Link>
             <TimeAgo timestamp={props.timestamp} />
         </header>
