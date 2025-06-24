@@ -27,6 +27,18 @@ export type AssetId = {
   inner: Scalars['String']['output'];
 };
 
+export type BatchSwap = {
+  __typename?: 'BatchSwap';
+  executionType: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  individualSwaps: Array<IndividualSwap>;
+  individualSwapsCount: Scalars['Int']['output'];
+  totalInputAmount: Scalars['String']['output'];
+  totalInputAssetId: Scalars['String']['output'];
+  totalOutputAmount: Scalars['String']['output'];
+  totalOutputAssetId: Scalars['String']['output'];
+};
+
 export type Block = {
   __typename?: 'Block';
   chainId?: Maybe<Scalars['String']['output']>;
@@ -135,6 +147,12 @@ export type DbRawTransaction = {
   txHashHex: Scalars['String']['output'];
 };
 
+export type DexStats = {
+  __typename?: 'DexStats';
+  openPositions: Scalars['Int']['output'];
+  totalExecutions: Scalars['Int']['output'];
+};
+
 export type Event = {
   __typename?: 'Event';
   type: Scalars['String']['output'];
@@ -187,6 +205,41 @@ export type IbcTransactionUpdate = {
   txHash: Scalars['String']['output'];
 };
 
+export type IndividualSwap = {
+  __typename?: 'IndividualSwap';
+  inputAmount: Scalars['String']['output'];
+  inputAssetId: Scalars['String']['output'];
+  outputAmount: Scalars['String']['output'];
+  outputAssetId: Scalars['String']['output'];
+  routeSteps: Array<RouteStep>;
+  swapIndex: Scalars['Int']['output'];
+};
+
+export type LiquidityPosition = {
+  __typename?: 'LiquidityPosition';
+  feePercentage: Scalars['Float']['output'];
+  positionId: Scalars['String']['output'];
+  reserves1Amount: Scalars['String']['output'];
+  reserves2Amount: Scalars['String']['output'];
+  state: LiquidityPositionState;
+  tradingPairAsset1: Scalars['String']['output'];
+  tradingPairAsset2: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type LiquidityPositionCollection = {
+  __typename?: 'LiquidityPositionCollection';
+  items: Array<LiquidityPosition>;
+  total: Scalars['Int']['output'];
+};
+
+export enum LiquidityPositionState {
+  Closed = 'CLOSED',
+  Executing = 'EXECUTING',
+  Open = 'OPEN',
+  Withdrawn = 'WITHDRAWN'
+}
+
 export type NotYetSupportedAction = {
   __typename?: 'NotYetSupportedAction';
   debug: Scalars['String']['output'];
@@ -222,8 +275,11 @@ export type QueryRoot = {
   dbLatestBlock?: Maybe<DbBlock>;
   dbRawTransaction?: Maybe<DbRawTransaction>;
   dbRawTransactions: Array<DbRawTransaction>;
+  dexStats: DexStats;
   ibcStats: Array<IbcStats>;
   ibcTotalShieldedVolume: TotalShieldedVolume;
+  latestExecutions: Array<SwapExecution>;
+  liquidityPositions: LiquidityPositionCollection;
   search?: Maybe<SearchResult>;
   stats: Stats;
   transaction?: Maybe<Transaction>;
@@ -271,6 +327,16 @@ export type QueryRootIbcStatsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   timePeriod?: InputMaybe<TimePeriod>;
+};
+
+
+export type QueryRootLatestExecutionsArgs = {
+  filter?: InputMaybe<SwapExecutionFilter>;
+};
+
+
+export type QueryRootLiquidityPositionsArgs = {
+  limit: CollectionLimit;
 };
 
 
@@ -341,6 +407,13 @@ export type RootValidatorBlocksArgs = {
   validatorId: Scalars['String']['input'];
 };
 
+export type RouteStep = {
+  __typename?: 'RouteStep';
+  amount: Scalars['String']['output'];
+  assetId: Scalars['String']['output'];
+  routeStep: Scalars['Int']['output'];
+};
+
 export type SearchResult = Block | Transaction | ValidatorSearchResults;
 
 export type Spend = {
@@ -373,6 +446,17 @@ export type StakingParameters = {
 export type Stats = {
   __typename?: 'Stats';
   totalTransactionsCount: Scalars['Int']['output'];
+};
+
+export type SwapExecution = {
+  __typename?: 'SwapExecution';
+  batchSwaps: Array<BatchSwap>;
+  blockHeight: Scalars['Int']['output'];
+  timestamp: Scalars['DateTime']['output'];
+};
+
+export type SwapExecutionFilter = {
+  height?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export enum TimePeriod {
