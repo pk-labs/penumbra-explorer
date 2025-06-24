@@ -1,16 +1,16 @@
 import { ArrowRightIcon } from 'lucide-react'
 import { FC } from 'react'
-import { TransformedDexExecution } from '@/lib/types'
+import { TransformedDexSwapExecution } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import AssetValue from '../assetValue'
 import Collapsible from '../collapsible'
 import DexExecutionRoute from './dexExecutionRoute'
 
-interface Props extends TransformedDexExecution {
+interface Props extends TransformedDexSwapExecution {
     className?: string
 }
 
-const DexExecution: FC<Props> = props => (
+const DexSwapExecution: FC<Props> = props => (
     <Collapsible
         className={classNames('font-mono text-xs font-medium', props.className)}
         contentClassName="flex flex-col gap-6 overflow-x-auto"
@@ -30,17 +30,17 @@ const DexExecution: FC<Props> = props => (
                     />
                 </span>
                 <span>
-                    {props.swaps.length}{' '}
-                    {props.swaps.length === 1 ? 'swap' : 'swaps'}
+                    {props.routes.length}{' '}
+                    {props.routes.length === 1 ? 'swap' : 'swaps'}
                 </span>
             </>
         }
         headerClassName="justify-between"
     >
-        {props.swaps.map((hops, i) => (
+        {props.routes.map((hops, i) => (
             <DexExecutionRoute key={i} hops={hops} />
         ))}
     </Collapsible>
 )
 
-export default DexExecution
+export default DexSwapExecution

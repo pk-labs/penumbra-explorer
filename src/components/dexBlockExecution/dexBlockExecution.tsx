@@ -1,16 +1,13 @@
+import DexSwapExecution from 'components/dexSwapExecution'
 import { Link2Icon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { TransformedDexExecution } from '@/lib/types'
+import { TransformedDexBlockExecution } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
-import DexExecution from '../dexExecution'
 import TimeAgo from '../timeAgo'
 
-interface Props {
+interface Props extends TransformedDexBlockExecution {
     className?: string
-    executions: TransformedDexExecution[]
-    height: number
-    timestamp: number
 }
 
 const DexBlockExecution: FC<Props> = props => (
@@ -31,8 +28,8 @@ const DexBlockExecution: FC<Props> = props => (
             <TimeAgo timestamp={props.timestamp} />
         </header>
         <div>
-            {props.executions.map(execution => (
-                <DexExecution
+            {props.swapExecutions.map(execution => (
+                <DexSwapExecution
                     key={execution.id}
                     {...execution}
                     className={classNames(

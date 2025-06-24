@@ -1,11 +1,11 @@
 import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import getLiquidityPositions from './getLiquidityPositions'
+import getDexLiquidityPositions from './getDexLiquidityPositions'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
-describe('getLiquidityPositions', () => {
+describe('getDexLiquidityPositions', () => {
     test('returns transformed data', async () => {
         const updatedAt = dayjs().subtract(1, 'second')
 
@@ -33,7 +33,7 @@ describe('getLiquidityPositions', () => {
         })
 
         await expect(
-            getLiquidityPositions({ length: 1 })
+            getDexLiquidityPositions({ length: 1 })
         ).resolves.toMatchObject({
             positions: [
                 {
@@ -56,6 +56,8 @@ describe('getLiquidityPositions', () => {
             }),
         })
 
-        await expect(getLiquidityPositions({ length: 1 })).rejects.toBe('foo')
+        await expect(getDexLiquidityPositions({ length: 1 })).rejects.toBe(
+            'foo'
+        )
     })
 })

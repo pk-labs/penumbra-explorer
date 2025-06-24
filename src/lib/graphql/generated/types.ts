@@ -649,6 +649,20 @@ export type ChainParametersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ChainParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', chainParameters?: { __typename?: 'ChainParameters', chainId: string, currentBlockTime: any, currentBlockHeight: number, currentEpoch: number, epochDuration: number, nextEpochIn: number } | null } };
 
+export type DexBlockExecutionsQueryVariables = Exact<{
+  filter?: InputMaybe<SwapExecutionFilter>;
+}>;
+
+
+export type DexBlockExecutionsQuery = { __typename?: 'QueryRoot', latestExecutions: Array<{ __typename?: 'SwapExecution', blockHeight: number, timestamp: any, batchSwaps: Array<{ __typename?: 'BatchSwap', id: number, executionType: string, totalInputAssetId: string, totalInputAmount: string, totalOutputAssetId: string, totalOutputAmount: string, individualSwaps: Array<{ __typename?: 'IndividualSwap', routeSteps: Array<{ __typename?: 'RouteStep', assetId: string, amount: string }> }> }> }> };
+
+export type DexLiquidityPositionsQueryVariables = Exact<{
+  limit: CollectionLimit;
+}>;
+
+
+export type DexLiquidityPositionsQuery = { __typename?: 'QueryRoot', liquidityPositions: { __typename?: 'LiquidityPositionCollection', total: number, items: Array<{ __typename?: 'LiquidityPosition', tradingPairAsset1: string, tradingPairAsset2: string, reserves1Amount: string, reserves2Amount: string, state: LiquidityPositionState, feePercentage: number, updatedAt: any, positionId: string }> } };
+
 export type DexOpenPositionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -666,13 +680,6 @@ export type IbcStatsQueryVariables = Exact<{
 
 
 export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', status: ClientStatus, channelId?: string | null, counterpartyChannelId?: string | null, lastUpdated?: any | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, totalTxCount: number, pendingTxCount: number, expiredTxCount: number, id: string }> };
-
-export type LiquidityPositionsQueryVariables = Exact<{
-  limit: CollectionLimit;
-}>;
-
-
-export type LiquidityPositionsQuery = { __typename?: 'QueryRoot', liquidityPositions: { __typename?: 'LiquidityPositionCollection', total: number, items: Array<{ __typename?: 'LiquidityPosition', tradingPairAsset1: string, tradingPairAsset2: string, reserves1Amount: string, reserves2Amount: string, state: LiquidityPositionState, feePercentage: number, updatedAt: any, positionId: string }> } };
 
 export type MinValidatorStakeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -891,6 +898,45 @@ export const ChainParametersDocument = gql`
   }
 }
     `;
+export const DexBlockExecutionsDocument = gql`
+    query DexBlockExecutions($filter: SwapExecutionFilter) {
+  latestExecutions(filter: $filter) {
+    blockHeight
+    timestamp
+    batchSwaps {
+      id
+      executionType
+      totalInputAssetId
+      totalInputAmount
+      totalOutputAssetId
+      totalOutputAmount
+      individualSwaps {
+        routeSteps {
+          assetId
+          amount
+        }
+      }
+    }
+  }
+}
+    `;
+export const DexLiquidityPositionsDocument = gql`
+    query DexLiquidityPositions($limit: CollectionLimit!) {
+  liquidityPositions(limit: $limit) {
+    items {
+      tradingPairAsset1
+      tradingPairAsset2
+      reserves1Amount
+      reserves2Amount
+      state
+      feePercentage
+      updatedAt
+      positionId
+    }
+    total
+  }
+}
+    `;
 export const DexOpenPositionsDocument = gql`
     query DexOpenPositions {
   dexStats {
@@ -920,23 +966,6 @@ export const IbcStatsDocument = gql`
     totalTxCount
     pendingTxCount
     expiredTxCount
-  }
-}
-    `;
-export const LiquidityPositionsDocument = gql`
-    query LiquidityPositions($limit: CollectionLimit!) {
-  liquidityPositions(limit: $limit) {
-    items {
-      tradingPairAsset1
-      tradingPairAsset2
-      reserves1Amount
-      reserves2Amount
-      state
-      feePercentage
-      updatedAt
-      positionId
-    }
-    total
   }
 }
     `;

@@ -6,11 +6,16 @@ jest.mock(
     () => (props: any) => <div>{props.transactions}</div>
 )
 
+jest.mock('../../dexSwapExecution/dexSwapExecution', () => (props: any) => (
+    <div>{props.id}</div>
+))
+
 describe('BlockView', () => {
     test.skip('renders navigation', async () => {
         const { container } = render(
             <BlockView
                 block={{ height: 1234567, timestamp: 0, transactions: [] }}
+                swapExecutions={[]}
             />
         )
 
@@ -22,7 +27,10 @@ describe('BlockView', () => {
 
     test.skip('disables next button when viewing first block', async () => {
         const { container } = render(
-            <BlockView block={{ height: 1, timestamp: 0, transactions: [] }} />
+            <BlockView
+                block={{ height: 1, timestamp: 0, transactions: [] }}
+                swapExecutions={[]}
+            />
         )
 
         const navigation = queryByText(container, 'Block view')?.nextSibling
@@ -36,6 +44,7 @@ describe('BlockView', () => {
         const { container } = render(
             <BlockView
                 block={{ height: 1234567, timestamp: 0, transactions: [] }}
+                swapExecutions={[]}
             />
         )
 
@@ -46,6 +55,7 @@ describe('BlockView', () => {
         const { container } = render(
             <BlockView
                 block={{ height: 1234567, timestamp: 0, transactions: [] }}
+                swapExecutions={[]}
             />
         )
 
@@ -57,10 +67,24 @@ describe('BlockView', () => {
             <BlockView
                 // @ts-expect-error
                 block={{ height: 1234567, timestamp: 0, transactions: 'Foo' }}
+                swapExecutions={[]}
             />
         )
 
         getByText(container, 'Foo')
+    })
+
+    test('renders swap executions', async () => {
+        const { container } = render(
+            <BlockView
+                block={{ height: 1234567, timestamp: 0, transactions: [] }}
+                // @ts-expect-error
+                swapExecutions={[{ id: 'foo' }]}
+            />
+        )
+
+        getByText(container, 'Executions')
+        getByText(container, 'foo')
     })
 
     test('applies CSS classes', async () => {
@@ -68,6 +92,7 @@ describe('BlockView', () => {
             <BlockView
                 block={{ height: 1234567, timestamp: 0, transactions: [] }}
                 className="foo bar"
+                swapExecutions={[]}
             />
         )
 

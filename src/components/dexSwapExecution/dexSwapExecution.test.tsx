@@ -1,7 +1,7 @@
 import { getByText, render } from '@testing-library/react'
-import DexExecution from './dexExecution'
+import DexSwapExecution from './dexSwapExecution'
 
-describe('DexExecution', () => {
+describe('DexSwapExecution', () => {
     // test('renders base and quote', async () => {
     //     const { container } = render(
     //         <DexExecution
@@ -20,13 +20,13 @@ describe('DexExecution', () => {
 
     test('renders single swap', async () => {
         const { container } = render(
-            <DexExecution
+            <DexSwapExecution
                 baseAmount={0}
                 baseAssetId="foo"
-                id="1"
+                id={1}
                 quoteAmount={0}
                 quoteAssetId="bar"
-                swaps={[[]]}
+                routes={[[]]}
             />
         )
 
@@ -35,13 +35,13 @@ describe('DexExecution', () => {
 
     test('renders multiple swaps', async () => {
         const { container } = render(
-            <DexExecution
+            <DexSwapExecution
                 baseAmount={0}
                 baseAssetId="foo"
-                id="1"
+                id={1}
                 quoteAmount={0}
                 quoteAssetId="bar"
-                swaps={[[], []]}
+                routes={[[], []]}
             />
         )
 
@@ -50,14 +50,14 @@ describe('DexExecution', () => {
 
     test('applies CSS classes', async () => {
         const { container } = render(
-            <DexExecution
+            <DexSwapExecution
                 baseAmount={0}
                 baseAssetId="foo"
                 className="foo bar"
-                id="1"
+                id={1}
                 quoteAmount={0}
                 quoteAssetId="bar"
-                swaps={[]}
+                routes={[]}
             />
         )
 

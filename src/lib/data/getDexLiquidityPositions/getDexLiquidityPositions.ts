@@ -2,13 +2,13 @@ import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
     CollectionLimit,
-    LiquidityPositionsQuery,
-    LiquidityPositionsQueryVariables,
+    DexLiquidityPositionsQuery,
+    DexLiquidityPositionsQueryVariables,
 } from '@/lib/graphql/generated/types'
-import { liquidityPositionsQuery } from '@/lib/graphql/queries'
+import { dexLiquidityPositionsQuery } from '@/lib/graphql/queries'
 import { TransformedDexPosition } from '@/lib/types'
 
-const getLiquidityPositions = async (
+const getDexLiquidityPositions = async (
     limit: CollectionLimit
 ): Promise<{
     positions: TransformedDexPosition[]
@@ -18,9 +18,9 @@ const getLiquidityPositions = async (
 
     const result = await graphqlClient
         .query<
-            LiquidityPositionsQuery,
-            LiquidityPositionsQueryVariables
-        >(liquidityPositionsQuery, { limit })
+            DexLiquidityPositionsQuery,
+            DexLiquidityPositionsQueryVariables
+        >(dexLiquidityPositionsQuery, { limit })
         .toPromise()
 
     if (result.error) {
@@ -43,4 +43,4 @@ const getLiquidityPositions = async (
     return { positions, total: result.data.liquidityPositions.total }
 }
 
-export default getLiquidityPositions
+export default getDexLiquidityPositions

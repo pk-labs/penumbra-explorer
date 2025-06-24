@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
 import { Pagination } from '@/components'
-import { getLiquidityPositions } from '@/lib/data'
+import { getDexLiquidityPositions } from '@/lib/data'
 import DexPositionTable from '../../components/tables/dexPositionTable/dexPositionTable'
 import { Props } from './dexPositionTableContainer'
 
@@ -10,7 +10,7 @@ const DexPositionTableLoader: FC<Props> = async ({
     pagination,
     ...props
 }) => {
-    const { positions, total } = await getLiquidityPositions(limit)
+    const { positions, total } = await getDexLiquidityPositions(limit)
 
     return (
         <DexPositionTable

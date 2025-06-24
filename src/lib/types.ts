@@ -1,8 +1,8 @@
 import {
     BlockFragment,
+    DexLiquidityPositionsQuery,
     IbcStatsQuery,
     IbcStatus,
-    LiquidityPositionsQuery,
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
@@ -55,19 +55,19 @@ export interface ValidatorBlock {
     signed?: boolean
 }
 
-export interface DexBlockExecution {
-    executions: TransformedDexExecution[]
+export interface TransformedDexBlockExecution {
     height: number
+    swapExecutions: TransformedDexSwapExecution[]
     timestamp: number
 }
 
-export interface TransformedDexExecution {
+export interface TransformedDexSwapExecution {
     baseAmount: number
     baseAssetId: string
-    id: string
+    id: number
     quoteAmount: number
     quoteAssetId: string
-    swaps: DexExecutionRoute[]
+    routes: DexExecutionRoute[]
 }
 
 type DexExecutionRoute = DexExecutionHop[]
@@ -79,7 +79,7 @@ export interface DexExecutionHop {
 
 export interface TransformedDexPosition
     extends Pick<
-        LiquidityPositionsQuery['liquidityPositions']['items'][number],
+        DexLiquidityPositionsQuery['liquidityPositions']['items'][number],
         'state'
     > {
     baseAssetId: string
@@ -89,13 +89,6 @@ export interface TransformedDexPosition
     quoteAssetId: string
     quoteReserve: number
     timestamp: number
-}
-
-export enum DexPositionState {
-    Closed = 'Closed',
-    Executing = 'Executing',
-    Open = 'Open',
-    Withdrawn = 'Withdrawn',
 }
 
 // TODO: Refactor value names to pascal case

@@ -120,6 +120,53 @@ export const ChainParametersDocument = gql`
 export function useChainParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.ChainParametersQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ChainParametersQuery, Types.ChainParametersQueryVariables>({ query: Types.ChainParametersDocument, ...options });
 };
+export const DexBlockExecutionsDocument = gql`
+    query DexBlockExecutions($filter: SwapExecutionFilter) {
+  latestExecutions(filter: $filter) {
+    blockHeight
+    timestamp
+    batchSwaps {
+      id
+      executionType
+      totalInputAssetId
+      totalInputAmount
+      totalOutputAssetId
+      totalOutputAmount
+      individualSwaps {
+        routeSteps {
+          assetId
+          amount
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useDexBlockExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexBlockExecutionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexBlockExecutionsQuery, Types.DexBlockExecutionsQueryVariables>({ query: Types.DexBlockExecutionsDocument, ...options });
+};
+export const DexLiquidityPositionsDocument = gql`
+    query DexLiquidityPositions($limit: CollectionLimit!) {
+  liquidityPositions(limit: $limit) {
+    items {
+      tradingPairAsset1
+      tradingPairAsset2
+      reserves1Amount
+      reserves2Amount
+      state
+      feePercentage
+      updatedAt
+      positionId
+    }
+    total
+  }
+}
+    `;
+
+export function useDexLiquidityPositionsQuery(options: Omit<Urql.UseQueryArgs<Types.DexLiquidityPositionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexLiquidityPositionsQuery, Types.DexLiquidityPositionsQueryVariables>({ query: Types.DexLiquidityPositionsDocument, ...options });
+};
 export const DexOpenPositionsDocument = gql`
     query DexOpenPositions {
   dexStats {
@@ -163,27 +210,6 @@ export const IbcStatsDocument = gql`
 
 export function useIbcStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.IbcStatsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.IbcStatsQuery, Types.IbcStatsQueryVariables>({ query: Types.IbcStatsDocument, ...options });
-};
-export const LiquidityPositionsDocument = gql`
-    query LiquidityPositions($limit: CollectionLimit!) {
-  liquidityPositions(limit: $limit) {
-    items {
-      tradingPairAsset1
-      tradingPairAsset2
-      reserves1Amount
-      reserves2Amount
-      state
-      feePercentage
-      updatedAt
-      positionId
-    }
-    total
-  }
-}
-    `;
-
-export function useLiquidityPositionsQuery(options: Omit<Urql.UseQueryArgs<Types.LiquidityPositionsQueryVariables>, 'query'>) {
-  return Urql.useQuery<Types.LiquidityPositionsQuery, Types.LiquidityPositionsQueryVariables>({ query: Types.LiquidityPositionsDocument, ...options });
 };
 export const MinValidatorStakeDocument = gql`
     query MinValidatorStake {

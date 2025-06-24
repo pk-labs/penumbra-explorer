@@ -2,12 +2,12 @@ import { getByText, render } from '@testing-library/react'
 import dayjs from '@/lib/dayjs'
 import DexBlockExecution from './dexBlockExecution'
 
-describe('DexExecution', () => {
+describe('DexBlockExecution', () => {
     test('renders block height and timestamp', async () => {
         const { container } = render(
             <DexBlockExecution
-                executions={[]}
                 height={1234}
+                swapExecutions={[]}
                 timestamp={dayjs().subtract(1, 'second').valueOf()}
             />
         )
@@ -16,20 +16,20 @@ describe('DexExecution', () => {
         getByText(container, '1s ago')
     })
 
-    test.skip('renders executions', async () => {
+    test.skip('renders swap executions', async () => {
         const { container } = render(
             <DexBlockExecution
-                executions={[
+                height={0}
+                swapExecutions={[
                     {
                         baseAmount: 1234,
                         baseAssetId: 'foo',
-                        id: '1',
+                        id: 1,
                         quoteAmount: 5678,
                         quoteAssetId: 'bar',
-                        swaps: [],
+                        routes: [],
                     },
                 ]}
-                height={0}
                 timestamp={0}
             />
         )
@@ -42,8 +42,8 @@ describe('DexExecution', () => {
         const { container } = render(
             <DexBlockExecution
                 className="foo bar"
-                executions={[]}
                 height={0}
+                swapExecutions={[]}
                 timestamp={0}
             />
         )

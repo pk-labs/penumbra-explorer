@@ -2,17 +2,26 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { BlockView } from '@/components'
-import { getBlock } from '@/lib/data'
+import { getBlock, getDexBlockExecutions } from '@/lib/data'
 import { Props } from './blockViewContainer'
 
 const BlockViewLoader: FC<Props> = async ({ blockHeight, ...props }) => {
-    const block = await getBlock(blockHeight)
+    const [block, blockExecutions] = await Promise.all([
+        getBlock(blockHeight),
+        getDexBlockExecutions({ height: blockHeight }),
+    ])
 
-    if (!block) {
+    if (!block || !blockExecutions) {
         notFound()
     }
 
-    return <BlockView block={block} {...props} />
+    return (
+        <BlockView
+            {...props}
+            block={block}
+            swapExecutions={blockExecutions[0]?.swapExecutions ?? []}
+        />
+    )
 }
 
 export default BlockViewLoader

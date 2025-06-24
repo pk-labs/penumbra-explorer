@@ -4,7 +4,8 @@ import { BlockViewProps, Skeleton, View } from '@/components'
 import { classNames } from '@/lib/utils'
 import BlockViewLoader from './blockViewLoader'
 
-export interface Props extends Omit<BlockViewProps, 'block'> {
+export interface Props
+    extends Omit<BlockViewProps, 'block' | 'swapExecutions'> {
     blockHeight: number
 }
 

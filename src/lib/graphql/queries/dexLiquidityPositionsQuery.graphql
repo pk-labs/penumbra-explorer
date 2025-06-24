@@ -1,4 +1,4 @@
-query LiquidityPositions($limit: CollectionLimit!) {
+query DexLiquidityPositions($limit: CollectionLimit!) {
     liquidityPositions(limit: $limit) {
         items {
             tradingPairAsset1
