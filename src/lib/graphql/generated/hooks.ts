@@ -120,6 +120,17 @@ export const ChainParametersDocument = gql`
 export function useChainParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.ChainParametersQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ChainParametersQuery, Types.ChainParametersQueryVariables>({ query: Types.ChainParametersDocument, ...options });
 };
+export const DexTotalExecutionsDocument = gql`
+    query DexTotalExecutions {
+  dexStats {
+    totalExecutions
+  }
+}
+    `;
+
+export function useDexTotalExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexTotalExecutionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexTotalExecutionsQuery, Types.DexTotalExecutionsQueryVariables>({ query: Types.DexTotalExecutionsDocument, ...options });
+};
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {

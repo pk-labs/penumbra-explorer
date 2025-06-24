@@ -1,21 +1,16 @@
 // istanbul ignore file
-import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { NumberPanel } from '@/components'
+import { getDexTotalExecutions } from '@/lib/data'
 import { Props } from './dexExecutionPanelContainer'
 
 const DexExecutionPanelLoader: FC<Props> = async props => {
-    const number = await new Promise<number>(resolve =>
-        setTimeout(
-            () => resolve(faker.number.int({ max: 100000, min: 1000 })),
-            faker.number.int({ max: 1000, min: 500 })
-        )
-    )
+    const number = await getDexTotalExecutions()
 
     return (
         <NumberPanel
             className={props.className}
-            number={number}
+            number={number ?? 0}
             title="Number of executions"
         />
     )

@@ -3,6 +3,7 @@ export { default as activeVotingPowerQuery } from './activeVotingPowerQuery.grap
 export { default as blockQuery } from './blockQuery.graphql'
 export { default as blocksQuery } from './blocksQuery.graphql'
 export { default as chainParametersQuery } from './chainParametersQuery.graphql'
+export { default as dexTotalExecutionsQuery } from './dexTotalExecutionsQuery.graphql'
 export { default as ibcStatsQuery } from './ibcStatsQuery.graphql'
 export { default as minValidatorStakeQuery } from './minValidatorStakeQuery.graphql'
 export { default as searchQuery } from './searchQuery.graphql'
