@@ -649,6 +649,11 @@ export type ChainParametersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ChainParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', chainParameters?: { __typename?: 'ChainParameters', chainId: string, currentBlockTime: any, currentBlockHeight: number, currentEpoch: number, epochDuration: number, nextEpochIn: number } | null } };
 
+export type DexOpenPositionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DexOpenPositionsQuery = { __typename?: 'QueryRoot', dexStats: { __typename?: 'DexStats', openPositions: number } };
+
 export type DexTotalExecutionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -876,6 +881,13 @@ export const ChainParametersDocument = gql`
       epochDuration
       nextEpochIn
     }
+  }
+}
+    `;
+export const DexOpenPositionsDocument = gql`
+    query DexOpenPositions {
+  dexStats {
+    openPositions
   }
 }
     `;

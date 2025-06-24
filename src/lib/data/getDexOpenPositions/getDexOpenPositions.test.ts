@@ -1,21 +1,21 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import getDexTotalExecutions from './getDexTotalExecutions'
+import getDexOpenPositions from './getDexOpenPositions'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
-describe('getDexTotalExecutions', () => {
+describe('getDexOpenPositions', () => {
     test('returns number', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
-                        data: { dexStats: { totalExecutions: 99 } },
+                        data: { dexStats: { openPositions: 99 } },
                     }),
             }),
         })
 
-        await expect(getDexTotalExecutions()).resolves.toBe(99)
+        await expect(getDexOpenPositions()).resolves.toBe(99)
     })
 
     test('throws error', async () => {
@@ -25,6 +25,6 @@ describe('getDexTotalExecutions', () => {
             }),
         })
 
-        await expect(getDexTotalExecutions()).rejects.toBe('foo')
+        await expect(getDexOpenPositions()).rejects.toBe('foo')
     })
 })

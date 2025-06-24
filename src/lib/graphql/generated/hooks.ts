@@ -120,6 +120,17 @@ export const ChainParametersDocument = gql`
 export function useChainParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.ChainParametersQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ChainParametersQuery, Types.ChainParametersQueryVariables>({ query: Types.ChainParametersDocument, ...options });
 };
+export const DexOpenPositionsDocument = gql`
+    query DexOpenPositions {
+  dexStats {
+    openPositions
+  }
+}
+    `;
+
+export function useDexOpenPositionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexOpenPositionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexOpenPositionsQuery, Types.DexOpenPositionsQueryVariables>({ query: Types.DexOpenPositionsDocument, ...options });
+};
 export const DexTotalExecutionsDocument = gql`
     query DexTotalExecutions {
   dexStats {
