@@ -36,13 +36,26 @@ const DexPositionTable: FC<Props> = ({ positions, ...props }) => (
                             />
                         </TableCell>
                         <TableCell className="h-20">
-                            <AssetValue
-                                amount={position.reserve}
-                                assetId={position.quoteAssetId}
-                                context="table"
-                                density="compact"
-                                showIcon={false}
-                            />
+                            <span className="inline-flex flex-col gap-1">
+                                {position.baseReserve > 0 && (
+                                    <AssetValue
+                                        amount={position.baseReserve}
+                                        assetId={position.baseAssetId}
+                                        context="table"
+                                        density="compact"
+                                        showIcon={false}
+                                    />
+                                )}
+                                {position.quoteReserve > 0 && (
+                                    <AssetValue
+                                        amount={position.quoteReserve}
+                                        assetId={position.quoteAssetId}
+                                        context="table"
+                                        density="compact"
+                                        showIcon={false}
+                                    />
+                                )}
+                            </span>
                         </TableCell>
                         <TableCell className="h-20">
                             <DexPositionStatePill state={position.state} />

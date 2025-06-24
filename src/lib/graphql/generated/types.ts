@@ -667,6 +667,13 @@ export type IbcStatsQueryVariables = Exact<{
 
 export type IbcStatsQuery = { __typename?: 'QueryRoot', ibcStats: Array<{ __typename?: 'IbcStats', status: ClientStatus, channelId?: string | null, counterpartyChannelId?: string | null, lastUpdated?: any | null, shieldedVolume: string, shieldedTxCount: number, unshieldedVolume: string, unshieldedTxCount: number, totalTxCount: number, pendingTxCount: number, expiredTxCount: number, id: string }> };
 
+export type LiquidityPositionsQueryVariables = Exact<{
+  limit: CollectionLimit;
+}>;
+
+
+export type LiquidityPositionsQuery = { __typename?: 'QueryRoot', liquidityPositions: { __typename?: 'LiquidityPositionCollection', total: number, items: Array<{ __typename?: 'LiquidityPosition', tradingPairAsset1: string, tradingPairAsset2: string, reserves1Amount: string, reserves2Amount: string, state: LiquidityPositionState, feePercentage: number, updatedAt: any, positionId: string }> } };
+
 export type MinValidatorStakeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -913,6 +920,23 @@ export const IbcStatsDocument = gql`
     totalTxCount
     pendingTxCount
     expiredTxCount
+  }
+}
+    `;
+export const LiquidityPositionsDocument = gql`
+    query LiquidityPositions($limit: CollectionLimit!) {
+  liquidityPositions(limit: $limit) {
+    items {
+      tradingPairAsset1
+      tradingPairAsset2
+      reserves1Amount
+      reserves2Amount
+      state
+      feePercentage
+      updatedAt
+      positionId
+    }
+    total
   }
 }
     `;

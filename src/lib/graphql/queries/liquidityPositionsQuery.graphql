@@ -1,0 +1,15 @@
+query LiquidityPositions($limit: CollectionLimit!) {
+    liquidityPositions(limit: $limit) {
+        items {
+            tradingPairAsset1
+            tradingPairAsset2
+            reserves1Amount
+            reserves2Amount
+            state
+            feePercentage
+            updatedAt
+            positionId
+        }
+        total
+    }
+}

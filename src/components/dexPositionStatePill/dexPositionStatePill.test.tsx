@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react'
-import { DexPositionState } from '@/lib/types'
+import { LiquidityPositionState } from '@/lib/graphql/generated/types'
 import DexPositionStatePill from './dexPositionStatePill'
 
 describe('DexPositionStatePill', () => {
@@ -10,41 +10,41 @@ describe('DexPositionStatePill', () => {
 
     test('renders open state', async () => {
         const { container } = render(
-            <DexPositionStatePill state={DexPositionState.Open} />
+            <DexPositionStatePill state={LiquidityPositionState.Open} />
         )
 
-        getByText(container, DexPositionState.Open)
+        getByText(container, 'Open')
     })
 
     test('renders executing state', async () => {
         const { container } = render(
-            <DexPositionStatePill state={DexPositionState.Executing} />
+            <DexPositionStatePill state={LiquidityPositionState.Executing} />
         )
 
-        getByText(container, DexPositionState.Executing)
+        getByText(container, 'Executing')
     })
 
     test('renders withdrawn state', async () => {
         const { container } = render(
-            <DexPositionStatePill state={DexPositionState.Withdrawn} />
+            <DexPositionStatePill state={LiquidityPositionState.Withdrawn} />
         )
 
-        getByText(container, DexPositionState.Withdrawn)
+        getByText(container, 'Withdrawn')
     })
 
     test('renders closed state', async () => {
         const { container } = render(
-            <DexPositionStatePill state={DexPositionState.Closed} />
+            <DexPositionStatePill state={LiquidityPositionState.Closed} />
         )
 
-        getByText(container, DexPositionState.Closed)
+        getByText(container, 'Closed')
     })
 
     test('applies CSS classes', async () => {
         const { container } = render(
             <DexPositionStatePill
                 className="foo bar"
-                state={DexPositionState.Closed}
+                state={LiquidityPositionState.Closed}
             />
         )
 

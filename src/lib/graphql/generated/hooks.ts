@@ -164,6 +164,27 @@ export const IbcStatsDocument = gql`
 export function useIbcStatsQuery(options?: Omit<Urql.UseQueryArgs<Types.IbcStatsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.IbcStatsQuery, Types.IbcStatsQueryVariables>({ query: Types.IbcStatsDocument, ...options });
 };
+export const LiquidityPositionsDocument = gql`
+    query LiquidityPositions($limit: CollectionLimit!) {
+  liquidityPositions(limit: $limit) {
+    items {
+      tradingPairAsset1
+      tradingPairAsset2
+      reserves1Amount
+      reserves2Amount
+      state
+      feePercentage
+      updatedAt
+      positionId
+    }
+    total
+  }
+}
+    `;
+
+export function useLiquidityPositionsQuery(options: Omit<Urql.UseQueryArgs<Types.LiquidityPositionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.LiquidityPositionsQuery, Types.LiquidityPositionsQueryVariables>({ query: Types.LiquidityPositionsDocument, ...options });
+};
 export const MinValidatorStakeDocument = gql`
     query MinValidatorStake {
   validatorsHomepage {

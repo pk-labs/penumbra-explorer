@@ -2,6 +2,7 @@ import {
     BlockFragment,
     IbcStatsQuery,
     IbcStatus,
+    LiquidityPositionsQuery,
     PartialBlockFragment,
     PartialTransactionFragment,
     TransactionFragment,
@@ -76,13 +77,17 @@ export interface DexExecutionHop {
     assetId: string
 }
 
-export interface TransformedDexPosition {
+export interface TransformedDexPosition
+    extends Pick<
+        LiquidityPositionsQuery['liquidityPositions']['items'][number],
+        'state'
+    > {
     baseAssetId: string
+    baseReserve: number
     fee: number
     id: string
     quoteAssetId: string
-    reserve: number
-    state: DexPositionState
+    quoteReserve: number
     timestamp: number
 }
 

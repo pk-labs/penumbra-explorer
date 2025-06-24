@@ -2,6 +2,7 @@
 import { FC, Suspense } from 'react'
 import {
     DexPositionTableProps,
+    Pagination,
     Skeleton,
     Table,
     TableCell,
@@ -15,12 +16,21 @@ export interface Props
         length: number
         offset?: number
     }
+    pagination?: boolean
 }
 
 const DexPositionTableContainer: FC<Props> = props => (
     <Suspense
         fallback={
-            <Table className={props.className} header={props.header}>
+            <Table
+                className={props.className}
+                footer={
+                    props.pagination ? (
+                        <Pagination page={0} totalPages={0} />
+                    ) : undefined
+                }
+                header={props.header}
+            >
                 <thead>
                     <TableRow>
                         <TableCell header>

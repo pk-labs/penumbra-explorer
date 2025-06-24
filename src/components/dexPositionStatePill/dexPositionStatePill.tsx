@@ -1,26 +1,27 @@
 import { FC } from 'react'
-import { DexPositionState } from '@/lib/types'
+import { LiquidityPositionState } from '@/lib/graphql/generated/types'
+import { ucFirst } from '@/lib/utils'
 import { Pill, PillProps } from '../pill'
 
 interface Props {
     className?: string
-    state?: DexPositionState
+    state?: LiquidityPositionState
 }
 
 const DexPositionStatePill: FC<Props> = props => {
     let context: PillProps['context']
 
     switch (props.state) {
-        case DexPositionState.Open:
+        case LiquidityPositionState.Open:
             context = 'technical-success'
             break
-        case DexPositionState.Executing:
+        case LiquidityPositionState.Executing:
             context = 'technical-caution'
             break
-        case DexPositionState.Withdrawn:
+        case LiquidityPositionState.Withdrawn:
             context = 'technical-destructive'
             break
-        case DexPositionState.Closed:
+        case LiquidityPositionState.Closed:
             context = 'technical-default'
             break
         default:
@@ -33,7 +34,7 @@ const DexPositionStatePill: FC<Props> = props => {
             context={context}
             priority="secondary"
         >
-            {props.state}
+            {ucFirst(props.state)}
         </Pill>
     )
 }
