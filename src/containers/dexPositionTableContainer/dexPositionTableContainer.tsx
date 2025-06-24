@@ -21,6 +21,7 @@ export interface Props
 
 const DexPositionTableContainer: FC<Props> = props => (
     <Suspense
+        key={JSON.stringify(props.limit)}
         fallback={
             <Table
                 className={props.className}

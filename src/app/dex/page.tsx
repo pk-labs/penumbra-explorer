@@ -24,6 +24,9 @@ const DexPage: FC<Props> = async props => {
         notFound()
     }
 
+    const length = 13
+    const offset = page * length
+
     return (
         <Container>
             <Breadcrumbs>
@@ -41,7 +44,8 @@ const DexPage: FC<Props> = async props => {
                             Liquidity positions
                         </h1>
                     }
-                    limit={{ length: 13 }}
+                    limit={{ length, offset }}
+                    pagination
                 />
             </div>
         </Container>
