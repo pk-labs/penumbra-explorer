@@ -56,9 +56,21 @@ const BlockView: FC<Props> = props => (
         />
         {props.swapExecutions.length > 0 && (
             <Subsection title="Executions">
-                {props.swapExecutions.map(execution => (
-                    <DexSwapExecution key={execution.id} {...execution} />
-                ))}
+                <div>
+                    {props.swapExecutions.map(execution => (
+                        <DexSwapExecution
+                            key={execution.id}
+                            {...execution}
+                            className={classNames(
+                                'not-last:not-only:border-b-other-tonalStroke',
+                                'not-first:not-last:rounded-none',
+                                'not-last:not-only:border-b-1',
+                                'first:not-only:rounded-b-none',
+                                'last:not-only:rounded-t-none'
+                            )}
+                        />
+                    ))}
+                </div>
             </Subsection>
         )}
         {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
