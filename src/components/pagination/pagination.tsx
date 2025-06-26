@@ -32,6 +32,7 @@ const Pagination: FC<Props> = props => {
                         ? `${pathname}?page=${props.page - 1}`
                         : pathname
                 }
+                scroll={false}
             >
                 Prev
             </Button>
@@ -52,6 +53,7 @@ const Pagination: FC<Props> = props => {
                         ? `${pathname}?page=${props.page + 1}`
                         : `${pathname}?page=${props.totalPages}`
                 }
+                scroll={false}
             >
                 Next
             </Button>
