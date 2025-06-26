@@ -13,7 +13,6 @@ interface Props extends TransformedDexSwapExecution {
 const DexSwapExecution: FC<Props> = props => (
     <Collapsible
         className={classNames('font-mono text-xs font-medium', props.className)}
-        contentClassName="flex flex-col gap-6 overflow-x-auto"
         header={
             <>
                 <span className="flex items-center gap-1">
@@ -37,9 +36,11 @@ const DexSwapExecution: FC<Props> = props => (
         }
         headerClassName="justify-between"
     >
-        {props.routes.map((hops, i) => (
-            <DexExecutionRoute key={i} hops={hops} />
-        ))}
+        <div className="flex flex-col gap-6 overflow-x-auto">
+            {props.routes.map((hops, i) => (
+                <DexExecutionRoute key={i} hops={hops} />
+            ))}
+        </div>
     </Collapsible>
 )
 
