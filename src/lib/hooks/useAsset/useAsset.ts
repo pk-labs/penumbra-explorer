@@ -9,12 +9,13 @@ import useGetMetadata from '../useGetMetadata'
 
 const useAsset = (id: string) => {
     const getMetadata = useGetMetadata()
-    const [asset, setAsset] = useState<Metadata>()
+    const [asset, setAsset] = useState<Metadata | null>()
 
     useEffect(() => {
         if (getMetadata) {
             setAsset(
-                getMetadata(new AssetId({ inner: base64ToUint8Array(id) }))
+                getMetadata(new AssetId({ inner: base64ToUint8Array(id) })) ??
+                    null
             )
         }
     }, [getMetadata, id])

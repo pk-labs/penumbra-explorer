@@ -4,6 +4,7 @@ import { AssetGroup, AssetGroupProps } from '@penumbra-zone/ui/AssetIcon'
 import { FC } from 'react'
 import { useAsset } from '@/lib/hooks'
 import { classNames } from '@/lib/utils'
+import Skeleton from '../skeleton'
 
 interface Props extends Pick<AssetGroupProps, 'size'> {
     baseAssetId: string
@@ -15,8 +16,10 @@ const AssetPair: FC<Props> = props => {
     const baseAsset = useAsset(props.baseAssetId)
     const quoteAsset = useAsset(props.quoteAssetId)
 
-    if (!baseAsset || !quoteAsset) {
-        return
+    if (typeof baseAsset === 'undefined' || typeof quoteAsset === 'undefined') {
+        return <Skeleton className="h-8 w-24" />
+    } else if (baseAsset === null || quoteAsset === null) {
+        return 'NA'
     }
 
     return (
