@@ -29,7 +29,7 @@ const DexSwapExecution: FC<Props> = props => (
                         density="slim"
                     />
                 </span>
-                <span>
+                <span className="whitespace-nowrap">
                     {props.routes.length}{' '}
                     {props.routes.length === 1 ? 'swap' : 'swaps'}
                 </span>
