@@ -11,11 +11,7 @@ describe('AssetPair', () => {
         const { default: AssetPair } = await import('./assetPair')
 
         const { container } = render(
-            <AssetPair
-                baseAssetId="foo"
-                className="foo bar"
-                quoteAssetId="bar"
-            />
+            <AssetPair baseAssetId="foo" quoteAssetId="bar" />
         )
 
         getByText(container, 'Skeleton')
@@ -27,11 +23,7 @@ describe('AssetPair', () => {
         const { default: AssetPair } = await import('./assetPair')
 
         const { container } = render(
-            <AssetPair
-                baseAssetId="foo"
-                className="foo bar"
-                quoteAssetId="bar"
-            />
+            <AssetPair baseAssetId="foo" quoteAssetId="bar" />
         )
 
         getByText(container, 'NA')
