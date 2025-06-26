@@ -48,6 +48,22 @@ describe('DexSwapExecution', () => {
         getByText(container, '2 swaps')
     })
 
+    test('renders arb', async () => {
+        const { container } = render(
+            <DexSwapExecution
+                baseAmount={0}
+                baseAssetId="foo"
+                id={1}
+                quoteAmount={0}
+                quoteAssetId="bar"
+                routes={[[]]}
+                arb
+            />
+        )
+
+        getByText(container, 'Arb')
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(
             <DexSwapExecution

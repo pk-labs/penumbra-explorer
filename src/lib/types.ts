@@ -62,6 +62,7 @@ export interface TransformedDexBlockExecution {
 }
 
 export interface TransformedDexSwapExecution {
+    arb?: boolean
     baseAmount: number
     baseAssetId: string
     id: number

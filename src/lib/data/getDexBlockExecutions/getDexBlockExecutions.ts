@@ -28,6 +28,7 @@ const getDexBlockExecutions = async (
         return {
             height: blockExecution.blockHeight,
             swapExecutions: blockExecution.batchSwaps.map(swap => ({
+                arb: swap.executionType === 'Arb',
                 baseAmount: Number(swap.totalInputAmount),
                 baseAssetId: swap.totalInputAssetId,
                 id: swap.id,

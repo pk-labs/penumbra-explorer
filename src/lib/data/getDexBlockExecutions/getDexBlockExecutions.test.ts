@@ -18,6 +18,7 @@ describe('getDexBlockExecutions', () => {
                                 {
                                     batchSwaps: [
                                         {
+                                            executionType: 'Arb',
                                             individualSwaps: [
                                                 {
                                                     routeSteps: [
@@ -43,6 +44,7 @@ describe('getDexBlockExecutions', () => {
             {
                 swapExecutions: [
                     {
+                        arb: true,
                         baseAmount: 123,
                         baseAssetId: 'base',
                         quoteAmount: 456,
