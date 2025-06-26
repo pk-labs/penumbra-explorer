@@ -33,12 +33,14 @@ const DexPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>DEX</Breadcrumb>
             </Breadcrumbs>
-            <div className="grid grid-cols-12 gap-4">
-                <DexExecutionPanelContainer className="col-span-full sm:col-span-6" />
-                <DexPositionPanelContainer className="col-span-full sm:col-span-6" />
-                <DexExecutionContainer className="col-span-full lg:col-span-6 xl:col-span-4" />
+            <div className="flex flex-col gap-4 sm:flex-row">
+                <DexExecutionPanelContainer className="flex-1" />
+                <DexPositionPanelContainer className="flex-1" />
+            </div>
+            <div className="mt-4 flex flex-col-reverse gap-4 lg:flex-row">
+                <DexExecutionContainer className="lg:w-[550px]" />
                 <DexPositionTableContainer
-                    className="col-span-full lg:col-span-6 xl:col-span-8"
+                    className="lg:min-w-0 lg:flex-1"
                     header={
                         <h1 className="text-2xl font-medium">
                             Liquidity positions
