@@ -1,7 +1,12 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container } from '@/components'
+import {
+    Breadcrumb,
+    Breadcrumbs,
+    Container,
+    FilterSelector,
+} from '@/components'
 import {
     DexExecutionContainer,
     DexExecutionPanelContainer,
@@ -13,7 +18,10 @@ import { generatePageMetadata } from '@/lib/utils'
 export const metadata = generatePageMetadata('Dex', 'TODO: Description', '/dex')
 
 interface Props {
-    searchParams: Promise<{ page?: string }>
+    searchParams: Promise<{
+        filter?: string
+        page?: string
+    }>
 }
 
 const DexPage: FC<Props> = async props => {
@@ -42,9 +50,15 @@ const DexPage: FC<Props> = async props => {
                 <DexPositionTableContainer
                     className="lg:min-w-0 lg:flex-1"
                     header={
-                        <h1 className="text-2xl font-medium">
-                            Liquidity positions
-                        </h1>
+                        <div className="flex flex-col gap-6">
+                            <h1 className="text-2xl font-medium">
+                                Liquidity positions
+                            </h1>
+                            <FilterSelector
+                                filters={['open', 'closed']}
+                                selectedFilter={searchParams.filter}
+                            />
+                        </div>
                     }
                     limit={{ length, offset }}
                     pagination
