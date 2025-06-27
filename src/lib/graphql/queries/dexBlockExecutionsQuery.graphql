@@ -1,0 +1,20 @@
+query DexBlockExecutions($filter: SwapExecutionFilter) {
+    latestExecutions(filter: $filter) {
+        blockHeight
+        timestamp
+        batchSwaps {
+            id
+            executionType
+            totalInputAssetId
+            totalInputAmount
+            totalOutputAssetId
+            totalOutputAmount
+            individualSwaps {
+                routeSteps {
+                    assetId
+                    amount
+                }
+            }
+        }
+    }
+}

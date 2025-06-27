@@ -27,7 +27,7 @@ const TransactionView: FC<Props> = props => (
     >
         <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
             <Parameter name="Transaction hash">
-                {shortenHash(props.transaction.hash)}
+                {shortenHash(props.transaction.hash, 16)}
                 <CopyToClipboard
                     className="text-text-primary -mr-[5px]"
                     text={props.transaction.hash}
@@ -37,13 +37,13 @@ const TransactionView: FC<Props> = props => (
             <Parameter name="Block height">
                 <Link
                     className={classNames(
-                        'inline-flex items-center gap-1 text-inherit',
+                        'inline-flex items-center gap-2 text-inherit',
                         'hover:text-primary-light'
                     )}
                     href={`/block/${props.transaction.blockHeight}`}
                 >
                     {formatNumber(props.transaction.blockHeight)}
-                    <Link2Icon className="text-text-primary ml-1" size={12} />
+                    <Link2Icon className="text-text-primary" size={12} />
                 </Link>
             </Parameter>
             <Parameter name="Time">

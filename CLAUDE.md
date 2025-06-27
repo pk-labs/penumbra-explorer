@@ -1,4 +1,4 @@
-# Development Guide
+# Claude development guide
 
 ## Commands
 - **Build:** `npm run build` (production), `npm run dev` (development)
@@ -13,7 +13,7 @@
   
 **Important:** Always run both `npm run lint:fix` and `npm run stylelint:fix` after making changes to files
 
-## Code Style
+## Code style
 - **Imports:** Group by external/internal, sort alphabetically
 - **Formatting:** No semicolons, single quotes, 4 spaces, avoid parens in arrow functions
 - **Types:** Use TypeScript interfaces for React props, prefer explicit types
@@ -32,10 +32,9 @@
   - All test functions should be async
   - Test descriptions should be clear and descriptive
 
-## Git Commit Guidelines
+## Git commit guidelines
 - **Format:** Use imperative mood (e.g., "Add feature" not "Added feature")
 - **Style:** Start with a verb, be concise (50 chars or less for the title)
-- **Scope:** Include the component or area affected in parentheses when relevant
 - **Co-authorship:** Always include the co-authorship message for AI-assisted commits:
   ```
   🤖 Generated with Claude Code: https://claude.ai/code

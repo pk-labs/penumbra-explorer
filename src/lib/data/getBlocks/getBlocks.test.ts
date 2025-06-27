@@ -32,7 +32,6 @@ describe('getBlocks', () => {
             blocks: [
                 {
                     height: 456,
-                    initialTimeAgo: '1s ago',
                     timestamp: createdAt.valueOf(),
                 },
                 { height: 123 },

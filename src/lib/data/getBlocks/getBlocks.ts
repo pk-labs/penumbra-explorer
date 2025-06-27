@@ -28,16 +28,11 @@ const getBlocks = async (
         return { blocks: [], total: 0 }
     }
 
-    const blocks = result.data.blocks.items.map(block => {
-        const date = dayjs(block.createdAt)
-
-        return {
-            height: block.height,
-            initialTimeAgo: dayjs().to(date),
-            timestamp: date.valueOf(),
-            transactionsCount: block.transactionsCount,
-        }
-    })
+    const blocks = result.data.blocks.items.map(block => ({
+        height: block.height,
+        timestamp: dayjs(block.createdAt).valueOf(),
+        transactionsCount: block.transactionsCount,
+    }))
 
     return { blocks, total: result.data.blocks.total }
 }

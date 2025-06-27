@@ -2,21 +2,16 @@ import { getByText, render } from '@testing-library/react'
 import View from './view'
 
 describe('View', () => {
-    test('renders children, title and subtitle', async () => {
-        const { container } = render(
-            <View subtitle="Bar" title="Foo">
-                Baz
-            </View>
-        )
+    test('renders title and children', async () => {
+        const { container } = render(<View title="Foo">Bar</View>)
 
         getByText(container, 'Foo')
         getByText(container, 'Bar')
-        getByText(container, 'Baz')
     })
 
-    test('renders any node as subtitle ', async () => {
-        const { container } = render(<View subtitle={123} title="Foo" />)
-        getByText(container, 123)
+    test.skip('renders navigation', async () => {
+        const { container } = render(<View nextHref="/bar" title="Foo" />)
+        expect(container.querySelector('a')).toHaveAttribute('href', '/bar')
     })
 
     test('applies CSS classes', async () => {

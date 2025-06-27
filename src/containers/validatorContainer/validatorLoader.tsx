@@ -41,21 +41,24 @@ const ValidatorLoader: FC<Props> = async props => {
                     />
                     <span className="inline-flex flex-col gap-1">
                         <h1 className="text-2xl break-all">
-                            {validator.name || shortenHash(validator.id, 'end')}
+                            {validator.name ||
+                                shortenHash(validator.id, 19, 'end')}
                         </h1>
                         {validator.website && (
                             <a
                                 className={classNames(
                                     'text-text-secondary',
-                                    'hover:text-text-special inline-flex',
-                                    'items-center gap-2 text-xs'
+                                    'hover:text-text-special text-xs break-all'
                                 )}
                                 href={validator.website}
                                 rel="nofollow"
                                 target="_blank"
                             >
                                 {validator.website}
-                                <ExternalLinkIcon size={14} />
+                                <ExternalLinkIcon
+                                    className="-mt-1 ml-2 inline-block"
+                                    size={14}
+                                />
                             </a>
                         )}
                     </span>
@@ -129,6 +132,7 @@ const ValidatorLoader: FC<Props> = async props => {
                                         <span className="text-text-primary">
                                             {shortenHash(
                                                 stream.recipientAddress,
+                                                19,
                                                 'end'
                                             )}
                                         </span>

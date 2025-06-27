@@ -28,7 +28,7 @@ const MenuItem: FC<Props> = props => {
             className={classNames(
                 'flex h-8 items-center gap-2 px-7 text-lg',
                 'hover:text-text-primary hover:bg-other-tonalFill5',
-                'transition-[color,background] duration-200 ease-out',
+                'transition-colors duration-200 ease-out',
                 'sm:text-base',
                 active ? 'text-text-primary' : 'text-text-secondary'
             )}

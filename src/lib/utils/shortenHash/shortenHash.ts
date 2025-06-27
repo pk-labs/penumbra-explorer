@@ -1,11 +1,17 @@
-const shortenHash = (hash: string, truncate: 'end' | 'middle' = 'middle') => {
+const shortenHash = (
+    hash: string,
+    length: number,
+    truncate: 'end' | 'middle' = 'middle'
+) => {
     if (truncate === 'middle') {
-        return hash.length < 19
+        const halfLength = Math.floor(length / 2)
+
+        return hash.length <= length
             ? hash
-            : `${hash.slice(0, 8)}...${hash.slice(-8)}`
+            : `${hash.slice(0, halfLength)}...${hash.slice(-halfLength)}`
     }
 
-    return hash.length < 22 ? hash : `${hash.slice(0, 19)}...`
+    return hash.length <= length ? hash : `${hash.slice(0, length)}...`
 }
 
 export default shortenHash

@@ -42,7 +42,7 @@ const ValidatorTable: FC<Props> = ({ inactive, validators, ...props }) => (
                             />
                             <Link href={`/validator/${validator.id}`}>
                                 {validator.name ||
-                                    shortenHash(validator.id, 'end')}
+                                    shortenHash(validator.id, 19, 'end')}
                             </Link>
                         </TableCell>
                         <TableCell className="h-15">

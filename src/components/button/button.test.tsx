@@ -4,7 +4,7 @@ import Button from './button'
 describe('Button', () => {
     test('renders as internal link', async () => {
         const { container } = render(
-            <Button href="/foo" icon="Home">
+            <Button href="/foo" icon="Home" scroll={false}>
                 Foo
             </Button>
         )
@@ -15,7 +15,7 @@ describe('Button', () => {
         expect(button.firstChild).toHaveClass('lucide-house')
     })
 
-    test('renders as internal link', async () => {
+    test('renders as external link', async () => {
         const { container } = render(
             <Button href="/foo" externalLink>
                 Foo

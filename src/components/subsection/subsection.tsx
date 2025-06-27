@@ -8,9 +8,9 @@ interface Props {
 }
 
 const Subsection: FC<Props> = props => (
-    <div className={classNames('flex flex-col gap-1', props.className)}>
+    <div className={classNames('flex flex-col gap-2', props.className)}>
         {props.title && (
-            <h3 className="flex items-center gap-1 text-xs">{props.title}</h3>
+            <h3 className="flex items-center gap-1 text-sm">{props.title}</h3>
         )}
         {props.children}
     </div>

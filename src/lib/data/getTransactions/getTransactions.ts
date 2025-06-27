@@ -36,7 +36,6 @@ const getTransactions = async (
     }
 
     const transactions = result.data.transactions.items.map(transaction => {
-        const date = dayjs(transaction.block.createdAt)
         let primaryAction
         let actionCount
 
@@ -53,11 +52,10 @@ const getTransactions = async (
             actionCount: actionCount ?? 0,
             blockHeight: transaction.block.height,
             hash: transaction.hash.toLowerCase(),
-            initialTimeAgo: dayjs().to(date),
             primaryAction,
             raw: transaction.raw,
             status: transaction.ibcStatus,
-            timestamp: date.valueOf(),
+            timestamp: dayjs(transaction.block.createdAt).valueOf(),
         }
     })
 

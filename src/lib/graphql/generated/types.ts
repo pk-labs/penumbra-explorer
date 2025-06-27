@@ -27,6 +27,18 @@ export type AssetId = {
   inner: Scalars['String']['output'];
 };
 
+export type BatchSwap = {
+  __typename?: 'BatchSwap';
+  executionType: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  individualSwaps: Array<IndividualSwap>;
+  individualSwapsCount: Scalars['Int']['output'];
+  totalInputAmount: Scalars['String']['output'];
+  totalInputAssetId: Scalars['String']['output'];
+  totalOutputAmount: Scalars['String']['output'];
+  totalOutputAssetId: Scalars['String']['output'];
+};
+
 export type Block = {
   __typename?: 'Block';
   chainId?: Maybe<Scalars['String']['output']>;
@@ -135,6 +147,12 @@ export type DbRawTransaction = {
   txHashHex: Scalars['String']['output'];
 };
 
+export type DexStats = {
+  __typename?: 'DexStats';
+  openPositions: Scalars['Int']['output'];
+  totalExecutions: Scalars['Int']['output'];
+};
+
 export type Event = {
   __typename?: 'Event';
   type: Scalars['String']['output'];
@@ -187,6 +205,50 @@ export type IbcTransactionUpdate = {
   txHash: Scalars['String']['output'];
 };
 
+export type IndividualSwap = {
+  __typename?: 'IndividualSwap';
+  inputAmount: Scalars['String']['output'];
+  inputAssetId: Scalars['String']['output'];
+  outputAmount: Scalars['String']['output'];
+  outputAssetId: Scalars['String']['output'];
+  routeSteps: Array<RouteStep>;
+  swapIndex: Scalars['Int']['output'];
+};
+
+export type LiquidityPosition = {
+  __typename?: 'LiquidityPosition';
+  feePercentage: Scalars['Float']['output'];
+  positionId: Scalars['String']['output'];
+  reserves1Amount: Scalars['String']['output'];
+  reserves2Amount: Scalars['String']['output'];
+  state: LiquidityPositionState;
+  tradingPairAsset1: Scalars['String']['output'];
+  tradingPairAsset2: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type LiquidityPositionCollection = {
+  __typename?: 'LiquidityPositionCollection';
+  items: Array<LiquidityPosition>;
+  total: Scalars['Int']['output'];
+};
+
+export type LiquidityPositionFilter = {
+  state?: InputMaybe<LiquidityPositionStateFilter>;
+};
+
+export enum LiquidityPositionState {
+  Closed = 'CLOSED',
+  Executing = 'EXECUTING',
+  Open = 'OPEN',
+  Withdrawn = 'WITHDRAWN'
+}
+
+export enum LiquidityPositionStateFilter {
+  Closed = 'CLOSED',
+  Open = 'OPEN'
+}
+
 export type NotYetSupportedAction = {
   __typename?: 'NotYetSupportedAction';
   debug: Scalars['String']['output'];
@@ -222,8 +284,11 @@ export type QueryRoot = {
   dbLatestBlock?: Maybe<DbBlock>;
   dbRawTransaction?: Maybe<DbRawTransaction>;
   dbRawTransactions: Array<DbRawTransaction>;
+  dexStats: DexStats;
   ibcStats: Array<IbcStats>;
   ibcTotalShieldedVolume: TotalShieldedVolume;
+  latestExecutions: Array<SwapExecution>;
+  liquidityPositions: LiquidityPositionCollection;
   search?: Maybe<SearchResult>;
   stats: Stats;
   transaction?: Maybe<Transaction>;
@@ -271,6 +336,17 @@ export type QueryRootIbcStatsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   timePeriod?: InputMaybe<TimePeriod>;
+};
+
+
+export type QueryRootLatestExecutionsArgs = {
+  filter?: InputMaybe<SwapExecutionFilter>;
+};
+
+
+export type QueryRootLiquidityPositionsArgs = {
+  filter?: InputMaybe<LiquidityPositionFilter>;
+  limit: CollectionLimit;
 };
 
 
@@ -341,6 +417,13 @@ export type RootValidatorBlocksArgs = {
   validatorId: Scalars['String']['input'];
 };
 
+export type RouteStep = {
+  __typename?: 'RouteStep';
+  amount: Scalars['String']['output'];
+  assetId: Scalars['String']['output'];
+  routeStep: Scalars['Int']['output'];
+};
+
 export type SearchResult = Block | Transaction | ValidatorSearchResults;
 
 export type Spend = {
@@ -373,6 +456,17 @@ export type StakingParameters = {
 export type Stats = {
   __typename?: 'Stats';
   totalTransactionsCount: Scalars['Int']['output'];
+};
+
+export type SwapExecution = {
+  __typename?: 'SwapExecution';
+  batchSwaps: Array<BatchSwap>;
+  blockHeight: Scalars['Int']['output'];
+  timestamp: Scalars['DateTime']['output'];
+};
+
+export type SwapExecutionFilter = {
+  height?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export enum TimePeriod {
@@ -564,6 +658,31 @@ export type ChainParametersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ChainParametersQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', chainParameters?: { __typename?: 'ChainParameters', chainId: string, currentBlockTime: any, currentBlockHeight: number, currentEpoch: number, epochDuration: number, nextEpochIn: number } | null } };
+
+export type DexBlockExecutionsQueryVariables = Exact<{
+  filter?: InputMaybe<SwapExecutionFilter>;
+}>;
+
+
+export type DexBlockExecutionsQuery = { __typename?: 'QueryRoot', latestExecutions: Array<{ __typename?: 'SwapExecution', blockHeight: number, timestamp: any, batchSwaps: Array<{ __typename?: 'BatchSwap', id: number, executionType: string, totalInputAssetId: string, totalInputAmount: string, totalOutputAssetId: string, totalOutputAmount: string, individualSwaps: Array<{ __typename?: 'IndividualSwap', routeSteps: Array<{ __typename?: 'RouteStep', assetId: string, amount: string }> }> }> }> };
+
+export type DexLiquidityPositionsQueryVariables = Exact<{
+  limit: CollectionLimit;
+  filter?: InputMaybe<LiquidityPositionFilter>;
+}>;
+
+
+export type DexLiquidityPositionsQuery = { __typename?: 'QueryRoot', liquidityPositions: { __typename?: 'LiquidityPositionCollection', total: number, items: Array<{ __typename?: 'LiquidityPosition', tradingPairAsset1: string, tradingPairAsset2: string, reserves1Amount: string, reserves2Amount: string, state: LiquidityPositionState, feePercentage: number, updatedAt: any, positionId: string }> } };
+
+export type DexOpenPositionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DexOpenPositionsQuery = { __typename?: 'QueryRoot', dexStats: { __typename?: 'DexStats', openPositions: number } };
+
+export type DexTotalExecutionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DexTotalExecutionsQuery = { __typename?: 'QueryRoot', dexStats: { __typename?: 'DexStats', totalExecutions: number } };
 
 export type IbcStatsQueryVariables = Exact<{
   clientId?: InputMaybe<Scalars['String']['input']>;
@@ -787,6 +906,59 @@ export const ChainParametersDocument = gql`
       epochDuration
       nextEpochIn
     }
+  }
+}
+    `;
+export const DexBlockExecutionsDocument = gql`
+    query DexBlockExecutions($filter: SwapExecutionFilter) {
+  latestExecutions(filter: $filter) {
+    blockHeight
+    timestamp
+    batchSwaps {
+      id
+      executionType
+      totalInputAssetId
+      totalInputAmount
+      totalOutputAssetId
+      totalOutputAmount
+      individualSwaps {
+        routeSteps {
+          assetId
+          amount
+        }
+      }
+    }
+  }
+}
+    `;
+export const DexLiquidityPositionsDocument = gql`
+    query DexLiquidityPositions($limit: CollectionLimit!, $filter: LiquidityPositionFilter) {
+  liquidityPositions(limit: $limit, filter: $filter) {
+    items {
+      tradingPairAsset1
+      tradingPairAsset2
+      reserves1Amount
+      reserves2Amount
+      state
+      feePercentage
+      updatedAt
+      positionId
+    }
+    total
+  }
+}
+    `;
+export const DexOpenPositionsDocument = gql`
+    query DexOpenPositions {
+  dexStats {
+    openPositions
+  }
+}
+    `;
+export const DexTotalExecutionsDocument = gql`
+    query DexTotalExecutions {
+  dexStats {
+    totalExecutions
   }
 }
     `;

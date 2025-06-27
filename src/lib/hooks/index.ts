@@ -1,3 +1,4 @@
+export { default as useAsset } from './useAsset'
 export { default as useDebounce } from './useDebounce'
 export { default as useDocumentVisible } from './useDocumentVisible'
 export { default as useGetMetadata } from './useGetMetadata'

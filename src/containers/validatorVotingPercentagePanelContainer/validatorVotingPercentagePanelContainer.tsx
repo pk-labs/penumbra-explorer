@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import NumberPanel from '../../components/panels/numberPanel'
+import { NumberPanel } from '@/components'
 import ValidatorVotingPercentagePanelLoader from './validatorVotingPercentagePanelLoader'
 
 export interface Props {

@@ -15,6 +15,17 @@ type AssetId {
     inner: String!
 }
 
+type BatchSwap {
+    executionType: String!
+    id: Int!
+    individualSwaps: [IndividualSwap!]!
+    individualSwapsCount: Int!
+    totalInputAmount: String!
+    totalInputAssetId: String!
+    totalOutputAmount: String!
+    totalOutputAssetId: String!
+}
+
 type Block {
     chainId: String
     createdAt: DateTime!
@@ -91,6 +102,11 @@ type DbRawTransaction {
     txHashHex: String!
 }
 
+type DexStats {
+    openPositions: Int!
+    totalExecutions: Int!
+}
+
 type Event {
     type: String!
     value: String!
@@ -130,6 +146,31 @@ type IbcTransactionUpdate {
     txHash: String!
 }
 
+type IndividualSwap {
+    inputAmount: String!
+    inputAssetId: String!
+    outputAmount: String!
+    outputAssetId: String!
+    routeSteps: [RouteStep!]!
+    swapIndex: Int!
+}
+
+type LiquidityPosition {
+    feePercentage: Float!
+    positionId: String!
+    reserves1Amount: String!
+    reserves2Amount: String!
+    state: LiquidityPositionState!
+    tradingPairAsset1: String!
+    tradingPairAsset2: String!
+    updatedAt: DateTime!
+}
+
+type LiquidityPositionCollection {
+    items: [LiquidityPosition!]!
+    total: Int!
+}
+
 type NotYetSupportedAction {
     debug: String!
 }
@@ -160,8 +201,11 @@ type QueryRoot {
     dbLatestBlock: DbBlock
     dbRawTransaction(txHashHex: String!): DbRawTransaction
     dbRawTransactions(limit: Int, offset: Int): [DbRawTransaction!]!
+    dexStats: DexStats!
     ibcStats(clientId: String, limit: Int, offset: Int, timePeriod: TimePeriod): [IbcStats!]!
     ibcTotalShieldedVolume: TotalShieldedVolume!
+    latestExecutions(filter: SwapExecutionFilter): [SwapExecution!]!
+    liquidityPositions(filter: LiquidityPositionFilter, limit: CollectionLimit!): LiquidityPositionCollection!
     search(slug: String!): SearchResult
     stats: Stats!
     transaction(hash: String!): Transaction
@@ -181,6 +225,12 @@ type Root {
     transactionCount: TransactionCountUpdate!
     transactions: TransactionUpdate!
     validatorBlocks(validatorId: String!): ValidatorBlockUpdate!
+}
+
+type RouteStep {
+    amount: String!
+    assetId: String!
+    routeStep: Int!
 }
 
 type Spend {
@@ -209,6 +259,12 @@ type StakingParameters {
 
 type Stats {
     totalTransactionsCount: Int!
+}
+
+type SwapExecution {
+    batchSwaps: [BatchSwap!]!
+    blockHeight: Int!
+    timestamp: DateTime!
 }
 
 type TotalShieldedVolume {
@@ -339,6 +395,18 @@ enum IbcStatus {
     UNKNOWN
 }
 
+enum LiquidityPositionState {
+    CLOSED
+    EXECUTING
+    OPEN
+    WITHDRAWN
+}
+
+enum LiquidityPositionStateFilter {
+    CLOSED
+    OPEN
+}
+
 enum TimePeriod {
     ALL
     DAY
@@ -373,6 +441,14 @@ input BlockFilter {
 input CollectionLimit {
     length: Int
     offset: Int
+}
+
+input LiquidityPositionFilter {
+    state: LiquidityPositionStateFilter
+}
+
+input SwapExecutionFilter {
+    height: Int
 }
 
 input TransactionFilter {

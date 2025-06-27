@@ -22,7 +22,7 @@ const Table: FC<Props> = props => (
         )}
     >
         {props.header}
-        <div className="flex-1 overflow-x-auto">
+        <div className="scroll-area-component flex-1 overflow-x-auto">
             <table className="w-full">{props.children}</table>
         </div>
         {props.footer}

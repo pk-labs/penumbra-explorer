@@ -120,6 +120,75 @@ export const ChainParametersDocument = gql`
 export function useChainParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.ChainParametersQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ChainParametersQuery, Types.ChainParametersQueryVariables>({ query: Types.ChainParametersDocument, ...options });
 };
+export const DexBlockExecutionsDocument = gql`
+    query DexBlockExecutions($filter: SwapExecutionFilter) {
+  latestExecutions(filter: $filter) {
+    blockHeight
+    timestamp
+    batchSwaps {
+      id
+      executionType
+      totalInputAssetId
+      totalInputAmount
+      totalOutputAssetId
+      totalOutputAmount
+      individualSwaps {
+        routeSteps {
+          assetId
+          amount
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useDexBlockExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexBlockExecutionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexBlockExecutionsQuery, Types.DexBlockExecutionsQueryVariables>({ query: Types.DexBlockExecutionsDocument, ...options });
+};
+export const DexLiquidityPositionsDocument = gql`
+    query DexLiquidityPositions($limit: CollectionLimit!, $filter: LiquidityPositionFilter) {
+  liquidityPositions(limit: $limit, filter: $filter) {
+    items {
+      tradingPairAsset1
+      tradingPairAsset2
+      reserves1Amount
+      reserves2Amount
+      state
+      feePercentage
+      updatedAt
+      positionId
+    }
+    total
+  }
+}
+    `;
+
+export function useDexLiquidityPositionsQuery(options: Omit<Urql.UseQueryArgs<Types.DexLiquidityPositionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexLiquidityPositionsQuery, Types.DexLiquidityPositionsQueryVariables>({ query: Types.DexLiquidityPositionsDocument, ...options });
+};
+export const DexOpenPositionsDocument = gql`
+    query DexOpenPositions {
+  dexStats {
+    openPositions
+  }
+}
+    `;
+
+export function useDexOpenPositionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexOpenPositionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexOpenPositionsQuery, Types.DexOpenPositionsQueryVariables>({ query: Types.DexOpenPositionsDocument, ...options });
+};
+export const DexTotalExecutionsDocument = gql`
+    query DexTotalExecutions {
+  dexStats {
+    totalExecutions
+  }
+}
+    `;
+
+export function useDexTotalExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexTotalExecutionsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.DexTotalExecutionsQuery, Types.DexTotalExecutionsQueryVariables>({ query: Types.DexTotalExecutionsDocument, ...options });
+};
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String, $timePeriod: TimePeriod) {
   ibcStats(clientId: $clientId, timePeriod: $timePeriod) {

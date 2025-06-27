@@ -47,7 +47,7 @@ const RootLayout: FC<Props> = props => (
     <html className="overflow-x-hidden" lang="en">
         <body
             className={classNames(
-                'relative flex flex-col justify-start gap-10',
+                'scroll-area-page relative flex flex-col justify-start gap-10',
                 'overflow-x-hidden'
             )}
         >

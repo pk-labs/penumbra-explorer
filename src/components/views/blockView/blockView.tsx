@@ -1,13 +1,21 @@
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs'
-import { TransformedBlockFragment } from '@/lib/types'
+import {
+    TransformedBlockFragment,
+    TransformedDexSwapExecution,
+} from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
-import { CopyToClipboard, JsonTree, TransactionTable } from '../../index'
+import CopyToClipboard from '../../copyToClipboard'
+import DexSwapExecution from '../../dexSwapExecution'
+import JsonTree from '../../jsonTree'
 import { Parameter, Parameters } from '../../parameters'
+import Subsection from '../../subsection'
+import { TransactionTable } from '../../tables'
 import { View, ViewProps } from '../view'
 
 export interface Props extends Pick<ViewProps, 'className'> {
     block: TransformedBlockFragment
+    swapExecutions: TransformedDexSwapExecution[]
 }
 
 const BlockView: FC<Props> = props => (
@@ -17,6 +25,12 @@ const BlockView: FC<Props> = props => (
             'to-[rgba(83,174,168,0.03)]!',
             props.className
         )}
+        nextHref={
+            props.block.height > 1
+                ? `/block/${props.block.height - 1}`
+                : undefined
+        }
+        prevHref={`/block/${props.block.height + 1}`}
         title="Block view"
     >
         <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
@@ -38,9 +52,27 @@ const BlockView: FC<Props> = props => (
         </Parameters>
         <TransactionTable
             className="rounded-sm p-0 backdrop-blur-none"
-            emptyStateMessage="This block contains no transactions"
             transactions={props.block.transactions}
         />
+        {props.swapExecutions.length > 0 && (
+            <Subsection title="Executions">
+                <div>
+                    {props.swapExecutions.map(execution => (
+                        <DexSwapExecution
+                            key={execution.id}
+                            {...execution}
+                            className={classNames(
+                                'not-last:not-only:border-b-other-tonalStroke',
+                                'not-first:not-last:rounded-none',
+                                'not-last:not-only:border-b-1',
+                                'first:not-only:rounded-b-none',
+                                'last:not-only:rounded-t-none'
+                            )}
+                        />
+                    ))}
+                </div>
+            </Subsection>
+        )}
         {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
     </View>
 )

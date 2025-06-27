@@ -106,10 +106,7 @@ const IbcTable: FC<Props> = props => {
                             </TableCell>
                             <TableCell className="h-20">
                                 <span className="text-base font-normal">
-                                    <TimeAgo
-                                        initialTimeAgo={client.initialTimeAgo}
-                                        timestamp={client.timestamp}
-                                    />
+                                    <TimeAgo timestamp={client.timestamp} />
                                 </span>
                             </TableCell>
                             <TableCell className="h-20">

@@ -1,0 +1,5 @@
+query DexTotalExecutions {
+    dexStats {
+        totalExecutions
+    }
+}

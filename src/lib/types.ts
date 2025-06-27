@@ -1,5 +1,6 @@
 import {
     BlockFragment,
+    DexLiquidityPositionsQuery,
     IbcStatsQuery,
     IbcStatus,
     PartialBlockFragment,
@@ -16,7 +17,6 @@ export interface TransformedBlockFragment
 
 export interface TransformedPartialBlockFragment
     extends Pick<PartialBlockFragment, 'height' | 'transactionsCount'> {
-    initialTimeAgo: string
     timestamp: number
 }
 
@@ -36,7 +36,6 @@ export interface TransformedPartialTransactionFragment
     extends Pick<PartialTransactionFragment, 'hash' | 'raw'> {
     actionCount: number
     blockHeight: number
-    initialTimeAgo: string
     primaryAction?: ActionType
     status: IbcStatus
     timestamp: number
@@ -48,13 +47,49 @@ export interface TransformedIbcStats
         'clientId' | 'lastUpdated'
     > {
     id: string
-    initialTimeAgo: string
     timestamp: number
 }
 
 export interface ValidatorBlock {
     height: number
     signed?: boolean
+}
+
+export interface TransformedDexBlockExecution {
+    height: number
+    swapExecutions: TransformedDexSwapExecution[]
+    timestamp: number
+}
+
+export interface TransformedDexSwapExecution {
+    arb?: boolean
+    baseAmount: number
+    baseAssetId: string
+    id: number
+    quoteAmount: number
+    quoteAssetId: string
+    routes: DexExecutionRoute[]
+}
+
+type DexExecutionRoute = DexExecutionHop[]
+
+export interface DexExecutionHop {
+    amount: number
+    assetId: string
+}
+
+export interface TransformedDexPosition
+    extends Pick<
+        DexLiquidityPositionsQuery['liquidityPositions']['items'][number],
+        'state'
+    > {
+    baseAssetId: string
+    baseReserve: number
+    fee: number
+    id: string
+    quoteAssetId: string
+    quoteReserve: number
+    timestamp: number
 }
 
 // TODO: Refactor value names to pascal case

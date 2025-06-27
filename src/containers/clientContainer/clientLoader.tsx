@@ -65,10 +65,7 @@ const ClientLoader: FC<Props> = async props => {
                 <div className="flex flex-col gap-4">
                     <Parameters>
                         <Parameter name="Last tx time">
-                            <TimeAgo
-                                initialTimeAgo={client.initialTimeAgo}
-                                timestamp={client.timestamp}
-                            />
+                            <TimeAgo timestamp={client.timestamp} />
                         </Parameter>
                     </Parameters>
                     <Parameters>

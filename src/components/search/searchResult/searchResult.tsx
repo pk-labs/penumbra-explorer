@@ -79,7 +79,7 @@ const SearchResult: FC<Props> = props => {
                         fallbackLetter
                     />
                     {props.searchResult.name ??
-                        shortenHash(props.searchResult.id)}
+                        shortenHash(props.searchResult.id, 16)}
                 </Link>
             )
             break
@@ -92,7 +92,7 @@ const SearchResult: FC<Props> = props => {
     return (
         <li
             className={classNames(
-                'transition-background rounded-sm duration-200',
+                'rounded-sm transition-colors duration-200',
                 'hover:bg-action-hoverOverlay ease-out'
             )}
         >

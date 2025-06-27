@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react'
 import useDebounce from './useDebounce'
 
 describe('useDebounce', () => {
-    test('debounces a value', () => {
+    test('debounces a value', async () => {
         const { rerender, result } = renderHook(
             ({ value }) => useDebounce(value, 500),
             { initialProps: { value: 'foo' } }
@@ -41,7 +41,7 @@ describe('useDebounce', () => {
         expect(func).toHaveBeenCalledWith(10)
     })
 
-    it('can be canceled', () => {
+    test('can be canceled', async () => {
         const func = jest.fn()
 
         const { result } = renderHook(() => useDebounce(func, 300))

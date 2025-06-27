@@ -14,6 +14,7 @@ interface Props extends Omit<PenumbraButtonProps, 'icon'> {
     externalLink?: boolean
     href?: string
     icon?: keyof typeof icons
+    scroll?: boolean
 }
 
 const Button: FC<Props> = ({
@@ -21,15 +22,17 @@ const Button: FC<Props> = ({
     externalLink,
     href,
     icon,
+    scroll,
     ...props
 }) =>
     href ? (
         <Link
             className={classNames('outline-none', className)}
             href={href}
+            scroll={scroll}
             target={externalLink ? '_blank' : undefined}
         >
-            {/* @ts-expect-error iconOnly typing */}
+            {/* @ts-expect-error icon typing */}
             <PenumbraButton
                 icon={
                     externalLink
@@ -43,12 +46,8 @@ const Button: FC<Props> = ({
         </Link>
     ) : (
         <span className={classNames('outline-none', className)}>
-            {/* @ts-expect-error iconOnly typing */}
-            <PenumbraButton
-                icon={icon && icons[icon]}
-                iconOnly={Boolean(props.iconOnly)}
-                {...props}
-            />
+            {/* @ts-expect-error icon typing */}
+            <PenumbraButton icon={icon && icons[icon]} {...props} />
         </span>
     )
 
