@@ -1,12 +1,14 @@
 import { getByText, render } from '@testing-library/react'
+import { useAsset } from '@/lib/hooks'
 
+jest.mock('../../lib/hooks/useAsset/useAsset')
 jest.mock('../skeleton/skeleton', () => () => <div>Skeleton</div>)
 
 describe('AssetValue', () => {
-    beforeEach(jest.resetModules)
+    const mockedUseAsset = jest.mocked(useAsset)
 
     test('renders skeleton when registry is loading', async () => {
-        jest.doMock('../../lib/hooks/useAsset/useAsset', () => () => undefined)
+        mockedUseAsset.mockImplementationOnce(() => undefined)
 
         const { default: AssetValue } = await import('./assetValue')
         const { container } = render(<AssetValue amount={0} assetId="foo" />)
@@ -15,7 +17,7 @@ describe('AssetValue', () => {
     })
 
     test('renders NA when an asset is null', async () => {
-        jest.doMock('../../lib/hooks/useAsset/useAsset', () => () => null)
+        mockedUseAsset.mockImplementationOnce(() => null)
 
         const { default: AssetValue } = await import('./assetValue')
         const { container } = render(<AssetValue amount={0} assetId="foo" />)
@@ -24,10 +26,8 @@ describe('AssetValue', () => {
     })
 
     test('applies CSS classes', async () => {
-        jest.doMock(
-            '../../lib/hooks/useAsset/useAsset',
-            () => (id: string) => ({ symbol: id })
-        )
+        // @ts-expect-error
+        mockedUseAsset.mockImplementationOnce((id: string) => ({ symbol: id }))
 
         const { default: AssetValue } = await import('./assetValue')
 
