@@ -16,8 +16,9 @@ const DexExecutionLoader: FC<Props> = async props => {
     return (
         <section
             className={classNames(
-                'bg-other-tonalFill5 flex flex-col gap-10 rounded-lg py-6 pl-6',
-                'backdrop-blur-lg lg:overflow-y-hidden',
+                'bg-other-tonalFill5 scroll-area-component flex flex-col',
+                'gap-10 rounded-lg py-6 pr-0.5 pl-6 backdrop-blur-lg',
+                'lg:overflow-y-hidden',
                 props.className
             )}
         >
@@ -25,7 +26,8 @@ const DexExecutionLoader: FC<Props> = async props => {
             {blockExecutions.length ? (
                 <ul
                     className={classNames(
-                        'flex flex-col gap-10 pr-6 lg:h-[1064px] lg:overflow-y-auto'
+                        'scroll-area-component flex flex-col gap-10 pr-5.5',
+                        'lg:h-[1064px] lg:overflow-y-auto'
                     )}
                 >
                     {blockExecutions.map(blockExecution => (

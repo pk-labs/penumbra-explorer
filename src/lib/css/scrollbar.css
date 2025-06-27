@@ -1,0 +1,52 @@
+/**
+  Utility classes for scroll management.
+  - Use .scroll-area-page for page-level scroll areas, usually on body element.
+  - Use .scroll-area-component for component-level scroll areas.
+
+  Note that the styles can work only in WebKit browsers.
+ */
+.scroll-area-page::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll-area-page::-webkit-scrollbar-track {
+    backdrop-filter: blur(16px);
+    background: transparent;
+}
+
+.scroll-area-page::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    background-clip: content-box;
+    background-color: #fafafa1a;
+}
+
+.scroll-area-page::-webkit-scrollbar-thumb:hover {
+    border-right: none;
+    border-left: none;
+    background-color: #a3a3a3;
+}
+
+.scroll-area-component::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll-area-component::-webkit-scrollbar-track {
+    backdrop-filter: blur(16px);
+    background: transparent;
+}
+
+.scroll-area-component::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    border-right: 2px solid transparent;
+    border-left: 2px solid transparent;
+    background-clip: content-box;
+    background-color: #fafafa1a;
+}
+
+.scroll-area-component::-webkit-scrollbar-thumb:hover {
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    background-color: #a3a3a3;
+}

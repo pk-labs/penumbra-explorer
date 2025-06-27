@@ -44,7 +44,7 @@ const DexSwapExecution: FC<Props> = props => (
         }
         headerClassName="justify-between"
     >
-        <div className="flex flex-col gap-6 overflow-x-auto">
+        <div className="scroll-area-component flex flex-col gap-6 overflow-x-auto">
             {props.routes.map((hops, i) => (
                 <DexExecutionRoute key={i} hops={hops} />
             ))}

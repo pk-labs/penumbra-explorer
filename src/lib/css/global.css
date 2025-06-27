@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./animations.css";
 @import "./colors.css";
+@import "./scrollbar.css";
 @import "./typography.css";
 
 @source "../../../node_modules/@penumbra-zone/ui/dist";
