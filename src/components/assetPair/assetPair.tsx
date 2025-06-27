@@ -1,14 +1,14 @@
 'use client'
 
 import { AssetGroup, AssetGroupProps } from '@penumbra-zone/ui/AssetIcon'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { useAsset } from '@/lib/hooks'
 import { classNames } from '@/lib/utils'
-import Skeleton from '../skeleton'
 
 interface Props extends Pick<AssetGroupProps, 'size'> {
     baseAssetId: string
     className?: string
+    fallback?: ReactNode
     quoteAssetId: string
 }
 
@@ -17,7 +17,7 @@ const AssetPair: FC<Props> = props => {
     const quoteAsset = useAsset(props.quoteAssetId)
 
     if (typeof baseAsset === 'undefined' || typeof quoteAsset === 'undefined') {
-        return <Skeleton className="h-8 w-24" />
+        return props.fallback
     } else if (baseAsset === null || quoteAsset === null) {
         return 'NA'
     }

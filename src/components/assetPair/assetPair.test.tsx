@@ -8,14 +8,18 @@ jest.mock('../skeleton/skeleton', () => () => <div>Skeleton</div>)
 describe('AssetPair', () => {
     const mockedUseAsset = jest.mocked(useAsset)
 
-    test('renders skeleton when registry is loading', async () => {
+    test('renders fallback when registry is loading', async () => {
         mockedUseAsset.mockImplementationOnce(() => undefined)
 
         const { container } = render(
-            <AssetPair baseAssetId="foo" quoteAssetId="bar" />
+            <AssetPair
+                baseAssetId="foo"
+                fallback="fallback"
+                quoteAssetId="bar"
+            />
         )
 
-        getByText(container, 'Skeleton')
+        getByText(container, 'fallback')
     })
 
     // FXIME: Fails even though almost identical test in assetValue passes

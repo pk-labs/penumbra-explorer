@@ -32,6 +32,12 @@ const DexPositionTable: FC<Props> = ({ positions, ...props }) => (
                         <TableCell className="h-20">
                             <AssetPair
                                 baseAssetId={position.baseAssetId}
+                                fallback={
+                                    <span className="inline-flex items-center gap-2">
+                                        <Skeleton className="h-8 w-8 rounded-full" />
+                                        <Skeleton className="h-5 w-14" />
+                                    </span>
+                                }
                                 quoteAssetId={position.quoteAssetId}
                                 size="lg"
                             />
