@@ -6,22 +6,28 @@ import {
     ValueViewComponent,
     ValueViewComponentProps,
 } from '@penumbra-zone/ui/ValueView'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { useAsset } from '@/lib/hooks'
-import Skeleton from '../skeleton'
 
 interface Props
     extends Omit<ValueViewComponentProps<'default' | 'table'>, 'valueView'> {
     amount: number
     assetId: string
     className?: string
+    fallback?: ReactNode
 }
 
-const AssetValue: FC<Props> = ({ amount, assetId, className, ...props }) => {
+const AssetValue: FC<Props> = ({
+    amount,
+    assetId,
+    className,
+    fallback,
+    ...props
+}) => {
     const asset = useAsset(assetId)
 
     if (typeof asset === 'undefined') {
-        return <Skeleton className="h-5 w-16" />
+        return fallback
     } else if (asset === null) {
         return 'NA'
     }

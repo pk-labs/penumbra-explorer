@@ -5,6 +5,7 @@ import { classNames } from '@/lib/utils'
 import AssetValue from '../assetValue'
 import Collapsible from '../collapsible'
 import { Pill } from '../pill'
+import Skeleton from '../skeleton'
 import DexExecutionRoute from './dexExecutionRoute'
 
 interface Props extends TransformedDexSwapExecution {
@@ -21,12 +22,18 @@ const DexSwapExecution: FC<Props> = props => (
                         amount={props.baseAmount}
                         assetId={props.baseAssetId}
                         density="slim"
+                        fallback={
+                            <Skeleton className="h-7 w-25 rounded-full" />
+                        }
                     />
                     <ArrowRightIcon size={12} />
                     <AssetValue
                         amount={props.quoteAmount}
                         assetId={props.quoteAssetId}
                         density="slim"
+                        fallback={
+                            <Skeleton className="h-7 w-25 rounded-full" />
+                        }
                     />
                 </span>
                 <span className="flex items-center gap-2">

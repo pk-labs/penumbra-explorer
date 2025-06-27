@@ -6,6 +6,7 @@ import { classNames, shortenHash } from '@/lib/utils'
 import AssetPair from '../../assetPair'
 import AssetValue from '../../assetValue'
 import EmptyState from '../../emptyState'
+import Skeleton from '../../skeleton'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -42,6 +43,9 @@ const DexPositionTable: FC<Props> = ({ positions, ...props }) => (
                                     assetId={position.baseAssetId}
                                     context="table"
                                     density="compact"
+                                    fallback={
+                                        <Skeleton className="mb-1 h-5 w-23" />
+                                    }
                                     showIcon={false}
                                 />
                                 <AssetValue
@@ -49,6 +53,7 @@ const DexPositionTable: FC<Props> = ({ positions, ...props }) => (
                                     assetId={position.quoteAssetId}
                                     context="table"
                                     density="compact"
+                                    fallback={<Skeleton className="h-5 w-23" />}
                                     showIcon={false}
                                 />
                             </span>

@@ -8,12 +8,14 @@ jest.mock('../skeleton/skeleton', () => () => <div>Skeleton</div>)
 describe('AssetValue', () => {
     const mockedUseAsset = jest.mocked(useAsset)
 
-    test('renders skeleton when registry is loading', async () => {
+    test('renders fallback when registry is loading', async () => {
         mockedUseAsset.mockImplementationOnce(() => undefined)
 
-        const { container } = render(<AssetValue amount={0} assetId="foo" />)
+        const { container } = render(
+            <AssetValue amount={0} assetId="foo" fallback="bar" />
+        )
 
-        getByText(container, 'Skeleton')
+        getByText(container, 'bar')
     })
 
     test('renders NA when an asset is null', async () => {
