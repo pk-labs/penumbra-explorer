@@ -1,7 +1,7 @@
 // istanbul ignore file
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { FC } from 'react'
 import { classNames, formatNumber } from '@/lib/utils'
 import Button from '../button'
@@ -15,6 +15,21 @@ interface Props {
 
 const Pagination: FC<Props> = props => {
     const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const prevSearchParams = new URLSearchParams(searchParams)
+    const nextSearchParams = new URLSearchParams(searchParams)
+
+    if (props.page > 2) {
+        prevSearchParams.set('page', String(props.page - 1))
+    } else {
+        prevSearchParams.delete('page')
+    }
+
+    if (props.page < props.totalPages) {
+        nextSearchParams.set('page', String(props.page + 1))
+    } else {
+        nextSearchParams.set('page', String(props.totalPages))
+    }
 
     return (
         <div
@@ -27,11 +42,7 @@ const Pagination: FC<Props> = props => {
                 className="font-normal"
                 density="compact"
                 disabled={props.page <= 1}
-                href={
-                    props.page > 2
-                        ? `${pathname}?page=${props.page - 1}`
-                        : pathname
-                }
+                href={`${pathname}${prevSearchParams.size ? `?${prevSearchParams}` : ''}`}
                 scroll={false}
             >
                 Prev
@@ -48,11 +59,7 @@ const Pagination: FC<Props> = props => {
                 className="font-normal"
                 density="compact"
                 disabled={props.page >= props.totalPages}
-                href={
-                    props.page < props.totalPages
-                        ? `${pathname}?page=${props.page + 1}`
-                        : `${pathname}?page=${props.totalPages}`
-                }
+                href={`${pathname}${nextSearchParams.size ? `?${nextSearchParams}` : ''}`}
                 scroll={false}
             >
                 Next
