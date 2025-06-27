@@ -8,6 +8,7 @@ import {
     TableCell,
     TableRow,
 } from '@/components'
+import { LiquidityPositionFilter } from '@/lib/graphql/generated/types'
 import DexPositionTableLoader from './dexPositionTableLoader'
 
 export interface Props
@@ -17,11 +18,15 @@ export interface Props
         offset?: number
     }
     pagination?: boolean
+    stateFilter: LiquidityPositionFilter['state']
 }
 
 const DexPositionTableContainer: FC<Props> = props => (
     <Suspense
-        key={JSON.stringify(props.limit)}
+        key={JSON.stringify({
+            limit: props.limit,
+            stateFilter: props.stateFilter,
+        })}
         fallback={
             <Table
                 className={props.className}

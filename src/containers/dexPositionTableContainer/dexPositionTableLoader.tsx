@@ -8,9 +8,12 @@ import { Props } from './dexPositionTableContainer'
 const DexPositionTableLoader: FC<Props> = async ({
     limit,
     pagination,
+    stateFilter,
     ...props
 }) => {
-    const { positions, total } = await getDexLiquidityPositions(limit)
+    const { positions, total } = await getDexLiquidityPositions(limit, {
+        state: stateFilter,
+    })
 
     return (
         <DexPositionTable

@@ -13,6 +13,7 @@ import {
     DexPositionPanelContainer,
     DexPositionTableContainer,
 } from '@/containers'
+import { LiquidityPositionStateFilter } from '@/lib/graphql/generated/types'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata('Dex', 'TODO: Description', '/dex')
@@ -61,6 +62,11 @@ const DexPage: FC<Props> = async props => {
                         </div>
                     }
                     limit={{ length, offset }}
+                    stateFilter={
+                        searchParams.filter === 'closed'
+                            ? LiquidityPositionStateFilter.Closed
+                            : LiquidityPositionStateFilter.Open
+                    }
                     pagination
                 />
             </div>

@@ -233,11 +233,20 @@ export type LiquidityPositionCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type LiquidityPositionFilter = {
+  state?: InputMaybe<LiquidityPositionStateFilter>;
+};
+
 export enum LiquidityPositionState {
   Closed = 'CLOSED',
   Executing = 'EXECUTING',
   Open = 'OPEN',
   Withdrawn = 'WITHDRAWN'
+}
+
+export enum LiquidityPositionStateFilter {
+  Closed = 'CLOSED',
+  Open = 'OPEN'
 }
 
 export type NotYetSupportedAction = {
@@ -336,6 +345,7 @@ export type QueryRootLatestExecutionsArgs = {
 
 
 export type QueryRootLiquidityPositionsArgs = {
+  filter?: InputMaybe<LiquidityPositionFilter>;
   limit: CollectionLimit;
 };
 
@@ -658,6 +668,7 @@ export type DexBlockExecutionsQuery = { __typename?: 'QueryRoot', latestExecutio
 
 export type DexLiquidityPositionsQueryVariables = Exact<{
   limit: CollectionLimit;
+  filter?: InputMaybe<LiquidityPositionFilter>;
 }>;
 
 
@@ -921,8 +932,8 @@ export const DexBlockExecutionsDocument = gql`
 }
     `;
 export const DexLiquidityPositionsDocument = gql`
-    query DexLiquidityPositions($limit: CollectionLimit!) {
-  liquidityPositions(limit: $limit) {
+    query DexLiquidityPositions($limit: CollectionLimit!, $filter: LiquidityPositionFilter) {
+  liquidityPositions(limit: $limit, filter: $filter) {
     items {
       tradingPairAsset1
       tradingPairAsset2

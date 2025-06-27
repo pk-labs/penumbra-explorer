@@ -205,7 +205,7 @@ type QueryRoot {
     ibcStats(clientId: String, limit: Int, offset: Int, timePeriod: TimePeriod): [IbcStats!]!
     ibcTotalShieldedVolume: TotalShieldedVolume!
     latestExecutions(filter: SwapExecutionFilter): [SwapExecution!]!
-    liquidityPositions(limit: CollectionLimit!): LiquidityPositionCollection!
+    liquidityPositions(filter: LiquidityPositionFilter, limit: CollectionLimit!): LiquidityPositionCollection!
     search(slug: String!): SearchResult
     stats: Stats!
     transaction(hash: String!): Transaction
@@ -402,6 +402,11 @@ enum LiquidityPositionState {
     WITHDRAWN
 }
 
+enum LiquidityPositionStateFilter {
+    CLOSED
+    OPEN
+}
+
 enum TimePeriod {
     ALL
     DAY
@@ -436,6 +441,10 @@ input BlockFilter {
 input CollectionLimit {
     length: Int
     offset: Int
+}
+
+input LiquidityPositionFilter {
+    state: LiquidityPositionStateFilter
 }
 
 input SwapExecutionFilter {

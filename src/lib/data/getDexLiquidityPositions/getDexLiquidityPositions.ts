@@ -4,12 +4,14 @@ import {
     CollectionLimit,
     DexLiquidityPositionsQuery,
     DexLiquidityPositionsQueryVariables,
+    LiquidityPositionFilter,
 } from '@/lib/graphql/generated/types'
 import { dexLiquidityPositionsQuery } from '@/lib/graphql/queries'
 import { TransformedDexPosition } from '@/lib/types'
 
 const getDexLiquidityPositions = async (
-    limit: CollectionLimit
+    limit: CollectionLimit,
+    filter?: LiquidityPositionFilter
 ): Promise<{
     positions: TransformedDexPosition[]
     total: number
@@ -20,7 +22,7 @@ const getDexLiquidityPositions = async (
         .query<
             DexLiquidityPositionsQuery,
             DexLiquidityPositionsQueryVariables
-        >(dexLiquidityPositionsQuery, { limit })
+        >(dexLiquidityPositionsQuery, { filter, limit })
         .toPromise()
 
     if (result.error) {

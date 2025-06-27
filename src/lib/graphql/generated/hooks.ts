@@ -147,8 +147,8 @@ export function useDexBlockExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Type
   return Urql.useQuery<Types.DexBlockExecutionsQuery, Types.DexBlockExecutionsQueryVariables>({ query: Types.DexBlockExecutionsDocument, ...options });
 };
 export const DexLiquidityPositionsDocument = gql`
-    query DexLiquidityPositions($limit: CollectionLimit!) {
-  liquidityPositions(limit: $limit) {
+    query DexLiquidityPositions($limit: CollectionLimit!, $filter: LiquidityPositionFilter) {
+  liquidityPositions(limit: $limit, filter: $filter) {
     items {
       tradingPairAsset1
       tradingPairAsset2
