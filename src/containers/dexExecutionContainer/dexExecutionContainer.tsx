@@ -14,7 +14,7 @@ const DexExecutionContainer: FC<Props> = props => (
             <section
                 className={classNames(
                     'bg-other-tonalFill5 flex flex-col gap-10 rounded-lg p-6',
-                    'backdrop-blur-lg',
+                    'backdrop-blur-lg lg:w-[550px]',
                     props.className
                 )}
             >

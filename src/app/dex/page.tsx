@@ -47,7 +47,7 @@ const DexPage: FC<Props> = async props => {
                 <DexPositionPanelContainer className="flex-1" />
             </div>
             <div className="mt-4 flex flex-col-reverse gap-4 lg:flex-row">
-                <DexExecutionContainer className="lg:w-[550px]" />
+                <DexExecutionContainer />
                 <DexPositionTableContainer
                     className="lg:min-w-0 lg:flex-1"
                     header={

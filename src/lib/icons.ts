@@ -10,7 +10,9 @@ import {
     ExternalLinkIcon,
     HomeIcon,
     Link2Icon,
+    MaximizeIcon,
     MenuIcon,
+    MinimizeIcon,
     SearchIcon,
     XIcon,
 } from 'lucide-react'
@@ -28,7 +30,9 @@ export default {
     ExternalLink: ExternalLinkIcon,
     Home: HomeIcon,
     Link2: Link2Icon,
+    Maximize: MaximizeIcon,
     Menu: MenuIcon,
+    Minimize: MinimizeIcon,
     Search: SearchIcon,
     X: XIcon,
 }

@@ -1,10 +1,9 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { DexBlockExecution, EmptyState } from '@/components'
 import { getDexBlockExecutions } from '@/lib/data'
-import { classNames } from '@/lib/utils'
 import { Props } from './dexExecutionContainer'
+import DexExecutionSection from './dexExecutionSection'
 
 const DexExecutionLoader: FC<Props> = async props => {
     const blockExecutions = await getDexBlockExecutions()
@@ -13,34 +12,7 @@ const DexExecutionLoader: FC<Props> = async props => {
         notFound()
     }
 
-    return (
-        <section
-            className={classNames(
-                'bg-other-tonalFill5 scroll-area-component flex flex-col',
-                'gap-10 rounded-lg py-6 pr-0.5 pl-6 backdrop-blur-lg',
-                'lg:overflow-y-hidden',
-                props.className
-            )}
-        >
-            <h2 className="text-2xl font-medium">Latest executions</h2>
-            {blockExecutions.length ? (
-                <ul
-                    className={classNames(
-                        'scroll-area-component flex flex-col gap-10 pr-5.5',
-                        'lg:h-[1064px] lg:overflow-y-auto'
-                    )}
-                >
-                    {blockExecutions.map(blockExecution => (
-                        <li key={blockExecution.height}>
-                            <DexBlockExecution {...blockExecution} />
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <EmptyState title="No executions" />
-            )}
-        </section>
-    )
+    return <DexExecutionSection {...props} blockExecutions={blockExecutions} />
 }
 
 export default DexExecutionLoader
