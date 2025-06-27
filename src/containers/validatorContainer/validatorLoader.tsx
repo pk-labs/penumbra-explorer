@@ -48,15 +48,17 @@ const ValidatorLoader: FC<Props> = async props => {
                             <a
                                 className={classNames(
                                     'text-text-secondary',
-                                    'hover:text-text-special inline-flex',
-                                    'items-center gap-2 text-xs'
+                                    'hover:text-text-special text-xs break-all'
                                 )}
                                 href={validator.website}
                                 rel="nofollow"
                                 target="_blank"
                             >
                                 {validator.website}
-                                <ExternalLinkIcon size={14} />
+                                <ExternalLinkIcon
+                                    className="-mt-1 ml-2 inline-block"
+                                    size={14}
+                                />
                             </a>
                         )}
                     </span>
