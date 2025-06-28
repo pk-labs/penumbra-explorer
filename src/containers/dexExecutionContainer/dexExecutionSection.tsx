@@ -29,7 +29,7 @@ const DexExecutionSection: FC<Props> = props => {
             <div className="flex justify-between gap-2">
                 <h2 className="text-2xl font-medium">Latest executions</h2>
                 <Button
-                    className="mr-6"
+                    className="mr-6 hidden lg:block"
                     density="compact"
                     icon={maximized ? 'Minimize' : 'Maximize'}
                     onClick={toggleMaximized}
