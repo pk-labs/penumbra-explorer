@@ -49,7 +49,7 @@ const DexSwapExecution: FC<Props> = props => (
                 </span>
             </>
         }
-        headerClassName="justify-between"
+        headerClassName="justify-between gap-4"
     >
         <div className="scroll-area-component flex flex-col gap-6 overflow-x-auto">
             {props.routes.map((hops, i) => (
