@@ -17,7 +17,7 @@ import { LiquidityPositionStateFilter } from '@/lib/graphql/generated/types'
 import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
-    'Dex',
+    'DEX',
     'Explore DEX liquidity positions and swap executions on the Penumbra ' +
         'blockchain. View liquidity reserves, fee tier, execution routes and ' +
         'more on Noctis - a fast, secure, and privacy-focused explorer built ' +
