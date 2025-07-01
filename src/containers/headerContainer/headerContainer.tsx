@@ -14,7 +14,7 @@ const HeaderContainer: FC<Props> = props => (
     <Container
         as="header"
         className={classNames(
-            'grid h-19 grid-cols-2 items-center lg:grid-cols-3',
+            'grid h-19 grid-cols-2 items-center xl:grid-cols-3',
             props.className
         )}
     >
@@ -23,7 +23,7 @@ const HeaderContainer: FC<Props> = props => (
                 <Logo className="max-h-6 w-auto sm:max-h-7" />
             </Link>
         </div>
-        <Tabs className="hidden justify-self-center lg:flex">
+        <Tabs className="hidden justify-self-center xl:flex">
             <Tab href="/">Home</Tab>
             <Tab href="/blocks" paths={['/block']}>
                 Blocks

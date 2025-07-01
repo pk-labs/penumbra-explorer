@@ -28,7 +28,7 @@ const MobileMenu: FC<Props> = props => {
         <Menu
             className={classNames(
                 'relative z-40 rounded-full backdrop-blur-lg',
-                'lg:hidden'
+                'xl:hidden'
             )}
             onClose={closeMenu}
             onOpen={openMenu}
