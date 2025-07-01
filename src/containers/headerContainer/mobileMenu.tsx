@@ -5,6 +5,7 @@ import {
     BlocksIcon,
     BoxIcon,
     CheckCheckIcon,
+    HandshakeIcon,
     HomeIcon,
     SatelliteDishIcon,
 } from 'lucide-react'
@@ -60,6 +61,10 @@ const MobileMenu: FC<Props> = props => {
                     size={16}
                 />
                 DEX
+            </MenuItem>
+            <MenuItem href="/dex">
+                <HandshakeIcon className="stroke-primary-light" size={16} />
+                Governance
             </MenuItem>
         </Menu>
     )
