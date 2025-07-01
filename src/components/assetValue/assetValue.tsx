@@ -29,7 +29,7 @@ const AssetValue: FC<Props> = ({
     if (typeof asset === 'undefined') {
         return fallback
     } else if (asset === null) {
-        return 'NA'
+        return <span>NA</span>
     }
 
     const valueView = new ValueView({
@@ -43,9 +43,9 @@ const AssetValue: FC<Props> = ({
     })
 
     return (
-        <div className={className}>
+        <span className={className}>
             <ValueViewComponent valueView={valueView} {...props} />
-        </div>
+        </span>
     )
 }
 
