@@ -2,7 +2,7 @@ import { BoxIcon } from 'lucide-react'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs/dayjs'
 import { TransformedProposal } from '@/lib/types'
-import { formatNumber } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import ProposalStatePill from '../../proposalStatePill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
@@ -30,7 +30,12 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                     <TableRow key={proposal.id}>
                         <TableCell className="h-20">{proposal.id}</TableCell>
                         <TableCell className="h-20">
-                            <span className="line-clamp-2">
+                            <span
+                                className={classNames(
+                                    'font-default inline-block max-w-60',
+                                    'truncate font-normal'
+                                )}
+                            >
                                 {proposal.title}
                             </span>
                         </TableCell>
@@ -53,7 +58,7 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                                     />
                                     {formatNumber(proposal.blockHeight)}
                                 </span>
-                                <span>
+                                <span className="text-text-secondary text-xs">
                                     {dayjs(proposal.timestamp)
                                         .tz('UTC')
                                         .format('YYYY-MM-DD HH:mm:ss z')}

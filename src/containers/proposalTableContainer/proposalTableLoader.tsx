@@ -2,7 +2,12 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { Pagination, ProposalTable } from '@/components'
-import { TransformedProposal } from '@/lib/types'
+import dayjs from '@/lib/dayjs'
+import {
+    ProposalOutcome,
+    ProposalState,
+    TransformedProposal,
+} from '@/lib/types'
 import { Props } from './proposalTableContainer'
 
 const ProposalTableLoader: FC<Props> = async ({
@@ -12,7 +17,39 @@ const ProposalTableLoader: FC<Props> = async ({
 }) => {
     const proposals = await new Promise<TransformedProposal[]>(resolve =>
         setTimeout(
-            () => resolve([]),
+            () =>
+                resolve(
+                    Array.from({ length: limit.length }).map((_, i) => ({
+                        blockHeight: faker.number.int({
+                            max: 5000000,
+                            min: 4000000,
+                        }),
+                        id: i,
+                        outcome: faker.helpers.arrayElement(
+                            Object.values(ProposalOutcome)
+                        ),
+                        state: faker.helpers.arrayElement(
+                            Object.values(ProposalState)
+                        ),
+                        timestamp: dayjs()
+                            .subtract(
+                                faker.number.int({ max: 60, min: 1 }),
+                                'days'
+                            )
+                            .valueOf(),
+                        title: faker.lorem.sentence({ max: 20, min: 5 }),
+                        type: faker.helpers.arrayElement([
+                            'Unfreeze IBC Client',
+                            'Emergency',
+                            'Parameter change',
+                            'Upgrade plan',
+                        ]),
+                        votes: faker.number.int({
+                            max: 20000000,
+                            min: 1000000,
+                        }),
+                    }))
+                ),
             faker.number.int({ max: 3000, min: 2000 })
         )
     )
