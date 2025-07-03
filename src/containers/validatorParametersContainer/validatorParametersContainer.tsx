@@ -18,7 +18,7 @@ const ValidatorParametersContainer: FC<Props> = props => (
                     props.className
                 )}
             >
-                <h2 className="text-lg">Validator parameters</h2>
+                <h3 className="text-lg">Validator parameters</h3>
                 <Parameters>
                     <Parameter name="Uptime blocks window">
                         <Skeleton className="h-4 w-12" />

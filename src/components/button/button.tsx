@@ -11,6 +11,7 @@ import { classNames } from '@/lib/utils'
 
 interface Props extends Omit<PenumbraButtonProps, 'icon'> {
     className?: string
+    // TODO: Determine automatically by checking for http at the beginning
     externalLink?: boolean
     href?: string
     icon?: keyof typeof icons

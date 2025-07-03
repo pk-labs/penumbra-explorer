@@ -8,7 +8,7 @@ import Surface from '../../components/surface'
 import { Props } from './proposalPanelContainer'
 
 const ProposalPanelLoader: FC<Props> = async props => {
-    const data = await new Promise<any>(resolve =>
+    const proposal = await new Promise<any>(resolve =>
         setTimeout(
             () =>
                 resolve({
@@ -36,13 +36,13 @@ const ProposalPanelLoader: FC<Props> = async props => {
         >
             <header className="flex flex-1 flex-col overflow-hidden">
                 <h3 className="text-text-secondary font-mono text-xs font-medium">
-                    {data.title}
+                    {proposal.title}
                 </h3>
                 <div className="truncate text-lg font-medium">
-                    {data.description}
+                    {proposal.description}
                 </div>
             </header>
-            <ProposalStatePill state={data.state} />
+            <ProposalStatePill state={proposal.state} />
         </Surface>
     )
 }
