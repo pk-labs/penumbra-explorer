@@ -7,7 +7,7 @@ import {
     ProposalPanelContainer,
     ProposalTableContainer,
 } from '@/containers'
-import { generatePageMetadata } from '@/lib/utils'
+import { classNames, generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
     'Governance',
@@ -41,14 +41,21 @@ const GovernancePage: FC<Props> = async props => {
             <div className="grid grid-cols-12 items-start gap-4">
                 <ProposalPanelContainer className="col-span-full" />
                 <ProposalTableContainer
-                    className="col-span-9 flex flex-col gap-6 p-6"
+                    className={classNames(
+                        'col-span-full flex flex-col gap-6 p-6 lg:col-span-8',
+                        'xl:col-span-9'
+                    )}
                     header={
                         <h1 className="text-2xl font-medium">Past proposals</h1>
                     }
                     limit={{ length, offset }}
                     pagination
                 />
-                <GovernanceParametersContainer className="col-span-3" />
+                <GovernanceParametersContainer
+                    className={classNames(
+                        'col-span-full lg:col-span-4 xl:col-span-3'
+                    )}
+                />
             </div>
         </Container>
     )
