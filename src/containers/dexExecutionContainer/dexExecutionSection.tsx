@@ -20,8 +20,7 @@ const DexExecutionSection: FC<Props> = props => {
         <section
             className={classNames(
                 'bg-other-tonalFill5 scroll-area-component flex flex-col',
-                'gap-10 rounded-lg py-6 pr-0.5 pl-6 backdrop-blur-lg',
-                'lg:overflow-y-hidden',
+                'gap-10 rounded-lg p-6 backdrop-blur-lg lg:overflow-y-hidden',
                 maximized ? 'lg:w-3/4' : 'lg:w-[550px]',
                 props.className
             )}
@@ -29,7 +28,7 @@ const DexExecutionSection: FC<Props> = props => {
             <div className="flex justify-between gap-2">
                 <h2 className="text-2xl font-medium">Latest executions</h2>
                 <Button
-                    className="mr-6 hidden lg:block"
+                    className="hidden lg:block"
                     density="compact"
                     icon={maximized ? 'Minimize' : 'Maximize'}
                     onClick={toggleMaximized}
@@ -42,8 +41,8 @@ const DexExecutionSection: FC<Props> = props => {
             {props.blockExecutions.length ? (
                 <ul
                     className={classNames(
-                        'scroll-area-component flex flex-col gap-10 pr-5.5',
-                        'lg:h-[1064px] lg:overflow-y-auto'
+                        'scroll-area-component -mr-6 flex flex-col gap-10 pr-6',
+                        'lg:h-[1160px] lg:overflow-y-auto'
                     )}
                 >
                     {props.blockExecutions.map(blockExecution => (

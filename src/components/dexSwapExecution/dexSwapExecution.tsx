@@ -16,7 +16,12 @@ const DexSwapExecution: FC<Props> = props => (
     <Collapsible
         className={classNames('font-mono text-xs font-medium', props.className)}
         header={
-            <>
+            <span
+                className={classNames(
+                    'scroll-area-component -mb-[7px] inline-flex items-center',
+                    'justify-between gap-4 overflow-x-auto pb-[7px]'
+                )}
+            >
                 <span className="flex items-center gap-1">
                     <AssetValue
                         amount={props.baseAmount}
@@ -47,11 +52,10 @@ const DexSwapExecution: FC<Props> = props => (
                         {props.routes.length === 1 ? 'swap' : 'swaps'}
                     </span>
                 </span>
-            </>
+            </span>
         }
-        headerClassName="justify-between gap-4"
     >
-        <div className="scroll-area-component flex flex-col gap-6 overflow-x-auto">
+        <div className="scroll-area-component -mb-6 flex flex-col gap-6 overflow-x-auto pb-6">
             {props.routes.map((hops, i) => (
                 <DexExecutionRoute key={i} hops={hops} />
             ))}
