@@ -4,6 +4,7 @@ import dayjs from '@/lib/dayjs/dayjs'
 import { TransformedProposal } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
+import ProposalOutcomePill from '../../proposalOutcomePill'
 import ProposalStatePill from '../../proposalStatePill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
@@ -44,7 +45,7 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                             <ProposalStatePill state={proposal.state} />
                         </TableCell>
                         <TableCell className="h-20">
-                            {proposal.outcome}
+                            <ProposalOutcomePill outcome={proposal.outcome} />
                         </TableCell>
                         <TableCell className="h-20">
                             {formatNumber(proposal.votes)} UM
