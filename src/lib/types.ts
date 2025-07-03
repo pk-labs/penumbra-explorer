@@ -137,9 +137,26 @@ export interface TransformedDexPosition
     timestamp: number
 }
 
+export interface TransformedProposal {
+    blockHeight: number
+    id: number
+    outcome: ProposalOutcome
+    state: ProposalState
+    timestamp: number
+    title: string
+    type: string
+    votes: number
+}
+
 export enum ProposalState {
     Claimed = 'claimed',
     Finished = 'finished',
     Voting = 'voting',
     Withdrawn = 'withdrawn',
+}
+
+export enum ProposalOutcome {
+    Failed = 'failed',
+    Passed = 'passed',
+    Slashed = 'slashed',
 }

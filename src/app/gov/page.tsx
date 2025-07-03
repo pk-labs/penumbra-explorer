@@ -1,10 +1,11 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container, Surface } from '@/components'
+import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
     GovernanceParametersContainer,
     ProposalPanelContainer,
+    ProposalTableContainer,
 } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
@@ -29,7 +30,7 @@ const GovernancePage: FC<Props> = async props => {
     }
 
     const length = 10
-    const _offset = page * length
+    const offset = page * length
 
     return (
         <Container>
@@ -37,14 +38,16 @@ const GovernancePage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Governance</Breadcrumb>
             </Breadcrumbs>
-            <div className="grid grid-cols-12 gap-4">
+            <div className="grid grid-cols-12 items-start gap-4">
                 <ProposalPanelContainer className="col-span-full" />
-                <Surface
-                    as="section"
-                    className="col-span-9 flex flex-col gap-2 p-6"
-                >
-                    Past proposals
-                </Surface>
+                <ProposalTableContainer
+                    className="col-span-9 flex flex-col gap-6 p-6"
+                    header={
+                        <h1 className="text-2xl font-medium">Past proposals</h1>
+                    }
+                    limit={{ length, offset }}
+                    pagination
+                />
                 <GovernanceParametersContainer className="col-span-3" />
             </div>
         </Container>

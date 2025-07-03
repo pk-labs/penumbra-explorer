@@ -1,6 +1,7 @@
 export * from './blockTable'
 export * from './dexPositionTable'
 export * from './ibcTable'
+export * from './proposalTable'
 export * from './table'
 export * from './transactionTable'
 export * from './validatorTable'
