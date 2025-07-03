@@ -1,8 +1,14 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container, Panel } from '@/components'
-import { classNames, generatePageMetadata } from '@/lib/utils'
+import {
+    Breadcrumb,
+    Breadcrumbs,
+    Container,
+    Panel,
+    Surface,
+} from '@/components'
+import { generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
     'Governance',
@@ -35,14 +41,12 @@ const GovernancePage: FC<Props> = async props => {
             </Breadcrumbs>
             <div className="grid grid-cols-12 gap-4">
                 <Panel className="col-span-full" title="Proposal" />
-                <section
-                    className={classNames(
-                        'bg-other-tonalFill5 col-span-9 flex flex-col gap-2',
-                        'rounded-lg p-6 backdrop-blur-lg'
-                    )}
+                <Surface
+                    as="section"
+                    className="col-span-9 flex flex-col gap-2 p-6"
                 >
                     Past proposals
-                </section>
+                </Surface>
                 <Panel className="col-span-3" title="Governance parameters" />
             </div>
         </Container>

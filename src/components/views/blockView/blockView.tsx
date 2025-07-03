@@ -51,7 +51,7 @@ const BlockView: FC<Props> = props => (
             <Parameter name="Txs">{props.block.transactions.length}</Parameter>
         </Parameters>
         <TransactionTable
-            className="rounded-sm p-0 backdrop-blur-none"
+            className="p-0 before:rounded-sm before:backdrop-blur-none"
             transactions={props.block.transactions}
         />
         {props.swapExecutions.length > 0 && (

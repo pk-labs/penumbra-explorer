@@ -2,7 +2,7 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
-import { Parameter, Parameters } from '@/components'
+import { Parameter, Parameters, Surface } from '@/components'
 import dayjs from '@/lib/dayjs/dayjs'
 import { useChainParametersUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { ChainParameters } from '@/lib/graphql/generated/types'
@@ -34,12 +34,9 @@ const ChainParametersUpdater: FC<Props> = props => {
     }, [parametersUpdate])
 
     return (
-        <section
-            className={classNames(
-                'bg-other-tonalFill5 flex flex-col gap-2 rounded-lg p-6',
-                'backdrop-blur-lg',
-                props.className
-            )}
+        <Surface
+            as="section"
+            className={classNames('flex flex-col gap-2 p-6', props.className)}
         >
             <div className="flex flex-col gap-1">
                 <h2 className="text-lg">Chain parameters</h2>
@@ -76,7 +73,7 @@ const ChainParametersUpdater: FC<Props> = props => {
                     </Parameter>
                 </Parameters>
             </div>
-        </section>
+        </Surface>
     )
 }
 

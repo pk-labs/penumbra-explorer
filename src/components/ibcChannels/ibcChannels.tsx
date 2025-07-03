@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import Avatar from '../avatar'
+import Surface from '../surface'
 
 interface Props {
     channelId: string
@@ -13,13 +14,7 @@ interface Props {
 }
 
 const IbcChannels: FC<Props> = props => (
-    <div
-        className={classNames(
-            'bg-other-tonalFill5 flex items-center rounded-lg p-6',
-            'backdrop-blur-lg',
-            props.className
-        )}
-    >
+    <Surface className={classNames('flex items-center p-6', props.className)}>
         <div className="flex flex-1 items-center">
             <div
                 className={classNames(
@@ -101,7 +96,7 @@ const IbcChannels: FC<Props> = props => (
                 />
             </div>
         </div>
-    </div>
+    </Surface>
 )
 
 export default IbcChannels

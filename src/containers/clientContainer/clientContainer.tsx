@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Avatar, Parameter, Parameters, Skeleton } from '@/components'
+import { Avatar, Parameter, Parameters, Skeleton, Surface } from '@/components'
 import { placeholderAvatarImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import ClientLoader from './clientLoader'
@@ -18,10 +18,9 @@ const ClientContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <>
-                <div
+                <Surface
                     className={classNames(
-                        'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg',
-                        'p-6 backdrop-blur-lg',
+                        'flex flex-col gap-4 p-6',
                         props.statsClassName
                     )}
                 >
@@ -104,15 +103,10 @@ const ClientContainer: FC<Props> = props => (
                     {/*    </Parameter>*/}
                     {/*</Parameters>*/}
                     {/*</div>*/}
-                </div>
-                <div
-                    className={classNames(
-                        'bg-other-tonalFill5 rounded-lg p-6 backdrop-blur-lg',
-                        props.channelsClassName
-                    )}
-                >
+                </Surface>
+                <Surface className={classNames('p-6', props.channelsClassName)}>
                     <Skeleton className="h-10 w-full" />
-                </div>
+                </Surface>
             </>
         }
     >

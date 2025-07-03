@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Parameter, Parameters, Skeleton } from '@/components'
+import { Parameter, Parameters, Skeleton, Surface } from '@/components'
 import { classNames } from '@/lib/utils'
 import ValidatorParametersLoader from './validatorParametersLoader'
 
@@ -11,10 +11,10 @@ export interface Props {
 const ValidatorParametersContainer: FC<Props> = props => (
     <Suspense
         fallback={
-            <section
+            <Surface
+                as="section"
                 className={classNames(
-                    'bg-other-tonalFill5 flex flex-col gap-1 rounded-lg',
-                    'p-6 backdrop-blur-lg',
+                    'flex flex-col gap-1 p-6',
                     props.className
                 )}
             >
@@ -36,7 +36,7 @@ const ValidatorParametersContainer: FC<Props> = props => (
                         <Skeleton className="h-4 w-20" />
                     </Parameter>
                 </Parameters>
-            </section>
+            </Surface>
         }
     >
         <ValidatorParametersLoader {...props} />

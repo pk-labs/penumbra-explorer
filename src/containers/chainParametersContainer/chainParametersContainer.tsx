@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Parameter, Parameters, Skeleton } from '@/components'
+import { Parameter, Parameters, Skeleton, Surface } from '@/components'
 import { classNames } from '@/lib/utils'
 import ChainParametersLoader from './chainParametersLoader'
 
@@ -11,10 +11,10 @@ export interface Props {
 const ChainParametersContainer: FC<Props> = props => (
     <Suspense
         fallback={
-            <section
+            <Surface
+                as="section"
                 className={classNames(
-                    'bg-other-tonalFill5 flex flex-col gap-2 rounded-lg',
-                    'p-6 backdrop-blur-lg',
+                    'flex flex-col gap-2 p-6',
                     props.className
                 )}
             >
@@ -51,7 +51,7 @@ const ChainParametersContainer: FC<Props> = props => (
                         </Parameter>
                     </Parameters>
                 </div>
-            </section>
+            </Surface>
         }
     >
         <ChainParametersLoader {...props} />

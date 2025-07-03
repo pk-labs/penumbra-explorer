@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Parameter, Parameters } from '@/components'
+import { Parameter, Parameters, Surface } from '@/components'
 import { getValidatorParameters } from '@/lib/data'
 import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
 import { Props } from './validatorParametersContainer'
@@ -14,12 +14,8 @@ const ValidatorParametersLoader: FC<Props> = async props => {
     }
 
     return (
-        <section
-            className={classNames(
-                'bg-other-tonalFill5 flex flex-col gap-1 rounded-lg p-6',
-                'backdrop-blur-lg',
-                props.className
-            )}
+        <Surface
+            className={classNames('flex flex-col gap-1 p-6', props.className)}
         >
             <h3 className="text-lg">Validator parameters</h3>
             <Parameters>
@@ -40,7 +36,7 @@ const ValidatorParametersLoader: FC<Props> = async props => {
                     {blocksToTime(parameters.unbondingDelay)}
                 </Parameter>
             </Parameters>
-        </section>
+        </Surface>
     )
 }
 
