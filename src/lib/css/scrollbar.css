@@ -30,6 +30,7 @@
 
 .scroll-area-component::-webkit-scrollbar {
     width: 10px;
+    height: 6px;
 }
 
 .scroll-area-component::-webkit-scrollbar-track {

@@ -23,7 +23,7 @@ const HeaderContainer: FC<Props> = props => (
                 <Logo className="max-h-6 w-auto sm:max-h-7" />
             </Link>
         </div>
-        <Tabs className="hidden justify-self-center xl:flex">
+        <Tabs className="z-40 hidden justify-self-center xl:flex">
             <Tab href="/">Home</Tab>
             <Tab href="/blocks" paths={['/block']}>
                 Blocks
