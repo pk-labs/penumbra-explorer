@@ -24,7 +24,6 @@ const GovernanceParametersContainer: FC<Props> = props => (
                     className="mt-4"
                     density="compact"
                     href="https://guide.penumbra.zone/overview/gov"
-                    externalLink
                     fullWidth
                 >
                     Learn more

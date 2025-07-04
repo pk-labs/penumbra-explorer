@@ -12,8 +12,6 @@ import styles from './button.module.css'
 
 interface Props extends Omit<PenumbraButtonProps, 'icon'> {
     className?: string
-    // TODO: Determine automatically by checking for http at the beginning
-    externalLink?: boolean
     fullWidth?: boolean
     href?: string
     icon?: keyof typeof icons
@@ -22,47 +20,48 @@ interface Props extends Omit<PenumbraButtonProps, 'icon'> {
 
 const Button: FC<Props> = ({
     className,
-    externalLink,
     fullWidth,
     href,
     icon,
     scroll,
     ...props
-}) =>
-    href ? (
-        <Link
-            className={classNames(
-                styles.root,
-                fullWidth && styles.fullWidth,
-                className
-            )}
-            href={href}
-            scroll={scroll}
-            target={externalLink ? '_blank' : undefined}
-        >
-            {/* @ts-expect-error icon typing */}
-            <PenumbraButton
-                icon={
-                    externalLink
-                        ? icons['ExternalLink']
-                        : icon
-                          ? icons[icon]
-                          : undefined
-                }
-                {...props}
-            />
-        </Link>
-    ) : (
-        <span
-            className={classNames(
-                styles.root,
-                fullWidth && styles.fullWidth,
-                className
-            )}
-        >
+}) => {
+    const combinedClassName = classNames(
+        styles.root,
+        fullWidth && styles.fullWidth,
+        className
+    )
+
+    if (href) {
+        const externalLink = href.startsWith('http')
+
+        return (
+            <Link
+                className={combinedClassName}
+                href={href}
+                scroll={scroll}
+                target={externalLink ? '_blank' : undefined}
+            >
+                {/* @ts-expect-error icon typing */}
+                <PenumbraButton
+                    icon={
+                        externalLink
+                            ? icons['ExternalLink']
+                            : icon
+                              ? icons[icon]
+                              : undefined
+                    }
+                    {...props}
+                />
+            </Link>
+        )
+    }
+
+    return (
+        <span className={combinedClassName}>
             {/* @ts-expect-error icon typing */}
             <PenumbraButton icon={icon && icons[icon]} {...props} />
         </span>
     )
-
+}
 export default Button
