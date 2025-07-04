@@ -4,6 +4,7 @@ import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container, Surface } from '@/components'
 import {
     ProposalContainer,
+    VotingContainer,
     VotingEndPanelContainer,
     VotingStartPanelContainer,
 } from '@/containers'
@@ -47,7 +48,7 @@ const ProposalPage: FC<Props> = async props => {
                         <VotingStartPanelContainer className="flex-1" />
                         <VotingEndPanelContainer className="flex-1" />
                     </div>
-                    <Surface>Vote results</Surface>
+                    <VotingContainer />
                     <Surface>Vote table</Surface>
                 </div>
             </div>
