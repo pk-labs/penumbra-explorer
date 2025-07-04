@@ -30,11 +30,10 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                 proposals.map(proposal => (
                     <TableRow key={proposal.id}>
                         <TableCell className="h-20">{proposal.id}</TableCell>
-                        <TableCell className="h-20">
+                        <TableCell className="h-20 whitespace-normal">
                             <span
                                 className={classNames(
-                                    'font-default inline-block max-w-60',
-                                    'truncate font-normal'
+                                    'font-default line-clamp-2 font-normal'
                                 )}
                             >
                                 {proposal.title}
