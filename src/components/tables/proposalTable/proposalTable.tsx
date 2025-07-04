@@ -1,4 +1,5 @@
 import { BoxIcon } from 'lucide-react'
+import Link from 'next/link'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs/dayjs'
 import { TransformedProposal } from '@/lib/types'
@@ -27,46 +28,57 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
         </thead>
         <tbody>
             {proposals?.length ? (
-                proposals.map(proposal => (
-                    <TableRow key={proposal.id}>
-                        <TableCell className="h-20">{proposal.id}</TableCell>
-                        <TableCell className="h-20 whitespace-normal">
-                            <span
-                                className={classNames(
-                                    'font-default line-clamp-2 font-normal'
-                                )}
-                            >
-                                {proposal.title}
-                            </span>
-                        </TableCell>
-                        <TableCell className="h-20">{proposal.type}</TableCell>
-                        <TableCell className="h-20">
-                            <ProposalStatePill state={proposal.state} />
-                        </TableCell>
-                        <TableCell className="h-20">
-                            <ProposalOutcomePill outcome={proposal.outcome} />
-                        </TableCell>
-                        <TableCell className="h-20">
-                            {formatNumber(proposal.votes)} UM
-                        </TableCell>
-                        <TableCell className="h-20">
-                            <span className="inline-flex flex-col gap-1">
-                                <span className="inline-flex items-center gap-2">
-                                    <BoxIcon
-                                        className="text-text-secondary"
-                                        size={16}
-                                    />
-                                    {formatNumber(proposal.blockHeight)}
+                proposals.map(proposal => {
+                    const href = `/proposal/${proposal.id}`
+
+                    return (
+                        <TableRow key={proposal.id} href={href}>
+                            <TableCell className="h-20">
+                                <Link href={href}>{proposal.id}</Link>
+                            </TableCell>
+                            <TableCell className="h-20 whitespace-normal">
+                                <Link
+                                    className={classNames(
+                                        'font-default line-clamp-2 font-normal'
+                                    )}
+                                    href={href}
+                                >
+                                    {proposal.title}
+                                </Link>
+                            </TableCell>
+                            <TableCell className="h-20">
+                                {proposal.type}
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <ProposalStatePill state={proposal.state} />
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <ProposalOutcomePill
+                                    outcome={proposal.outcome}
+                                />
+                            </TableCell>
+                            <TableCell className="h-20">
+                                {formatNumber(proposal.votes)} UM
+                            </TableCell>
+                            <TableCell className="h-20">
+                                <span className="inline-flex flex-col gap-1">
+                                    <span className="inline-flex items-center gap-2">
+                                        <BoxIcon
+                                            className="text-text-secondary"
+                                            size={16}
+                                        />
+                                        {formatNumber(proposal.blockHeight)}
+                                    </span>
+                                    <span className="text-text-secondary text-xs">
+                                        {dayjs(proposal.timestamp)
+                                            .tz('UTC')
+                                            .format('YYYY-MM-DD HH:mm:ss z')}
+                                    </span>
                                 </span>
-                                <span className="text-text-secondary text-xs">
-                                    {dayjs(proposal.timestamp)
-                                        .tz('UTC')
-                                        .format('YYYY-MM-DD HH:mm:ss z')}
-                                </span>
-                            </span>
-                        </TableCell>
-                    </TableRow>
-                ))
+                            </TableCell>
+                        </TableRow>
+                    )
+                })
             ) : (
                 <TableRow>
                     <TableCell className="h-20" colSpan={7}>
