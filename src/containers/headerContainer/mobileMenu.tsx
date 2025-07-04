@@ -62,7 +62,7 @@ const MobileMenu: FC<Props> = props => {
                 />
                 DEX
             </MenuItem>
-            <MenuItem href="/dex">
+            <MenuItem href="/gov" paths={['/proposal']}>
                 <HandshakeIcon className="stroke-primary-light" size={16} />
                 Governance
             </MenuItem>
