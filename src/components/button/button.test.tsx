@@ -37,6 +37,11 @@ describe('Button', () => {
         )
     })
 
+    test('renders at full width', async () => {
+        const { container } = render(<Button fullWidth>Foo</Button>)
+        expect(container.firstChild).toHaveClass('fullWidth')
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(<Button className="foo bar">Foo</Button>)
         expect(getByText(container, 'Foo').parentNode).toHaveClass('foo', 'bar')

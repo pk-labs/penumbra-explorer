@@ -21,10 +21,11 @@ const GovernanceParametersContainer: FC<Props> = props => (
                 <h3 className="text-lg">Governance parameters</h3>
                 <Skeleton className="h-29 rounded-sm" />
                 <Button
-                    className="mt-4 self-center"
+                    className="mt-4"
                     density="compact"
                     href="https://guide.penumbra.zone/overview/gov"
                     externalLink
+                    fullWidth
                 >
                     Learn more
                 </Button>

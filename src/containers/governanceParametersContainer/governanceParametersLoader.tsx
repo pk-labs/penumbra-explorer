@@ -52,10 +52,11 @@ const GovernanceParametersLoader: FC<Props> = async props => {
                 </Parameter>
             </Parameters>
             <Button
-                className="mt-4 self-center"
+                className="mt-4"
                 density="compact"
                 href="https://guide.penumbra.zone/overview/gov"
                 externalLink
+                fullWidth
             >
                 Learn more
             </Button>
