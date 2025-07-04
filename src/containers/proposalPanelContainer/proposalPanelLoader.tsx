@@ -1,11 +1,11 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
 import { ChevronRightIcon } from 'lucide-react'
+import Link from 'next/link'
 import { FC } from 'react'
 import { ProposalState } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import ProposalStatePill from '../../components/proposalStatePill'
-import Surface from '../../components/surface'
 import { Props } from './proposalPanelContainer'
 
 const ProposalPanelLoader: FC<Props> = async props => {
@@ -14,38 +14,46 @@ const ProposalPanelLoader: FC<Props> = async props => {
             () =>
                 resolve({
                     description: faker.lorem.sentence({ max: 20, min: 5 }),
+                    id: faker.number.int({ max: 999, min: 1 }),
                     state: faker.helpers.arrayElement(
                         Object.values(ProposalState)
                     ),
-                    title: `Proposal #${faker.number.int({ max: 999, min: 1 })}`,
                 }),
             faker.number.int({ max: 3000, min: 2000 })
         )
     )
 
     return (
-        <Surface
-            as="section"
+        <Link
             className={classNames(
-                'before:border-other-tonalFill10 flex items-center gap-4 px-6',
-                'py-4 before:border-1 before:bg-transparent',
-                'before:bg-linear-284 before:from-[rgba(186,77,20,0.05)]',
-                'before:from-[9.77%] before:to-[rgba(193,166,204,0.35)]',
-                'before:to-[99.84%]',
+                'border-other-tonalFill10 flex items-center gap-4 rounded-lg',
+                'border-1 bg-linear-284 from-[rgba(186,77,20,0.05)]',
+                'from-[9.77%] to-[rgba(193,166,204,0.35)] to-[99.84%] px-6',
+                'py-4 backdrop-blur-lg',
                 props.className
             )}
+            href={`/proposal/${proposal.id}`}
         >
             <ProposalStatePill state={proposal.state} />
-            <header className="flex flex-1 flex-col overflow-hidden">
-                <h3 className="text-text-secondary font-mono text-xs font-medium">
-                    {proposal.title}
-                </h3>
-                <div className="line-clamp-2 text-lg font-medium">
+            <div className="flex flex-1 flex-col overflow-hidden">
+                <div
+                    className={classNames(
+                        'text-text-secondary font-mono text-xs font-medium'
+                    )}
+                >
+                    Proposal #{proposal.id}
+                </div>
+                <div
+                    className={classNames(
+                        'line-clamp-2 text-lg font-medium sm:line-clamp-none',
+                        'sm:truncate'
+                    )}
+                >
                     {proposal.description}
                 </div>
-            </header>
+            </div>
             <ChevronRightIcon className="text-text-secondary" size={24} />
-        </Surface>
+        </Link>
     )
 }
 
