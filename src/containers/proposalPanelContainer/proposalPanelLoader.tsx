@@ -1,5 +1,6 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
+import { ChevronRightIcon } from 'lucide-react'
 import { FC } from 'react'
 import { ProposalState } from '@/lib/types'
 import { classNames } from '@/lib/utils'
@@ -26,14 +27,15 @@ const ProposalPanelLoader: FC<Props> = async props => {
         <Surface
             as="section"
             className={classNames(
-                'before:border-other-tonalFill10 flex flex-row-reverse',
-                'items-center gap-4 px-6 py-4 before:border-1',
-                'before:bg-transparent before:bg-linear-284',
-                'before:from-[rgba(186,77,20,0.05)] before:from-[9.77%]',
-                'before:to-[rgba(193,166,204,0.35)] before:to-[99.84%]',
+                'before:border-other-tonalFill10 flex items-center gap-4 px-6',
+                'py-4 before:border-1 before:bg-transparent',
+                'before:bg-linear-284 before:from-[rgba(186,77,20,0.05)]',
+                'before:from-[9.77%] before:to-[rgba(193,166,204,0.35)]',
+                'before:to-[99.84%]',
                 props.className
             )}
         >
+            <ProposalStatePill state={proposal.state} />
             <header className="flex flex-1 flex-col overflow-hidden">
                 <h3 className="text-text-secondary font-mono text-xs font-medium">
                     {proposal.title}
@@ -42,7 +44,7 @@ const ProposalPanelLoader: FC<Props> = async props => {
                     {proposal.description}
                 </div>
             </header>
-            <ProposalStatePill state={proposal.state} />
+            <ChevronRightIcon className="text-text-secondary" size={24} />
         </Surface>
     )
 }

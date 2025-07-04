@@ -53,7 +53,7 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                             <span className="inline-flex flex-col gap-1">
                                 <span className="inline-flex items-center gap-2">
                                     <BoxIcon
-                                        color="var(--color-text-secondary)"
+                                        className="text-text-secondary"
                                         size={16}
                                     />
                                     {formatNumber(proposal.blockHeight)}
