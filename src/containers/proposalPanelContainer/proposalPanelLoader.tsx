@@ -13,11 +13,17 @@ const ProposalPanelLoader: FC<Props> = async props => {
         setTimeout(
             () =>
                 resolve({
-                    description: faker.lorem.sentence({ max: 20, min: 5 }),
                     id: faker.number.int({ max: 999, min: 1 }),
                     state: faker.helpers.arrayElement(
                         Object.values(ProposalState)
                     ),
+                    title: faker.lorem.sentence({ max: 20, min: 5 }),
+                    type: faker.helpers.arrayElement([
+                        'Unfreeze IBC Client',
+                        'Emergency',
+                        'Parameter change',
+                        'Upgrade plan',
+                    ]),
                 }),
             faker.number.int({ max: 3000, min: 2000 })
         )
@@ -41,7 +47,7 @@ const ProposalPanelLoader: FC<Props> = async props => {
                         'text-text-secondary font-mono text-xs font-medium'
                     )}
                 >
-                    Proposal #{proposal.id}
+                    Proposal #{proposal.id} {proposal.type}
                 </div>
                 <div
                     className={classNames(
@@ -49,7 +55,7 @@ const ProposalPanelLoader: FC<Props> = async props => {
                         'sm:truncate'
                     )}
                 >
-                    {proposal.description}
+                    {proposal.title}
                 </div>
             </div>
             <ChevronRightIcon className="text-text-secondary" size={24} />
