@@ -19,6 +19,7 @@ export const metadata = generatePageMetadata(
     '/'
 )
 
+// FIXME: Extra spacing between panels and tables above md and below lg
 const HomePage: FC = async () => (
     <>
         <Container>

@@ -14,10 +14,7 @@ export interface Props {
 const Panel: FC<Props> = props => (
     <Surface
         as="section"
-        className={classNames(
-            'flex flex-col justify-between gap-4 p-6 sm:flex-row',
-            props.className
-        )}
+        className={classNames('flex flex-col p-6', props.className)}
     >
         <header className={classNames('flex flex-col', props.headerClassName)}>
             <h3
@@ -31,7 +28,7 @@ const Panel: FC<Props> = props => (
             </h3>
             {props.header}
         </header>
-        {props.children && <div className="sm:self-end">{props.children}</div>}
+        {props.children}
     </Surface>
 )
 
