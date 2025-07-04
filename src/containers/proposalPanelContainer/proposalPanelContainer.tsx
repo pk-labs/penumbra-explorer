@@ -22,7 +22,7 @@ const ProposalPanelContainer: FC<Props> = props => (
                     props.className
                 )}
             >
-                <Skeleton className="h-11 rounded-sm" />
+                <Skeleton className="h-18.5 rounded-sm sm:h-11" />
             </Surface>
         }
     >
