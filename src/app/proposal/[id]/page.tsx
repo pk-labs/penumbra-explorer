@@ -1,7 +1,7 @@
 // istanbul ignore file
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container, Surface } from '@/components'
-import { classNames, generatePageMetadata } from '@/lib/utils'
+import { generatePageMetadata } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ id: string }>
@@ -26,42 +26,18 @@ const ProposalPage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb href="/gov">Governance</Breadcrumb>
             </Breadcrumbs>
-            <div className="grid grid-cols-12 items-start gap-4">
-                <Surface
-                    className={classNames(
-                        'col-span-12 md:col-span-4 md:row-span-3'
-                    )}
-                >
+            <div className="flex flex-col gap-4 md:flex-row md:items-start">
+                <Surface className="md:w-[350px] lg:w-[380px]! xl:w-[500px]!">
                     Proposal #{id}
                 </Surface>
-                <Surface
-                    className={classNames(
-                        'col-span-12 sm:col-span-6 md:col-span-4 md:col-start-5'
-                    )}
-                >
-                    Voting started
-                </Surface>
-                <Surface
-                    className={classNames(
-                        'col-span-12 sm:col-span-6 md:col-span-4 md:col-start-9'
-                    )}
-                >
-                    Voting ends
-                </Surface>
-                <Surface
-                    className={classNames(
-                        'col-span-12 md:col-span-8 md:col-start-5'
-                    )}
-                >
-                    Vote results
-                </Surface>
-                <Surface
-                    className={classNames(
-                        'col-span-12 md:col-span-8 md:col-start-5'
-                    )}
-                >
-                    Vote table
-                </Surface>
+                <div className="flex flex-1 flex-col gap-4">
+                    <div className="flex flex-col gap-4 sm:flex-row">
+                        <Surface className="flex-1">Voting started</Surface>
+                        <Surface className="flex-1">Voting ends</Surface>
+                    </div>
+                    <Surface>Vote results</Surface>
+                    <Surface>Vote table</Surface>
+                </div>
             </div>
         </Container>
     )
