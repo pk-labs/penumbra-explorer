@@ -38,25 +38,22 @@ const GovernancePage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Governance</Breadcrumb>
             </Breadcrumbs>
-            <div className="grid grid-cols-12 items-start gap-4">
-                <ProposalPanelContainer className="col-span-full" />
+            <ProposalPanelContainer />
+            <div
+                className={classNames(
+                    'mt-4 flex flex-col-reverse gap-4 lg:flex-row',
+                    'lg:items-start'
+                )}
+            >
                 <ProposalTableContainer
-                    className={classNames(
-                        'col-span-full row-start-3 flex flex-col gap-6 p-6',
-                        'lg:col-span-8 lg:row-start-auto xl:col-span-9'
-                    )}
+                    className="min-w-0 flex-1"
                     header={
                         <h1 className="text-2xl font-medium">Past proposals</h1>
                     }
                     limit={{ length, offset }}
                     pagination
                 />
-                <GovernanceParametersContainer
-                    className={classNames(
-                        'col-span-full row-start-2 lg:col-span-4',
-                        'lg:row-start-auto xl:col-span-3'
-                    )}
-                />
+                <GovernanceParametersContainer className="lg:w-[370px]" />
             </div>
         </Container>
     )
