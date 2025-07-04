@@ -2,7 +2,11 @@
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container, Surface } from '@/components'
-import { ProposalContainer, VotingStartPanelContainer } from '@/containers'
+import {
+    ProposalContainer,
+    VotingEndPanelContainer,
+    VotingStartPanelContainer,
+} from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 interface Props {
@@ -41,7 +45,7 @@ const ProposalPage: FC<Props> = async props => {
                 <div className="flex flex-1 flex-col gap-4">
                     <div className="flex flex-col gap-4 sm:flex-row">
                         <VotingStartPanelContainer className="flex-1" />
-                        <Surface className="flex-1">Voting ends</Surface>
+                        <VotingEndPanelContainer className="flex-1" />
                     </div>
                     <Surface>Vote results</Surface>
                     <Surface>Vote table</Surface>
