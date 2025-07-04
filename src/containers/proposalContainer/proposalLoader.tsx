@@ -1,9 +1,15 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
-import { Button, Surface } from '@/components'
+import {
+    Button,
+    CopyToClipboard,
+    Parameter,
+    Parameters,
+    Surface,
+} from '@/components'
 import { ProposalState } from '@/lib/types'
-import { classNames } from '@/lib/utils'
+import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './proposalContainer'
 
 const ProposalLoader: FC<Props> = async props => {
@@ -11,6 +17,7 @@ const ProposalLoader: FC<Props> = async props => {
         setTimeout(
             () =>
                 resolve({
+                    depositAmount: faker.number.int({ max: 100, min: 10 }),
                     description: faker.lorem.paragraphs(3),
                     id: props.proposalId,
                     state: faker.helpers.arrayElement(
@@ -40,9 +47,9 @@ const ProposalLoader: FC<Props> = async props => {
                     </span>
                     <Button
                         density="compact"
-                        href="https://guide.penumbra.zone/overview/gov"
+                        href="https://vote.penumbra.zone/"
                     >
-                        void.vote
+                        Vote
                     </Button>
                 </div>
                 <h1 className="text-2xl font-medium">{proposal.title}</h1>
@@ -57,6 +64,24 @@ const ProposalLoader: FC<Props> = async props => {
                         {paragraph}
                     </p>
                 ))}
+            <Parameters className="text-text-primary">
+                <Parameter name="Deposit amount">
+                    {formatNumber(proposal.depositAmount)} UM
+                </Parameter>
+            </Parameters>
+            <div className="flex flex-col gap-1">
+                <h3 className="flex items-center gap-1 text-xs">
+                    Payload <CopyToClipboard text={proposal.id} small />
+                </h3>
+                <div
+                    className={classNames(
+                        'text-text-secondary bg-other-tonalFill5 rounded-sm',
+                        'p-4 font-mono text-sm font-medium break-all'
+                    )}
+                >
+                    {proposal.id}
+                </div>
+            </div>
         </Surface>
     )
 }

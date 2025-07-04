@@ -26,13 +26,13 @@ const ProposalContainer: FC<Props> = props => (
                         </span>
                         <Button
                             density="compact"
-                            href="https://guide.penumbra.zone/overview/gov"
+                            href="https://vote.penumbra.zone/"
                         >
-                            void.vote
+                            Vote
                         </Button>
                     </div>
                 </header>
-                <Skeleton className="h-120 rounded-sm" />
+                <Skeleton className="h-140 rounded-sm" />
             </Surface>
         }
     >
