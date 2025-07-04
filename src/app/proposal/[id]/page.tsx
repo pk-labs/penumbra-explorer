@@ -1,12 +1,13 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
-import { Breadcrumb, Breadcrumbs, Container, Surface } from '@/components'
+import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
     ProposalContainer,
     VotingContainer,
     VotingEndPanelContainer,
     VotingStartPanelContainer,
+    VotingTableContainer,
 } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
@@ -49,7 +50,7 @@ const ProposalPage: FC<Props> = async props => {
                         <VotingEndPanelContainer className="flex-1" />
                     </div>
                     <VotingContainer />
-                    <Surface>Vote table</Surface>
+                    <VotingTableContainer />
                 </div>
             </div>
         </Container>

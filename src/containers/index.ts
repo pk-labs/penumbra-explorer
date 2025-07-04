@@ -31,3 +31,4 @@ export { default as ValidatorVotingPowerPanelContainer } from './validatorVoting
 export { default as VotingContainer } from './votingContainer'
 export { default as VotingEndPanelContainer } from './votingEndPanelContainer'
 export { default as VotingStartPanelContainer } from './votingStartPanelContainer'
+export { default as VotingTableContainer } from './votingTableContainer'
