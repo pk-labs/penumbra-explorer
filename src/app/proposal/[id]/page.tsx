@@ -1,6 +1,8 @@
 // istanbul ignore file
+import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container, Surface } from '@/components'
+import { ProposalContainer } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
 interface Props {
@@ -18,7 +20,12 @@ export const generateMetadata = async (props: Props) => {
 }
 
 const ProposalPage: FC<Props> = async props => {
-    const { id } = await props.params
+    const params = await props.params
+    const id = Number(params.id)
+
+    if (Number.isNaN(id) || id < 0) {
+        notFound()
+    }
 
     return (
         <Container>
@@ -27,9 +34,10 @@ const ProposalPage: FC<Props> = async props => {
                 <Breadcrumb href="/gov">Governance</Breadcrumb>
             </Breadcrumbs>
             <div className="flex flex-col gap-4 md:flex-row md:items-start">
-                <Surface className="md:w-[350px] lg:w-[380px]! xl:w-[500px]!">
-                    Proposal #{id}
-                </Surface>
+                <ProposalContainer
+                    className="md:w-[350px] lg:w-[380px]! xl:w-[500px]!"
+                    proposalId={id}
+                />
                 <div className="flex flex-1 flex-col gap-4">
                     <div className="flex flex-col gap-4 sm:flex-row">
                         <Surface className="flex-1">Voting started</Surface>
