@@ -12,9 +12,9 @@ interface Props {
 const BurnPanel: FC<Props> = props => (
     <NumberPanel
         className={classNames(
-            'bg-transparent bg-radial-[100%_100%_at_0%_0%]',
-            'from-[rgba(193,166,204,0.25)] from-0% to-[rgba(193,166,204,0.03)]',
-            'to-100%',
+            'before:bg-transparent before:bg-radial-[100%_100%_at_0%_0%]',
+            'before:from-[rgba(193,166,204,0.25)] before:from-0%',
+            'before:to-[rgba(193,166,204,0.03)] before:to-100%',
             props.className
         )}
         headerClassName="gap-2"
