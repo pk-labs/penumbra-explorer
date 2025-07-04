@@ -2,7 +2,6 @@
 import { FC, Suspense } from 'react'
 import { Skeleton } from '@/components'
 import { classNames } from '@/lib/utils'
-import Surface from '../../components/surface'
 import ProposalPanelLoader from './proposalPanelLoader'
 
 export interface Props {
@@ -12,18 +11,17 @@ export interface Props {
 const ProposalPanelContainer: FC<Props> = props => (
     <Suspense
         fallback={
-            <Surface
-                as="section"
+            <div
                 className={classNames(
-                    'before:border-other-tonalFill10 px-6 py-4 before:border-1',
-                    'before:bg-transparent before:bg-linear-284',
-                    'before:from-[rgba(186,77,20,0.05)] before:from-[9.77%]',
-                    'before:to-[rgba(193,166,204,0.35)] before:to-[99.84%]',
+                    'border-other-tonalFill10 rounded-lg border-1',
+                    'bg-linear-284 from-[rgba(186,77,20,0.05)] from-[9.77%]',
+                    'to-[rgba(193,166,204,0.35)] to-[99.84%] px-6 py-4',
+                    'backdrop-blur-lg',
                     props.className
                 )}
             >
                 <Skeleton className="h-18.5 rounded-sm sm:h-11" />
-            </Surface>
+            </div>
         }
     >
         <ProposalPanelLoader {...props} />
