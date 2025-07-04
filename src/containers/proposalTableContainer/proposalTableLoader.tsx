@@ -17,14 +17,21 @@ const ProposalTableLoader: FC<Props> = async ({
 }) => {
     const proposals = await new Promise<TransformedProposal[]>(resolve =>
         setTimeout(
-            () =>
-                resolve(
-                    Array.from({ length: limit.length }).map((_, i) => ({
+            () => {
+                const ids = faker.helpers
+                    .uniqueArray(
+                        () => faker.number.int({ max: 999, min: 1 }),
+                        limit.length
+                    )
+                    .toSorted((a, b) => b - a)
+
+                return resolve(
+                    ids.map(id => ({
                         blockHeight: faker.number.int({
                             max: 5000000,
                             min: 4000000,
                         }),
-                        id: i,
+                        id,
                         outcome: faker.helpers.arrayElement(
                             Object.values(ProposalOutcome)
                         ),
@@ -49,7 +56,8 @@ const ProposalTableLoader: FC<Props> = async ({
                             min: 1000000,
                         }),
                     }))
-                ),
+                )
+            },
             faker.number.int({ max: 3000, min: 2000 })
         )
     )
