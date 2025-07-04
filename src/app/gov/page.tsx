@@ -42,8 +42,8 @@ const GovernancePage: FC<Props> = async props => {
                 <ProposalPanelContainer className="col-span-full" />
                 <ProposalTableContainer
                     className={classNames(
-                        'col-span-full flex flex-col gap-6 p-6 lg:col-span-8',
-                        'xl:col-span-9'
+                        'col-span-full row-start-3 flex flex-col gap-6 p-6',
+                        'lg:col-span-8 lg:row-start-auto xl:col-span-9'
                     )}
                     header={
                         <h1 className="text-2xl font-medium">Past proposals</h1>
@@ -53,7 +53,8 @@ const GovernancePage: FC<Props> = async props => {
                 />
                 <GovernanceParametersContainer
                     className={classNames(
-                        'col-span-full lg:col-span-4 xl:col-span-3'
+                        'col-span-full row-start-2 lg:col-span-4',
+                        'lg:row-start-auto xl:col-span-3'
                     )}
                 />
             </div>

@@ -40,7 +40,7 @@ const ProposalPanelLoader: FC<Props> = async props => {
                 <h3 className="text-text-secondary font-mono text-xs font-medium">
                     {proposal.title}
                 </h3>
-                <div className="truncate text-lg font-medium">
+                <div className="line-clamp-2 text-lg font-medium">
                     {proposal.description}
                 </div>
             </header>
