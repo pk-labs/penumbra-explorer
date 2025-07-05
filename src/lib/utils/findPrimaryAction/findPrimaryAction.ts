@@ -4,61 +4,61 @@ import { ActionType } from '@/lib/types'
 
 const findPrimaryAction = (transaction?: Transaction): ActionType => {
     if (!transaction) {
-        return ActionType.unknown
+        return ActionType.Unknown
     }
 
     const cases = new Set(transaction.body?.actions.map(a => a.action.case))
 
     if (cases.has('swap')) {
-        return ActionType.swap
+        return ActionType.Swap
     } else if (cases.has('swapClaim')) {
-        return ActionType.swapClaim
+        return ActionType.SwapClaim
     } else if (cases.has('delegate')) {
-        return ActionType.delegate
+        return ActionType.Delegate
     } else if (cases.has('undelegate')) {
-        return ActionType.undelegate
+        return ActionType.Undelegate
     } else if (cases.has('undelegateClaim')) {
-        return ActionType.undelegateClaim
+        return ActionType.UndelegateClaim
     } else if (cases.has('ics20Withdrawal')) {
-        return ActionType.ics20Withdrawal
+        return ActionType.Ics20Withdrawal
     } else if (cases.has('actionDutchAuctionSchedule')) {
-        return ActionType.dutchAuctionSchedule
+        return ActionType.DutchAuctionSchedule
     } else if (cases.has('actionDutchAuctionEnd')) {
-        return ActionType.dutchAuctionEnd
+        return ActionType.DutchAuctionEnd
     } else if (cases.has('actionDutchAuctionWithdraw')) {
-        return ActionType.dutchAuctionWithdraw
+        return ActionType.DutchAuctionWithdraw
     } else if (cases.has('delegatorVote')) {
-        return ActionType.delegatorVote
+        return ActionType.DelegatorVote
     } else if (cases.has('validatorVote')) {
-        return ActionType.validatorVote
+        return ActionType.ValidatorVote
     } else if (cases.has('validatorDefinition')) {
-        return ActionType.validatorDefinition
+        return ActionType.ValidatorDefinition
     } else if (cases.has('ibcRelayAction')) {
-        return ActionType.ibcRelayAction
+        return ActionType.IbcRelayAction
     } else if (cases.has('proposalSubmit')) {
-        return ActionType.proposalSubmit
+        return ActionType.ProposalSubmit
     } else if (cases.has('proposalWithdraw')) {
-        return ActionType.proposalWithdraw
+        return ActionType.ProposalWithdraw
     } else if (cases.has('proposalDepositClaim')) {
-        return ActionType.proposalDepositClaim
+        return ActionType.ProposalDepositClaim
     } else if (cases.has('positionOpen')) {
-        return ActionType.positionOpen
+        return ActionType.PositionOpen
     } else if (cases.has('positionClose')) {
-        return ActionType.positionClose
+        return ActionType.PositionClose
     } else if (cases.has('positionWithdraw')) {
-        return ActionType.positionWithdraw
+        return ActionType.PositionWithdraw
     } else if (cases.has('positionRewardClaim')) {
-        return ActionType.positionRewardClaim
+        return ActionType.PositionRewardClaim
     } else if (cases.has('communityPoolSpend')) {
-        return ActionType.communityPoolSpend
+        return ActionType.CommunityPoolSpend
     } else if (cases.has('communityPoolDeposit')) {
-        return ActionType.communityPoolDeposit
+        return ActionType.CommunityPoolDeposit
     } else if (cases.has('communityPoolOutput')) {
-        return ActionType.communityPoolOutput
+        return ActionType.CommunityPoolOutput
     } else if (cases.has('spend')) {
-        return ActionType.spend
+        return ActionType.Spend
     } else if (cases.has('output')) {
-        return ActionType.output
+        return ActionType.Output
     }
 
     /*
@@ -93,26 +93,26 @@ const findPrimaryAction = (transaction?: Transaction): ActionType => {
         // If we can't see at least one spend, but we can see an output we
         // control, it's a receive.
         if (hasOpaqueSpend && hasVisibleOutputWithVisibleAddress) {
-            return ActionType.receive
+            return ActionType.Receive
         }
         // If we can see all spends and outputs, it's a transaction we created ...
         if (allSpendsVisible && allOutputsVisible) {
             // ... so it's either a send or an internal transfer, depending on
             // whether there's an output we don't control.
             if (isInternal) {
-                return ActionType.internalTransfer
+                return ActionType.InternalTransfer
             } else {
-                return ActionType.send
+                return ActionType.Send
             }
         }
     }
 
     if (isInternal) {
-        return ActionType.unknownInternal
+        return ActionType.UnknownInternal
     }
     */
 
-    return ActionType.unknown
+    return ActionType.Unknown
 }
 
 export default findPrimaryAction

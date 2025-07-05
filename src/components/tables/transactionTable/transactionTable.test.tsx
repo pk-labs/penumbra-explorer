@@ -157,7 +157,7 @@ describe('TransactionTable', () => {
                         actionCount: 2,
                         blockHeight: 123,
                         hash: 'tx1',
-                        primaryAction: ActionType.receive,
+                        primaryAction: ActionType.Receive,
                         raw: '',
                         status: IbcStatus.Unknown,
                         timestamp: 0,
