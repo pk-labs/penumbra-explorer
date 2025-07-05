@@ -13,18 +13,18 @@ const ProposalOutcomePill: FC<Props> = props => {
 
     switch (props.outcome) {
         case ProposalOutcome.Passed:
-            context = 'technical-success'
+            context = 'success'
             break
         case ProposalOutcome.Failed:
         case ProposalOutcome.Slashed:
-            context = 'technical-destructive'
+            context = 'destructive'
             break
         default:
             return null
     }
 
     return (
-        <Pill className={props.className} context={context}>
+        <Pill className={props.className} context={context} technical>
             {ucFirst(props.outcome)}
         </Pill>
     )

@@ -13,16 +13,16 @@ const ProposalStatePill: FC<Props> = props => {
 
     switch (props.state) {
         case ProposalState.Claimed:
-            context = 'technical-success'
+            context = 'success'
             break
         case ProposalState.Voting:
-            context = 'technical-caution'
+            context = 'caution'
             break
         case ProposalState.Withdrawn:
-            context = 'technical-destructive'
+            context = 'destructive'
             break
         case ProposalState.Finished:
-            context = 'technical-default'
+            context = 'default'
             break
         default:
             return null
@@ -33,6 +33,7 @@ const ProposalStatePill: FC<Props> = props => {
             className={props.className}
             context={context}
             priority="secondary"
+            technical
         >
             {ucFirst(props.state)}
         </Pill>

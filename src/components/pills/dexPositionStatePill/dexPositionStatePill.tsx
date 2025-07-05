@@ -13,16 +13,16 @@ const DexPositionStatePill: FC<Props> = props => {
 
     switch (props.state) {
         case LiquidityPositionState.Open:
-            context = 'technical-success'
+            context = 'success'
             break
         case LiquidityPositionState.Executing:
-            context = 'technical-caution'
+            context = 'caution'
             break
         case LiquidityPositionState.Withdrawn:
-            context = 'technical-destructive'
+            context = 'destructive'
             break
         case LiquidityPositionState.Closed:
-            context = 'technical-default'
+            context = 'default'
             break
         default:
             return null
@@ -33,6 +33,7 @@ const DexPositionStatePill: FC<Props> = props => {
             className={props.className}
             context={context}
             priority="secondary"
+            technical
         >
             {ucFirst(props.state)}
         </Pill>

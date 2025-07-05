@@ -13,14 +13,14 @@ const VotingStatePill: FC<Props> = props => {
 
     switch (props.state) {
         case VotingState.Passed:
-            context = 'technical-success'
+            context = 'success'
             break
         case VotingState.InProgress:
-            context = 'technical-caution'
+            context = 'caution'
             break
         case VotingState.Failed:
         case VotingState.Slashed:
-            context = 'technical-destructive'
+            context = 'destructive'
             break
         default:
             return null

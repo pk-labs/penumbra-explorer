@@ -43,7 +43,7 @@ const DexSwapExecution: FC<Props> = props => (
                 </span>
                 <span className="flex items-center gap-2">
                     {props.arb && (
-                        <Pill context="technical-default">
+                        <Pill compact>
                             <span className="text-xs">Arb</span>
                         </Pill>
                     )}

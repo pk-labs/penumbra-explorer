@@ -12,8 +12,9 @@ const TransactionStatusPill: FC<Props> = props => {
     return (
         <Pill
             className={props.className}
-            context="technical-success"
+            context="success"
             priority="secondary"
+            technical
         >
             {ucFirst(IbcStatus.Completed)}
         </Pill>

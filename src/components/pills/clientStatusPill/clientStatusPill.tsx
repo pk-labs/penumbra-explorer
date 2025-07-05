@@ -14,16 +14,13 @@ const ClientStatusPill: FC<Props> = props => {
 
     switch (status) {
         case ClientStatus.Active:
-            context = 'technical-success'
+            context = 'success'
             break
         case ClientStatus.Frozen:
-            context = 'technical-caution'
+            context = 'caution'
             break
         case ClientStatus.Expired:
-            context = 'technical-destructive'
-            break
-        default:
-            context = 'technical-default'
+            context = 'destructive'
             break
     }
 
@@ -32,6 +29,7 @@ const ClientStatusPill: FC<Props> = props => {
             className={props.className}
             context={context}
             priority="secondary"
+            technical
         >
             {ucFirst(status)}
         </Pill>

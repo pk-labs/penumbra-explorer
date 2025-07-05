@@ -80,7 +80,7 @@ const TransactionTableRow: FC<Props> = props => {
             )}
             <TableCell>
                 {props.transaction.primaryAction && (
-                    <Pill context="technical-default">
+                    <Pill compact technical>
                         {props.transaction.primaryAction}
                     </Pill>
                 )}
