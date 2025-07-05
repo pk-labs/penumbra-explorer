@@ -1,13 +1,7 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
-import {
-    Button,
-    CopyToClipboard,
-    Parameter,
-    Parameters,
-    Surface,
-} from '@/components'
+import { Button, JsonTree, Parameter, Parameters, Surface } from '@/components'
 import { ProposalState } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './proposalContainer'
@@ -64,24 +58,17 @@ const ProposalLoader: FC<Props> = async props => {
                         {paragraph}
                     </p>
                 ))}
-            <Parameters className="text-text-primary">
+            <Parameters>
                 <Parameter name="Deposit amount">
                     {formatNumber(proposal.depositAmount)} UM
                 </Parameter>
             </Parameters>
-            <div className="flex flex-col gap-1">
-                <h3 className="flex items-center gap-1 text-xs">
-                    Payload <CopyToClipboard text={proposal.id} small />
-                </h3>
-                <div
-                    className={classNames(
-                        'text-text-secondary bg-other-tonalFill5 rounded-sm',
-                        'p-4 font-mono text-sm font-medium break-all'
-                    )}
-                >
-                    {proposal.id}
-                </div>
-            </div>
+            <JsonTree
+                className="gap-1"
+                data={{ foo: 'bar' }}
+                title="Payload"
+                titleClassName="text-xs"
+            />
         </Surface>
     )
 }

@@ -73,7 +73,9 @@ const BlockView: FC<Props> = props => (
                 </div>
             </Subsection>
         )}
-        {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
+        {props.block.rawJson && (
+            <JsonTree data={props.block.rawJson} title="Raw JSON" />
+        )}
     </View>
 )
 

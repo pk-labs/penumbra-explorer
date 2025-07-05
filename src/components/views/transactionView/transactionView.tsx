@@ -68,7 +68,7 @@ const TransactionView: FC<Props> = props => (
                 </Parameter>
             </Parameters>
         </Subsection>
-        <JsonTree data={props.transaction.rawJson} />
+        <JsonTree data={props.transaction.rawJson} title="Raw JSON" />
     </View>
 )
 
