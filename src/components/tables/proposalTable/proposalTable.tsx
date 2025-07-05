@@ -5,8 +5,8 @@ import dayjs from '@/lib/dayjs/dayjs'
 import { TransformedProposal } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
-import ProposalOutcomePill from '../../proposalOutcomePill'
-import ProposalStatePill from '../../proposalStatePill'
+import ProposalOutcomePill from '../../pills/proposalOutcomePill'
+import ProposalStatePill from '../../pills/proposalStatePill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {

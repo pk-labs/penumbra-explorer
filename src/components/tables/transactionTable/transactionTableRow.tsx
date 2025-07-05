@@ -6,10 +6,10 @@ import { FC } from 'react'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { formatNumber, shortenHash } from '@/lib/utils'
 import CopyToClipboard from '../../copyToClipboard'
-import { Pill } from '../../pill'
+import { Pill } from '../../pills/pill'
+import TransactionStatusPill from '../../pills/transactionStatusPill'
 import TimeAgo from '../../timeAgo'
 import TransactionStatusIcon from '../../transactionStatusIcon'
-import TransactionStatusPill from '../../transactionStatusPill'
 import { TableCell, TableRow } from '../table'
 
 export interface Props {

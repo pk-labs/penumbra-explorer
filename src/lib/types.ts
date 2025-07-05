@@ -169,3 +169,14 @@ export enum ProposalType {
     UnfreezeIbcClient = 'Unfreeze IBC client',
     UpgradePlan = 'Upgrade plan',
 }
+
+export interface TransformedVoting {
+    state: VotingState
+}
+
+export enum VotingState {
+    Failed = 'Failed',
+    InProgress = 'Voting in progress',
+    Passed = 'Passed',
+    Slashed = 'Slashed',
+}

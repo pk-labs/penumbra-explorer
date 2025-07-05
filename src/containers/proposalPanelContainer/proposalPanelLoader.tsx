@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { FC } from 'react'
 import { ProposalState, ProposalType } from '@/lib/types'
 import { classNames } from '@/lib/utils'
-import ProposalStatePill from '../../components/proposalStatePill'
+import ProposalStatePill from '../../components/pills/proposalStatePill'
 import { Props } from './proposalPanelContainer'
 
 const ProposalPanelLoader: FC<Props> = async props => {

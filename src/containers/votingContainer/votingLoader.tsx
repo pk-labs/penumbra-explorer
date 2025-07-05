@@ -1,14 +1,20 @@
 // istanbul ignore file
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
-import { Surface } from '@/components'
+import { Surface, VotingStatePill } from '@/components'
+import { TransformedVoting, VotingState } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import { Props } from './votingContainer'
 
 const VotingLoader: FC<Props> = async props => {
-    const _voting = await new Promise<any>(resolve =>
+    const voting = await new Promise<TransformedVoting>(resolve =>
         setTimeout(
-            () => resolve({}),
+            () =>
+                resolve({
+                    state: faker.helpers.arrayElement(
+                        Object.values(VotingState)
+                    ),
+                }),
             faker.number.int({ max: 3000, min: 2000 })
         )
     )
@@ -18,7 +24,7 @@ const VotingLoader: FC<Props> = async props => {
             as="section"
             className={classNames('flex flex-col gap-6 p-6', props.className)}
         >
-            Voting results
+            <VotingStatePill state={voting.state} />
         </Surface>
     )
 }

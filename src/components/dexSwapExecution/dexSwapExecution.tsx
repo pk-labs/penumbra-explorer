@@ -4,7 +4,7 @@ import { TransformedDexSwapExecution } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import AssetValue from '../assetValue'
 import Collapsible from '../collapsible'
-import { Pill } from '../pill'
+import { Pill } from '../pills/pill'
 import Skeleton from '../skeleton'
 import DexExecutionRoute from './dexExecutionRoute'
 
