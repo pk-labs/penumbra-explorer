@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker'
 import { ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { ProposalState } from '@/lib/types'
+import { ProposalState, ProposalType } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import ProposalStatePill from '../../components/proposalStatePill'
 import { Props } from './proposalPanelContainer'
@@ -18,12 +18,9 @@ const ProposalPanelLoader: FC<Props> = async props => {
                         Object.values(ProposalState)
                     ),
                     title: faker.lorem.sentence({ max: 20, min: 5 }),
-                    type: faker.helpers.arrayElement([
-                        'Unfreeze IBC Client',
-                        'Emergency',
-                        'Parameter change',
-                        'Upgrade plan',
-                    ]),
+                    type: faker.helpers.arrayElement(
+                        Object.values(ProposalType)
+                    ),
                 }),
             faker.number.int({ max: 3000, min: 2000 })
         )

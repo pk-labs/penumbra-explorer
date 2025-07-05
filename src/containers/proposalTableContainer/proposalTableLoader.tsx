@@ -6,6 +6,7 @@ import dayjs from '@/lib/dayjs'
 import {
     ProposalOutcome,
     ProposalState,
+    ProposalType,
     TransformedProposal,
 } from '@/lib/types'
 import { Props } from './proposalTableContainer'
@@ -45,12 +46,9 @@ const ProposalTableLoader: FC<Props> = async ({
                             )
                             .valueOf(),
                         title: faker.lorem.sentence({ max: 20, min: 5 }),
-                        type: faker.helpers.arrayElement([
-                            'Unfreeze IBC Client',
-                            'Emergency',
-                            'Parameter change',
-                            'Upgrade plan',
-                        ]),
+                        type: faker.helpers.arrayElement(
+                            Object.values(ProposalType)
+                        ),
                         votes: faker.number.int({
                             max: 20000000,
                             min: 1000000,
