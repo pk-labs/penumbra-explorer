@@ -73,6 +73,7 @@
     --color-other-tonalStroke: oklch(from var(--color-neutral-50) l c h / 0.15);
     --color-other-tonalFill5: oklch(from var(--color-neutral-50) l c h / 0.05);
     --color-other-tonalFill10: oklch(from var(--color-neutral-50) l c h / 0.1);
+    --color-other-tonalFill20: oklch(from var(--color-neutral-50) l c h / 0.2);
     --color-other-solidStroke: var(--color-neutral-900);
     --color-other-dialogBackground: rgb(from #226362 r g b / 0.1);
     --color-other-overlay: oklch(from var(--color-black) l c h / 0.5);

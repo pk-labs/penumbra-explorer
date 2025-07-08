@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'motion/react'
 import { FC } from 'react'
 import { NumberCountup } from '@/components'
 import { TransformedVoting, VotingState } from '@/lib/types'
@@ -51,7 +52,7 @@ const VotingNumbers: FC<Props> = props => {
                     />
                 </div>
             </div>
-            <div className="flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
                     <div className="flex flex-col">
                         <NumberCountup
@@ -102,7 +103,25 @@ const VotingNumbers: FC<Props> = props => {
                         />
                     </div>
                 </div>
-                <div className="flex justify-between"></div>
+                <div className="bg-other-tonalFill20 relative h-2 rounded-full">
+                    <motion.div
+                        animate={{ width: `${yesPercentage}%` }}
+                        className={classNames(
+                            'bg-success-light absolute h-full rounded-l-full'
+                        )}
+                        initial={{ width: 0 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                    />
+                    <motion.div
+                        animate={{ width: `${noPercentage}%` }}
+                        className={classNames(
+                            'bg-destructive-light absolute right-0 h-full',
+                            'rounded-r-full'
+                        )}
+                        initial={{ width: 0 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                    />
+                </div>
             </div>
         </>
     )
