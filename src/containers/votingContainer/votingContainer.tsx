@@ -15,12 +15,12 @@ const VotingContainer: FC<Props> = props => (
             <Surface
                 as="section"
                 className={classNames(
-                    'flex flex-col gap-6 p-6',
+                    'flex flex-col gap-4 p-6',
                     props.className
                 )}
             >
                 <Skeleton className="h-8 w-42 rounded-full" />
-                <VotingNumbers no={0} quorum={0} yes={0} />
+                <VotingNumbers abstain={0} no={0} quorum={0} yes={0} />
             </Surface>
         }
     >

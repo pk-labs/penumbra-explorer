@@ -16,10 +16,13 @@ const VotingLoader: FC<Props> = async props => {
                     min: 4000000,
                 })
 
-                const yes = faker.number.int({ max: quorum * 0.9 })
-                const no = faker.number.int({ max: quorum - yes })
+                const total = faker.number.int({ max: quorum })
+                const yes = faker.number.int({ max: total * 0.9 })
+                const no = faker.number.int({ max: (total - yes) * 0.9 })
+                const abstain = total - yes - no
 
                 return resolve({
+                    abstain,
                     no,
                     quorum,
                     state: faker.helpers.arrayElement(
@@ -35,7 +38,7 @@ const VotingLoader: FC<Props> = async props => {
     return (
         <Surface
             as="section"
-            className={classNames('flex flex-col gap-6 p-6', props.className)}
+            className={classNames('flex flex-col gap-4 p-6', props.className)}
         >
             <VotingStatePill state={voting.state} />
             <VotingNumbers {...voting} />
