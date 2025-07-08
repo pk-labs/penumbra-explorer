@@ -171,7 +171,10 @@ export enum ProposalType {
 }
 
 export interface TransformedVoting {
+    no: number
+    quorum: number
     state: VotingState
+    yes: number
 }
 
 export enum VotingState {

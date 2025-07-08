@@ -3,6 +3,7 @@ import { FC, Suspense } from 'react'
 import { Skeleton, Surface } from '@/components'
 import { classNames } from '@/lib/utils'
 import VotingLoader from './votingLoader'
+import VotingNumbers from './votingNumbers'
 
 export interface Props {
     className?: string
@@ -18,7 +19,8 @@ const VotingContainer: FC<Props> = props => (
                     props.className
                 )}
             >
-                <Skeleton className="h-50 rounded-sm" />
+                <Skeleton className="h-8 w-42 rounded-full" />
+                <VotingNumbers no={0} quorum={0} yes={0} />
             </Surface>
         }
     >
