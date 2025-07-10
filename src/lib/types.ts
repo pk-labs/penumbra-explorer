@@ -191,6 +191,9 @@ export interface TransformedVote {
     powerPercentage: number
     timestamp: number
     transactionHash: string
-    validatorId?: string
+    validator?: {
+        id: string
+        name: string
+    }
     yes: boolean
 }

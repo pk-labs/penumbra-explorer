@@ -1,2 +1,2 @@
-export type { Props as ValidatorTableProps } from './voteTable'
-export { default as ValidatorTable } from './voteTable'
+export type { Props as VoteTableProps } from './voteTable'
+export { default as VoteTable } from './voteTable'

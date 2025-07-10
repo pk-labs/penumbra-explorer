@@ -31,7 +31,7 @@ const VotingLoader: FC<Props> = async props => {
                     yes,
                 })
             },
-            faker.number.int({ max: 3000, min: 2000 })
+            faker.number.int({ max: 2000, min: 1000 })
         )
     )
 

@@ -20,7 +20,7 @@ const GovernanceParametersLoader: FC<Props> = async props => {
                     slashingTreshold: faker.number.int({ max: 80, min: 70 }),
                     validQuorum: faker.number.int({ max: 49, min: 30 }),
                 }),
-            faker.number.int({ max: 3000, min: 2000 })
+            faker.number.int({ max: 2000, min: 1000 })
         )
     )
 

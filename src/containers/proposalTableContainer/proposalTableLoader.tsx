@@ -56,7 +56,7 @@ const ProposalTableLoader: FC<Props> = async ({
                     }))
                 )
             },
-            faker.number.int({ max: 3000, min: 2000 })
+            faker.number.int({ max: 2000, min: 1000 })
         )
     )
 

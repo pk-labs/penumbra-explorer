@@ -19,7 +19,7 @@ const VotingEndPanelLoader: FC<Props> = async props => {
                         .add(faker.number.int({ max: 60, min: 1 }), 'days')
                         .valueOf(),
                 }),
-            faker.number.int({ max: 3000, min: 2000 })
+            faker.number.int({ max: 2000, min: 1000 })
         )
     )
 

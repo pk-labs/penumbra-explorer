@@ -1,25 +1,53 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Skeleton, Surface } from '@/components'
-import { classNames } from '@/lib/utils'
+import {
+    Pagination,
+    Skeleton,
+    Table,
+    TableCell,
+    TableRow,
+    VoteTableProps,
+} from '@/components'
 import VoteTableLoader from './voteTableLoader'
 
-export interface Props {
-    className?: string
+export interface Props extends Omit<VoteTableProps, 'footer' | 'votes'> {
+    limit: {
+        length: number
+        offset?: number
+    }
+    pagination?: boolean
 }
 
 const VoteTableContainer: FC<Props> = props => (
     <Suspense
+        key={JSON.stringify(props.limit)}
         fallback={
-            <Surface
-                as="section"
-                className={classNames(
-                    'flex flex-col gap-6 p-6',
-                    props.className
-                )}
+            <Table
+                className={props.className}
+                footer={
+                    props.pagination ? (
+                        <Pagination page={0} totalPages={0} />
+                    ) : undefined
+                }
+                header={props.header}
             >
-                <Skeleton className="h-50 rounded-sm" />
-            </Surface>
+                <thead>
+                    <TableRow>
+                        <TableCell header>
+                            <Skeleton className="h-6" />
+                        </TableCell>
+                    </TableRow>
+                </thead>
+                <tbody>
+                    {Array.from({ length: props.limit.length }).map((_, i) => (
+                        <TableRow key={i}>
+                            <TableCell className="h-15">
+                                <Skeleton className="h-9" />
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </tbody>
+            </Table>
         }
     >
         <VoteTableLoader {...props} />

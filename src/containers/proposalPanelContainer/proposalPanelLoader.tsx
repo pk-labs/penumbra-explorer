@@ -22,7 +22,7 @@ const ProposalPanelLoader: FC<Props> = async props => {
                         Object.values(ProposalType)
                     ),
                 }),
-            faker.number.int({ max: 3000, min: 2000 })
+            faker.number.int({ max: 2000, min: 1000 })
         )
     )
 

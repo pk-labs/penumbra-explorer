@@ -1,14 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import { TimeAgo } from '@/components'
 import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { TransformedVote } from '@/lib/types'
-import { formatNumber, shortenHash } from '@/lib/utils'
+import { classNames, formatNumber, shortenHash } from '@/lib/utils'
 import { validatorImages } from '@/lib/validators'
 import Avatar from '../../avatar'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
+import { Pill } from '../../pills'
+import TimeAgo from '../../timeAgo'
+import { Encrypted } from '../../vectors'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
@@ -32,34 +34,49 @@ const VoteTable: FC<Props> = ({ votes, ...props }) => (
                     <TableRow
                         key={i}
                         href={
-                            vote.validatorId && `/validator/${vote.validatorId}`
+                            vote.validator && `/validator/${vote.validator.id}`
                         }
                     >
                         <TableCell className="h-15">
-                            {vote.validatorId ? (
+                            {vote.validator ? (
                                 <>
                                     <Avatar
-                                        // alt={validator.name || validator.id}
-                                        alt={vote.validatorId}
+                                        alt={vote.validator.name}
+                                        className="h-6 w-6"
                                         fallback={placeholderAvatarImage}
-                                        src={validatorImages[vote.validatorId]}
+                                        src={validatorImages[vote.validator.id]}
                                         fallbackLetter
                                     />
-                                    <Link
-                                        href={`/validator/${vote.validatorId}`}
-                                    >
-                                        {
-                                            // validator.name ||
-                                            shortenHash(
-                                                vote.validatorId,
+                                    <span className="inline-flex flex-col">
+                                        <Link
+                                            href={`/validator/${vote.validator.id}`}
+                                        >
+                                            {vote.validator.name}
+                                        </Link>
+                                        <span className="text-text-secondary text-xs">
+                                            {shortenHash(
+                                                vote.validator.id,
                                                 19,
                                                 'end'
-                                            )
-                                        }
-                                    </Link>
+                                            )}
+                                            <CopyToClipboard
+                                                className="align-middle"
+                                                text={vote.validator.id}
+                                                small
+                                            />
+                                        </span>
+                                    </span>
                                 </>
                             ) : (
-                                'TODO: Delegator'
+                                <>
+                                    <Encrypted
+                                        className={classNames(
+                                            'bg-neutral-main inline-block',
+                                            'h-6 w-6 rounded-full p-1'
+                                        )}
+                                    />
+                                    <span>Delegator</span>
+                                </>
                             )}
                         </TableCell>
                         <TableCell className="h-15">
@@ -79,7 +96,12 @@ const VoteTable: FC<Props> = ({ votes, ...props }) => (
                             </span>
                         </TableCell>
                         <TableCell className="h-15">
-                            {String(vote.yes)}
+                            <Pill
+                                context={vote.yes ? 'success' : 'destructive'}
+                                technical
+                            >
+                                {vote.yes ? 'Yes' : 'No'}
+                            </Pill>
                         </TableCell>
                         <TableCell className="h-15">
                             <TimeAgo timestamp={vote.timestamp} />
