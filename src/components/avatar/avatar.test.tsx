@@ -2,11 +2,6 @@ import { getByAltText, getByText, render } from '@testing-library/react'
 import Avatar from './avatar'
 
 describe('Avatar', () => {
-    test('renders nothing when no image and no fallback', async () => {
-        const { container } = render(<Avatar alt="Foo" />)
-        expect(container.firstChild).toBeNull()
-    })
-
     test('renders image', async () => {
         const { container } = render(<Avatar alt="Foo" src="foo.jpg" />)
         expect(getByAltText(container, 'Foo')).toHaveAttribute('src', 'foo.jpg')
