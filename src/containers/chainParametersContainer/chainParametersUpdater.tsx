@@ -38,13 +38,13 @@ const ChainParametersUpdater: FC<Props> = props => {
             as="section"
             className={classNames('flex flex-col gap-2 p-6', props.className)}
         >
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
                 <h2 className="text-lg">Chain parameters</h2>
                 <Parameters>
                     <Parameter name="Chain ID">{parameters.chainId}</Parameter>
                 </Parameters>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
                 <h3 className="text-base">Latest block</h3>
                 <Parameters>
                     <Parameter name="Time">
@@ -57,7 +57,7 @@ const ChainParametersUpdater: FC<Props> = props => {
                     </Parameter>
                 </Parameters>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
                 <h3 className="text-base">Epoch</h3>
                 <Parameters>
                     <Parameter name="Current">
