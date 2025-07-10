@@ -1,12 +1,6 @@
-import {
-    Children,
-    cloneElement,
-    FC,
-    isValidElement,
-    ReactElement,
-    ReactNode,
-} from 'react'
+import { FC, ReactNode } from 'react'
 import { classNames } from '@/lib/utils'
+import styles from './tableCell.module.css'
 
 export interface Props {
     children?: ReactNode
@@ -21,6 +15,7 @@ const TableCell: FC<Props> = props => {
     return (
         <Element
             className={classNames(
+                styles.root,
                 'h-12 px-3 text-left text-sm font-medium whitespace-nowrap',
                 props.header
                     ? 'border-other-tonalFill10 text-text-secondary border-b ' +
@@ -30,20 +25,7 @@ const TableCell: FC<Props> = props => {
             )}
             colSpan={props.colSpan}
         >
-            {Children.map(props.children, child => {
-                if (!isValidElement(child)) {
-                    return child
-                }
-
-                const element = child as ReactElement<{ className?: string }>
-
-                return cloneElement(element, {
-                    className: classNames(
-                        element.props.className ?? '',
-                        'align-middle not-last:mr-2'
-                    ),
-                })
-            })}
+            {props.children}
         </Element>
     )
 }
