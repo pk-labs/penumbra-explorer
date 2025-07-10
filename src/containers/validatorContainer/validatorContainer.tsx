@@ -14,17 +14,9 @@ const ValidatorContainer: FC<Props> = props => (
         fallback={
             <Surface
                 as="section"
-                className={classNames(
-                    'flex flex-col gap-6 p-6',
-                    props.className
-                )}
+                className={classNames('p-6', props.className)}
             >
-                <Skeleton className="h-14" />
-                <Skeleton className="h-25" />
-                <Skeleton className="h-20" />
-                <Skeleton className="h-24" />
-                <Skeleton className="h-19" />
-                <Skeleton className="h-8" />
+                <Skeleton className="h-125 rounded-sm" />
             </Surface>
         }
     >
