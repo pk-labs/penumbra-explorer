@@ -16,6 +16,7 @@ import { Props } from './clientContainer'
 
 const ClientLoader: FC<Props> = async props => {
     const stats = await getIbcStats({ clientId: props.id })
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     if (stats?.length !== 1) {
         notFound()
