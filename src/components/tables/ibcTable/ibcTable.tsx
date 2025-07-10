@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { FC, useMemo } from 'react'
-import { TimePeriod } from '@/lib/graphql/generated/types'
 import ibc from '@/lib/ibc'
 import { placeholderAvatarImage } from '@/lib/images'
 import { TransformedIbcStats } from '@/lib/types'
@@ -13,7 +12,6 @@ import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
     stats: TransformedIbcStats[]
-    timePeriod?: TimePeriod
 }
 
 const IbcTable: FC<Props> = props => {
@@ -40,10 +38,7 @@ const IbcTable: FC<Props> = props => {
     )
 
     return (
-        <Table
-            className={props.className}
-            // header={<TimePeriodSelector timePeriod={props.timePeriod} />}
-        >
+        <Table className={props.className}>
             <thead>
                 <TableRow>
                     <TableCell header>Name</TableCell>
@@ -52,10 +47,6 @@ const IbcTable: FC<Props> = props => {
                     <TableCell header>Channel ID</TableCell>
                     <TableCell header>Last tx time</TableCell>
                     <TableCell header>Total tx count</TableCell>
-                    {/*<TableCell header>Txs shielded</TableCell>*/}
-                    {/*<TableCell header>Txs unshielded</TableCell>*/}
-                    {/*<TableCell header>Txs total</TableCell>*/}
-                    {/*<TableCell header>Txs expired</TableCell>*/}
                 </TableRow>
             </thead>
             <tbody>
@@ -114,50 +105,6 @@ const IbcTable: FC<Props> = props => {
                                     {formatNumber(client.totalTxCount)}
                                 </span>
                             </TableCell>
-                            {/*<TableCell className="h-20">*/}
-                            {/*    <div className="flex flex-col gap-2">*/}
-                            {/*        <span className="text-base font-normal">*/}
-                            {/*            {formatNumber(*/}
-                            {/*                connection.shieldedTxCount*/}
-                            {/*            )}*/}
-                            {/*        </span>*/}
-                            {/*    </div>*/}
-                            {/*</TableCell>*/}
-                            {/*<TableCell className="h-20">*/}
-                            {/*    <div className="flex flex-col gap-2">*/}
-                            {/*        <span className="text-base font-normal">*/}
-                            {/*            {formatNumber(*/}
-                            {/*                connection.unshieldedTxCount*/}
-                            {/*            )}*/}
-                            {/*        </span>*/}
-                            {/*    </div>*/}
-                            {/*</TableCell>*/}
-                            {/*<TableCell className="h-20">*/}
-                            {/*    <div className="flex flex-col gap-2">*/}
-                            {/*        <span className="text-base font-normal">*/}
-                            {/*            {formatNumber(connection.totalTxCount)}*/}
-                            {/*        </span>*/}
-                            {/*    </div>*/}
-                            {/*</TableCell>*/}
-                            {/*<TableCell className="h-20">*/}
-                            {/*    <div className="flex flex-col gap-2">*/}
-                            {/*        <span*/}
-                            {/*            className={classNames(*/}
-                            {/*                'text-text-secondary flex',*/}
-                            {/*                'items-center gap-1 text-base',*/}
-                            {/*                'font-normal'*/}
-                            {/*            )}*/}
-                            {/*        >*/}
-                            {/*            <TimerOffIcon*/}
-                            {/*                className="text-text-secondary"*/}
-                            {/*                size={12}*/}
-                            {/*            />*/}
-                            {/*            {formatNumber(*/}
-                            {/*                connection.expiredTxCount*/}
-                            {/*            )}*/}
-                            {/*        </span>*/}
-                            {/*    </div>*/}
-                            {/*</TableCell>*/}
                         </TableRow>
                     ))
                 ) : (

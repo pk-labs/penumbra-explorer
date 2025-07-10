@@ -8,19 +8,14 @@ import {
     TableRow,
 } from '@/components'
 import ibc from '@/lib/ibc'
-import IbcLoader from './ibcLoader'
+import IbcTableLoader from './ibcTableLoader'
 
 export type Props = Omit<IbcTableProps, 'stats'>
 
-// TODO: Rename to IBC table container
-const IbcContainer: FC<Props> = props => (
+const IbcTableContainer: FC<Props> = props => (
     <Suspense
-        key={props.timePeriod}
         fallback={
-            <Table
-                // header={<TimePeriodSelector timePeriod={props.timePeriod} />}
-                {...props}
-            >
+            <Table {...props}>
                 <thead>
                     <TableRow>
                         <TableCell header>
@@ -40,8 +35,8 @@ const IbcContainer: FC<Props> = props => (
             </Table>
         }
     >
-        <IbcLoader {...props} />
+        <IbcTableLoader {...props} />
     </Suspense>
 )
 
-export default IbcContainer
+export default IbcTableContainer

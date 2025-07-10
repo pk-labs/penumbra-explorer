@@ -11,7 +11,7 @@ export { default as DexPositionPanelContainer } from './dexPositionPanelContaine
 export { default as DexPositionTableContainer } from './dexPositionTableContainer'
 export { default as GovernanceParametersContainer } from './governanceParametersContainer'
 export { default as HeaderContainer } from './headerContainer'
-export { default as IbcContainer } from './ibcContainer'
+export { default as IbcTableContainer } from './ibcTableContainer'
 export { default as MinValidatorStakePanelContainer } from './minValidatorStakePanelContainer'
 export { default as PageViewTracker } from './pageViewTracker'
 export { default as ProposalContainer } from './proposalContainer'

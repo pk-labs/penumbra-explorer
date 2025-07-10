@@ -686,7 +686,6 @@ export type DexTotalExecutionsQuery = { __typename?: 'QueryRoot', dexStats: { __
 
 export type IbcStatsQueryVariables = Exact<{
   clientId?: InputMaybe<Scalars['String']['input']>;
-  timePeriod?: InputMaybe<TimePeriod>;
 }>;
 
 
@@ -963,8 +962,8 @@ export const DexTotalExecutionsDocument = gql`
 }
     `;
 export const IbcStatsDocument = gql`
-    query IbcStats($clientId: String, $timePeriod: TimePeriod) {
-  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
+    query IbcStats($clientId: String) {
+  ibcStats(clientId: $clientId) {
     id: clientId
     status
     channelId

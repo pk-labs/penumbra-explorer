@@ -190,8 +190,8 @@ export function useDexTotalExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Type
   return Urql.useQuery<Types.DexTotalExecutionsQuery, Types.DexTotalExecutionsQueryVariables>({ query: Types.DexTotalExecutionsDocument, ...options });
 };
 export const IbcStatsDocument = gql`
-    query IbcStats($clientId: String, $timePeriod: TimePeriod) {
-  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
+    query IbcStats($clientId: String) {
+  ibcStats(clientId: $clientId) {
     id: clientId
     status
     channelId

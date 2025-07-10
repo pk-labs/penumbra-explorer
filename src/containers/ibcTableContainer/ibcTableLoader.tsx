@@ -3,10 +3,10 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { IbcTable } from '@/components'
 import { getIbcStats } from '@/lib/data'
-import { Props } from './ibcContainer'
+import { Props } from './ibcTableContainer'
 
-const IbcLoader: FC<Props> = async props => {
-    const stats = await getIbcStats({ timePeriod: props.timePeriod })
+const IbcTableLoader: FC<Props> = async props => {
+    const stats = await getIbcStats()
 
     if (!stats) {
         notFound()
@@ -15,4 +15,4 @@ const IbcLoader: FC<Props> = async props => {
     return <IbcTable stats={stats} {...props} />
 }
 
-export default IbcLoader
+export default IbcTableLoader
