@@ -21,8 +21,7 @@ export interface Props extends Pick<ViewProps, 'className'> {
 const BlockView: FC<Props> = props => (
     <View
         className={classNames(
-            'from-[rgba(83,174,168,0.25)]!',
-            'to-[rgba(83,174,168,0.03)]!',
+            'from-[rgba(83,174,168,0.25)] to-[rgba(83,174,168,0.03)]',
             props.className
         )}
         nextHref={
