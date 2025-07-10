@@ -18,7 +18,7 @@ const GovernanceParametersContainer: FC<Props> = props => (
                     props.className
                 )}
             >
-                <h3 className="text-lg">Governance parameters</h3>
+                <h2 className="text-lg">Governance parameters</h2>
                 <Skeleton className="h-29 rounded-sm" />
                 <Button
                     className="mt-4"
