@@ -4,10 +4,10 @@ import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
     ProposalContainer,
+    VoteTableContainer,
     VotingContainer,
     VotingEndPanelContainer,
     VotingStartPanelContainer,
-    VotingTableContainer,
 } from '@/containers'
 import { generatePageMetadata } from '@/lib/utils'
 
@@ -50,7 +50,7 @@ const ProposalPage: FC<Props> = async props => {
                         <VotingEndPanelContainer className="flex-1" />
                     </div>
                     <VotingContainer />
-                    <VotingTableContainer />
+                    <VoteTableContainer />
                 </div>
             </div>
         </Container>

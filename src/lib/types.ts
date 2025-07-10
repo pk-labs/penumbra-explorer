@@ -184,3 +184,13 @@ export enum VotingState {
     Passed = 'Passed',
     Slashed = 'Slashed',
 }
+
+export interface TransformedVote {
+    id: string
+    power: number
+    powerPercentage: number
+    timestamp: number
+    transactionHash: string
+    validatorId?: string
+    yes: boolean
+}

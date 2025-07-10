@@ -3,9 +3,9 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { Surface } from '@/components'
 import { classNames } from '@/lib/utils'
-import { Props } from './votingTableContainer'
+import { Props } from './voteTableContainer'
 
-const VotingTableLoader: FC<Props> = async props => {
+const VoteTableLoader: FC<Props> = async props => {
     const _voting = await new Promise<any>(resolve =>
         setTimeout(
             () => resolve({}),
@@ -23,4 +23,4 @@ const VotingTableLoader: FC<Props> = async props => {
     )
 }
 
-export default VotingTableLoader
+export default VoteTableLoader

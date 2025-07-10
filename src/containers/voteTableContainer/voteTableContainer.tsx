@@ -2,13 +2,13 @@
 import { FC, Suspense } from 'react'
 import { Skeleton, Surface } from '@/components'
 import { classNames } from '@/lib/utils'
-import VotingTableLoader from './votingTableLoader'
+import VoteTableLoader from './voteTableLoader'
 
 export interface Props {
     className?: string
 }
 
-const VotingTableContainer: FC<Props> = props => (
+const VoteTableContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <Surface
@@ -22,8 +22,8 @@ const VotingTableContainer: FC<Props> = props => (
             </Surface>
         }
     >
-        <VotingTableLoader {...props} />
+        <VoteTableLoader {...props} />
     </Suspense>
 )
 
-export default VotingTableContainer
+export default VoteTableContainer
