@@ -15,9 +15,9 @@ const ValidatorParametersLoader: FC<Props> = async props => {
 
     return (
         <Surface
-            className={classNames('flex flex-col gap-1 p-6', props.className)}
+            className={classNames('flex flex-col gap-2 p-6', props.className)}
         >
-            <h3 className="text-lg">Validator parameters</h3>
+            <h2 className="text-lg">Validator parameters</h2>
             <Parameters>
                 <Parameter name="Uptime blocks window">
                     {formatNumber(parameters.uptimeBlocksWindow)}
