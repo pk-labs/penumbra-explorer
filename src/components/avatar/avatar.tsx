@@ -3,14 +3,6 @@ import Image from 'next/image'
 import { FC } from 'react'
 import { classNames, firstLetter } from '@/lib/utils'
 
-// interface Props {
-//     alt: string
-//     className?: string
-//     fallback?: StaticImageData | string
-//     fallbackLetter?: boolean
-//     src?: StaticImageData | string
-// }
-
 type Props = {
     alt: string
     className?: string
@@ -40,7 +32,7 @@ const Avatar: FC<Props> = props => (
             className="rounded-full"
             src={(props.src ?? props.fallback)!}
         />
-        {props.fallbackLetter && (
+        {Boolean(!props.src && props.fallbackLetter) && (
             <span
                 className={classNames(
                     'absolute top-1/2 left-1/2 mt-[3px] -translate-1/2'

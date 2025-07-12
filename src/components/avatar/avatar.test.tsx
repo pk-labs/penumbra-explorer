@@ -1,4 +1,9 @@
-import { getByAltText, getByText, render } from '@testing-library/react'
+import {
+    getByAltText,
+    getByText,
+    queryByText,
+    render,
+} from '@testing-library/react'
 import Avatar from './avatar'
 
 describe('Avatar', () => {
@@ -8,14 +13,28 @@ describe('Avatar', () => {
     })
 
     test('renders fallback image', async () => {
-        const { container } = render(<Avatar alt="Foo" fallback="bar.jpg" />)
+        const { container, rerender } = render(
+            <Avatar alt="Foo" fallback="bar.jpg" src="foo.jpg" />
+        )
+
+        expect(getByAltText(container, 'Foo')).not.toHaveAttribute(
+            'src',
+            'bar.jpg'
+        )
+
+        rerender(<Avatar alt="Foo" fallback="bar.jpg" />)
+
         expect(getByAltText(container, 'Foo')).toHaveAttribute('src', 'bar.jpg')
     })
 
     test('renders fallback letter', async () => {
-        const { container } = render(
-            <Avatar alt="Bar" fallback="bar.jpg" fallbackLetter />
+        const { container, rerender } = render(
+            <Avatar alt="Bar" fallback="bar.jpg" src="foo.jpg" fallbackLetter />
         )
+
+        expect(queryByText(container, 'B')).toBeNull()
+
+        rerender(<Avatar alt="Bar" fallback="bar.jpg" fallbackLetter />)
 
         getByText(container, 'B')
     })
