@@ -20,4 +20,5 @@ const config: Config = {
     },
 }
 
+// @ts-expect-error Jest v30 config type not yet supported by Next.js
 export default createJestConfig(config)
