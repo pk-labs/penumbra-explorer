@@ -50,7 +50,10 @@ const ProposalPage: FC<Props> = async props => {
                             className="flex-1"
                             proposalId={id}
                         />
-                        <VotingEndPanelContainer className="flex-1" />
+                        <VotingEndPanelContainer
+                            className="flex-1"
+                            proposalId={id}
+                        />
                     </div>
                     <VotingContainer />
                     <VoteTableContainer limit={{ length: 20 }} pagination />

@@ -6,6 +6,7 @@ import VotingEndPanelLoader from './votingEndPanelLoader'
 
 export interface Props {
     className?: string
+    proposalId: number
 }
 
 const VotingEndPanelContainer: FC<Props> = props => (

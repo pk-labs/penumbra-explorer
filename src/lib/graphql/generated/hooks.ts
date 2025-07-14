@@ -476,6 +476,18 @@ export const ValidatorsDocument = gql`
 export function useValidatorsQuery(options?: Omit<Urql.UseQueryArgs<Types.ValidatorsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ValidatorsQuery, Types.ValidatorsQueryVariables>({ query: Types.ValidatorsDocument, ...options });
 };
+export const VotingEndDocument = gql`
+    query VotingEnd($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    votingEndedBlockHeight
+    votingEndedTimestamp
+  }
+}
+    `;
+
+export function useVotingEndQuery(options: Omit<Urql.UseQueryArgs<Types.VotingEndQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.VotingEndQuery, Types.VotingEndQueryVariables>({ query: Types.VotingEndDocument, ...options });
+};
 export const VotingStartDocument = gql`
     query VotingStart($proposalId: Int!) {
   proposalDetail(id: $proposalId) {

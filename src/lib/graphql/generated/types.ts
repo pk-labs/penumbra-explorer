@@ -945,6 +945,13 @@ export type ValidatorsQueryVariables = Exact<{
 
 export type ValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', validators: Array<{ __typename?: 'Validator', id: string, name?: string | null, state: ValidatorState, bondingState: BondingState, votingPower: number, votingPowerActivePercentage: number, uptime?: number | null, firstSeenTime?: any | null, commission: number }> } };
 
+export type VotingEndQueryVariables = Exact<{
+  proposalId: Scalars['Int']['input'];
+}>;
+
+
+export type VotingEndQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', votingEndedBlockHeight: number, votingEndedTimestamp?: any | null } | null };
+
 export type VotingStartQueryVariables = Exact<{
   proposalId: Scalars['Int']['input'];
 }>;
@@ -1350,6 +1357,14 @@ export const ValidatorsDocument = gql`
       firstSeenTime
       commission
     }
+  }
+}
+    `;
+export const VotingEndDocument = gql`
+    query VotingEnd($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    votingEndedBlockHeight
+    votingEndedTimestamp
   }
 }
     `;

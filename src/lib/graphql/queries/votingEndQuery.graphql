@@ -1,0 +1,6 @@
+query VotingEnd($proposalId: Int!) {
+    proposalDetail(id: $proposalId) {
+        votingEndedBlockHeight
+        votingEndedTimestamp
+    }
+}
