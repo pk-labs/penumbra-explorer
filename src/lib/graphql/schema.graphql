@@ -9,6 +9,14 @@ union Action = IbcRelay | NotYetSupportedAction | Output | Spend
 
 union SearchResult = Block | Transaction | ValidatorSearchResults
 
+type ActiveProposal {
+    endBlockHeight: Int!
+    id: Int!
+    kind: ProposalKind!
+    state: ProposalState!
+    title: String!
+}
+
 type AssetId {
     altBaseDenom: String!
     altBech32M: String!
@@ -117,6 +125,19 @@ type Fee {
     assetId: AssetId
 }
 
+type GovernanceParameters {
+    "The deposit amount required to submit a proposal (in UM)"
+    depositAmount: Decimal!
+    "The percentage of votes required for a proposal to pass"
+    passingThreshold: Decimal!
+    "The duration of proposal voting in blocks"
+    proposalDuration: Int!
+    "The percentage threshold for slashing"
+    slashingThreshold: Decimal!
+    "The quorum percentage required for a proposal to be valid"
+    validQuorum: Decimal!
+}
+
 type IbcRelay {
     rawAction: String!
 }
@@ -193,7 +214,48 @@ type OutputBody {
     wrappedMemoKey: String!
 }
 
+type PastProposal {
+    endBlockHeight: Int!
+    endTimestamp: DateTime
+    id: Int!
+    kind: ProposalKind!
+    outcome: ProposalOutcome
+    state: ProposalState!
+    title: String!
+    totalVotes: Decimal!
+}
+
+type PastProposalCollection {
+    items: [PastProposal!]!
+    total: Int!
+}
+
+type ProposalDetail {
+    abstainVotes: Decimal!
+    abstainVotesPercentage: Decimal!
+    depositAmount: Decimal!
+    description: String!
+    id: Int!
+    kind: ProposalKind!
+    noVotes: Decimal!
+    noVotesPercentage: Decimal!
+    outcome: ProposalOutcome
+    payload: JSON!
+    quorum: Decimal!
+    state: ProposalState!
+    title: String!
+    totalVotes: Decimal!
+    votes(limit: CollectionLimit): VoteCollection!
+    votingEndedBlockHeight: Int!
+    votingEndedTimestamp: DateTime
+    votingStartedBlockHeight: Int!
+    votingStartedTimestamp: DateTime!
+    yesVotes: Decimal!
+    yesVotesPercentage: Decimal!
+}
+
 type QueryRoot {
+    activeProposals: [ActiveProposal!]!
     block(height: Int!): Block
     blocks(filter: BlockFilter, limit: CollectionLimit!): BlockCollection!
     dbBlock(height: Int!): DbBlock
@@ -202,10 +264,14 @@ type QueryRoot {
     dbRawTransaction(txHashHex: String!): DbRawTransaction
     dbRawTransactions(limit: Int, offset: Int): [DbRawTransaction!]!
     dexStats: DexStats!
+    getVoteForTransaction(txHash: String!): VoteForTransaction
+    governanceParameters: GovernanceParameters
     ibcStats(clientId: String, limit: Int, offset: Int, timePeriod: TimePeriod): [IbcStats!]!
     ibcTotalShieldedVolume: TotalShieldedVolume!
     latestExecutions(filter: SwapExecutionFilter): [SwapExecution!]!
     liquidityPositions(filter: LiquidityPositionFilter, limit: CollectionLimit!): LiquidityPositionCollection!
+    pastProposals(limit: CollectionLimit!): PastProposalCollection!
+    proposalDetail(id: Int!): ProposalDetail
     search(slug: String!): SearchResult
     stats: Stats!
     transaction(hash: String!): Transaction
@@ -373,6 +439,28 @@ type ValidatorSearchResults {
     total: Int!
 }
 
+type Vote {
+    effectiveVotingPower: Decimal!
+    id: String
+    name: String!
+    txHash: String
+    vote: VoteValue
+    votedAt: DateTime!
+    votingPowerPercentage: Decimal!
+}
+
+type VoteCollection {
+    items: [Vote!]!
+    total: Int!
+}
+
+type VoteForTransaction {
+    id: String
+    proposal: Int!
+    vote: VoteValue
+    votingPower: Decimal!
+}
+
 enum BondingState {
     BONDING_STATE_ENUM_BONDED
     BONDING_STATE_ENUM_UNBONDED
@@ -407,6 +495,29 @@ enum LiquidityPositionStateFilter {
     OPEN
 }
 
+enum ProposalKind {
+    COMMUNITY_POOL_SPEND
+    EMERGENCY
+    FREEZE_IBC_CLIENT
+    PARAMETER_CHANGE
+    SIGNALING
+    UNFREEZE_IBC_CLIENT
+    UPGRADE_PLAN
+}
+
+enum ProposalOutcome {
+    FAILED
+    PASSED
+    SLASHED
+}
+
+enum ProposalState {
+    CLAIMED
+    FINISHED
+    VOTING
+    WITHDRAWN
+}
+
 enum TimePeriod {
     ALL
     DAY
@@ -429,7 +540,15 @@ enum ValidatorStateFilter {
     INACTIVE
 }
 
+enum VoteValue {
+    ABSTAIN
+    NO
+    YES
+}
+
 scalar DateTime
+
+scalar Decimal
 
 "A scalar that can represent any JSON value."
 scalar JSON
