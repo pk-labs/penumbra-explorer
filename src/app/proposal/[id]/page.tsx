@@ -55,7 +55,7 @@ const ProposalPage: FC<Props> = async props => {
                             proposalId={id}
                         />
                     </div>
-                    <VotingContainer />
+                    <VotingContainer proposalId={id} />
                     <VoteTableContainer limit={{ length: 20 }} pagination />
                 </div>
             </div>

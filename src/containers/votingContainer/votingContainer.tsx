@@ -7,6 +7,7 @@ import VotingNumbers from './votingNumbers'
 
 export interface Props {
     className?: string
+    proposalId: number
 }
 
 const VotingContainer: FC<Props> = props => (

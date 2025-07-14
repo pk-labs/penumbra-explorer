@@ -488,6 +488,21 @@ export const VotingEndDocument = gql`
 export function useVotingEndQuery(options: Omit<Urql.UseQueryArgs<Types.VotingEndQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.VotingEndQuery, Types.VotingEndQueryVariables>({ query: Types.VotingEndDocument, ...options });
 };
+export const VotingDocument = gql`
+    query Voting($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    abstainVotes
+    noVotes
+    outcome
+    quorum
+    yesVotes
+  }
+}
+    `;
+
+export function useVotingQuery(options: Omit<Urql.UseQueryArgs<Types.VotingQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.VotingQuery, Types.VotingQueryVariables>({ query: Types.VotingDocument, ...options });
+};
 export const VotingStartDocument = gql`
     query VotingStart($proposalId: Int!) {
   proposalDetail(id: $proposalId) {
