@@ -7,6 +7,7 @@ export { default as dexBlockExecutionsQuery } from './dexBlockExecutionsQuery.gr
 export { default as dexLiquidityPositionsQuery } from './dexLiquidityPositionsQuery.graphql'
 export { default as dexOpenPositionsQuery } from './dexOpenPositionsQuery.graphql'
 export { default as dexTotalExecutionsQuery } from './dexTotalExecutionsQuery.graphql'
+export { default as govParametersQuery } from './govParametersQuery.graphql'
 export { default as ibcStatsQuery } from './ibcStatsQuery.graphql'
 export { default as minValidatorStakeQuery } from './minValidatorStakeQuery.graphql'
 export { default as searchQuery } from './searchQuery.graphql'

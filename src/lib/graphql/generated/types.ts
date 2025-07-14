@@ -830,6 +830,11 @@ export type DexTotalExecutionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type DexTotalExecutionsQuery = { __typename?: 'QueryRoot', dexStats: { __typename?: 'DexStats', totalExecutions: number } };
 
+export type GovParametersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GovParametersQuery = { __typename?: 'QueryRoot', governanceParameters?: { __typename?: 'GovernanceParameters', depositAmount: any, passingThreshold: any, proposalDuration: number, slashingThreshold: any, validQuorum: any } | null };
+
 export type IbcStatsQueryVariables = Exact<{
   clientId?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -1104,6 +1109,17 @@ export const DexTotalExecutionsDocument = gql`
     query DexTotalExecutions {
   dexStats {
     totalExecutions
+  }
+}
+    `;
+export const GovParametersDocument = gql`
+    query GovParameters {
+  governanceParameters {
+    depositAmount
+    passingThreshold
+    proposalDuration
+    slashingThreshold
+    validQuorum
   }
 }
     `;

@@ -189,6 +189,21 @@ export const DexTotalExecutionsDocument = gql`
 export function useDexTotalExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexTotalExecutionsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.DexTotalExecutionsQuery, Types.DexTotalExecutionsQueryVariables>({ query: Types.DexTotalExecutionsDocument, ...options });
 };
+export const GovParametersDocument = gql`
+    query GovParameters {
+  governanceParameters {
+    depositAmount
+    passingThreshold
+    proposalDuration
+    slashingThreshold
+    validQuorum
+  }
+}
+    `;
+
+export function useGovParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.GovParametersQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.GovParametersQuery, Types.GovParametersQueryVariables>({ query: Types.GovParametersDocument, ...options });
+};
 export const IbcStatsDocument = gql`
     query IbcStats($clientId: String) {
   ibcStats(clientId: $clientId) {

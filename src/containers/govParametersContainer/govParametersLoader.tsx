@@ -1,28 +1,13 @@
 // istanbul ignore file
-import { faker } from '@faker-js/faker'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Button, Parameter, Parameters, Surface } from '@/components'
+import { getGovParameters } from '@/lib/data'
 import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
 import { Props } from './govParametersContainer'
 
 const GovParametersLoader: FC<Props> = async props => {
-    const parameters = await new Promise<any>(resolve =>
-        setTimeout(
-            () =>
-                resolve({
-                    depositAmount: faker.number.int({ max: 100, min: 10 }),
-                    passingTreshold: faker.number.int({ max: 69, min: 50 }),
-                    proposalDuration: faker.number.int({
-                        max: 40000,
-                        min: 30000,
-                    }),
-                    slashingTreshold: faker.number.int({ max: 80, min: 70 }),
-                    validQuorum: faker.number.int({ max: 49, min: 30 }),
-                }),
-            faker.number.int({ max: 2000, min: 1000 })
-        )
-    )
+    const parameters = await getGovParameters()
 
     if (!parameters) {
         notFound()
@@ -38,10 +23,10 @@ const GovParametersLoader: FC<Props> = async props => {
                     {parameters.validQuorum}%
                 </Parameter>
                 <Parameter name="Passing treshold">
-                    {parameters.passingTreshold}%
+                    {parameters.passingThreshold}%
                 </Parameter>
                 <Parameter name="Slashing treshold">
-                    {parameters.slashingTreshold}%
+                    {parameters.slashingThreshold}%
                 </Parameter>
                 <Parameter name="Deposit amount">
                     {formatNumber(parameters.depositAmount)} UM
