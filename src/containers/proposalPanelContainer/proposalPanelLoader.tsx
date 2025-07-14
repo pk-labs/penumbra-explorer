@@ -1,30 +1,20 @@
 // istanbul ignore file
-import { faker } from '@faker-js/faker'
 import { ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { ProposalKind, ProposalState } from '@/lib/graphql/generated/types'
-import { classNames, transformProposalKind } from '@/lib/utils'
+import { getActiveProposals } from '@/lib/data'
+import { classNames } from '@/lib/utils'
 import ProposalStatePill from '../../components/pills/proposalStatePill'
 import { Props } from './proposalPanelContainer'
 
 const ProposalPanelLoader: FC<Props> = async props => {
-    const proposal = await new Promise<any>(resolve =>
-        setTimeout(
-            () =>
-                resolve({
-                    id: faker.number.int({ max: 999, min: 1 }),
-                    kind: transformProposalKind(
-                        faker.helpers.arrayElement(Object.values(ProposalKind))
-                    ),
-                    state: faker.helpers.arrayElement(
-                        Object.values(ProposalState)
-                    ),
-                    title: faker.lorem.sentence({ max: 20, min: 5 }),
-                }),
-            faker.number.int({ max: 2000, min: 1000 })
-        )
-    )
+    const proposals = await getActiveProposals()
+
+    if (!proposals?.length) {
+        return
+    }
+
+    const [proposal] = proposals
 
     return (
         <Link
@@ -44,7 +34,7 @@ const ProposalPanelLoader: FC<Props> = async props => {
                         'text-text-secondary font-mono text-xs font-medium'
                     )}
                 >
-                    Proposal #{proposal.id} {proposal.type}
+                    Proposal #{proposal.id} {proposal.kind}
                 </div>
                 <div
                     className={classNames(

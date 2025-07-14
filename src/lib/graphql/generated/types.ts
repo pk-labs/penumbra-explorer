@@ -775,6 +775,11 @@ export type PartialTransactionFragment = { __typename?: 'Transaction', hash: str
 
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
 
+export type ActiveProposalsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ActiveProposalsQuery = { __typename?: 'QueryRoot', activeProposals: Array<{ __typename?: 'ActiveProposal', endBlockHeight: number, id: number, kind: ProposalKind, state: ProposalState, title: string }> };
+
 export type ActiveValidatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1007,6 +1012,17 @@ export const TransactionFragmentDoc = gql`
   }
   raw
   rawJson
+}
+    `;
+export const ActiveProposalsDocument = gql`
+    query ActiveProposals {
+  activeProposals {
+    endBlockHeight
+    id
+    kind
+    state
+    title
+  }
 }
     `;
 export const ActiveValidatorsDocument = gql`

@@ -50,6 +50,21 @@ export const TransactionFragmentDoc = gql`
   rawJson
 }
     `;
+export const ActiveProposalsDocument = gql`
+    query ActiveProposals {
+  activeProposals {
+    endBlockHeight
+    id
+    kind
+    state
+    title
+  }
+}
+    `;
+
+export function useActiveProposalsQuery(options?: Omit<Urql.UseQueryArgs<Types.ActiveProposalsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ActiveProposalsQuery, Types.ActiveProposalsQueryVariables>({ query: Types.ActiveProposalsDocument, ...options });
+};
 export const ActiveValidatorsDocument = gql`
     query ActiveValidators {
   validatorsHomepage {

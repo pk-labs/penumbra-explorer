@@ -1,0 +1,9 @@
+query ActiveProposals {
+    activeProposals {
+        endBlockHeight
+        id
+        kind
+        state
+        title
+    }
+}

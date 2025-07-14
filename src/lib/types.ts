@@ -1,4 +1,5 @@
 import {
+    ActiveProposal,
     BlockFragment,
     DexLiquidityPositionsQuery,
     IbcStatsQuery,
@@ -136,6 +137,11 @@ export interface TransformedDexPosition
     quoteAssetId: string
     quoteReserve: number
     timestamp: number
+}
+
+export interface TransformedActiveProposal
+    extends Omit<ActiveProposal, 'kind'> {
+    kind: TransformedProposalKind
 }
 
 export interface TransformedProposal {

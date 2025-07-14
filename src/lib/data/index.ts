@@ -1,3 +1,4 @@
+export { default as getActiveProposals } from './getActiveProposals'
 export { default as getActiveVotingPower } from './getActiveVotingPower'
 export { default as getBlock } from './getBlock'
 export { default as getBlocks } from './getBlocks'
