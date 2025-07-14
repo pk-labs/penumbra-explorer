@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Button, Skeleton, Surface } from '@/components'
+import { Skeleton, Surface } from '@/components'
 import { classNames } from '@/lib/utils'
 import ProposalLoader from './proposalLoader'
 
@@ -24,12 +24,7 @@ const ProposalContainer: FC<Props> = props => (
                         <span className="font-mono text-base">
                             Proposal #{props.proposalId}
                         </span>
-                        <Button
-                            density="compact"
-                            href="https://vote.penumbra.zone/"
-                        >
-                            Vote
-                        </Button>
+                        <Skeleton className="h-9 w-23 rounded-full" />
                     </div>
                 </header>
                 <Skeleton className="h-140 rounded-sm" />

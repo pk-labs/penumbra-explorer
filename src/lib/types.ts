@@ -7,8 +7,7 @@ import {
     PartialBlockFragment,
     PartialTransactionFragment,
     PastProposal,
-    ProposalOutcome,
-    ProposalState,
+    ProposalDetail,
     TransactionFragment,
 } from '@/lib/graphql/generated/types'
 
@@ -151,15 +150,13 @@ export interface TransformedPastProposal
     kind: TransformedProposalKind
 }
 
-export interface TransformedProposal {
-    blockHeight: number
-    id: number
+export interface TransformedProposal
+    extends Pick<
+        ProposalDetail,
+        'depositAmount' | 'description' | 'id' | 'outcome' | 'state' | 'title'
+    > {
     kind: TransformedProposalKind
-    outcome: ProposalOutcome
-    state: ProposalState
-    timestamp: number
-    title: string
-    votes: number
+    rawJson?: object
 }
 
 export enum TransformedProposalKind {

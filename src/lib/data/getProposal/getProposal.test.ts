@@ -1,5 +1,7 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import getBlock from './getBlock'
+import { ProposalKind } from '@/lib/graphql/generated/types'
+import { TransformedProposalKind } from '@/lib/types'
+import getProposal from './getProposal'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
@@ -8,27 +10,25 @@ jest.mock('../../utils/decodeTransaction/decodeTransaction', () => () => ({
     toJson: jest.fn(),
 }))
 
-describe('getBlock', () => {
+describe('getProposal', () => {
     test('returns transformed data', async () => {
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
                         data: {
-                            block: {
-                                rawJson: {
-                                    events: [{ event_id: 2 }, { event_id: 1 }],
-                                },
-                                transactions: [{ block: {}, hash: 'FoO' }],
+                            proposalDetail: {
+                                kind: ProposalKind.Emergency,
+                                payload: { foo: 'bar' },
                             },
                         },
                     }),
             }),
         })
 
-        await expect(getBlock(1)).resolves.toMatchObject({
-            rawJson: { events: [{ event_id: 1 }, { event_id: 2 }] },
-            transactions: [{ hash: 'foo' }],
+        await expect(getProposal(1)).resolves.toMatchObject({
+            kind: TransformedProposalKind.Emergency,
+            rawJson: { foo: 'bar' },
         })
     })
 
@@ -39,6 +39,6 @@ describe('getBlock', () => {
             }),
         })
 
-        await expect(getBlock(1)).rejects.toBe('foo')
+        await expect(getProposal(1)).rejects.toBe('foo')
     })
 })

@@ -859,6 +859,13 @@ export type PastProposalsQueryVariables = Exact<{
 
 export type PastProposalsQuery = { __typename?: 'QueryRoot', pastProposals: { __typename?: 'PastProposalCollection', total: number, items: Array<{ __typename?: 'PastProposal', endBlockHeight: number, endTimestamp?: any | null, id: number, kind: ProposalKind, outcome?: ProposalOutcome | null, state: ProposalState, title: string, totalVotes: any }> } };
 
+export type ProposalQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type ProposalQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', depositAmount: any, description: string, id: number, kind: ProposalKind, outcome?: ProposalOutcome | null, payload: any, state: ProposalState, title: string } | null };
+
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -1187,6 +1194,20 @@ export const PastProposalsDocument = gql`
       totalVotes
     }
     total
+  }
+}
+    `;
+export const ProposalDocument = gql`
+    query Proposal($id: Int!) {
+  proposalDetail(id: $id) {
+    depositAmount
+    description
+    id
+    kind
+    outcome
+    payload
+    state
+    title
   }
 }
     `;

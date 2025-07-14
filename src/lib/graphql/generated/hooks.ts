@@ -275,6 +275,24 @@ export const PastProposalsDocument = gql`
 export function usePastProposalsQuery(options: Omit<Urql.UseQueryArgs<Types.PastProposalsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.PastProposalsQuery, Types.PastProposalsQueryVariables>({ query: Types.PastProposalsDocument, ...options });
 };
+export const ProposalDocument = gql`
+    query Proposal($id: Int!) {
+  proposalDetail(id: $id) {
+    depositAmount
+    description
+    id
+    kind
+    outcome
+    payload
+    state
+    title
+  }
+}
+    `;
+
+export function useProposalQuery(options: Omit<Urql.UseQueryArgs<Types.ProposalQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ProposalQuery, Types.ProposalQueryVariables>({ query: Types.ProposalDocument, ...options });
+};
 export const SearchDocument = gql`
     query Search($slug: String!) {
   search(slug: $slug) {
