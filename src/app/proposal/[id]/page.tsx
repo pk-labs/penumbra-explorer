@@ -46,7 +46,10 @@ const ProposalPage: FC<Props> = async props => {
                 />
                 <div className="flex flex-1 flex-col gap-4">
                     <div className="flex flex-col gap-4 sm:flex-row">
-                        <VotingStartPanelContainer className="flex-1" />
+                        <VotingStartPanelContainer
+                            className="flex-1"
+                            proposalId={id}
+                        />
                         <VotingEndPanelContainer className="flex-1" />
                     </div>
                     <VotingContainer />

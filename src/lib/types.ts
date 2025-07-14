@@ -170,6 +170,11 @@ export enum TransformedProposalKind {
     UpgradePlan = 'Upgrade plan',
 }
 
+export interface VotingTime {
+    blockHeight: number
+    timestamp: number
+}
+
 export interface TransformedVoting {
     abstain: number
     no: number

@@ -6,6 +6,7 @@ import VotingStartPanelLoader from './votingStartPanelLoader'
 
 export interface Props {
     className?: string
+    proposalId: number
 }
 
 const VotingStartPanelContainer: FC<Props> = props => (

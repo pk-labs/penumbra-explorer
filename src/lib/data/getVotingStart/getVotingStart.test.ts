@@ -1,30 +1,32 @@
+import dayjs from '@/lib/dayjs/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import { ProposalKind } from '@/lib/graphql/generated/types'
-import { TransformedProposalKind } from '@/lib/types'
-import getProposal from './getProposal'
+import getVotingStart from './getVotingStart'
 
 jest.mock('../../graphql/createGraphqlClient')
 const createGraphqlClientMock = createGraphqlClient as jest.Mocked<any>
 
-describe('getProposal', () => {
+describe('getVotingStart', () => {
     test('returns transformed data', async () => {
+        const votingStartedTimestamp = dayjs().subtract(1, 'second')
+
         createGraphqlClientMock.mockReturnValue({
             query: () => ({
                 toPromise: () =>
                     Promise.resolve({
                         data: {
                             proposalDetail: {
-                                kind: ProposalKind.Emergency,
-                                payload: { foo: 'bar' },
+                                votingStartedBlockHeight: 123,
+                                votingStartedTimestamp:
+                                    votingStartedTimestamp.toISOString(),
                             },
                         },
                     }),
             }),
         })
 
-        await expect(getProposal(1)).resolves.toMatchObject({
-            kind: TransformedProposalKind.Emergency,
-            rawJson: { foo: 'bar' },
+        await expect(getVotingStart(1)).resolves.toEqual({
+            blockHeight: 123,
+            timestamp: votingStartedTimestamp.valueOf(),
         })
     })
 
@@ -35,6 +37,6 @@ describe('getProposal', () => {
             }),
         })
 
-        await expect(getProposal(1)).rejects.toBe('foo')
+        await expect(getVotingStart(1)).rejects.toBe('foo')
     })
 })

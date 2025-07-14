@@ -9,7 +9,7 @@ import { transformProposalKind } from '@/lib/utils'
 
 const getProposal = async (
     id: number
-): Promise<null | TransformedProposal | undefined> => {
+): Promise<TransformedProposal | undefined> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
