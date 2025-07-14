@@ -2,13 +2,13 @@
 import { FC, Suspense } from 'react'
 import { Button, Skeleton, Surface } from '@/components'
 import { classNames } from '@/lib/utils'
-import GovernanceParametersLoader from './governanceParametersLoader'
+import GovParametersLoader from './govParametersLoader'
 
 export interface Props {
     className?: string
 }
 
-const GovernanceParametersContainer: FC<Props> = props => (
+const GovParametersContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <Surface
@@ -31,8 +31,8 @@ const GovernanceParametersContainer: FC<Props> = props => (
             </Surface>
         }
     >
-        <GovernanceParametersLoader {...props} />
+        <GovParametersLoader {...props} />
     </Suspense>
 )
 
-export default GovernanceParametersContainer
+export default GovParametersContainer

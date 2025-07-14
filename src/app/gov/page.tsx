@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
-    GovernanceParametersContainer,
+    GovParametersContainer,
     ProposalPanelContainer,
     ProposalTableContainer,
 } from '@/containers'
@@ -53,7 +53,7 @@ const GovernancePage: FC<Props> = async props => {
                     limit={{ length, offset }}
                     pagination
                 />
-                <GovernanceParametersContainer className="lg:w-[370px]" />
+                <GovParametersContainer className="lg:w-[370px]" />
             </div>
         </Container>
     )

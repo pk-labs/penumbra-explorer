@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Button, Parameter, Parameters, Surface } from '@/components'
 import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
-import { Props } from './governanceParametersContainer'
+import { Props } from './govParametersContainer'
 
-const GovernanceParametersLoader: FC<Props> = async props => {
+const GovParametersLoader: FC<Props> = async props => {
     const parameters = await new Promise<any>(resolve =>
         setTimeout(
             () =>
@@ -63,4 +63,4 @@ const GovernanceParametersLoader: FC<Props> = async props => {
     )
 }
 
-export default GovernanceParametersLoader
+export default GovParametersLoader
