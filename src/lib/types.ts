@@ -5,6 +5,7 @@ import {
     IbcStatus,
     PartialBlockFragment,
     PartialTransactionFragment,
+    ProposalOutcome,
     ProposalState,
     TransactionFragment,
 } from '@/lib/graphql/generated/types'
@@ -146,12 +147,6 @@ export interface TransformedProposal {
     title: string
     type: ProposalType
     votes: number
-}
-
-export enum ProposalOutcome {
-    Failed = 'failed',
-    Passed = 'passed',
-    Slashed = 'slashed',
 }
 
 export enum ProposalType {

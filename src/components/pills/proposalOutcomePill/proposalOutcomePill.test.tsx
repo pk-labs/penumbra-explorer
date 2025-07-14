@@ -1,5 +1,5 @@
 import { getByText, render } from '@testing-library/react'
-import { ProposalOutcome } from '@/lib/types'
+import { ProposalOutcome } from '@/lib/graphql/generated/types'
 import ProposalOutcomePill from './proposalOutcomePill'
 
 describe('ProposalOutcomePill', () => {

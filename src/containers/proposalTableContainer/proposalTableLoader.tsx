@@ -3,8 +3,8 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { Pagination, ProposalTable } from '@/components'
 import dayjs from '@/lib/dayjs'
-import { ProposalState } from '@/lib/graphql/generated/types'
-import { ProposalOutcome, ProposalType, TransformedProposal } from '@/lib/types'
+import { ProposalOutcome, ProposalState } from '@/lib/graphql/generated/types'
+import { ProposalType, TransformedProposal } from '@/lib/types'
 import { Props } from './proposalTableContainer'
 
 const ProposalTableLoader: FC<Props> = async ({
