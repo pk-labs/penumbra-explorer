@@ -5,7 +5,7 @@ import { Pill, PillProps } from '../pill'
 
 interface Props {
     className?: string
-    outcome?: ProposalOutcome
+    outcome?: null | ProposalOutcome
 }
 
 const ProposalOutcomePill: FC<Props> = props => {

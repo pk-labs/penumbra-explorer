@@ -254,6 +254,27 @@ export const MinValidatorStakeDocument = gql`
 export function useMinValidatorStakeQuery(options?: Omit<Urql.UseQueryArgs<Types.MinValidatorStakeQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.MinValidatorStakeQuery, Types.MinValidatorStakeQueryVariables>({ query: Types.MinValidatorStakeDocument, ...options });
 };
+export const PastProposalsDocument = gql`
+    query PastProposals($limit: CollectionLimit!) {
+  pastProposals(limit: $limit) {
+    items {
+      endBlockHeight
+      endTimestamp
+      id
+      kind
+      outcome
+      state
+      title
+      totalVotes
+    }
+    total
+  }
+}
+    `;
+
+export function usePastProposalsQuery(options: Omit<Urql.UseQueryArgs<Types.PastProposalsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.PastProposalsQuery, Types.PastProposalsQueryVariables>({ query: Types.PastProposalsDocument, ...options });
+};
 export const SearchDocument = gql`
     query Search($slug: String!) {
   search(slug: $slug) {

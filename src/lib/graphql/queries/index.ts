@@ -11,6 +11,7 @@ export { default as dexTotalExecutionsQuery } from './dexTotalExecutionsQuery.gr
 export { default as govParametersQuery } from './govParametersQuery.graphql'
 export { default as ibcStatsQuery } from './ibcStatsQuery.graphql'
 export { default as minValidatorStakeQuery } from './minValidatorStakeQuery.graphql'
+export { default as pastProposalsQuery } from './pastProposalsQuery.graphql'
 export { default as searchQuery } from './searchQuery.graphql'
 export { default as statsQuery } from './statsQuery.graphql'
 export { default as totalShieldedVolumeQuery } from './totalShieldedVolumeQuery.graphql'

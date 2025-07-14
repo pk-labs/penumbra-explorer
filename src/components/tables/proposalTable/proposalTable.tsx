@@ -2,7 +2,7 @@ import { BoxIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
 import dayjs from '@/lib/dayjs/dayjs'
-import { TransformedProposal } from '@/lib/types'
+import { TransformedPastProposal } from '@/lib/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import EmptyState from '../../emptyState'
 import ProposalOutcomePill from '../../pills/proposalOutcomePill'
@@ -10,7 +10,7 @@ import ProposalStatePill from '../../pills/proposalStatePill'
 import { Table, TableCell, TableProps, TableRow } from '../table'
 
 export interface Props extends Omit<TableProps, 'children'> {
-    proposals: TransformedProposal[]
+    proposals: TransformedPastProposal[]
 }
 
 const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
@@ -58,7 +58,7 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                                 />
                             </TableCell>
                             <TableCell className="h-20">
-                                {formatNumber(proposal.votes)} UM
+                                {formatNumber(proposal.totalVotes)} UM
                             </TableCell>
                             <TableCell className="h-20">
                                 <span className="inline-flex flex-col gap-1">
@@ -67,10 +67,10 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                                             className="text-text-secondary"
                                             size={16}
                                         />
-                                        {formatNumber(proposal.blockHeight)}
+                                        {formatNumber(proposal.endBlockHeight)}
                                     </span>
                                     <span className="text-text-secondary text-xs">
-                                        {dayjs(proposal.timestamp)
+                                        {dayjs(proposal.endTimestamp)
                                             .tz('UTC')
                                             .format('YYYY-MM-DD HH:mm:ss z')}
                                     </span>

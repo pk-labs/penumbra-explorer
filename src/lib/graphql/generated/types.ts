@@ -852,6 +852,13 @@ export type MinValidatorStakeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MinValidatorStakeQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', minValidatorStake: number } } };
 
+export type PastProposalsQueryVariables = Exact<{
+  limit: CollectionLimit;
+}>;
+
+
+export type PastProposalsQuery = { __typename?: 'QueryRoot', pastProposals: { __typename?: 'PastProposalCollection', total: number, items: Array<{ __typename?: 'PastProposal', endBlockHeight: number, endTimestamp?: any | null, id: number, kind: ProposalKind, outcome?: ProposalOutcome | null, state: ProposalState, title: string, totalVotes: any }> } };
+
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
@@ -1163,6 +1170,23 @@ export const MinValidatorStakeDocument = gql`
     stakingParameters {
       minValidatorStake
     }
+  }
+}
+    `;
+export const PastProposalsDocument = gql`
+    query PastProposals($limit: CollectionLimit!) {
+  pastProposals(limit: $limit) {
+    items {
+      endBlockHeight
+      endTimestamp
+      id
+      kind
+      outcome
+      state
+      title
+      totalVotes
+    }
+    total
   }
 }
     `;

@@ -6,6 +6,7 @@ import {
     IbcStatus,
     PartialBlockFragment,
     PartialTransactionFragment,
+    PastProposal,
     ProposalOutcome,
     ProposalState,
     TransactionFragment,
@@ -141,6 +142,12 @@ export interface TransformedDexPosition
 
 export interface TransformedActiveProposal
     extends Omit<ActiveProposal, 'kind'> {
+    kind: TransformedProposalKind
+}
+
+export interface TransformedPastProposal
+    extends Omit<PastProposal, 'endTimestamp' | 'kind'> {
+    endTimestamp: number
     kind: TransformedProposalKind
 }
 
