@@ -3,8 +3,13 @@ import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { Pagination, ProposalTable } from '@/components'
 import dayjs from '@/lib/dayjs'
-import { ProposalOutcome, ProposalState } from '@/lib/graphql/generated/types'
-import { ProposalType, TransformedProposal } from '@/lib/types'
+import {
+    ProposalKind,
+    ProposalOutcome,
+    ProposalState,
+} from '@/lib/graphql/generated/types'
+import { TransformedProposal } from '@/lib/types'
+import { transformProposalKind } from '@/lib/utils'
 import { Props } from './proposalTableContainer'
 
 const ProposalTableLoader: FC<Props> = async ({
@@ -29,6 +34,11 @@ const ProposalTableLoader: FC<Props> = async ({
                             min: 4000000,
                         }),
                         id,
+                        kind: transformProposalKind(
+                            faker.helpers.arrayElement(
+                                Object.values(ProposalKind)
+                            )
+                        ),
                         outcome: faker.helpers.arrayElement(
                             Object.values(ProposalOutcome)
                         ),
@@ -42,9 +52,6 @@ const ProposalTableLoader: FC<Props> = async ({
                             )
                             .valueOf(),
                         title: faker.lorem.sentence({ max: 20, min: 5 }),
-                        type: faker.helpers.arrayElement(
-                            Object.values(ProposalType)
-                        ),
                         votes: faker.number.int({
                             max: 20000000,
                             min: 1000000,

@@ -3,9 +3,8 @@ import { faker } from '@faker-js/faker'
 import { ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { ProposalState } from '@/lib/graphql/generated/types'
-import { ProposalType } from '@/lib/types'
-import { classNames } from '@/lib/utils'
+import { ProposalKind, ProposalState } from '@/lib/graphql/generated/types'
+import { classNames, transformProposalKind } from '@/lib/utils'
 import ProposalStatePill from '../../components/pills/proposalStatePill'
 import { Props } from './proposalPanelContainer'
 
@@ -15,13 +14,13 @@ const ProposalPanelLoader: FC<Props> = async props => {
             () =>
                 resolve({
                     id: faker.number.int({ max: 999, min: 1 }),
+                    kind: transformProposalKind(
+                        faker.helpers.arrayElement(Object.values(ProposalKind))
+                    ),
                     state: faker.helpers.arrayElement(
                         Object.values(ProposalState)
                     ),
                     title: faker.lorem.sentence({ max: 20, min: 5 }),
-                    type: faker.helpers.arrayElement(
-                        Object.values(ProposalType)
-                    ),
                 }),
             faker.number.int({ max: 2000, min: 1000 })
         )

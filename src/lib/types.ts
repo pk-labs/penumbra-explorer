@@ -141,21 +141,22 @@ export interface TransformedDexPosition
 export interface TransformedProposal {
     blockHeight: number
     id: number
+    kind: TransformedProposalKind
     outcome: ProposalOutcome
     state: ProposalState
     timestamp: number
     title: string
-    type: ProposalType
     votes: number
 }
 
-export enum ProposalType {
+export enum TransformedProposalKind {
     CommunityPoolSpend = 'Community pool spend',
     Emergency = 'Emergency',
     FreezeIbcClient = 'Freeze IBC client',
     ParameterChange = 'Parameter change',
     Signaling = 'Signaling',
     UnfreezeIbcClient = 'Unfreeze IBC client',
+    Unknown = 'Unknown',
     UpgradePlan = 'Upgrade plan',
 }
 

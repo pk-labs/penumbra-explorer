@@ -47,7 +47,7 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                                 </Link>
                             </TableCell>
                             <TableCell className="h-20">
-                                {proposal.type}
+                                {proposal.kind}
                             </TableCell>
                             <TableCell className="h-20">
                                 <ProposalStatePill state={proposal.state} />
