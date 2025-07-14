@@ -2,7 +2,7 @@
 import { faker } from '@faker-js/faker'
 import { FC } from 'react'
 import { Button, JsonTree, Parameter, Parameters, Surface } from '@/components'
-import { ProposalState } from '@/lib/types'
+import { ProposalState } from '@/lib/graphql/generated/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './proposalContainer'
 

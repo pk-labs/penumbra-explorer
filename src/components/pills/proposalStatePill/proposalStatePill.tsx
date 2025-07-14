@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { ProposalState } from '@/lib/types'
+import { ProposalState } from '@/lib/graphql/generated/types'
 import { ucFirst } from '@/lib/utils'
 import { Pill, PillProps } from '../pill'
 
