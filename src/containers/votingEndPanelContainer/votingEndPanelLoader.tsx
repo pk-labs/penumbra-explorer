@@ -25,7 +25,8 @@ const VotingEndPanelLoader: FC<Props> = async ({ proposalId, ...props }) => {
             <div className="text-text-secondary font-mono text-base">
                 {votingEnd.votingInProgress
                     ? blocksDuration(
-                          votingEnd.endBlockHeight - votingEnd.startBlockHeight
+                          votingEnd.endBlockHeight - votingEnd.startBlockHeight,
+                          'long'
                       )
                     : dayjs(votingEnd.timestamp)
                           .tz('UTC')
