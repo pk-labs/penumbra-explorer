@@ -100,7 +100,8 @@ const VotingNumbers: FC<Props> = props => (
                 <motion.div
                     animate={{ width: `${props.yesPercentage}%` }}
                     className={classNames(
-                        'bg-success-light absolute h-full rounded-l-full'
+                        'bg-success-light absolute h-full rounded-l-full',
+                        props.yesPercentage === 100 && 'rounded-full'
                     )}
                     initial={{ width: 0 }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -109,7 +110,8 @@ const VotingNumbers: FC<Props> = props => (
                     animate={{ width: `${props.noPercentage}%` }}
                     className={classNames(
                         'bg-destructive-light absolute right-0 h-full',
-                        'rounded-r-full'
+                        'rounded-r-full',
+                        props.noPercentage === 100 && 'rounded-full'
                     )}
                     initial={{ width: 0 }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
