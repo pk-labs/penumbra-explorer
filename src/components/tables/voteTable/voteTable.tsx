@@ -8,6 +8,7 @@ import { validatorImages } from '@/lib/validators'
 import Avatar from '../../avatar'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
+import VoteValuePill from '../../pills/voteValuePill'
 import TimeAgo from '../../timeAgo'
 import { Encrypted } from '../../vectors'
 import { Table, TableCell, TableProps, TableRow } from '../table'
@@ -87,13 +88,7 @@ const VoteTable: FC<Props> = ({ votes, ...props }) => (
                             </span>
                         </TableCell>
                         <TableCell className="h-15">
-                            {vote.value}
-                            {/*<Pill*/}
-                            {/*    context={vote.yes ? 'success' : 'destructive'}*/}
-                            {/*    technical*/}
-                            {/*>*/}
-                            {/*    {vote.yes ? 'Yes' : 'No'}*/}
-                            {/*</Pill>*/}
+                            <VoteValuePill value={vote.value} />
                         </TableCell>
                         <TableCell className="h-15">
                             <TimeAgo timestamp={vote.timestamp} />
