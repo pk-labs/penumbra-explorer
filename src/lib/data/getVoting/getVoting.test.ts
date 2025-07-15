@@ -1,5 +1,5 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
-import { ProposalOutcome } from '@/lib/graphql/generated/types'
+import { ProposalOutcome, ProposalState } from '@/lib/graphql/generated/types'
 import { VotingState } from '@/lib/types'
 import getVoting from './getVoting'
 
@@ -55,6 +55,7 @@ describe('getVoting', () => {
                                     noVotes: '2',
                                     noVotesPercentage: '2.2',
                                     quorum: '456',
+                                    state: ProposalState.Voting,
                                     totalVotes: '789',
                                     yesVotes: '3',
                                     yesVotesPercentage: '3.3',

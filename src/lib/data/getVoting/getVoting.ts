@@ -1,6 +1,7 @@
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
     ProposalOutcome,
+    ProposalState,
     VotingQuery,
     VotingQueryVariables,
 } from '@/lib/graphql/generated/types'
@@ -22,7 +23,16 @@ const getVoting = async (
         return
     }
 
-    let state: VotingState
+    let state: undefined | VotingState
+
+    switch (result.data.proposalDetail.state) {
+        case ProposalState.Voting:
+            state = VotingState.InProgress
+            break
+        case ProposalState.Withdrawn:
+            state = VotingState.Withdrawn
+            break
+    }
 
     switch (result.data.proposalDetail.outcome) {
         case ProposalOutcome.Passed:
@@ -33,9 +43,6 @@ const getVoting = async (
             break
         case ProposalOutcome.Slashed:
             state = VotingState.Slashed
-            break
-        default:
-            state = VotingState.InProgress
             break
     }
 

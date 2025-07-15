@@ -40,6 +40,14 @@ describe('VotingStatePill', () => {
         getByText(container, 'Slashed')
     })
 
+    test('renders withdrawn state', async () => {
+        const { container } = render(
+            <VotingStatePill state={VotingState.Withdrawn} />
+        )
+
+        getByText(container, 'Withdrawn')
+    })
+
     test('applies CSS classes', async () => {
         const { container } = render(
             <VotingStatePill className="foo bar" state={VotingState.Passed} />

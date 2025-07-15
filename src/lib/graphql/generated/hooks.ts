@@ -519,6 +519,7 @@ export const VotingDocument = gql`
     noVotesPercentage
     outcome
     quorum
+    state
     totalVotes
     yesVotes
     yesVotesPercentage

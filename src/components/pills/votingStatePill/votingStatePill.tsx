@@ -20,6 +20,7 @@ const VotingStatePill: FC<Props> = props => {
             break
         case VotingState.Failed:
         case VotingState.Slashed:
+        case VotingState.Withdrawn:
             context = 'destructive'
             break
         default:

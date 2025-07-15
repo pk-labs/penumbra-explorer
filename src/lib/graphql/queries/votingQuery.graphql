@@ -6,6 +6,7 @@ query Voting($proposalId: Int!) {
         noVotesPercentage
         outcome
         quorum
+        state
         totalVotes
         yesVotes
         yesVotesPercentage

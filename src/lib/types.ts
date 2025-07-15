@@ -182,7 +182,7 @@ export interface TransformedVoting {
     no: number
     noPercentage: number
     quorum: number
-    state: VotingState
+    state?: VotingState
     total: number
     yes: number
     yesPercentage: number
@@ -193,6 +193,7 @@ export enum VotingState {
     InProgress = 'Voting in progress',
     Passed = 'Passed',
     Slashed = 'Slashed',
+    Withdrawn = 'Withdrawn',
 }
 
 export interface TransformedVote {

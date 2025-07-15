@@ -965,7 +965,7 @@ export type VotingQueryVariables = Exact<{
 }>;
 
 
-export type VotingQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', abstainVotes: any, abstainVotesPercentage: any, noVotes: any, noVotesPercentage: any, outcome?: ProposalOutcome | null, quorum: any, totalVotes: any, yesVotes: any, yesVotesPercentage: any } | null };
+export type VotingQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', abstainVotes: any, abstainVotesPercentage: any, noVotes: any, noVotesPercentage: any, outcome?: ProposalOutcome | null, quorum: any, state: ProposalState, totalVotes: any, yesVotes: any, yesVotesPercentage: any } | null };
 
 export type VotingStartQueryVariables = Exact<{
   proposalId: Scalars['Int']['input'];
@@ -1410,6 +1410,7 @@ export const VotingDocument = gql`
     noVotesPercentage
     outcome
     quorum
+    state
     totalVotes
     yesVotes
     yesVotesPercentage
