@@ -7,6 +7,7 @@ import {
     Parameter,
     Parameters,
     ProposalStatePill,
+    ReadMore,
     Surface,
 } from '@/components'
 import getProposal from '@/lib/data/getProposal'
@@ -47,15 +48,11 @@ const ProposalLoader: FC<Props> = async ({ proposalId, ...props }) => {
                     {proposal.kind}
                 </div>
             </header>
-            {proposal.description
-                .split('\n')
-                .map(paragraph => paragraph.trim())
-                .filter(Boolean)
-                .map((paragraph: string, i: number) => (
-                    <p key={i} className="text-sm">
-                        {paragraph}
-                    </p>
-                ))}
+            <ReadMore
+                className="text-sm"
+                minParagraphs={3}
+                text={proposal.description}
+            />
             <Parameters>
                 <Parameter name="Deposit amount">
                     {formatNumber(proposal.depositAmount)} UM
