@@ -1,5 +1,5 @@
 export { default as actionToView } from './actionToView'
-export { default as blocksToTime } from './blocksToTime'
+export { default as blocksDuration } from './blocksDuration'
 export { default as classNames } from './classNames'
 export { default as decodeTransaction } from './decodeTransaction'
 export { default as findPrimaryAction } from './findPrimaryAction'

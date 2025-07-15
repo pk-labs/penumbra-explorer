@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Button, Parameter, Parameters, Surface } from '@/components'
 import { getGovParameters } from '@/lib/data'
-import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
+import { blocksDuration, classNames, formatNumber } from '@/lib/utils'
 import { Props } from './govParametersContainer'
 
 const GovParametersLoader: FC<Props> = async props => {
@@ -33,7 +33,7 @@ const GovParametersLoader: FC<Props> = async props => {
                 </Parameter>
                 <Parameter name="Proposal duration">
                     {formatNumber(parameters.proposalDuration)} blocks{' '}
-                    {blocksToTime(parameters.proposalDuration)}
+                    {blocksDuration(parameters.proposalDuration)}
                 </Parameter>
             </Parameters>
             <Button

@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { NumberPanel } from '@/components'
 import { getVotingEnd } from '@/lib/data'
 import dayjs from '@/lib/dayjs/dayjs'
-import { blocksToTime } from '@/lib/utils'
+import { blocksDuration } from '@/lib/utils'
 import { Props } from './votingEndPanelContainer'
 
 const VotingEndPanelLoader: FC<Props> = async ({ proposalId, ...props }) => {
@@ -24,7 +24,7 @@ const VotingEndPanelLoader: FC<Props> = async ({ proposalId, ...props }) => {
         >
             <div className="text-text-secondary font-mono text-base">
                 {votingEnd.votingInProgress
-                    ? blocksToTime(
+                    ? blocksDuration(
                           votingEnd.endBlockHeight - votingEnd.startBlockHeight
                       )
                     : dayjs(votingEnd.timestamp)

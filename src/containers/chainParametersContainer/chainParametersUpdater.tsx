@@ -6,7 +6,7 @@ import { Parameter, Parameters, Surface } from '@/components'
 import dayjs from '@/lib/dayjs/dayjs'
 import { useChainParametersUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { ChainParameters } from '@/lib/graphql/generated/types'
-import { blocksToTime, classNames, formatNumber } from '@/lib/utils'
+import { blocksDuration, classNames, formatNumber } from '@/lib/utils'
 import { Props as ChainParametersContainerProps } from './chainParametersContainer'
 
 interface Props extends ChainParametersContainerProps {
@@ -65,11 +65,11 @@ const ChainParametersUpdater: FC<Props> = props => {
                     </Parameter>
                     <Parameter name="Duration">
                         {formatNumber(parameters.epochDuration)} blocks{' '}
-                        {blocksToTime(parameters.epochDuration)}
+                        {blocksDuration(parameters.epochDuration)}
                     </Parameter>
                     <Parameter name="Next in">
                         {formatNumber(parameters.nextEpochIn)} blocks{' '}
-                        {blocksToTime(parameters.nextEpochIn)}
+                        {blocksDuration(parameters.nextEpochIn)}
                     </Parameter>
                 </Parameters>
             </div>
