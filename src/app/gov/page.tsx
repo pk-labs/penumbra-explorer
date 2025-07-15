@@ -11,7 +11,8 @@ import { classNames, generatePageMetadata } from '@/lib/utils'
 
 export const metadata = generatePageMetadata(
     'Governance',
-    'TODO: Description',
+    'Explore active and past governance proposals on Noctis - a fast, ' +
+        'secure, and privacy-focused explorer built for Penumbra blockchain.',
     '/gov'
 )
 

@@ -21,7 +21,9 @@ export const generateMetadata = async (props: Props) => {
 
     return generatePageMetadata(
         `Proposal #${id}`,
-        'TODO: Description',
+        'Explore governance proposal votes by validators and delegators on ' +
+            'Noctis - a fast, secure, and privacy-focused explorer built for ' +
+            'Penumbra blockchain.',
         `/proposal/${id}`
     )
 }
