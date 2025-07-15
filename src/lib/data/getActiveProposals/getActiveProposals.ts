@@ -23,6 +23,16 @@ const getActiveProposals = async (): Promise<
         throw result.error
     }
 
+    // return [
+    //     {
+    //         endBlockHeight: 5555555,
+    //         id: 123,
+    //         kind: TransformedProposalKind.CommunityPoolSpend,
+    //         state: ProposalState.Voting,
+    //         title: faker.lorem.words({ max: 10, min: 3 }),
+    //     },
+    // ]
+
     return result.data?.activeProposals.map(proposal => ({
         ...proposal,
         kind: transformProposalKind(proposal.kind),
