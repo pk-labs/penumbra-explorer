@@ -28,11 +28,6 @@ jest.mock(
     })
 )
 
-jest.mock(
-    '../../../lib/utils/valueToView/valueToView',
-    () => (value: any) => value
-)
-
 jest.mock('../../assetValue/assetValue', () => (props: any) => (
     <div>{props.valueView}</div>
 ))
