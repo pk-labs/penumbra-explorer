@@ -1,15 +1,16 @@
 import dayjs from '@/lib/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
+    ProposalState,
     VotingEndQuery,
     VotingEndQueryVariables,
 } from '@/lib/graphql/generated/types'
 import { votingEndQuery } from '@/lib/graphql/queries'
-import { VotingTime } from '@/lib/types'
+import { VotingEnd } from '@/lib/types'
 
 const getVotingEnd = async (
     proposalId: number
-): Promise<undefined | VotingTime> => {
+): Promise<undefined | VotingEnd> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient
@@ -26,10 +27,13 @@ const getVotingEnd = async (
     }
 
     return {
-        blockHeight: result.data.proposalDetail.votingEndedBlockHeight,
+        endBlockHeight: result.data.proposalDetail.votingEndedBlockHeight,
+        startBlockHeight: result.data.proposalDetail.votingStartedBlockHeight,
         timestamp: dayjs(
             result.data.proposalDetail.votingEndedTimestamp
         ).valueOf(),
+        votingInProgress:
+            result.data.proposalDetail.state === ProposalState.Voting,
     }
 }
 

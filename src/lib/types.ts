@@ -171,9 +171,16 @@ export enum TransformedProposalKind {
     UpgradePlan = 'Upgrade plan',
 }
 
-export interface VotingTime {
+export interface VotingStart {
     blockHeight: number
     timestamp: number
+}
+
+export interface VotingEnd {
+    endBlockHeight: number
+    startBlockHeight: number
+    timestamp: number
+    votingInProgress: boolean
 }
 
 export interface TransformedVoting {

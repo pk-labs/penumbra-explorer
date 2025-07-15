@@ -501,8 +501,10 @@ export function useVotesQuery(options: Omit<Urql.UseQueryArgs<Types.VotesQueryVa
 export const VotingEndDocument = gql`
     query VotingEnd($proposalId: Int!) {
   proposalDetail(id: $proposalId) {
+    state
     votingEndedBlockHeight
     votingEndedTimestamp
+    votingStartedBlockHeight
   }
 }
     `;

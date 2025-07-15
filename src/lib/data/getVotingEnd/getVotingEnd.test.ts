@@ -1,5 +1,6 @@
 import dayjs from '@/lib/dayjs/dayjs'
 import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
+import { ProposalState } from '@/lib/graphql/generated/types'
 import getVotingEnd from './getVotingEnd'
 
 jest.mock('../../graphql/createGraphqlClient')
@@ -15,9 +16,11 @@ describe('getVotingEnd', () => {
                     Promise.resolve({
                         data: {
                             proposalDetail: {
+                                state: ProposalState.Voting,
                                 votingEndedBlockHeight: 456,
                                 votingEndedTimestamp:
                                     votingEndedTimestamp.toISOString(),
+                                votingStartedBlockHeight: 123,
                             },
                         },
                     }),
@@ -25,8 +28,10 @@ describe('getVotingEnd', () => {
         })
 
         await expect(getVotingEnd(1)).resolves.toEqual({
-            blockHeight: 456,
+            endBlockHeight: 456,
+            startBlockHeight: 123,
             timestamp: votingEndedTimestamp.valueOf(),
+            votingInProgress: true,
         })
     })
 

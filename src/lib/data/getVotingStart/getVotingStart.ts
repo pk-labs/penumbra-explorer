@@ -5,11 +5,11 @@ import {
     VotingStartQueryVariables,
 } from '@/lib/graphql/generated/types'
 import { votingStartQuery } from '@/lib/graphql/queries'
-import { VotingTime } from '@/lib/types'
+import { VotingStart } from '@/lib/types'
 
 const getVotingStart = async (
     proposalId: number
-): Promise<undefined | VotingTime> => {
+): Promise<undefined | VotingStart> => {
     const graphqlClient = createGraphqlClient()
 
     const result = await graphqlClient

@@ -958,7 +958,7 @@ export type VotingEndQueryVariables = Exact<{
 }>;
 
 
-export type VotingEndQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', votingEndedBlockHeight: number, votingEndedTimestamp?: any | null } | null };
+export type VotingEndQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', state: ProposalState, votingEndedBlockHeight: number, votingEndedTimestamp?: any | null, votingStartedBlockHeight: number } | null };
 
 export type VotingQueryVariables = Exact<{
   proposalId: Scalars['Int']['input'];
@@ -1396,8 +1396,10 @@ export const VotesDocument = gql`
 export const VotingEndDocument = gql`
     query VotingEnd($proposalId: Int!) {
   proposalDetail(id: $proposalId) {
+    state
     votingEndedBlockHeight
     votingEndedTimestamp
+    votingStartedBlockHeight
   }
 }
     `;

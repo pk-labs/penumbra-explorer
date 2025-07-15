@@ -4,6 +4,7 @@ import { FC } from 'react'
 import { NumberPanel } from '@/components'
 import { getVotingEnd } from '@/lib/data'
 import dayjs from '@/lib/dayjs/dayjs'
+import { blocksToTime } from '@/lib/utils'
 import { Props } from './votingEndPanelContainer'
 
 const VotingEndPanelLoader: FC<Props> = async ({ proposalId, ...props }) => {
@@ -16,15 +17,19 @@ const VotingEndPanelLoader: FC<Props> = async ({ proposalId, ...props }) => {
     return (
         <NumberPanel
             className={props.className}
-            number={votingEnd.blockHeight}
+            number={votingEnd.endBlockHeight}
             numberClassName="gap-2"
             numberPrefix={<BoxIcon className="text-text-secondary" size={16} />}
-            title="Voting ends"
+            title={`Voting ${votingEnd.votingInProgress ? 'ends' : 'ended'}`}
         >
             <div className="text-text-secondary font-mono text-base">
-                {dayjs(votingEnd.timestamp)
-                    .tz('UTC')
-                    .format('YYYY-MM-DD HH:mm:ss z')}
+                {votingEnd.votingInProgress
+                    ? blocksToTime(
+                          votingEnd.endBlockHeight - votingEnd.startBlockHeight
+                      )
+                    : dayjs(votingEnd.timestamp)
+                          .tz('UTC')
+                          .format('YYYY-MM-DD HH:mm:ss z')}
             </div>
         </NumberPanel>
     )
