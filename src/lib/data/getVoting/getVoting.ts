@@ -40,11 +40,17 @@ const getVoting = async (
     }
 
     return {
-        abstain: Math.round(result.data.proposalDetail.abstainVotes),
-        no: Math.round(result.data.proposalDetail.noVotes),
-        quorum: Math.round(result.data.proposalDetail.quorum),
+        abstain: Number(result.data.proposalDetail.abstainVotes),
+        abstainPercentage: Number(
+            result.data.proposalDetail.abstainVotesPercentage
+        ),
+        no: Number(result.data.proposalDetail.noVotes),
+        noPercentage: Number(result.data.proposalDetail.noVotesPercentage),
+        quorum: Number(result.data.proposalDetail.quorum),
         state,
-        yes: Math.round(result.data.proposalDetail.yesVotes),
+        total: Number(result.data.proposalDetail.totalVotes),
+        yes: Number(result.data.proposalDetail.yesVotes),
+        yesPercentage: Number(result.data.proposalDetail.yesVotesPercentage),
     }
 }
 

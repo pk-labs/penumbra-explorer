@@ -514,10 +514,14 @@ export const VotingDocument = gql`
     query Voting($proposalId: Int!) {
   proposalDetail(id: $proposalId) {
     abstainVotes
+    abstainVotesPercentage
     noVotes
+    noVotesPercentage
     outcome
     quorum
+    totalVotes
     yesVotes
+    yesVotesPercentage
   }
 }
     `;

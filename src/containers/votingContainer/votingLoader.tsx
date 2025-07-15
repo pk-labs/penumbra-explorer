@@ -21,9 +21,13 @@ const VotingLoader: FC<Props> = async ({ proposalId, ...props }) => {
             <VotingStatePill state={voting.state} />
             <VotingNumbers
                 abstain={voting.abstain}
+                abstainPercentage={voting.abstainPercentage}
                 no={voting.no}
+                noPercentage={voting.noPercentage}
                 quorum={voting.quorum}
+                total={voting.total}
                 yes={voting.yes}
+                yesPercentage={voting.yesPercentage}
             />
         </Surface>
     )

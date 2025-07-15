@@ -178,10 +178,14 @@ export interface VotingTime {
 
 export interface TransformedVoting {
     abstain: number
+    abstainPercentage: number
     no: number
+    noPercentage: number
     quorum: number
     state: VotingState
+    total: number
     yes: number
+    yesPercentage: number
 }
 
 export enum VotingState {

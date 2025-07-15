@@ -21,7 +21,16 @@ const VotingContainer: FC<Props> = props => (
                 )}
             >
                 <Skeleton className="h-8 w-42 rounded-full" />
-                <VotingNumbers abstain={0} no={0} quorum={0} yes={0} />
+                <VotingNumbers
+                    abstain={0}
+                    abstainPercentage={0}
+                    no={0}
+                    noPercentage={0}
+                    quorum={0}
+                    total={0}
+                    yes={0}
+                    yesPercentage={0}
+                />
             </Surface>
         }
     >
