@@ -16,9 +16,7 @@ export const metadata = generatePageMetadata(
 )
 
 interface Props {
-    searchParams: Promise<{
-        page?: string
-    }>
+    searchParams: Promise<{ page?: string }>
 }
 
 const GovernancePage: FC<Props> = async props => {

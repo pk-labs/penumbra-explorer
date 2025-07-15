@@ -16,6 +16,7 @@ export interface Props extends Omit<VoteTableProps, 'footer' | 'votes'> {
         offset?: number
     }
     pagination?: boolean
+    proposalId: number
 }
 
 const VoteTableContainer: FC<Props> = props => (

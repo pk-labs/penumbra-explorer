@@ -8,7 +8,6 @@ import { validatorImages } from '@/lib/validators'
 import Avatar from '../../avatar'
 import CopyToClipboard from '../../copyToClipboard'
 import EmptyState from '../../emptyState'
-import { Pill } from '../../pills'
 import TimeAgo from '../../timeAgo'
 import { Encrypted } from '../../vectors'
 import { Table, TableCell, TableProps, TableRow } from '../table'
@@ -33,35 +32,27 @@ const VoteTable: FC<Props> = ({ votes, ...props }) => (
                 votes.map((vote, i) => (
                     <TableRow
                         key={i}
-                        href={
-                            vote.validator && `/validator/${vote.validator.id}`
-                        }
+                        href={vote.id ? `/validator/${vote.id}` : undefined}
                     >
                         <TableCell className="h-15">
-                            {vote.validator ? (
+                            {vote.id && vote.name ? (
                                 <>
                                     <Avatar
-                                        alt={vote.validator.name}
+                                        alt={vote.name}
                                         className="h-6 w-6"
                                         fallback={placeholderAvatarImage}
-                                        src={validatorImages[vote.validator.id]}
+                                        src={validatorImages[vote.id]}
                                         fallbackLetter
                                     />
                                     <span className="inline-flex flex-col">
-                                        <Link
-                                            href={`/validator/${vote.validator.id}`}
-                                        >
-                                            {vote.validator.name}
+                                        <Link href={`/validator/${vote.id}`}>
+                                            {vote.name}
                                         </Link>
                                         <span className="text-text-secondary text-xs">
-                                            {shortenHash(
-                                                vote.validator.id,
-                                                19,
-                                                'end'
-                                            )}
+                                            {shortenHash(vote.id, 19, 'end')}
                                             <CopyToClipboard
                                                 className="align-middle"
-                                                text={vote.validator.id}
+                                                text={vote.id}
                                                 small
                                             />
                                         </span>
@@ -96,12 +87,13 @@ const VoteTable: FC<Props> = ({ votes, ...props }) => (
                             </span>
                         </TableCell>
                         <TableCell className="h-15">
-                            <Pill
-                                context={vote.yes ? 'success' : 'destructive'}
-                                technical
-                            >
-                                {vote.yes ? 'Yes' : 'No'}
-                            </Pill>
+                            {vote.value}
+                            {/*<Pill*/}
+                            {/*    context={vote.yes ? 'success' : 'destructive'}*/}
+                            {/*    technical*/}
+                            {/*>*/}
+                            {/*    {vote.yes ? 'Yes' : 'No'}*/}
+                            {/*</Pill>*/}
                         </TableCell>
                         <TableCell className="h-15">
                             <TimeAgo timestamp={vote.timestamp} />

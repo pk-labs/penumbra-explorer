@@ -1,0 +1,16 @@
+query Votes($proposalId: Int!, $limit: CollectionLimit!) {
+    proposalDetail(id: $proposalId) {
+        votes(limit: $limit) {
+            items {
+                effectiveVotingPower
+                id
+                name
+                txHash
+                vote
+                votedAt
+                votingPowerPercentage
+            }
+            total
+        }
+    }
+}

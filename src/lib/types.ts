@@ -9,6 +9,7 @@ import {
     PastProposal,
     ProposalDetail,
     TransactionFragment,
+    VoteValue,
 } from '@/lib/graphql/generated/types'
 
 export enum ActionType {
@@ -191,14 +192,11 @@ export enum VotingState {
 }
 
 export interface TransformedVote {
-    id: string
+    id?: null | string
+    name?: string
     power: number
     powerPercentage: number
     timestamp: number
     transactionHash: string
-    validator?: {
-        id: string
-        name: string
-    }
-    yes: boolean
+    value: VoteValue
 }

@@ -27,9 +27,7 @@ export const metadata = generatePageMetadata(
 )
 
 interface Props {
-    searchParams: Promise<{
-        filter?: string
-    }>
+    searchParams: Promise<{ filter?: string }>
 }
 
 const ValidatorsPage: FC<Props> = async props => {

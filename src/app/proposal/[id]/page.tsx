@@ -13,6 +13,7 @@ import { generatePageMetadata } from '@/lib/utils'
 
 interface Props {
     params: Promise<{ id: string }>
+    searchParams: Promise<{ page?: string }>
 }
 
 export const generateMetadata = async (props: Props) => {
@@ -28,10 +29,15 @@ export const generateMetadata = async (props: Props) => {
 const ProposalPage: FC<Props> = async props => {
     const params = await props.params
     const id = Number(params.id)
+    const searchParams = await props.searchParams
+    const page = searchParams.page ? Number(searchParams.page) - 1 : 0
 
-    if (Number.isNaN(id) || id < 0) {
+    if (Number.isNaN(id) || id < 0 || Number.isNaN(page) || page < 0) {
         notFound()
     }
+
+    const length = 20
+    const offset = page * length
 
     return (
         <Container>
@@ -56,7 +62,11 @@ const ProposalPage: FC<Props> = async props => {
                         />
                     </div>
                     <VotingContainer proposalId={id} />
-                    <VoteTableContainer limit={{ length: 20 }} pagination />
+                    <VoteTableContainer
+                        limit={{ length, offset }}
+                        proposalId={id}
+                        pagination
+                    />
                 </div>
             </div>
         </Container>
