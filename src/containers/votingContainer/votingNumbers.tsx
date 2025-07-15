@@ -12,8 +12,8 @@ interface Props extends Omit<TransformedVoting, 'state'> {
 
 const VotingNumbers: FC<Props> = props => (
     <>
-        <div className="flex gap-10">
-            <div className="flex-col">
+        <div className="flex flex-col gap-6 sm:flex-row">
+            <div>
                 <div className="font-mono text-xs font-medium">Total votes</div>
                 <NumberCountup
                     className="gap-2"
@@ -31,7 +31,7 @@ const VotingNumbers: FC<Props> = props => (
                     </div>
                 )}
             </div>
-            <div className="flex-col">
+            <div>
                 <div className="font-mono text-xs font-medium">
                     Quorum needed
                 </div>
