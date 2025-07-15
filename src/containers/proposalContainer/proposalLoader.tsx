@@ -10,6 +10,7 @@ import {
     Surface,
 } from '@/components'
 import getProposal from '@/lib/data/getProposal'
+import { ProposalState } from '@/lib/graphql/generated/types'
 import { classNames, formatNumber } from '@/lib/utils'
 import { Props } from './proposalContainer'
 
@@ -30,7 +31,7 @@ const ProposalLoader: FC<Props> = async ({ proposalId, ...props }) => {
                     <span className="font-mono text-base">
                         Proposal #{proposal.id}
                     </span>
-                    {proposal.outcome ? (
+                    {proposal.state !== ProposalState.Voting ? (
                         <ProposalStatePill state={proposal.state} />
                     ) : (
                         <Button

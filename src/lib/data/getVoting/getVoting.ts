@@ -25,25 +25,20 @@ const getVoting = async (
 
     let state: undefined | VotingState
 
-    switch (result.data.proposalDetail.state) {
-        case ProposalState.Voting:
-            state = VotingState.InProgress
-            break
-        case ProposalState.Withdrawn:
-            state = VotingState.Withdrawn
-            break
-    }
-
-    switch (result.data.proposalDetail.outcome) {
-        case ProposalOutcome.Passed:
-            state = VotingState.Passed
-            break
-        case ProposalOutcome.Failed:
-            state = VotingState.Failed
-            break
-        case ProposalOutcome.Slashed:
-            state = VotingState.Slashed
-            break
+    if (result.data.proposalDetail.state === ProposalState.Voting) {
+        state = VotingState.InProgress
+    } else {
+        switch (result.data.proposalDetail.outcome) {
+            case ProposalOutcome.Passed:
+                state = VotingState.Passed
+                break
+            case ProposalOutcome.Failed:
+                state = VotingState.Failed
+                break
+            case ProposalOutcome.Slashed:
+                state = VotingState.Slashed
+                break
+        }
     }
 
     return {

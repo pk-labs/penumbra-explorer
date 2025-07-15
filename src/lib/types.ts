@@ -193,7 +193,6 @@ export enum VotingState {
     InProgress = 'Voting in progress',
     Passed = 'Passed',
     Slashed = 'Slashed',
-    Withdrawn = 'Withdrawn',
 }
 
 export interface TransformedVote {
