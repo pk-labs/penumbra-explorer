@@ -24,23 +24,24 @@ const getProposal = async (
 
     const { kind, payload, ...proposal } = result.data.proposalDetail
 
+    const {
+        description: payloadDescription,
+        id: payloadId,
+        title: payloadTitle,
+        ...remainingPayload
+    } = payload
+
     return {
         ...proposal,
         kind: transformProposalKind(kind),
-        rawJson: payload,
-        // rawJson: {
-        //     height: result.data.block.rawJson.height,
-        //     chain_id: result.data.block.rawJson.chain_id,
-        //     timestamp: result.data.block.rawJson.timestamp,
-        //     transactions: result.data.block.rawJson.transactions,
-        //     events: result.data.block.rawJson.events
-        //         .map((event: any) => ({
-        //             event_id: event.event_id,
-        //             type: event.type,
-        //             attributes: event.attributes,
-        //         }))
-        //         .toSorted((a: any, b: any) => a.event_id - b.event_id),
-        // },
+        /* eslint-disable perfectionist/sort-objects */
+        rawJson: {
+            id: payloadId,
+            title: payloadTitle,
+            description: payloadDescription,
+            ...remainingPayload,
+        },
+        /* eslint-enable perfectionist/sort-objects */
     }
 }
 
