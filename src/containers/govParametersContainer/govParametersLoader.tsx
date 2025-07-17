@@ -22,10 +22,10 @@ const GovParametersLoader: FC<Props> = async props => {
                 <Parameter name="Valid quorum">
                     {parameters.validQuorum}%
                 </Parameter>
-                <Parameter name="Passing treshold">
+                <Parameter name="Passing threshold">
                     {parameters.passingThreshold}%
                 </Parameter>
-                <Parameter name="Slashing treshold">
+                <Parameter name="Slashing threshold">
                     {parameters.slashingThreshold}%
                 </Parameter>
                 <Parameter name="Deposit amount">
