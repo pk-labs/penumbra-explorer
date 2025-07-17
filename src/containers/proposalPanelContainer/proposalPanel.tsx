@@ -15,14 +15,12 @@ interface Props {
 
 const ProposalPanel: FC<Props> = props => (
     <motion.div
-        animate={{ height: 'auto', opacity: 1 }}
-        className={props.className}
-        initial={{ height: 0, opacity: 0 }}
-        style={{ overflow: 'hidden' }}
+        animate={{ height: 'auto' }}
+        className={classNames('overflow-hidden', props.className)}
+        initial={{ height: 0 }}
         transition={{
-            damping: 15,
-            opacity: { duration: 0.5 },
-            stiffness: 200,
+            damping: 16,
+            stiffness: 160,
             type: 'spring',
         }}
     >
