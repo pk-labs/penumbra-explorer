@@ -4,12 +4,13 @@ import { ChevronRightIcon } from 'lucide-react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 import { FC } from 'react'
-import { ProposalStatePill } from '@/components'
+import { Pill, ProposalStatePill } from '@/components'
 import { TransformedActiveProposal } from '@/lib/types'
-import { classNames } from '@/lib/utils'
+import { blocksDuration, classNames } from '@/lib/utils'
 
 interface Props {
     className?: string
+    latestBlockHeight: number
     proposal: TransformedActiveProposal
 }
 
@@ -35,22 +36,37 @@ const ProposalPanel: FC<Props> = props => (
             href={`/proposal/${props.proposal.id}`}
         >
             <ProposalStatePill state={props.proposal.state} />
-            <div className="flex flex-1 flex-col overflow-hidden">
-                <div
-                    className={classNames(
-                        'text-text-secondary font-mono text-xs font-medium'
-                    )}
-                >
-                    Active proposal #{props.proposal.id} {props.proposal.kind}
+            <div
+                className={classNames(
+                    'flex flex-1 flex-col gap-2 overflow-hidden sm:flex-row',
+                    'sm:items-center sm:gap-4'
+                )}
+            >
+                <div className="flex flex-1 flex-col overflow-hidden">
+                    <div
+                        className={classNames(
+                            'text-text-secondary font-mono text-xs font-medium'
+                        )}
+                    >
+                        Active proposal #{props.proposal.id}{' '}
+                        {props.proposal.kind}
+                    </div>
+                    <div
+                        className={classNames(
+                            'line-clamp-2 text-lg font-medium sm:line-clamp-none',
+                            'sm:max-w-[600px] sm:truncate'
+                        )}
+                    >
+                        {props.proposal.title}
+                    </div>
                 </div>
-                <div
-                    className={classNames(
-                        'line-clamp-2 text-lg font-medium sm:line-clamp-none',
-                        'sm:max-w-[600px] sm:truncate'
+                <Pill className="py-2 text-xs">
+                    Ends in{' '}
+                    {blocksDuration(
+                        props.proposal.endBlockHeight - props.latestBlockHeight,
+                        'long'
                     )}
-                >
-                    {props.proposal.title}
-                </div>
+                </Pill>
             </div>
             <ChevronRightIcon className="text-text-secondary" size={24} />
         </Link>
