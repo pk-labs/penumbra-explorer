@@ -4,6 +4,7 @@ import { Button, Container } from '@/components'
 import {
     BlockPanelContainer,
     BlockTableContainer,
+    ProposalPanelContainer,
     SearchContainer,
     TransactionPanelContainer,
     TransactionTableContainer,
@@ -30,6 +31,7 @@ const HomePage: FC = () => (
             </GraphqlClientProvider>
         </Container>
         <Container className="flex flex-col gap-4">
+            <ProposalPanelContainer className="mb-4" />
             <div className="flex flex-col gap-4 md:flex-row">
                 <BlockPanelContainer className="flex-1" />
                 <TransactionPanelContainer className="flex-1" />

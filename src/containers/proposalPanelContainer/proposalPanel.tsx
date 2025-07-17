@@ -19,7 +19,7 @@ const ProposalPanel: FC<Props> = props => (
         className={classNames('overflow-hidden', props.className)}
         initial={{ height: 0 }}
         transition={{
-            damping: 25,
+            damping: 26,
             mass: 2,
             stiffness: 200,
             type: 'spring',
@@ -41,12 +41,12 @@ const ProposalPanel: FC<Props> = props => (
                         'text-text-secondary font-mono text-xs font-medium'
                     )}
                 >
-                    Proposal #{props.proposal.id} {props.proposal.kind}
+                    Active proposal #{props.proposal.id} {props.proposal.kind}
                 </div>
                 <div
                     className={classNames(
                         'line-clamp-2 text-lg font-medium sm:line-clamp-none',
-                        'sm:truncate'
+                        'sm:max-w-[600px] sm:truncate'
                     )}
                 >
                     {props.proposal.title}
