@@ -178,7 +178,6 @@ export interface VotingStart {
 
 export interface VotingEnd {
     endBlockHeight: number
-    startBlockHeight: number
     timestamp: number
     votingInProgress: boolean
 }

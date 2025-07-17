@@ -28,7 +28,6 @@ const getVotingEnd = async (
 
     return {
         endBlockHeight: result.data.proposalDetail.votingEndedBlockHeight,
-        startBlockHeight: result.data.proposalDetail.votingStartedBlockHeight,
         timestamp: dayjs(
             result.data.proposalDetail.votingEndedTimestamp
         ).valueOf(),

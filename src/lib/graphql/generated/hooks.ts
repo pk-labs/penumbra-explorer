@@ -504,7 +504,6 @@ export const VotingEndDocument = gql`
     state
     votingEndedBlockHeight
     votingEndedTimestamp
-    votingStartedBlockHeight
   }
 }
     `;

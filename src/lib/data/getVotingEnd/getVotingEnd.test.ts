@@ -20,7 +20,6 @@ describe('getVotingEnd', () => {
                                 votingEndedBlockHeight: 456,
                                 votingEndedTimestamp:
                                     votingEndedTimestamp.toISOString(),
-                                votingStartedBlockHeight: 123,
                             },
                         },
                     }),
@@ -29,7 +28,6 @@ describe('getVotingEnd', () => {
 
         await expect(getVotingEnd(1)).resolves.toEqual({
             endBlockHeight: 456,
-            startBlockHeight: 123,
             timestamp: votingEndedTimestamp.valueOf(),
             votingInProgress: true,
         })

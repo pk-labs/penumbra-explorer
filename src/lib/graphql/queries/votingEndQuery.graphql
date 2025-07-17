@@ -3,6 +3,5 @@ query VotingEnd($proposalId: Int!) {
         state
         votingEndedBlockHeight
         votingEndedTimestamp
-        votingStartedBlockHeight
     }
 }

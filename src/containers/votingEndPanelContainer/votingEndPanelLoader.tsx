@@ -2,15 +2,18 @@
 import { BoxIcon } from 'lucide-react'
 import { FC } from 'react'
 import { NumberPanel } from '@/components'
-import { getVotingEnd } from '@/lib/data'
+import { getLatestBlockHeight, getVotingEnd } from '@/lib/data'
 import dayjs from '@/lib/dayjs/dayjs'
 import { blocksDuration } from '@/lib/utils'
 import { Props } from './votingEndPanelContainer'
 
 const VotingEndPanelLoader: FC<Props> = async ({ proposalId, ...props }) => {
-    const votingEnd = await getVotingEnd(proposalId)
+    const [latestBlockHeight, votingEnd] = await Promise.all([
+        getLatestBlockHeight(),
+        getVotingEnd(proposalId),
+    ])
 
-    if (!votingEnd) {
+    if (!latestBlockHeight || !votingEnd) {
         return
     }
 
@@ -25,7 +28,7 @@ const VotingEndPanelLoader: FC<Props> = async ({ proposalId, ...props }) => {
             <div className="text-text-secondary font-mono text-base">
                 {votingEnd.votingInProgress
                     ? blocksDuration(
-                          votingEnd.endBlockHeight - votingEnd.startBlockHeight,
+                          votingEnd.endBlockHeight - latestBlockHeight,
                           'long'
                       )
                     : dayjs(votingEnd.timestamp)
