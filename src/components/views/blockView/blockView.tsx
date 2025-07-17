@@ -32,7 +32,7 @@ const BlockView: FC<Props> = props => (
         prevHref={`/block/${props.block.height + 1}`}
         title="Block view"
     >
-        <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
+        <Parameters className="bg-other-tonal-fill5 rounded-sm p-3">
             <Parameter name="Block height">
                 {formatNumber(props.block.height)}
                 <CopyToClipboard
@@ -61,7 +61,7 @@ const BlockView: FC<Props> = props => (
                             key={execution.id}
                             {...execution}
                             className={classNames(
-                                'not-last:not-only:border-b-other-tonalStroke',
+                                'not-last:not-only:border-b-other-tonal-stroke',
                                 'not-first:not-last:rounded-none',
                                 'not-last:not-only:border-b-1',
                                 'first:not-only:rounded-b-none',

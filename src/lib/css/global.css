@@ -31,7 +31,7 @@
 /* https://tailwindcss.com/docs/preflight#extending-preflight */
 @layer base {
     body {
-        background: var(--color-base-blackAlt);
+        background: var(--color-base-black-alt);
         color: var(--color-text-primary);
         font-family: var(--font-default);
         font-size: var(--text-base);

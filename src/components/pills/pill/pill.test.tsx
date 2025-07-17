@@ -25,7 +25,7 @@ describe('Pill', () => {
 
             expect(container.firstChild).toHaveClass(
                 'text-text-primary',
-                'bg-other-tonalFill10'
+                'bg-other-tonal-fill10'
             )
         })
 
@@ -67,7 +67,7 @@ describe('Pill', () => {
         const { container } = render(<Pill priority="secondary" />)
 
         expect(container.firstChild).toHaveClass(
-            'border-other-tonalStroke',
+            'border-other-tonal-stroke',
             'border-2',
             'border-dashed'
         )

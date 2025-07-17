@@ -21,13 +21,13 @@ const Collapsible: FC<Props> = props => {
     return (
         <div
             className={classNames(
-                'bg-other-tonalFill5 overflow-hidden rounded-sm',
+                'bg-other-tonal-fill5 overflow-hidden rounded-sm',
                 props.className
             )}
         >
             <div
                 className={classNames(
-                    'hover:bg-other-tonalFill10 relative transition-colors',
+                    'hover:bg-other-tonal-fill10 relative transition-colors',
                     'flex h-12 cursor-pointer items-center pr-4 pl-10',
                     'duration-200 ease-out select-none',
                     props.headerClassName
@@ -54,7 +54,7 @@ const Collapsible: FC<Props> = props => {
                     >
                         <div
                             className={classNames(
-                                'border-t-other-tonalStroke border-t-1 px-10',
+                                'border-t-other-tonal-stroke border-t-1 px-10',
                                 'py-6',
                                 props.contentClassName
                             )}

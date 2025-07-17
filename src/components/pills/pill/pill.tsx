@@ -25,7 +25,7 @@ const Pill: FC<Props> = props => {
                     : 'font-default font-normal',
                 context === 'default' &&
                     (priority === 'primary'
-                        ? 'text-text-primary bg-other-tonalFill10'
+                        ? 'text-text-primary bg-other-tonal-fill10'
                         : 'text-text-primary bg-transparent'),
                 context === 'success' &&
                     (priority === 'primary'
@@ -40,7 +40,7 @@ const Pill: FC<Props> = props => {
                         ? 'text-secondary-dark bg-destructive-light'
                         : 'text-destructive-light bg-transparent'),
                 priority === 'secondary' &&
-                    'border-other-tonalStroke border-2 border-dashed',
+                    'border-other-tonal-stroke border-2 border-dashed',
                 props.className
             )}
         >

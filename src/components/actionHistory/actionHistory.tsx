@@ -33,14 +33,14 @@ const ActionHistory: FC<Props> = props => {
                         className={classNames(
                             'relative before:absolute before:top-full',
                             'before:left-5 before:h-2 before:w-[1px]',
-                            'before:bg-other-tonalStroke last:before:hidden'
+                            'before:bg-other-tonal-stroke last:before:hidden'
                         )}
                     >
                         <ErrorBoundary
                             fallback={
                                 <div
                                     className={classNames(
-                                        'bg-other-tonalFill5 flex h-10 w-full',
+                                        'bg-other-tonal-fill5 flex h-10 w-full',
                                         'items-center justify-between gap-1',
                                         'rounded-sm px-3 py-2 font-mono'
                                     )}

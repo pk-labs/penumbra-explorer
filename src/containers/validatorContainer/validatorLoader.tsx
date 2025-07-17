@@ -78,7 +78,7 @@ const ValidatorLoader: FC<Props> = async props => {
                 </h3>
                 <div
                     className={classNames(
-                        'text-text-secondary bg-other-tonalFill5 rounded-sm',
+                        'text-text-secondary bg-other-tonal-fill5 rounded-sm',
                         'p-4 font-mono text-sm font-medium break-all'
                     )}
                 >

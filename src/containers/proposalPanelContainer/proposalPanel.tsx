@@ -28,7 +28,7 @@ const ProposalPanel: FC<Props> = props => (
     >
         <Link
             className={classNames(
-                'border-other-tonalFill10 flex items-center gap-4 rounded-lg',
+                'border-other-tonal-fill10 flex items-center gap-4 rounded-lg',
                 'border-1 bg-linear-284 from-[rgba(186,77,20,0.05)]',
                 'from-[9.77%] to-[rgba(193,166,204,0.35)] to-[99.84%] px-6',
                 'py-4 backdrop-blur-lg'
