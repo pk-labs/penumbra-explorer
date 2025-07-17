@@ -1,309 +1,104 @@
-/* Font size (legacy Penumbra classes) */
-.text-textXs {
-    font-size: 0.75rem;
-    line-height: 1rem;
-}
-
-.text-textSm {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-}
-
-.text-textBase {
-    font-size: 1rem;
-    line-height: 1.5rem;
-}
-
-.text-textLg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-}
-
-.text-textXl {
-    font-size: 1.25rem;
-    line-height: 2rem;
-}
-
-.text-text2xl {
-    font-size: 1.5rem;
-    line-height: 2.25rem;
-}
-
-.text-text3xl {
-    font-size: 1.875rem;
-    line-height: 2.5rem;
-}
-
-.text-text4xl {
-    font-size: 2.25rem;
-    line-height: 2.75rem;
-}
-
-.text-text5xl {
-    font-size: 3rem;
-    line-height: 3.5rem;
-}
-
-.text-text6xl {
-    font-size: 3.75rem;
-    line-height: 4.25rem;
-}
-
-.text-text7xl {
-    font-size: 4.5rem;
-    line-height: 5rem;
-}
-
-.text-text8xl {
-    font-size: 6rem;
-    line-height: 6.25rem;
-}
-
-.text-text9xl {
-    font-size: 8rem;
-    line-height: 8.25rem;
-}
-
-/* Reduce font size below sm */
-@media (max-width: calc(1rem / 16 * 600)) {
-    .text-textXs {
-        font-size: 0.6875rem;
-    }
-
-    .text-textSm {
-        font-size: 0.75rem;
-    }
-
-    .text-textBase {
-        font-size: 0.875rem;
-    }
-
-    .text-textLg {
-        font-size: 1rem;
-    }
-
-    .text-textXl {
-        font-size: 1.125rem;
-    }
-
-    .text-text2xl {
-        font-size: 1.3125rem;
-    }
-
-    .text-text3xl {
-        font-size: 1.625rem;
-    }
-
-    .text-text4xl {
-        font-size: 2rem;
-    }
-
-    .text-text5xl {
-        font-size: 2.625rem;
-    }
-
-    .text-text6xl {
-        font-size: 3.25rem;
-    }
-
-    .text-text7xl {
-        font-size: 3.9375rem;
-    }
-
-    .text-text8xl {
-        font-size: 5.25rem;
-    }
-
-    .text-text9xl {
-        font-size: 7rem;
-    }
-}
-
-/* Increase font size above xl */
-@media (min-width: calc(1rem / 16 * 1600)) {
-    .text-textXs {
-        font-size: 0.875rem;
-    }
-
-    .text-textSm {
-        font-size: 1rem;
-    }
-
-    .text-textBase {
-        font-size: 1.125rem;
-    }
-
-    .text-textLg {
-        font-size: 1.25rem;
-    }
-
-    .text-textXl {
-        font-size: 1.375rem;
-    }
-
-    .text-text2xl {
-        font-size: 1.6875rem;
-    }
-
-    .text-text3xl {
-        font-size: 2.125rem;
-    }
-
-    .text-text4xl {
-        font-size: 2.5rem;
-    }
-
-    .text-text5xl {
-        font-size: 3.375rem;
-    }
-
-    .text-text6xl {
-        font-size: 4.25rem;
-    }
-
-    .text-text7xl {
-        font-size: 5.0625rem;
-    }
-
-    .text-text8xl {
-        font-size: 6.75rem;
-    }
-
-    .text-text9xl {
-        font-size: 9rem;
-    }
-}
-
 @theme {
     /* Font family */
     --font-default: Poppins, sans-serif;
     --font-heading: "Work Sans", sans-serif;
     --font-mono: _fontMono, monospace;
 
+    /* Font size */
+    /* Map non-standard text-text-size from Penumbra */
+    --text-xs: 0.75rem;
+    --text-text-xs: var(--text-xs);
+    --text-sm: 0.875rem;
+    --text-text-sm: var(--text-sm);
+    --text-base: 1rem;
+    --text-text-base: var(--text-base);
+    --text-lg: 1.125rem;
+    --text-text-lg: var(--text-lg);
+    --text-xl: 1.25rem;
+    --text-text-xl: var(--text-xl);
+    --text-2xl: 1.5rem;
+    --text-text-2xl: var(--text-2xl);
+    --text-3xl: 1.875rem;
+    --text-text-3xl: var(--text-3xl);
+    --text-4xl: 2.25rem;
+    --text-text-4xl: var(--text-4xl);
+    --text-5xl: 3rem;
+    --text-text-5xl: var(--text-5xl);
+    --text-6xl: 3.75rem;
+    --text-text-6xl: var(--text-6xl);
+    --text-7xl: 4.5rem;
+    --text-text-7xl: var(--text-7xl);
+    --text-8xl: 6rem;
+    --text-text-8xl: var(--text-8xl);
+    --text-9xl: 8rem;
+    --text-text-9xl: var(--text-9xl);
+
     /* Line height */
+    /* Map non-standard leading-text-size from Penumbra */
     --text-xs--line-height: 1rem;
+    --leading-text-xs: var(--text-xs--line-height);
     --text-sm--line-height: 1.25rem;
+    --leading-text-sm: var(--text-sm--line-height);
     --text-base--line-height: 1.5rem;
+    --leading-text-base: var(--text-base--line-height);
     --text-lg--line-height: 1.75rem;
+    --leading-text-lg: var(--text-lg--line-height);
     --text-xl--line-height: 2rem;
+    --leading-text-xl: var(--text-xl--line-height);
     --text-2xl--line-height: 2.25rem;
+    --leading-text2xl: var(--text-2xl--line-height);
     --text-3xl--line-height: 2.5rem;
+    --leading-text3xl: var(--text-3xl--line-height);
     --text-4xl--line-height: 2.75rem;
+    --leading-text4xl: var(--text-4xl--line-height);
     --text-5xl--line-height: 3.5rem;
+    --leading-text5xl: var(--text-5xl--line-height);
     --text-6xl--line-height: 4.25rem;
+    --leading-text6xl: var(--text-6xl--line-height);
     --text-7xl--line-height: 5rem;
+    --leading-text7xl: var(--text-7xl--line-height);
     --text-8xl--line-height: 6.25rem;
+    --leading-text8xl: var(--text-8xl--line-height);
     --text-9xl--line-height: 8.25rem;
+    --leading-text9xl: var(--text-9xl--line-height);
 }
 
-@layer utilities {
+@layer base {
     /* Reduce font size below sm */
     @media (max-width: calc(1rem / 16 * 600)) {
-        .text-xs {
-            font-size: 0.6875rem;
-        }
-
-        .text-sm {
-            font-size: 0.75rem;
-        }
-
-        .text-base {
-            font-size: 0.875rem;
-        }
-
-        .text-lg {
-            font-size: 1rem;
-        }
-
-        .text-xl {
-            font-size: 1.125rem;
-        }
-
-        .text-2xl {
-            font-size: 1.3125rem;
-        }
-
-        .text-3xl {
-            font-size: 1.625rem;
-        }
-
-        .text-4xl {
-            font-size: 2rem;
-        }
-
-        .text-5xl {
-            font-size: 2.625rem;
-        }
-
-        .text-6xl {
-            font-size: 3.25rem;
-        }
-
-        .text-7xl {
-            font-size: 3.9375rem;
-        }
-
-        .text-8xl {
-            font-size: 5.25rem;
-        }
-
-        .text-9xl {
-            font-size: 7rem;
+        :root {
+            --text-xs: 0.6875rem;
+            --text-sm: 0.75rem;
+            --text-base: 0.875rem;
+            --text-lg: 1rem;
+            --text-xl: 1.125rem;
+            --text-2xl: 1.3125rem;
+            --text-3xl: 1.625rem;
+            --text-4xl: 2rem;
+            --text-5xl: 2.625rem;
+            --text-6xl: 3.25rem;
+            --text-7xl: 3.9375rem;
+            --text-8xl: 5.25rem;
+            --text-9xl: 7rem;
         }
     }
 
     /* Increase font size above xl */
     @media (min-width: calc(1rem / 16 * 1600)) {
-        .text-xs {
-            font-size: 0.875rem;
-        }
-
-        .text-sm {
-            font-size: 1rem;
-        }
-
-        .text-base {
-            font-size: 1.125rem;
-        }
-
-        .text-lg {
-            font-size: 1.25rem;
-        }
-
-        .text-xl {
-            font-size: 1.375rem;
-        }
-
-        .text-2xl {
-            font-size: 1.6875rem;
-        }
-
-        .text-3xl {
-            font-size: 2.125rem;
-        }
-
-        .text-4xl {
-            font-size: 2.5rem;
-        }
-
-        .text-5xl {
-            font-size: 3.375rem;
-        }
-
-        .text-6xl {
-            font-size: 4.25rem;
-        }
-
-        .text-7xl {
-            font-size: 5.0625rem;
-        }
-
-        .text-8xl {
-            font-size: 6.75rem;
-        }
-
-        .text-9xl {
-            font-size: 9rem;
+        :root {
+            --text-xs: 0.875rem;
+            --text-sm: 1rem;
+            --text-base: 1.125rem;
+            --text-lg: 1.25rem;
+            --text-xl: 1.375rem;
+            --text-2xl: 1.6875rem;
+            --text-3xl: 2.125rem;
+            --text-4xl: 2.5rem;
+            --text-5xl: 3.375rem;
+            --text-6xl: 4.25rem;
+            --text-7xl: 5.0625rem;
+            --text-8xl: 6.75rem;
+            --text-9xl: 9rem;
         }
     }
 }
