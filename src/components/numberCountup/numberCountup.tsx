@@ -19,11 +19,9 @@ const NumberCountup: FC<Props> = props => {
 
     const transformValue = useCallback(
         (value: number) =>
-            formatNumber(
-                props.toFixed
-                    ? Number(value.toFixed(props.toFixed))
-                    : Math.round(value)
-            ),
+            props.toFixed
+                ? formatNumber(value, props.toFixed)
+                : formatNumber(Math.round(value)),
         [props.toFixed]
     )
 

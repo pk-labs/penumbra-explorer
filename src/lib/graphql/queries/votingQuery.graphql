@@ -1,0 +1,14 @@
+query Voting($proposalId: Int!) {
+    proposalDetail(id: $proposalId) {
+        abstainVotes
+        abstainVotesPercentage
+        noVotes
+        noVotesPercentage
+        outcome
+        quorum
+        state
+        totalVotes
+        yesVotes
+        yesVotesPercentage
+    }
+}

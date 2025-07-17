@@ -19,8 +19,7 @@ export interface Props extends Pick<ViewProps, 'className'> {
 const TransactionView: FC<Props> = props => (
     <View
         className={classNames(
-            'from-[rgba(193,166,204,0.25)]!',
-            'to-[rgba(193,166,204,0.03)]!',
+            'from-[rgba(193,166,204,0.25)] to-[rgba(193,166,204,0.03)]',
             props.className
         )}
         title="Transaction view"
@@ -68,7 +67,7 @@ const TransactionView: FC<Props> = props => (
                 </Parameter>
             </Parameters>
         </Subsection>
-        <JsonTree data={props.transaction.rawJson} />
+        <JsonTree data={props.transaction.rawJson} title="Raw JSON" />
     </View>
 )
 

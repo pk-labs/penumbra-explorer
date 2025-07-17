@@ -1,5 +1,5 @@
-query IbcStats($clientId: String, $timePeriod: TimePeriod) {
-    ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
+query IbcStats($clientId: String) {
+    ibcStats(clientId: $clientId) {
         id: clientId
         status
         channelId

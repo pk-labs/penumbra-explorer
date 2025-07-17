@@ -1,0 +1,12 @@
+query Proposal($id: Int!) {
+    proposalDetail(id: $id) {
+        depositAmount
+        description
+        id
+        kind
+        outcome
+        payload
+        state
+        title
+    }
+}

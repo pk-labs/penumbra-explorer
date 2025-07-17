@@ -3,14 +3,12 @@ import createGraphqlClient from '@/lib/graphql/createGraphqlClient'
 import {
     IbcStatsQuery,
     IbcStatsQueryVariables,
-    TimePeriod,
 } from '@/lib/graphql/generated/types'
 import { ibcStatsQuery } from '@/lib/graphql/queries'
 import { TransformedIbcStats } from '@/lib/types'
 
 const getIbcStats = async (args?: {
     clientId?: string
-    timePeriod?: TimePeriod
 }): Promise<TransformedIbcStats[] | undefined> => {
     const graphqlClient = createGraphqlClient()
 

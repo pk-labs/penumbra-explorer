@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react'
 import { classNames } from '@/lib/utils'
+import Surface from '../../surface'
 
 export interface Props {
     children?: ReactNode
@@ -11,12 +12,9 @@ export interface Props {
 }
 
 const Panel: FC<Props> = props => (
-    <section
-        className={classNames(
-            'bg-other-tonalFill5 flex flex-col justify-between gap-4',
-            'rounded-lg p-6 backdrop-blur-lg sm:flex-row',
-            props.className
-        )}
+    <Surface
+        as="section"
+        className={classNames('flex flex-col p-6', props.className)}
     >
         <header className={classNames('flex flex-col', props.headerClassName)}>
             <h3
@@ -30,8 +28,8 @@ const Panel: FC<Props> = props => (
             </h3>
             {props.header}
         </header>
-        {props.children && <div className="sm:self-end">{props.children}</div>}
-    </section>
+        {props.children}
+    </Surface>
 )
 
 export default Panel

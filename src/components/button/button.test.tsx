@@ -2,7 +2,7 @@ import { getByText, render } from '@testing-library/react'
 import Button from './button'
 
 describe('Button', () => {
-    test('renders as internal link', async () => {
+    test('renders internal link', async () => {
         const { container } = render(
             <Button href="/foo" icon="Home" scroll={false}>
                 Foo
@@ -15,17 +15,14 @@ describe('Button', () => {
         expect(button.firstChild).toHaveClass('lucide-house')
     })
 
-    test('renders as external link', async () => {
+    test('renders external link', async () => {
         const { container } = render(
-            <Button href="/foo" externalLink>
-                Foo
-            </Button>
+            <Button href="https://foo.com/">Foo</Button>
         )
 
-        console.log(container.innerHTML)
         const button = getByText(container, 'Foo')
 
-        expect(button.parentNode).toHaveAttribute('href', '/foo')
+        expect(button.parentNode).toHaveAttribute('href', 'https://foo.com/')
         expect(button.firstChild).toHaveClass('lucide-external-link')
     })
 
@@ -35,6 +32,11 @@ describe('Button', () => {
         expect(getByText(container, 'Foo').firstChild).toHaveClass(
             'lucide-house'
         )
+    })
+
+    test('renders at full width', async () => {
+        const { container } = render(<Button fullWidth>Foo</Button>)
+        expect(container.firstChild).toHaveClass('fullWidth')
     })
 
     test('applies CSS classes', async () => {

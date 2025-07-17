@@ -1,0 +1,9 @@
+query GovParameters {
+    governanceParameters {
+        depositAmount
+        passingThreshold
+        proposalDuration
+        slashingThreshold
+        validQuorum
+    }
+}

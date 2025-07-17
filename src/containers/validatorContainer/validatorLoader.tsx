@@ -7,6 +7,7 @@ import {
     CopyToClipboard,
     Parameter,
     Parameters,
+    Surface,
     ValidatorStateBonding,
 } from '@/components'
 import { getValidator } from '@/lib/data'
@@ -23,12 +24,9 @@ const ValidatorLoader: FC<Props> = async props => {
     }
 
     return (
-        <section
-            className={classNames(
-                'bg-other-tonalFill5 flex flex-col gap-6 rounded-lg p-6',
-                'backdrop-blur-lg',
-                props.className
-            )}
+        <Surface
+            as="section"
+            className={classNames('flex flex-col gap-6 p-6', props.className)}
         >
             <header className="flex justify-between gap-4">
                 <span className="flex gap-2">
@@ -161,7 +159,7 @@ const ValidatorLoader: FC<Props> = async props => {
                     .
                 </span>
             </footer>
-        </section>
+        </Surface>
     )
 }
 

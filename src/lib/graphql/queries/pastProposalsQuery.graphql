@@ -1,0 +1,15 @@
+query PastProposals($limit: CollectionLimit!) {
+    pastProposals(limit: $limit) {
+        items {
+            endBlockHeight
+            endTimestamp
+            id
+            kind
+            outcome
+            state
+            title
+            totalVotes
+        }
+        total
+    }
+}

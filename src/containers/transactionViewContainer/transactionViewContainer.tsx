@@ -14,17 +14,12 @@ const TransactionViewContainer: FC<Props> = props => (
         fallback={
             <View
                 className={classNames(
-                    'from-[rgba(193,166,204,0.25)]!',
-                    'to-[rgba(193,166,204,0.03)]!',
+                    'from-[rgba(193,166,204,0.25)] to-[rgba(193,166,204,0.03)]',
                     props.className
                 )}
                 title="Transaction view"
             >
-                <Skeleton className="h-24 rounded-sm" />
-                <Skeleton className="h-16 rounded-sm" />
-                <Skeleton className="h-65 rounded-sm" />
-                <Skeleton className="h-24 rounded-sm" />
-                <Skeleton className="h-18.5 rounded-sm" />
+                <Skeleton className="h-150 rounded-sm" />
             </View>
         }
     >

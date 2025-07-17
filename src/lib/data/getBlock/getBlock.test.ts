@@ -38,6 +38,7 @@ describe('getBlock', () => {
                 toPromise: () => Promise.resolve({ error: 'foo' }),
             }),
         })
+
         await expect(getBlock(1)).rejects.toBe('foo')
     })
 })
