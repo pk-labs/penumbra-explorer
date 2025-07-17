@@ -19,8 +19,9 @@ const ProposalPanel: FC<Props> = props => (
         className={classNames('overflow-hidden', props.className)}
         initial={{ height: 0 }}
         transition={{
-            damping: 16,
-            stiffness: 160,
+            damping: 25,
+            mass: 2,
+            stiffness: 200,
             type: 'spring',
         }}
     >
