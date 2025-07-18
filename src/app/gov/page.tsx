@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation'
 import { FC } from 'react'
 import { Breadcrumb, Breadcrumbs, Container } from '@/components'
 import {
+    ActiveProposalPanelContainer,
     GovParametersContainer,
-    ProposalPanelContainer,
     ProposalTableContainer,
 } from '@/containers'
 import { classNames, generatePageMetadata } from '@/lib/utils'
@@ -37,7 +37,7 @@ const GovernancePage: FC<Props> = async props => {
                 <Breadcrumb href="/">Explore</Breadcrumb>
                 <Breadcrumb>Governance</Breadcrumb>
             </Breadcrumbs>
-            <ProposalPanelContainer />
+            <ActiveProposalPanelContainer />
             <div
                 className={classNames(
                     'mt-4 flex flex-col-reverse gap-4 lg:flex-row',

@@ -14,16 +14,15 @@ interface Props {
     proposal: TransformedActiveProposal
 }
 
-const ProposalPanel: FC<Props> = props => (
+const ActiveProposalPanel: FC<Props> = props => (
     <motion.div
-        animate={{ height: 'auto' }}
+        animate={{ height: 'auto', marginBottom: '16px' }}
         className={classNames('overflow-hidden', props.className)}
-        initial={{ height: 0 }}
+        initial={{ height: 0, marginBottom: 0 }}
         transition={{
-            damping: 26,
-            mass: 2,
-            stiffness: 200,
-            type: 'spring',
+            delay: 0.25,
+            duration: 0.75,
+            ease: 'backOut',
         }}
     >
         <Link
@@ -73,4 +72,4 @@ const ProposalPanel: FC<Props> = props => (
     </motion.div>
 )
 
-export default ProposalPanel
+export default ActiveProposalPanel
