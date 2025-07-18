@@ -31,10 +31,12 @@ const HomePage: FC = () => (
             </GraphqlClientProvider>
         </Container>
         <Container className="flex flex-col gap-4">
-            <ActiveProposalPanelContainer className="mb-4" />
-            <div className="flex flex-col gap-4 md:flex-row">
-                <BlockPanelContainer className="flex-1" />
-                <TransactionPanelContainer className="flex-1" />
+            <div>
+                <ActiveProposalPanelContainer />
+                <div className="flex flex-col gap-4 md:flex-row">
+                    <BlockPanelContainer className="flex-1" />
+                    <TransactionPanelContainer className="flex-1" />
+                </div>
             </div>
             <div className="flex flex-col gap-4 lg:flex-row">
                 <BlockTableContainer
