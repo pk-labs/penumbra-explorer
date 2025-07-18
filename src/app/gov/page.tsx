@@ -40,8 +40,7 @@ const GovernancePage: FC<Props> = async props => {
             <ActiveProposalPanelContainer />
             <div
                 className={classNames(
-                    'mt-4 flex flex-col-reverse gap-4 lg:flex-row',
-                    'lg:items-start'
+                    'flex flex-col-reverse gap-4 lg:flex-row lg:items-start'
                 )}
             >
                 <ProposalTableContainer
