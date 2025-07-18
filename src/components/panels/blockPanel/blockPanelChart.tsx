@@ -101,7 +101,7 @@ const BlockPanelChart: FC<Props> = props => {
                         'font-medium'
                     )}
                 >
-                    Receiving new blocks ...
+                    Syncing to blocks ...
                 </div>
             </div>
         </div>
