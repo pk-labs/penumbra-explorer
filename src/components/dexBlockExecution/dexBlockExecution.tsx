@@ -33,7 +33,7 @@ const DexBlockExecution: FC<Props> = props => (
                     key={execution.id}
                     {...execution}
                     className={classNames(
-                        'not-last:not-only:border-b-other-tonalStroke',
+                        'not-last:not-only:border-b-other-tonal-stroke',
                         'not-first:not-last:rounded-none',
                         'not-last:not-only:border-b-1',
                         'first:not-only:rounded-b-none',

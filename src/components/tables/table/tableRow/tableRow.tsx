@@ -25,9 +25,9 @@ const TableRow: FC<Props> = props => {
     return (
         <tr
             className={classNames(
-                'border-other-tonalFill10 not-last:border-b',
+                'border-other-tonal-fill10 not-last:border-b',
                 props.href &&
-                    'hover:bg-other-tonalFill5 transition-colors ' +
+                    'hover:bg-other-tonal-fill5 transition-colors ' +
                         'cursor-pointer duration-200 ease-out',
                 props.className
             )}

@@ -8,7 +8,7 @@ const Memo: FC = () => (
     <Subsection title="Memo">
         <div
             className={classNames(
-                'bg-other-tonalFill5 flex items-center gap-1 rounded-sm px-3',
+                'bg-other-tonal-fill5 flex items-center gap-1 rounded-sm px-3',
                 'text-text-secondary py-2'
             )}
         >

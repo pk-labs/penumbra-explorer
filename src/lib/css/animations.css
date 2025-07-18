@@ -15,7 +15,7 @@
 
     @keyframes new-data-bg-animation {
         from {
-            background-color: var(--color-action-hoverOverlay);
+            background-color: var(--color-action-hover-overlay);
         }
 
         to {

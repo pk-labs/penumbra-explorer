@@ -11,7 +11,7 @@ export interface Props extends ViewNavigationProps {
 const View: FC<Props> = props => (
     <article
         className={classNames(
-            'border-other-tonalStroke flex flex-col gap-4 rounded-lg',
+            'border-other-tonal-stroke flex flex-col gap-4 rounded-lg',
             'border-1 bg-radial-[100%_100%_at_0%_0%]',
             'from-[rgba(174,174,174,0.25)] from-0%',
             'to-[rgba(174,174,174,0.03)] to-100% p-6 backdrop-blur-md',

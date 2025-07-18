@@ -22,7 +22,7 @@ const Footer: FC<Props> = props => (
             <div className="flex gap-2">
                 <a
                     className={classNames(
-                        'border-other-tonalStroke inline-flex h-8 w-8',
+                        'border-other-tonal-stroke inline-flex h-8 w-8',
                         'items-center justify-center rounded-full border-1'
                     )}
                     href="http://discord.gg/penumbrazone"
@@ -32,7 +32,7 @@ const Footer: FC<Props> = props => (
                 </a>
                 <a
                     className={classNames(
-                        'border-other-tonalStroke inline-flex h-8 w-8',
+                        'border-other-tonal-stroke inline-flex h-8 w-8',
                         'items-center justify-center rounded-full border-1'
                     )}
                     href="https://github.com/pk-labs/penumbra-explorer"
@@ -42,7 +42,7 @@ const Footer: FC<Props> = props => (
                 </a>
                 <a
                     className={classNames(
-                        'border-other-tonalStroke inline-flex h-8 w-8',
+                        'border-other-tonal-stroke inline-flex h-8 w-8',
                         'items-center justify-center rounded-full border-1'
                     )}
                     href="https://twitter.com/penumbrazone"
