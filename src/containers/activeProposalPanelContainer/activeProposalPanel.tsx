@@ -20,10 +20,9 @@ const ActiveProposalPanel: FC<Props> = props => (
         className={classNames('overflow-hidden', props.className)}
         initial={{ height: 0 }}
         transition={{
-            damping: 26,
-            mass: 2,
-            stiffness: 200,
-            type: 'spring',
+            delay: 0.25,
+            duration: 0.75,
+            ease: 'backOut',
         }}
     >
         <Link
