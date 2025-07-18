@@ -1,12 +1,12 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import ProposalPanelLoader from './proposalPanelLoader'
+import ActiveProposalPanelLoader from './activeProposalPanelLoader'
 
 export interface Props {
     className?: string
 }
 
-const ProposalPanelContainer: FC<Props> = props => (
+const ActiveProposalPanelContainer: FC<Props> = props => (
     <Suspense
     // No fallback for now because active proposals are infrequent
     // fallback={
@@ -23,8 +23,8 @@ const ProposalPanelContainer: FC<Props> = props => (
     //     </div>
     // }
     >
-        <ProposalPanelLoader {...props} />
+        <ActiveProposalPanelLoader {...props} />
     </Suspense>
 )
 
-export default ProposalPanelContainer
+export default ActiveProposalPanelContainer

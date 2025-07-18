@@ -1,10 +1,10 @@
 // istanbul ignore file
 import { FC } from 'react'
 import { getActiveProposals, getLatestBlockHeight } from '@/lib/data'
-import ProposalPanel from './proposalPanel'
-import { Props } from './proposalPanelContainer'
+import ActiveProposalPanel from './activeProposalPanel'
+import { Props } from './activeProposalPanelContainer'
 
-const ProposalPanelLoader: FC<Props> = async props => {
+const ActiveProposalPanelLoader: FC<Props> = async props => {
     const [latestBlockHeight, proposals] = await Promise.all([
         getLatestBlockHeight(),
         getActiveProposals(),
@@ -17,7 +17,7 @@ const ProposalPanelLoader: FC<Props> = async props => {
     const [proposal] = proposals
 
     return (
-        <ProposalPanel
+        <ActiveProposalPanel
             className={props.className}
             latestBlockHeight={latestBlockHeight}
             proposal={proposal}
@@ -25,4 +25,4 @@ const ProposalPanelLoader: FC<Props> = async props => {
     )
 }
 
-export default ProposalPanelLoader
+export default ActiveProposalPanelLoader

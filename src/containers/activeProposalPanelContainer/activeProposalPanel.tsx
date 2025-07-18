@@ -14,7 +14,7 @@ interface Props {
     proposal: TransformedActiveProposal
 }
 
-const ProposalPanel: FC<Props> = props => (
+const ActiveProposalPanel: FC<Props> = props => (
     <motion.div
         animate={{ height: 'auto' }}
         className={classNames('overflow-hidden', props.className)}
@@ -73,4 +73,4 @@ const ProposalPanel: FC<Props> = props => (
     </motion.div>
 )
 
-export default ProposalPanel
+export default ActiveProposalPanel
