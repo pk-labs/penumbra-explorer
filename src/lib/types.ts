@@ -127,8 +127,8 @@ export enum ActionType {
 }
 
 export interface UmPriceData {
-    change: number
-    price: number
+    change: null | number
+    price: null | number
 }
 
 export type StoredSearchResult =

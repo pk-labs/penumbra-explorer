@@ -8,8 +8,8 @@ const searchParams = new URLSearchParams({
 const url = `https://api.coingecko.com/api/v3/coins/markets?${searchParams}`
 
 interface Data {
-    current_price: number
-    price_change_percentage_24h: number
+    current_price: null | number
+    price_change_percentage_24h: null | number
 }
 
 const getUmPrice = async (): Promise<UmPriceData | undefined> => {
