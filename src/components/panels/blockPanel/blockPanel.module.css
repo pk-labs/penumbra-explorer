@@ -1,18 +1,40 @@
 @reference "../../../lib/css/global.css";
 
 .bar {
-    &.active {
-        background: var(--color-secondary-light);
-        box-shadow: 0 0 8px 4px
-            rgb(from var(--color-secondary-light) r g b / 0.6);
+    @apply bg-other-tonal-fill10 rounded-xs;
+    @apply h-2.5 w-1.25 sm:h-9 sm:w-1 xl:h-10! xl:w-1.25!;
 
-        & + div {
-            background: rgb(from var(--color-secondary-light) r g b / 0.5);
-        }
+    &.full {
+        animation: bar-animation 200ms linear forwards;
+        background: var(--color-other-tonal-fill10);
+    }
+}
+
+@keyframes bar-animation {
+    0% {
+        background: var(--color-other-tonal-fill10);
+        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0);
     }
 
-    &:has(+ .active) {
+    25% {
+        background: rgb(from var(--color-secondary-light) r g b / 0.2);
+        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.05);
+    }
+
+    50% {
         background: rgb(from var(--color-secondary-light) r g b / 0.5);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.1);
+    }
+
+    75% {
+        background: rgb(from var(--color-secondary-light) r g b / 0.8);
+        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.15);
+    }
+
+    100% {
+        background: var(--color-secondary-light);
+        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.2);
     }
 }
 

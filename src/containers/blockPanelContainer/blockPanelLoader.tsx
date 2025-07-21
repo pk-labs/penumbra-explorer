@@ -10,7 +10,7 @@ const BlockPanelLoader: FC<Props> = async props => {
 
     return (
         <GraphqlClientProvider>
-            <BlockPanelUpdater number={blocks[0]?.height ?? 0} {...props} />
+            <BlockPanelUpdater blockHeight={blocks[0]?.height} {...props} />
         </GraphqlClientProvider>
     )
 }

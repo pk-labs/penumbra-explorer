@@ -7,11 +7,11 @@ import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { Props as BlockPanelContainerProps } from './blockPanelContainer'
 
 interface Props extends BlockPanelContainerProps {
-    number: number
+    blockHeight?: number
 }
 
 const BlockPanelUpdater: FC<Props> = props => {
-    const [number, setNumber] = useState(props.number)
+    const [blockHeight, setBlockHeight] = useState(props.blockHeight)
     const [blockSubscription] = useBlockUpdateSubscription({
         variables: { limit: 1 },
     })
@@ -19,11 +19,11 @@ const BlockPanelUpdater: FC<Props> = props => {
 
     useEffect(() => {
         if (blockUpdate) {
-            setNumber(blockUpdate.height)
+            setBlockHeight(blockUpdate.height)
         }
     }, [blockUpdate])
 
-    return <BlockPanel {...props} number={number} />
+    return <BlockPanel {...props} blockHeight={blockHeight} />
 }
 
 export default BlockPanelUpdater
