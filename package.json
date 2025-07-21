@@ -23,7 +23,7 @@
         "@penumbra-labs/registry": "^12.5.0",
         "@penumbra-zone/perspective": "^61.1.0",
         "@penumbra-zone/protobuf": "^11.0.0",
-        "@penumbra-zone/types": "^35.0.0",
+        "@penumbra-zone/types": "^36.0.0",
         "@penumbra-zone/ui": "^16.0.2",
         "clsx": "^2.1.1",
         "dayjs": "^1.11.13",
