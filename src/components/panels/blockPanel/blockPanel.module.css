@@ -18,7 +18,8 @@
 
     25% {
         background: rgb(from var(--color-secondary-light) r g b / 0.2);
-        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.05);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.05);
     }
 
     50% {
@@ -29,12 +30,14 @@
 
     75% {
         background: rgb(from var(--color-secondary-light) r g b / 0.8);
-        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.15);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.15);
     }
 
     100% {
         background: var(--color-secondary-light);
-        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.2);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.2);
     }
 }
 
