@@ -1,6 +1,6 @@
 // istanbul ignore file
 import { FC, Suspense } from 'react'
-import { Avatar, Parameter, Parameters, Skeleton } from '@/components'
+import { Avatar, Skeleton, Surface } from '@/components'
 import { placeholderAvatarImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import ClientLoader from './clientLoader'
@@ -18,10 +18,9 @@ const ClientContainer: FC<Props> = props => (
     <Suspense
         fallback={
             <>
-                <div
+                <Surface
                     className={classNames(
-                        'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg',
-                        'p-6 backdrop-blur-lg',
+                        'flex flex-col gap-4 p-6',
                         props.statsClassName
                     )}
                 >
@@ -58,61 +57,11 @@ const ClientContainer: FC<Props> = props => (
                             <span>{props.id}</span>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4">
-                        <Parameters>
-                            <Parameter name="Last tx time">
-                                <Skeleton className="h-4 w-14" />
-                            </Parameter>
-                        </Parameters>
-                        <Parameters>
-                            <Parameter name="Txs total">
-                                <Skeleton className="h-4 w-14" />
-                            </Parameter>
-                        </Parameters>
-                    </div>
-                    {/*<div className="grid gap-4">*/}
-                    {/*<div className="flex flex-col gap-4">*/}
-                    {/*    <Parameters*/}
-                    {/*        className="bg-transparent p-0"*/}
-                    {/*        title="Shielded"*/}
-                    {/*    >*/}
-                    {/*        <Parameter name="Txs shielded">*/}
-                    {/*            <Skeleton className="h-4 w-24" />*/}
-                    {/*        </Parameter>*/}
-                    {/*    </Parameters>*/}
-                    {/*    <Parameters*/}
-                    {/*        className="bg-transparent p-0"*/}
-                    {/*        title="Unshielded"*/}
-                    {/*    >*/}
-                    {/*        <Parameter name="Txs unshielded">*/}
-                    {/*            <Skeleton className="h-4 w-24" />*/}
-                    {/*        </Parameter>*/}
-                    {/*    </Parameters>*/}
-                    {/*</div>*/}
-                    {/*<Parameters*/}
-                    {/*    className="bg-transparent p-0 sm:col-2 lg:col-auto!"*/}
-                    {/*    title="Total"*/}
-                    {/*>*/}
-                    {/*    <Parameter name="Txs total">*/}
-                    {/*        <Skeleton className="h-4 w-24" />*/}
-                    {/*    </Parameter>*/}
-                    {/*    <Parameter name="Txs pending">*/}
-                    {/*        <Skeleton className="h-4 w-24" />*/}
-                    {/*    </Parameter>*/}
-                    {/*    <Parameter name="Txs expired">*/}
-                    {/*        <Skeleton className="h-4 w-24" />*/}
-                    {/*    </Parameter>*/}
-                    {/*</Parameters>*/}
-                    {/*</div>*/}
-                </div>
-                <div
-                    className={classNames(
-                        'bg-other-tonalFill5 rounded-lg p-6 backdrop-blur-lg',
-                        props.channelsClassName
-                    )}
-                >
-                    <Skeleton className="h-10 w-full" />
-                </div>
+                    <Skeleton className="h-14 rounded-sm" />
+                </Surface>
+                <Surface className={classNames('p-6', props.channelsClassName)}>
+                    <Skeleton className="h-10 w-full rounded-sm" />
+                </Surface>
             </>
         }
     >

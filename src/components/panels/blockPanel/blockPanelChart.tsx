@@ -58,7 +58,7 @@ const BlockPanelChart: FC<Props> = props => {
     }, [props.animate])
 
     return (
-        <div className="flex flex-col gap-4 sm:gap-2">
+        <div className="flex flex-col gap-4 sm:gap-2 sm:self-end">
             <div
                 ref={chartRef}
                 className="flex justify-between sm:justify-start sm:gap-1"
@@ -67,7 +67,7 @@ const BlockPanelChart: FC<Props> = props => {
                     <div
                         key={i}
                         className={classNames(
-                            'bg-other-tonalFill10 h-2.5 w-1.25 rounded-xs',
+                            'bg-other-tonal-fill10 h-2.5 w-1.25 rounded-xs',
                             'transition-all duration-120 sm:h-9 sm:w-1 xl:h-10!',
                             'xl:w-1.25!',
                             styles.bar

@@ -5,6 +5,7 @@ import {
     BlocksIcon,
     BoxIcon,
     CheckCheckIcon,
+    HandshakeIcon,
     HomeIcon,
     SatelliteDishIcon,
 } from 'lucide-react'
@@ -27,7 +28,7 @@ const MobileMenu: FC<Props> = props => {
         <Menu
             className={classNames(
                 'relative z-40 rounded-full backdrop-blur-lg',
-                'lg:hidden'
+                'min-[1440px]:hidden'
             )}
             onClose={closeMenu}
             onOpen={openMenu}
@@ -60,6 +61,10 @@ const MobileMenu: FC<Props> = props => {
                     size={16}
                 />
                 DEX
+            </MenuItem>
+            <MenuItem href="/gov" paths={['/proposal']}>
+                <HandshakeIcon className="stroke-primary-light" size={16} />
+                Governance
             </MenuItem>
         </Menu>
     )

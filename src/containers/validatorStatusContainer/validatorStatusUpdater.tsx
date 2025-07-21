@@ -2,6 +2,7 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
+import { Surface } from '@/components'
 import { useValidatorBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
 import { ValidatorBlock } from '@/lib/types'
 import { classNames } from '@/lib/utils'
@@ -48,15 +49,9 @@ const ValidatorStatusUpdater: FC<Props> = props => {
     }, [validatorBlockUpdate])
 
     return (
-        <section
-            // TODO: Maybe extract this nested backdrop-filter workaround to a
-            // "Surface" component
-            className={classNames(
-                'before:bg-other-tonalFill5 relative z-1 flex flex-col gap-6',
-                'p-6 before:absolute before:inset-0 before:-z-1',
-                'before:rounded-lg before:backdrop-blur-lg',
-                props.className
-            )}
+        <Surface
+            as="section"
+            className={classNames('flex flex-col gap-6 p-6', props.className)}
         >
             <header>
                 <h2 className="inline text-2xl font-medium">
@@ -83,7 +78,7 @@ const ValidatorStatusUpdater: FC<Props> = props => {
                     No signing activity
                 </div>
             )}
-        </section>
+        </Surface>
     )
 }
 

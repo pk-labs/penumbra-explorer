@@ -19,13 +19,12 @@ export interface Props extends Pick<ViewProps, 'className'> {
 const TransactionView: FC<Props> = props => (
     <View
         className={classNames(
-            'from-[rgba(193,166,204,0.25)]!',
-            'to-[rgba(193,166,204,0.03)]!',
+            'from-[rgba(193,166,204,0.25)] to-[rgba(193,166,204,0.03)]',
             props.className
         )}
         title="Transaction view"
     >
-        <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
+        <Parameters className="bg-other-tonal-fill5 rounded-sm p-3">
             <Parameter name="Transaction hash">
                 {shortenHash(props.transaction.hash, 16)}
                 <CopyToClipboard
@@ -59,7 +58,7 @@ const TransactionView: FC<Props> = props => (
             rawTransaction={props.transaction.raw}
         />
         <Subsection title="Parameters">
-            <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
+            <Parameters className="bg-other-tonal-fill5 rounded-sm p-3">
                 <Parameter name="Transaction fee">
                     {props.transaction.fee / 1000000} UM
                 </Parameter>
@@ -68,7 +67,7 @@ const TransactionView: FC<Props> = props => (
                 </Parameter>
             </Parameters>
         </Subsection>
-        <JsonTree data={props.transaction.rawJson} />
+        <JsonTree data={props.transaction.rawJson} title="Raw JSON" />
     </View>
 )
 

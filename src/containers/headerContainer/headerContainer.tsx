@@ -14,7 +14,7 @@ const HeaderContainer: FC<Props> = props => (
     <Container
         as="header"
         className={classNames(
-            'grid h-19 grid-cols-2 items-center lg:grid-cols-3',
+            'grid h-19 grid-cols-2 items-center min-[1440px]:grid-cols-3',
             props.className
         )}
     >
@@ -23,7 +23,7 @@ const HeaderContainer: FC<Props> = props => (
                 <Logo className="max-h-6 w-auto sm:max-h-7" />
             </Link>
         </div>
-        <Tabs className="hidden justify-self-center lg:flex">
+        <Tabs className="z-40 hidden justify-self-center min-[1440px]:flex">
             <Tab href="/">Home</Tab>
             <Tab href="/blocks" paths={['/block']}>
                 Blocks
@@ -38,6 +38,9 @@ const HeaderContainer: FC<Props> = props => (
                 Validators
             </Tab>
             <Tab href="/dex">DEX</Tab>
+            <Tab href="/gov" paths={['/proposal']}>
+                Governance
+            </Tab>
         </Tabs>
         <div className="flex items-center gap-2 justify-self-end">
             <SearchButton />

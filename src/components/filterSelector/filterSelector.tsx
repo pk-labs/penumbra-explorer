@@ -19,7 +19,6 @@ const FilterSelector: FC<Props> = props => {
 
     const onChange = useCallback(
         (value: string) => {
-            // FIXME: Click on selected value results in empty string here
             if (!value || value === selectedFilter) {
                 return
             }

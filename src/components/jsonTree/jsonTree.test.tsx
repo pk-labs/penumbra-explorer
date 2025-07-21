@@ -1,4 +1,5 @@
 import {
+    act,
     fireEvent,
     getByText,
     queryByText,
@@ -11,8 +12,20 @@ import JsonTree from './jsonTree'
 userEvent.setup()
 
 describe('JsonTree', () => {
+    test('renders title', async () => {
+        const { container } = render(
+            <JsonTree data={{ foo: 'bar' }} title="Foo" />
+        )
+
+        await act(async () => {})
+
+        expect(getByText(container, 'Foo'))
+    })
+
     test('is collapsed by default', async () => {
-        const { container } = render(<JsonTree data={{ foo: 'bar' }} />)
+        const { container } = render(
+            <JsonTree data={{ foo: 'bar' }} title="Foo" />
+        )
 
         await waitFor(() => {
             getByText(container, 'root')
@@ -31,6 +44,7 @@ describe('JsonTree', () => {
                         },
                     },
                 }}
+                title="Foo"
             />
         )
 
@@ -47,5 +61,21 @@ describe('JsonTree', () => {
             getByText(container, 'level2')
             expect(queryByText(container, 'level3')).toBeNull()
         })
+    })
+
+    test('applies CSS classes', async () => {
+        const { container } = render(
+            <JsonTree
+                className="foo bar"
+                data={{ foo: 'bar' }}
+                title="Bar"
+                titleClassName="bar"
+            />
+        )
+
+        console.log(container.innerHTML)
+
+        expect(container.firstChild).toHaveClass('foo', 'bar')
+        expect(getByText(container, 'Bar').parentNode).toHaveClass('bar')
     })
 })

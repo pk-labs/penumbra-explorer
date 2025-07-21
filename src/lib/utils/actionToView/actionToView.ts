@@ -153,6 +153,14 @@ const actionToView = (action: Action): ActionView | undefined => {
                     value: payload.value,
                 },
             })
+        // case 'positionOpenPlan': {
+        //     return new ActionView({
+        //         actionView: {
+        //             case: 'positionOpen',
+        //             value: payload.value,
+        //         },
+        //     })
+        // }
         case 'positionClose':
             return new ActionView({
                 actionView: {

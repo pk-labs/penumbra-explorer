@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { penumbraImage, placeholderAvatarImage } from '@/lib/images'
 import { classNames } from '@/lib/utils'
 import Avatar from '../avatar'
+import Surface from '../surface'
 
 interface Props {
     channelId: string
@@ -13,18 +14,12 @@ interface Props {
 }
 
 const IbcChannels: FC<Props> = props => (
-    <div
-        className={classNames(
-            'bg-other-tonalFill5 flex items-center rounded-lg p-6',
-            'backdrop-blur-lg',
-            props.className
-        )}
-    >
+    <Surface className={classNames('flex items-center p-6', props.className)}>
         <div className="flex flex-1 items-center">
             <div
                 className={classNames(
                     'border-success-light',
-                    'before:border-other-tonalStroke relative flex',
+                    'before:border-other-tonal-stroke relative flex',
                     'h-10 w-10 items-center justify-center',
                     'rounded-full border-1 before:absolute',
                     'before:-z-1 before:h-[calc(100%+4px)]',
@@ -36,7 +31,7 @@ const IbcChannels: FC<Props> = props => (
             </div>
             <div
                 className={classNames(
-                    'bg-other-tonalFill10 flex h-7 items-center',
+                    'bg-other-tonal-fill10 flex h-7 items-center',
                     'justify-center rounded-full px-1.5 font-mono',
                     'text-xs font-medium whitespace-nowrap',
                     'backdrop-blur-lg'
@@ -46,14 +41,14 @@ const IbcChannels: FC<Props> = props => (
             </div>
             <div
                 className={classNames(
-                    'bg-success-light border-other-tonalStroke h-0.5',
+                    'bg-success-light border-other-tonal-stroke h-0.5',
                     'flex-1 border-1'
                 )}
             />
         </div>
         <div
             className={classNames(
-                'bg-other-tonalFill10 relative flex h-8 w-8',
+                'bg-other-tonal-fill10 relative flex h-8 w-8',
                 'items-center justify-center rounded-full'
             )}
         >
@@ -69,13 +64,13 @@ const IbcChannels: FC<Props> = props => (
         <div className="flex flex-1 items-center">
             <div
                 className={classNames(
-                    'bg-success-light border-other-tonalStroke h-0.5',
+                    'bg-success-light border-other-tonal-stroke h-0.5',
                     'flex-1 border-1'
                 )}
             />
             <div
                 className={classNames(
-                    'bg-other-tonalFill10 flex h-7 items-center',
+                    'bg-other-tonal-fill10 flex h-7 items-center',
                     'justify-center rounded-full px-1.5 font-mono',
                     'text-xs font-medium whitespace-nowrap',
                     'backdrop-blur-lg'
@@ -86,7 +81,7 @@ const IbcChannels: FC<Props> = props => (
             <div
                 className={classNames(
                     'border-success-light',
-                    'before:border-other-tonalStroke relative flex',
+                    'before:border-other-tonal-stroke relative flex',
                     'h-10 w-10 items-center justify-center',
                     'rounded-full border-1 before:absolute',
                     'before:-z-1 before:h-[calc(100%+4px)]',
@@ -101,7 +96,7 @@ const IbcChannels: FC<Props> = props => (
                 />
             </div>
         </div>
-    </div>
+    </Surface>
 )
 
 export default IbcChannels

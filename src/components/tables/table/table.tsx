@@ -1,5 +1,6 @@
 import { FC, ReactElement, ReactNode } from 'react'
 import { classNames } from '@/lib/utils'
+import Surface from '../../surface'
 
 export interface Props {
     children?:
@@ -14,19 +15,13 @@ export interface Props {
 }
 
 const Table: FC<Props> = props => (
-    <div
-        className={classNames(
-            'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg p-6',
-            'backdrop-blur-lg',
-            props.className
-        )}
-    >
+    <Surface className={classNames('flex flex-col gap-4 p-6', props.className)}>
         {props.header}
         <div className="scroll-area-component flex-1 overflow-x-auto">
             <table className="w-full">{props.children}</table>
         </div>
         {props.footer}
-    </div>
+    </Surface>
 )
 
 export default Table

@@ -28,11 +28,6 @@ jest.mock(
     })
 )
 
-jest.mock(
-    '../../../lib/utils/valueToView/valueToView',
-    () => (value: any) => value
-)
-
 jest.mock('../../assetValue/assetValue', () => (props: any) => (
     <div>{props.valueView}</div>
 ))
@@ -157,7 +152,7 @@ describe('TransactionTable', () => {
                         actionCount: 2,
                         blockHeight: 123,
                         hash: 'tx1',
-                        primaryAction: ActionType.receive,
+                        primaryAction: ActionType.Receive,
                         raw: '',
                         status: IbcStatus.Unknown,
                         timestamp: 0,

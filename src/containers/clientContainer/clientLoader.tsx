@@ -6,6 +6,7 @@ import {
     IbcChannels,
     Parameter,
     Parameters,
+    Surface,
     TimeAgo,
 } from '@/components'
 import { getIbcStats } from '@/lib/data'
@@ -24,10 +25,9 @@ const ClientLoader: FC<Props> = async props => {
 
     return (
         <>
-            <div
+            <Surface
                 className={classNames(
-                    'bg-other-tonalFill5 flex flex-col gap-4 rounded-lg',
-                    'p-6 backdrop-blur-lg',
+                    'flex flex-col gap-4 p-6',
                     props.statsClassName
                 )}
             >
@@ -108,7 +108,7 @@ const ClientLoader: FC<Props> = async props => {
                 {/*    </Parameter>*/}
                 {/*</Parameters>*/}
                 {/*</div>*/}
-            </div>
+            </Surface>
             {client.channelId && client.counterpartyChannelId && (
                 <IbcChannels
                     channelId={client.channelId}

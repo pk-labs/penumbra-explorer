@@ -22,7 +22,7 @@ const SearchResultOverlay: FC<Props> = props => (
     <motion.div
         animate={{ opacity: 1, transition: { duration: 0 } }}
         className={classNames(
-            'border-other-tonalStroke bg-other-dialogBackground absolute',
+            'border-other-tonal-stroke bg-other-dialog-background absolute',
             'top-16 z-10 flex w-full flex-col gap-2 rounded-sm border px-2',
             'py-3 backdrop-blur-lg'
         )}

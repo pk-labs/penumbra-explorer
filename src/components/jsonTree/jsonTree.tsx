@@ -11,7 +11,10 @@ const ReactJsonView = dynamic(() => import('@microlink/react-json-view'), {
 })
 
 interface Props {
+    className?: string
     data: object
+    title: string
+    titleClassName?: string
 }
 
 const JsonTree: FC<Props> = props => {
@@ -21,19 +24,21 @@ const JsonTree: FC<Props> = props => {
 
     return (
         <Subsection
+            className={props.className}
             title={
                 <>
-                    <span>Raw JSON</span>
+                    {props.title}
                     <CopyToClipboard
                         text={JSON.stringify(props.data, null, 2)}
                         small
                     />
                 </>
             }
+            titleClassName={props.titleClassName}
         >
             <div
                 className={classNames(
-                    'bg-other-tonalFill5 rounded-sm p-3 font-mono text-xs',
+                    'bg-other-tonal-fill5 rounded-sm p-3 font-mono text-xs',
                     'font-medium break-all'
                 )}
                 onClick={onClick}

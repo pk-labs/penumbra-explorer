@@ -2,7 +2,7 @@
 'use client'
 
 import { FC, useCallback, useState } from 'react'
-import { Button, DexBlockExecution, EmptyState } from '@/components'
+import { Button, DexBlockExecution, EmptyState, Surface } from '@/components'
 import { TransformedDexBlockExecution } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 import { Props as DexExecutionContainerProps } from './dexExecutionContainer'
@@ -17,10 +17,11 @@ const DexExecutionSection: FC<Props> = props => {
     const toggleMaximized = useCallback(() => setMaximized(prev => !prev), [])
 
     return (
-        <section
+        <Surface
+            as="section"
             className={classNames(
-                'bg-other-tonalFill5 scroll-area-component flex flex-col',
-                'gap-10 rounded-lg p-6 backdrop-blur-lg lg:overflow-y-hidden',
+                'scroll-area-component flex flex-col gap-10 p-6',
+                'lg:overflow-y-hidden',
                 maximized ? 'lg:w-3/4' : 'lg:w-[550px]',
                 props.className
             )}
@@ -54,7 +55,7 @@ const DexExecutionSection: FC<Props> = props => {
             ) : (
                 <EmptyState title="No executions" />
             )}
-        </section>
+        </Surface>
     )
 }
 

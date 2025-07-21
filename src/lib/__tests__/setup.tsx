@@ -21,8 +21,6 @@ jest.mock('../../lib/utils/transactionToView/transactionToView', () =>
     jest.fn()
 )
 
-jest.mock('../../lib/utils/valueToView/valueToView', () => jest.fn())
-
 beforeEach(() => {
     jest.useFakeTimers()
 })

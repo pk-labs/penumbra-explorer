@@ -15,10 +15,20 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   DateTime: { input: any; output: any; }
+  Decimal: { input: any; output: any; }
   JSON: { input: any; output: any; }
 };
 
 export type Action = IbcRelay | NotYetSupportedAction | Output | Spend;
+
+export type ActiveProposal = {
+  __typename?: 'ActiveProposal';
+  endBlockHeight: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  kind: ProposalKind;
+  state: ProposalState;
+  title: Scalars['String']['output'];
+};
 
 export type AssetId = {
   __typename?: 'AssetId';
@@ -165,6 +175,20 @@ export type Fee = {
   assetId?: Maybe<AssetId>;
 };
 
+export type GovernanceParameters = {
+  __typename?: 'GovernanceParameters';
+  /** The deposit amount required to submit a proposal (in UM) */
+  depositAmount: Scalars['Decimal']['output'];
+  /** The percentage of votes required for a proposal to pass */
+  passingThreshold: Scalars['Decimal']['output'];
+  /** The duration of proposal voting in blocks */
+  proposalDuration: Scalars['Int']['output'];
+  /** The percentage threshold for slashing */
+  slashingThreshold: Scalars['Decimal']['output'];
+  /** The quorum percentage required for a proposal to be valid */
+  validQuorum: Scalars['Decimal']['output'];
+};
+
 export type IbcRelay = {
   __typename?: 'IbcRelay';
   rawAction: Scalars['String']['output'];
@@ -275,8 +299,80 @@ export type OutputBody = {
   wrappedMemoKey: Scalars['String']['output'];
 };
 
+export type PastProposal = {
+  __typename?: 'PastProposal';
+  endBlockHeight: Scalars['Int']['output'];
+  endTimestamp?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['Int']['output'];
+  kind: ProposalKind;
+  outcome?: Maybe<ProposalOutcome>;
+  state: ProposalState;
+  title: Scalars['String']['output'];
+  totalVotes: Scalars['Decimal']['output'];
+};
+
+export type PastProposalCollection = {
+  __typename?: 'PastProposalCollection';
+  items: Array<PastProposal>;
+  total: Scalars['Int']['output'];
+};
+
+export type ProposalDetail = {
+  __typename?: 'ProposalDetail';
+  abstainVotes: Scalars['Decimal']['output'];
+  abstainVotesPercentage: Scalars['Decimal']['output'];
+  depositAmount: Scalars['Decimal']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  kind: ProposalKind;
+  noVotes: Scalars['Decimal']['output'];
+  noVotesPercentage: Scalars['Decimal']['output'];
+  outcome?: Maybe<ProposalOutcome>;
+  payload: Scalars['JSON']['output'];
+  quorum: Scalars['Decimal']['output'];
+  state: ProposalState;
+  title: Scalars['String']['output'];
+  totalVotes: Scalars['Decimal']['output'];
+  votes: VoteCollection;
+  votingEndedBlockHeight: Scalars['Int']['output'];
+  votingEndedTimestamp?: Maybe<Scalars['DateTime']['output']>;
+  votingStartedBlockHeight: Scalars['Int']['output'];
+  votingStartedTimestamp: Scalars['DateTime']['output'];
+  yesVotes: Scalars['Decimal']['output'];
+  yesVotesPercentage: Scalars['Decimal']['output'];
+};
+
+
+export type ProposalDetailVotesArgs = {
+  limit?: InputMaybe<CollectionLimit>;
+};
+
+export enum ProposalKind {
+  CommunityPoolSpend = 'COMMUNITY_POOL_SPEND',
+  Emergency = 'EMERGENCY',
+  FreezeIbcClient = 'FREEZE_IBC_CLIENT',
+  ParameterChange = 'PARAMETER_CHANGE',
+  Signaling = 'SIGNALING',
+  UnfreezeIbcClient = 'UNFREEZE_IBC_CLIENT',
+  UpgradePlan = 'UPGRADE_PLAN'
+}
+
+export enum ProposalOutcome {
+  Failed = 'FAILED',
+  Passed = 'PASSED',
+  Slashed = 'SLASHED'
+}
+
+export enum ProposalState {
+  Claimed = 'CLAIMED',
+  Finished = 'FINISHED',
+  Voting = 'VOTING',
+  Withdrawn = 'WITHDRAWN'
+}
+
 export type QueryRoot = {
   __typename?: 'QueryRoot';
+  activeProposals: Array<ActiveProposal>;
   block?: Maybe<Block>;
   blocks: BlockCollection;
   dbBlock?: Maybe<DbBlock>;
@@ -285,10 +381,14 @@ export type QueryRoot = {
   dbRawTransaction?: Maybe<DbRawTransaction>;
   dbRawTransactions: Array<DbRawTransaction>;
   dexStats: DexStats;
+  getVoteForTransaction?: Maybe<VoteForTransaction>;
+  governanceParameters?: Maybe<GovernanceParameters>;
   ibcStats: Array<IbcStats>;
   ibcTotalShieldedVolume: TotalShieldedVolume;
   latestExecutions: Array<SwapExecution>;
   liquidityPositions: LiquidityPositionCollection;
+  pastProposals: PastProposalCollection;
+  proposalDetail?: Maybe<ProposalDetail>;
   search?: Maybe<SearchResult>;
   stats: Stats;
   transaction?: Maybe<Transaction>;
@@ -331,6 +431,11 @@ export type QueryRootDbRawTransactionsArgs = {
 };
 
 
+export type QueryRootGetVoteForTransactionArgs = {
+  txHash: Scalars['String']['input'];
+};
+
+
 export type QueryRootIbcStatsArgs = {
   clientId?: InputMaybe<Scalars['String']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -347,6 +452,16 @@ export type QueryRootLatestExecutionsArgs = {
 export type QueryRootLiquidityPositionsArgs = {
   filter?: InputMaybe<LiquidityPositionFilter>;
   limit: CollectionLimit;
+};
+
+
+export type QueryRootPastProposalsArgs = {
+  limit: CollectionLimit;
+};
+
+
+export type QueryRootProposalDetailArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -621,6 +736,37 @@ export enum ValidatorStateFilter {
   Inactive = 'INACTIVE'
 }
 
+export type Vote = {
+  __typename?: 'Vote';
+  effectiveVotingPower: Scalars['Decimal']['output'];
+  id?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  txHash?: Maybe<Scalars['String']['output']>;
+  vote?: Maybe<VoteValue>;
+  votedAt: Scalars['DateTime']['output'];
+  votingPowerPercentage: Scalars['Decimal']['output'];
+};
+
+export type VoteCollection = {
+  __typename?: 'VoteCollection';
+  items: Array<Vote>;
+  total: Scalars['Int']['output'];
+};
+
+export type VoteForTransaction = {
+  __typename?: 'VoteForTransaction';
+  id?: Maybe<Scalars['String']['output']>;
+  proposal: Scalars['Int']['output'];
+  vote?: Maybe<VoteValue>;
+  votingPower: Scalars['Decimal']['output'];
+};
+
+export enum VoteValue {
+  Abstain = 'ABSTAIN',
+  No = 'NO',
+  Yes = 'YES'
+}
+
 export type BlockFragment = { __typename?: 'Block', height: number, createdAt: any, rawJson: any, transactions: Array<{ __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } }> };
 
 export type PartialBlockFragment = { __typename?: 'Block', height: number, createdAt: any, transactionsCount: number };
@@ -628,6 +774,11 @@ export type PartialBlockFragment = { __typename?: 'Block', height: number, creat
 export type PartialTransactionFragment = { __typename?: 'Transaction', hash: string, ibcStatus: IbcStatus, raw: string, block: { __typename?: 'Block', height: number, createdAt: any } };
 
 export type TransactionFragment = { __typename?: 'Transaction', hash: string, raw: string, rawJson: any, block: { __typename?: 'Block', height: number, createdAt: any }, body: { __typename?: 'TransactionBody', parameters: { __typename?: 'TransactionParameters', chainId: string, fee: { __typename?: 'Fee', amount: string } } } };
+
+export type ActiveProposalsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ActiveProposalsQuery = { __typename?: 'QueryRoot', activeProposals: Array<{ __typename?: 'ActiveProposal', endBlockHeight: number, id: number, kind: ProposalKind, state: ProposalState, title: string }> };
 
 export type ActiveValidatorsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -684,9 +835,13 @@ export type DexTotalExecutionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type DexTotalExecutionsQuery = { __typename?: 'QueryRoot', dexStats: { __typename?: 'DexStats', totalExecutions: number } };
 
+export type GovParametersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GovParametersQuery = { __typename?: 'QueryRoot', governanceParameters?: { __typename?: 'GovernanceParameters', depositAmount: any, passingThreshold: any, proposalDuration: number, slashingThreshold: any, validQuorum: any } | null };
+
 export type IbcStatsQueryVariables = Exact<{
   clientId?: InputMaybe<Scalars['String']['input']>;
-  timePeriod?: InputMaybe<TimePeriod>;
 }>;
 
 
@@ -696,6 +851,20 @@ export type MinValidatorStakeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MinValidatorStakeQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', stakingParameters: { __typename?: 'StakingParameters', minValidatorStake: number } } };
+
+export type PastProposalsQueryVariables = Exact<{
+  limit: CollectionLimit;
+}>;
+
+
+export type PastProposalsQuery = { __typename?: 'QueryRoot', pastProposals: { __typename?: 'PastProposalCollection', total: number, items: Array<{ __typename?: 'PastProposal', endBlockHeight: number, endTimestamp?: any | null, id: number, kind: ProposalKind, outcome?: ProposalOutcome | null, state: ProposalState, title: string, totalVotes: any }> } };
+
+export type ProposalQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type ProposalQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', depositAmount: any, description: string, id: number, kind: ProposalKind, outcome?: ProposalOutcome | null, payload: any, state: ProposalState, title: string } | null };
 
 export type SearchQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -775,6 +944,35 @@ export type ValidatorsQueryVariables = Exact<{
 
 
 export type ValidatorsQuery = { __typename?: 'QueryRoot', validatorsHomepage: { __typename?: 'ValidatorHomepageData', validators: Array<{ __typename?: 'Validator', id: string, name?: string | null, state: ValidatorState, bondingState: BondingState, votingPower: number, votingPowerActivePercentage: number, uptime?: number | null, firstSeenTime?: any | null, commission: number }> } };
+
+export type VotesQueryVariables = Exact<{
+  proposalId: Scalars['Int']['input'];
+  limit: CollectionLimit;
+}>;
+
+
+export type VotesQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', votes: { __typename?: 'VoteCollection', total: number, items: Array<{ __typename?: 'Vote', effectiveVotingPower: any, id?: string | null, name: string, txHash?: string | null, vote?: VoteValue | null, votedAt: any, votingPowerPercentage: any }> } } | null };
+
+export type VotingEndQueryVariables = Exact<{
+  proposalId: Scalars['Int']['input'];
+}>;
+
+
+export type VotingEndQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', state: ProposalState, votingEndedBlockHeight: number, votingEndedTimestamp?: any | null } | null };
+
+export type VotingQueryVariables = Exact<{
+  proposalId: Scalars['Int']['input'];
+}>;
+
+
+export type VotingQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', abstainVotes: any, abstainVotesPercentage: any, noVotes: any, noVotesPercentage: any, outcome?: ProposalOutcome | null, quorum: any, state: ProposalState, totalVotes: any, yesVotes: any, yesVotesPercentage: any } | null };
+
+export type VotingStartQueryVariables = Exact<{
+  proposalId: Scalars['Int']['input'];
+}>;
+
+
+export type VotingStartQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', votingStartedBlockHeight: number, votingStartedTimestamp: any } | null };
 
 export type BlockUpdateSubscriptionVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -857,6 +1055,17 @@ export const TransactionFragmentDoc = gql`
   }
   raw
   rawJson
+}
+    `;
+export const ActiveProposalsDocument = gql`
+    query ActiveProposals {
+  activeProposals {
+    endBlockHeight
+    id
+    kind
+    state
+    title
+  }
 }
     `;
 export const ActiveValidatorsDocument = gql`
@@ -962,9 +1171,20 @@ export const DexTotalExecutionsDocument = gql`
   }
 }
     `;
+export const GovParametersDocument = gql`
+    query GovParameters {
+  governanceParameters {
+    depositAmount
+    passingThreshold
+    proposalDuration
+    slashingThreshold
+    validQuorum
+  }
+}
+    `;
 export const IbcStatsDocument = gql`
-    query IbcStats($clientId: String, $timePeriod: TimePeriod) {
-  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
+    query IbcStats($clientId: String) {
+  ibcStats(clientId: $clientId) {
     id: clientId
     status
     channelId
@@ -986,6 +1206,37 @@ export const MinValidatorStakeDocument = gql`
     stakingParameters {
       minValidatorStake
     }
+  }
+}
+    `;
+export const PastProposalsDocument = gql`
+    query PastProposals($limit: CollectionLimit!) {
+  pastProposals(limit: $limit) {
+    items {
+      endBlockHeight
+      endTimestamp
+      id
+      kind
+      outcome
+      state
+      title
+      totalVotes
+    }
+    total
+  }
+}
+    `;
+export const ProposalDocument = gql`
+    query Proposal($id: Int!) {
+  proposalDetail(id: $id) {
+    depositAmount
+    description
+    id
+    kind
+    outcome
+    payload
+    state
+    title
   }
 }
     `;
@@ -1121,6 +1372,57 @@ export const ValidatorsDocument = gql`
       firstSeenTime
       commission
     }
+  }
+}
+    `;
+export const VotesDocument = gql`
+    query Votes($proposalId: Int!, $limit: CollectionLimit!) {
+  proposalDetail(id: $proposalId) {
+    votes(limit: $limit) {
+      items {
+        effectiveVotingPower
+        id
+        name
+        txHash
+        vote
+        votedAt
+        votingPowerPercentage
+      }
+      total
+    }
+  }
+}
+    `;
+export const VotingEndDocument = gql`
+    query VotingEnd($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    state
+    votingEndedBlockHeight
+    votingEndedTimestamp
+  }
+}
+    `;
+export const VotingDocument = gql`
+    query Voting($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    abstainVotes
+    abstainVotesPercentage
+    noVotes
+    noVotesPercentage
+    outcome
+    quorum
+    state
+    totalVotes
+    yesVotes
+    yesVotesPercentage
+  }
+}
+    `;
+export const VotingStartDocument = gql`
+    query VotingStart($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    votingStartedBlockHeight
+    votingStartedTimestamp
   }
 }
     `;

@@ -15,16 +15,12 @@ const BlockViewContainer: FC<Props> = props => (
         fallback={
             <View
                 className={classNames(
-                    'from-[rgba(83,174,168,0.25)]!',
-                    'to-[rgba(83,174,168,0.03)]!',
+                    'from-[rgba(83,174,168,0.25)] to-[rgba(83,174,168,0.03)]',
                     props.className
                 )}
                 title="Block view"
             >
-                <Skeleton className="h-24 rounded-sm" />
-                <Skeleton className="h-33 rounded-sm" />
-                <Skeleton className="h-32 rounded-sm" />
-                <Skeleton className="h-18.5 rounded-sm" />
+                <Skeleton className="h-74.25 rounded-sm" />
             </View>
         }
     >

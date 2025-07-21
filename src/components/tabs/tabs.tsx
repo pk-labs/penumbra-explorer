@@ -1,5 +1,6 @@
 import { FC, ReactElement } from 'react'
 import { classNames } from '@/lib/utils'
+import Surface from '../surface'
 import { TabProps } from './tab'
 
 interface Props {
@@ -16,15 +17,12 @@ interface Props {
 }
 
 const Tabs: FC<Props> = props => (
-    <nav
-        className={classNames(
-            'bg-other-tonalFill5 relative flex h-9 items-center rounded-full',
-            'px-4 backdrop-blur-lg',
-            props.className
-        )}
+    <Surface
+        as="nav"
+        className={classNames('flex h-9 items-center px-4', props.className)}
     >
         {props.children}
-    </nav>
+    </Surface>
 )
 
 export default Tabs

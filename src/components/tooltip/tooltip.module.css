@@ -2,8 +2,8 @@
 
 .root {
     &.override {
-        @apply bg-other-dialogBackground text-text-primary;
-        @apply border-other-tonalStroke rounded-sm;
+        @apply bg-other-dialog-background text-text-primary;
+        @apply border-other-tonal-stroke rounded-sm;
         @apply border-1 p-2 font-mono text-xs font-medium backdrop-blur-lg;
     }
 }

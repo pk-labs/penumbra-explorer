@@ -16,7 +16,7 @@ const DexExecutionRoute: FC<Props> = props => (
                 </span>
                 <span
                     className={classNames(
-                        'border-t-other-tonalStroke min-w-4 flex-1 border-t-1',
+                        'border-t-other-tonal-stroke min-w-4 flex-1 border-t-1',
                         'last:hidden'
                     )}
                 />

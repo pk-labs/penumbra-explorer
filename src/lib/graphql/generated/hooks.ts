@@ -50,6 +50,21 @@ export const TransactionFragmentDoc = gql`
   rawJson
 }
     `;
+export const ActiveProposalsDocument = gql`
+    query ActiveProposals {
+  activeProposals {
+    endBlockHeight
+    id
+    kind
+    state
+    title
+  }
+}
+    `;
+
+export function useActiveProposalsQuery(options?: Omit<Urql.UseQueryArgs<Types.ActiveProposalsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ActiveProposalsQuery, Types.ActiveProposalsQueryVariables>({ query: Types.ActiveProposalsDocument, ...options });
+};
 export const ActiveValidatorsDocument = gql`
     query ActiveValidators {
   validatorsHomepage {
@@ -189,9 +204,24 @@ export const DexTotalExecutionsDocument = gql`
 export function useDexTotalExecutionsQuery(options?: Omit<Urql.UseQueryArgs<Types.DexTotalExecutionsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.DexTotalExecutionsQuery, Types.DexTotalExecutionsQueryVariables>({ query: Types.DexTotalExecutionsDocument, ...options });
 };
+export const GovParametersDocument = gql`
+    query GovParameters {
+  governanceParameters {
+    depositAmount
+    passingThreshold
+    proposalDuration
+    slashingThreshold
+    validQuorum
+  }
+}
+    `;
+
+export function useGovParametersQuery(options?: Omit<Urql.UseQueryArgs<Types.GovParametersQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.GovParametersQuery, Types.GovParametersQueryVariables>({ query: Types.GovParametersDocument, ...options });
+};
 export const IbcStatsDocument = gql`
-    query IbcStats($clientId: String, $timePeriod: TimePeriod) {
-  ibcStats(clientId: $clientId, timePeriod: $timePeriod) {
+    query IbcStats($clientId: String) {
+  ibcStats(clientId: $clientId) {
     id: clientId
     status
     channelId
@@ -223,6 +253,45 @@ export const MinValidatorStakeDocument = gql`
 
 export function useMinValidatorStakeQuery(options?: Omit<Urql.UseQueryArgs<Types.MinValidatorStakeQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.MinValidatorStakeQuery, Types.MinValidatorStakeQueryVariables>({ query: Types.MinValidatorStakeDocument, ...options });
+};
+export const PastProposalsDocument = gql`
+    query PastProposals($limit: CollectionLimit!) {
+  pastProposals(limit: $limit) {
+    items {
+      endBlockHeight
+      endTimestamp
+      id
+      kind
+      outcome
+      state
+      title
+      totalVotes
+    }
+    total
+  }
+}
+    `;
+
+export function usePastProposalsQuery(options: Omit<Urql.UseQueryArgs<Types.PastProposalsQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.PastProposalsQuery, Types.PastProposalsQueryVariables>({ query: Types.PastProposalsDocument, ...options });
+};
+export const ProposalDocument = gql`
+    query Proposal($id: Int!) {
+  proposalDetail(id: $id) {
+    depositAmount
+    description
+    id
+    kind
+    outcome
+    payload
+    state
+    title
+  }
+}
+    `;
+
+export function useProposalQuery(options: Omit<Urql.UseQueryArgs<Types.ProposalQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.ProposalQuery, Types.ProposalQueryVariables>({ query: Types.ProposalDocument, ...options });
 };
 export const SearchDocument = gql`
     query Search($slug: String!) {
@@ -406,6 +475,73 @@ export const ValidatorsDocument = gql`
 
 export function useValidatorsQuery(options?: Omit<Urql.UseQueryArgs<Types.ValidatorsQueryVariables>, 'query'>) {
   return Urql.useQuery<Types.ValidatorsQuery, Types.ValidatorsQueryVariables>({ query: Types.ValidatorsDocument, ...options });
+};
+export const VotesDocument = gql`
+    query Votes($proposalId: Int!, $limit: CollectionLimit!) {
+  proposalDetail(id: $proposalId) {
+    votes(limit: $limit) {
+      items {
+        effectiveVotingPower
+        id
+        name
+        txHash
+        vote
+        votedAt
+        votingPowerPercentage
+      }
+      total
+    }
+  }
+}
+    `;
+
+export function useVotesQuery(options: Omit<Urql.UseQueryArgs<Types.VotesQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.VotesQuery, Types.VotesQueryVariables>({ query: Types.VotesDocument, ...options });
+};
+export const VotingEndDocument = gql`
+    query VotingEnd($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    state
+    votingEndedBlockHeight
+    votingEndedTimestamp
+  }
+}
+    `;
+
+export function useVotingEndQuery(options: Omit<Urql.UseQueryArgs<Types.VotingEndQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.VotingEndQuery, Types.VotingEndQueryVariables>({ query: Types.VotingEndDocument, ...options });
+};
+export const VotingDocument = gql`
+    query Voting($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    abstainVotes
+    abstainVotesPercentage
+    noVotes
+    noVotesPercentage
+    outcome
+    quorum
+    state
+    totalVotes
+    yesVotes
+    yesVotesPercentage
+  }
+}
+    `;
+
+export function useVotingQuery(options: Omit<Urql.UseQueryArgs<Types.VotingQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.VotingQuery, Types.VotingQueryVariables>({ query: Types.VotingDocument, ...options });
+};
+export const VotingStartDocument = gql`
+    query VotingStart($proposalId: Int!) {
+  proposalDetail(id: $proposalId) {
+    votingStartedBlockHeight
+    votingStartedTimestamp
+  }
+}
+    `;
+
+export function useVotingStartQuery(options: Omit<Urql.UseQueryArgs<Types.VotingStartQueryVariables>, 'query'>) {
+  return Urql.useQuery<Types.VotingStartQuery, Types.VotingStartQueryVariables>({ query: Types.VotingStartDocument, ...options });
 };
 export const BlockUpdateDocument = gql`
     subscription BlockUpdate($limit: Int!) {

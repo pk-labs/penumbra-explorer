@@ -21,8 +21,7 @@ export interface Props extends Pick<ViewProps, 'className'> {
 const BlockView: FC<Props> = props => (
     <View
         className={classNames(
-            'from-[rgba(83,174,168,0.25)]!',
-            'to-[rgba(83,174,168,0.03)]!',
+            'from-[rgba(83,174,168,0.25)] to-[rgba(83,174,168,0.03)]',
             props.className
         )}
         nextHref={
@@ -33,7 +32,7 @@ const BlockView: FC<Props> = props => (
         prevHref={`/block/${props.block.height + 1}`}
         title="Block view"
     >
-        <Parameters className="bg-other-tonalFill5 rounded-sm p-3">
+        <Parameters className="bg-other-tonal-fill5 rounded-sm p-3">
             <Parameter name="Block height">
                 {formatNumber(props.block.height)}
                 <CopyToClipboard
@@ -51,7 +50,7 @@ const BlockView: FC<Props> = props => (
             <Parameter name="Txs">{props.block.transactions.length}</Parameter>
         </Parameters>
         <TransactionTable
-            className="rounded-sm p-0 backdrop-blur-none"
+            className="p-0 before:rounded-sm before:backdrop-blur-none"
             transactions={props.block.transactions}
         />
         {props.swapExecutions.length > 0 && (
@@ -62,7 +61,7 @@ const BlockView: FC<Props> = props => (
                             key={execution.id}
                             {...execution}
                             className={classNames(
-                                'not-last:not-only:border-b-other-tonalStroke',
+                                'not-last:not-only:border-b-other-tonal-stroke',
                                 'not-first:not-last:rounded-none',
                                 'not-last:not-only:border-b-1',
                                 'first:not-only:rounded-b-none',
@@ -73,7 +72,9 @@ const BlockView: FC<Props> = props => (
                 </div>
             </Subsection>
         )}
-        {props.block.rawJson && <JsonTree data={props.block.rawJson} />}
+        {props.block.rawJson && (
+            <JsonTree data={props.block.rawJson} title="Raw JSON" />
+        )}
     </View>
 )
 

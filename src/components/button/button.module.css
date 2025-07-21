@@ -1,0 +1,7 @@
+.root {
+    outline: none;
+}
+
+.fullWidth > button {
+    width: 100%;
+}

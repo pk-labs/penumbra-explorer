@@ -1,0 +1,5 @@
+@reference "../../../../lib/css/global.css";
+
+.root > * {
+    @apply align-middle not-last:mr-2;
+}
