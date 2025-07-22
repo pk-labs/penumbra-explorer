@@ -62,6 +62,10 @@ const BlockPanelChart: FC<Props> = props => {
         const bars = Array.from(chartRef.current.children)
 
         const animationInterval = setInterval(() => {
+            if (initialBlock.current) {
+                return
+            }
+
             bars.find(
                 bar => !bar.classList.contains(styles.full)
             )?.classList.add(styles.full)
@@ -114,6 +118,22 @@ const BlockPanelChart: FC<Props> = props => {
             resetBars()
         }
     }, [counter, resetBars, syncState])
+
+    useEffect(() => {
+        const onVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                initialBlock.current = true
+                setSyncState(SyncState.Syncing)
+                resetBars()
+            }
+        }
+
+        document.addEventListener('visibilitychange', onVisibilityChange)
+
+        return () => {
+            document.removeEventListener('visibilitychange', onVisibilityChange)
+        }
+    }, [resetBars])
 
     return (
         <div className="flex flex-col gap-4 sm:gap-2 sm:self-end">
