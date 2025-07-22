@@ -40,7 +40,7 @@ const BlockPanelMessage: FC<Props> = props => {
                     'sm:scale-80 xl:scale-85!',
                     styles.cube,
                     props.blockHeight &&
-                        props.syncState !== SyncState.Late &&
+                        props.syncState !== SyncState.NotSynced &&
                         styles.animated
                 )}
             >

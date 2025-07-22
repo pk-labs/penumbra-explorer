@@ -2,10 +2,18 @@ import { act, getByText, render } from '@testing-library/react'
 import BlockPanel from './blockPanel'
 
 jest.mock('../numberPanel/numberPanel', () => (props: any) => (
-    <div className={props.className}>{props.children}</div>
+    <div className={props.className}>
+        <div>{props.number}</div>
+        <div>{props.children}</div>
+    </div>
 ))
 
 describe('BlockPanel', () => {
+    test('renders block height', async () => {
+        const { container } = render(<BlockPanel blockHeight={1234567} />)
+        getByText(container, 1234567)
+    })
+
     describe('renders sync state', () => {
         describe('syncing', () => {
             test('when no block height', async () => {
@@ -61,6 +69,35 @@ describe('BlockPanel', () => {
 
             act(() => jest.advanceTimersByTime(1000))
             getByText(container, 'Blocks not synced')
+        })
+    })
+
+    describe('does not animate cube', () => {
+        test('when no block', async () => {
+            const { container } = render(<BlockPanel />)
+            expect(container.querySelector('.cube')).not.toHaveClass('animated')
+        })
+
+        test('when not syncing', async () => {
+            const { container, rerender } = render(
+                <BlockPanel blockHeight={123} />
+            )
+
+            rerender(<BlockPanel blockHeight={456} />)
+
+            act(() => jest.advanceTimersByTime(6000))
+            getByText(container, 'Block in ~0s')
+
+            act(() => jest.advanceTimersByTime(1000))
+            getByText(container, 'Block late by ~1s')
+
+            act(() => jest.advanceTimersByTime(29000))
+            getByText(container, 'Block late by ~30s')
+
+            act(() => jest.advanceTimersByTime(1000))
+            getByText(container, 'Blocks not synced')
+
+            expect(container.querySelector('.cube')).not.toHaveClass('animated')
         })
     })
 
