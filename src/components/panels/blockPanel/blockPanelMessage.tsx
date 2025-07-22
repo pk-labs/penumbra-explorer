@@ -5,6 +5,7 @@ import { SyncState } from './blockPanelChart'
 
 interface Props {
     blockHeight?: number
+    seconds?: number
     syncState: SyncState
 }
 
@@ -14,11 +15,11 @@ const BlockPanelMessage: FC<Props> = props => {
 
     switch (props.syncState) {
         case SyncState.Upcoming:
-            message = 'Upcoming block in ...'
+            message = `Block in ~${props.seconds}s`
             color = 'text-primary'
             break
         case SyncState.Late:
-            message = 'Upcoming block late by ...'
+            message = `Block late by ~${props.seconds}s`
             color = 'text-secondary'
             break
         case SyncState.NotSynced:

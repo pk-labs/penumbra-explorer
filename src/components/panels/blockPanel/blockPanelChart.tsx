@@ -1,12 +1,13 @@
 'use client'
 
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import styles from './blockPanel.module.css'
 import BlockPanelMessage from './blockPanelMessage'
 
 const barCount = 24
-const animationDuration = 5000
-const animationInterval = animationDuration / barCount
+const upcomingCountdown = 5
+const animationDuration = upcomingCountdown * 1000
+const syncTimeout = 30
 
 export enum SyncState {
     Syncing,
@@ -22,12 +23,31 @@ interface Props {
 const BlockPanelChart: FC<Props> = props => {
     const chartRef = useRef<HTMLDivElement>(null)
     const [syncState, setSyncState] = useState(SyncState.Syncing)
+    const [blockHeight, setBlockHeight] = useState(props.blockHeight)
+    const [counter, setCounter] = useState<number>()
+
+    const resetBars = useCallback(() => {
+        if (chartRef.current) {
+            const bars = Array.from(chartRef.current.children)
+            bars.forEach(bar => bar.classList.remove(styles.full))
+        }
+    }, [])
 
     useEffect(() => {
-        if (syncState === SyncState.Syncing && props.blockHeight) {
+        if (!chartRef.current) {
+            return
+        }
+
+        if (syncState === SyncState.Syncing && blockHeight) {
+            setCounter(upcomingCountdown)
+            setSyncState(SyncState.Upcoming)
+        } else if (props.blockHeight !== blockHeight) {
+            resetBars()
+            setBlockHeight(props.blockHeight)
+            setCounter(upcomingCountdown)
             setSyncState(SyncState.Upcoming)
         }
-    }, [syncState, props.blockHeight])
+    }, [props.blockHeight, blockHeight, syncState, resetBars])
 
     useEffect(() => {
         if (!chartRef.current || syncState !== SyncState.Upcoming) {
@@ -36,37 +56,59 @@ const BlockPanelChart: FC<Props> = props => {
 
         const bars = Array.from(chartRef.current.children)
 
-        const fillBars = () => {
-            const firstEmptyBar = bars.find(
+        const animationInterval = setInterval(() => {
+            bars.find(
                 bar => !bar.classList.contains(styles.full)
-            )
+            )?.classList.add(styles.full)
+        }, animationDuration / barCount)
 
-            if (firstEmptyBar) {
-                firstEmptyBar.classList.add(styles.full)
-            } else {
-                setSyncState(SyncState.Late)
-            }
-        }
-
-        const interval = setInterval(fillBars, animationInterval)
+        const counterInterval = setInterval(
+            () => setCounter(prev => prev && prev - 1),
+            1000
+        )
 
         return () => {
-            if (interval) {
-                clearInterval(interval)
-            }
+            clearInterval(animationInterval)
+            clearInterval(counterInterval)
         }
     }, [syncState, props])
 
     useEffect(() => {
-        if (chartRef.current && syncState === SyncState.Late) {
-            const bars = Array.from(chartRef.current.children)
-
-            setTimeout(() => {
-                setSyncState(SyncState.NotSynced)
-                bars.forEach(element => element.classList.remove(styles.full))
-            }, 3000)
+        if (syncState !== SyncState.Upcoming || counter !== 0) {
+            return
         }
-    }, [syncState])
+
+        const timeout = setTimeout(() => {
+            setCounter(1)
+            setSyncState(SyncState.Late)
+        }, 1000)
+
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [counter, syncState])
+
+    useEffect(() => {
+        if (syncState !== SyncState.Late) {
+            return
+        }
+
+        const counterInterval = setInterval(
+            () => setCounter(prev => prev && prev + 1),
+            1000
+        )
+
+        return () => {
+            clearTimeout(counterInterval)
+        }
+    }, [resetBars, syncState])
+
+    useEffect(() => {
+        if (syncState === SyncState.Late && counter && counter > syncTimeout) {
+            setSyncState(SyncState.NotSynced)
+            resetBars()
+        }
+    }, [counter, resetBars, syncState])
 
     return (
         <div className="flex flex-col gap-4 sm:gap-2 sm:self-end">
@@ -79,7 +121,8 @@ const BlockPanelChart: FC<Props> = props => {
                 ))}
             </div>
             <BlockPanelMessage
-                blockHeight={props.blockHeight}
+                blockHeight={blockHeight}
+                seconds={counter}
                 syncState={syncState}
             />
         </div>
