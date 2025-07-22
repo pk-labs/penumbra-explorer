@@ -22,8 +22,9 @@ interface Props {
 
 const BlockPanelChart: FC<Props> = props => {
     const chartRef = useRef<HTMLDivElement>(null)
-    const [syncState, setSyncState] = useState(SyncState.Syncing)
+    const initialBlock = useRef(true)
     const [blockHeight, setBlockHeight] = useState(props.blockHeight)
+    const [syncState, setSyncState] = useState(SyncState.Syncing)
     const [counter, setCounter] = useState<number>()
 
     const resetBars = useCallback(() => {
@@ -39,8 +40,12 @@ const BlockPanelChart: FC<Props> = props => {
         }
 
         if (syncState === SyncState.Syncing && blockHeight) {
-            setCounter(upcomingCountdown)
-            setSyncState(SyncState.Upcoming)
+            if (initialBlock.current) {
+                initialBlock.current = false
+            } else {
+                setCounter(upcomingCountdown)
+                setSyncState(SyncState.Upcoming)
+            }
         } else if (props.blockHeight !== blockHeight) {
             resetBars()
             setBlockHeight(props.blockHeight)

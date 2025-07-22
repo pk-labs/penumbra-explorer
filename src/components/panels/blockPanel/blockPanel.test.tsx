@@ -7,18 +7,34 @@ jest.mock('../numberPanel/numberPanel', () => (props: any) => (
 
 describe('BlockPanel', () => {
     describe('renders sync state', () => {
-        test('syncing when no block height', async () => {
-            const { container } = render(<BlockPanel />)
-            getByText(container, 'Syncing to blocks ...')
+        describe('syncing', () => {
+            test('when no block height', async () => {
+                const { container } = render(<BlockPanel />)
+                getByText(container, 'Syncing to blocks ...')
+            })
+
+            test('when initial block', async () => {
+                const { container } = render(<BlockPanel blockHeight={123} />)
+                getByText(container, 'Syncing to blocks ...')
+            })
         })
 
         test('upcoming when block height', async () => {
-            const { container } = render(<BlockPanel blockHeight={123} />)
+            const { container, rerender } = render(
+                <BlockPanel blockHeight={123} />
+            )
+
+            rerender(<BlockPanel blockHeight={456} />)
+
             getByText(container, 'Block in ~5s')
         })
 
         test('late when no new block height after 6s', async () => {
-            const { container } = render(<BlockPanel blockHeight={123} />)
+            const { container, rerender } = render(
+                <BlockPanel blockHeight={123} />
+            )
+
+            rerender(<BlockPanel blockHeight={456} />)
 
             act(() => jest.advanceTimersByTime(6000))
             getByText(container, 'Block in ~0s')
@@ -28,7 +44,11 @@ describe('BlockPanel', () => {
         })
 
         test('not syncing after late timeout', async () => {
-            const { container } = render(<BlockPanel blockHeight={123} />)
+            const { container, rerender } = render(
+                <BlockPanel blockHeight={123} />
+            )
+
+            rerender(<BlockPanel blockHeight={456} />)
 
             act(() => jest.advanceTimersByTime(6000))
             getByText(container, 'Block in ~0s')
