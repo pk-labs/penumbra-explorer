@@ -15,11 +15,11 @@ const BlockPanelMessage: FC<Props> = props => {
 
     switch (props.syncState) {
         case SyncState.Upcoming:
-            message = `Block in ~${props.seconds}s`
+            message = `Next block in ~${props.seconds}s`
             color = 'text-primary'
             break
         case SyncState.Late:
-            message = `Block late by ~${props.seconds}s`
+            message = `Next block late by ~${props.seconds}s`
             color = 'text-secondary'
             break
         case SyncState.NotSynced:
