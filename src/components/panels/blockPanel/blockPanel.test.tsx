@@ -22,27 +22,27 @@ describe('BlockPanel', () => {
             })
 
             test('when initial block', async () => {
-                const { container } = render(<BlockPanel blockHeight={123} />)
+                const { container } = render(<BlockPanel blockHeight={99} />)
                 getByText(container, 'Syncing to blocks ...')
             })
         })
 
         test('upcoming when block height', async () => {
             const { container, rerender } = render(
-                <BlockPanel blockHeight={123} />
+                <BlockPanel blockHeight={99} />
             )
 
-            rerender(<BlockPanel blockHeight={456} />)
+            rerender(<BlockPanel blockHeight={100} />)
 
             getByText(container, 'Next block in ~5s')
         })
 
         test('late when no new block height after 6s', async () => {
             const { container, rerender } = render(
-                <BlockPanel blockHeight={123} />
+                <BlockPanel blockHeight={99} />
             )
 
-            rerender(<BlockPanel blockHeight={456} />)
+            rerender(<BlockPanel blockHeight={100} />)
 
             act(() => jest.advanceTimersByTime(6000))
             getByText(container, 'Next block in ~0s')
@@ -53,10 +53,10 @@ describe('BlockPanel', () => {
 
         test('not syncing after late timeout', async () => {
             const { container, rerender } = render(
-                <BlockPanel blockHeight={123} />
+                <BlockPanel blockHeight={99} />
             )
 
-            rerender(<BlockPanel blockHeight={456} />)
+            rerender(<BlockPanel blockHeight={100} />)
 
             act(() => jest.advanceTimersByTime(6000))
             getByText(container, 'Next block in ~0s')
@@ -80,10 +80,10 @@ describe('BlockPanel', () => {
 
         test('when not syncing', async () => {
             const { container, rerender } = render(
-                <BlockPanel blockHeight={123} />
+                <BlockPanel blockHeight={99} />
             )
 
-            rerender(<BlockPanel blockHeight={456} />)
+            rerender(<BlockPanel blockHeight={100} />)
 
             act(() => jest.advanceTimersByTime(6000))
             getByText(container, 'Next block in ~0s')

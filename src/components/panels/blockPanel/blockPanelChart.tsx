@@ -7,6 +7,7 @@ import BlockPanelMessage from './blockPanelMessage'
 const barCount = 24
 const upcomingCountdown = 5
 const animationDuration = upcomingCountdown * 1000
+const syncMinBlockHeight = 100
 const syncTimeout = 30
 
 export enum SyncState {
@@ -35,12 +36,14 @@ const BlockPanelChart: FC<Props> = props => {
     }, [])
 
     useEffect(() => {
-        if (!chartRef.current) {
+        if (!chartRef.current || !props.blockHeight) {
             return
         }
 
         if (syncState === SyncState.Syncing && blockHeight) {
-            if (initialBlock.current) {
+            if (props.blockHeight - blockHeight >= syncMinBlockHeight) {
+                return
+            } else if (initialBlock.current) {
                 initialBlock.current = false
             } else {
                 setCounter(upcomingCountdown)
