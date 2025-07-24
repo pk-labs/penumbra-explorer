@@ -4,9 +4,8 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import styles from './blockPanel.module.css'
 import BlockPanelMessage from './blockPanelMessage'
 
-const barCount = 24
+const barCount = 25
 const upcomingCountdown = 5
-const animationDuration = upcomingCountdown * 1000
 const syncMinBlockHeight = 100
 const syncTimeout = 30
 
@@ -63,25 +62,28 @@ const BlockPanelChart: FC<Props> = props => {
         }
 
         const bars = Array.from(chartRef.current.children)
+        const barsPerSecond = barCount / upcomingCountdown
 
-        const animationInterval = setInterval(() => {
+        const interval = setInterval(() => {
             if (initialBlock.current) {
                 return
             }
 
-            bars.find(
-                bar => !bar.classList.contains(styles.full)
-            )?.classList.add(styles.full)
-        }, animationDuration / barCount)
+            setCounter(prev => prev && prev - 1)
 
-        const counterInterval = setInterval(
-            () => setCounter(prev => prev && prev - 1),
-            1000
-        )
+            bars.filter(bar => !bar.classList.contains(styles.full))
+                .slice(0, barsPerSecond)
+                .forEach((bar, i) => {
+                    bar.classList.add(styles.full)
+
+                    if (i) {
+                        bar.classList.add(styles[`delayed-${i}`])
+                    }
+                })
+        }, 1000)
 
         return () => {
-            clearInterval(animationInterval)
-            clearInterval(counterInterval)
+            clearInterval(interval)
         }
     }, [syncState, props])
 
@@ -105,13 +107,13 @@ const BlockPanelChart: FC<Props> = props => {
             return
         }
 
-        const counterInterval = setInterval(
+        const interval = setInterval(
             () => setCounter(prev => prev && prev + 1),
             1000
         )
 
         return () => {
-            clearTimeout(counterInterval)
+            clearTimeout(interval)
         }
     }, [resetBars, syncState])
 

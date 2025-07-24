@@ -7,6 +7,22 @@
     &.full {
         animation: bar-animation 200ms linear forwards;
         background: var(--color-other-tonal-fill10);
+
+        &.delayed-1 {
+            animation-delay: 75ms;
+        }
+
+        &.delayed-2 {
+            animation-delay: 150ms;
+        }
+
+        &.delayed-3 {
+            animation-delay: 225ms;
+        }
+
+        &.delayed-4 {
+            animation-delay: 300ms;
+        }
     }
 }
 
