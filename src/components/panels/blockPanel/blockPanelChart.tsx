@@ -32,7 +32,10 @@ const BlockPanelChart: FC<Props> = props => {
     const resetBars = useCallback(() => {
         if (barsRef.current) {
             const bars = Array.from(barsRef.current.children)
-            bars.forEach(bar => bar.classList.remove(styles.fullBar))
+
+            bars.forEach(bar =>
+                bar.classList.remove(styles.fullBar, styles.animatedBar)
+            )
         }
     }, [])
 
@@ -97,10 +100,17 @@ const BlockPanelChart: FC<Props> = props => {
 
             setCounter(prev => prev && prev - 1)
 
+            bars.filter(bar =>
+                bar.classList.contains(styles.animatedBar)
+            ).forEach(bar => {
+                bar.classList.add(styles.fullBar)
+                bar.classList.remove(styles.animatedBar)
+            })
+
             bars.filter(bar => !bar.classList.contains(styles.fullBar))
                 .slice(0, barsPerSecond)
                 .forEach((bar, i) => {
-                    bar.classList.add(styles.fullBar)
+                    bar.classList.add(styles.animatedBar)
 
                     if (i) {
                         bar.classList.add(styles[`delayed${i}`])

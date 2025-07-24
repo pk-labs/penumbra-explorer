@@ -1,4 +1,9 @@
 .full-bar {
+    background: var(--color-secondary-light);
+    box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.2);
+}
+
+.animated-bar {
     animation: bar-animation 200ms linear forwards;
     background: var(--color-other-tonal-fill10);
 
