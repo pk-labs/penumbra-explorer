@@ -122,21 +122,21 @@ const BlockPanelChart: FC<Props> = props => {
         }
     }, [counter, resetBars, syncState])
 
-    useEffect(() => {
-        const onVisibilityChange = () => {
-            if (document.visibilityState === 'visible') {
-                initialBlock.current = true
-                setSyncState(SyncState.Syncing)
-                resetBars()
-            }
-        }
-
-        document.addEventListener('visibilitychange', onVisibilityChange)
-
-        return () => {
-            document.removeEventListener('visibilitychange', onVisibilityChange)
-        }
-    }, [resetBars])
+    // useEffect(() => {
+    //     const onVisibilityChange = () => {
+    //         if (document.visibilityState === 'visible') {
+    //             initialBlock.current = true
+    //             setSyncState(SyncState.Syncing)
+    //             resetBars()
+    //         }
+    //     }
+    //
+    //     document.addEventListener('visibilitychange', onVisibilityChange)
+    //
+    //     return () => {
+    //         document.removeEventListener('visibilitychange', onVisibilityChange)
+    //     }
+    // }, [resetBars])
 
     return (
         <div className="flex flex-col gap-4 sm:gap-2 sm:self-end">
