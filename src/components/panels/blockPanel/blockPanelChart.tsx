@@ -23,6 +23,7 @@ interface Props {
 const BlockPanelChart: FC<Props> = props => {
     const barsRef = useRef<HTMLDivElement>(null)
     const cubeRef = useRef<HTMLDivElement>(null)
+    const lateTimeoutRef = useRef<NodeJS.Timeout>(null)
     const initialBlock = useRef(true)
     const [blockHeight, setBlockHeight] = useState(props.blockHeight)
     const [syncState, setSyncState] = useState(SyncState.Syncing)
@@ -62,6 +63,11 @@ const BlockPanelChart: FC<Props> = props => {
                 setSyncState(SyncState.Upcoming)
             }
         } else if (props.blockHeight !== blockHeight) {
+            if (lateTimeoutRef.current) {
+                clearTimeout(lateTimeoutRef.current)
+                lateTimeoutRef.current = null
+            }
+
             resetBars()
             resetCube()
             setBlockHeight(props.blockHeight)
@@ -107,7 +113,7 @@ const BlockPanelChart: FC<Props> = props => {
                 cube.classList.remove(styles.rotateSecondHalf)
                 cube.classList.add(styles.rotateFirstHalf)
             } else if (cube.classList.contains(styles.rotateFirstHalf)) {
-                cube.classList.remove(styles.rotatrotateFirstHalfeSecondHalf)
+                cube.classList.remove(styles.rotateFirstHalf)
                 cube.classList.add(styles.rotateSecondHalf)
             } else {
                 cube.classList.add(styles.rotateFirstHalf)
@@ -124,7 +130,7 @@ const BlockPanelChart: FC<Props> = props => {
             return
         }
 
-        const timeout = setTimeout(() => {
+        lateTimeoutRef.current = setTimeout(() => {
             setCounter(1)
             setSyncState(SyncState.Late)
             resetCube()
@@ -132,7 +138,10 @@ const BlockPanelChart: FC<Props> = props => {
         }, 1000)
 
         return () => {
-            clearTimeout(timeout)
+            if (lateTimeoutRef.current) {
+                clearTimeout(lateTimeoutRef.current)
+                lateTimeoutRef.current = null
+            }
         }
     }, [counter, resetCube, syncState])
 
@@ -147,7 +156,7 @@ const BlockPanelChart: FC<Props> = props => {
         )
 
         return () => {
-            clearTimeout(interval)
+            clearInterval(interval)
         }
     }, [syncState])
 
