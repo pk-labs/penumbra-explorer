@@ -127,12 +127,14 @@ const BlockPanelChart: FC<Props> = props => {
         const timeout = setTimeout(() => {
             setCounter(1)
             setSyncState(SyncState.Late)
+            resetCube()
+            cubeRef.current?.classList.add(styles.rotateInfinite)
         }, 1000)
 
         return () => {
             clearTimeout(timeout)
         }
-    }, [counter, syncState])
+    }, [counter, resetCube, syncState])
 
     useEffect(() => {
         if (syncState !== SyncState.Late) {
@@ -153,8 +155,9 @@ const BlockPanelChart: FC<Props> = props => {
         if (syncState === SyncState.Late && counter && counter > syncTimeout) {
             setSyncState(SyncState.NotSynced)
             resetBars()
+            resetCube()
         }
-    }, [counter, resetBars, syncState])
+    }, [counter, resetBars, resetCube, syncState])
 
     let message
     let color

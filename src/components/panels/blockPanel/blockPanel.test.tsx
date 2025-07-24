@@ -80,9 +80,32 @@ describe('BlockPanel', () => {
         )
     })
 
-    test('cube rotates when syncing', async () => {
-        const { container } = render(<BlockPanel blockHeight={123} />)
-        expect(container.querySelector('.cube')).toHaveClass('rotateInfinite')
+    describe('cube rotates', () => {
+        test('when syncing', async () => {
+            const { container } = render(<BlockPanel blockHeight={99} />)
+
+            expect(container.querySelector('.cube')).toHaveClass(
+                'rotateInfinite'
+            )
+        })
+
+        test('when late', async () => {
+            const { container, rerender } = render(
+                <BlockPanel blockHeight={99} />
+            )
+
+            rerender(<BlockPanel blockHeight={100} />)
+
+            act(() => jest.advanceTimersByTime(6000))
+            getByText(container, 'Next block in ~0s')
+
+            act(() => jest.advanceTimersByTime(1000))
+            getByText(container, 'Next block late by ~1s')
+
+            expect(container.querySelector('.cube')).toHaveClass(
+                'rotateInfinite'
+            )
+        })
     })
 
     test('applies CSS classes', async () => {
