@@ -51,24 +51,35 @@ describe('BlockPanel', () => {
             getByText(container, 'Next block late by ~1s')
         })
 
-        test('not syncing after late timeout', async () => {
-            const { container, rerender } = render(
-                <BlockPanel blockHeight={99} />
-            )
+        describe('not syncing', () => {
+            test('after sync timeout', async () => {
+                const { container } = render(<BlockPanel blockHeight={99} />)
 
-            rerender(<BlockPanel blockHeight={100} />)
+                getByText(container, 'Syncing to blocks ...')
 
-            act(() => jest.advanceTimersByTime(6000))
-            getByText(container, 'Next block in ~0s')
+                act(() => jest.advanceTimersByTime(30000))
+                getByText(container, 'Blocks not synced')
+            })
 
-            act(() => jest.advanceTimersByTime(1000))
-            getByText(container, 'Next block late by ~1s')
+            test('after late timeout', async () => {
+                const { container, rerender } = render(
+                    <BlockPanel blockHeight={99} />
+                )
 
-            act(() => jest.advanceTimersByTime(29000))
-            getByText(container, 'Next block late by ~30s')
+                rerender(<BlockPanel blockHeight={100} />)
 
-            act(() => jest.advanceTimersByTime(1000))
-            getByText(container, 'Blocks not synced')
+                act(() => jest.advanceTimersByTime(6000))
+                getByText(container, 'Next block in ~0s')
+
+                act(() => jest.advanceTimersByTime(1000))
+                getByText(container, 'Next block late by ~1s')
+
+                act(() => jest.advanceTimersByTime(29000))
+                getByText(container, 'Next block late by ~30s')
+
+                act(() => jest.advanceTimersByTime(1000))
+                getByText(container, 'Blocks not synced')
+            })
         })
     })
 

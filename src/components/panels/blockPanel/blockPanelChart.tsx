@@ -7,7 +7,7 @@ import styles from './blockPanel.module.css'
 const barCount = 25
 const upcomingCountdown = 5
 const syncMinBlockHeight = 100
-const syncTimeout = 30
+const syncTimeout = 30 * 1000
 
 export enum SyncState {
     Syncing,
@@ -23,11 +23,24 @@ interface Props {
 const BlockPanelChart: FC<Props> = props => {
     const barsRef = useRef<HTMLDivElement>(null)
     const cubeRef = useRef<HTMLDivElement>(null)
+    const syncTimeoutRef = useRef<NodeJS.Timeout>(null)
     const lateTimeoutRef = useRef<NodeJS.Timeout>(null)
     const initialBlock = useRef(true)
     const [blockHeight, setBlockHeight] = useState(props.blockHeight)
     const [syncState, setSyncState] = useState(SyncState.Syncing)
     const [counter, setCounter] = useState<number>()
+
+    const resetTimeouts = useCallback(() => {
+        if (syncTimeoutRef.current) {
+            clearTimeout(syncTimeoutRef.current)
+            syncTimeoutRef.current = null
+        }
+
+        if (lateTimeoutRef.current) {
+            clearTimeout(lateTimeoutRef.current)
+            lateTimeoutRef.current = null
+        }
+    }, [])
 
     const resetBars = useCallback(() => {
         if (barsRef.current) {
@@ -50,6 +63,20 @@ const BlockPanelChart: FC<Props> = props => {
     }, [])
 
     useEffect(() => {
+        if (![SyncState.Syncing, SyncState.Late].includes(syncState)) {
+            return
+        }
+
+        syncTimeoutRef.current = setTimeout(() => {
+            setSyncState(SyncState.NotSynced)
+            resetBars()
+            resetCube()
+        }, syncTimeout)
+
+        return resetTimeouts
+    }, [resetBars, resetCube, resetTimeouts, syncState])
+
+    useEffect(() => {
         if (!barsRef.current || !cubeRef.current || !props.blockHeight) {
             return
         }
@@ -66,18 +93,21 @@ const BlockPanelChart: FC<Props> = props => {
                 setSyncState(SyncState.Upcoming)
             }
         } else if (props.blockHeight !== blockHeight) {
-            if (lateTimeoutRef.current) {
-                clearTimeout(lateTimeoutRef.current)
-                lateTimeoutRef.current = null
-            }
-
+            resetTimeouts()
             resetBars()
             resetCube()
             setBlockHeight(props.blockHeight)
             setCounter(upcomingCountdown)
             setSyncState(SyncState.Upcoming)
         }
-    }, [props.blockHeight, blockHeight, syncState, resetBars, resetCube])
+    }, [
+        blockHeight,
+        props.blockHeight,
+        resetBars,
+        resetCube,
+        resetTimeouts,
+        syncState,
+    ])
 
     useEffect(() => {
         if (
@@ -147,13 +177,8 @@ const BlockPanelChart: FC<Props> = props => {
             cubeRef.current?.classList.add(styles.rotateInfinite)
         }, 1000)
 
-        return () => {
-            if (lateTimeoutRef.current) {
-                clearTimeout(lateTimeoutRef.current)
-                lateTimeoutRef.current = null
-            }
-        }
-    }, [counter, resetCube, syncState])
+        return resetTimeouts
+    }, [counter, resetCube, resetTimeouts, syncState])
 
     useEffect(() => {
         if (syncState !== SyncState.Late) {
@@ -169,14 +194,6 @@ const BlockPanelChart: FC<Props> = props => {
             clearInterval(interval)
         }
     }, [syncState])
-
-    useEffect(() => {
-        if (syncState === SyncState.Late && counter && counter > syncTimeout) {
-            setSyncState(SyncState.NotSynced)
-            resetBars()
-            resetCube()
-        }
-    }, [counter, resetBars, resetCube, syncState])
 
     let message
     let color
