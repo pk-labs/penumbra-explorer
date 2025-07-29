@@ -2,9 +2,15 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
+import { useClient } from 'urql'
+import { pipe, subscribe, throttle } from 'wonka'
 import { Pagination, TransactionTable } from '@/components'
-import { useTransactionUpdateSubscription } from '@/lib/graphql/generated/hooks'
-import { IbcStatus } from '@/lib/graphql/generated/types'
+import {
+    IbcStatus,
+    TransactionUpdateSubscription,
+    TransactionUpdateSubscriptionVariables,
+} from '@/lib/graphql/generated/types'
+import transactionSubscription from '@/lib/graphql/subscriptions/transactionSubscription.graphql'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import { Props as TransactionTableContainerProps } from './transactionTableContainer'
@@ -22,53 +28,71 @@ const TransactionTableUpdater: FC<Props> = ({
     total,
     ...props
 }) => {
+    const client = useClient()
     const [transactions, setTransactions] = useState(props.transactions)
-    const [transactionUpdateSubscription] = useTransactionUpdateSubscription({
-        pause: !subscription,
-        variables: { limit: limit.length },
-    })
-    const transactionUpdate =
-        transactionUpdateSubscription.data?.latestTransactions
 
     useEffect(() => {
-        if (transactionUpdate) {
-            setTransactions(prev => {
-                if (
-                    !prev ||
-                    prev.some(
-                        tx => transactionUpdate.hash.toLowerCase() === tx.hash
-                    )
-                ) {
-                    return prev
-                }
-
-                let primaryAction
-                let actionCount
-
-                try {
-                    const decoded = decodeTransaction(transactionUpdate.raw)
-                    primaryAction = findPrimaryAction(decoded)
-                    actionCount = decoded.body?.actions.length
-                } catch (e) {
-                    // istanbul ignore next
-                    console.error(e)
-                }
-
-                return [
-                    {
-                        actionCount: actionCount ?? 0,
-                        blockHeight: transactionUpdate.id,
-                        hash: transactionUpdate.hash.toLowerCase(),
-                        primaryAction,
-                        raw: transactionUpdate.raw,
-                        status: IbcStatus.Completed, // FIXME: Query ibcStatus
-                        timestamp: 0, // FIXME: Query block.createdAt
-                    },
-                    ...prev.slice(0, -1),
-                ]
-            })
+        if (!subscription) {
+            return
         }
-    }, [transactionUpdate])
+
+        const source = client.subscription<
+            TransactionUpdateSubscription,
+            TransactionUpdateSubscriptionVariables
+        >(transactionSubscription, { limit: limit.length })
+
+        const sub = pipe(
+            source,
+            throttle(() => 1000),
+            subscribe(result => {
+                const transactionUpdate = result.data?.latestTransactions
+
+                if (transactionUpdate) {
+                    setTransactions(prev => {
+                        if (
+                            !prev ||
+                            prev.some(
+                                tx =>
+                                    transactionUpdate.hash.toLowerCase() ===
+                                    tx.hash
+                            )
+                        ) {
+                            return prev
+                        }
+
+                        let primaryAction
+                        let actionCount
+
+                        try {
+                            const decoded = decodeTransaction(
+                                transactionUpdate.raw
+                            )
+                            primaryAction = findPrimaryAction(decoded)
+                            actionCount = decoded.body?.actions.length
+                        } catch (e) {
+                            // istanbul ignore next
+                            console.error(e)
+                        }
+
+                        return [
+                            {
+                                actionCount: actionCount ?? 0,
+                                blockHeight: transactionUpdate.id,
+                                hash: transactionUpdate.hash.toLowerCase(),
+                                primaryAction,
+                                raw: transactionUpdate.raw,
+                                status: IbcStatus.Completed, // FIXME: Query ibcStatus
+                                timestamp: 0, // FIXME: Query block.createdAt
+                            },
+                            ...prev.slice(0, -1),
+                        ]
+                    })
+                }
+            })
+        )
+
+        return () => sub.unsubscribe()
+    }, [client, limit.length, subscription])
 
     return (
         <TransactionTable

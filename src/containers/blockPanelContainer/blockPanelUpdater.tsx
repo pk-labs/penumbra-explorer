@@ -2,8 +2,14 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
+import { useClient } from 'urql'
+import { pipe, subscribe, throttle } from 'wonka'
 import { BlockPanel } from '@/components'
-import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
+import {
+    BlockUpdateSubscription,
+    BlockUpdateSubscriptionVariables,
+} from '@/lib/graphql/generated/types'
+import blockSubscription from '@/lib/graphql/subscriptions/blockSubscription.graphql'
 import { Props as BlockPanelContainerProps } from './blockPanelContainer'
 
 interface Props extends BlockPanelContainerProps {
@@ -11,17 +17,29 @@ interface Props extends BlockPanelContainerProps {
 }
 
 const BlockPanelUpdater: FC<Props> = props => {
+    const client = useClient()
     const [blockHeight, setBlockHeight] = useState(props.blockHeight)
-    const [blockSubscription] = useBlockUpdateSubscription({
-        variables: { limit: 1 },
-    })
-    const blockUpdate = blockSubscription.data?.latestBlocks
 
     useEffect(() => {
-        if (blockUpdate) {
-            setBlockHeight(blockUpdate.height)
-        }
-    }, [blockUpdate])
+        const source = client.subscription<
+            BlockUpdateSubscription,
+            BlockUpdateSubscriptionVariables
+        >(blockSubscription, { limit: 1 })
+
+        const subscription = pipe(
+            source,
+            throttle(() => 1000),
+            subscribe(result => {
+                const blockUpdate = result.data?.latestBlocks
+
+                if (blockUpdate) {
+                    setBlockHeight(blockUpdate.height)
+                }
+            })
+        )
+
+        return () => subscription.unsubscribe()
+    }, [client])
 
     return <BlockPanel {...props} blockHeight={blockHeight} />
 }
