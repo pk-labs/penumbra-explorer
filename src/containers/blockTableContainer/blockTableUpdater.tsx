@@ -77,7 +77,7 @@ const BlockTableUpdater: FC<Props> = ({
         )
 
         return () => sub.unsubscribe()
-    }, [client, limit.length, subscription])
+    }, [client, subscription])
 
     return (
         <BlockTable

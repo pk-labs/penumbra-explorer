@@ -3,7 +3,7 @@
 
 import { FC, useEffect, useState } from 'react'
 import { useClient } from 'urql'
-import { pipe, subscribe, throttle } from 'wonka'
+import { pipe, subscribe } from 'wonka'
 import { Pagination, TransactionTable } from '@/components'
 import {
     IbcStatus,
@@ -12,7 +12,11 @@ import {
 } from '@/lib/graphql/generated/types'
 import transactionSubscription from '@/lib/graphql/subscriptions/transactionSubscription.graphql'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
-import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
+import {
+    decodeTransaction,
+    findPrimaryAction,
+    throttleStream,
+} from '@/lib/utils'
 import { Props as TransactionTableContainerProps } from './transactionTableContainer'
 
 interface Props extends TransactionTableContainerProps {
@@ -39,34 +43,23 @@ const TransactionTableUpdater: FC<Props> = ({
         const source = client.subscription<
             TransactionUpdateSubscription,
             TransactionUpdateSubscriptionVariables
-        >(transactionSubscription, { limit: limit.length })
+        >(transactionSubscription, {})
 
         const sub = pipe(
-            source,
-            throttle(() => 1000),
-            subscribe(result => {
-                const transactionUpdate = result.data?.latestTransactions
+            throttleStream(source, 1000, 10),
+            subscribe(results => {
+                const latestTransactions: TransformedPartialTransactionFragment[] =
+                    []
 
-                if (transactionUpdate) {
-                    setTransactions(prev => {
-                        if (
-                            !prev ||
-                            prev.some(
-                                tx =>
-                                    transactionUpdate.hash.toLowerCase() ===
-                                    tx.hash
-                            )
-                        ) {
-                            return prev
-                        }
+                for (const result of results) {
+                    const transaction = result.data?.latestTransactions
 
+                    if (transaction) {
                         let primaryAction
                         let actionCount
 
                         try {
-                            const decoded = decodeTransaction(
-                                transactionUpdate.raw
-                            )
+                            const decoded = decodeTransaction(transaction.raw)
                             primaryAction = findPrimaryAction(decoded)
                             actionCount = decoded.body?.actions.length
                         } catch (e) {
@@ -74,25 +67,44 @@ const TransactionTableUpdater: FC<Props> = ({
                             console.error(e)
                         }
 
-                        return [
-                            {
-                                actionCount: actionCount ?? 0,
-                                blockHeight: transactionUpdate.id,
-                                hash: transactionUpdate.hash.toLowerCase(),
-                                primaryAction,
-                                raw: transactionUpdate.raw,
-                                status: IbcStatus.Completed, // FIXME: Query ibcStatus
-                                timestamp: 0, // FIXME: Query block.createdAt
-                            },
-                            ...prev.slice(0, -1),
-                        ]
+                        latestTransactions.unshift({
+                            actionCount: actionCount ?? 0,
+                            blockHeight: transaction.id,
+                            hash: transaction.hash.toLowerCase(),
+                            primaryAction,
+                            raw: transaction.raw,
+                            status: IbcStatus.Completed, // FIXME: Query ibcStatus
+                            timestamp: 0, // FIXME: Query block.createdAt
+                        })
+                    }
+                }
+
+                if (latestTransactions.length) {
+                    setTransactions(prev => {
+                        const latestTransactionHashes = new Set(
+                            latestTransactions.map(
+                                transaction => transaction.hash
+                            )
+                        )
+
+                        prev?.forEach(prevTransaction => {
+                            if (
+                                !latestTransactionHashes.has(
+                                    prevTransaction.hash
+                                )
+                            ) {
+                                latestTransactions.push(prevTransaction)
+                            }
+                        })
+
+                        return latestTransactions.slice(0, 10)
                     })
                 }
             })
         )
 
         return () => sub.unsubscribe()
-    }, [client, limit.length, subscription])
+    }, [client, subscription])
 
     return (
         <TransactionTable

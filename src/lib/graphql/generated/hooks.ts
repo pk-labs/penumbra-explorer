@@ -595,8 +595,8 @@ export function useTransactionCountUpdateSubscription<TData = Types.TransactionC
   return Urql.useSubscription<Types.TransactionCountUpdateSubscription, TData, Types.TransactionCountUpdateSubscriptionVariables>({ query: Types.TransactionCountUpdateDocument, ...options }, handler);
 };
 export const TransactionUpdateDocument = gql`
-    subscription TransactionUpdate($limit: Int!) {
-  latestTransactions(limit: $limit) {
+    subscription TransactionUpdate {
+  latestTransactions(limit: 1) {
     hash
     id
     raw
@@ -604,7 +604,7 @@ export const TransactionUpdateDocument = gql`
 }
     `;
 
-export function useTransactionUpdateSubscription<TData = Types.TransactionUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.TransactionUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.TransactionUpdateSubscription, TData>) {
+export function useTransactionUpdateSubscription<TData = Types.TransactionUpdateSubscription>(options?: Omit<Urql.UseSubscriptionArgs<Types.TransactionUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.TransactionUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.TransactionUpdateSubscription, TData, Types.TransactionUpdateSubscriptionVariables>({ query: Types.TransactionUpdateDocument, ...options }, handler);
 };
 export const ValidatorBlockUpdateDocument = gql`
