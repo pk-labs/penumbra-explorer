@@ -1,5 +1,5 @@
-subscription BlockUpdate($limit: Int!) {
-    latestBlocks(limit: $limit) {
+subscription BlockUpdate {
+    latestBlocks(limit: 1) {
         height
         createdAt
         transactionsCount

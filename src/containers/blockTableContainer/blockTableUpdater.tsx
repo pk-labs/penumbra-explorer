@@ -38,7 +38,7 @@ const BlockTableUpdater: FC<Props> = ({
         const source = client.subscription<
             BlockUpdateSubscription,
             BlockUpdateSubscriptionVariables
-        >(blockSubscription, { limit: limit.length })
+        >(blockSubscription, {})
 
         const sub = pipe(
             source,

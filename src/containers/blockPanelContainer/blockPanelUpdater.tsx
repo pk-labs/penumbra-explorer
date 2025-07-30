@@ -3,13 +3,14 @@
 
 import { FC, useEffect, useState } from 'react'
 import { useClient } from 'urql'
-import { pipe, subscribe, throttle } from 'wonka'
+import { pipe, subscribe } from 'wonka'
 import { BlockPanel } from '@/components'
 import {
     BlockUpdateSubscription,
     BlockUpdateSubscriptionVariables,
 } from '@/lib/graphql/generated/types'
 import blockSubscription from '@/lib/graphql/subscriptions/blockSubscription.graphql'
+import { throttleStream } from '@/lib/utils'
 import { Props as BlockPanelContainerProps } from './blockPanelContainer'
 
 interface Props extends BlockPanelContainerProps {
@@ -19,21 +20,24 @@ interface Props extends BlockPanelContainerProps {
 const BlockPanelUpdater: FC<Props> = props => {
     const client = useClient()
     const [blockHeight, setBlockHeight] = useState(props.blockHeight)
+    const [reindexing, setReindexing] = useState(false)
 
     useEffect(() => {
         const source = client.subscription<
             BlockUpdateSubscription,
             BlockUpdateSubscriptionVariables
-        >(blockSubscription, { limit: 1 })
+        >(blockSubscription, {})
 
         const subscription = pipe(
-            source,
-            throttle(() => 1000),
-            subscribe(result => {
-                const blockUpdate = result.data?.latestBlocks
+            throttleStream(source, 1000, 10),
+            subscribe(results => {
+                const latestResult = results.at(-1)
+                const latestBlockHeight =
+                    latestResult?.data?.latestBlocks.height
 
-                if (blockUpdate) {
-                    setBlockHeight(blockUpdate.height)
+                if (latestBlockHeight) {
+                    setBlockHeight(latestBlockHeight)
+                    setReindexing(results.length > 2)
                 }
             })
         )
@@ -41,7 +45,13 @@ const BlockPanelUpdater: FC<Props> = props => {
         return () => subscription.unsubscribe()
     }, [client])
 
-    return <BlockPanel {...props} blockHeight={blockHeight} />
+    return (
+        <BlockPanel
+            {...props}
+            blockHeight={blockHeight}
+            reindexing={reindexing}
+        />
+    )
 }
 
 export default BlockPanelUpdater

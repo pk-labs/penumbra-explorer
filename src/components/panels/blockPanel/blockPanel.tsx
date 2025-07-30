@@ -8,6 +8,7 @@ import blockPanelIcon from './blockPanelIcon.svg'
 interface Props {
     blockHeight?: number
     className?: string
+    reindexing?: boolean
 }
 
 const BlockPanel: FC<Props> = props => (
@@ -29,7 +30,10 @@ const BlockPanel: FC<Props> = props => (
         }
         titleClassName="text-base font-medium"
     >
-        <BlockPanelChart blockHeight={props.blockHeight} />
+        <BlockPanelChart
+            blockHeight={props.blockHeight}
+            reindexing={props.reindexing}
+        />
     </NumberPanel>
 )
 

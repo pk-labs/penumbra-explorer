@@ -6,7 +6,6 @@ import styles from './blockPanel.module.css'
 
 const barCount = 25
 const upcomingCountdown = 5
-const syncMinBlockHeight = 100
 const syncTimeout = 30 * 1000
 
 export enum SyncState {
@@ -18,6 +17,7 @@ export enum SyncState {
 
 interface Props {
     blockHeight?: number
+    reindexing?: boolean
 }
 
 const BlockPanelChart: FC<Props> = props => {
@@ -77,16 +77,25 @@ const BlockPanelChart: FC<Props> = props => {
     }, [resetBars, resetCube, resetTimeouts, syncState])
 
     useEffect(() => {
-        if (!barsRef.current || !cubeRef.current || !props.blockHeight) {
+        if (props.reindexing) {
+            setSyncState(SyncState.Syncing)
+        }
+    }, [props.reindexing])
+
+    useEffect(() => {
+        if (
+            !barsRef.current ||
+            !cubeRef.current ||
+            !props.blockHeight ||
+            props.reindexing
+        ) {
             return
         }
 
         if (syncState === SyncState.Syncing && blockHeight) {
             cubeRef.current.classList.add(styles.rotateInfinite)
 
-            if (props.blockHeight - blockHeight >= syncMinBlockHeight) {
-                return
-            } else if (initialBlock.current) {
+            if (initialBlock.current) {
                 initialBlock.current = false
             } else {
                 setCounter(upcomingCountdown)
@@ -103,6 +112,7 @@ const BlockPanelChart: FC<Props> = props => {
     }, [
         blockHeight,
         props.blockHeight,
+        props.reindexing,
         resetBars,
         resetCube,
         resetTimeouts,

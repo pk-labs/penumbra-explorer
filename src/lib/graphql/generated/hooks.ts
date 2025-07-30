@@ -544,8 +544,8 @@ export function useVotingStartQuery(options: Omit<Urql.UseQueryArgs<Types.Voting
   return Urql.useQuery<Types.VotingStartQuery, Types.VotingStartQueryVariables>({ query: Types.VotingStartDocument, ...options });
 };
 export const BlockUpdateDocument = gql`
-    subscription BlockUpdate($limit: Int!) {
-  latestBlocks(limit: $limit) {
+    subscription BlockUpdate {
+  latestBlocks(limit: 1) {
     height
     createdAt
     transactionsCount
@@ -553,7 +553,7 @@ export const BlockUpdateDocument = gql`
 }
     `;
 
-export function useBlockUpdateSubscription<TData = Types.BlockUpdateSubscription>(options: Omit<Urql.UseSubscriptionArgs<Types.BlockUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.BlockUpdateSubscription, TData>) {
+export function useBlockUpdateSubscription<TData = Types.BlockUpdateSubscription>(options?: Omit<Urql.UseSubscriptionArgs<Types.BlockUpdateSubscriptionVariables>, 'query'>, handler?: Urql.SubscriptionHandler<Types.BlockUpdateSubscription, TData>) {
   return Urql.useSubscription<Types.BlockUpdateSubscription, TData, Types.BlockUpdateSubscriptionVariables>({ query: Types.BlockUpdateDocument, ...options }, handler);
 };
 export const ChainParametersUpdateDocument = gql`
