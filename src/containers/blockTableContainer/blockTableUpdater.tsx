@@ -3,7 +3,7 @@
 
 import { FC, useEffect, useState } from 'react'
 import { useClient } from 'urql'
-import { pipe, subscribe, throttle } from 'wonka'
+import { pipe, subscribe } from 'wonka'
 import { BlockTable, Pagination } from '@/components'
 import dayjs from '@/lib/dayjs'
 import {
@@ -12,6 +12,7 @@ import {
 } from '@/lib/graphql/generated/types'
 import blockSubscription from '@/lib/graphql/subscriptions/blockSubscription.graphql'
 import { TransformedPartialBlockFragment } from '@/lib/types'
+import { throttleStream } from '@/lib/utils'
 import { Props as BlockTableContainerProps } from './blockTableContainer'
 
 interface Props extends BlockTableContainerProps {
@@ -41,33 +42,35 @@ const BlockTableUpdater: FC<Props> = ({
         >(blockSubscription, {})
 
         const sub = pipe(
-            source,
-            throttle(() => 1000),
-            subscribe(result => {
-                const blockUpdate = result.data?.latestBlocks
+            throttleStream(source, 1000, 10),
+            subscribe(results => {
+                const latestBlocks: TransformedPartialBlockFragment[] = []
 
-                if (blockUpdate) {
+                for (const result of results) {
+                    const block = result.data?.latestBlocks
+
+                    if (block) {
+                        latestBlocks.unshift({
+                            height: block.height,
+                            timestamp: dayjs(block.createdAt).valueOf(),
+                            transactionsCount: block.transactionsCount,
+                        })
+                    }
+                }
+
+                if (latestBlocks.length) {
                     setBlocks(prev => {
-                        if (
-                            !prev ||
-                            prev.some(
-                                block => blockUpdate.height === block.height
-                            )
-                        ) {
-                            return prev
-                        }
+                        const latestBlockHeights = new Set(
+                            latestBlocks.map(block => block.height)
+                        )
 
-                        return [
-                            {
-                                height: blockUpdate.height,
-                                timestamp: dayjs(
-                                    blockUpdate.createdAt
-                                ).valueOf(),
-                                transactionsCount:
-                                    blockUpdate.transactionsCount,
-                            },
-                            ...prev.slice(0, -1),
-                        ]
+                        prev?.forEach(prevBlock => {
+                            if (!latestBlockHeights.has(prevBlock.height)) {
+                                latestBlocks.push(prevBlock)
+                            }
+                        })
+
+                        return latestBlocks.slice(0, 10)
                     })
                 }
             })
