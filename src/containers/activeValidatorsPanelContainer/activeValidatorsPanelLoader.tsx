@@ -1,10 +1,9 @@
 // istanbul ignore file
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
+import { NumberPanel } from '@/components'
 import getActiveValidators from '@/lib/data/getActiveValidators'
-import GraphqlClientProvider from '@/lib/graphql/graphqlClientProvider'
 import { Props } from './activeValidatorsPanelContainer'
-import ActiveValidatorsPanelUpdater from './activeValidatorsPanelUpdater'
 
 const ActiveValidatorsPanelLoader: FC<Props> = async props => {
     const activeValidators = await getActiveValidators()
@@ -14,13 +13,16 @@ const ActiveValidatorsPanelLoader: FC<Props> = async props => {
     }
 
     return (
-        <GraphqlClientProvider>
-            <ActiveValidatorsPanelUpdater
-                {...props}
-                limit={activeValidators.activeValidatorLimit}
-                number={activeValidators.activeValidatorCount}
-            />
-        </GraphqlClientProvider>
+        <NumberPanel
+            className={props.className}
+            number={activeValidators.activeValidatorCount}
+            numberSuffix={
+                <span className="text-text-secondary text-2xl">
+                    /{activeValidators.activeValidatorLimit}
+                </span>
+            }
+            title="Active validators / Validators limit"
+        />
     )
 }
 
