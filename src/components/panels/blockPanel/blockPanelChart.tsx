@@ -25,7 +25,6 @@ const BlockPanelChart: FC<Props> = props => {
     const cubeRef = useRef<HTMLDivElement>(null)
     const syncTimeoutRef = useRef<NodeJS.Timeout>(null)
     const lateTimeoutRef = useRef<NodeJS.Timeout>(null)
-    const initialBlock = useRef(true)
     const [blockHeight, setBlockHeight] = useState(props.blockHeight)
     const [syncState, setSyncState] = useState(SyncState.Syncing)
     const [counter, setCounter] = useState<number>()
@@ -77,7 +76,8 @@ const BlockPanelChart: FC<Props> = props => {
     }, [resetBars, resetCube, resetTimeouts, syncState])
 
     useEffect(() => {
-        if (props.reindexing) {
+        if (cubeRef.current && props.reindexing) {
+            cubeRef.current.classList.add(styles.rotateInfinite)
             setSyncState(SyncState.Syncing)
         }
     }, [props.reindexing])
@@ -95,16 +95,13 @@ const BlockPanelChart: FC<Props> = props => {
         if (syncState === SyncState.Syncing && blockHeight) {
             cubeRef.current.classList.add(styles.rotateInfinite)
 
-            if (initialBlock.current) {
-                initialBlock.current = false
-            } else {
-                setCounter(upcomingCountdown)
-                setSyncState(SyncState.Upcoming)
-            }
+            setCounter(upcomingCountdown)
+            setSyncState(SyncState.Upcoming)
         } else if (props.blockHeight !== blockHeight) {
             resetTimeouts()
             resetBars()
             resetCube()
+
             setBlockHeight(props.blockHeight)
             setCounter(upcomingCountdown)
             setSyncState(SyncState.Upcoming)
@@ -134,10 +131,6 @@ const BlockPanelChart: FC<Props> = props => {
         const cube = cubeRef.current
 
         const interval = setInterval(() => {
-            if (initialBlock.current) {
-                return
-            }
-
             setCounter(prev => prev && prev - 1)
 
             bars.filter(bar =>
