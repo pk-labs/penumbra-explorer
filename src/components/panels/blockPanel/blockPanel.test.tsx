@@ -21,8 +21,8 @@ describe('BlockPanel', () => {
                 getByText(container, 'Syncing to blocks ...')
             })
 
-            test('when initial block', async () => {
-                const { container } = render(<BlockPanel blockHeight={99} />)
+            test('when reindexing', async () => {
+                const { container } = render(<BlockPanel reindexing />)
                 getByText(container, 'Syncing to blocks ...')
             })
         })
@@ -53,7 +53,7 @@ describe('BlockPanel', () => {
 
         describe('not syncing', () => {
             test('after sync timeout', async () => {
-                const { container } = render(<BlockPanel blockHeight={99} />)
+                const { container } = render(<BlockPanel />)
 
                 getByText(container, 'Syncing to blocks ...')
 
