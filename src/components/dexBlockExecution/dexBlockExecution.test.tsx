@@ -8,7 +8,7 @@ describe('DexBlockExecution', () => {
             <DexBlockExecution
                 height={1234}
                 swapExecutions={[]}
-                timestamp={dayjs().subtract(1, 'second').valueOf()}
+                timestamp={dayjs().subtract(1.1, 'second').valueOf()}
             />
         )
 
