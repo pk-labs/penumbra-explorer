@@ -24,6 +24,7 @@ export enum ActionType {
     IbcRelayAction = 'IBC relay',
     Ics20Withdrawal = 'ICS 20 withdrawal',
     InternalTransfer = 'Internal transfer',
+    LiquidityTournamentVote = 'Liquidity tournament vote',
     Output = 'Output',
     PositionClose = 'Position close',
     PositionOpen = 'Position open',
