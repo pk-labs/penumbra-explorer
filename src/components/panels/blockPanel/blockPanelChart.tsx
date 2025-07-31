@@ -62,7 +62,10 @@ const BlockPanelChart: FC<Props> = props => {
     }, [])
 
     useEffect(() => {
-        if (![SyncState.Syncing, SyncState.Late].includes(syncState)) {
+        if (
+            ![SyncState.Syncing, SyncState.Late].includes(syncState) ||
+            props.reindexing
+        ) {
             return
         }
 
@@ -73,7 +76,7 @@ const BlockPanelChart: FC<Props> = props => {
         }, syncTimeout)
 
         return resetTimeouts
-    }, [resetBars, resetCube, resetTimeouts, syncState])
+    }, [props.reindexing, resetBars, resetCube, resetTimeouts, syncState])
 
     useEffect(() => {
         if (cubeRef.current && props.reindexing) {
