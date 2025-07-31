@@ -18,7 +18,7 @@ const Table: FC<Props> = props => (
     <Surface className={classNames('flex flex-col gap-4 p-6', props.className)}>
         {props.header}
         <div className="scroll-area-component flex-1 overflow-x-auto">
-            <table className="w-full">{props.children}</table>
+            <table className="w-max min-w-full">{props.children}</table>
         </div>
         {props.footer}
     </Surface>
