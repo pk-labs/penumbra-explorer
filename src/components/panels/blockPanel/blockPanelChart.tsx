@@ -70,9 +70,9 @@ const BlockPanelChart: FC<Props> = props => {
         }
 
         syncTimeoutRef.current = setTimeout(() => {
-            setSyncState(SyncState.NotSynced)
             resetBars()
             resetCube()
+            setSyncState(SyncState.NotSynced)
         }, syncTimeout)
 
         return resetTimeouts
@@ -80,10 +80,13 @@ const BlockPanelChart: FC<Props> = props => {
 
     useEffect(() => {
         if (cubeRef.current && props.reindexing) {
+            resetTimeouts()
+            resetBars()
+            resetCube()
             cubeRef.current.classList.add(styles.rotateInfinite)
             setSyncState(SyncState.Syncing)
         }
-    }, [props.reindexing])
+    }, [props.reindexing, resetBars, resetCube, resetTimeouts])
 
     useEffect(() => {
         if (
@@ -97,14 +100,12 @@ const BlockPanelChart: FC<Props> = props => {
 
         if (syncState === SyncState.Syncing && blockHeight) {
             cubeRef.current.classList.add(styles.rotateInfinite)
-
             setCounter(upcomingCountdown)
             setSyncState(SyncState.Upcoming)
         } else if (props.blockHeight !== blockHeight) {
             resetTimeouts()
             resetBars()
             resetCube()
-
             setBlockHeight(props.blockHeight)
             setCounter(upcomingCountdown)
             setSyncState(SyncState.Upcoming)
@@ -177,10 +178,10 @@ const BlockPanelChart: FC<Props> = props => {
         }
 
         lateTimeoutRef.current = setTimeout(() => {
-            setCounter(1)
-            setSyncState(SyncState.Late)
             resetCube()
             cubeRef.current?.classList.add(styles.rotateInfinite)
+            setCounter(1)
+            setSyncState(SyncState.Late)
         }, 1000)
 
         return resetTimeouts
