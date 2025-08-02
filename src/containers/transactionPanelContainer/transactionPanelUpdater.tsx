@@ -13,16 +13,14 @@ interface Props extends TransactionPanelContainerProps {
 const TransactionPanelUpdater: FC<Props> = props => {
     const [number, setNumber] = useState(props.number)
 
-    const [transactionCountUpdateSubscription] =
+    const [transactionCountSubscription] =
         useTransactionCountUpdateSubscription()
 
     useEffect(() => {
-        if (transactionCountUpdateSubscription.data?.transactionCount) {
-            setNumber(
-                transactionCountUpdateSubscription.data.transactionCount.count
-            )
+        if (transactionCountSubscription.data?.transactionCount) {
+            setNumber(transactionCountSubscription.data.transactionCount.count)
         }
-    }, [transactionCountUpdateSubscription.data?.transactionCount])
+    }, [transactionCountSubscription.data?.transactionCount])
 
     return <TransactionPanel {...props} number={number} />
 }

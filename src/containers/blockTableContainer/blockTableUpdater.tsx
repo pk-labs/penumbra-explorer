@@ -1,7 +1,7 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { useClient } from 'urql'
 import { pipe, subscribe } from 'wonka'
 import { BlockTable, Pagination } from '@/components'
@@ -12,7 +12,6 @@ import {
 } from '@/lib/graphql/generated/types'
 import blockSubscription from '@/lib/graphql/subscriptions/blockSubscription.graphql'
 import { TransformedPartialBlockFragment } from '@/lib/types'
-import { throttleStream } from '@/lib/utils'
 import { Props as BlockTableContainerProps } from './blockTableContainer'
 
 interface Props extends BlockTableContainerProps {
@@ -29,7 +28,14 @@ const BlockTableUpdater: FC<Props> = ({
     ...props
 }) => {
     const client = useClient()
-    const [blocks, setBlocks] = useState(props.blocks)
+    const queueRef = useRef<TransformedPartialBlockFragment[]>([])
+    const animationFrameRef = useRef<number>(undefined)
+    const [blocks, setBlocks] = useState(props.blocks ?? [])
+
+    const initialBlockHeights = useMemo(
+        () => new Set(props.blocks?.map(block => block.height)),
+        [props.blocks]
+    )
 
     useEffect(() => {
         if (!subscription) {
@@ -41,43 +47,45 @@ const BlockTableUpdater: FC<Props> = ({
             BlockUpdateSubscriptionVariables
         >(blockSubscription, {})
 
-        const sub = pipe(
-            throttleStream(source, 1000, 10),
-            subscribe(results => {
-                const latestBlocks: TransformedPartialBlockFragment[] = []
+        const { unsubscribe } = pipe(
+            source,
+            subscribe(result => {
+                const block = result.data?.latestBlocks
 
-                for (const result of results) {
-                    const block = result.data?.latestBlocks
-
-                    if (block) {
-                        latestBlocks.unshift({
-                            height: block.height,
-                            timestamp: dayjs(block.createdAt).valueOf(),
-                            transactionsCount: block.transactionsCount,
-                        })
-                    }
-                }
-
-                if (latestBlocks.length) {
-                    setBlocks(prev => {
-                        const latestBlockHeights = new Set(
-                            latestBlocks.map(block => block.height)
-                        )
-
-                        prev?.forEach(prevBlock => {
-                            if (!latestBlockHeights.has(prevBlock.height)) {
-                                latestBlocks.push(prevBlock)
-                            }
-                        })
-
-                        return latestBlocks.slice(0, 10)
+                if (block && !initialBlockHeights.has(block.height)) {
+                    queueRef.current.push({
+                        height: block.height,
+                        timestamp: dayjs(block.createdAt).valueOf(),
+                        transactionsCount: block.transactionsCount,
                     })
                 }
             })
         )
 
-        return () => sub.unsubscribe()
-    }, [client, subscription])
+        return () => unsubscribe()
+    }, [client, initialBlockHeights, subscription])
+
+    useEffect(() => {
+        const animationLoop = () => {
+            if (queueRef.current.length > 0) {
+                const block = queueRef.current.shift()
+
+                if (block) {
+                    setBlocks(prev => [block, ...prev].slice(0, 10))
+                }
+            }
+
+            animationFrameRef.current = requestAnimationFrame(animationLoop)
+        }
+
+        animationFrameRef.current = requestAnimationFrame(animationLoop)
+
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current)
+            }
+        }
+    }, [])
 
     return (
         <BlockTable
