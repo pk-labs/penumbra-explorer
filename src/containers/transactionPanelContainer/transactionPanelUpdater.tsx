@@ -1,9 +1,15 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
+import { useClient } from 'urql'
+import { pipe, subscribe } from 'wonka'
 import { TransactionPanel } from '@/components'
-import { useTransactionCountUpdateSubscription } from '@/lib/graphql/generated/hooks'
+import {
+    TransactionCountUpdateSubscription,
+    TransactionCountUpdateSubscriptionVariables,
+} from '@/lib/graphql/generated/types'
+import transactionCountSubscription from '@/lib/graphql/subscriptions/transactionCountSubscription.graphql'
 import { Props as TransactionPanelContainerProps } from './transactionPanelContainer'
 
 interface Props extends TransactionPanelContainerProps {
@@ -11,16 +17,52 @@ interface Props extends TransactionPanelContainerProps {
 }
 
 const TransactionPanelUpdater: FC<Props> = props => {
+    const client = useClient()
+    const queueRef = useRef<number[]>([])
+    const animationFrameRef = useRef<number>(undefined)
     const [number, setNumber] = useState(props.number)
 
-    const [transactionCountSubscription] =
-        useTransactionCountUpdateSubscription()
+    useEffect(() => {
+        const source = client.subscription<
+            TransactionCountUpdateSubscription,
+            TransactionCountUpdateSubscriptionVariables
+        >(transactionCountSubscription, {})
+
+        const { unsubscribe } = pipe(
+            source,
+            subscribe(result => {
+                const count = result.data?.transactionCount.count
+
+                if (count) {
+                    queueRef.current.push(count)
+                }
+            })
+        )
+
+        return () => unsubscribe()
+    }, [client])
 
     useEffect(() => {
-        if (transactionCountSubscription.data?.transactionCount) {
-            setNumber(transactionCountSubscription.data.transactionCount.count)
+        const animationLoop = () => {
+            if (queueRef.current.length > 0) {
+                const count = queueRef.current.shift()
+
+                if (count) {
+                    setNumber(count)
+                }
+            }
+
+            animationFrameRef.current = requestAnimationFrame(animationLoop)
         }
-    }, [transactionCountSubscription.data?.transactionCount])
+
+        animationFrameRef.current = requestAnimationFrame(animationLoop)
+
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current)
+            }
+        }
+    }, [])
 
     return <TransactionPanel {...props} number={number} />
 }
