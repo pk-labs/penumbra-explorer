@@ -73,8 +73,6 @@ describe('JsonTree', () => {
             />
         )
 
-        console.log(container.innerHTML)
-
         expect(container.firstChild).toHaveClass('foo', 'bar')
         expect(getByText(container, 'Bar').parentNode).toHaveClass('bar')
     })

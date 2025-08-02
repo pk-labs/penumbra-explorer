@@ -52,7 +52,6 @@ const TransactionTableUpdater: FC<Props> = ({
             source,
             subscribe(result => {
                 const transaction = result.data?.latestTransactions
-                console.log('transaction:', transaction)
 
                 if (
                     transaction &&
