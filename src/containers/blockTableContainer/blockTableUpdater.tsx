@@ -1,7 +1,7 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useClient } from 'urql'
 import { pipe, subscribe } from 'wonka'
 import { BlockTable, Pagination } from '@/components'
@@ -32,9 +32,8 @@ const BlockTableUpdater: FC<Props> = ({
     const animationFrameRef = useRef<number>(undefined)
     const [blocks, setBlocks] = useState(props.blocks ?? [])
 
-    const initialBlockHeights = useMemo(
-        () => new Set(props.blocks?.map(block => block.height)),
-        [props.blocks]
+    const blockHeightsRef = useRef(
+        new Set(props.blocks?.map(block => block.height))
     )
 
     useEffect(() => {
@@ -52,7 +51,7 @@ const BlockTableUpdater: FC<Props> = ({
             subscribe(result => {
                 const block = result.data?.latestBlocks
 
-                if (block && !initialBlockHeights.has(block.height)) {
+                if (block && !blockHeightsRef.current.has(block.height)) {
                     queueRef.current.push({
                         height: block.height,
                         timestamp: dayjs(block.createdAt).valueOf(),
@@ -63,7 +62,7 @@ const BlockTableUpdater: FC<Props> = ({
         )
 
         return () => unsubscribe()
-    }, [client, initialBlockHeights, subscription])
+    }, [client, subscription])
 
     useEffect(() => {
         const animationLoop = () => {
@@ -71,7 +70,19 @@ const BlockTableUpdater: FC<Props> = ({
                 const block = queueRef.current.shift()
 
                 if (block) {
-                    setBlocks(prev => [block, ...prev].slice(0, 10))
+                    setBlocks(prev => {
+                        const blockHeightToBeRemoved = prev.at(-1)?.height
+
+                        if (blockHeightToBeRemoved) {
+                            blockHeightsRef.current.delete(
+                                blockHeightToBeRemoved
+                            )
+                        }
+
+                        blockHeightsRef.current.add(block.height)
+
+                        return [block, ...prev].slice(0, 10)
+                    })
                 }
             }
 

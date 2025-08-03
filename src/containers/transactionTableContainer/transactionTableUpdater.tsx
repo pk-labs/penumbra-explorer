@@ -1,7 +1,7 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useClient } from 'urql'
 import { pipe, subscribe } from 'wonka'
 import { Pagination, TransactionTable } from '@/components'
@@ -33,9 +33,8 @@ const TransactionTableUpdater: FC<Props> = ({
     const animationFrameRef = useRef<number>(undefined)
     const [transactions, setTransactions] = useState(props.transactions ?? [])
 
-    const initialTransactionHashes = useMemo(
-        () => new Set(props.transactions?.map(transaction => transaction.hash)),
-        [props.transactions]
+    const hashesRef = useRef(
+        new Set(transactions.map(transaction => transaction.hash))
     )
 
     useEffect(() => {
@@ -55,9 +54,7 @@ const TransactionTableUpdater: FC<Props> = ({
 
                 if (
                     transaction &&
-                    !initialTransactionHashes.has(
-                        transaction.hash.toLowerCase()
-                    )
+                    !hashesRef.current.has(transaction.hash.toLowerCase())
                 ) {
                     let primaryAction
                     let actionCount
@@ -85,7 +82,7 @@ const TransactionTableUpdater: FC<Props> = ({
         )
 
         return () => unsubscribe()
-    }, [client, initialTransactionHashes, subscription])
+    }, [client, subscription])
 
     useEffect(() => {
         const animationLoop = () => {
@@ -93,7 +90,17 @@ const TransactionTableUpdater: FC<Props> = ({
                 const transaction = queueRef.current.shift()
 
                 if (transaction) {
-                    setTransactions(prev => [transaction, ...prev].slice(0, 10))
+                    setTransactions(prev => {
+                        const hashToBeRemoved = prev.at(-1)?.hash
+
+                        if (hashToBeRemoved) {
+                            hashesRef.current.delete(hashToBeRemoved)
+                        }
+
+                        hashesRef.current.add(transaction.hash)
+
+                        return [transaction, ...prev].slice(0, 10)
+                    })
                 }
             }
 
