@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, Suspense, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useTicker } from '@/lib/hooks'
 
 interface Props {
@@ -10,13 +10,13 @@ interface Props {
 
 const TimeAgo: FC<Props> = props => {
     const lastTick = useTicker()
-    const [timeAgo, setTimeAgo] = useState(lastTick.to(props.timestamp))
+    const [timeAgo, setTimeAgo] = useState<string>()
 
     useEffect(() => {
         setTimeAgo(lastTick.to(props.timestamp))
     }, [lastTick, props.timestamp])
 
-    return <Suspense fallback={timeAgo}>{timeAgo}</Suspense>
+    return timeAgo
 }
 
 export default TimeAgo
