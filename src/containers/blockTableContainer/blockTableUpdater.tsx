@@ -5,6 +5,7 @@ import { FC, useEffect, useRef, useState } from 'react'
 import { useClient } from 'urql'
 import { pipe, subscribe } from 'wonka'
 import { BlockTable, Pagination } from '@/components'
+import { animationFrameMs } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
 import {
     BlockUpdateSubscription,
@@ -30,6 +31,7 @@ const BlockTableUpdater: FC<Props> = ({
     const client = useClient()
     const queueRef = useRef<TransformedPartialBlockFragment[]>([])
     const animationFrameRef = useRef<number>(undefined)
+    const updateTimestampRef = useRef(0)
     const [blocks, setBlocks] = useState(props.blocks ?? [])
 
     const blockHeightsRef = useRef(
@@ -67,22 +69,28 @@ const BlockTableUpdater: FC<Props> = ({
     useEffect(() => {
         const animationLoop = () => {
             if (queueRef.current.length > 0) {
-                const block = queueRef.current.shift()
+                const now = performance.now()
 
-                if (block) {
-                    blockHeightsRef.current.add(block.height)
+                if (now - updateTimestampRef.current >= animationFrameMs) {
+                    const block = queueRef.current.shift()
 
-                    setBlocks(prev => {
-                        const blockHeightToBeRemoved = prev.at(-1)?.height
+                    if (block) {
+                        blockHeightsRef.current.add(block.height)
 
-                        if (blockHeightToBeRemoved) {
-                            blockHeightsRef.current.delete(
-                                blockHeightToBeRemoved
-                            )
-                        }
+                        setBlocks(prev => {
+                            const blockHeightToBeRemoved = prev.at(-1)?.height
 
-                        return [block, ...prev].slice(0, 10)
-                    })
+                            if (blockHeightToBeRemoved) {
+                                blockHeightsRef.current.delete(
+                                    blockHeightToBeRemoved
+                                )
+                            }
+
+                            return [block, ...prev].slice(0, 10)
+                        })
+
+                        updateTimestampRef.current = now
+                    }
                 }
             }
 

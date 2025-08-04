@@ -5,6 +5,7 @@ import { FC, useEffect, useRef, useState } from 'react'
 import { useClient } from 'urql'
 import { pipe, subscribe } from 'wonka'
 import { Pagination, TransactionTable } from '@/components'
+import { animationFrameMs } from '@/lib/constants'
 import {
     IbcStatus,
     TransactionUpdateSubscription,
@@ -31,6 +32,7 @@ const TransactionTableUpdater: FC<Props> = ({
     const client = useClient()
     const queueRef = useRef<TransformedPartialTransactionFragment[]>([])
     const animationFrameRef = useRef<number>(undefined)
+    const updateTimestampRef = useRef(0)
     const [transactions, setTransactions] = useState(props.transactions ?? [])
 
     const hashesRef = useRef(
@@ -87,20 +89,26 @@ const TransactionTableUpdater: FC<Props> = ({
     useEffect(() => {
         const animationLoop = () => {
             if (queueRef.current.length > 0) {
-                const transaction = queueRef.current.shift()
+                const now = performance.now()
 
-                if (transaction) {
-                    hashesRef.current.add(transaction.hash)
+                if (now - updateTimestampRef.current >= animationFrameMs) {
+                    const transaction = queueRef.current.shift()
 
-                    setTransactions(prev => {
-                        const hashToBeRemoved = prev.at(-1)?.hash
+                    if (transaction) {
+                        hashesRef.current.add(transaction.hash)
 
-                        if (hashToBeRemoved) {
-                            hashesRef.current.delete(hashToBeRemoved)
-                        }
+                        setTransactions(prev => {
+                            const hashToBeRemoved = prev.at(-1)?.hash
 
-                        return [transaction, ...prev].slice(0, 10)
-                    })
+                            if (hashToBeRemoved) {
+                                hashesRef.current.delete(hashToBeRemoved)
+                            }
+
+                            return [transaction, ...prev].slice(0, 10)
+                        })
+
+                        updateTimestampRef.current = now
+                    }
                 }
             }
 

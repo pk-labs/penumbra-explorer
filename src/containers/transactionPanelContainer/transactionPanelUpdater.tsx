@@ -5,6 +5,7 @@ import { FC, useEffect, useRef, useState } from 'react'
 import { useClient } from 'urql'
 import { pipe, subscribe } from 'wonka'
 import { TransactionPanel } from '@/components'
+import { animationFrameMs } from '@/lib/constants'
 import {
     TransactionCountUpdateSubscription,
     TransactionCountUpdateSubscriptionVariables,
@@ -20,6 +21,7 @@ const TransactionPanelUpdater: FC<Props> = props => {
     const client = useClient()
     const queueRef = useRef<number[]>([])
     const animationFrameRef = useRef<number>(undefined)
+    const updateTimestampRef = useRef(0)
     const [number, setNumber] = useState(props.number)
 
     useEffect(() => {
@@ -45,10 +47,15 @@ const TransactionPanelUpdater: FC<Props> = props => {
     useEffect(() => {
         const animationLoop = () => {
             if (queueRef.current.length > 0) {
-                const count = queueRef.current.shift()
+                const now = performance.now()
 
-                if (count) {
-                    setNumber(count)
+                if (now - updateTimestampRef.current >= animationFrameMs) {
+                    const count = queueRef.current.shift()
+
+                    if (count) {
+                        setNumber(count)
+                        updateTimestampRef.current = now
+                    }
                 }
             }
 

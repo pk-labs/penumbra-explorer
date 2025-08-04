@@ -5,6 +5,7 @@ import { FC, useEffect, useRef, useState } from 'react'
 import { useClient } from 'urql'
 import { pipe, subscribe } from 'wonka'
 import { BlockPanel } from '@/components'
+import { animationFrameMs } from '@/lib/constants'
 import {
     BlockUpdateSubscription,
     BlockUpdateSubscriptionVariables,
@@ -20,6 +21,7 @@ const BlockPanelUpdater: FC<Props> = props => {
     const client = useClient()
     const queueRef = useRef<number[]>([])
     const animationFrameRef = useRef<number>(undefined)
+    const updateTimestampRef = useRef(0)
     const [reindexing, setReindexing] = useState(false)
     const [blockHeight, setBlockHeight] = useState(props.blockHeight)
 
@@ -47,10 +49,15 @@ const BlockPanelUpdater: FC<Props> = props => {
     useEffect(() => {
         const animationLoop = () => {
             if (queueRef.current.length > 0) {
-                const height = queueRef.current.shift()
+                const now = performance.now()
 
-                if (height) {
-                    setBlockHeight(height)
+                if (now - updateTimestampRef.current >= animationFrameMs) {
+                    const height = queueRef.current.shift()
+
+                    if (height) {
+                        setBlockHeight(height)
+                        updateTimestampRef.current = now
+                    }
                 }
             }
 
