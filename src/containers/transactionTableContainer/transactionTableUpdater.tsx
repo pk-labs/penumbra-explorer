@@ -90,14 +90,14 @@ const TransactionTableUpdater: FC<Props> = ({
                 const transaction = queueRef.current.shift()
 
                 if (transaction) {
+                    hashesRef.current.add(transaction.hash)
+
                     setTransactions(prev => {
                         const hashToBeRemoved = prev.at(-1)?.hash
 
                         if (hashToBeRemoved) {
                             hashesRef.current.delete(hashToBeRemoved)
                         }
-
-                        hashesRef.current.add(transaction.hash)
 
                         return [transaction, ...prev].slice(0, 10)
                     })

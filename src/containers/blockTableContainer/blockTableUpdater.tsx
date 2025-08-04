@@ -70,6 +70,8 @@ const BlockTableUpdater: FC<Props> = ({
                 const block = queueRef.current.shift()
 
                 if (block) {
+                    blockHeightsRef.current.add(block.height)
+
                     setBlocks(prev => {
                         const blockHeightToBeRemoved = prev.at(-1)?.height
 
@@ -78,8 +80,6 @@ const BlockTableUpdater: FC<Props> = ({
                                 blockHeightToBeRemoved
                             )
                         }
-
-                        blockHeightsRef.current.add(block.height)
 
                         return [block, ...prev].slice(0, 10)
                     })
