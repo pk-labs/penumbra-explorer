@@ -20,6 +20,7 @@ interface Props extends TransactionPanelContainerProps {
 const TransactionPanelUpdater: FC<Props> = props => {
     const client = useClient()
     const queueRef = useRef<number[]>([])
+    const lastNumberRef = useRef(props.number)
     const animationFrameRef = useRef<number>(undefined)
     const updateTimestampRef = useRef(0)
     const [number, setNumber] = useState(props.number)
@@ -35,7 +36,7 @@ const TransactionPanelUpdater: FC<Props> = props => {
             subscribe(result => {
                 const count = result.data?.transactionCount.count
 
-                if (count) {
+                if (count && count > lastNumberRef.current) {
                     queueRef.current.push(count)
                 }
             })
@@ -52,7 +53,8 @@ const TransactionPanelUpdater: FC<Props> = props => {
                 if (now - updateTimestampRef.current >= animationFrameMs) {
                     const count = queueRef.current.shift()
 
-                    if (count) {
+                    if (count && count > lastNumberRef.current) {
+                        lastNumberRef.current = count
                         setNumber(count)
                         updateTimestampRef.current = now
                     }
