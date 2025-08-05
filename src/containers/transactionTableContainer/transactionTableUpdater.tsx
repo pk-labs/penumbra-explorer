@@ -54,32 +54,39 @@ const TransactionTableUpdater: FC<Props> = ({
             subscribe(result => {
                 const transaction = result.data?.latestTransactions
 
-                if (
-                    transaction &&
-                    !hashesRef.current.has(transaction.hash.toLowerCase())
-                ) {
-                    let primaryAction
-                    let actionCount
-
-                    try {
-                        const decoded = decodeTransaction(transaction.raw)
-                        primaryAction = findPrimaryAction(decoded)
-                        actionCount = decoded.body?.actions.length
-                    } catch (e) {
-                        // istanbul ignore next
-                        console.error(e)
-                    }
-
-                    queueRef.current.push({
-                        actionCount: actionCount ?? 0,
-                        blockHeight: transaction.id,
-                        hash: transaction.hash.toLowerCase(),
-                        primaryAction,
-                        raw: transaction.raw,
-                        status: IbcStatus.Completed, // FIXME: Query ibcStatus
-                        timestamp: 0, // FIXME: Query block.createdAt
-                    })
+                if (!transaction) {
+                    return
                 }
+
+                const hash = transaction?.hash.toLowerCase()
+
+                if (hashesRef.current.has(hash)) {
+                    return
+                }
+
+                let primaryAction
+                let actionCount
+
+                try {
+                    const decoded = decodeTransaction(transaction.raw)
+                    primaryAction = findPrimaryAction(decoded)
+                    actionCount = decoded.body?.actions.length
+                } catch (e) {
+                    // istanbul ignore next
+                    console.error(e)
+                }
+
+                hashesRef.current.add(hash)
+
+                queueRef.current.push({
+                    actionCount: actionCount ?? 0,
+                    blockHeight: transaction.id,
+                    hash,
+                    primaryAction,
+                    raw: transaction.raw,
+                    status: IbcStatus.Completed, // FIXME: Query ibcStatus
+                    timestamp: 0, // FIXME: Query block.createdAt
+                })
             })
         )
 
@@ -88,24 +95,16 @@ const TransactionTableUpdater: FC<Props> = ({
 
     useEffect(() => {
         const animationLoop = () => {
-            if (queueRef.current.length > 0) {
+            if (queueRef.current.length) {
                 const now = performance.now()
 
                 if (now - updateTimestampRef.current >= animationFrameMs) {
                     const transaction = queueRef.current.shift()
 
                     if (transaction) {
-                        hashesRef.current.add(transaction.hash)
-
-                        setTransactions(prev => {
-                            const hashToBeRemoved = prev.at(-1)?.hash
-
-                            if (hashToBeRemoved) {
-                                hashesRef.current.delete(hashToBeRemoved)
-                            }
-
-                            return [transaction, ...prev].slice(0, 10)
-                        })
+                        setTransactions(prev =>
+                            [transaction, ...prev].slice(0, 10)
+                        )
 
                         updateTimestampRef.current = now
                     }

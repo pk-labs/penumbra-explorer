@@ -53,13 +53,17 @@ const BlockTableUpdater: FC<Props> = ({
             subscribe(result => {
                 const block = result.data?.latestBlocks
 
-                if (block && !blockHeightsRef.current.has(block.height)) {
-                    queueRef.current.push({
-                        height: block.height,
-                        timestamp: dayjs(block.createdAt).valueOf(),
-                        transactionsCount: block.transactionsCount,
-                    })
+                if (!block || blockHeightsRef.current.has(block.height)) {
+                    return
                 }
+
+                blockHeightsRef.current.add(block.height)
+
+                queueRef.current.push({
+                    height: block.height,
+                    timestamp: dayjs(block.createdAt).valueOf(),
+                    transactionsCount: block.transactionsCount,
+                })
             })
         )
 
@@ -68,27 +72,14 @@ const BlockTableUpdater: FC<Props> = ({
 
     useEffect(() => {
         const animationLoop = () => {
-            if (queueRef.current.length > 0) {
+            if (queueRef.current.length) {
                 const now = performance.now()
 
                 if (now - updateTimestampRef.current >= animationFrameMs) {
                     const block = queueRef.current.shift()
 
                     if (block) {
-                        blockHeightsRef.current.add(block.height)
-
-                        setBlocks(prev => {
-                            const blockHeightToBeRemoved = prev.at(-1)?.height
-
-                            if (blockHeightToBeRemoved) {
-                                blockHeightsRef.current.delete(
-                                    blockHeightToBeRemoved
-                                )
-                            }
-
-                            return [block, ...prev].slice(0, 10)
-                        })
-
+                        setBlocks(prev => [block, ...prev].slice(0, 10))
                         updateTimestampRef.current = now
                     }
                 }
