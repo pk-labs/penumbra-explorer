@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react'
 import { FC } from 'react'
-import { NumberCountup } from '@/components'
+import { NumberCountup, Skeleton } from '@/components'
 import { TransformedVoting, VotingState } from '@/lib/types'
 import { classNames } from '@/lib/utils'
 
@@ -20,15 +20,21 @@ const VotingNumbers: FC<Props> = props => (
                     number={props.total}
                     suffix="UM"
                 />
-                {props.state === VotingState.InProgress && (
+                {props.quorum > 0 ? (
                     <div
                         className={classNames(
-                            'text-destructive-light font-mono text-xs',
-                            'font-medium'
+                            'font-mono text-xs font-medium',
+                            props.total > props.quorum
+                                ? 'text-success-light'
+                                : 'text-destructive-light'
                         )}
                     >
-                        Quorum not reached
+                        {props.total > props.quorum
+                            ? 'Quorum reached'
+                            : 'Quorum not reached'}
                     </div>
+                ) : (
+                    <Skeleton className="h-4 w-32" />
                 )}
             </div>
             <div>

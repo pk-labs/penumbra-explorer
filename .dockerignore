@@ -1,0 +1,11 @@
+*.log
+*.tsbuildinfo
+/.git
+/.next
+/.swc
+/build
+/coverage
+/docker
+/node_modules
+/out
+next-env.d.ts

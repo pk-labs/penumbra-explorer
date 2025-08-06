@@ -1,0 +1,8 @@
+services:
+  penumbra-explorer-frontend:
+    build:
+      context: ../../
+      dockerfile: docker/prod/Dockerfile
+    image: penumbra-explorer-frontend
+    ports:
+      - "3000:3000"

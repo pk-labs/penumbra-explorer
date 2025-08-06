@@ -1,10 +1,17 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
+import { useClient } from 'urql'
+import { pipe, subscribe } from 'wonka'
 import { Pagination, TransactionTable } from '@/components'
-import { useTransactionUpdateSubscription } from '@/lib/graphql/generated/hooks'
-import { IbcStatus } from '@/lib/graphql/generated/types'
+import { animationFrameMs } from '@/lib/constants'
+import {
+    IbcStatus,
+    TransactionUpdateSubscription,
+    TransactionUpdateSubscriptionVariables,
+} from '@/lib/graphql/generated/types'
+import transactionSubscription from '@/lib/graphql/subscriptions/transactionSubscription.graphql'
 import { TransformedPartialTransactionFragment } from '@/lib/types'
 import { decodeTransaction, findPrimaryAction } from '@/lib/utils'
 import { Props as TransactionTableContainerProps } from './transactionTableContainer'
@@ -22,31 +29,46 @@ const TransactionTableUpdater: FC<Props> = ({
     total,
     ...props
 }) => {
-    const [transactions, setTransactions] = useState(props.transactions)
-    const [transactionUpdateSubscription] = useTransactionUpdateSubscription({
-        pause: !subscription,
-        variables: { limit: limit.length },
-    })
-    const transactionUpdate =
-        transactionUpdateSubscription.data?.latestTransactions
+    const client = useClient()
+    const queueRef = useRef<TransformedPartialTransactionFragment[]>([])
+    const animationFrameRef = useRef<number>(undefined)
+    const updateTimestampRef = useRef(0)
+    const [transactions, setTransactions] = useState(props.transactions ?? [])
+
+    const hashesRef = useRef(
+        new Set(transactions.map(transaction => transaction.hash))
+    )
 
     useEffect(() => {
-        if (transactionUpdate) {
-            setTransactions(prev => {
-                if (
-                    !prev ||
-                    prev.some(
-                        tx => transactionUpdate.hash.toLowerCase() === tx.hash
-                    )
-                ) {
-                    return prev
+        if (!subscription) {
+            return
+        }
+
+        const source = client.subscription<
+            TransactionUpdateSubscription,
+            TransactionUpdateSubscriptionVariables
+        >(transactionSubscription, {})
+
+        const { unsubscribe } = pipe(
+            source,
+            subscribe(result => {
+                const transaction = result.data?.latestTransactions
+
+                if (!transaction) {
+                    return
+                }
+
+                const hash = transaction?.hash.toLowerCase()
+
+                if (hashesRef.current.has(hash)) {
+                    return
                 }
 
                 let primaryAction
                 let actionCount
 
                 try {
-                    const decoded = decodeTransaction(transactionUpdate.raw)
+                    const decoded = decodeTransaction(transaction.raw)
                     primaryAction = findPrimaryAction(decoded)
                     actionCount = decoded.body?.actions.length
                 } catch (e) {
@@ -54,21 +76,52 @@ const TransactionTableUpdater: FC<Props> = ({
                     console.error(e)
                 }
 
-                return [
-                    {
-                        actionCount: actionCount ?? 0,
-                        blockHeight: transactionUpdate.id,
-                        hash: transactionUpdate.hash.toLowerCase(),
-                        primaryAction,
-                        raw: transactionUpdate.raw,
-                        status: IbcStatus.Completed, // FIXME: Query ibcStatus
-                        timestamp: 0, // FIXME: Query block.createdAt
-                    },
-                    ...prev.slice(0, -1),
-                ]
+                hashesRef.current.add(hash)
+
+                queueRef.current.push({
+                    actionCount: actionCount ?? 0,
+                    blockHeight: transaction.id,
+                    hash,
+                    primaryAction,
+                    raw: transaction.raw,
+                    status: IbcStatus.Completed, // FIXME: Query ibcStatus
+                    timestamp: 0, // FIXME: Query block.createdAt
+                })
             })
+        )
+
+        return () => unsubscribe()
+    }, [client, subscription])
+
+    useEffect(() => {
+        const animationLoop = () => {
+            if (queueRef.current.length) {
+                const now = performance.now()
+
+                if (now - updateTimestampRef.current >= animationFrameMs) {
+                    const transaction = queueRef.current.shift()
+
+                    if (transaction) {
+                        setTransactions(prev =>
+                            [transaction, ...prev].slice(0, 10)
+                        )
+
+                        updateTimestampRef.current = now
+                    }
+                }
+            }
+
+            animationFrameRef.current = requestAnimationFrame(animationLoop)
         }
-    }, [transactionUpdate])
+
+        animationFrameRef.current = requestAnimationFrame(animationLoop)
+
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current)
+            }
+        }
+    }, [])
 
     return (
         <TransactionTable

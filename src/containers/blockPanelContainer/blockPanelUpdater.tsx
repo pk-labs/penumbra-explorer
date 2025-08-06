@@ -1,29 +1,85 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
+import { useClient } from 'urql'
+import { pipe, subscribe } from 'wonka'
 import { BlockPanel } from '@/components'
-import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
+import { animationFrameMs } from '@/lib/constants'
+import {
+    BlockUpdateSubscription,
+    BlockUpdateSubscriptionVariables,
+} from '@/lib/graphql/generated/types'
+import blockSubscription from '@/lib/graphql/subscriptions/blockSubscription.graphql'
 import { Props as BlockPanelContainerProps } from './blockPanelContainer'
 
 interface Props extends BlockPanelContainerProps {
-    number: number
+    blockHeight?: number
 }
 
 const BlockPanelUpdater: FC<Props> = props => {
-    const [number, setNumber] = useState(props.number)
-    const [blockSubscription] = useBlockUpdateSubscription({
-        variables: { limit: 1 },
-    })
-    const blockUpdate = blockSubscription.data?.latestBlocks
+    const client = useClient()
+    const queueRef = useRef<number[]>([])
+    const animationFrameRef = useRef<number>(undefined)
+    const updateTimestampRef = useRef(0)
+    const [reindexing, setReindexing] = useState(false)
+    const [blockHeight, setBlockHeight] = useState(props.blockHeight)
 
     useEffect(() => {
-        if (blockUpdate) {
-            setNumber(blockUpdate.height)
-        }
-    }, [blockUpdate])
+        const source = client.subscription<
+            BlockUpdateSubscription,
+            BlockUpdateSubscriptionVariables
+        >(blockSubscription, {})
 
-    return <BlockPanel {...props} number={number} />
+        const { unsubscribe } = pipe(
+            source,
+            subscribe(result => {
+                const block = result.data?.latestBlocks
+
+                if (block) {
+                    queueRef.current.push(block.height)
+                    setReindexing(queueRef.current.length > 2)
+                }
+            })
+        )
+
+        return () => unsubscribe()
+    }, [client])
+
+    useEffect(() => {
+        const animationLoop = () => {
+            if (queueRef.current.length > 0) {
+                const now = performance.now()
+
+                if (now - updateTimestampRef.current >= animationFrameMs) {
+                    const height = queueRef.current.shift()
+
+                    if (height) {
+                        setBlockHeight(height)
+                        updateTimestampRef.current = now
+                    }
+                }
+            }
+
+            animationFrameRef.current = requestAnimationFrame(animationLoop)
+        }
+
+        animationFrameRef.current = requestAnimationFrame(animationLoop)
+
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current)
+            }
+        }
+    }, [])
+
+    return (
+        <BlockPanel
+            {...props}
+            blockHeight={blockHeight}
+            reindexing={reindexing}
+        />
+    )
 }
 
 export default BlockPanelUpdater

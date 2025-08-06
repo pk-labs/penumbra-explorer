@@ -1,46 +1,73 @@
-@reference "../../../lib/css/global.css";
+.full-bar {
+    background: var(--color-secondary-light);
+    box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0.2);
+}
 
-.bar {
-    &.active {
-        background: var(--color-secondary-light);
-        box-shadow: 0 0 64px 8px var(--color-secondary-light);
-        transform: scaleY(2);
+.animated-bar {
+    animation: bar-animation 200ms linear forwards;
+    background: var(--color-other-tonal-fill10);
 
-        & + div {
-            background: rgba(83, 174, 168, 0.5);
-            box-shadow: 0 0 4px 2px rgba(83, 174, 168, 0.1);
-            transform: scaleY(1.5);
-        }
+    &.delayed-1 {
+        animation-delay: 75ms;
     }
 
-    &:has(+ .active) {
-        background: rgba(83, 174, 168, 0.5);
-        box-shadow: 0 0 4px 2px rgba(83, 174, 168, 0.1);
-        transform: scaleY(1.5);
+    &.delayed-2 {
+        animation-delay: 150ms;
+    }
+
+    &.delayed-3 {
+        animation-delay: 225ms;
+    }
+
+    &.delayed-4 {
+        animation-delay: 300ms;
     }
 }
 
-@media (min-width: calc(1rem / 16 * 600)) {
-    .bar {
-        &.active {
-            transform: scaleY(1.3);
+@keyframes bar-animation {
+    0% {
+        background: var(--color-other-tonal-fill10);
+        box-shadow: 0 0 8px 4px rgb(from var(--color-secondary-light) r g b / 0);
+    }
 
-            & + div {
-                transform: scaleY(1.1);
-            }
-        }
+    25% {
+        background: rgb(from var(--color-secondary-light) r g b / 0.2);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.05);
+    }
 
-        &:has(+ .active) {
-            transform: scaleY(1.1);
-        }
+    50% {
+        background: rgb(from var(--color-secondary-light) r g b / 0.5);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.1);
+    }
+
+    75% {
+        background: rgb(from var(--color-secondary-light) r g b / 0.8);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.15);
+    }
+
+    100% {
+        background: var(--color-secondary-light);
+        box-shadow: 0 0 8px 4px
+            rgb(from var(--color-secondary-light) r g b / 0.2);
     }
 }
 
 .cube {
-    transform: rotateX(-35deg) rotateY(0deg);
+    transform: rotateX(-35deg) rotateY(45deg);
 
-    &.animated {
-        animation: cube-animation 3s linear infinite;
+    &.rotate-infinite {
+        animation: cube-full-rotation-animation 3s linear infinite;
+    }
+
+    &.rotate-first-half {
+        animation: cube-first-half-rotation-animation 500ms ease-in-out reverse;
+    }
+
+    &.rotate-second-half {
+        animation: cube-second-half-rotation-animation 500ms ease-in-out reverse;
     }
 
     .face {
@@ -70,11 +97,32 @@
     }
 }
 
-@keyframes cube-animation {
+@keyframes cube-full-rotation-animation {
     from {
-        transform: rotateX(-35deg) rotateY(0deg);
+        transform: rotateX(-35deg) rotateY(45deg);
     }
+
     to {
-        transform: rotateX(-35deg) rotateY(360deg);
+        transform: rotateX(-35deg) rotateY(405deg);
+    }
+}
+
+@keyframes cube-first-half-rotation-animation {
+    from {
+        transform: rotateX(-35deg) rotateY(45deg);
+    }
+
+    to {
+        transform: rotateX(-35deg) rotateY(225deg);
+    }
+}
+
+@keyframes cube-second-half-rotation-animation {
+    from {
+        transform: rotateX(-35deg) rotateY(225deg);
+    }
+
+    to {
+        transform: rotateX(-35deg) rotateY(405deg);
     }
 }

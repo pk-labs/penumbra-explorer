@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import { classNames } from '@/lib/utils'
-import { NumberPanel } from '../numberPanel'
+import NumberPanel from '../numberPanel'
 import BlockPanelChart from './blockPanelChart'
 import blockPanelIcon from './blockPanelIcon.svg'
 
 interface Props {
+    blockHeight?: number
     className?: string
-    fallback?: boolean
-    number: number
+    reindexing?: boolean
 }
 
 const BlockPanel: FC<Props> = props => (
@@ -21,7 +21,7 @@ const BlockPanel: FC<Props> = props => (
             props.className
         )}
         headerClassName="gap-2"
-        number={props.number}
+        number={props.blockHeight ?? 0}
         title={
             <>
                 <Image alt="Block panel" src={blockPanelIcon} />
@@ -30,7 +30,10 @@ const BlockPanel: FC<Props> = props => (
         }
         titleClassName="text-base font-medium"
     >
-        <BlockPanelChart animate={!props.fallback} />
+        <BlockPanelChart
+            blockHeight={props.blockHeight}
+            reindexing={props.reindexing}
+        />
     </NumberPanel>
 )
 

@@ -8,11 +8,7 @@ export interface Props {
 }
 
 const BlockPanelContainer: FC<Props> = props => (
-    <Suspense
-        fallback={
-            <BlockPanel className={props.className} number={0} fallback />
-        }
-    >
+    <Suspense fallback={<BlockPanel className={props.className} />}>
         <BlockPanelLoader {...props} />
     </Suspense>
 )

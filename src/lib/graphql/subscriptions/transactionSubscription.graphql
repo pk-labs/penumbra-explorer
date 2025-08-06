@@ -1,5 +1,5 @@
-subscription TransactionUpdate($limit: Int!) {
-    latestTransactions(limit: $limit) {
+subscription TransactionUpdate {
+    latestTransactions(limit: 1) {
         hash
         id
         raw
