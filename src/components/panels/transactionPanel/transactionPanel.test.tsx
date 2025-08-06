@@ -1,8 +1,7 @@
 import { getByText, render } from '@testing-library/react'
-import { NumberPanelProps } from '../numberPanel'
 import TransactionPanel from './transactionPanel'
 
-jest.mock('../numberPanel/numberPanel', () => (props: NumberPanelProps) => (
+jest.mock('../numberPanel/numberPanel', () => (props: any) => (
     <div className={props.className}>{props.number}</div>
 ))
 

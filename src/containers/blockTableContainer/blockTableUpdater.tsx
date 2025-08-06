@@ -1,10 +1,17 @@
 // istanbul ignore file
 'use client'
 
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
+import { useClient } from 'urql'
+import { pipe, subscribe } from 'wonka'
 import { BlockTable, Pagination } from '@/components'
+import { animationFrameMs } from '@/lib/constants'
 import dayjs from '@/lib/dayjs'
-import { useBlockUpdateSubscription } from '@/lib/graphql/generated/hooks'
+import {
+    BlockUpdateSubscription,
+    BlockUpdateSubscriptionVariables,
+} from '@/lib/graphql/generated/types'
+import blockSubscription from '@/lib/graphql/subscriptions/blockSubscription.graphql'
 import { TransformedPartialBlockFragment } from '@/lib/types'
 import { Props as BlockTableContainerProps } from './blockTableContainer'
 
@@ -21,34 +28,74 @@ const BlockTableUpdater: FC<Props> = ({
     total,
     ...props
 }) => {
-    const [blocks, setBlocks] = useState(props.blocks)
-    const [blockSubscription] = useBlockUpdateSubscription({
-        pause: !subscription,
-        variables: { limit: limit.length },
-    })
-    const blockUpdate = blockSubscription.data?.latestBlocks
+    const client = useClient()
+    const queueRef = useRef<TransformedPartialBlockFragment[]>([])
+    const animationFrameRef = useRef<number>(undefined)
+    const updateTimestampRef = useRef(0)
+    const [blocks, setBlocks] = useState(props.blocks ?? [])
+
+    const blockHeightsRef = useRef(
+        new Set(props.blocks?.map(block => block.height))
+    )
 
     useEffect(() => {
-        if (blockUpdate) {
-            setBlocks(prev => {
-                if (
-                    !prev ||
-                    prev.some(block => blockUpdate.height === block.height)
-                ) {
-                    return prev
+        if (!subscription) {
+            return
+        }
+
+        const source = client.subscription<
+            BlockUpdateSubscription,
+            BlockUpdateSubscriptionVariables
+        >(blockSubscription, {})
+
+        const { unsubscribe } = pipe(
+            source,
+            subscribe(result => {
+                const block = result.data?.latestBlocks
+
+                if (!block || blockHeightsRef.current.has(block.height)) {
+                    return
                 }
 
-                return [
-                    {
-                        height: blockUpdate.height,
-                        timestamp: dayjs(blockUpdate.createdAt).valueOf(),
-                        transactionsCount: blockUpdate.transactionsCount,
-                    },
-                    ...prev.slice(0, -1),
-                ]
+                blockHeightsRef.current.add(block.height)
+
+                queueRef.current.push({
+                    height: block.height,
+                    timestamp: dayjs(block.createdAt).valueOf(),
+                    transactionsCount: block.transactionsCount,
+                })
             })
+        )
+
+        return () => unsubscribe()
+    }, [client, subscription])
+
+    useEffect(() => {
+        const animationLoop = () => {
+            if (queueRef.current.length) {
+                const now = performance.now()
+
+                if (now - updateTimestampRef.current >= animationFrameMs) {
+                    const block = queueRef.current.shift()
+
+                    if (block) {
+                        setBlocks(prev => [block, ...prev].slice(0, 10))
+                        updateTimestampRef.current = now
+                    }
+                }
+            }
+
+            animationFrameRef.current = requestAnimationFrame(animationLoop)
         }
-    }, [blockUpdate])
+
+        animationFrameRef.current = requestAnimationFrame(animationLoop)
+
+        return () => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current)
+            }
+        }
+    }, [])
 
     return (
         <BlockTable

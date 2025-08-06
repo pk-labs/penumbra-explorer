@@ -46,6 +46,7 @@ Penumbra Blockchain Explorer
 | `src/lib/images`    | Image assets that are directly imported.                                                                                                                                                                       |
 | `src/lib/utils`     | Utility functions for formatting, transforming, etc.                                                                                                                                                           |
 | `public`            | Static public assets directly accessible through the browser.                                                                                                                                                  |
+| `docker`            | Docker configuration to run as container.                                                                                                                                                                      |
 
 ## GraphQL
 
@@ -100,6 +101,18 @@ as entry point. Staging is also deployed on push with
 `.github/workflows/staging.yaml` as entry point and production deployments are
 triggered manually in the GitHub Actions web interface with
 `.github/workflows/prod.yaml` as entry point.
+
+## Docker
+
+The project can also be run as a Docker container in production mode. Each
+environment has its own configuration located in the `docker` folder.
+
+Build and run it using the following commands:
+
+```
+docker compose -f docker/dev/compose.yaml build
+docker compose -f docker/dev/compose.yaml up
+```
 
 ## Misc
 

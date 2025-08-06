@@ -55,62 +55,13 @@ const findPrimaryAction = (transaction?: Transaction): ActionType => {
         return ActionType.CommunityPoolDeposit
     } else if (cases.has('communityPoolOutput')) {
         return ActionType.CommunityPoolOutput
+    } else if (cases.has('actionLiquidityTournamentVote')) {
+        return ActionType.LiquidityTournamentVote
     } else if (cases.has('spend')) {
         return ActionType.Spend
     } else if (cases.has('output')) {
         return ActionType.Output
     }
-
-    /*
-    const hasOpaqueSpend = false
-    const allSpendsVisible = !hasOpaqueSpend
-
-    const hasOpaqueOutput = false
-    const allOutputsVisible = !hasOpaqueOutput
-
-    // A visible output whose note is controlled by an opaque address is an
-    // output we don't control.
-    const hasVisibleOutputWithOpaqueAddress = false
-
-    // A visible output whose note is controlled by an opaque address is an
-    // output we do control.
-    const hasVisibleOutputWithVisibleAddress = false
-
-    // A transaction is internal if all spends and outputs are visible, and
-    // there are no outputs we don't control.
-    const isInternal =
-        allSpendsVisible &&
-        allOutputsVisible &&
-        !hasVisibleOutputWithOpaqueAddress
-
-    // Call a transaction a "transfer" if it only has spends and outputs.
-    const isTransfer = transaction.body?.actions.every(
-        (a: any) => a.action.case === 'spend' || a.action.case === 'output'
-    )
-
-    // If the tx has only spends and outputs, then it's a transfer. What kind?
-    if (isTransfer) {
-        // If we can't see at least one spend, but we can see an output we
-        // control, it's a receive.
-        if (hasOpaqueSpend && hasVisibleOutputWithVisibleAddress) {
-            return ActionType.Receive
-        }
-        // If we can see all spends and outputs, it's a transaction we created ...
-        if (allSpendsVisible && allOutputsVisible) {
-            // ... so it's either a send or an internal transfer, depending on
-            // whether there's an output we don't control.
-            if (isInternal) {
-                return ActionType.InternalTransfer
-            } else {
-                return ActionType.Send
-            }
-        }
-    }
-
-    if (isInternal) {
-        return ActionType.UnknownInternal
-    }
-    */
 
     return ActionType.Unknown
 }

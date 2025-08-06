@@ -16,7 +16,7 @@ const VoteValuePill: FC<Props> = props => {
             context = 'success'
             break
         case VoteValue.No:
-            context = 'caution'
+            context = 'destructive'
             break
         case VoteValue.Abstain:
             context = 'default'

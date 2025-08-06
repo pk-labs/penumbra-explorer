@@ -974,9 +974,7 @@ export type VotingStartQueryVariables = Exact<{
 
 export type VotingStartQuery = { __typename?: 'QueryRoot', proposalDetail?: { __typename?: 'ProposalDetail', votingStartedBlockHeight: number, votingStartedTimestamp: any } | null };
 
-export type BlockUpdateSubscriptionVariables = Exact<{
-  limit: Scalars['Int']['input'];
-}>;
+export type BlockUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
 export type BlockUpdateSubscription = { __typename?: 'Root', latestBlocks: { __typename?: 'BlockUpdate', height: number, createdAt: any, transactionsCount: number } };
@@ -996,9 +994,7 @@ export type TransactionCountUpdateSubscriptionVariables = Exact<{ [key: string]:
 
 export type TransactionCountUpdateSubscription = { __typename?: 'Root', transactionCount: { __typename?: 'TransactionCountUpdate', count: number } };
 
-export type TransactionUpdateSubscriptionVariables = Exact<{
-  limit: Scalars['Int']['input'];
-}>;
+export type TransactionUpdateSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TransactionUpdateSubscription = { __typename?: 'Root', latestTransactions: { __typename?: 'TransactionUpdate', hash: string, id: number, raw: string } };
@@ -1427,8 +1423,8 @@ export const VotingStartDocument = gql`
 }
     `;
 export const BlockUpdateDocument = gql`
-    subscription BlockUpdate($limit: Int!) {
-  latestBlocks(limit: $limit) {
+    subscription BlockUpdate {
+  latestBlocks(limit: 1) {
     height
     createdAt
     transactionsCount
@@ -1462,8 +1458,8 @@ export const TransactionCountUpdateDocument = gql`
 }
     `;
 export const TransactionUpdateDocument = gql`
-    subscription TransactionUpdate($limit: Int!) {
-  latestTransactions(limit: $limit) {
+    subscription TransactionUpdate {
+  latestTransactions(limit: 1) {
     hash
     id
     raw
