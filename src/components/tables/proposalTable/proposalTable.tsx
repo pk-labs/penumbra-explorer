@@ -39,7 +39,7 @@ const ProposalTable: FC<Props> = ({ proposals, ...props }) => (
                             <TableCell className="h-20 whitespace-normal">
                                 <Link
                                     className={classNames(
-                                        'font-default line-clamp-2 max-w-80',
+                                        'font-default line-clamp-2 max-w-62',
                                         'font-normal'
                                     )}
                                     href={href}
